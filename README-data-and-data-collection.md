@@ -18,7 +18,7 @@ Because the Pest Notes are very structured, it should work to use [scrapy](https
 
 ### How to use the information of the Pest Notes
 
-##### <u>Initial implementation: Use the `Pest Name, Description, Identification & Damage`</u> 
+##### Initial implementation: Use the `Pest Name, Description, Identification & Damage`
 
 1. Ask user for a description of the pest problem
 2. Find *'closest match'* to the Pest Name, Description, Identification & Damage sections of the pest notes
@@ -30,7 +30,11 @@ Because the Pest Notes are very structured, it should work to use [scrapy](https
      - If Yes: if the information provided was helpful
    - Any other suggestions or feedback?
 
-##### <u>Improvement: ask for more specific pest identification details</u>
+##### Improvement Idea 1: Ask separately about Pest Name, Description/Identification & Damage 
+
+ Instead of just asking for a description of the pest problem, ask separately for the Pest Name, the Pest Description and the Damage. That will allow a more targeted Query. 
+
+##### Improvement Idea 2: ask for more specific pest identification details
 
 Based on the most commonly asked about pests, for example ants, a more detailed Form can be implemented to ask more specific pest identification questions that will improve predictive performance of the Query.  
 
