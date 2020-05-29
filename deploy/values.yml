@@ -1,0 +1,42 @@
+debugMode: "false"
+# nginx specific settings
+nginx:
+  service:
+    # port is the port which the nginx service exposes for HTTP connections
+    port: 8000
+# rasax specific settings
+rasax:
+    # initialUser is the user which is created upon the initial start of Rasa X
+    initialUser:
+        # password for the Rasa X user
+        password: "<safe credential>"
+    # passwordSalt Rasa X uses to salt the user passwords
+    passwordSalt: "<safe credential>"
+    # token Rasa X accepts as authentication token from other Rasa services
+    token: "<safe credential>"
+    # jwtSecret which is used to sign the jwtTokens of the users
+    jwtSecret: "<safe credential>"
+    # rasa x version to deploy
+    tag: "0.28.5"
+# rasa: Settings common for all Rasa containers
+rasa:
+    # token Rasa accepts as authentication token from other Rasa services
+    token: "<safe credential>"
+    # rasa open source version to deploy
+    tag: "1.10.1-full"
+# RabbitMQ specific settings
+rabbitmq:
+    # rabbitmq settings of the subchart
+    rabbitmq:
+        # password which is used for the authentication
+        password: "<safe credential>"
+# global settings of the used subcharts
+global:
+    # postgresql: global settings of the postgresql subchart
+    postgresql:
+        # postgresqlPassword is the password which is used when the postgresqlUsername equals "postgres"
+        postgresqlPassword: "<safe credential>"
+    # redis: global settings of the postgresql subchart
+    redis:
+        # password to use in case there no external secret was provided
+        password: "<safe credential>"

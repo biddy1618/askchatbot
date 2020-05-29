@@ -1,0 +1,86 @@
+intents:
+  - intent_hi
+  - intent_bye
+  - intent_yes
+  - intent_no
+  - intent_chatgoal
+  - intent_pest_problem_description
+
+entities:
+  - chatgoal_value
+  
+slots:
+  shown_privacypolicy:
+    type: unfeaturized
+  chatgoal_value:
+    type: categorical
+    values:
+    - explain_ipm
+    - I_have_a_pest
+  pest_problem_description:
+    type: unfeaturized
+  
+
+actions:
+  - action_hi
+  
+forms:
+  - form_query_knowledge_base
+  
+responses:
+  utter_hi:
+  - text: Hi, I am the Integrated Pest Management (IPM) demo bot!
+  
+  utter_inform_privacypolicy:
+  - text: By chatting to me you agree to our [privacy policy](https://www.ucop.edu/ethics-compliance-audit-services/_files/compliance/uc-privacy-principles.pdf).
+
+  utter_summarize_skills:
+  - text: I can explain what IPM is or help to manage a particular pest.
+  
+  utter_what_is_chatgoal:
+  - buttons:
+    - payload: /intent_chatgoal{"chatgoal_value":"explain_ipm"}
+      title: Explain IPM
+    - payload: /intent_chatgoal{"chatgoal_value":"I_have_a_pest"}
+      title: I have a pest
+    - payload: /intent_chatgoal
+      title: Something else
+    text: Please select one of these options
+  
+  utter_canthelp:
+  - text: I'm sorry I cannot help you with that. 
+  
+  utter_please_askexpert:
+  - text: Please ask one of our experts at [Ask an Expert](https://ask.extension.org/ask).
+      
+  utter_explain_ipm:
+  - text: IPM is an ecosystem-based strategy that focuses on long-term prevention 
+         of pests or their damage through a combination of techniques such as 
+         biological control, habitat manipulation, modification of cultural 
+         practices, and use of resistant varieties. 
+         
+         Pesticides are used only after monitoring indicates they are needed 
+         according to established guidelines, and treatments are made with the 
+         goal of removing only the target organism. 
+         
+         Pest control materials are selected and applied in a manner that 
+         minimizes risks to human health, beneficial and nontarget organisms, 
+         and the environment.
+         
+         You can find more details [here](https://www2.ipm.ucanr.edu/What-is-IPM/).
+  
+  utter_do_you_have_a_pest_problem:
+  - text: Do you have a pest problem I can help you with?
+
+  utter_to_be_implemented_2:
+  - text: This still needs to be implemented (TODO 1)
+  
+  utter_bye:
+  - text: Bye!
+  
+  utter_ask_pest_problem_description:
+  - text: Please describe your pest problem
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
