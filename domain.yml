@@ -29,7 +29,7 @@ forms:
   
 responses:
   utter_hi:
-  - text: Hi, I am the Integrated Pest Management (IPM) demo bot!
+  - text: Hi, I am the AskChatBot!
   
   utter_inform_privacypolicy:
   - text: By chatting to me you agree to our [privacy policy](https://www.ucop.edu/ethics-compliance-audit-services/_files/compliance/uc-privacy-principles.pdf).
