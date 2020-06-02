@@ -1,4 +1,4 @@
-# Instructions to build & deploy the chatbot
+# Instructions to deploy the chatbot on k3s
 
 ### Connect to the knowledge base instance
 
@@ -69,7 +69,7 @@ source ~/.bashrc
 
 
 
-### k3s systemd service
+### k3s cluster management
 
 The k3s installer creates a `k3s systemd service` which can be used for `stop`, `start`, `restart` and verify the `status` of the k3s server running Kubernetes.
 
@@ -89,6 +89,13 @@ sudo systemctl disable k3s
 
 # To get the details of the nodes 
 kubectl get nodes -o wide
+
+# Use the cri-tools (crictl) to see more
+# what containers are running
+sudo k3s crictl ps -a
+sudo k3s crictl images
+sudo k3s crictl pods
+sudo k3s crictl stats
 
 # To uninstall & remove k3s
 sudo /usr/local/bin/k3s-uninstall.sh
@@ -153,7 +160,7 @@ Edit the template `values.yml` as  shown:
 
 ```bash
 # use Debug or not
-debugMode: "true"
+debugMode: "false"
 # nginx specific settings
 nginx:
   service:
@@ -291,17 +298,6 @@ curl http://localhost:8000/api/version
 
 
 
-##### OPTIONAL, BUT NOT DONE --- JUST OPENED PORT 8000... Redirect port 80 to port 8000
-
-```bash
-# TODO -- redirect port 80 to port 8000
-
-# https://coderwall.com/p/plejka/forward-port-80-to-port-3000
-sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
-```
-
-
-
 #### Upgrade/Modify a release ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#upgrading-the-deployment))
 
 ```bash
@@ -419,14 +415,14 @@ k get services
 # For VM at AWS ==> get it from AWS Console for the VM Instance
 
 # Then, connect at
-http://<IP>:8100
+http://<IP>:8000
 ```
 
 
 
 ### Connect Rasa X to gitlab ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/integrated-version-control/))
 
-The bot is temporarily stored in https://github.com/ArjaanBuijkLLC/ipm-demo
+The bot is temporarily stored in personal, private repo on github.
 
 From Rasa X, connect to the git repository as described in the docs.
 
