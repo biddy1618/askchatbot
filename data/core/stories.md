@@ -36,3 +36,10 @@
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
+    
+## chatgoal do stackoverflow query
+* intent_chatgoal{"chatgoal_value": "do_a_stackoverflow_query"}
+    - slot{"chatgoal_value": "do_a_stackoverflow_query"}
+    - form_query_stackoverflow_in_es
+    - form{"name": "form_query_stackoverflow_in_es"}
+    - form{"name": null}

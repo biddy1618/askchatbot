@@ -4,7 +4,7 @@ intents:
   - intent_yes
   - intent_no
   - intent_chatgoal
-  - intent_pest_problem_description
+  - intent_question
 
 entities:
   - chatgoal_value
@@ -17,7 +17,10 @@ slots:
     values:
     - explain_ipm
     - I_have_a_pest
+    - do_a_stackoverflow_query
   pest_problem_description:
+    type: unfeaturized
+  stackoverflow_query:
     type: unfeaturized
   
 
@@ -26,6 +29,7 @@ actions:
   
 forms:
   - form_query_knowledge_base
+  - form_query_stackoverflow_in_es
   
 responses:
   utter_hi:
@@ -43,6 +47,8 @@ responses:
       title: Explain IPM
     - payload: /intent_chatgoal{"chatgoal_value":"I_have_a_pest"}
       title: I have a pest
+    - payload: /intent_chatgoal{"chatgoal_value":"do_a_stackoverflow_query"}
+      title: Stackoverflow Query
     - payload: /intent_chatgoal
       title: Something else
     text: Please select one of these options
@@ -80,6 +86,9 @@ responses:
   
   utter_ask_pest_problem_description:
   - text: Please describe your pest problem
+  
+  utter_ask_stackoverflow_query:
+  - text: Please describe your stackoverflow query
 
 session_config:
   session_expiration_time: 60

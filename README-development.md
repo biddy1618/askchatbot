@@ -2,9 +2,46 @@
 
 ## Install the bot locally for development purposes
 
-```bash
-git clone https://git.eduworks.us/ask-extension/askchatbot.git
+##### Install Ubuntu modules needed for local development
 
+```bash
+sudo apt-get update
+sudo apt-get install curl python3-distutils build-essential
+
+# check it is all there
+gcc --version
+g++ --version
+```
+
+##### Install Miniconda3 for Ubuntu
+
+```bash
+# download Miniconda installer for Python 3.7
+# (https://docs.conda.io/en/latest/miniconda.html)
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+# Install Miniconda
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh
+Do you accept the license terms? [yes|no]
+[no] >>> yes
+.
+Do you wish the installer to initialize Miniconda3
+by running conda init? [yes|no]
+[no] >>> yes
+
+# Verify it works
+$ source ~/.bashrc  # installer updated this, and will activate the base environment
+(base) > conda --version
+```
+
+##### Create conda environment & install the bot for development
+
+```bash
+conda create --name askchatbot python=3.7
+conda activate askchatbot
+
+git clone https://git.eduworks.us/ask-extension/askchatbot.git
 cd askchatbot
 pip install -r requirements-dev.txt
 ```

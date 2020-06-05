@@ -4,15 +4,14 @@
 
 This step is done on the local system in the cloned repo.
 
-### Connect to the knowledge base instance
+### Connect to elastic search
 
 To connect to the knowledge base instance, configure the following in 
-`<project-root>/credentials_knowledge_base.yml`:
+`<project-root>/credentials_elasticsearch.yml`:
 
-- `kb_instance` - This is just the instance address, you don't need the leading https.
-- `kb_user` - The username of the service account the action code will use to query the knowledge base.
-- `kb_pw` - The password of the service account the action code will use to query the knowledge base.
-- `localmode` -  When set to `true` (default in the code),  the action server will **not** send an actual query to the `kb_instance`. 
+- `stubquery` -  When set to `true` (default in the code),  the action server will **not** send an actual query.
+- `stackoverflow-index-name` - name of the stackoverflow index (For test purposes only)
+- `tfhub-embedding-url` - The TF-HUB embeddings to use for creating the dense vectors. This must match the one used to create the elasticsearch index.
 
 ### Build docker image of action server
 
@@ -42,15 +41,19 @@ to describe...
 
 # Deploy
 
-### Install Docker
+### Install docker & docker-compose
 
 For Ubuntu 20.04, you can just install Docker from a standard Ubuntu Repository
 
 ```bash
-sudo apt install docker.io
+sudo apt-get update
+sudo apt install docker.io docker-compose
 
 sudo docker --version
 19.03.#
+
+sudo docker-compose --version
+docker-compose version 1.25.0, build unknown
 ```
 
 ### Quick Installation using Docker Compose  ([docs](https://rasa.com/docs/rasa-x/deploy/))
