@@ -18,6 +18,7 @@ slots:
     - explain_ipm
     - I_have_a_pest
     - do_a_stackoverflow_query
+    - goodbye
   pest_problem_description:
     type: unfeaturized
   stackoverflow_query:
@@ -49,8 +50,8 @@ responses:
       title: I have a pest
     - payload: /intent_chatgoal{"chatgoal_value":"do_a_stackoverflow_query"}
       title: Stackoverflow Query
-    - payload: /intent_chatgoal
-      title: Something else
+    - payload: /intent_chatgoal{"chatgoal_value":"goodbye"}
+      title: Goodbye
     text: Please select one of these options
   
   utter_canthelp:
@@ -74,12 +75,6 @@ responses:
          and the environment.
          
          You can find more details [here](https://www2.ipm.ucanr.edu/What-is-IPM/).
-  
-  utter_do_you_have_a_pest_problem:
-  - text: Do you have a pest problem I can help you with?
-
-  utter_to_be_implemented_2:
-  - text: This still needs to be implemented (TODO 1)
   
   utter_bye:
   - text: Bye!

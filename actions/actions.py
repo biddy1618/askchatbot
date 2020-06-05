@@ -81,7 +81,6 @@ class ActionHi(Action):
         dispatcher.utter_message(template="utter_hi")
         dispatcher.utter_message(template="utter_inform_privacypolicy")
         dispatcher.utter_message(template="utter_summarize_skills")
-        dispatcher.utter_message(template="utter_what_is_chatgoal")
         return [SlotSet("shown_privacypolicy", True)]
 
 
@@ -105,7 +104,7 @@ class FormQueryKnowledgeBase(FormAction):
             or a list of them, where a first match will be picked"""
 
         return {
-            "pest_problem_description": [self.from_text(intent=["intent_question"])],
+            "pest_problem_description": [self.from_text()],
         }
 
     async def submit(
@@ -152,7 +151,7 @@ class FormQueryStackOverflowIndex(FormAction):
             or a list of them, where a first match will be picked"""
 
         return {
-            "stackoverflow_query": [self.from_text(intent=["intent_question"])],
+            "stackoverflow_query": [self.from_text()],
         }
 
     async def submit(

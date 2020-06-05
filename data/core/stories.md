@@ -1,6 +1,7 @@
 ## hi
 * intent_hi
   - action_hi
+  - utter_what_is_chatgoal
 
 ## bye
 * intent_bye
@@ -11,24 +12,11 @@
     - utter_canthelp
     - utter_please_askexpert
     
-## chatgoal explain ipm + pest problem
+## chatgoal explain ipm
 * intent_chatgoal{"chatgoal_value": "explain_ipm"}
     - slot{"chatgoal_value": "explain_ipm"}
     - utter_explain_ipm
-    - utter_do_you_have_a_pest_problem
-* intent_yes
-    - form_query_knowledge_base
-    - form{"name": "form_query_knowledge_base"}
-    - form{"name": null}
-    
-    
-## chatgoal explain ipm + no pest problem
-* intent_chatgoal{"chatgoal_value": "explain_ipm"}
-    - slot{"chatgoal_value": "explain_ipm"}
-    - utter_explain_ipm
-    - utter_do_you_have_a_pest_problem
-* intent_no
-    - utter_to_be_implemented_2
+    - utter_what_is_chatgoal
     
 ## chatgoal pest problem
 * intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
@@ -36,6 +24,7 @@
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
+    - utter_what_is_chatgoal
     
 ## chatgoal do stackoverflow query
 * intent_chatgoal{"chatgoal_value": "do_a_stackoverflow_query"}
@@ -43,3 +32,9 @@
     - form_query_stackoverflow_in_es
     - form{"name": "form_query_stackoverflow_in_es"}
     - form{"name": null}
+    - utter_what_is_chatgoal
+    
+## chatgoal goodbye
+* intent_chatgoal{"chatgoal_value": "goodbye"}
+    - slot{"chatgoal_value": "goodbye"}
+    - utter_bye
