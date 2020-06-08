@@ -31,6 +31,7 @@ sudo sysctl -p
 #### create a folder from where to deploy
 
 ```bash
+mkdir -p ~/deploy/elastic/docker-compose
 cd ~/deploy/elastic/docker-compose
 ```
 
@@ -97,7 +98,8 @@ sudo docker-compose down -v
 ```bash
 # Elasticsearch is now running on port 9200. Verify it is working.
 # For installation without authentication enabled
-curl -XGET 'localhost:9200/?pretty'
+curl -XGET 'localhost:9200/?pretty'  
+
 # For installation with authentication enabled via X-Pack
 # -> default username & password = elastic:changeme
 curl -XGET -u elastic:changeme 'localhost:9200/?pretty'    
@@ -122,26 +124,27 @@ References:
 - https://github.com/jtibshirani/text-embeddings
 
 ```bash
-git clone https://github.com/jtibshirani/text-embeddings.git
+# first time:
+git clone https://git.eduworks.us/ask-extension/text-embeddings
+
+# after that:
+git fetch --all
+
+
 cd text-embeddings
-conda create --name elasticsearch-stackoverflow python=3.7
-conda activate elasticsearch-stackoverflow
+conda create --name es-so python=3.7
+conda activate es-so
 pip install -r requirements.txt
 
 # make sure the elasticsearch container is up & running
 sudo docker ps -a
 curl -XGET -u elastic:changeme 'localhost:9200/?pretty'
 
-# populates the database & starts query loop
-python src/main.py
-> Downloading pre-trained embeddings from tensorflow hub...
-> Injecting documents
-> Enter query:
+# Create the elasticsearch index for the Stackoverflow posts
+python3 src/create_es_index.py
 
-# also, check out the injected data with kibana
-
-# to query with curl
-#...todo... curl -X GET "localhost:9200/_xpack?pretty"
+# Run elasticsearch queries from the command line
+python3 src/run_es_query.py
 ```
 
 #### How does it work

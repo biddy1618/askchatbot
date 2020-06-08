@@ -1,46 +1,5 @@
 # Deploy the chatbot w/ docker-compose
 
-# Build & Push docker image of action server
-
-This step is done on the local system in the cloned repo.
-
-### Connect to elastic search
-
-To connect to the knowledge base instance, configure the following in 
-`<project-root>/credentials_elasticsearch.yml`:
-
-- `stubquery` -  When set to `true` (default in the code),  the action server will **not** send an actual query.
-- `stackoverflow-index-name` - name of the stackoverflow index (For test purposes only)
-- `tfhub-embedding-url` - The TF-HUB embeddings to use for creating the dense vectors. This must match the one used to create the elasticsearch index.
-
-### Build docker image of action server
-
-For now, we will build & push the docker image of the action server manually. You can run the commands locally or on the EC2 instance.
-
-A Dockerfile is included in the project-root folder.
-
-#### Build the docker image
-
-```bash
-to describe...
-```
-
-#### Test locally
-
-```bash
-to describe...
-```
-
-#### Push the docker image
-
-```bash
-to describe...
-```
-
-
-
-# Deploy
-
 ### Install docker & docker-compose
 
 For Ubuntu 20.04, you can just install Docker from a standard Ubuntu Repository
@@ -55,6 +14,67 @@ sudo docker --version
 sudo docker-compose --version
 docker-compose version 1.25.0, build unknown
 ```
+
+### Create conda environment
+
+##### Install Miniconda3 for Ubuntu
+
+```bash
+# download Miniconda installer for Python 3.7
+# (https://docs.conda.io/en/latest/miniconda.html)
+$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+# Install Miniconda
+$ chmod +x Miniconda3-latest-Linux-x86_64.sh
+$ ./Miniconda3-latest-Linux-x86_64.sh
+Do you accept the license terms? [yes|no]
+[no] >>> yes
+.
+Do you wish the installer to initialize Miniconda3
+by running conda init? [yes|no]
+[no] >>> yes
+
+# Verify it works
+$ source ~/.bashrc  # installer updated this, and will activate the base environment
+(base) > conda --version
+```
+
+```bash
+# first time:
+git clone https://git.eduworks.us/ask-extension/askchatbot
+cd askchatbot
+
+# after that:
+git fetch --all
+
+conda create --name askchatbot python=3.7
+conda activate askchatbot
+pip install -r requirements-dev.txt
+```
+
+### Build the docker image for the action server
+
+First, define the elasticsearch details in `<project-root>/credentials_elasticsearch.yml`:
+
+- `hosts` - One or more Elasticsearch hosts (See inside the yml for detailed instructions)
+- `do-the-queries` -  `true`=send queries to elasticsearch; `false`=mock queries
+- `stackoverflow-index-name` - name of the stackoverflow index (For test purposes only)
+- `tfhub-embedding-url` - The TF-HUB embeddings to use for creating the dense vectors. This must match the one used to create the elasticsearch index.
+- `tfhub-cache-dir` - The directory where TF-HUB will cache the dowloaded pre-trained embeddings
+
+For now, we are just keeping it local, and not pushing it to a docker registry.
+
+```bash
+cd <project-root>
+sudo docker build . -t askchatbot-action-server:0.0.1
+
+# quickly test that it comes up ok
+sudo docker run -p 5055:5055 askchatbot-action-server:0.0.1
+curl http://<hostname>:5055/actions
+
+```
+
+
 
 ### Quick Installation using Docker Compose  ([docs](https://rasa.com/docs/rasa-x/deploy/))
 
@@ -74,9 +94,9 @@ sudo bash ./install.sh
 cd /etc/rasa
 
 sudo vi .env
-RASA_X_VERSION=0.28.5
-RASA_VERSION=1.10.1
-RASA_X_DEMO_VERSION=0.28.5
+RASA_X_VERSION=0.28.6
+RASA_VERSION=1.10.2
+RASA_X_DEMO_VERSION=0.28.6
 ```
 
 #### Define action server
@@ -88,7 +108,7 @@ sudo vi docker-compose.override.yml
 version: '3.4'
 services:
   app:
-    image: docker.io/arjaan/test:0.0.1
+    image: askchatbot-action-server:0.0.1
 ```
 
 
@@ -187,6 +207,8 @@ curl http://localhost:5055/actions
 
 
 #### Set password of admin
+
+This is not needed when upgrading, because it is stored in the persistent Rasa X db.
 
 ```bash
 cd /etc/rasa

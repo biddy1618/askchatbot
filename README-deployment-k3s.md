@@ -5,7 +5,7 @@
 To connect to the knowledge base instance, configure the following in 
 `<project-root>/credentials_elasticsearch.yml`:
 
-- `stubquery` -  When set to `true` (default in the code),  the action server will **not** send an actual query.
+- `do-the-queries` - `true`=send queries to elasticsearch; `false`=mock queries(default)
 - `stackoverflow-index-name` - name of the stackoverflow index (For test purposes only)
 - `tfhub-embedding-url` - The TF-HUB embeddings to use for creating the dense vectors. This must match the one used to create the elasticsearch index.
 

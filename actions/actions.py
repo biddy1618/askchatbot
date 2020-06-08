@@ -18,17 +18,19 @@ logger = logging.getLogger(__name__)
 
 # get configuration
 es_config = ruamel.yaml.safe_load(open("credentials_elasticsearch.yml", "r")) or {}
-stubquery = es_config.get("stubquery", True)
+hosts = es_config.get("hosts", None)
+do_the_queries = es_config.get("do-the-queries")
 stackoverflow_index_name = es_config.get("stackoverflow-index-name")
 tfhub_embedding_url = es_config.get("tfhub-embedding-url")
 
 # define where the tfhub modules are stored
 os.environ["TFHUB_CACHE_DIR"] = es_config.get("tfhub-cache-dir")
 
-if stubquery:
-    logger.info("Will skip elastic search queries (stubquery=%s)", stubquery)
+if do_the_queries:
+    logger.info("Will do elastic search queries (do-the-queries=%s)", do_the_queries)
 else:
-    logger.info("Will do elastic search queries (stubquery=%s)", stubquery)
+    logger.info("Will skip elastic search queries (do-the-queries=%s)", do_the_queries)
+
 
 logger.info("Start loading embedding module %s", tfhub_embedding_url)
 embed = tf_hub.load(tfhub_embedding_url)
@@ -36,7 +38,9 @@ logger.info("Done loading embedding module %s", tfhub_embedding_url)
 
 
 # initialize the elastic search client
-es_client = Elasticsearch()
+logger.info("Initializing elasticsearch client for hosts:")
+logger.info("%s", pprint.pformat(hosts))
+es_client = Elasticsearch(hosts)
 SEARCH_SIZE = 5
 
 
@@ -118,15 +122,16 @@ class FormQueryKnowledgeBase(FormAction):
 
         pest_problem_description = tracker.get_slot("pest_problem_description")
 
-        if stubquery:
+        if do_the_queries:
+            message = "TO-BE-IMPLEMENTED: QUERY TO KNOWLEDGE BASE"
+        else:
             message = (
                 f"Not doing an actual elastic search query.\n"
                 f"A query with the following details would be done: \n"
                 f"pest problem description = "
                 f"{pest_problem_description}"
             )
-        else:
-            message = "TO-BE-IMPLEMENTED: QUERY TO KNOWLEDGE BASE"
+
         dispatcher.utter_message(message)
         return [AllSlotsReset()]
 
@@ -165,14 +170,7 @@ class FormQueryStackOverflowIndex(FormAction):
 
         stackoverflow_query = tracker.get_slot("stackoverflow_query")
 
-        if stubquery:
-            message = (
-                f"Not doing an actual elastic search query.\n"
-                f"A query with the following details would be done: \n"
-                f"stackoverflow_query = "
-                f"{stackoverflow_query}"
-            )
-        else:
+        if do_the_queries:
             response = handle_es_query(stackoverflow_query, stackoverflow_index_name)
             hits = response["hits"]["hits"]
             if len(hits) == 0:
@@ -183,6 +181,13 @@ class FormQueryStackOverflowIndex(FormAction):
                     f"(max {SEARCH_SIZE}):\n"
                     f"{pprint.pformat(hits)}"
                 )
+        else:
+            message = (
+                f"Not doing an actual elastic search query.\n"
+                f"A query with the following details would be done: \n"
+                f"stackoverflow_query = "
+                f"{stackoverflow_query}"
+            )
 
         dispatcher.utter_message(message)
         return [AllSlotsReset()]
