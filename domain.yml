@@ -5,9 +5,11 @@ intents:
   - intent_no
   - intent_chatgoal
   - intent_question
+  - intent_rating
 
 entities:
   - chatgoal_value
+  - rating_value
   
 slots:
   shown_privacypolicy:
@@ -23,10 +25,12 @@ slots:
     type: unfeaturized
   stackoverflow_query:
     type: unfeaturized
-  
+  rating_value:
+    type: unfeaturized  
 
 actions:
   - action_hi
+  - action_tag_rating
   
 forms:
   - form_query_knowledge_base
@@ -34,7 +38,7 @@ forms:
   
 responses:
   utter_hi:
-  - text: Hi, I am the AskChatBot!
+  - text: Hi, I am the Extension Bot!
   
   utter_inform_privacypolicy:
   - text: By chatting to me you agree to our [privacy policy](https://www.ucop.edu/ethics-compliance-audit-services/_files/compliance/uc-privacy-principles.pdf).
@@ -84,6 +88,20 @@ responses:
   
   utter_ask_stackoverflow_query:
   - text: Please describe your stackoverflow query
+  
+  utter_request_rating:
+  - buttons:
+    - payload: /intent_rating{"rating_value":"1"}
+      title: "1"
+    - payload: /intent_rating{"rating_value":"2"}
+      title: "2"
+    - payload: /intent_rating{"rating_value":"3"}
+      title: "3"
+    - payload: /intent_rating{"rating_value":"4"}
+      title: "4"
+    - payload: /intent_rating{"rating_value":"5"}
+      title: "5"
+    text: To help me improve, please rate this response (1=bad, 5=great)?
 
 session_config:
   session_expiration_time: 60

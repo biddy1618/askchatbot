@@ -1,5 +1,11 @@
 # Instructions to deploy the chatbot on k3s
 
+# TO DO: Update this file
+
+We switched to docker-compose based deployment, so this file that describes k3s based deployment is out of date....
+
+
+
 ### Connect to the knowledge base instance
 
 To connect to the knowledge base instance, configure the following in 
