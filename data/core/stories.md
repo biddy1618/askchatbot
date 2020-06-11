@@ -24,6 +24,9 @@
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
+    - utter_request_rating
+* intent_rating
+    - action_tag_rating
     - utter_what_is_chatgoal
     
 ## chatgoal do stackoverflow query
@@ -32,6 +35,9 @@
     - form_query_stackoverflow_in_es
     - form{"name": "form_query_stackoverflow_in_es"}
     - form{"name": null}
+    - utter_request_rating
+* intent_rating
+    - action_tag_rating
     - utter_what_is_chatgoal
     
 ## chatgoal goodbye

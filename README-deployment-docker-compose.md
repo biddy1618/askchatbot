@@ -54,18 +54,19 @@ pip install -r requirements-dev.txt
 
 ### Build the docker image for the action server
 
-First, define the elasticsearch details in `<project-root>/credentials_elasticsearch.yml`:
-
-- `hosts` - One or more Elasticsearch hosts (See inside the yml for detailed instructions)
-- `do-the-queries` -  `true`=send queries to elasticsearch; `false`=mock queries
-- `stackoverflow-index-name` - name of the stackoverflow index (For test purposes only)
-- `tfhub-embedding-url` - The TF-HUB embeddings to use for creating the dense vectors. This must match the one used to create the elasticsearch index.
-- `tfhub-cache-dir` - The directory where TF-HUB will cache the dowloaded pre-trained embeddings
-
-For now, we are just keeping it local, and not pushing it to a docker registry.
+For now, we build the docker image on the VM, and do not push it to a docker registry.
 
 ```bash
 cd <project-root>
+
+#
+# Edit the file: ./actions/credentials_elasticsearch.yml
+#
+# Edit the file: ./actions/actions_config.py
+#  (-) If Rasa X is not deployed in same docker network, you can set rasa_x_host here.
+#
+
+# Build the image
 sudo docker build . -t askchatbot-action-server:0.0.1
 
 # quickly test that it comes up ok
@@ -78,13 +79,13 @@ curl http://<hostname>:5055/actions
 
 ### Quick Installation using Docker Compose  ([docs](https://rasa.com/docs/rasa-x/deploy/))
 
-Use the [Quick Installation](https://rasa.com/docs/rasa-x/deploy/#quick-installation) method, with this detail:
+Install Rasa X using these steps:
 
 #### Download & run the install script
 
 ```bash
 cd <project-root>/deploy/docker-compose/secret
-curl -sSL -o install.sh https://storage.googleapis.com/rasa-x-releases/0.28.5/install.sh
+curl -sSL -o install.sh https://storage.googleapis.com/rasa-x-releases/0.29.1/install.sh
 sudo bash ./install.sh
 ```
 
@@ -94,9 +95,9 @@ sudo bash ./install.sh
 cd /etc/rasa
 
 sudo vi .env
-RASA_X_VERSION=0.28.6
+RASA_X_VERSION=0.29.1
 RASA_VERSION=1.10.2
-RASA_X_DEMO_VERSION=0.28.6
+RASA_X_DEMO_VERSION=0.29.1
 ```
 
 #### Define action server

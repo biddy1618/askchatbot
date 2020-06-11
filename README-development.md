@@ -43,7 +43,12 @@ conda activate askchatbot
 
 git clone https://git.eduworks.us/ask-extension/askchatbot.git
 cd askchatbot
+
+# install the dependencies
 pip install -r requirements-dev.txt
+
+# install the askchatbot package in editable mode
+pip install -e .
 ```
 
 **WARNING:** 
