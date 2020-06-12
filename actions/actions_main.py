@@ -129,12 +129,19 @@ class FormQueryKnowledgeBase(FormAction):
                     pn_image = hit["_source"]["imagePestNote"][0]["src"]
                     pn_image_caption = hit["_source"]["imagePestNote"][0]["caption"]
 
-                text = f"{name} (score={score:.1f})"
-                if pn_url:
-                    text = f"{text} ([pestnote]({pn_url}))"
-                dispatcher.utter_message(text=text)
+                text = ""
+
                 if pn_image:
-                    dispatcher.utter_message(text=pn_image_caption, image=pn_image)
+                    text = f"{pn_image_caption}\n"
+
+                if pn_url:
+                    text = f"{text}- [pestnote for '{name}']({pn_url})\n"
+                else:
+                    text = f"{text}- {name}\n"
+
+                text = f"{text}- similarity score={score:.1f}"
+
+                dispatcher.utter_message(text=text, image=pn_image)
 
         else:
             message = (
