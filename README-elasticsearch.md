@@ -116,15 +116,11 @@ Open browser at http://localhost:5601
 
 
 
-# Ingest pestnotes
+# Ingest ipmdate
 
 ```bash
-# first time:
 git clone https://git.eduworks.us/ask-extension/askchatbot
 cd askchatbot
-
-# after that:
-git fetch --all
 
 conda create --name askchatbot python=3.7
 conda activate askchatbot
@@ -139,11 +135,14 @@ pip install -e .
 #  - ec2 instance: IPv4 = 10.1.100.167
 hosts:
     - host: 10.1.100.167
+    
+# index name of ipmdata queries
+ipmdata-index-name: "ipmdata"
 
 # ingest the pestnotes
 cd <project-root>/scripts/elasticsearch/src
 $ vi create_es_index.py
-INDEX_NAME = 'pestnotes'
+INDEX_NAME = 'impdata'
 
 python3 -m create_es_index
 

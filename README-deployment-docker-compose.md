@@ -40,18 +40,18 @@ $ source ~/.bashrc  # installer updated this, and will activate the base environ
 ```
 
 ```bash
-# first time:
 git clone https://git.eduworks.us/ask-extension/askchatbot
 cd askchatbot
-
-# after that:
-git fetch --all
 
 conda create --name askchatbot python=3.7
 conda activate askchatbot
 pip install -r requirements-dev.txt
 pip install -e .
 ```
+
+### Create the elasticsearch index
+
+See README-elasticsearch.md
 
 ### Build the docker image for the action server
 
@@ -68,7 +68,10 @@ cd <project-root>
 #  - ec2 instance: IPv4 = 10.1.100.167
 hosts:
     - host: 10.1.100.167
-    
+
+# index name of ipmdata queries
+ipmdata-index-name: "ipmdata"
+
 # Edit the file: ./actions/actions_config.py
 #  (-) If Rasa X is not deployed in same docker network, you can set rasa_x_host here.
 #
