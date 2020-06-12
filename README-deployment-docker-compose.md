@@ -197,6 +197,24 @@ cd /etc/rasa
 sudo python rasa_x_commands.py create --update admin me <PASSWORD>
 ```
 
+### Specify name that the chatbot uses to refer to itself
+
+The name is specified in the file  `<project-root>/domain.yml`:
+
+```bash
+responses:
+  utter_hi:
+  - text: Hi, I am the Extension Bot!
+```
+
+At the moment it is not configurable, and when you change it, you need to re-train the model with:
+
+```bash
+rasa train
+```
+
+And then upload & activate it as described next.
+
 #### Upload & activate a trained model
 
 Log into Rasa X at http://35.166.13.105:8000
