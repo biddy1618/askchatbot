@@ -33,8 +33,7 @@ es_config = (
 
 hosts = es_config.get("hosts", None)
 do_the_queries = es_config.get("do-the-queries")
-pestnotes_index_name = es_config.get("pestnotes-index-name")
-stackoverflow_index_name = es_config.get("stackoverflow-index-name")
+ipmdata_index_name = es_config.get("ipmdata-index-name")
 tfhub_embedding_url = es_config.get("tfhub-embedding-url")
 search_size = es_config.get("search-size")
 
@@ -47,8 +46,7 @@ logger.info("----------------------------------------------")
 logger.info("Elasticsearch configuration:")
 logger.info("- hosts                    = %s", pprint.pformat(hosts))
 logger.info("- do_the_queries           = %s", do_the_queries)
-logger.info("- pestnotes_index_name     = %s", pestnotes_index_name)
-logger.info("- stackoverflow_index_name = %s", stackoverflow_index_name)
+logger.info("- ipmdata_index_name     = %s", ipmdata_index_name)
 logger.info("- tfhub_embedding_url      = %s", tfhub_embedding_url)
 logger.info("----------------------------------------------")
 

@@ -116,6 +116,41 @@ Open browser at http://localhost:5601
 
 
 
+# Ingest pestnotes
+
+```bash
+# first time:
+git clone https://git.eduworks.us/ask-extension/askchatbot
+cd askchatbot
+
+# after that:
+git fetch --all
+
+conda create --name askchatbot python=3.7
+conda activate askchatbot
+pip install -r requirements-dev.txt
+pip install -e .
+
+#
+# Edit the file: ./actions/credentials_elasticsearch.yml
+# Select the correct Ipv4 !
+# Notes:
+#  - arjaan-Kudu : IPv4 = 192.168.1.6
+#  - ec2 instance: IPv4 = 10.1.100.167
+hosts:
+    - host: 10.1.100.167
+
+# ingest the pestnotes
+cd <project-root>/scripts/elasticsearch/src
+$ vi create_es_index.py
+INDEX_NAME = 'pestnotes'
+
+python3 -m create_es_index
+
+```
+
+
+
 # Example Stackoverflow questions
 
 References:

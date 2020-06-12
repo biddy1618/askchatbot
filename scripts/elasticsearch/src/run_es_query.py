@@ -10,7 +10,7 @@ from actions import actions_config as ac
 
 # Select the index to create by uncommenting one of these
 # INDEX_NAME = 'posts'
-INDEX_NAME = "pestnotes"
+INDEX_NAME = "ipmdata"
 
 
 def run_query_loop():
@@ -31,21 +31,23 @@ def handle_query():
     embedding_time = time.time() - embedding_start
 
     if INDEX_NAME == "posts":
-        cos = "cosineSimilarity(params.query_vector, doc['title_vector']) + 1.0"
+        cos = "cosineSimilarity(params.query_vector, 'title_vector') + 1.0"
         _source_query = {"includes": ["title", "body"]}
-    elif INDEX_NAME == "pestnotes":
-        script_query = {
-            "script_score": {
-                "query": {"match_all": {}},
-                "script": {
-                    "source": "cosineSimilarity(params.query_vector, doc['description_vector']) + 1.0",
-                    "params": {"query_vector": query_vector},
-                },
-            }
-        }
-        _source_query = {"includes": ["name", "description"]}
+    elif INDEX_NAME == "ipmdata":
+        cos = (
+            "cosineSimilarity(params.query_vector, 'descriptionPestNote_vector') + 1.0"
+        )
+        _source_query = {"includes": ["name"]}
     else:
         raise Exception(f"Not implemented for INDEX_NAME = {INDEX_NAME}")
+
+    # https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-script-score-query.html#vector-functions
+    script_query = {
+        "script_score": {
+            "query": {"match_all": {}},
+            "script": {"source": cos, "params": {"query_vector": query_vector},},
+        }
+    }
 
     search_start = time.time()
     response = ac.es_client.search(
