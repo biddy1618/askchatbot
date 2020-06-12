@@ -11,7 +11,7 @@ from actions import actions_config as ac
 
 # Select the index to create by uncommenting one of these
 # INDEX_NAME = 'posts'
-INDEX_NAME = 'pestnotes'
+INDEX_NAME = 'ipmdata'
 
 
 INDEX_FILE = f"{Path(__file__).parents[1]}/data/{INDEX_NAME}/index.json"
@@ -32,8 +32,8 @@ def index_data():
     """Create the index"""
     if INDEX_NAME == 'posts':
         index_data_posts()
-    elif INDEX_NAME == 'pestnotes':
-        index_data_pestnotes()
+    elif INDEX_NAME == 'ipmdata':
+        index_data_ipmdata()
     else:
         raise Exception(f"Not implemented for INDEX_NAME = {INDEX_NAME}")
 
@@ -89,8 +89,8 @@ def index_batch_posts(docs):
     bulk(ac.es_client, requests)
 
 
-def index_data_pestnotes():
-    """Create the index for pestnotes"""
+def index_data_ipmdata():
+    """Create the index for ipmdata"""
     print(f"Creating the index: {INDEX_NAME}")
     ac.es_client.indices.delete(index=INDEX_NAME, ignore=[404])
 
@@ -110,29 +110,29 @@ def index_data_pestnotes():
             count += 1
 
             if count % BATCH_SIZE == 0:
-                index_batch_pestnotes(docs_batch)
+                index_batch_ipmdata(docs_batch)
                 docs_batch = []
                 print("Indexed {} documents.".format(count))
 
         if docs_batch:
-            index_batch_pestnotes(docs_batch)
+            index_batch_ipmdata(docs_batch)
             print("Indexed {} documents.".format(count))
 
     ac.es_client.indices.refresh(index=INDEX_NAME)
     print("Done indexing.")
 
 
-def index_batch_pestnotes(docs):
+def index_batch_ipmdata(docs):
     """Index a batch of docs"""
-    descriptions = [doc["description"] for doc in docs]
-    description_vectors = ac.embed(descriptions).numpy()
+    pn_descriptions = [doc["descriptionPestNote"] for doc in docs]
+    pn_description_vectors = ac.embed(pn_descriptions).numpy()
 
     requests = []
     for i, doc in enumerate(docs):
         request = doc
         request["_op_type"] = "index"
         request["_index"] = INDEX_NAME
-        request["description_vector"] = description_vectors[i]
+        request["descriptionPestNote_vector"] = pn_description_vectors[i]
         requests.append(request)
     bulk(ac.es_client, requests)
 

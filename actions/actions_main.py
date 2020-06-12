@@ -1,7 +1,6 @@
 """Custom Actions & Forms"""
 
 import logging
-import pprint
 from typing import Any, Text, Dict, List, Union
 
 from rasa_sdk import Action, Tracker
@@ -10,6 +9,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet, EventType, AllSlotsReset
 
 import requests
+import aiohttp
 
 from actions import actions_config as ac
 
@@ -25,17 +25,28 @@ async def handle_es_query(query, index_name):
     # create the embedding vector
     query_vector = ac.embed([query]).numpy()[0]
 
-    if index_name == "posts":
-        cos = "cosineSimilarity(params.query_vector, doc['title_vector']) + 1.0"
-        _source_query = {"includes": ["title", "body"]}
-    elif index_name == "pestnotes":
-        cos = "cosineSimilarity(params.query_vector, doc['description_vector']) + 1.0"
+    if index_name == "ipmdata":
+        cos = (
+            "cosineSimilarity(params.query_vector, 'descriptionPestNote_vector') + 1.0"
+        )
         _source_query = {
-            "includes": ["name", "url", "description", "damage", "management", "images"]
+            "includes": [
+                "name",
+                "urlPestNote",
+                "descriptionPestNote",
+                "damagePestNote",
+                "managementPestNote",
+                "imagePestNote",
+                "urlQuickTip",
+                "contentQuickTips",
+                "imageQuickTips",
+                "video",
+            ]
         }
     else:
         raise Exception(f"Not implemented for index_name = {index_name}")
 
+    # https://www.elastic.co/guide/en/elasticsearch/reference/7.x/query-dsl-script-score-query.html#vector-functions
     script_query = {
         "script_score": {
             "query": {"match_all": {}},
@@ -106,21 +117,24 @@ class FormQueryKnowledgeBase(FormAction):
 
         if ac.do_the_queries:
             response = await handle_es_query(
-                pest_problem_description, ac.pestnotes_index_name
+                pest_problem_description, ac.ipmdata_index_name
             )
 
-            if response["hits"]["hits"]:
-                dispatcher.utter_message(text="I found some relevant pestnotes:")
             for hit in response["hits"]["hits"]:
                 name = hit["_source"]["name"]
                 score = hit["_score"]
-                url = hit["_source"]["url"]
-                image = None
-                if hit["_source"]["images"]:
-                    image = hit["_source"]["images"][0]["src"]
+                pn_url = hit["_source"]["urlPestNote"]
+                pn_image = None
+                if hit["_source"]["imagePestNote"]:
+                    pn_image = hit["_source"]["imagePestNote"][0]["src"]
+                    pn_image_caption = hit["_source"]["imagePestNote"][0]["caption"]
 
                 text = f"{name} (score={score:.1f})"
-                dispatcher.utter_message(text=text, url=url, image=image)
+                if pn_url:
+                    text = f"{text} ([pestnote]({pn_url}))"
+                dispatcher.utter_message(text=text)
+                if pn_image:
+                    dispatcher.utter_message(text=pn_image_caption, image=pn_image)
 
         else:
             message = (
@@ -131,65 +145,6 @@ class FormQueryKnowledgeBase(FormAction):
             )
             dispatcher.utter_message(message)
 
-        return [AllSlotsReset()]
-
-
-class FormQueryStackOverflowIndex(FormAction):
-    """Query the StackOverflow Index"""
-
-    def name(self) -> Text:
-        return "form_query_stackoverflow_in_es"
-
-    @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
-        """A list of required slots that the form has to fill"""
-
-        return ["stackoverflow_query"]
-
-    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-        """A dictionary to map required slots to
-            - an extracted entity
-            - intent: value pairs
-            - a whole message
-            or a list of them, where a first match will be picked"""
-
-        return {
-            "stackoverflow_query": [self.from_text()],
-        }
-
-    async def submit(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict]:
-        """Define what the form has to do
-            after all required slots are filled"""
-
-        stackoverflow_query = tracker.get_slot("stackoverflow_query")
-
-        if ac.do_the_queries:
-            response = await handle_es_query(
-                stackoverflow_query, ac.stackoverflow_index_name
-            )
-            hits = response["hits"]["hits"]
-            if len(hits) == 0:
-                message = "No Stackoverflow hits were found"
-            else:
-                message = (
-                    f"Listing the Stackoverflow hits with highest score "
-                    f"(max {ac.search_size}):\n"
-                    f"{pprint.pformat(hits)}"
-                )
-        else:
-            message = (
-                f"Not doing an actual elastic search query.\n"
-                f"A query with the following details would be done: \n"
-                f"stackoverflow_query = "
-                f"{stackoverflow_query}"
-            )
-
-        dispatcher.utter_message(message)
         return [AllSlotsReset()]
 
 

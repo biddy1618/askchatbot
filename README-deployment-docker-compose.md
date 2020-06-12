@@ -50,6 +50,7 @@ git fetch --all
 conda create --name askchatbot python=3.7
 conda activate askchatbot
 pip install -r requirements-dev.txt
+pip install -e .
 ```
 
 ### Build the docker image for the action server
@@ -61,7 +62,13 @@ cd <project-root>
 
 #
 # Edit the file: ./actions/credentials_elasticsearch.yml
-#
+# Select the correct Ipv4 for the elasticsearch host!
+# Notes:
+#  - arjaan-Kudu : IPv4 = 192.168.1.6
+#  - ec2 instance: IPv4 = 10.1.100.167
+hosts:
+    - host: 10.1.100.167
+    
 # Edit the file: ./actions/actions_config.py
 #  (-) If Rasa X is not deployed in same docker network, you can set rasa_x_host here.
 #
@@ -149,7 +156,7 @@ services:
     environment:
       DEBUG_MODE: "true"
 
-# rasa: Add this directly to docker-compose.yml
+# rasa: Add '--debug' directly to docker-compose.yml
 x-rasa-services: &default-rasa-service
   command: >
     x
@@ -175,6 +182,25 @@ sudo docker-compose up -d
 # to bring down the deployment
 sudo docker-compose down
 ```
+
+
+
+#### Set password of admin
+
+This is not needed when upgrading without removing, because it is stored in the persistent Rasa X db.
+
+```bash
+cd /etc/rasa
+sudo python rasa_x_commands.py create --update admin me <PASSWORD>
+```
+
+#### Upload & activate a trained model
+
+Log into Rasa X at http://35.166.13.105:8000
+
+Go to the `models` screen, and click on `upload model`
+
+Upload a trained model from your local computer.
 
 #### Monitor containers & their logs
 
@@ -203,17 +229,6 @@ http://35.166.13.105:8000/api/version  # rasa-x
 # check action server endpoints directly on the VM
 curl http://localhost:5055/health  
 curl http://localhost:5055/actions 
-```
-
-
-
-#### Set password of admin
-
-This is not needed when upgrading, because it is stored in the persistent Rasa X db.
-
-```bash
-cd /etc/rasa
-sudo python rasa_x_commands.py create --update admin me <PASSWORD>
 ```
 
 

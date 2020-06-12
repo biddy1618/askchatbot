@@ -12,31 +12,47 @@
       "name": {
         "type": "text"
       },
-      "url": {
+      "urlPestNote": {
         "type": "text"
       },
-      "description": {
+      "descriptionPestNote": {
         "type": "text"
       },
-      "description_vector": {
+      "descriptionPestNote_vector": {
         "type": "dense_vector",
         "dims": 512
       },
-      "damage": {
+      "damagePestNote": {
         "type": "text"
       },
-      "damage_vector": {
+      "damagePestNote_vector": {
         "type": "dense_vector",
         "dims": 512
       },
-      "management": {
+      "managementPestNote": {
         "type": "text"
       },
-      "management_vector": {
+      "managementPestNote_vector": {
         "type": "dense_vector",
         "dims": 512
       },
-      "images": {
+      "imagePestNote": {
+        "type": "nested"
+      },
+      "urlQuickTip": {
+        "type": "text"
+      },
+      "contentQuickTips": {
+        "type": "text"
+      },
+      "contentQuickTips_vector": {
+        "type": "dense_vector",
+        "dims": 512
+      },
+      "imageQuickTips": {
+        "type": "nested"
+      },
+      "video": {
         "type": "nested"
       }
     }
