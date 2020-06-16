@@ -1,6 +1,24 @@
 # Elasticsearch for Askchatbot
 
-# Installation
+# Elasticsearch ec2 instance
+
+Details, including password, can be found in this [Jira Ticket](https://jira.eduworks.us/browse/AE-283?focusedCommentId=31925&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-31925)
+
+For the Elasticsearch ec2 instance, on the connecting machine add to /etc/hosts:
+
+```bash
+34.211.141.190 ask-chat-db-dev.i.eduworks.com
+```
+
+The URL is: https://ask-chat-db-dev.i.eduworks.com:9200/
+
+User: elastic
+
+PW:  see [Jira Ticket](https://jira.eduworks.us/browse/AE-283?focusedCommentId=31925&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-31925)
+
+# Local docker-compose installation
+
+This is useful for testing locally
 
 ### Elasticsearch+kibana with docker-compose ([docs](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-docker.html))
 
@@ -145,6 +163,9 @@ $ vi create_es_index.py
 INDEX_NAME = 'impdata'
 
 python3 -m create_es_index
+
+# run a test query
+python3 -m run_es_query
 
 ```
 
