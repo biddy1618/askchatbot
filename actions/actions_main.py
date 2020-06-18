@@ -1,12 +1,22 @@
 """Custom Actions & Forms"""
 
 import logging
+import pprint
 from typing import Any, Text, Dict, List, Union
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.forms import FormAction
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet, EventType, AllSlotsReset
+from rasa_sdk.events import (
+    SlotSet,
+    SessionStarted,
+    Restarted,
+    FollowupAction,
+    ActionExecuted,
+    EventType,
+    AllSlotsReset,
+    UserUttered,
+)
 
 import requests
 import aiohttp
@@ -17,6 +27,16 @@ from actions import actions_config as ac
 logger = logging.getLogger(__name__)
 
 USE_AIOHTTP = False
+
+# https://forum.rasa.com/t/trigger-a-story-or-intent-from-a-custom-action/13784/9?u=arjaan
+def next_intent_events(next_intent: Text) -> List[Dict]:
+    """Add next intent events, mimicking a prediction by NLU"""
+    return [ActionExecuted("action_listen")] + [
+        UserUttered(
+            "/" + next_intent,
+            {"intent": {"name": next_intent, "confidence": 1.0}, "entities": {}},
+        )
+    ]
 
 
 async def handle_es_query(query, index_name):
@@ -64,21 +84,64 @@ async def handle_es_query(query, index_name):
 
 
 class ActionHi(Action):
-    """Say Hi and show the privacy policy if not yet done"""
+    """Get the conversation going"""
 
     def name(self) -> Text:
         return "action_hi"
 
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
         shown_privacypolicy = tracker.get_slot("shown_privacypolicy")
-        if shown_privacypolicy:
-            dispatcher.utter_message(template="utter_hi")
-            return []
+        said_hi = tracker.get_slot("said_hi")
+        explained_ipm = tracker.get_slot("explained_ipm")
 
-        dispatcher.utter_message(template="utter_hi")
-        dispatcher.utter_message(template="utter_inform_privacypolicy")
-        dispatcher.utter_message(template="utter_summarize_skills")
-        return [SlotSet("shown_privacypolicy", True)]
+        events = []
+
+        if not said_hi:
+            dispatcher.utter_message(template="utter_hi")
+            dispatcher.utter_message(template="utter_summarize_skills")
+            events.extend([SlotSet("said_hi", True)])
+
+        if not shown_privacypolicy:
+            dispatcher.utter_message(template="utter_inform_privacypolicy")
+            events.extend([SlotSet("shown_privacypolicy", True)])
+
+        buttons = []
+
+        buttons.append(
+            {
+                "title": "I have a pest",
+                "payload": '/intent_chatgoal{"chatgoal_value":"I_have_a_pest"}',
+            }
+        )
+
+        if not explained_ipm:
+            buttons.append(
+                {
+                    "title": "Explain IPM",
+                    "payload": '/intent_chatgoal{"chatgoal_value":"explain_ipm"}',
+                }
+            )
+
+        if said_hi:
+            buttons.append(
+                {"title": "Goodbye", "payload": "/intent_bye",}
+            )
+        dispatcher.utter_message(
+            text="Please select one of these options", buttons=buttons
+        )
+
+        return events
+
+
+class ActionExplainIPM(Action):
+    """Explain IPM"""
+
+    def name(self) -> Text:
+        return "action_explain_ipm"
+
+    async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        dispatcher.utter_message(template="utter_explain_ipm")
+        return [SlotSet("explained_ipm", True)]
 
 
 class FormQueryKnowledgeBase(FormAction):
@@ -152,15 +215,19 @@ class FormQueryKnowledgeBase(FormAction):
             )
             dispatcher.utter_message(message)
 
-        return [AllSlotsReset()]
+        # return [AllSlotsReset()]
+        return []
 
 
 async def tag_convo(tracker: Tracker, label: Text) -> None:
     """Tag a conversation in Rasa X with a given label"""
     endpoint = f"http://{ac.rasa_x_host}/api/conversations/{tracker.sender_id}/tags"
     if not USE_AIOHTTP:
-        response = requests.post(url=endpoint, data=label)
-        logger.debug("Response status code: %s", response.status_code)
+        try:
+            response = requests.post(url=endpoint, data=label)
+            logger.debug("Response status code: %s", response.status_code)
+        except requests.exceptions.ConnectionError as e:
+            logger.error("Rasa X connection error: %s", e)
     else:
         logger.info("using aiohttp module")
         # https://docs.aiohttp.org/en/stable/client_quickstart.html#make-a-request
@@ -197,4 +264,62 @@ class ActionTagRating(Action):
         )
         await tag_convo(tracker, label)
 
-        return []
+        # return []
+        # Start a new session by sending the session_start intent
+        return next_intent_events("session_start_custom")
+
+
+class ActionSessionStart(Action):
+    """Greet the user right away when a session starts, not waiting until the
+    user says something first."""
+
+    def name(self) -> Text:
+        """Overwrite the default action_session_start"""
+        return "action_session_start_custom"
+
+    @staticmethod
+    def fetch_slots(tracker: Tracker) -> List[EventType]:
+        """Collect the slots you want to carry over to the next session."""
+
+        slots = []
+
+        for key in ["shown_privacypolicy", "said_hi", "explained_ipm"]:
+            value = tracker.get_slot(key)
+            if value is not None:
+                slots.append(SlotSet(key=key, value=value))
+
+        logger.debug("Fetched slots = %s", pprint.pformat(slots))
+        return slots
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+
+        # the session should begin with a `session_started` event
+        events = [SessionStarted()]
+
+        # any slots that should be carried over should come after the
+        # `session_started` event
+        events.extend(self.fetch_slots(tracker))
+
+        # pretend user also said 'hi'
+        events.extend(next_intent_events("intent_hi"))
+
+        return events
+
+
+class ActionRestart(Action):
+    def name(self) -> Text:
+        return "action_restart"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+
+        return [Restarted(), FollowupAction("action_session_start_custom")]

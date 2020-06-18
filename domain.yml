@@ -1,4 +1,8 @@
 intents:
+  - start
+  - session_start
+  - restart
+  - session_start_custom
   - intent_hi
   - intent_bye
   - intent_yes
@@ -6,13 +10,18 @@ intents:
   - intent_chatgoal
   - intent_question
   - intent_rating
+  
 
 entities:
   - chatgoal_value
   - rating_value
   
 slots:
+  said_hi:
+    type: unfeaturized
   shown_privacypolicy:
+    type: unfeaturized
+  explained_ipm:
     type: unfeaturized
   chatgoal_value:
     type: categorical
@@ -25,7 +34,10 @@ slots:
     type: unfeaturized  
 
 actions:
+  - action_session_start_custom
+  - action_restart
   - action_hi
+  - action_explain_ipm
   - action_tag_rating
   
 forms:
@@ -40,14 +52,6 @@ responses:
 
   utter_summarize_skills:
   - text: I can explain what IPM is or help to manage a particular pest.
-  
-  utter_what_is_chatgoal:
-  - buttons:
-    - payload: /intent_chatgoal{"chatgoal_value":"explain_ipm"}
-      title: Explain IPM
-    - payload: /intent_chatgoal{"chatgoal_value":"I_have_a_pest"}
-      title: I have a pest
-    text: Please select one of these options
   
   utter_canthelp:
   - text: I'm sorry I cannot help you with that. 

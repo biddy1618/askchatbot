@@ -49,6 +49,16 @@ def handle_query():
         }
     }
 
+    # https://stackoverflow.com/a/62354043/5480536
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
+    # https://discuss.elastic.co/t/search-query-to-search-in-a-nested-type-object/211721
+    # script_query = {
+    # "script_score": {
+    # "query": {"nested": {"inner_hits": {},}},
+    # "script": {"source": cos, "params": {"query_vector": query_vector},},
+    # }
+    # }
+
     search_start = time.time()
     response = ac.es_client.search(
         index=INDEX_NAME,

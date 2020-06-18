@@ -37,7 +37,22 @@
         "dims": 512
       },
       "imagePestNote": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "caption": {
+            "type": "text"
+          },
+          "caption_vector": {
+            "type": "dense_vector",
+            "dims": 512
+          },
+          "link": {
+            "type": "text"
+          },
+          "src": {
+            "type": "text"
+          }
+        }
       },
       "urlQuickTip": {
         "type": "text"

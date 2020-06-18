@@ -80,9 +80,15 @@ ipmdata-index-name: "ipmdata"
 sudo docker build . -t askchatbot-action-server:0.0.1
 
 # quickly test that it comes up ok
-sudo docker run -p 5055:5055 askchatbot-action-server:0.0.1
+sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:10.1.100.49 askchatbot-action-server:0.0.1
+
 curl http://<hostname>:5055/actions
 
+# use rasa shell to do a quick query, making sure it can reach the elasticsearch host
+rasa shell
+> hi
+> I have a pest
+> Ants
 ```
 
 
@@ -110,7 +116,7 @@ RASA_VERSION=1.10.2
 RASA_X_DEMO_VERSION=0.29.1
 ```
 
-#### Define action server
+#### Define action server, with extra hosts for elasticsearch
 
 ```bash
 cd /etc/rasa
@@ -120,6 +126,8 @@ version: '3.4'
 services:
   app:
     image: askchatbot-action-server:0.0.1
+  extra_hosts:
+    - "ask-chat-db-dev.i.eduworks.com:10.1.100.49"
 ```
 
 
