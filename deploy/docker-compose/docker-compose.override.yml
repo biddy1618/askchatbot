@@ -1,0 +1,12 @@
+version: '3.4'
+services:
+  app:
+    image: askchatbot-action-server:0.0.1
+    extra_hosts:
+      - "ask-chat-db-dev.i.eduworks.com:10.1.100.49"
+  nginx:
+    ports:
+      - "8000:8080"
+  rasa-x:
+    environment:
+      DEBUG_MODE: "true"
