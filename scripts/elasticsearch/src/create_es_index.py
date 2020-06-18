@@ -9,8 +9,7 @@ import setup_logger  # pylint: disable=unused-import
 from actions import actions_config as ac
 
 
-# Select the index to create by uncommenting one of these
-#INDEX_NAME = 'posts'
+# Define the index
 INDEX_NAME = 'ipmdata'
 
 
@@ -124,15 +123,26 @@ def index_data_ipmdata():
 
 def index_batch_ipmdata(docs):
     """Index a batch of docs"""
+
+    # Update the docs prior to inserting:
+    # - add embedding vectors
     pn_descriptions = [doc["descriptionPestNote"] for doc in docs]
     pn_description_vectors = ac.embed(pn_descriptions).numpy()
+    for i, pn_description_vector in enumerate(pn_description_vectors):
+        docs[i]["descriptionPestNote_vector"] = pn_description_vector
+        pn_images = docs[i]["imagePestNote"]
+        if pn_images:
+            captions = [pn_image["caption"] for pn_image in pn_images]
+            captions_vectors = ac.embed(captions).numpy()
+            for j, caption_vector in enumerate(captions_vectors):
+                docs[i]["imagePestNote"][j]["caption_vector"] = caption_vector
 
     requests = []
     for i, doc in enumerate(docs):
         request = doc
         request["_op_type"] = "index"
         request["_index"] = INDEX_NAME
-        request["descriptionPestNote_vector"] = pn_description_vectors[i]
+        # request["descriptionPestNote_vector"] = pn_description_vectors[i]
         requests.append(request)
     bulk(ac.es_client, requests)
 
