@@ -1,7 +1,18 @@
+## custom session start 0
+* start
+  - action_session_start_custom
+
+## custom session start 1
+* session_start_custom
+  - action_session_start_custom
+  
+## custom session start 2
+* session_start
+  - action_session_start_custom
+  
 ## hi
 * intent_hi
   - action_hi
-  - utter_what_is_chatgoal
 
 ## bye
 * intent_bye
@@ -15,8 +26,8 @@
 ## chatgoal explain ipm
 * intent_chatgoal{"chatgoal_value": "explain_ipm"}
     - slot{"chatgoal_value": "explain_ipm"}
-    - utter_explain_ipm
-    - utter_what_is_chatgoal
+    - action_explain_ipm
+    - action_hi
     
 ## chatgoal pest problem
 * intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
@@ -27,4 +38,3 @@
     - utter_request_rating
 * intent_rating
     - action_tag_rating
-    - utter_what_is_chatgoal

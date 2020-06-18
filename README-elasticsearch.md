@@ -7,18 +7,90 @@ Details, including password, can be found in this [Jira Ticket](https://jira.edu
 For the Elasticsearch ec2 instance, on the connecting machine add to /etc/hosts:
 
 ```bash
-34.211.141.190 ask-chat-db-dev.i.eduworks.com
+10.1.100.49 ask-chat-db-dev.i.eduworks.com
 ```
+
+- User: elastic
+- PW:  see [Jira Ticket](https://jira.eduworks.us/browse/AE-283?focusedCommentId=31925&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-31925)
+
+You can test it from the command line with:
+
+```bash
+# Check it is up & running
+curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/?pretty'
+
+# Submit a _cat/nodes request to see that the nodes are up and running
+curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_cat/nodes?v&"
+
+# Get an overview of all indices
+curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_cat/indices?v'
+```
+
+
 
 The URL is: https://ask-chat-db-dev.i.eduworks.com:9200/
 
-User: elastic
 
-PW:  see [Jira Ticket](https://jira.eduworks.us/browse/AE-283?focusedCommentId=31925&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-31925)
 
-# Local docker-compose installation
+# Ingest & Test ipmdata
 
-This is useful for testing locally
+### Create the index
+
+```bash
+git clone https://git.eduworks.us/ask-extension/askchatbot
+cd askchatbot
+
+conda create --name askchatbot python=3.7
+conda activate askchatbot
+pip install -r requirements-dev.txt
+pip install -e .
+
+#
+# Edit the file: ./actions/credentials_elasticsearch.yml
+# Select the correct Ipv4 !
+# Notes:
+#  - arjaan-Kudu : IPv4 = 192.168.1.6
+#  - ec2 instance: IPv4 = 10.1.100.167
+hosts:
+    - host: 10.1.100.167
+    
+# index name of ipmdata queries
+ipmdata-index-name: "ipmdata"
+
+# ingest the ipmdata
+cd <project-root>/scripts/elasticsearch/src
+$ vi create_es_index.py
+INDEX_NAME = 'impdata'
+
+python3 -m create_es_index
+
+# to verify the index is there
+curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_aliases?pretty'
+
+# run a test query
+python3 -m run_es_query
+
+```
+
+### Test query
+
+```bash
+# to verify the index is there
+curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_aliases?pretty'
+
+# run a test query
+cd <project-root>/scripts/elasticsearch/src
+$ vi create_es_index.py
+INDEX_NAME = 'impdata'
+
+python3 -m run_es_query
+```
+
+
+
+# Appendix A: Local docker-compose 
+
+Installing Elasticsearch locally with docker-compose is useful for testing & development.
 
 ### Elasticsearch+kibana with docker-compose ([docs](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-docker.html))
 
@@ -132,46 +204,9 @@ ip          heap.percent ram.percent cpu load_1m load_5m load_15m node.role mast
 
 Open browser at http://localhost:5601
 
+# Appendix B: Stackoverflow posts
 
-
-# Ingest ipmdate
-
-```bash
-git clone https://git.eduworks.us/ask-extension/askchatbot
-cd askchatbot
-
-conda create --name askchatbot python=3.7
-conda activate askchatbot
-pip install -r requirements-dev.txt
-pip install -e .
-
-#
-# Edit the file: ./actions/credentials_elasticsearch.yml
-# Select the correct Ipv4 !
-# Notes:
-#  - arjaan-Kudu : IPv4 = 192.168.1.6
-#  - ec2 instance: IPv4 = 10.1.100.167
-hosts:
-    - host: 10.1.100.167
-    
-# index name of ipmdata queries
-ipmdata-index-name: "ipmdata"
-
-# ingest the pestnotes
-cd <project-root>/scripts/elasticsearch/src
-$ vi create_es_index.py
-INDEX_NAME = 'impdata'
-
-python3 -m create_es_index
-
-# run a test query
-python3 -m run_es_query
-
-```
-
-
-
-# Example Stackoverflow questions
+This is a good example to play around with, to become familiar with the elasticsearch approach to embedding vectors. 
 
 References:
 
