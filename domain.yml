@@ -48,7 +48,7 @@ responses:
   - text: Hi, I am the Extension Bot!
   
   utter_inform_privacypolicy:
-  - text: By chatting to me you agree to our [privacy policy](https://ucanr.edu/?privacyStatement/).
+  - text: By chatting with me, you agree to our [privacy policy](https://ucanr.edu/?privacyStatement/).
 
   utter_summarize_skills:
   - text: I can explain what IPM is or help to manage a particular pest.
