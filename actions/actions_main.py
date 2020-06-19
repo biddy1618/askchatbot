@@ -63,6 +63,34 @@ async def handle_es_query(query, index_name):
         ]
     }
 
+    ########################
+    # Score on name_vector #
+    ########################
+
+    cos = "cosineSimilarity(params.query_vector, 'name_vector') + 1.0"
+
+    script_query = {
+        "script_score": {
+            "query": {"match_all": {}},
+            "script": {"source": cos, "params": {"query_vector": query_vector},},
+        }
+    }
+
+    response_pn_name = ac.es_client.search(
+        index=index_name,
+        body={"size": ac.search_size, "query": script_query, "_source": _source_query,},
+    )
+
+    hits0 = response_pn_name["hits"]["hits"]
+    # print without 'best name'
+    # print_hits(hits0, title="Best name")
+
+    # When scored on name, we do not know the best image. Just pick the first.
+    for i, hit in enumerate(hits0):
+        hits0[i]["best_image"] = None
+        if hit["_source"]["imagePestNote"]:
+            hits0[i]["best_image"] = hit["_source"]["imagePestNote"][0]
+
     #######################################
     # Score on descriptionPestNote_vector #
     #######################################
@@ -137,8 +165,8 @@ async def handle_es_query(query, index_name):
 
     # combine both queries
     # - merge info if same doc
-    hits = hits1
-    for hit2 in hits2:
+    hits = hits0
+    for hit2 in hits1 + hits2:
         duplicate = False
         for i, hit in enumerate(hits):
             if hit2["_source"]["name"] == hit["_source"]["name"]:
@@ -386,6 +414,8 @@ class ActionSessionStart(Action):
 
 
 class ActionRestart(Action):
+    """Restart the session"""
+
     def name(self) -> Text:
         return "action_restart"
 

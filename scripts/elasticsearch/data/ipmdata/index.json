@@ -12,6 +12,10 @@
       "name": {
         "type": "text"
       },
+      "name_vector": {
+        "type": "dense_vector",
+        "dims": 512
+      },
       "urlPestNote": {
         "type": "text"
       },
