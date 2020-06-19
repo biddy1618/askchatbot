@@ -10,17 +10,17 @@ from actions import actions_config as ac
 
 
 # Define the index
-INDEX_NAME = 'ipmdata'
+INDEX_NAME = "ipmdata"
 
 
 INDEX_FILE = f"{Path(__file__).parents[1]}/data/{INDEX_NAME}/index.json"
 DATA_FILE = f"{Path(__file__).parents[1]}/data/{INDEX_NAME}/{INDEX_NAME}.json"
 
-print('-----------------------------------------------------------')
+print("-----------------------------------------------------------")
 print(f"INDEX_NAME = {INDEX_NAME}")
 print(f"INDEX_FILE = {INDEX_FILE}")
 print(f"DATA_FILE  = {DATA_FILE}")
-print('-----------------------------------------------------------')
+print("-----------------------------------------------------------")
 
 
 BATCH_SIZE = 1000
@@ -29,9 +29,9 @@ GPU_LIMIT = 0.5
 
 def index_data():
     """Create the index"""
-    if INDEX_NAME == 'posts':
+    if INDEX_NAME == "posts":
         index_data_posts()
-    elif INDEX_NAME == 'ipmdata':
+    elif INDEX_NAME == "ipmdata":
         index_data_ipmdata()
     else:
         raise Exception(f"Not implemented for INDEX_NAME = {INDEX_NAME}")
@@ -126,9 +126,14 @@ def index_batch_ipmdata(docs):
 
     # Update the docs prior to inserting:
     # - add embedding vectors
+    pn_names = [doc["name"] for doc in docs]
+    pn_name_vectors = ac.embed(pn_names).numpy()
     pn_descriptions = [doc["descriptionPestNote"] for doc in docs]
     pn_description_vectors = ac.embed(pn_descriptions).numpy()
-    for i, pn_description_vector in enumerate(pn_description_vectors):
+    for i, (pn_name_vector, pn_description_vector) in enumerate(
+        zip(pn_name_vectors, pn_description_vectors)
+    ):
+        docs[i]["name_vector"] = pn_name_vector
         docs[i]["descriptionPestNote_vector"] = pn_description_vector
         pn_images = docs[i]["imagePestNote"]
         if pn_images:
