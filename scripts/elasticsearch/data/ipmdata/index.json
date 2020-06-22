@@ -26,6 +26,13 @@
         "type": "dense_vector",
         "dims": 512
       },
+      "life_cycle": {
+        "type": "text"
+      },
+      "life_cycle_vector": {
+        "type": "dense_vector",
+        "dims": 512
+      },
       "damagePestNote": {
         "type": "text"
       },

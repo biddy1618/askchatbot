@@ -5,19 +5,18 @@ from elasticsearch.helpers import bulk
 
 import setup_logger  # pylint: disable=unused-import
 
-# from initialize import DATA_FILE, INDEX_NAME, INDEX_FILE, BATCH_SIZE
 from actions import actions_config as ac
 
 
 # Define the index
-INDEX_NAME = "ipmdata"
+index_name = ac.ipmdata_index_name
 
 
-INDEX_FILE = f"{Path(__file__).parents[1]}/data/{INDEX_NAME}/index.json"
-DATA_FILE = f"{Path(__file__).parents[1]}/data/{INDEX_NAME}/{INDEX_NAME}.json"
+INDEX_FILE = f"{Path(__file__).parents[1]}/data/{index_name}/index.json"
+DATA_FILE = f"{Path(__file__).parents[1]}/data/{index_name}/{index_name}.json"
 
 print("-----------------------------------------------------------")
-print(f"INDEX_NAME = {INDEX_NAME}")
+print(f"index_name = {index_name}")
 print(f"INDEX_FILE = {INDEX_FILE}")
 print(f"DATA_FILE  = {DATA_FILE}")
 print("-----------------------------------------------------------")
@@ -29,22 +28,22 @@ GPU_LIMIT = 0.5
 
 def index_data():
     """Create the index"""
-    if INDEX_NAME == "posts":
+    if index_name == "posts":
         index_data_posts()
-    elif INDEX_NAME == "ipmdata":
+    elif index_name == "ipmdata":
         index_data_ipmdata()
     else:
-        raise Exception(f"Not implemented for INDEX_NAME = {INDEX_NAME}")
+        raise Exception(f"Not implemented for index_name = {index_name}")
 
 
 def index_data_posts():
     """Create the index for stackoverflow posts"""
-    print(f"Creating the index: {INDEX_NAME}")
-    ac.es_client.indices.delete(index=INDEX_NAME, ignore=[404])
+    print(f"Creating the index: {index_name}")
+    ac.es_client.indices.delete(index=index_name, ignore=[404])
 
     with open(INDEX_FILE) as index_file:
         source = index_file.read().strip()
-        ac.es_client.indices.create(index=INDEX_NAME, body=source)
+        ac.es_client.indices.create(index=index_name, body=source)
 
     docs = []
     count = 0
@@ -69,7 +68,7 @@ def index_data_posts():
             index_batch_posts(docs)
             print("Indexed {} documents.".format(count))
 
-    ac.es_client.indices.refresh(index=INDEX_NAME)
+    ac.es_client.indices.refresh(index=index_name)
     print("Done indexing.")
 
 
@@ -82,7 +81,7 @@ def index_batch_posts(docs):
     for i, doc in enumerate(docs):
         request = doc
         request["_op_type"] = "index"
-        request["_index"] = INDEX_NAME
+        request["_index"] = index_name
         request["title_vector"] = title_vectors[i]
         requests.append(request)
     bulk(ac.es_client, requests)
@@ -90,12 +89,12 @@ def index_batch_posts(docs):
 
 def index_data_ipmdata():
     """Create the index for ipmdata"""
-    print(f"Creating the index: {INDEX_NAME}")
-    ac.es_client.indices.delete(index=INDEX_NAME, ignore=[404])
+    print(f"Creating the index: {index_name}")
+    ac.es_client.indices.delete(index=index_name, ignore=[404])
 
     with open(INDEX_FILE) as index_file:
         source = index_file.read().strip()
-        ac.es_client.indices.create(index=INDEX_NAME, body=source)
+        ac.es_client.indices.create(index=index_name, body=source)
 
     docs_batch = []
     count = 0
@@ -117,7 +116,7 @@ def index_data_ipmdata():
             index_batch_ipmdata(docs_batch)
             print("Indexed {} documents.".format(count))
 
-    ac.es_client.indices.refresh(index=INDEX_NAME)
+    ac.es_client.indices.refresh(index=index_name)
     print("Done indexing.")
 
 
@@ -128,13 +127,49 @@ def index_batch_ipmdata(docs):
     # - add embedding vectors
     pn_names = [doc["name"] for doc in docs]
     pn_name_vectors = ac.embed(pn_names).numpy()
+
     pn_descriptions = [doc["descriptionPestNote"] for doc in docs]
     pn_description_vectors = ac.embed(pn_descriptions).numpy()
-    for i, (pn_name_vector, pn_description_vector) in enumerate(
-        zip(pn_name_vectors, pn_description_vectors)
+
+    pn_life_cycles = [doc["life_cycle"] for doc in docs]
+    pn_life_cycle_vectors = ac.embed(pn_life_cycles).numpy()
+
+    pn_damages = [doc["damagePestNote"] for doc in docs]
+    pn_damage_vectors = ac.embed(pn_damages).numpy()
+
+    pn_managements = [doc["managementPestNote"] for doc in docs]
+    pn_management_vectors = ac.embed(pn_managements).numpy()
+
+    qt_contents = [doc["contentQuickTips"] for doc in docs]
+    qt_content_vectors = ac.embed(qt_contents).numpy()
+
+    for (
+        i,
+        (
+            pn_name_vector,
+            pn_description_vector,
+            pn_life_cycle_vector,
+            pn_damage_vector,
+            pn_management_vector,
+            qt_content_vector,
+        ),
+    ) in enumerate(
+        zip(
+            pn_name_vectors,
+            pn_description_vectors,
+            pn_life_cycle_vectors,
+            pn_damage_vectors,
+            pn_management_vectors,
+            qt_content_vectors,
+        )
     ):
         docs[i]["name_vector"] = pn_name_vector
         docs[i]["descriptionPestNote_vector"] = pn_description_vector
+        docs[i]["life_cycle_vector"] = pn_life_cycle_vector
+        docs[i]["damagePestNote_vector"] = pn_damage_vector
+        docs[i]["managementPestNote_vector"] = pn_management_vector
+        docs[i]["contentQuickTips_vector"] = qt_content_vector
+
         pn_images = docs[i]["imagePestNote"]
         if pn_images:
             captions = [pn_image["caption"] for pn_image in pn_images]
@@ -146,7 +181,7 @@ def index_batch_ipmdata(docs):
     for i, doc in enumerate(docs):
         request = doc
         request["_op_type"] = "index"
-        request["_index"] = INDEX_NAME
+        request["_index"] = index_name
         # request["descriptionPestNote_vector"] = pn_description_vectors[i]
         requests.append(request)
     bulk(ac.es_client, requests)
