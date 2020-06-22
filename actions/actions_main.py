@@ -38,6 +38,107 @@ def next_intent_events(next_intent: Text) -> List[Dict]:
     ]
 
 
+def cosine_similarity_query(
+    index_name,
+    _source_query,
+    query_vector,
+    vector_name,
+    nested=False,
+    best_image="first",
+    print_summary=False,
+):
+    """Does a query on cosine similarity between query_vector and the index field
+    vector_name, and returns the list of hits
+    
+    _source_query = dict, defining what the query should return in the _source
+    query_vector = the embedding vector we are sending
+    vector_name = name of a dense_vector in the elasticsearch index
+    """
+
+    cos = f"cosineSimilarity(params.query_vector, '{vector_name}') + 1.0"
+
+    if not nested:
+        script_query = {
+            "script_score": {
+                "query": {"match_all": {}},
+                "script": {"source": cos, "params": {"query_vector": query_vector},},
+            }
+        }
+    else:
+        ## https://stackoverflow.com/a/62354043/5480536
+        path = vector_name[: vector_name.rfind(".")]
+        script_query = {
+            "nested": {
+                "inner_hits": {},
+                "path": path,
+                "score_mode": "max",
+                "query": {
+                    "function_score": {
+                        "script_score": {
+                            "script": {
+                                "source": cos,
+                                "params": {"query_vector": query_vector},
+                            },
+                        }
+                    }
+                },
+            }
+        }
+
+    response = ac.es_client.search(
+        index=index_name,
+        body={"size": ac.search_size, "query": script_query, "_source": _source_query,},
+    )
+
+    hits = response["hits"]["hits"]
+
+    if print_summary and best_image == "first":
+        # print it before filling out best image field
+        print_hits(hits, title=vector_name)
+
+    if best_image == "first":
+        hits = set_first_image_as_best(hits)
+    elif best_image == "caption":
+        if vector_name == "imagePestNote.caption_vector":
+            # When scored on image caption, fist of the innerhits had the highest score
+            for i, hit in enumerate(hits):
+                hits[i]["best_image"] = None
+                hits[i]["best_image"] = hit["inner_hits"][path]["hits"]["hits"][0][
+                    "_source"
+                ]
+    else:
+        raise Exception("Not implemented")
+
+    if print_summary and best_image == "caption":
+        # print it after filling out best image field
+        print_hits(hits, title=vector_name)
+
+    return hits
+
+
+def set_first_image_as_best(hits):
+    """When scored we do not know the best image. Just pick the first."""
+    for i, hit in enumerate(hits):
+        hits[i]["best_image"] = None
+        if hit["_source"]["imagePestNote"]:
+            hits[i]["best_image"] = hit["_source"]["imagePestNote"][0]
+
+    return hits
+
+
+def print_hits(hits, title=""):
+    """print the hits & scores"""
+    print("----------------------------------------------------------")
+    print(title)
+    # print("{} total hits.".format(response["hits"]["total"]["value"]))
+    for hit in hits:
+        print(
+            f'{hit["_score"]}; '
+            f'{hit["_source"]["name"]}; '
+            f'image-caption={(hit.get("best_image", {}) or {}).get("caption")}'
+        )
+
+
 async def handle_es_query(query, index_name):
     """Handles an elastic search query"""
 
@@ -48,11 +149,13 @@ async def handle_es_query(query, index_name):
     query_vector = ac.embed([query]).numpy()[0]
 
     # Define what the elasticsearch queries need to return in it's response
+    # _source_query = {"includes": ["name", "imagePestNote"]}
     _source_query = {
         "includes": [
             "name",
             "urlPestNote",
             "descriptionPestNote",
+            "life_cycle",
             "damagePestNote",
             "managementPestNote",
             "imagePestNote",
@@ -63,110 +166,64 @@ async def handle_es_query(query, index_name):
         ]
     }
 
-    ########################
-    # Score on name_vector #
-    ########################
-
-    cos = "cosineSimilarity(params.query_vector, 'name_vector') + 1.0"
-
-    script_query = {
-        "script_score": {
-            "query": {"match_all": {}},
-            "script": {"source": cos, "params": {"query_vector": query_vector},},
-        }
-    }
-
-    response_pn_name = ac.es_client.search(
-        index=index_name,
-        body={"size": ac.search_size, "query": script_query, "_source": _source_query,},
+    pn_name_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "name_vector",
+        nested=False,
+        best_image="first",
+        print_summary=False,
     )
 
-    hits0 = response_pn_name["hits"]["hits"]
-    # print without 'best name'
-    # print_hits(hits0, title="Best name")
-
-    # When scored on name, we do not know the best image. Just pick the first.
-    for i, hit in enumerate(hits0):
-        hits0[i]["best_image"] = None
-        if hit["_source"]["imagePestNote"]:
-            hits0[i]["best_image"] = hit["_source"]["imagePestNote"][0]
-
-    #######################################
-    # Score on descriptionPestNote_vector #
-    #######################################
-
-    cos = "cosineSimilarity(params.query_vector, 'descriptionPestNote_vector') + 1.0"
-
-    script_query = {
-        "script_score": {
-            "query": {"match_all": {}},
-            "script": {"source": cos, "params": {"query_vector": query_vector},},
-        }
-    }
-
-    response_pn_description = ac.es_client.search(
-        index=index_name,
-        body={"size": ac.search_size, "query": script_query, "_source": _source_query,},
+    pn_description_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "descriptionPestNote_vector",
+        nested=False,
+        best_image="first",
+        print_summary=False,
     )
 
-    hits1 = response_pn_description["hits"]["hits"]
-    # print without 'best image'
-    # print_hits(hits1, title="Best pestnote descriptions")
-
-    # When scored on description, we do not know the best image. Just pick the first.
-    for i, hit in enumerate(hits1):
-        hits1[i]["best_image"] = None
-        if hit["_source"]["imagePestNote"]:
-            hits1[i]["best_image"] = hit["_source"]["imagePestNote"][0]
-
-    #########################################
-    # Score on imagePestNote.caption_vector #
-    #########################################
-
-    cos = "cosineSimilarity(params.query_vector, 'imagePestNote.caption_vector') + 1.0"
-
-    script_query = {
-        "nested": {
-            "inner_hits": {},
-            "path": "imagePestNote",
-            "score_mode": "max",
-            "query": {
-                "function_score": {
-                    "script_score": {
-                        "script": {
-                            "source": cos,
-                            "params": {"query_vector": query_vector},
-                        },
-                    }
-                }
-            },
-        }
-    }
-
-    response_pn_image_caption = ac.es_client.search(
-        index=index_name,
-        body={"size": ac.search_size, "query": script_query, "_source": _source_query,},
+    pn_life_cycle_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "life_cycle_vector",
+        nested=False,
+        best_image="first",
+        print_summary=False,
     )
 
-    hits2 = response_pn_image_caption["hits"]["hits"]
+    qt_content_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "contentQuickTips_vector",
+        nested=False,
+        best_image="first",
+        print_summary=False,
+    )
 
-    # When scored on image caption, the fist of the innerhits had the highest score
-    for i, hit in enumerate(hits2):
-        hits2[i]["best_image"] = None
-        hits2[i]["best_image"] = hit["inner_hits"]["imagePestNote"]["hits"]["hits"][0][
-            "_source"
-        ]
-
-    # print_hits(hits2, title="Best image captions")
+    pn_caption_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "imagePestNote.caption_vector",
+        nested=True,
+        best_image="caption",
+        print_summary=False,
+    )
 
     ##########################################
     # Combine all hits and sort to max score #
     ##########################################
 
-    # combine both queries
-    # - merge info if same doc
-    hits = hits0
-    for hit2 in hits1 + hits2:
+    hits = pn_name_hits
+    for hit2 in (
+        pn_description_hits + pn_life_cycle_hits + qt_content_hits + pn_caption_hits
+    ):
         duplicate = False
         for i, hit in enumerate(hits):
             if hit2["_source"]["name"] == hit["_source"]["name"]:
