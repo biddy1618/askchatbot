@@ -76,7 +76,22 @@
         "dims": 512
       },
       "imageQuickTips": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "caption": {
+            "type": "text"
+          },
+          "caption_vector": {
+            "type": "dense_vector",
+            "dims": 512
+          },
+          "link": {
+            "type": "text"
+          },
+          "src": {
+            "type": "text"
+          }
+        }
       },
       "video": {
         "type": "nested"

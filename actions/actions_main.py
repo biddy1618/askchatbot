@@ -99,7 +99,10 @@ def cosine_similarity_query(
     if best_image == "first":
         hits = set_first_image_as_best(hits)
     elif best_image == "caption":
-        if vector_name == "imagePestNote.caption_vector":
+        if vector_name in [
+            "imagePestNote.caption_vector",
+            "imageQuickTips.caption_vector",
+        ]:
             # When scored on image caption, fist of the innerhits had the highest score
             for i, hit in enumerate(hits):
                 hits[i]["best_image"] = None
@@ -149,7 +152,6 @@ async def handle_es_query(query, index_name):
     query_vector = ac.embed([query]).numpy()[0]
 
     # Define what the elasticsearch queries need to return in it's response
-    # _source_query = {"includes": ["name", "imagePestNote"]}
     _source_query = {
         "includes": [
             "name",
@@ -216,13 +218,27 @@ async def handle_es_query(query, index_name):
         print_summary=False,
     )
 
+    qt_caption_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "imageQuickTips.caption_vector",
+        nested=True,
+        best_image="caption",
+        print_summary=False,
+    )
+
     ##########################################
     # Combine all hits and sort to max score #
     ##########################################
 
     hits = pn_name_hits
     for hit2 in (
-        pn_description_hits + pn_life_cycle_hits + qt_content_hits + pn_caption_hits
+        pn_description_hits
+        + pn_life_cycle_hits
+        + qt_content_hits
+        + pn_caption_hits
+        + qt_caption_hits
     ):
         duplicate = False
         for i, hit in enumerate(hits):

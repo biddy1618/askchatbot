@@ -177,6 +177,13 @@ def index_batch_ipmdata(docs):
             for j, caption_vector in enumerate(captions_vectors):
                 docs[i]["imagePestNote"][j]["caption_vector"] = caption_vector
 
+        qt_images = docs[i]["imageQuickTips"]
+        if qt_images:
+            captions = [qt_image["caption"] for qt_image in qt_images]
+            captions_vectors = ac.embed(captions).numpy()
+            for j, caption_vector in enumerate(captions_vectors):
+                docs[i]["imageQuickTips"][j]["caption_vector"] = caption_vector
+
     requests = []
     for i, doc in enumerate(docs):
         request = doc
