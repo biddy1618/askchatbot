@@ -286,9 +286,10 @@ async def handle_es_query(
     # now, rearrange the hits with score above threshold based on the ndl_damage scoring
     hits = [hit for hit in hits if hit["_score"] >= score_threshold]
     if len(hits) > 0:
+        for i, hit in enumerate(hits):
+            hits[i]["_score_w_damage"] = 0.0
         if pest_damage_description:
             for i, hit in enumerate(hits):
-                hits[i]["_score_w_damage"] = 0.0
                 for hit_ndl_damage in pn_ndl_damage_hits:
                     if hit_ndl_damage["_source"]["name"] == hit["_source"]["name"]:
                         hits[i]["_score_w_damage"] = hit_ndl_damage["_score"]
