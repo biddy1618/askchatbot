@@ -142,14 +142,29 @@ def print_hits(hits, title=""):
         )
 
 
-async def handle_es_query(query, index_name):
+async def handle_es_query(
+    pest_problem_description,
+    pest_damage_description,
+    index_name,
+    score_threshold,
+    print_summary=False,
+):
     """Handles an elastic search query"""
 
     if index_name != "ipmdata":
         raise Exception(f"Not implemented for index_name = {index_name}")
 
-    # create the embedding vector
-    query_vector = ac.embed([query]).numpy()[0]
+    # create the embedding vectors
+    query_vector = ac.embed([pest_problem_description]).numpy()[0]
+
+    # damage by itself does not work.
+    # encode it together with pest_problem_description and then
+    # check similarity to encoded name+description+life_cycle+damage (ndl_damage)
+    ndl_damage_vector = None
+    if pest_damage_description:
+        ndl_damage_vector = ac.embed(
+            [pest_problem_description + pest_damage_description]
+        ).numpy()[0]
 
     # Define what the elasticsearch queries need to return in it's response
     _source_query = {
@@ -175,7 +190,7 @@ async def handle_es_query(query, index_name):
         "name_vector",
         nested=False,
         best_image="first",
-        print_summary=False,
+        print_summary=print_summary,
     )
 
     pn_description_hits = cosine_similarity_query(
@@ -185,7 +200,7 @@ async def handle_es_query(query, index_name):
         "descriptionPestNote_vector",
         nested=False,
         best_image="first",
-        print_summary=False,
+        print_summary=print_summary,
     )
 
     pn_life_cycle_hits = cosine_similarity_query(
@@ -195,7 +210,7 @@ async def handle_es_query(query, index_name):
         "life_cycle_vector",
         nested=False,
         best_image="first",
-        print_summary=False,
+        print_summary=print_summary,
     )
 
     qt_content_hits = cosine_similarity_query(
@@ -205,7 +220,7 @@ async def handle_es_query(query, index_name):
         "contentQuickTips_vector",
         nested=False,
         best_image="first",
-        print_summary=False,
+        print_summary=print_summary,
     )
 
     pn_caption_hits = cosine_similarity_query(
@@ -215,7 +230,7 @@ async def handle_es_query(query, index_name):
         "imagePestNote.caption_vector",
         nested=True,
         best_image="caption",
-        print_summary=False,
+        print_summary=print_summary,
     )
 
     qt_caption_hits = cosine_similarity_query(
@@ -225,13 +240,26 @@ async def handle_es_query(query, index_name):
         "imageQuickTips.caption_vector",
         nested=True,
         best_image="caption",
-        print_summary=False,
+        print_summary=print_summary,
     )
+
+    pn_ndl_damage_hits = []
+    if pest_damage_description:
+        pn_ndl_damage_hits = cosine_similarity_query(
+            index_name,
+            _source_query,
+            ndl_damage_vector,
+            "ndl_damage_vector",
+            nested=False,
+            best_image="first",
+            print_summary=print_summary,
+        )
 
     ##########################################
     # Combine all hits and sort to max score #
     ##########################################
 
+    # Do not include ndl_damage in the first scoring
     hits = pn_name_hits
     for hit2 in (
         pn_description_hits
@@ -252,7 +280,20 @@ async def handle_es_query(query, index_name):
 
     hits = sorted(hits, key=lambda h: h["_score"], reverse=True)
 
-    # print_hits(hits, title="Combined & sorted hits")
+    if print_summary:
+        print_hits(hits, title="Combined & sorted hits")
+
+    # now, rearrange the hits with score above threshold based on the ndl_damage scoring
+    hits = [hit for hit in hits if hit["_score"] >= score_threshold]
+    if len(hits) > 0:
+        if pest_damage_description:
+            for i, hit in enumerate(hits):
+                hits[i]["_score_w_damage"] = 0.0
+                for hit_ndl_damage in pn_ndl_damage_hits:
+                    if hit_ndl_damage["_source"]["name"] == hit["_source"]["name"]:
+                        hits[i]["_score_w_damage"] = hit_ndl_damage["_score"]
+                        break
+            hits = sorted(hits, key=lambda h: h["_score_w_damage"], reverse=True)
 
     return hits
 
@@ -328,7 +369,14 @@ class FormQueryKnowledgeBase(FormAction):
     def required_slots(tracker: Tracker) -> List[Text]:
         """A list of required slots that the form has to fill"""
 
-        return ["pest_problem_description"]
+        slots = ["pest_problem_description"]
+
+        if tracker.get_slot("pest_causes_damage") != "no":
+            slots.extend(
+                ["pest_causes_damage", "pest_damage_description",]
+            )
+
+        return slots
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         """A dictionary to map required slots to
@@ -339,6 +387,11 @@ class FormQueryKnowledgeBase(FormAction):
 
         return {
             "pest_problem_description": [self.from_text()],
+            "pest_causes_damage": [
+                self.from_intent(value="yes", intent="intent_yes"),
+                self.from_intent(value="no", intent="intent_no"),
+            ],
+            "pest_damage_description": [self.from_text()],
         }
 
     async def submit(
@@ -351,16 +404,31 @@ class FormQueryKnowledgeBase(FormAction):
             after all required slots are filled"""
 
         pest_problem_description = tracker.get_slot("pest_problem_description")
+        pest_causes_damage = tracker.get_slot("pest_causes_damage")
+        pest_damage_description = None
+        if pest_causes_damage == "yes":
+            pest_damage_description = tracker.get_slot("pest_damage_description")
 
         if ac.do_the_queries:
             hits = await handle_es_query(
-                pest_problem_description, ac.ipmdata_index_name
+                pest_problem_description,
+                pest_damage_description,
+                ac.ipmdata_index_name,
+                ac.score_threshold,
+                print_summary=False,
             )
 
-            # List only the top 3
-            for hit in hits[:3]:
+            if len(hits) == 0:
+                text = "Sorry, I did not find anything in our knowledge base"
+                dispatcher.utter_message(text=text)
+
+                return [SlotSet("found_result", "no")]
+
+            # List only the top 2
+            for hit in hits[:2]:
                 name = hit["_source"]["name"]
                 score = hit["_score"]
+                score_w_damage = hit["_score_w_damage"]
                 pn_url = hit["_source"]["urlPestNote"]
                 pn_image = None
                 if hit["best_image"]:
@@ -377,21 +445,23 @@ class FormQueryKnowledgeBase(FormAction):
                 else:
                     text = f"{text}- {name}\n"
 
-                text = f"{text}- similarity score={score:.1f}"
+                text = f"{text}- similarity score            ={score:.1f}\n"
+                text = f"{text}- similarity score with damage={score_w_damage:.1f}"
 
                 dispatcher.utter_message(text=text, image=pn_image)
 
-        else:
-            message = (
-                f"Not doing an actual elastic search query.\n"
-                f"A query with the following details would be done: \n"
-                f"pest problem description = "
-                f"{pest_problem_description}"
-            )
-            dispatcher.utter_message(message)
+            return [SlotSet("found_result", "yes")]
 
-        # return [AllSlotsReset()]
-        return []
+        message = (
+            f"Not doing an actual elastic search query.\n"
+            f"A query with the following details would be done: \n"
+            f"pest problem description = "
+            f"{pest_problem_description}\n"
+            f"pest damage description = "
+            f"{pest_damage_description}"
+        )
+        dispatcher.utter_message(message)
+        return [SlotSet("found_result", "no")]
 
 
 async def tag_convo(tracker: Tracker, label: Text) -> None:

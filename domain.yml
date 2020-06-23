@@ -28,7 +28,16 @@ slots:
     values:
     - explain_ipm
     - I_have_a_pest
+  found_result:
+    type: categorical
+    values:
+    - yes
+    - no
   pest_problem_description:
+    type: unfeaturized
+  pest_causes_damage:
+    type: unfeaturized
+  pest_damage_description:
     type: unfeaturized
   rating_value:
     type: unfeaturized  
@@ -80,6 +89,17 @@ responses:
   
   utter_ask_pest_problem_description:
   - text: Please describe your pest problem
+  
+  utter_ask_pest_causes_damage:
+  - buttons:
+    - payload: /intent_yes
+      title: "Yes"
+    - payload: /intent_no
+      title: "No"
+    text: Is it causing any damage?
+    
+  utter_ask_pest_damage_description:
+  - text: Please describe the damage
   
   utter_request_rating:
   - buttons:
