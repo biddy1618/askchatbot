@@ -424,8 +424,8 @@ class FormQueryKnowledgeBase(FormAction):
 
                 return [SlotSet("found_result", "no")]
 
-            # List only the top 2
-            for hit in hits[:2]:
+            # List only the top 3
+            for hit in hits[:3]:
                 name = hit["_source"]["name"]
                 score = hit["_score"]
                 score_w_damage = hit["_score_w_damage"]
