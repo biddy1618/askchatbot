@@ -198,6 +198,13 @@ def index_batch_ipmdata(docs):
             for j, caption_vector in enumerate(captions_vectors):
                 docs[i]["imageQuickTips"][j]["caption_vector"] = caption_vector
 
+        videos = docs[i]["video"]
+        if videos:
+            titles = [video["videoTitle"] for video in videos]
+            titles_vectors = ac.embed(titles).numpy()
+            for j, title_vector in enumerate(titles_vectors):
+                docs[i]["video"][j]["videoTitle_vector"] = title_vector
+
     requests = []
     for i, doc in enumerate(docs):
         request = doc
