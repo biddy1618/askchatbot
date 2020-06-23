@@ -29,12 +29,23 @@
     - action_explain_ipm
     - action_hi
     
-## chatgoal pest problem
+## chatgoal pest problem with result
 * intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
     - slot{"chatgoal_value": "I_have_a_pest"}
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
+    - slot{"found_result": "yes"}
     - utter_request_rating
 * intent_rating
     - action_tag_rating
+    
+## chatgoal pest problem with result
+* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
+    - slot{"chatgoal_value": "I_have_a_pest"}
+    - form_query_knowledge_base
+    - form{"name": "form_query_knowledge_base"}
+    - form{"name": null}
+    - slot{"found_result": "no"}
+    - action_session_start_custom
+    

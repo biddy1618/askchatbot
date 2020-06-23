@@ -143,6 +143,17 @@ def index_batch_ipmdata(docs):
     qt_contents = [doc["contentQuickTips"] for doc in docs]
     qt_content_vectors = ac.embed(qt_contents).numpy()
 
+    # damage by itself does not work.
+    # encode it together with name, description, life_cycle
+    pn_ndl_damage = [
+        doc["name"]
+        + doc["descriptionPestNote"]
+        + doc["life_cycle"]
+        + doc["damagePestNote"]
+        for doc in docs
+    ]
+    pn_ndl_damage_vectors = ac.embed(pn_ndl_damage).numpy()
+
     for (
         i,
         (
@@ -152,6 +163,7 @@ def index_batch_ipmdata(docs):
             pn_damage_vector,
             pn_management_vector,
             qt_content_vector,
+            pn_ndl_damage_vector,
         ),
     ) in enumerate(
         zip(
@@ -161,6 +173,7 @@ def index_batch_ipmdata(docs):
             pn_damage_vectors,
             pn_management_vectors,
             qt_content_vectors,
+            pn_ndl_damage_vectors,
         )
     ):
         docs[i]["name_vector"] = pn_name_vector
@@ -169,6 +182,7 @@ def index_batch_ipmdata(docs):
         docs[i]["damagePestNote_vector"] = pn_damage_vector
         docs[i]["managementPestNote_vector"] = pn_management_vector
         docs[i]["contentQuickTips_vector"] = qt_content_vector
+        docs[i]["ndl_damage_vector"] = pn_ndl_damage_vector
 
         pn_images = docs[i]["imagePestNote"]
         if pn_images:

@@ -16,13 +16,13 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 # This is exactly like issuing the command:
 #  $ rasa run actions
 #
-sys.argv.append('run')
-sys.argv.append('actions')
-sys.argv.append('--actions')
-sys.argv.append('actions')
-sys.argv.append('--debug')
+sys.argv.append("run")
+sys.argv.append("actions")
+sys.argv.append("--actions")
+sys.argv.append("actions")
+# sys.argv.append("--debug")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from rasa.__main__ import main
 
     main()
