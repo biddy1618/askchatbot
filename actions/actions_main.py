@@ -45,6 +45,7 @@ def cosine_similarity_query(
     vector_name,
     nested=False,
     best_image="first",
+    best_video="first",
     print_summary=False,
 ):
     """Does a query on cosine similarity between query_vector and the index field
@@ -92,8 +93,8 @@ def cosine_similarity_query(
 
     hits = response["hits"]["hits"]
 
-    if print_summary and best_image == "first":
-        # print it before filling out best image field
+    if print_summary and (best_image == "first" or best_video == "first"):
+        # print it before filling out best_image & best_video fields
         print_hits(hits, title=vector_name)
 
     if best_image == "first":
@@ -110,10 +111,25 @@ def cosine_similarity_query(
                     "_source"
                 ]
     else:
-        raise Exception("Not implemented")
+        raise Exception(f"Not implemented. best_image = {best_image}")
 
-    if print_summary and best_image == "caption":
-        # print it after filling out best image field
+    if best_video == "first":
+        hits = set_first_video_as_best(hits)
+    elif best_video == "title":
+        if vector_name in [
+            "video.videoTitle_vector",
+        ]:
+            # When scored on video, fist of the innerhits had the highest score
+            for i, hit in enumerate(hits):
+                hits[i]["best_video"] = None
+                hits[i]["best_video"] = hit["inner_hits"][path]["hits"]["hits"][0][
+                    "_source"
+                ]
+    else:
+        raise Exception(f"Not implemented. best_video = {best_video}")
+
+    if print_summary and (best_image == "caption" or best_video == "title"):
+        # print it after filling out best_image or best_video fields
         print_hits(hits, title=vector_name)
 
     return hits
@@ -125,6 +141,18 @@ def set_first_image_as_best(hits):
         hits[i]["best_image"] = None
         if hit["_source"]["imagePestNote"]:
             hits[i]["best_image"] = hit["_source"]["imagePestNote"][0]
+        elif hit["_source"]["imageQuickTips"]:
+            hits[i]["best_image"] = hit["_source"]["imageQuickTips"][0]
+
+    return hits
+
+
+def set_first_video_as_best(hits):
+    """When scored we do not know the best video. Just pick the first."""
+    for i, hit in enumerate(hits):
+        hits[i]["best_video"] = None
+        if hit["_source"]["video"]:
+            hits[i]["best_image"] = hit["_source"]["video"][0]
 
     return hits
 
@@ -138,7 +166,8 @@ def print_hits(hits, title=""):
         print(
             f'{hit["_score"]}; '
             f'{hit["_source"]["name"]}; '
-            f'image-caption={(hit.get("best_image", {}) or {}).get("caption")}'
+            f'image-caption={(hit.get("best_image", {}) or {}).get("caption")}; '
+            f'video-title={(hit.get("best_video", {}) or {}).get("videoTitle")}'
         )
 
 
@@ -190,6 +219,7 @@ async def handle_es_query(
         "name_vector",
         nested=False,
         best_image="first",
+        best_video="first",
         print_summary=print_summary,
     )
 
@@ -200,6 +230,7 @@ async def handle_es_query(
         "descriptionPestNote_vector",
         nested=False,
         best_image="first",
+        best_video="first",
         print_summary=print_summary,
     )
 
@@ -210,6 +241,7 @@ async def handle_es_query(
         "life_cycle_vector",
         nested=False,
         best_image="first",
+        best_video="first",
         print_summary=print_summary,
     )
 
@@ -220,6 +252,7 @@ async def handle_es_query(
         "contentQuickTips_vector",
         nested=False,
         best_image="first",
+        best_video="first",
         print_summary=print_summary,
     )
 
@@ -230,6 +263,7 @@ async def handle_es_query(
         "imagePestNote.caption_vector",
         nested=True,
         best_image="caption",
+        best_video="first",
         print_summary=print_summary,
     )
 
@@ -240,6 +274,18 @@ async def handle_es_query(
         "imageQuickTips.caption_vector",
         nested=True,
         best_image="caption",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    video_link_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "video.videoTitle_vector",
+        nested=True,
+        best_image="first",
+        best_video="title",
         print_summary=print_summary,
     )
 
@@ -252,6 +298,7 @@ async def handle_es_query(
             "ndl_damage_vector",
             nested=False,
             best_image="first",
+            best_video="first",
             print_summary=print_summary,
         )
 
@@ -267,12 +314,14 @@ async def handle_es_query(
         + qt_content_hits
         + pn_caption_hits
         + qt_caption_hits
+        + video_link_hits
     ):
         duplicate = False
         for i, hit in enumerate(hits):
             if hit2["_source"]["name"] == hit["_source"]["name"]:
                 hits[i]["_score"] = max(hit["_score"], hit2["_score"])
                 hits[i]["best_image"] = hit2["best_image"]
+                hits[i]["best_video"] = hit2["best_video"]
                 duplicate = True
                 break
         if not duplicate:
@@ -431,6 +480,7 @@ class FormQueryKnowledgeBase(FormAction):
                 score = hit["_score"]
                 score_w_damage = hit["_score_w_damage"]
                 pn_url = hit["_source"]["urlPestNote"]
+                qt_url = hit["_source"]["urlQuickTip"]
                 pn_image = None
                 if hit["best_image"]:
                     pn_image = hit["best_image"]["src"]
@@ -439,12 +489,19 @@ class FormQueryKnowledgeBase(FormAction):
                 text = ""
 
                 if pn_image:
-                    text = f"{pn_image_caption}\n"
+                    text = f"{name}: {pn_image_caption}\n"
+                else:
+                    text = f"{name}\n"
 
+                if qt_url:
+                    text = f"{text}- [quick tips for '{name}']({qt_url})\n"
                 if pn_url:
                     text = f"{text}- [pestnote for '{name}']({pn_url})\n"
-                else:
-                    text = f"{text}- {name}\n"
+
+                if hit["best_video"]:
+                    video_title = hit["best_video"]["videoTitle"]
+                    video_link = hit["best_video"]["videoLink"]
+                    text = f"{text}- [video: '{video_title}']({video_link})\n"
 
                 text = f"{text}- similarity score            ={score:.1f}\n"
                 text = f"{text}- similarity score with damage={score_w_damage:.1f}"

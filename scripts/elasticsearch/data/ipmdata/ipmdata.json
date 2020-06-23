@@ -86,7 +86,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/barkbeetlescard.html?src=exchbt",
     "contentQuickTips": "Bark beetles are common pests of many trees, but some of the most damaging attacks occur on pines and other conifers. Trees already stressed by drought, disease, or mechanical damage are most likely to suffer. Insecticides won’t save heavily infested trees. Instead, promptly remove infested trees and protect healthy ones with proper care. Identifying bark beetles and their damage. Adults are small, dark, cylindrical insects about the size of a grain of rice; they can fly from tree to tree. Larvae are tiny grubs that feed beneath bark on trunks and branches. Infested trunks and branches have many tiny holes where beetles have bored in or emerged. Tree sap or dust from boring can exude from holes. If you peel back bark on infested trees, you may see galleries (tunnels) from adult and/or larval mining. Bark beetles in California include western pine beetles on ponderosa pine; mountain pine beetles on lodgepole and sugar pines; and engraver beetles on Monterey, pinyon, and other pines. Shothole borers and elm bark beetles attack some broadleaf trees. Bark beetles injure trees by disrupting the flow of nutrients. Adults and larvae feed in the area of the inner bark that transports nutrients through the tree. Needles turn yellow and drop off from infested trees. Infested trees can die in one season, causing limb drop and increased fire hazards. Keep trees healthy to reduce attacks. With low to moderate numbers of beetles, healthy trees defend themselves by releasing sap into holes before female adult beetles can lay eggs. Drought, disease, and injuries reduce a tree’s ability to combat invasions. When possible, properly irrigate drought-stressed trees. Thin groups of trees or stands to keep remaining trees vigorous. Dense stands favor beetle attack. Avoid compacting soil and injuring roots and trunks during activities such as construction. Remove severely infested trees. Regularly inspect your trees for signs of bark beetle invasions. Signs include dust from boring, small holes exuding sap, and tree crown decline. Promptly remove infested trees and destroy infested material by chipping or solarizing to prevent emerging beetles from attacking healthy trees. Solarize infested wood by tightly wrapping small piles in thick (10 mil) clear plastic and leaving them in the sun for several months. What about pesticides? Limit insecticide use (sprayed or systemic) to protecting healthy trees and combine with other nonchemical methods to improve tree defense. Insecticides are most effective when applied before adults land on the tree. Insecticides won’t save heavily infested trees because they have limited impact on bark beetles inside the tree. Effective insecticides for bark beetles are available only to licensed applicators. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/I/I-CO-IPAR-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/I/I-CO-IPAR-AD.001h.jpg?src=exchbt",
+        "caption": "Ips bark beetle (actual size 1/8 to 3/8 inch long)."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/I/I-CO-ISPP-CD.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/I/I-CO-ISPP-CD.004h.jpg?src=exchbt",
+        "caption": "Engraver beetle holes and sap."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/S/I-CO-SMUL-CD.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/S/I-CO-SMUL-CD.002h.jpg?src=exchbt",
+        "caption": "Larval galleries of European elm bark beetle."
+      }
+    ],
     "video": []
   },
   {
@@ -276,7 +292,53 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/pestalert/pabrownmarmorated.html?src=exchbt",
     "contentQuickTips": "The brown marmorated stink bug (BMSB), Halyomorpha halys, has been detected in California. Wherever BMSB takes up residence, it causes severe crop and garden losses and becomes a nuisance to people. The ability of BMSB to hitchhike in vehicles and planes has allowed it to spread rapidly to new areas. Since it was introduced to the United States from Asia in the 1990s, BMSB has become established in the mid-Atlantic states as well as in Portland, Ore., and Los Angeles. How to Identify BMSB EGGS: Laid in clusters of 20 to 30 on underside of leaves, barrel-shaped, white to pale green YOUNG NYMPHS: Abdomen orange with brown markings MATURE NYMPHS & ADULTS Similar Stink Bugs (also known as shield bugs) BMSB adults look similar to other brown stink bugs. Here are some tips for telling them apart. RED SHOULDERED STINK BUG: Edge of abdomen concealed; antennal bands, if present, are not white; less than 1/2 inch long ROUGH STINK BUG: Distinctive teeth jutting out from shoulder; no antenna bands; 2/3 inch long CONSPERSE STINK BUG: Legs dotted with dark spots – no antenna bands 1/2 inch long/p> Impact of BMSB on Crops and People CROP DAMAGE: BMSB may reach very high numbers, and since one bug can feed on many fruit, losses can be severe. Adults and nymphs suck juices from fruit and seeds, creating pockmarks and distortions that make fruit and vegetables unmarketable. Damaged flesh under the skin turns hard and pithy. BMSB damages fruits (e.g., apple, pear, citrus, stone fruits, and fig), berries, grapes, legumes, vegetables, and shade trees. BMSB damage to tomato (left), peach (center), and pear (right) NUISANCE TO PEOPLE: BMSB seeks winter shelter, and large numbers may congregate on outside walls or invade homes by entering through small openings. It is also a pest in home gardens. These insects stink when disturbed. How it Spreads BMSB travels long distances by hitching rides in vehicles or as stowaways when furniture or other articles are moved, often during winter months. As a result, most new infestations are found in urban areas. Report any Sightings If you find a stink bug that you suspect might be a BMSB, place it in a container and carefully note where and when you collected it. Take the sealed container to your county agricultural commissioner or local UC Cooperative Extension office. More information Brown Marmorated Stink Bug Brown Marmorated and Consperse Stink Bug Identification and Comparison video from UC Cooperative Extension Management in Homes and Gardens PDF : To display a PDF document, you may need to use a PDF reader.",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "caption": "Brown marmorated stink bug eggs and nymphs",
+        "link": "http://ipm.ucanr.edu/IMAGES/photos/I-HM-HHAL-NM.001.jpg?src=exchbt",
+        "src": "http://ipm.ucanr.edu//IMAGES/photos/I-HM-HHAL-NM.001h.jpg?src=exchbt"
+      },
+     {
+        "caption": "enlarged egg",
+        "link": "",
+        "src": "http://ipm.ucanr.edu/IMAGES/photos/I-HM-HHAL-EG.001.jpg?src=exchbt"
+      },
+      {
+        "caption": "brown marmorated stink bug distinguishing characteristics",
+        "link": "http://ipm.ucanr.edu/IMAGES/photos/bmsb-allid.jpg?src=exchbt",
+        "src": "http://ipm.ucanr.edu/IMAGES/photos/bmsb-smallid.jpg?src=exchbt"
+      },
+      {
+        "caption": "red-shouldered stink bug",
+        "link": "http://ipm.ucanr.edu/PMG/T/I-HM-TPAL-AD.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/I-HM-TPAL-AD.002h.jpg?src=exchbt"
+      },
+      {
+        "caption": "rough stink bug",
+        "link": "http://ipm.ucanr.edu/PMG/B/I-HM-BSUL-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/B/I-HM-BSUL-AD.001a.jpg?src=exchbt"
+      },
+      {
+        "caption": "consperse stink bug",
+        "link": "http://ipm.ucanr.edu/PMG/E/I-HM-ECON-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-AD.001h.jpg?src=exchbt"
+      },
+      {
+        "caption": "damage produced by stink bugs on tomato",
+        "link": "http://ipm.ucanr.edu/PMG/E/I-HM-ECON-CD.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-CD.004h.jpg?src=exchbt"
+      },
+      {
+        "caption": "damage produced by stink bugs on peach",
+        "link": "http://ipm.ucanr.edu/PMG/A/I-HM-AHIL-CD.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-HM-AHIL-CD.004h.jpg?src=exchbt"
+      },
+      {
+        "caption": "damage produced by stink bugs on pear",
+        "link": "",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/L/I-HM-LTRI-CD.001h.jpg?src=exchbt"
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=EHhtss8E7xM?src=exchbt",
@@ -356,7 +418,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/bedbugscard.html?src=exchbt",
     "contentQuickTips": "Bed bugs are small, wingless insects that feed on blood from humans and other animals. These insects hide along seams of mattresses, within box springs, or within cracks and crevices in furniture, personal belongings, and areas near sleeping and resting sites. Eliminating an infestation is best done by a professional pest control company and may require removing or treating all infested material and monitoring to be sure bugs are gone. Bed bug identification and biology. Adults are small (about 1/5 inch), flattened, oval, and rusty red. Nymphs (immature stages) are smaller and lighter colored. Bed bugs feed only on blood and must have one blood meal prior to molting to the next stage. Adults may feed every 5 to 7 days but can survive many months without food. What are associated health problems? Bed bug feeding is usually painless; sleeping victims are typically unaware. Areas around bites might redden, swell, and itch several days later. Some people have no reaction. Bed bugs aren’t known to spread diseases but scratching bites can lead to infections. How does a bed bug infestation start? People can bring bed bugs into their homes on luggage, clothes, bedding, furniture, or other objects. Bed bugs can be picked up in hotels or other places during overnight visits. Hotels, homeless shelters, furnished apartments, and dormitories are most at risk of becoming infested. Second-hand mattresses and furniture are known to be high-risk sources of potential bed bug infestations. Detecting bed bugs. Using a flashlight and magnifying glass, look for bed bugs, their dark fecal spots, and light-brown shed skins. Inspect mattresses, box springs, bed frames, and other areas near sleeping and resting surfaces. Bed bugs like to hide. Remove bedding. Look in cracks and holes. Turn furniture upside down and take apart frames if necessary. Several kinds of bed bug detection traps are available to help determine if your home is infested. Use nonchemical methods to get rid of small numbers of bed bugs. Vacuum along mattress seams, baseboards, and other bed bug hiding areas. Wash all bedding and clothing in hot (120°F) water and dry them using the hottest setting. Specially designed mattress encasements are helpful in preventing infestations and sealing bed bugs within so they can’t bite. Serious infestations require professional help and may include insecticide treatments. If you rent your home, contact your landlord or property owner so that they can help you manage your infestation. Tenants have rights. Hire a reputable pest control company with experience managing bed bugs. They have access to the most effective monitoring techniques and management products. Insecticides alone won’t control bed bugs. Remove or heat-treat infested materials and limit hiding spots to prevent future infestations. Inspect after treatments to be sure bugs are gone. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pni7454-1.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/PESTNOTES/IMAGES/pni7454-1a.jpg?src=exchbt",
+        "caption": "Bed bug life cycle. There are 5 nymphal stages, each requiring a blood meal before molting to the next stage."
+      },
+      {
+        "link": "http://www.youtube.com/watch?v=ORR7yAT-Vic?src=exchbt",
+        "src": "https://i.ytimg.com/vi/ORR7yAT-Vic/mqdefault.jpg?src=exchbt",
+        "caption": "How to inspect for bed bugs "
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-HM-CLEC-LC.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-HM-CLEC-LC.001h.jpg?src=exchbt",
+        "caption": "Egg, immatures, and adult bed bugs."
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=oWCc3Mngo7E?src=exchbt",
@@ -507,8 +585,19 @@
     "imagePestNote": [],
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/headlicecard.html?src=exchbt",
-    "contentQuickTips": "Anyone can get h ead lice, but children are more prone to infestations because they play closely with one another. Head lice are usually spread through direct head-to-head contact and more rarely from contact with infested hats or combs. Head lice are not known to transmit any infectious diseases, but infestations can cause discomfort, anxiety, and embarrassment. Control lice by using a combination of treatment with an effective insecticide (to kill live lice) and combing to remove eggs (nits). Head lice facts Head lice cannot hop, fly, or jump; they crawl. They can only survive off a human head for about 1 or 2 days. Head lice cannot live on family pets. Nits more than 1/4 inch from the scalp are probably dead or have already hatched. What should I look for? Eggs glued to the hair near the scalp. Developing eggs are dark in color, but white after hatching Adult head lice are about the size of a sesame seed and crawl rapidly. Some infestations may cause intense scratching on the back of the head or neck, although not everyone has this symptom. How do I manage a head lice infestation? Remove eggs (nits) by combing hair with a specially designed metal comb. This is key to successful control, regardless of the any insecticide treatment used. Comb wet, conditioned hair. Repeat daily as long as you find live lice or eggs within 1/4 inch of the scalp Remove lice and eggs from any infested areas. Wash clothing and bedding in hot water and dry in a hot dryer. Freeze items like headphones, hats, and bike helmets in plastic bags for at least 10 hours. Clean stuffed animals, car seats, and other objects that might have come in contact with the infested person’s head. Vacuum carpets and upholstery. Pesticide sprays are not necessary. Avoid head-to-head contact with the infested person. Inform anyone who has been in close contact in the recent past. It’s not necessary to keep children home from school unless an extreme infestation is found. Consider treating infested scalps with a head louse insecticidal product. Effective, less toxic products contain dimethicone, benzyl alcohol, or spinosad. Avoid products containing permethrin, malathion, pyrethrin, and lindane, since head lice are often resistant to them (reducing their effectiveness). Lindane and malathion are also more toxic to humans. Check heads and remove eggs daily until infestation is gone. Follow with weekly head checks to detect reinfestation. Some people never itch so itching is not a reliable way to tell if someone is infested. ",
-    "imageQuickTips": [],
+    "contentQuickTips": "Anyone can get head lice, but children are more prone to infestations because they play closely with one another. Head lice are usually spread through direct head-to-head contact and more rarely from contact with infested hats or combs. Head lice are not known to transmit any infectious diseases, but infestations can cause discomfort, anxiety, and embarrassment. Control lice by using a combination of treatment with an effective insecticide (to kill live lice) and combing to remove eggs (nits). Head lice facts Head lice cannot hop, fly, or jump; they crawl. They can only survive off a human head for about 1 or 2 days. Head lice cannot live on family pets. Nits more than 1/4 inch from the scalp are probably dead or have already hatched. What should I look for? Eggs glued to the hair near the scalp. Developing eggs are dark in color, but white after hatching Adult head lice are about the size of a sesame seed and crawl rapidly. Some infestations may cause intense scratching on the back of the head or neck, although not everyone has this symptom. How do I manage a head lice infestation? Remove eggs (nits) by combing hair with a specially designed metal comb. This is key to successful control, regardless of the any insecticide treatment used. Comb wet, conditioned hair. Repeat daily as long as you find live lice or eggs within 1/4 inch of the scalp Remove lice and eggs from any infested areas. Wash clothing and bedding in hot water and dry in a hot dryer. Freeze items like headphones, hats, and bike helmets in plastic bags for at least 10 hours. Clean stuffed animals, car seats, and other objects that might have come in contact with the infested person’s head. Vacuum carpets and upholstery. Pesticide sprays are not necessary. Avoid head-to-head contact with the infested person. Inform anyone who has been in close contact in the recent past. It’s not necessary to keep children home from school unless an extreme infestation is found. Consider treating infested scalps with a head louse insecticidal product. Effective, less toxic products contain dimethicone, benzyl alcohol, or spinosad. Avoid products containing permethrin, malathion, pyrethrin, and lindane, since head lice are often resistant to them (reducing their effectiveness). Lindane and malathion are also more toxic to humans. Check heads and remove eggs daily until infestation is gone. Follow with weekly head checks to detect reinfestation. Some people never itch so itching is not a reliable way to tell if someone is infested. ",
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/I-AN-PHUM-LC.003.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/I-AN-PHUM-LC.003h.jpg?src=exchbt",
+        "caption": "Stages in the development of head lice."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/I-AN-PHUM-EG.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/I-AN-PHUM-EG.002h.jpg?src=exchbt",
+        "caption": "Eggs (nits) of head lice on human hairs."
+      }
+    ],
     "video": []
   },
   {
@@ -618,7 +707,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/antscard.html?src=exchbt",
     "contentQuickTips": "Although ants are annoying when they come indoors, they can be beneficial by feeding on fleas, termites, and other pests in the garden. While spraying chemicals inside the house might seem effective, doing so will not prevent more ants from entering. Because most ants live outdoors, focus efforts on keeping ants from entering buildings. Combine several methods such as caulking entryways, cleaning up food sources, and baiting when necessary. Avoid using pyrethroids (e.g., bifenthrin and cypermethrin), especially on hard surfaces such as driveways or sidewalks or around the foundation of buildings. These products pollute waterways. Make your house less attractive to ants. Caulk cracks and crevices that provide entry into the house. Store food attractive to ants in closed containers. Clean up grease and spills. Ant-proof kitchen garbage pails with sticky barriers such as petroleum jelly under the lip and place pet dishes in a moat of water. Remove or manage sweet food sources next to your house such as aphid-infested bushes and ripened fruit on trees. Keep plants, grass, and organic mulch at least a foot away from the foundation of buildings to reduce ant foraging and nesting. When ants invade your house. Sponge up invading ants with soapy water as soon as they enter. Plug up ant entryways with caulk. Take infested potted plants outdoors and submerge pots in a solution of insecticidal soap and water. Clean up food sources by wiping up spills or placing food in tight-fitting containers. Rely on outdoor baits to control the ant colony. Insecticide sprays shouldn’t be necessary. If you hire a pest control company, ask them to use baits and spot treatments rather than perimeter treatments or monthly sprays. How ant baits work: Pesticide baits work by attracting worker ants who then take the product back to the nest where the entire colony, including queens, can be killed. The pesticide must be slow acting so workers won’t be killed before they get back to the nest. How to use baits: Place baits near ant trails and nest openings. Prepackaged or refillable bait stations or stakes are the safest and easiest to use. Active ingredients in baits may include boric acid/borate, fipronil, avermectin, or hydramethylnon. Liquid borate (0.5-1% borate in sugar water solution) baits in refillable bait stations are best for severe Argentine ant infestations. Replace baits when empty and reposition them, or try a different bait product if ants don't appear to be taking it. It can take 5 to 10 days to see fewer ants. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/I/I-HY-IHUM-AD.005.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/I/I-HY-IHUM-AD.005h.jpg?src=exchbt",
+        "caption": "Argentine ant."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/B/C-CH-BAIT-LS.083.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/B/C-CH-BAIT-LS.083h.jpg?src=exchbt",
+        "caption": "Various types of bait stations are available."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/E/C-NC-EXCL-GU.007.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/E/C-NC-EXCL-GU.007h.jpg?src=exchbt",
+        "caption": "Fill ant entryways with caulk."
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=9_CpRnOfn0A?src=exchbt",
@@ -740,7 +845,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/aphidscard.html?src=exchbt",
     "contentQuickTips": "Almost every plant has one or more aphid species that occasionally feed on it, but low to moderate numbers of aphids usually aren’t damaging to gardens or landscape trees. Although aphids can curl leaves and produce sticky honeydew, they rarely kill plants, and can usually be washed off with water. When aphid numbers are high, natural enemies often feed on them, eliminating the need for pesticides. When pesticides are necessary, use less-toxic products such as insecticidal soaps and oils. Aphids are common in gardens. Aphids like lush, new growth. Don’t over fertilize; use organic or slow-release products. Aphids build up on flowering plums, roses, tulip trees, crape myrtles, apples, and many vegetables. Expect aphids when you grow these plants. Ants protect aphids from their natural enemies. Keep ants off plants to help these beneficial insects do their job. How can I reduce aphids? Prune infested leaves and stems. Knock aphid populations off plants by shaking the plant or spraying it with a strong stream of water. Protect seedlings with covers or aluminum foil mulches. Wait for hot weather; some aphids are heat-intolerant and will be gone by mid-summer. Are there any good bugs that will eat aphids? Beneficial insects such as lady beetles and lacewings will visit plants naturally when aphids are abundant. Protect these natural enemies by avoiding the use of insecticides that can be toxic to them. Common natural enemies of aphids include: Lady beetles (ladybugs), both adults and larvae Lacewings Syrphid fly larvae Soldier beetles Tiny parasitic wasps that turn aphids into crusty “mummies” What about pesticides? Use nonchemical methods first to manage aphid populations. If insecticides seem necessary, choose the safest products, such as insecticidal oils and soaps. When properly used, these materials solve most aphid problems. Oils and soaps work by smothering aphids, so apply these products thoroughly. Don’t apply them to drought-stressed plants or when it is very hot. Some plants are sensitive to these products. Apply insecticidal soaps, soap-pyrethrum mixtures, or neem oils on vegetables or small bushes such as roses. Narrow range horticultural oils—such as supreme or superior oils—are appropriate for larger trees. Oils and soaps don’t kill aphids hidden within curled leaves. Prune these out. Systemic insecticides can kill hidden aphids, but they are much more toxic and might kill bees and other beneficial insects on flowering plants. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/M/I-HO-MROS-CO.013.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/M/I-HO-MROS-CO.013h.jpg?src=exchbt",
+        "caption": "Rose aphids on young blossom."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/M/I-HO-MROS-FD.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/M/I-HO-MROS-FD.004h.jpg?src=exchbt",
+        "caption": "Rose aphids vary in color from green to red; the fuzzy-orange aphids were killed by a fungus."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/H/I-CO-HCON-LV.032.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/H/I-CO-HCON-LV.032h.jpg?src=exchbt",
+        "caption": "Lady beetle larva eating an aphid."
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=RXMXh_DEyAE?src=exchbt",
@@ -1010,7 +1131,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/ratscard.html?src=exchbt",
     "contentQuickTips": "Rats are some of the most troublesome and damaging rodents. They eat and contaminate food, garden produce, and fruit, and can transmit diseases to humans and pets. Manage rats by removing food and shelter, eliminating entryways into buildings, and trapping. Indications of a rat infestation: Rat droppings in garages, storage buildings, or attics, or around pet food containers. Rodent feeding damage on tree fruit or nuts in your yard. Rat nests behind boxes, in garage drawers, or in woodpiles. Burrows beneath garbage cans and compost piles or among garden plants. Rats traveling along utility lines or on fence tops at dusk. Is it a Norway rat or a roof rat? The stocky Norway rat builds burrows along building foundations, beneath rubbish, or in woodpiles. Indoors they tend to remain in basements or on the ground floor. Roof rats are agile climbers with a tail longer than their head and body. They usually live and nest above ground in shrubs, trees, or dense vegetation. Indoors they favor attic spaces, walls, false ceilings, and cabinets. To get rid of rats, seal entryways and remove food, water, and shelter. Feed pets only the amount of food they will eat at a single feeding or bring food inside at night. Keep garbage, trash, and garden debris in containers with tight-fitting lids. Thin dense vegetation and create at least a 2-foot space between each shrub as well as between shrubs and buildings. Thin or remove climbing hedges from buildings. Remove tree limbs that are within 3 feet of a roof. Seal all cracks and openings in the house’s foundation that are larger than 1/4 inch. Make sure doors, windows, and screens fit tightly. Remove rats from the home by trapping. Snap traps are the safest, most effective, and most economical way to trap rats. For Norway rats, place traps close to walls, behind objects, in dark corners, and in places where you have found rat droppings. For roof rats, place traps in off-the-ground locations such as ledges, shelves, branches, fences, pipes, or overhead beams. Ensure traps are out of reach of children and pets. What about pesticides? When using rodenticide baits, avoid using them indoors, because dead rats create bad odors. Seal buildings before baiting outside to prevent poisoned rats from coming inside to die. Tamper-proof bait stations are available but can only be used within 50 feet of a building. All rodent baits are toxic to nontarget species, pets, and humans. Always keep away from children and pets. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/R/V-MA-RRAT-AD.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/R/V-MA-RRAT-AD.002h.jpg?src=exchbt",
+        "caption": "Roof rats favor attics, trees and aboveground locations."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/R/V-MA-RNOR-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/R/V-MA-RNOR-AD.001h.jpg?src=exchbt",
+        "caption": "Norway rats favor basements, woodpiles and the ground floor of buildings."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pni74106-4.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/PESTNOTES/IMAGES/pni74106-4.jpg?src=exchbt",
+        "caption": "Norway rats (bottom) are stockier than roof rats (top) and have smaller ears."
+      }
+    ],
     "video": []
   },
   {
@@ -1281,7 +1418,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/groundsquirrelcard.html?src=exchbt",
     "contentQuickTips": "Pests in Gardens and Landscapes: Quick Tips Ground Squirrel Published 4/19 Read more on this topic Ground squirrels injure many types of plants, harbor diseases harmful to humans, and damage landscapes with their burrowing. Although similar in appearance to tree squirrels, ground squirrels will always retreat to a burrow when frightened, while tree squirrels will climb a tree or other tall structure and never use a burrow. Traps, baits, and burrow fumigants will effectively manage ground squirrels in landscapes and gardens. Identification and behavior: Brownish-gray fur. Body is 9- to 11-inches long, not including a 5- to 9-inch tail that isn't as bushy as a tree squirrel's. Live in colonies in a burrow system where they sleep, rest, rear young, store food, and avoid danger. Active during the day, mainly midmorning through late afternoon, especially on warm, sunny days. Breed once a year, averaging 7 to 8 per litter. When 6 months old, young squirrels resemble adults. Ground squirrels cause damage by: Eating food-bearing and ornamental plants. Gnawing on plastic sprinklers and irrigation lines. Girdling young trees. Burrowing, which causes trip hazards and damages landscapes and structures. How do you manage ground squirrels? Remove brush piles and debris that ground squirrels can use as cover. Destroy old burrows by deep ripping them to a depth of at least 20 inches. Use kill traps (such as box or Conibear traps) only when there is no chance of catching a pet or other wildlife. Live-catch traps are not often recommended, because they present the problem of animal disposal. Place traps on the ground near squirrel burrows or runways. Bait traps with walnuts, almonds, oats, barley, or melon rinds. Trap between February and October. What about pesticides? In spring, fumigate by placing gas cartridges in burrows. In dry conditions, gas cartridges can be a fire hazard. Don't use near buildings. Place anticoagulant baits in secure, tamper-resistant bait stations and provide sufficient product for repeated feedings. Squirrels must eat the bait multiple times over several days. Always follow label instructions for use. Take care not to poison pets or other wildlife. For those who live next to wildlands or other infested areas, ongoing management is necessary. Periodically check the area for signs of reinfestation, such as new burrows. Start management as soon as you notice new squirrels, since it is easier and less expensive to manage a small number of squirrels.",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/S/V-MA-SBEE-AD.016.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/S/V-MA-SBEE-AD.016h.jpg?src=exchbt",
+        "caption": "California ground squirrel."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG//PMG/S/V-MA-SBEE-CD.030.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/S/V-MA-SBEE-CD.030h.jpg?src=exchbt",
+        "caption": "Ground squirrel damage to avocado."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/S/V-MA-SBEE-TR.034.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/S/V-MA-SBEE-TR.034h.jpg?src=exchbt",
+        "caption": "Conibear trap set at the base of a structure to trap California ground squirrels."
+      }
+    ],
     "video": []
   },
   {
@@ -1516,7 +1669,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/deercard.html?src=exchbt",
     "contentQuickTips": "Although pleasant to look at in the wild, deer can be very destructive in gardens, orchards, and landscaped areas, feeding upon a wide variety of plants. To confirm deer caused the damage, look for tracks, droppings, and trails. Excluding deer with fences or plant protectors provides the best long-term control. Deer biology and behavior: Deer often feed late in the evening and very early in the morning, so you won’t always see them. They are a special problem in gardens next to woodlands that can provide cover during the day. The two most common deer in California are the mule deer and the blacktailed deer. Deer eat shrubs, vines, fruit and nut trees, garden vegetables, grasses, and small flowering plants. Look for these signs to confirm deer damage: Hoofprints, 2 to 3 inches long, split in the middle, pointed at the front, and more rounded at the rear. Piles of small jellybean-shaped droppings. Trampled plants and shredded or ragged foliage, buds, or terminals. Girdled trunks or branches broken by deer rubbing against them with their antlers. Be aware of legal restrictions. The California Fish and Game Code classifies deer as game animals. If deer are damaging your property or crops, you must get a permit to shoot them. Shooting, however, isn’t recommended around homes and gardens. For deer, traps and poisons are illegal and can’t be used. Protect your garden with fences. A properly built and maintained fence 7 or 8 feet high is the most effective control method. Fence height may need to be extended for steep slopes. Most existing fences can be made deer-proof by extending them 3 or 4 feet with mesh or smooth wire. Be sure the fence is sturdy and fitted to the ground, so deer can’t crawl under it. Use wire or plastic plant protectors to shield individual plants. Standard electric fences haven’t proven very effective. The New Zealand type may be effective but should be professionally installed and constantly monitored. Repellents and frightening devices: Chemical repellents that give off foul tastes or odors, such as the scent of a predator, can be useful in some situations. Repellents must be reapplied at frequent intervals, depending on what is used and the weather. Repellents may not work if preferred food sources for deer are available. Many repellents aren’t allowed on food crops or can damage some plants. Read the product label. Deer quickly adjust to most noisemaking devices such as propane cannons and electronic alarms, making them ineffective. However, new devices featuring deer distress sounds show promise. Consider deer-resistant plants. There are plant species deer prefer not to eat, especially when other more palatable plants are available. However, when food is scarce, deer will eat most plants, including many deer-resistant species. Consult your local nursery and garden center, UC Cooperative Extension office, or Master Gardeners, or refer to gardening publications about deer-resistant plants suitable for your area. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pni74117-1b.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/PESTNOTES/IMAGES/pni74117-1b.jpg?src=exchbt",
+        "caption": "Blacktailed deer hoof print."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/O/V-MA-OHEM-KC.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/O/V-MA-OHEM-KC.001h.jpg?src=exchbt",
+        "caption": "Droppings are a good indicator of deer presence."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/O/V-MA-OHEM-MC.011.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/O/V-MA-OHEM-MC.011h.jpg?src=exchbt",
+        "caption": "A 7- to 8-foot high wire fence is the best way to exclude deer."
+      }
+    ],
     "video": []
   },
   {
@@ -1807,7 +1976,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/housemousecard.html?src=exchbt",
     "contentQuickTips": "House mice are well adapted to living in close contact with humans and thrive where food and shelter are abundant. They eat and contaminate food supplies and can also transmit disease. Their gnawing activities can damage structures or property. Manage them by cleaning up debris, removing food and shelter, eliminating entryways into buildings, or using traps or baits. High frequency electronic devices aren’t effective. How to detect a house mouse infestation: Look for droppings, fresh gnaw marks, and tracks, which indicate areas where mice are active. Search behind boxes, in drawers, in garages, or around woodpiles for nests made of finely shredded paper or other fibrous material. Check for the musky odor associated with mice. Mice are most active at night, but you also can see them during daylight hours. Discourage mice by removing food, water, and shelter and sealing entryways. Good housekeeping within buildings reduces shelter and food for house mice. Seal all structural cracks and openings larger than 1⁄4 inch. Use wire screen or coarse steel wool that mice can’t chew through. Ensure all doors, windows, and screens fit tightly. Feed pets only the amount of food they will eat at a single feeding. Keep all food storage and garbage containers sealed. Thin or remove plants next to or climbing up buildings, since house mice are excellent climbers. Remove mice from your home by trapping. Snap traps and glue boards are the safest and most economical traps. Place traps in secluded areas along walls, behind objects, in dark corners, and in places where droppings have been found. Dispose of dead rodents by burying or placing them in plastic bags and putting them in the garbage. Don’t touch mice with your bare hands, and wash hands thoroughly after handling traps. What about pesticides? Avoid using poison baits indoors. Mice can die in hidden places, create bad odors, and be difficult to locate. Seal buildings before baiting outdoors to prevent mice coming indoors to die. Baits generally take several days for effective control. Place baits in tamper-proof bait stations out of reach of children and pets and wildlife. All rodent baits are toxic. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/M/V-MA-MMUS-AD.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/M/V-MA-MMUS-AD.002h.jpg?src=exchbt",
+        "caption": "Adult house mouse."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pni74106-5.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/PESTNOTES/IMAGES/pni74106-5.jpg?src=exchbt",
+        "caption": "Compared to rats, the head and feet of mice are proportionally smaller."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/C-NC-TRAP-VT.009.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/C-NC-TRAP-VT.009h.jpg?src=exchbt",
+        "caption": "Snap traps are a useful management tool."
+      }
+    ],
     "video": []
   },
   {
@@ -2247,7 +2432,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/mistletoecard.html?src=exchbt",
     "contentQuickTips": "Mistletoe is a parasitic plant that absorbs both water and nutrients from a host tree. Healthy trees can tolerate a few mistletoe branch infections. However, if the infestation is severe, trees can weaken, have stunted growth or dead branches, or die completely. Symptoms are magnified on trees already stressed by drought or disease. Remove branches at least a foot below the mistletoe attachment, before it produces seeds that will infest other limbs and trees. Types of mistletoe—broadleaf and dwarf: Broadleaf mistletoes attack broadleaf trees and some conifers. Plants have green stems with thick, almost oval-shaped leaves and produce small, sticky, whitish berries in fall. Birds disperse the seeds. Dwarf mistletoes attack conifers. Plants are smaller with short stems and yellow to orange scaly leaves, resembling a juniper. Seeds mature in midsummer to late autumn and eject from the plant, traveling up to 50 feet. Mistletoe infestations weaken trees. Tree injury varies according to mistletoe and tree species. Dwarf mistletoes tend to be more damaging. Healthy oaks in natural areas can tolerate some mistletoe, but branches are more likely to break. Severely infested trees show reduced vigor, stunted growth, swellings on branches, and dead branches; some trees die completely. Drought or disease can magnify symptoms. Dwarf mistletoes cause profuse branching, or witches’ brooms, on conifers. Dead and dying limbs are a significant fire danger, especially in forested areas. If possible, select resistant tree species. Mistletoe rarely infests Bradford flowering pear, Chinese pistache, crape myrtle, eucalyptus, ginkgo, golden rain tree, liquidambar, sycamore, cedar, or redwood. Avoid especially susceptible varieties such as alder, Aristocrat flowering pear, and Modesto ash. Diversify infested conifer stands by replanting with different nonsusceptible species. Most dwarf mistletoes attack only one or a few related pine family species. Prune out mistletoe as soon as it appears. For good control, remove branches at least 1 foot below the point of mistletoe attachment. Simply cutting off mistletoe from trees can reduce spread, but it won’t provide control. If it’s not possible to remove the infested trunk or a major branch, prune off the mistletoe and wrap the infested area of the tree with sturdy black polyethylene plastic secured with twine or tape to exclude light. Leave on for up to two years until the mistletoe dies, replacing plastic that becomes torn. Remove trees that are too severely infested to prune back. Although plant growth regulators temporarily remove mistletoe, these chemicals provide only short-term control and don’t kill mistletoe plants. A community effort is the best defense. Since mistletoe spreads easily from one tree to another across property lines, removing mistletoe from all trees on the street will have the greatest benefit. Some cities loan mistletoe-removal tools. Other communities pool resources to hire a tree service. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/W-LR-PSPP-FL.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/W-LR-PSPP-FL.001h.jpg?src=exchbt",
+        "caption": "Foliage and berries of broadleaf mistletoe."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/W-LR-ARSP-IF.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/W-LR-ARSP-IF.001h.jpg?src=exchbt",
+        "caption": "Dwarf mistletoes have small scaly leafs and attack conifers."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/W-LR-PSPP-MC.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/W-LR-PSPP-MC.004h.jpg?src=exchbt",
+        "caption": "If affected tree limbs are too large to be pruned out, wrap them with a few layers of wide, black polyethylene to exclude light."
+      }
+    ],
     "video": []
   },
   {
@@ -3533,7 +3734,18 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/peachleafcurlcard.html?src=exchbt",
     "contentQuickTips": "Peach leaf curl is a fungal disease that affects only peach and nectarine trees. Distorted, reddened foliage in spring is a distinctive symptom. New leaves and shoots thicken, pucker, and may later die and fall off. If you allow an infection to go untreated for several years, it can lead to tree decline. To prevent peach leaf curl, treat peach and nectarine trees with a preventive fungicide every year after leaves fall. Treating after symptoms appear won’t be effective. When planting, consider tree varieties resistant to the disease. Look for symptoms in spring. New leaves and shoots redden and pucker. Leaves may yellow or be covered with powdery gray spores; they might also drop. Cool, wet spring weather prolongs disease development. A second set of normal leaves will replace fallen leaves, and tree growth will appear normal after weather turns dry and warm (79° to 87°F), although spores that can infect next year’s growth may remain. Symptoms won’t appear later in the season. What about pesticides? The safest, effective fungicides available for backyard trees are copper soap (copper octanoate) or the fixed copper fungicide, copper ammonium. Apply either of these copper products with 1% spray oil to increase effectiveness. Bordeaux mixture is a home-made copper sulfate and lime mixture that must be carefully mixed up just prior to treatment. However, the raw materials are difficult to find. For more information, see Pest Notes : Bordeaux Mixture. The synthetic fungicide chlorothalonil is also effective. Treat trees with a fungicide in late fall and winter. The fungal spores that cause the disease spend the winter on twigs and buds and germinate in the spring. For effective control, treat trees just after leaves have fallen, usually late November or December. A second application in late winter before buds swell is advisable, especially in areas with high rainfall or during wet winters. Don’t apply fungicides during the growing season because they won’t be effective. Make fungicide applications effective and safe. All peach leaf curl fungicides have environmental and health risks. Wear protective clothing and follow label directions to stop drift or runoff. When you spray, thoroughly cover all branches and twigs until dripping to ensure all spores are killed. After many years of use, copper ions from copper-based fungicides can accumulate in soil. This can harm soil microorganisms and, through runoff, aquatic organisms. Take care when using these materials to avoid excessive runoff. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/D-SF-TDEF-BT.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/D-SF-TDEF-BT.002h.jpg?src=exchbt",
+        "caption": "Foliage damaged by peach leaf curl. "
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/D-SF-TDEF-FO.005.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/D-SF-TDEF-FO.005h.jpg?src=exchbt",
+        "caption": "Reddened and puckered leaves caused by peach leaf curl."
+      }
+    ],
     "video": []
   },
   {
@@ -4168,7 +4380,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/whitefliescard.html?src=exchbt",
     "contentQuickTips": "Whiteflies are tiny, sap-sucking insects that fly around plants when disturbed. Adults are white and may have darker markings on their wings, while nymphs (immature stage) are oval, legless, and don't move. Nymphs cause most of the damage. Several whitefly species occur in California. Natural enemies often keep them under control. Prevent whitefly problems using reflective mulches, reducing dusty conditions, choosing less susceptible plants, and avoiding pesticides that kill whitefly natural enemies. When management is required, consider using sticky traps, spraying insecticidal soaps or oils, or removing infested plants. Signs of a whitefly infestation can include: Tiny nymphs on the underside of leaves. Sticky honeydew on leaves, fruit, or beneath plants, or a covering of black sooty mold. Yellowing, silvering, or drying leaves that have whitefly nymphs on them. Deposits of white wax with certain whiteflies. Reduce whiteflies using traps or hand removal. Inspect new plants for whiteflies before bringing them into your garden. Prune out isolated infested leaves when you first detect them. Hose adults off plants with a strong stream of water. Hang store bought, sticky-coated yellow traps or make your own. Use one trap for every medium-size vegetable plant. Promptly destroy infested annuals when the flowering or fruiting ends. Use reflective mulch to protect young plants. Use shiny metallic-coated construction paper or reflective plastic mulch products. These mulches repel whiteflies while plants are small. Lay the product on bare soil, bury its edges with soil, and insert seedlings or seeds into holes in the mulch. Plastic mulches require drip irrigation underneath them; paper mulches may be sprinkle or furrow irrigated. Remove mulches when plants get large and temperatures get hot. Protect other insects that help reduce whitefly numbers. Many beneficials or “natural enemies” such as lacewings and lady beetles help control whiteflies. Look for signs of parasitization by mini-wasps, such as circular holes in nymphs or a change in color. Prevent dusty conditions since dust disrupts beneficials. Keep ants, which protect whiteflies from natural enemies, out of plants. Avoid using pesticides such as pyrethroids, organophosphates, carbaryl, or neonicotinoids. What about pesticides? Choose products that are least harmful to natural enemies—such as insecticidal soaps and oils—and combine their use with the other practices listed above. Good coverage, including the underside of leaves, is essential. Repeat applications might be required. Avoid using pesticides if natural enemies are present. Even the most toxic insecticides are only partially effective against whiteflies. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/B/I-HO-BTAB-AD.006.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/B/I-HO-BTAB-AD.006h.jpg?src=exchbt",
+        "caption": "Sweetpotato whitefly and nymphs."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/I-HO-TVAP-EP.004.html\n?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/I-HO-TVAP-EP.004h.jpg?src=exchbt",
+        "caption": "Examine empty nymphal cases for signs of parasitization. The T-shaped hole in the nymph (above) indicates a healthy adult whitefly emerged whereas an adult parasite emerged from the round hole (below)."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/C-NC-APPL-LC.018.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/C-NC-APPL-LC.018h.jpg?src=exchbt",
+        "caption": "A sticky barrier can keep ants out of plants."
+      }
+    ],
     "video": []
   },
   {
@@ -4291,7 +4519,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/thripscard.html?src=exchbt",
     "contentQuickTips": "When thrips feed, they distort or scar leaves, flowers, or fruit. Healthy woody plants usually tolerate thrips, although damage can become unattractive. Herbaceous ornamentals and developing fruits and vegetables can suffer more serious injuries. Manage thrips by combining good cultural care, pest exclusion, thrips-resistant plants, and less toxic insecticides that are softer on natural enemies. Thrips are tiny, slender insects with hairs on their wing margins. They are less than 1⁄20 inch long and their color varies depending on the species and life stage. Thrips hatch from eggs and develop through two feeding larval (nymphal) stages and two nonfeeding stages (prepupa and pupa) before developing into adults. Most pest thrips feed while hidden, often in buds and shoot tips or beneath sepals; you’ll often observe the damage before seeing the thrips. Greenhouse thrips and western flower thrips are two common pest species in landscapes. Certain thrips are beneficial predators of some insects and mites. Damage often isn‘t apparent until tissue grows and expands. Look for: Scabby, silvery to dark brown discoloration on fruit, leaves, or petals Dark specks of excrement on fruit or leaves Distorted, curled, galled, or dead shoot tips and leaves Check for thrips before taking action. Be certain that pest thrips are present and causing damage before taking control action. Harsh weather, inadequate plant care, pathogens, and other invertebrates can cause similar-looking damage. Shake foliage or flowers over white paper to see if this dislodges any thrips. Hang blue or bright yellow sticky traps to detect flying thrips. Thrips are difficult to control. Combine methods for best results. Find out what species you have and research the best approach; see Pest Notes: Thrips. Conserve parasites and predators by avoiding persistent pesticides. Avoid overwatering or applying nitrogen fertilizer, which can increase thrips populations. Prune off declining, injured, or infested plant parts. Use row covers or cages over small plants to exclude thrips and other flying insects. Cover soil with reflective mulch, which repels flying thrips, if foliage of growing plants covers less than about half of the soil surface. What about pesticides? Pesticides won’t restore the appearance of injured plant material. Plants remain damaged until injured tissue drops or is pruned off and new growth appears. Thrips are difficult to control with pesticides. Often pesticides won’t be effective unless you wait until the next season and spray new plant growth. Horticultural oils, insecticidal soaps, and pyrethrins can provide temporary control, especially for greenhouse thrips. Spinosad may be more effective. Pesticides alone rarely provide good control, so combine spraying with other methods. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/F/I-TS-FOCC-AD.010.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/F/I-TS-FOCC-AD.010h.jpg?src=exchbt",
+        "caption": "Adult western flower thrips."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/H/I-TS-HHAE-CO.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/H/I-TS-HHAE-CO.004h.jpg?src=exchbt",
+        "caption": "Greenhouse thrips adults (black) and nymphs (yellow)."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-TS-CFAS-CD.011.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-TS-CFAS-CD.011h.jpg?src=exchbt",
+        "caption": "Leaf bleaching and black speckling caused by thrips."
+      }
+    ],
     "video": [
       {
         "videoLink": "https://www.youtube.com/watch?v=oXkp90opkjU?src=exchbt",
@@ -4547,7 +4791,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/spiderscard.html?src=exchbt",
     "contentQuickTips": "Spiders are mostly beneficial because they feed on pest insects. However, many people think that all spiders are dangerous and aggressive. In California, the main spider capable of causing serious injury is the black widow, which generally remains outdoors and out of sight. Spiders seen out in the open during the day are unlikely to bite people. Focus pest management efforts on removing webs and hiding places. Pesticides are not generally recommended. What to know about spiders: The jaws of most spiders are too small to bite humans. Adult female black widows are the main spiders capable of seriously injuring people in California. They are shiny black with a red hourglass marking on the underside and are commonly found outdoors, in sheltered, dry, undisturbed areas such as wood piles and garages. Anyone bitten by a black widow spider should remain calm and seek medical advice. The brown recluse spider and the hobo spider do not live in California. Some other spiders bite when trapped in clothing or bedding, but the effect is usually no more severe than itching or the reaction to a bee sting. To prevent spiders from entering your house, take these steps: Seal home foundation cracks and other access holes. Inspect window and door screens for good seals to keep out spiders and the insects they prey on. Keep areas around home foundations free of clutter. Manage spiders using these tips: Indoors, regular housecleaning provides adequate spider control. Vacuum up the spider and its web. Alternatively, squash spiders or capture them in a jar and release them outside. Prevent clutter buildup that can provide spider hiding places both indoors and out. Remove spider webs from the exterior of the house with a broom or high pressure hose. Spiders and biological control: When removing spiders, don’t overlook the fact that spiders eat a large number and variety of nuisance and pest insects. Spiders also have natural enemies—wasps, other spiders, birds, reptiles, and others—that sometimes keep them from becoming too numerous.",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/L/I-AR-LMAC-AD.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/L/I-AR-LMAC-AD.004h.jpg?src=exchbt",
+        "caption": "Adult black widow spider showing the red hourglass mark on underside of abdomen."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-AR-CINC-AD.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-AR-CINC-AD.004h.jpg?src=exchbt",
+        "caption": "Sac spiders occur indoors and out and hide in silk tubes in corners or under bark."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/H/I-AR-HPLU-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/H/I-AR-HPLU-AD.001h.jpg?src=exchbt",
+        "caption": "Cellar spiders have long skinny legs and often hang upside down."
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=Bs-OUvY8L80?src=exchbt",
@@ -4615,7 +4875,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/snailsslugscard.html?src=exchbt",
     "contentQuickTips": "Pests in Gardens and Landscapes: Quick Tips Snails and Slugs Published 9/18 Read more and see videos on this topic Snails and slugs rank among our most despised garden pests. These slimy mollusks emerge from hiding at night and chew holes in leaves and flowers of many succulent garden plants and fruit. Slugs and snails are similar in structure and biology, except slugs lack the snails’ external spiral shell. Management requires a vigilant and integrated approach that includes eliminating moisture and hiding spots, trapping, setting up barriers, and handpicking. Baits can be helpful but by themselves don’t provide adequate control in gardens that contain plenty of shelter, food, and moisture. How do you know snails and slugs are causing damage? Because they feed at night and hide during the day, you might not observe these pests at first. Go out at night or in the early morning to view them in action. Other pests can cause holes in leaves, flowers, and fruit. Look for the shiny slime trails slugs and snails leave behind. What can be done to reduce snails and slugs? Remove daytime hiding places such as ivy, weedy areas, debris, and boards. Place your garden in the sunniest spot possible. Remove garden objects, plants, or ground cover that can serve as shady shelter. Reduce moist surfaces by switching to drip irrigation or by running sprinklers in the morning rather than later in the day. Make sure the garden is mollusk-free before planting, then erect a copper barrier around it. Use a 4- to 6- inch-wide band of copper, buried an inch below the soil and bent over at the top or attached around the edge of a raised bed. Consider snail-proof plants such as impatiens, geraniums, lantana, nasturtiums, and other plants with stiff leaves and highly scented foliage such as sage, rosemary, and lavender. How can I manage snails and slugs without using pesticides? Regularly remove snails from shelters such as fence ledges, undersides of decks, and meter boxes. Build a trap using a board raised off the ground by 1-inch runners. As mollusks collect under the board, scrape them off and destroy daily. Place beer traps in your garden and dispose of trapped snails and slugs daily. What about pesticides? Pesticide baits will not be very effective unless you also remove shelter, food, and moisture. Iron phosphate baits are safe for use around dogs, children, and wildlife. Ferric sodium EDTA is a newer active ingredient that works similar to iron phosphate. This product is not organically acceptable. Metaldehyde baits are especially poisonous to dogs and birds. Metaldehyde also loses its effectiveness rapidly in sunlight and after rain or irrigation. Irrigate before applying bait and apply in the evening on warm days when mollusks are active. Scatter, don't pile, bait around sprinklers and in moist, protected areas where mollusks travel. Always read pesticide labels before applying the product. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/H/I-SM-HASP-TR.006.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/H/I-SM-HASP-TR.006h.jpg?src=exchbt",
+        "caption": "Use a board that is raised off the ground about an inch to trap snails daily."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-SM-ARET-AD.022.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-SM-ARET-AD.022h.jpg?src=exchbt",
+        "caption": "Slugs and their damage."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/H/I-SM-HASP-AD.017.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/H/I-SM-HASP-AD.017h.jpg?src=exchbt",
+        "caption": "Brown garden snail."
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=W-ul631ut1s?src=exchbt",
@@ -4711,7 +4987,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/scalescard.html?src=exchbt",
     "contentQuickTips": "Pests in Gardens and Landscapes: Quick Tips Scales Published 4/17 Read more on this topic Scale insects suck plant juices and are pests of many trees and shrubs. Infestations can cause yellowing or premature dropping of leaves, sticky honeydew, and blackish sooty mold. Plant parts can distort or die back, depending on the species and abundance of scales. Management includes proper plant care, conserving natural enemies, and applying low-toxicity insecticides when needed. Most plants tolerate low to moderate numbers of scales. Damage resembles that of aphids and whiteflies. Abundant sticky honeydew excreted by soft scales and certain other species. Black sooty mold growing on the honeydew. Discolored, distorted, or dying leaves, twigs, or branches, especially with armored scales. Recognize scales: Circular, elongate, or oval discolorations or raised areas on bark, leaves, or fruit. Immobile or slow-moving bodies or coverings 1/25 to 1/4 inch long that lack an obvious head or appendages and don’t resemble most other insects. Distinguish the two most common types of scales—soft and armored. Armored scales are tiny and flat, have covers that usually can be removed from the body, and don’t secrete sticky honeydew. Common species include San José scale and California red scale. Soft scales are larger, excrete honeydew, and are more rounded and convex with covers that don’t lift off. Common species include black scale, lecanium scale, and brown soft scale. Learn the species or family name of your scale so you can identify effective controls. To reduce problems, use an integrated program. Provide plants with proper cultural care, especially irrigation. Encourage scale natural enemies. Look for predators such as lady beetles or lacewings and parasite emergence holes in scale covers. Use sticky barriers or insecticide baits to selectively control scale-tending ants. Consider replacing problem-prone plants. Most scales are highly specific to certain plants. What about insecticides? Don’t treat unless you have an intolerable or damaging problem. Avoid insecticides that injure natural enemies. For fruit trees and smaller plants, make a well-timed and thorough spray using horticultural oil during the dormant season or when scale crawlers are active in the growing season. For intolerable soft scale problems, especially on large trees, consider soil-applied imidacloprid. This material is not effective against some scales, including armored scales, and may cause outbreaks of cottony cushion scale. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-HO-AAUR-CD.018.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-HO-AAUR-CD.018h.jpg?src=exchbt",
+        "caption": "California red scale, an armored scale."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-HO-CHES-CO.015.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-HO-CHES-CO.015h.jpg?src=exchbt",
+        "caption": "Brown soft scale."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-HO-CHES-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-HO-CHES-AD.001h.jpg?src=exchbt",
+        "caption": "Exit hole in soft scale indicating parasitization."
+      }
+    ],
     "video": []
   },
   {
@@ -4858,7 +5150,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/spidermitescard.html?src=exchbt",
     "contentQuickTips": "Spider mites are common pests of fruit trees, vegetables, berries, vines, and ornamental plants. Mites are tiny and difficult to see. Although related to insects, mites are arachnids just like spiders and ticks. If leaves are stippled with white dots or have webbing, check the undersides to see if spider mites are present. Sprays of water, insecticidal oils, or soaps can be used for management. Spider mites have many naturally occurring predators that often limit their numbers. What to look for: To the naked eye, spider mites look like tiny, moving dots. Use a magnifying lens to see them. Adults are less than 1⁄20 inch long and have eight legs, an oval body, and two colored eyespots near the end of the head. Spider mites live in colonies, mostly on the under surfaces of leaves; a single colony can contain hundreds of mites. When numbers are high, dense webbing can cover leaves, twigs, and fruit. Mites cause damage by sucking cell contents from leaves. A small number of mites isn’t usually cause for concern, but very high populations can be damaging, especially to annual plants. Often, damage first appears as a stippling of light dots on the leaves; sometimes leaves turn a bronze color. Heavily infested leaves can turn yellow and drop off. Damage is usually most severe in hot, dusty conditions and on water-stressed plants. Protect predators of spider mites. Spider mites have many predators or “natural enemies”, which prevent them from becoming plant pests, especially when undisturbed by pesticide sprays. Key predators include predatory mites, which are about the same size as plant-feeding mites but have longer legs and are more active. Other common natural enemies include thrips, lacewings, and minute pirate bugs. Keep dust down. Plant ground covers, use mulches, and irrigate regularly. Avoid using insecticides that kill natural enemies. How do I control spider mites? Water plants sufficiently to avoid drought stress, which increases mites and mite damage. Most woody plants can tolerate low to moderate mite populations, and natural enemies are often abundant. If plants are infested, apply a water spray or mist to the undersides of leaves at least once a day. If you wish to use an insecticide, a good choice is an insecticidal oil or soap (or a combination of the two) applied so you completely cover the undersides of leaves. Be sure mites are present before treating. Don’t spray when plants are water-stressed or if it is very hot. Spider mites frequently become a problem after applying persistent insecticides such as carbaryl or pyrethroids. These insecticides are not very effective against mites and often kill off natural enemies and stimulate mite reproduction. What about pesticides? If an insecticide is needed, use an insecticidal oil or insecticidal soap (or a combination of the two), applied so you completely cover the undersides of leaves. Be sure mites are present before treating. Don’t spray when plants are water-stressed or if it is very hot. Spider mites frequently become a problem after applying persistent insecticides such as carbaryl or pyrethroids. These insecticides are not very effective against mites and often kill off predators and stimulate mite reproduction. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/I-AC-TTUR-AD.011.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/I-AC-TTUR-AD.011h.jpg?src=exchbt",
+        "caption": "Spider mites, seen here on strawberry leaves, cause leaf stippling or spotting."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/I-AC-TSPP-CD.091.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/I-AC-TSPP-CD.091h.jpg?src=exchbt",
+        "caption": "As seen on this potato leaf, spider mites may leave webs when numbers are high."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/M/I-AC-MOCC-AD.050.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/M/I-AC-MOCC-AD.050h.jpg?src=exchbt",
+        "caption": "Spider mites have many natural enemies including these western predatory mites."
+      }
+    ],
     "video": []
   },
   {
@@ -5023,7 +5331,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/psyllidscard.html?src=exchbt",
     "contentQuickTips": "Psyllids are aphidlike insects that secrete sticky honeydew. Some species produce white wax, distort leaves and shoots, stunt plant growth, or cause defoliation. Management includes providing proper plant care, conserving natural enemies of psyllids, and applying low-toxicity insecticides when needed. Most plants can tolerate low to moderate numbers of psyllids. Plants commonly affected include: Acacia, boxwood, eucalyptus, eugenia, pepper tree, and some other ornamentals Pear, potato, and tomato Damage resembles that from some aphids, scale insects, and whiteflies. Look for: Abundant sticky honeydew that psyllids excrete as they suck plant sap Black sooty mold growing on the honeydew Curly or powdery wax or, in certain species, crystallized covers called “lerps” Distorted or galled leaves or shoots or prematurely dropping foliage Learn to recognize psyllids. Adults are 1⁄10 to 1⁄5 inch long and hold their wings rooflike over their bodies. Adults are quite active, often jumping away when disturbed. Nymphs are flattened and oblong to round. Some can move, but pit-making species remain stationary. Nymphs of several species that feed on eucalyptus are hidden under hardened covers (lerps). To reduce problems, use an integrated approach. Provide plants with appropriate environmental conditions and cultural care, especially proper irrigation; conditions vary for each location and plant species. Choose plant species or cultivars that psyllids don’t infest or that are less susceptible to these pests, such as certain acacia and eucalyptus. Learn how to recognize and conserve psyllid parasites and predators. Certain psyllids can be controlled by these natural enemies. Avoid stimulating succulent growth by reducing fertilization and unnecessary pruning. For topiary eugenia, shear growing tips about every 3 weeks and leave the clippings as mulch on the ground for at least 3 weeks to allow beneficial parasites time to emerge. What about pesticides? Don’t treat plants with insecticides unless you have an intolerable psyllid infestation. Avoid insecticides that injure natural enemies. Common natural enemies of psyllids include lady beetles, pirate bugs, and parasitic wasps. If you must treat, select insecticidal soaps, oils, and other least-toxic products, or use a soil-applied systemic insecticide for especially intolerable problems. Systemic insecticides may be toxic to honey bees and other beneficial insects so avoid using them during bloom. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/G/I-HO-GBRI-CO.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/G/I-HO-GBRI-CO.001h.jpg?src=exchbt",
+        "caption": "Nymph (with lerp removed), eggs, adult, and lerp of eucalyptus lerp psyllid."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/I-HO-TEUG-CD.010.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/I-HO-TEUG-CD.010h.jpg?src=exchbt",
+        "caption": "Damage caused by eugenia psyllid."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/G/I-HO-GBRI-CO.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/G/I-HO-GBRI-CO.004h.jpg?src=exchbt",
+        "caption": "Lerp psyllids on eucalyptus."
+      }
+    ],
     "video": []
   },
   {
@@ -5111,7 +5435,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/pantrypestscard.html?src=exchbt",
     "contentQuickTips": "Pantry pests are insects such as certain moths or beetles that can attack almost any kind of stored food, from spices to cereal to chocolate. Pantry pests usually enter your home in an infested package of food. You might not notice these small insects until you see moths flying around your kitchen or beetles crawling in your food. Get rid of these pests by removing infested food, tightly sealing stored dry food, and thoroughly cleaning the area. Types of pantry pests and their damage. The Indianmeal moth is the most common moth found on food products in the home. Several species of beetles, including the warehouse beetle, the sawtoothed grain beetle, the red flour beetle, and the cigarette beetle, commonly attack a variety of foods. Infested food can be contaminated with insect hairs, droppings, webbing, and secretions. Food contaminated with warehouse beetle hairs can irritate your mouth, esophagus, and digestive tract. Pantry pests can introduce microbes that rot food, especially in warm, humid conditions. Detecting pantry pests. Adult moths or beetles are usually easier to spot than the larvae. Inspect all packages, especially those that have been opened. Webbing in tight places of a package or tiny holes in a food container are signs of a pantry pest infestation. Use a pheromone trap labeled for pantry pests to detect them. By the time you spot a pantry pest, it has usually spread to other food packages. Preventing a pantry pest infestation. Store food in containers with tight-fitting lids, not plastic bags. Store bulk goods like pet food in airtight containers. Keep certain infrequently used food like flours, spices, and grains in a freezer if possible. Wash old containers before filling them with new food. Don’t mix old and new food together. Clean shelves, bins, and other food storage areas regularly. Cleaning up a pantry pest infestation. Throw away any food that has even the slightest evidence of infestation. Vacuum corners and crevices of cupboards to get rid of eggs and pupae, and wash shelves with soap and water. Pantry pests are capable of living for many weeks without food; continue using pheromone traps to detect pests after the source of the infestation has been removed. What about pesticides? Insecticides are not recommended for controlling any pantry pests. Spraying pesticides on or near food may cause greater harm to you and your family than would pantry pests. Even if you have a large infestation of pantry pests, removing infested material and following the guidelines above will provide effective control. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/I-LP-PINT-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/I-LP-PINT-AD.001h.jpg?src=exchbt",
+        "caption": "Adult Indianmeal moth."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/T/I-CO-TCAS-AD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/T/I-CO-TCAS-AD.001h.jpg?src=exchbt",
+        "caption": "Adult red flour beetle."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/I-LP-PINT-TR.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/I-LP-PINT-TR.001h.jpg?src=exchbt",
+        "caption": "Use a pheromone trap to detect pantry pests."
+      }
+    ],
     "video": [
       {
         "videoLink": "https://www.youtube.com/watch?v=8Zibw_m7hj8?src=exchbt",
@@ -5183,7 +5523,28 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/mosquitocard.html?src=exchbt",
     "contentQuickTips": "Mosquito adults are small flying insects that bite people and animals and can spread diseases. The females require blood from humans or other animals to develop eggs. Mosquitoes can transmit disease-causing organisms such as West Nile Virus. Certain mosquito larvae live and grow in ponds, objects containing standing water, and other aquatic sites. Decrease your chances of getting bitten by reducing standing water around your home, using repellents, and wearing protective clothing when outdoors. Minimize mosquito breeding habitats. Empty water from unused garden pots and other objects. Store containers upside down, cover, or dispose of them so mosquitoes can’t lay eggs. Change water in pet dishes, watering troughs, and bird baths every week. Avoid overwatering, which can lead to standing water. Keep litter and garden debris out of street gutters. Remove debris from rain gutters and downspouts at least once a year. Seal rain barrels and keep all filters and prefilters clean and free of moisture-retaining debris. Inspect regularly for leaks. For ponds, remove excess vegetation, stock with mosquito-eating fish, or use Bacillus thuringiensis (Bt) products such as Mosquito Dunks, Plunks, or Bits, which contain a bacterial agent that kills mosquito larvae but doesn’t affect people, other animals, or plants. Maintain water quality in swimming pools with chemical treatments. Keep water off swimming pool covers. Cover or drain water from plastic pools when not in use so mosquitoes can’t lay eggs. Fill open tree holes with sand or mortar. What is the West Nile virus? West Nile Virus is spread by mosquitoes that get the virus from infected birds. Once infected, mosquitoes then transfer the virus to humans and other animals. Infected humans can become very ill. The disease usually is most serious in children, people with weakened immune systems, and the elderly. For more information about West Nile Virus, visit the California Department of Health Services. The best defense is to avoid mosquito bites! Be sure doors and windows are properly screened. Avoid being outdoors at times of the day when mosquito activity is high in your area, especially at dawn and dusk. Wear long-sleeved shirts, long trousers, socks, and a hat if you must be outside when mosquitoes are present. Use insect repellents containing DEET, picaridin, or the slightly less effective Oil of Lemon Eucalyptus (PMD). Repellents containing other ingredients may be less effective and must be reapplied frequently. Always follow label directions. Outdoor insecticide sprays can temporarily reduce the number of adult mosquitoes but have no lasting effect. See Pest Notes: Mosquitoes for more details, or contact your local mosquito abatement or vector control district for more information about or assistance with managing these insects.",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-DP-CTAR-EG.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-DP-CTAR-EG.001h.jpg?src=exchbt",
+        "caption": "Egg rafts."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-DP-CTAR-LV.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-DP-CTAR-LV.001h.jpg?src=exchbt",
+        "caption": "Culex mosquito larvae."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-DP-CULI-PU.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-DP-CULI-PU.001h.jpg?src=exchbt",
+        "caption": "Mosquito pupa."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-DP-AFRE-AD.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-DP-AFRE-AD.002h.jpg?src=exchbt",
+        "caption": "Adult mosquito."
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=eiQXLZnU7lA?src=exchbt",
@@ -5234,7 +5595,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/mealybugscard.html?src=exchbt",
     "contentQuickTips": "Mealybugs are small, soft, wax-covered insects that are common problems on houseplants and on outdoor plants in areas with mild winters. Usually found in groups or colonies, mealybugs suck plant sap and often produce sticky honeydew which can cover leaves. Manage mealybugs by purchasing pest-free plants, discarding infested plants, and relying on biological control outdoors. What do mealybugs look like? Most adult mealybugs are wingless females with oval, segmented bodies covered with wax. Males have wings but are rarely seen. Newly hatched mealybug immatures (nymphs) lack wax and can move around plants but soon settle down and produce a waxy covering. Different mealybug species can be distinguished by the length of the waxy filaments around their bodies. They may be confused with cottony cushion scale, woolly aphids, soft scales, and whiteflies, which also produce wax and honeydew. Mealybugs are sometimes hard to see because they often live in protected areas of plants such as in the crown of a plant, in branch crotches, or on stems near the soil. Signs and damage from mealybugs. Signs of an infestation might include white, cottony egg masses on plants, wax-covered plants, sticky honeydew, black sooty mold growing on top of honeydew or ants feeding on honeydew. Mealybugs suck sap, weakening the plants. High populations can slow plant growth and cause leaf drop. Although many plants are attacked, citrus, grapes, bird of paradise, cactus, coral bells, cypress, fuchsia, hibiscus, mimosa, and indoor plants are the most commonly infested. To reduce problems, use a combination of practices. Inspect plants thoroughly before bringing them into your home and landscape and discard infested ones. If you find mealybugs on a houseplant or in your garden, hand pick or prune them out. If the infestation is serious, remove the whole plant. Once you’ve found the pest, continue monitoring plants, pots, and stakes on a regular basis. Reduce large exposed populations with a high-pressure spray of water, repeating this every few days as needed. Outdoors, protect natural enemies of mealybugs such as parasitic wasps, predatory insects (e.g. lady beetles and lacewings), and spiders. Use nitrogen fertilizer correctly. Over application combined with regular irrigation stimulates new plant growth where mealybugs prefer to lay eggs. For serious problems on indoor plants, a solution of 70% (or less) isopropyl alcohol and water could be used to clean off mealybugs. Test on plants for phytotoxicity first and reduce concentration as necessary. What about pesticides? The protective waxy cuticle of adult mealybugs and their tendency to hide makes contact insecticides less effective. Insecticidal soaps, horticultural oils, and neem oil applied directly to immature mealybugs can reduce numbers. Other insecticides labeled for use against mealybugs can be harmful to beneficial insects and should be avoided in the garden. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/I-HO-PCIT-CO.003.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/I-HO-PCIT-CO.003h.jpg?src=exchbt",
+        "caption": "Citrus mealybugs."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/I-HO-PAFF-CO.011.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/I-HO-PAFF-CO.011h.jpg?src=exchbt",
+        "caption": "Obscure mealybug colony."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/R/I-HO-RFAL-AD.004.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/R/I-HO-RFAL-AD.004h.jpg?src=exchbt",
+        "caption": "Ground mealybug."
+      }
+    ],
     "video": []
   },
   {
@@ -5534,7 +5911,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/lawninsectscard.html?src=exchbt",
     "contentQuickTips": "Contrary to popular belief, insects are not a common cause of lawn damage in California. Poor lawn care, especially incorrect watering or planting grass varieties not suited to your area, is the most likely cause of unhealthy or dying lawns. Turfgrass diseases and dog urine also produce similar damage. Never apply an insecticide unless a damaging level of a known insect is confirmed. Insecticides are only effective if applied at the right time and in the right manner. Many insecticides also kill good bugs—use them only as a last resort. Keep your lawn healthy. Plant grass species best suited for your area. Over-seed thin areas in the spring and fall. Water deeply and infrequently. Perform routine maintenance on sprinkler heads. Apply fertilizer appropriately. Aerate your lawn annually; remove thatch if it exceeds 1/2 inch. Cut only 1/3 of grass height at each mowing and keep lawnmower blades sharp. How do you know if insects are causing damage? Brown spots in lawns can have different causes. Over- or under-watering, plant disease, over-application of fertilizer/herbicide or chemical spill, and dog urine all cause similar looking damage. Before applying an insecticide, confirm that insects are present at high enough numbers to cause damage. For grubs, dig around roots. You do not need to treat if there are 5 or fewer grubs per square foot. For other insects, perform a drench test (described on reverse). If you do not find live pest insects at high levels, do not treat with pesticides. What about pesticides? Before applying insecticide, try to alter your lawn environment to discourage the pest. If an insecticide is required, select the least toxic product available for the pest you are targeting. Time treatments appropriately to be effective. Insect-attacking nematodes control caterpillars or grubs. Find out which insecticide targets your pest: Bacillus thuringiensis (Bt) and spinosad are least toxic pesticides that kill caterpillars. Azadirachtin controls cutworms, armyworms, and larvae of lawn moths. Imidacloprid controls young lawn grubs but can injure bees on flowering weeds and earthworms. Avoid products containing carbaryl and pyrethroids (e.g., bifenthrin). These are broadly toxic insecticides that kill chinch bugs, grubs, lawn moths, and cutworms, but also kill beneficial insects and pollute waterways. How to perform a drench test: Measure out an area of lawn that equals 1 square yard. Mix 3–4 tablespoons of dishwashing liquid to 2 gallons of water. Evenly apply the 2 gallons to 1 square yard of your lawn. Watch the area for 10 minutes and count the number of caterpillars that rise to the surface. Treat the area only if insect numbers exceed 5 armyworms or cutworms or 15 lawn moth larvae per square yard. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-CO-CBOR-LV.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-CO-CBOR-LV.002h.jpg?src=exchbt",
+        "caption": "White grub (masked chafer) larvae."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/P/I-LP-PSAU-LV.015.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/P/I-LP-PSAU-LV.015h.jpg?src=exchbt",
+        "caption": "Cutworm larva."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/S/S-TG-SCEN-MO.020.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/S/S-TG-SCEN-MO.020h.jpg?src=exchbt",
+        "caption": "Soil drench test. "
+      }
+    ],
     "video": []
   },
   {
@@ -5883,7 +6276,28 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/giantwhiteflycard.html?src=exchbt",
     "contentQuickTips": "Giant whiteflies can cover a beautiful plant with white fuzzy wax and sticky honeydew, turning it into an unsightly mess. First discovered in San Diego County in October 1992, this whitefly has spread northward into other areas of California. Although affected plants may be weakened, they rarely die. To manage giant whitefly, wash off plants with water and encourage natural enemies. What plants are affected? Many ornamentals including hibiscus, giant bird of paradise, begonia, Xylosma. Fruit trees including citrus, avocado, mulberry and banana. Look or these damage symptoms on affected plants: Long, white, waxy filaments produced by the whitefly give the leaf surface a bearded appearance. These hairlike strands may be mistaken for a fungal infection. Large amounts of sticky honeydew excreted by the whitefly as it feeds on plant sap. Black sooty mold growing on the honeydew. How to recognize the whitefly: Adults are small (3/16 inch long), white with light brown markings on their wings, and usually found in groups on the undersides of leaves. Nymphs are yellowish, small, oval, have no legs, and don't move. To reduce problems, use an integrated program that includes: Removing infested leaves. Washing giant whiteflies off leaves with a strong stream of water. Planting species less susceptible to giant whitefly. Avoiding insecticides that injure natural enemies, such as lacewings, lady beetles, syrphid flies, and parasitic wasps. What about insecticides? Don’t use insecticides if beneficial insects, including parasites and predators, are present in the area. To confirm the presence of parasitic wasps, use a magnifying glass to look for parasite exit holes on giant whitefly nymphs or darkened nymphs (see photo). If you do choose to use an insecticide, select least toxic products such as insecticidal soaps or oils. Spray the undersides of the leaves where whitefly colonies are found. Remember to follow label directions. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-HO-ADUG-AD.003.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-HO-ADUG-AD.003h.jpg?src=exchbt",
+        "caption": "Adult giant whiteflies."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-HO-ADUG-CO.003.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-HO-ADUG-CO.003h.jpg?src=exchbt",
+        "caption": "Giant whitefly eggs, nymphs and adults on the underside of a leaf."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-HO-ADUG-CD.007.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-HO-ADUG-CD.007h.jpg?src=exchbt",
+        "caption": "Beardlike wax strands."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-HO-ADUG-EK.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-HO-ADUG-EK.001h.jpg?src=exchbt",
+        "caption": "Healthy yellow whitefly nymph surrounded by black ones that have been parasitized, including one with an exit hole at right."
+      }
+    ],
     "video": []
   },
   {
@@ -6000,7 +6414,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/fleascard.html?src=exchbt",
     "contentQuickTips": "Fleas are annoying to people and pets, especially during spring and early summer when their numbers tend to increase dramatically. The common flea in California is the cat flea. Despite its name, this flea attacks both dogs and cats and will also bite humans. To keep fleas out of your home, control fleas on your pet and regularly clean pet sleeping areas. On the pet: A number of very effective and safe products for flea control on the pet are available. You must supplement pet treatments with regular cleaning of your home and periodic combing with a pet flea comb to detect new infestations. Spot-on formulations are applied to the animal's coat. Use as directed on the label. These are a vailable from veterinarians, over-the-counter, or online. System ic flea control products, available from vets, are given as a pill or food treat . Flea collars containing imidacloprid and flumethrin are effective against fleas and ticks. Collars with insect growth regulators (IGRs) affect eggs and immature fleas. Be sure to choose collars containing methoprene or pyriproxyfen. Flea shampoos and soaps, powders and dusts, spray-on liquids, and dips are less effective and more hazardous to pets, people, and the environment than the three types of products above. In the yard: Outdoor treatments are occasionally needed. If your pet regularly sleeps outside and flea numbers are high, these areas can be treated with a spray containing pyriproxyfen. If possible, open sleeping areas to sunlight by removing low hanging vegetation. Immature fleas are unlikely to survive in areas with exposure to sunlight. Some wild animals can lead to outdoor flea problems as well, including feral cats, opossums, squirrels, and coyotes, so measures to limit their presence are important. Inside the home: Whether or not you are aware of fleas in your home, regularly vacuum and launder areas where your pet rests . If you have a major flea problem, treat your pet with one of the options above and follow the steps below. Locate heavily infested areas (usually areas where the pet rests) and concentrate treatment there. Wash throw rugs and pet bedding. Vacuum upholstered furniture, cleaning under cushions and in crevices. Vacuum carpets, especially beneath furniture. Use a hand sprayer or aerosol to treat all carpets and unwashable upholstered furniture with an insecticide that contains an IGR (methoprene or pyriproxyfen). This treatment kills larvae but not pupae, so fleas may continue to emerge for up to 2 weeks. Over the next 2 weeks, vacuum regularly to remove adult fleas that emerge from pupae. Do not reapply pesticides. Seal vacuum bags and discard them so fleas don't escape. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pni020-2.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/PESTNOTES/IMAGES/pni020-2.gif?src=exchbt",
+        "caption": "Flea life cycle (egg not shown)."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-SP-CFEL-AD.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-SP-CFEL-AD.002h.jpg?src=exchbt",
+        "caption": "The adult flea feeds directly on animals."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-SP-CFEL-PU.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-SP-CFEL-PU.001h.jpg?src=exchbt",
+        "caption": "Two cat flea pupae."
+      }
+    ],
     "video": []
   },
   {
@@ -6276,7 +6706,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/earwigscard.html?src=exchbt",
     "contentQuickTips": "While their prominent tail-end pincers might look ferocious, earwigs aren’t harmful to people. Earwigs can seriously damage seedling vegetables and chew holes in annual flowers, soft fruit, and corn silks, but earwigs also play a beneficial role by feeding on aphids and other insects. Earwigs feed at night and hide during the day in dark, cool, moist places in the yard or within flowers or vegetables. To manage earwigs, reduce hiding places and moisture, and employ a vigilant trapping program. Should you be concerned about earwigs in your garden? Yes, if you are growing vegetables, herbaceous flowering plants, sweet corn, or plants with soft fruits such as strawberries and apricots. No, if your garden is primarily lawn, trees, and woody ornamentals or native plants. Reduce outdoor hiding places. Eliminate dense undergrowth of vines, ground cover, and weeds around vegetable and flower gardens. Prune away fruit tree suckers. Remove leaves, boards, boxes, trash, and other debris from planting areas. Move flower pots and other garden objects and structures that can harbor earwigs. Check plastic or organic mulches and remove them to limit earwig numbers. Trap earwigs until they’re gone. Trap earwigs with rolled newspaper, bamboo tubes, or short pieces of hose. Place these traps on the soil near plants just before dark, and shake accumulated earwigs into a pail of soapy water in the morning. Fill a low-sided can with vegetable oil and a drop of bacon grease or fish oil to attract and trap earwigs. Daily trapping will reduce earwig populations to tolerable levels. What other ways can I control earwigs outside? Drip irrigate where possible to reduce surface moisture. Keep earwigs out of stone fruit trees with a band of sticky substance such as Tanglefoot around the trunk, and harvest fruit as soon as it ripens. Insecticides should rarely be needed. How can I control earwigs inside my home? Earwigs might seek refuge indoors when conditions outside are too dry, too hot, or too cold. Large numbers of earwigs can be annoying, but present no health hazard. If earwigs invade your home, follow these steps: Sweep up or vacuum invading earwigs. Seal cracks or other entry points. Remove debris from gutters and around entryways. Keep water and moisture away from structures. Replace white outdoor lights with yellow ones, which are less attractive to earwigs. Indoor applications of pesticides aren’t recommended. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/F/I-DM-FAUR-AD.005.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/F/I-DM-FAUR-AD.005h.jpg?src=exchbt",
+        "caption": "Adult earwig."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/F/I-DM-FAUR-CD.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/F/I-DM-FAUR-CD.001h.jpg?src=exchbt",
+        "caption": "damage caused by earwigs. (Note: Other pests can cause similar-looking damage.)"
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/F/I-DM-FAUR-TR.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/F/I-DM-FAUR-TR.001h.jpg?src=exchbt",
+        "caption": "Earwig trap made from low-sided can filled with vegetable oil. "
+      }
+    ],
     "video": [
       {
         "videoLink": "http://www.youtube.com/watch?v=42yz-hV0sSI?src=exchbt",
@@ -6437,7 +6883,23 @@
     "tablePestNote": [],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/codlingmothcard.html?src=exchbt",
     "contentQuickTips": "Codling moth, the infamous “worm” in the apple, is difficult to manage in the home orchard. Soon after hatching, caterpillars bore into apples, pears, or walnuts and feed, leaving reddish-brown droppings (frass). Early-maturing fruit varieties are less likely to suffer damage. Use an integrated pest management (IPM) approach that combines several of the methods described below. Trees heavily infested every year require carefully timed sprays. Codling moth life cycle: Mature larvae overwinter under bark in cocoons and pupate in spring. Adult moths emerge in mid-March to April and mate after sunset temperatures exceed 62°F. Tiny disc-shaped eggs are laid on fruit or leaves. Hatching larvae immediately bore into fruit. Larvae feed within fruit until mature then drop to the ground to pupate in soil or debris or under tree bark. Two to four generations occur per year in California. Reduce codling moths with sanitation practices. Promptly remove infested fruit from trees. Look for worm entry points (“stings”) marked by tiny mounds of reddish-brown frass. Rake up and destroy dropped fruit as soon as it falls, especially in May and June. Sanitation alone won’t control the pest. Bagging protects fruit without chemical sprays, even when infestations are severe. Bag when fruit is 1⁄2 to 1 inch in diameter, four to six weeks after bloom. Cut a 2-inch slit in the bottom of a standard lunch bag, thin fruit to one per cluster, slip the fruit through the slit, and staple the bag shut. Remove bags just as fruit begins ripening. Use insecticides when infestations are severe. Codling moth granulosis virus (sold as Cyd-X) is a safe biological pesticide that won’t harm beneficials or bees. Add 1% horticultural oil to increase effectiveness. Apply every seven days after eggs hatch, at least three or four times per generation. Spinosad is a low-toxicity pesticide made more effective by adding 1% horticultural oil. Apply every 10 days after eggs hatch, or about three times per generation. Carbaryl is effective when properly timed at 14- to 21-day intervals but is very toxic to natural enemies, honey bees, and other nontargets and can cause water quality problems. Combining low-toxicity insecticides with nonchemical methods is the most environmentally sound approach. Insecticides are effective only when sprays are precisely timed to kill caterpillars just as they hatch. Hang a pheromone trap in your tree in March, and check it every few days for moths. Once moths are found and sunset temperatures exceed 62°F, start calculating degree-days following the instructions in Pest Notes: Codling Moth. Degree-days will help you determine when eggs will hatch or when to start looking for “stings” on fruit that indicate larvae have hatched and are entering fruit. Start applying insecticides as soon as degree-day calculations indicate eggs are hatching (250-300 degree-days after moths are caught in traps) or as soon as you see stings. Use new stings or degree-day calculations to initiate sprays for second and third generations. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-LP-CPOM-CD.029.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-LP-CPOM-CD.029h.jpg?src=exchbt",
+        "caption": "Codling moth larva in fruit."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-LP-CPOM-LV.012.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-LP-CPOM-LV.012h.jpg?src=exchbt",
+        "caption": "Newly hatched larva and eggs."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/C/I-LP-CPOM-CD.030.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/C/I-LP-CPOM-CD.030h.jpg?src=exchbt",
+        "caption": "Sting on fruit indicates where codling moth larva has entered."
+      }
+    ],
     "video": []
   },
   {
@@ -6482,7 +6944,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/cockroachescard.html?src=exchbt",
     "contentQuickTips": "Cockroaches thrive in both indoor and outdoor environments that provide food, water, and shelter. During the day, roaches hide in dark, moist areas like cracks, water meter boxes, sewers, and crawl spaces. They come out at night to feed. Good sanitation and exclusion are important for effective control; pesticides alone will not solve cockroach problems. When using insecticides, baits provide better control than sprays. Identify the cockroach species before taking action. Effective management options vary according to species. Cockroach sticky traps are useful in catching roaches for identification. Some cockroaches live outdoors but can invade indoor spaces (American, oriental, and Turkestan) while others live and breed entirely indoors (German and brownbanded). Remove food and water sources. Store food in tightly sealed containers. Keep trash in containers with tight lids. Fix plumbing and irrigation leaks to reduce sources of water. Regularly vacuum indoor cracks and crevices, clean behind kitchen appliances, and clean floors and counters, since even tiny crumbs or liquids provide good food sources. Exclude roaches and remove their hiding places. Seal cracks and other openings in walls, under and around doors, and around windows to prevent invaders coming in from outside. Use door sweeps and weather stripping on doors and windows. Seal cracks in false bottoms of cupboards and other indoor hiding places. Remove old papers, cardboard boxes, and other clutter, especially in kitchens and bathrooms. Use traps to identify and track cockroach populations. Cockroach sticky traps are available in garden and hardware stores. Place traps on the floor around edges of walls, in cupboards, and other places where you think roaches are foraging. Place traps near exterior doors to catch invading outdoor species. Check traps daily until you can tell where the most cockroaches are being caught. What about pesticides? Avoid using foggers, bombs, or aerosol sprays; these products can be hazardous and may repel and disperse cockroaches to other areas without actually killing them. Insecticide sprays do not provide long-term control. Sprays are not necessary if cleanup and removal of hiding places is combined with effective baits and boric acid powder. Boric acid powders and desiccant dusts may be applied within hollow walls, under refrigerators, and other undisturbed hiding places. This approach is very effective but may require a pest control professional. These materials must remain dry and undisturbed in order to be effective. Insecticide gels and bait stations placed near cockroach hiding areas can be effective if other food sources are removed. It may be 7 days or longer before you see fewer cockroaches. To control outdoor cockroaches, place baits in water meter boxes, drains, or under concrete slabs. Contact a pest control professional for very serious infestations. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/B/I-OT-BGER-CO.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/B/I-OT-BGER-CO.002h.jpg?src=exchbt",
+        "caption": "German cockroach adult (top) and nymph."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/B/I-OT-BORI-CO.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/B/I-OT-BORI-CO.002h.jpg?src=exchbt",
+        "caption": "Various life stages in oriental cockroach colony."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/B/I-OT-BLAT-TR.003.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/B/I-OT-BLAT-TR.003h.jpg?src=exchbt",
+        "caption": "Dead cockroaches caught on a sticky trap."
+      }
+    ],
     "video": []
   },
   {
@@ -6681,7 +7159,23 @@
     ],
     "urlQuickTip": "http://ipm.ucanr.edu/QT/carpetbeetlescard.html?src=exchbt",
     "contentQuickTips": "Carpet beetles can be found in homes, warehouses, museums, or anywhere else fabric, furs, and feathers are present. The larvae feed on a variety of animal products like wool, leather, and silk, often causing serious damage. Manage carpet beetles by keeping them out of your home and by thoroughly cleaning and removing infested items. What do carpet beetles look like? Adult carpet beetles are small (about 1/8 to 1/10 inch long) and have round bodies and short antennae. They range in color from black to a mix of white, brown, and yellow, depending on the species and age. Larvae are slightly longer than adults and look like fuzzy or hairy maggots. In California, there are three common species: the varied carpet beetle, the furniture carpet beetle, and the black carpet beetle. How did carpet beetles get in my house? Carpet beetle adults are pollen feeders and are found on flowers with abundant pollen like crape myrtle, spiraea, and buckwheat. People often bring carpet beetles into their homes on cut flowers from the garden. Adults can fly in through open windows or doors without screens. Preventing and excluding carpet beetles. Check window screens, doors, and vents to make sure there are no gaps or holes. Look for beetles on windowsills since they are attracted to light. Inspect cut flowers for beetles before bringing them inside. Store clean, pest-free susceptible items in sealed, airtight containers. Protect fabrics by keeping them clean since food and perspiration residues attract carpet beetles. Inspect stored woolens, linens, and furs, and air these items annually in the sun. Create a pest-free storage place in a seldom-opened closet by sealing cracks around the doors, in the walls, and ceiling. Cedar chests are not reliable or effective at repelling pests and the oil dissipates over time. Controlling carpet beetles already in the house. Clean up accumulations of lint, hair, and dead insects. Throw out badly infested items. Remove old spider webs which can harbor infestations. Regularly clean and vacuum rugs, draperies, and upholstered furniture to remove carpet beetles. Wash infested items in hot water or dry-clean them to kill all stages of the insect. What about pesticides? Insecticides may not be necessary if food sources are removed and areas kept clean. For infested items that can’t be washed, spot treat with an insecticide specifically labeled for carpet beetles. Don’t spray clothing or bedding with insecticides. Inspect carpets and spray both sides if live larvae are found. Treat attics, wall voids, and other inaccessible places with an insecticidal dust labeled for carpet beetle treatment. Take precautions to avoid inhaling the material. ",
-    "imageQuickTips": [],
+    "imageQuickTips": [
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-CO-AFLA-LV.001.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-CO-AFLA-LV.001h.jpg?src=exchbt",
+        "caption": "Furniture carpet beetle nymph."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-CO-AVER-AD.002.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-CO-AVER-AD.002h.jpg?src=exchbt",
+        "caption": "Varied carpet beetle nymph and adults."
+      },
+      {
+        "link": "http://ipm.ucanr.edu/PMG/A/I-CO-AUNI-AD.005.html?src=exchbt",
+        "src": "http://ipm.ucanr.edu/PMG/IMAGES/A/I-CO-AUNI-AD.005h.jpg?src=exchbt",
+        "caption": "Black carpet beetle."
+      }
+    ],
     "video": []
   },
   {

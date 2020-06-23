@@ -94,7 +94,19 @@
         }
       },
       "video": {
-        "type": "nested"
+        "type": "nested",
+        "properties": {
+          "videoLink": {
+            "type": "text"
+          },
+          "videoTitle": {
+            "type": "text"
+          },
+          "videoTitle_vector": {
+            "type": "dense_vector",
+            "dims": 512
+          }
+        }
       },
       "ndl_damage_vector": {
         "type": "dense_vector",
