@@ -103,6 +103,24 @@ pylint -j 4 **/*.py  # use 4 cores to run pylint on all project code
 
 Linting is configured to accept a line length of 88 characters per line.
 
+## Creating a 'release'
+
+When a new version of the bot is shared with guest testers or customers, it is good to tag the master branch with a version number, using [semantic versioning](https://semver.org/).
+
+This is the procedure to create an annotated tag in git:
+
+```bash
+git checkout dev                        # for now, we release from the dev branch
+git pull                                # pull the latest
+git tag -l                              # get a list of the tags
+git tag -a 0.0.1 -m "Initial release"   # Define release tag
+git show 0.0.1                          # to get details about this tag
+git push origin --tags                  # push all tags that are not already there
+
+```
+
+
+
 ## To run the bot:
 
 Use `rasa train` to train a model.
