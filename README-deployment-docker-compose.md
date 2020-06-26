@@ -77,6 +77,9 @@ ipmdata-index-name: "ipmdata"
 #
 
 # Build the image
+# Option 1: using docker-compose
+sudo docker-compose build
+# Option 2: using docker
 sudo docker build . -t askchatbot-action-server:0.0.1
 
 # quickly test that it comes up ok
@@ -105,15 +108,40 @@ curl -sSL -o install.sh https://storage.googleapis.com/rasa-x-releases/0.29.1/in
 sudo bash ./install.sh
 ```
 
+#### Define isolated docker environment ([docker-compose docs](https://docs.docker.com/compose/#multiple-isolated-environments-on-a-single-host)]
+
+To be able to deploy multiple versions on the same host, use `COMPOSE_PROJECT_NAME` and another `NGINX` port:
+
+```bash
+cd /etc/rasa-0.0.2
+
+sudo vi .env
+>
+SKCHATBOT_VERSION=0.0.1
+COMPOSE_PROJECT_NAME=${ASKCHATBOT_VERSION}
+NGINX_PORT=8001
+
+# outcomment default ports for nginx
+sudo vi docker-compose.yml
+>
+nginx:
+#   ports:
+#     - "80:8080"
+#     - "443:8443"
+```
+
+
+
 #### Select Rasa & Rasa X versions
 
 ```bash
 cd /etc/rasa
 
 sudo vi .env
-RASA_X_VERSION=0.29.1
-RASA_VERSION=1.10.2
-RASA_X_DEMO_VERSION=0.29.1
+RASA_X_VERSION=0.29.3
+RASA_VERSION=1.10.3
+RASA_X_DEMO_VERSION=0.29.3
+
 ```
 
 #### Define action server, with extra hosts for elasticsearch
@@ -125,7 +153,7 @@ sudo vi docker-compose.override.yml
 version: '3.4'
 services:
   app:
-    image: askchatbot-action-server:0.0.1
+    image: askchatbot-action-server:0.0.2
   extra_hosts:
     - "ask-chat-db-dev.i.eduworks.com:10.1.100.49"
 ```

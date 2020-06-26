@@ -8,12 +8,13 @@ intents:
   - intent_yes
   - intent_no
   - intent_chatgoal
-  - intent_question
+  - intent_inform
   - intent_rating
   
 
 entities:
   - chatgoal_value
+  - pest_name
   - rating_value
   
 slots:
@@ -33,7 +34,11 @@ slots:
     values:
     - yes
     - no
+  pest_name:
+    type: unfeaturized
   pest_problem_description:
+    type: unfeaturized
+  cause_damage_question:
     type: unfeaturized
   pest_causes_damage:
     type: unfeaturized
@@ -41,6 +46,7 @@ slots:
     type: unfeaturized
   rating_value:
     type: unfeaturized  
+  
 
 actions:
   - action_session_start_custom
@@ -96,7 +102,7 @@ responses:
       title: "Yes"
     - payload: /intent_no
       title: "No"
-    text: Is it causing any damage?
+    text: "{cause_damage_question}"
     
   utter_ask_pest_damage_description:
   - text: Please describe the damage

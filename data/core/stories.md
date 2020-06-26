@@ -40,7 +40,7 @@
 * intent_rating
     - action_tag_rating
     
-## chatgoal pest problem with result
+## chatgoal pest problem without result
 * intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
     - slot{"chatgoal_value": "I_have_a_pest"}
     - form_query_knowledge_base
