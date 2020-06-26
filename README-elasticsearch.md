@@ -59,8 +59,6 @@ ipmdata-index-name: "ipmdata"
 
 # ingest the ipmdata
 cd <project-root>/scripts/elasticsearch/src
-$ vi create_es_index.py
-INDEX_NAME = 'impdata'
 
 python3 -m create_es_index
 
