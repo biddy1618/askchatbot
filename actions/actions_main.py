@@ -19,11 +19,13 @@ from rasa_sdk.events import (
 
 import requests
 import aiohttp
+import inflect
 
 from actions import actions_config as ac
 
 
 logger = logging.getLogger(__name__)
+inflecter = inflect.engine()
 
 USE_AIOHTTP = False
 
@@ -443,6 +445,35 @@ class FormQueryKnowledgeBase(FormAction):
             ],
             "pest_damage_description": [self.from_text()],
         }
+
+    @staticmethod
+    def pest_name_plural(pest_name):
+        """Returns the pest_name in plural form"""
+        pest_singular = inflecter.singular_noun(pest_name)
+        if not pest_singular:
+            pest_singular = pest_name
+        pest_plural = inflecter.plural_noun(pest_singular)
+        return pest_plural
+
+    async def validate_pest_problem_description(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """Once pest problem is described, build damage question to ask, using the
+        pest name in plural form, if it was extracted from the pest problem 
+        description"""
+
+        pest_name = tracker.get_slot("pest_name")
+        if not pest_name:
+            question = "Is it causing any damage?"
+        else:
+            pest_plural = self.pest_name_plural(pest_name)
+            question = f"Are the {pest_plural} causing any damage?"
+
+        return {"pest_problem_description": value, "cause_damage_question": question}
 
     async def submit(
         self,
