@@ -1,5 +1,7 @@
 # Deploy the chatbot w/ docker-compose
 
+This method is used to deploy the QA chatbot at http://35.166.13.105:8000/
+
 ### Install docker & docker-compose
 
 For Ubuntu 20.04, you can just install Docker from a standard Ubuntu Repository
@@ -61,28 +63,17 @@ For now, we build the docker image on the VM, and do not push it to a docker reg
 cd <project-root>
 
 #
-# Edit the file: ./actions/credentials_elasticsearch.yml
-# Select the correct Ipv4 for the elasticsearch host!
-# Notes:
-#  - arjaan-Kudu : IPv4 = 192.168.1.6
-#  - ec2 instance: IPv4 = 10.1.100.167
-hosts:
-    - host: 10.1.100.167
-
-# index name of ipmdata queries
-ipmdata-index-name: "ipmdata"
+# Edit the file: ./actions/credentials_elasticsearch.yml > select the correct elasticsearch host!
 
 # Edit the file: ./actions/actions_config.py
 #  (-) If Rasa X is not deployed in same docker network, you can set rasa_x_host here.
 #
 
 # Build the image
-# Option 1: using docker-compose
 sudo docker-compose build
-# Option 2: using docker
-sudo docker build . -t askchatbot-action-server:0.0.1
 
-# quickly test that it comes up ok
+# To quickly test that the container starts up
+# TODO: use external IP for --add-host: 34.211.141.190 
 sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:10.1.100.49 askchatbot-action-server:0.0.1
 
 curl http://<hostname>:5055/actions
@@ -108,39 +99,15 @@ curl -sSL -o install.sh https://storage.googleapis.com/rasa-x-releases/0.29.1/in
 sudo bash ./install.sh
 ```
 
-#### Define isolated docker environment ([docker-compose docs](https://docs.docker.com/compose/#multiple-isolated-environments-on-a-single-host)]
-
-To be able to deploy multiple versions on the same host, use `COMPOSE_PROJECT_NAME` and another `NGINX` port:
-
-```bash
-cd /etc/rasa-0.0.2
-
-sudo vi .env
->
-SKCHATBOT_VERSION=0.0.1
-COMPOSE_PROJECT_NAME=${ASKCHATBOT_VERSION}
-NGINX_PORT=8001
-
-# outcomment default ports for nginx
-sudo vi docker-compose.yml
->
-nginx:
-#   ports:
-#     - "80:8080"
-#     - "443:8443"
-```
-
-
-
 #### Select Rasa & Rasa X versions
 
 ```bash
 cd /etc/rasa
 
 sudo vi .env
-RASA_X_VERSION=0.29.3
-RASA_VERSION=1.10.3
-RASA_X_DEMO_VERSION=0.29.3
+RASA_X_VERSION=0.29.1
+RASA_VERSION=1.10.1
+RASA_X_DEMO_VERSION=0.29.1
 
 ```
 
@@ -153,8 +120,9 @@ sudo vi docker-compose.override.yml
 version: '3.4'
 services:
   app:
-    image: askchatbot-action-server:0.0.2
+    image: askchatbot-action-server:0.0.1
   extra_hosts:
+    # TODO: use external IP: 34.211.141.190 
     - "ask-chat-db-dev.i.eduworks.com:10.1.100.49"
 ```
 
@@ -322,6 +290,4 @@ Rasa X is available on: http://35.166.13.105:8000/
 
 #### Connect Rasa X to gitlab ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/integrated-version-control/))
 
-The bot is temporarily stored in personal, private repo on github.
-
-From Rasa X, connect to the git repository as described in the docs.
+TODO.
