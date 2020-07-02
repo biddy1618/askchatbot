@@ -448,12 +448,16 @@ class FormQueryKnowledgeBase(FormAction):
             or a list of them, where a first match will be picked"""
 
         return {
-            "pest_problem_description": [self.from_text()],
+            "pest_problem_description": [
+                self.from_text(not_intent="intent_garbage_inputs")
+            ],
             "pest_causes_damage": [
                 self.from_intent(value="yes", intent="intent_yes"),
                 self.from_intent(value="no", intent="intent_no"),
             ],
-            "pest_damage_description": [self.from_text()],
+            "pest_damage_description": [
+                self.from_text(not_intent="intent_garbage_inputs")
+            ],
         }
 
     @staticmethod

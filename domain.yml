@@ -12,6 +12,7 @@ intents:
   - intent_rating
   - intent_ask_handoff_to_expert
   - intent_thanks
+  - intent_garbage_inputs
   
 
 entities:
