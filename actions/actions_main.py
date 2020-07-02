@@ -411,6 +411,16 @@ class ActionExplainIPM(Action):
         return [SlotSet("explained_ipm", True)]
 
 
+class ActionAskHandoffToExpert(Action):
+    """Asks if user wants to ask the question to an expert/human"""
+
+    def name(self) -> Text:
+        return "action_ask_handoff_to_expert"
+
+    async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        dispatcher.utter_message(template="utter_do_you_want_to_ask_a_human_expert")
+
+
 class FormQueryKnowledgeBase(FormAction):
     """Query the Knowledge Base"""
 
@@ -438,12 +448,16 @@ class FormQueryKnowledgeBase(FormAction):
             or a list of them, where a first match will be picked"""
 
         return {
-            "pest_problem_description": [self.from_text()],
+            "pest_problem_description": [
+                self.from_text(not_intent="intent_garbage_inputs")
+            ],
             "pest_causes_damage": [
                 self.from_intent(value="yes", intent="intent_yes"),
                 self.from_intent(value="no", intent="intent_no"),
             ],
-            "pest_damage_description": [self.from_text()],
+            "pest_damage_description": [
+                self.from_text(not_intent="intent_garbage_inputs")
+            ],
         }
 
     @staticmethod
@@ -458,9 +472,9 @@ class FormQueryKnowledgeBase(FormAction):
     async def validate_pest_problem_description(
         self,
         value: Text,
-        dispatcher: CollectingDispatcher,
+        _dispatcher: CollectingDispatcher,
         tracker: Tracker,
-        domain: Dict[Text, Any],
+        _domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Once pest problem is described, build damage question to ask, using the
         pest name in plural form, if it was extracted from the pest problem 

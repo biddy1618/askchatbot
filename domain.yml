@@ -10,6 +10,9 @@ intents:
   - intent_chatgoal
   - intent_inform
   - intent_rating
+  - intent_ask_handoff_to_expert
+  - intent_thanks
+  - intent_garbage_inputs
   
 
 entities:
@@ -54,6 +57,7 @@ actions:
   - action_hi
   - action_explain_ipm
   - action_tag_rating
+  - action_ask_handoff_to_expert
   
 forms:
   - form_query_knowledge_base
@@ -68,12 +72,17 @@ responses:
   utter_summarize_skills:
   - text: I can explain what IPM is or help to manage a particular pest.
   
-  utter_canthelp:
-  - text: I'm sorry I cannot help you with that. 
+  utter_do_you_want_to_ask_a_human_expert:
+  - buttons:
+    - payload: /intent_yes
+      title: "Yes"
+    - payload: /intent_no
+      title: "No"
+    text: "Sorry, I am not able to answer the question.\nDo you want to ask a human expert?"
   
-  utter_please_askexpert:
-  - text: Please ask one of our experts at [Ask an Expert](https://ask.extension.org/ask).
-      
+  utter_handoff_to_a_human_expert:
+  - text: You can ask one of our experts at [ask extension](https://qa.osticket.eduworks.com/open.php).
+    
   utter_explain_ipm:
   - text: IPM is an ecosystem-based strategy that focuses on long-term prevention 
          of pests or their damage through a combination of techniques such as 
@@ -92,6 +101,9 @@ responses:
   
   utter_bye:
   - text: Bye!
+  
+  utter_you_are_welcome:
+  - text: You are welcome!
   
   utter_ask_pest_problem_description:
   - text: Please describe your pest problem

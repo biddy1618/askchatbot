@@ -35,7 +35,6 @@ with open(f"{Path(__file__).parents[3]}/data/nlu/nlu-inform-pest.md", "r") as f:
                 if sentence not in nlu_inform_pest:
                     lines.insert(i + 1, sentence)
             break
-        break
 
 with open(f"{Path(__file__).parents[3]}/data/nlu/nlu-inform-pest-new.md", "w") as f:
     f.write('\n'.join(lines))

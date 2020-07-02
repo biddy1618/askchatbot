@@ -18,10 +18,45 @@
 * intent_bye
   - utter_bye
 
-## chatgoal other
+## thank you
+* intent_thanks
+  - utter_you_are_welcome
+
+## garbage + handoff
+* intent_garbage_inputs
+    - action_ask_handoff_to_expert
+* intent_yes
+    - utter_handoff_to_a_human_expert
+
+## garbage + no handoff
+* intent_garbage_inputs
+    - action_ask_handoff_to_expert
+* intent_no
+    - action_session_start_custom
+    
+## chatgoal other + handoff
 * intent_chatgoal{"chatgoal_value": "__other__"}
-    - utter_canthelp
-    - utter_please_askexpert
+    - action_ask_handoff_to_expert
+* intent_yes
+    - utter_handoff_to_a_human_expert
+
+## chatgoal other + no handoff
+* intent_chatgoal{"chatgoal_value": "__other__"}
+    - action_ask_handoff_to_expert
+* intent_no
+    - action_session_start_custom
+    
+## ask handoff to expert + yes
+* intent_ask_handoff_to_expert
+    - action_ask_handoff_to_expert
+* intent_yes
+    - utter_handoff_to_a_human_expert
+
+## ask handoff to expert + no
+* intent_ask_handoff_to_expert
+    - action_ask_handoff_to_expert
+* intent_no
+    - action_session_start_custom
     
 ## chatgoal explain ipm
 * intent_chatgoal{"chatgoal_value": "explain_ipm"}
@@ -49,3 +84,25 @@
     - slot{"found_result": "no"}
     - action_session_start_custom
     
+## chatgoal pest problem with garbage + handoff
+* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
+    - slot{"chatgoal_value": "I_have_a_pest"}
+    - form_query_knowledge_base
+    - form{"name": "form_query_knowledge_base"}
+* intent_garbage_inputs
+    - action_ask_handoff_to_expert
+* intent_yes
+    - action_deactivate_form
+    - form{"name": null}
+    - utter_handoff_to_a_human_expert
+    
+## chatgoal pest problem with garbage + no handoff + continue
+* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
+    - slot{"chatgoal_value": "I_have_a_pest"}
+    - form_query_knowledge_base
+    - form{"name": "form_query_knowledge_base"}
+* intent_garbage_inputs
+    - action_ask_handoff_to_expert
+* intent_no
+    - form_query_knowledge_base
+    - form{"name": null}
