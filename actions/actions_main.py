@@ -2,6 +2,7 @@
 
 import logging
 import pprint
+import json
 from typing import Any, Text, Dict, List, Union
 
 from rasa_sdk import Action, Tracker
@@ -364,6 +365,8 @@ class ActionHi(Action):
         events = []
 
         if not said_hi:
+            dispatcher.utter_message(text=summarize_bot_configuration(tracker))
+
             dispatcher.utter_message(template="utter_hi")
             dispatcher.utter_message(template="utter_summarize_skills")
             events.extend([SlotSet("said_hi", True)])
@@ -614,7 +617,7 @@ class ActionTagRating(Action):
 
         # return []
         # Start a new session by sending the session_start intent
-        return next_intent_events("session_start_custom")
+        return next_intent_events("session_start")
 
 
 class ActionSessionStart(Action):
@@ -623,7 +626,7 @@ class ActionSessionStart(Action):
 
     def name(self) -> Text:
         """Overwrite the default action_session_start"""
-        return "action_session_start_custom"
+        return "action_session_start"
 
     @staticmethod
     def fetch_slots(tracker: Tracker) -> List[EventType]:
@@ -637,6 +640,14 @@ class ActionSessionStart(Action):
                 slots.append(SlotSet(key=key, value=value))
 
         logger.debug("Fetched slots = %s", pprint.pformat(slots))
+
+        # if not yet configured, set default bot configurations
+        for key in ["bot_config_botname", "bot_config_urlprivacy"]:
+            value = tracker.get_slot(key)
+            value_default = getattr(ac, key)
+            if value is None:
+                slots.append(SlotSet(key=key, value=value_default))
+
         return slots
 
     async def run(
@@ -672,4 +683,39 @@ class ActionRestart(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
 
-        return [Restarted(), FollowupAction("action_session_start_custom")]
+        return [Restarted(), FollowupAction("action_session_start")]
+
+
+class ActionConfigureBot(Action):
+    """Configure the bot"""
+
+    def name(self) -> Text:
+        return "action_configure_bot"
+
+    async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        # To need to redefine slots, because it is done via entity->slot mapping
+        # Just summarize the new configurations for the user
+        dispatcher.utter_message(text=summarize_bot_configuration(tracker))
+        return []
+
+
+def summarize_bot_configuration(tracker) -> str:
+    """Prepares a message with the bot configurations in the slots"""
+
+    message = (
+        "---------------------------------------------------\nBot Configuration:\n"
+    )
+    for key in ["bot_config_botname", "bot_config_urlprivacy"]:
+        message = message + f"- {key} = {tracker.get_slot(key)}\n"
+
+    message = (
+        message + "\nOverwrite default bot configuration by sending this message:\n"
+    )
+    message = message + "/intent_configure_bot:"
+    mydict = {}
+    for key in ["bot_config_botname", "bot_config_urlprivacy"]:
+        mydict[key] = tracker.get_slot(key)
+    message = message + json.dumps(mydict) + "\n"
+    message = message + "---------------------------------------------------"
+
+    return message

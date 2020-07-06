@@ -38,3 +38,14 @@ tfhub-cache-dir: "/tmp/tfhub_modules"
 
 # index name of ipmdata queries
 ipmdata-index-name: "ipmdata"
+
+###################################################################
+# Default bot configurations                                      #
+# These can be set by channel, for now by sending this intent:    #
+#  /intent_configure_bot{"bot_config_botname":"the Extension Bot", "bot_config_urlprivacy": "http://...."}
+#                                                                 #
+# Once real channel is implemented, this is better done by using  #
+# a custom REST channel and send it in the metadata               #
+###################################################################
+bot-config-botname: "the Extension Bot"
+bot-config-urlprivacy: "https://ucanr.edu/?privacyStatement/"

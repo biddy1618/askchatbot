@@ -1,14 +1,15 @@
-## custom session start 0
-* start
-  - action_session_start_custom
+## configure bot
+* intent_configure_bot
+  - action_configure_bot
+  - action_hi
 
-## custom session start 1
-* session_start_custom
-  - action_session_start_custom
+## custom session start 0
+#* start
+#  - action_session_start
   
 ## custom session start 2
-* session_start
-  - action_session_start_custom
+#* session_start
+#  - action_session_start
   
 ## hi
 * intent_hi
@@ -32,7 +33,7 @@
 * intent_garbage_inputs
     - action_ask_handoff_to_expert
 * intent_no
-    - action_session_start_custom
+    - action_session_start
     
 ## chatgoal other + handoff
 * intent_chatgoal{"chatgoal_value": "__other__"}
@@ -44,7 +45,7 @@
 * intent_chatgoal{"chatgoal_value": "__other__"}
     - action_ask_handoff_to_expert
 * intent_no
-    - action_session_start_custom
+    - action_session_start
     
 ## ask handoff to expert + yes
 * intent_ask_handoff_to_expert
@@ -56,7 +57,7 @@
 * intent_ask_handoff_to_expert
     - action_ask_handoff_to_expert
 * intent_no
-    - action_session_start_custom
+    - action_session_start
     
 ## chatgoal explain ipm
 * intent_chatgoal{"chatgoal_value": "explain_ipm"}
@@ -82,7 +83,7 @@
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
     - slot{"found_result": "no"}
-    - action_session_start_custom
+    - action_session_start
     
 ## chatgoal pest problem with garbage + handoff
 * intent_chatgoal{"chatgoal_value": "I_have_a_pest"}

@@ -63,7 +63,7 @@ For now, we build the docker image on the VM, and do not push it to a docker reg
 cd <project-root>
 
 #
-# Edit the file: ./actions/credentials_elasticsearch.yml > select the correct elasticsearch host!
+# Edit the file: ./actions/bot_config.yml > select the correct elasticsearch host!
 
 # Edit the file: ./actions/actions_config.py
 #  (-) If Rasa X is not deployed in same docker network, you can set rasa_x_host here.
@@ -200,24 +200,6 @@ This is not needed when upgrading without removing, because it is stored in the 
 cd /etc/rasa
 sudo python rasa_x_commands.py create --update admin me <PASSWORD>
 ```
-
-### Specify name that the chatbot uses to refer to itself
-
-The name is specified in the file  `<project-root>/domain.yml`:
-
-```bash
-responses:
-  utter_hi:
-  - text: Hi, I am the Extension Bot!
-```
-
-At the moment it is not configurable, and when you change it, you need to re-train the model with:
-
-```bash
-rasa train
-```
-
-And then upload & activate it as described next.
 
 #### Upload & activate a trained model
 

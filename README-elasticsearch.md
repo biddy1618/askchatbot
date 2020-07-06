@@ -46,7 +46,7 @@ pip install -r requirements-dev.txt
 pip install -e .
 
 #
-# Edit the file: ./actions/credentials_elasticsearch.yml
+# Edit the file: ./actions/bot_config.yml
 # Select the correct Ipv4 !
 # Notes:
 #  - arjaan-Kudu : IPv4 = 192.168.1.6

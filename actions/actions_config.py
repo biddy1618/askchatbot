@@ -11,6 +11,11 @@ from ssl import create_default_context
 
 logger = logging.getLogger(__name__)
 
+botconfig = (
+    ruamel.yaml.safe_load(open(f"{Path(__file__).parents[0]}/bot_config.yml", "r"))
+    or {}
+)
+
 ##########
 # Rasa X #
 ##########
@@ -25,21 +30,14 @@ logger.info("----------------------------------------------")
 #################
 # Elasticsearch #
 #################
-es_config = (
-    ruamel.yaml.safe_load(
-        open(f"{Path(__file__).parents[0]}/credentials_elasticsearch.yml", "r")
-    )
-    or {}
-)
-
-hosts = es_config.get("hosts", None)
-username = es_config.get("username", None)
-password = es_config.get("password", None)
-do_the_queries = es_config.get("do-the-queries")
-score_threshold = es_config.get("score-threshold")
-ipmdata_index_name = es_config.get("ipmdata-index-name")
-tfhub_embedding_url = es_config.get("tfhub-embedding-url")
-search_size = es_config.get("search-size")
+hosts = botconfig.get("hosts", None)
+username = botconfig.get("username", None)
+password = botconfig.get("password", None)
+do_the_queries = botconfig.get("do-the-queries")
+score_threshold = botconfig.get("score-threshold")
+ipmdata_index_name = botconfig.get("ipmdata-index-name")
+tfhub_embedding_url = botconfig.get("tfhub-embedding-url")
+search_size = botconfig.get("search-size")
 
 # initialize the elastic search client
 logger.info("Initializing the elasticsearch client")
@@ -62,8 +60,14 @@ logger.info("----------------------------------------------")
 # TFHUB embeddings #
 ####################
 # define where the tfhub modules are stored
-os.environ["TFHUB_CACHE_DIR"] = es_config.get("tfhub-cache-dir")
+os.environ["TFHUB_CACHE_DIR"] = botconfig.get("tfhub-cache-dir")
 
 logger.info("Start loading embedding module %s", tfhub_embedding_url)
 embed = tf_hub.load(tfhub_embedding_url)
 logger.info("Done loading embedding module %s", tfhub_embedding_url)
+
+##############################
+# Default bot configurations #
+##############################
+bot_config_botname = botconfig.get("bot-config-botname")
+bot_config_urlprivacy = botconfig.get("bot-config-urlprivacy")
