@@ -149,8 +149,9 @@ Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-i
       tag: "0.0.2"
   ```
 
-
 #### Deploy  ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#quick-install))
+
+##### Initial deployment
 
 ```bash
 # Add the repository which contains the Rasa X Helm chart
@@ -165,7 +166,7 @@ h install my-release --values values.yml rasa-x/rasa-x
 h template --values values.yml my-release rasa-x/rasa-x > rasa-x-deployment.yml
 ```
 
-#### Add `hostAliases` to `my-release-app` deployment
+###### Add `hostAliases` to `my-release-app` deployment
 
 In order for the action server to know the IP address of the elastic-search instance, an entry must be added to the `hosts` file of the container. In Kubernetes, this is accomplished with `hostAliases`, which is identical to `extra_hosts` of docker-compose:
 
@@ -227,6 +228,28 @@ fe00::2	ip6-allrouters
 34.211.141.190	ask-chat-db-dev.i.eduworks.com
 ```
 
+##### Upgrade deployment
+
+###### Redeploy when `values.yml` was changed
+
+```bash
+# Add the repository which contains the Rasa X Helm chart
+helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
+helm repo update
+
+# Upgrade
+h upgrade my-release --values values.yml --reuse-values rasa-x/rasa-x
+```
+
+###### Redeploy a new action server with unchanged tag
+
+```bash
+# Restart the app's pod, by scaling it down and back up
+k get deployments
+k scale deployment my-release-app --replicas=0  # wait until it is gone
+k scale deployment my-release-app --replicas=1
+```
+
 
 
 #### Check deployment progress
@@ -258,19 +281,6 @@ my-release-rasa-x-rasa-worker     ClusterIP    10.152.183.163  <none>          5
 my-release-rasa-x-rasa-x          ClusterIP    10.152.183.154  <none>          5002/TCP                          
 my-release-redis-headless         ClusterIP    None            <none>          6379/TCP                          
 my-release-redis-master           ClusterIP    10.152.183.114  <none>          6379/TCP                          
-```
-
-
-
-#### Upgrade/Modify a release ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#upgrading-the-deployment))
-
-```bash
-# Add the repository which contains the Rasa X Helm chart
-helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
-helm repo update
-
-# Upgrade
-h upgrade my-release --values values.yml --reuse-values rasa-x/rasa-x
 ```
 
 
