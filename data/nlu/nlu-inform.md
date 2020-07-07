@@ -1,0 +1,107 @@
+## intent:intent_inform
+- [Springtails](pest_name)
+- [Skunks](pest_name)
+- [Scales](pest_name)
+- [Dandelions](pest_name)
+- [Sharpshooters](pest_name)
+- [Grasshoppers](pest_name)
+- [Rabbits](pest_name)
+- [Moths](pest_name)
+- [Opossums](pest_name)
+- [Chickweeds](pest_name)
+- [Bugs](pest_name)
+- [Oakworms](pest_name)
+- [Woodpeckers](pest_name)
+- [Mold](pest_name)
+- [Lice](pest_name)
+- [Nettles](pest_name)
+- [Coyotes](pest_name)
+- [Gnats](pest_name)
+- [Snails](pest_name)
+- I have [boxelder bugs](pest_name)
+- I have [ants](pest_name)
+- I have fire [ants](pest_name)
+- It is a small [insect](pest_name)
+- I have [cockroaches](pest_name) near my sink
+- i have [bugs](pest_name) on my tomato plants
+- There is a hole in the trim on the wall
+- Affected branches are dying
+- Black [spots](pest_name) on the ripe tomatoes.
+- [Cockroaches](pest_name) are invading my house
+- Eating leaves
+- Eating plant
+- How do I kill [cockroaches](pest_name)?
+- How to manage pest in my farm
+- I found dirt tunnels in my basement. When I broke up the dirt, I found little [bugs](pest_name) and larve inside.
+- I have a pest in collton planr
+- I have a pest in cotton plant
+- I have a pest in mango tree
+- I have [ants](pest_name) in my kitchen
+- I have [ants](pest_name) in my lawn
+- I have black [bugs](pest_name) in begonias
+- I have [cockroaches](pest_name) near my sink
+- I have [dandelions](pest_name) in my lawn
+- I have [flies](pest_name) in the house
+- I have large black [bugs](pest_name) running around on my patio at night
+- I have [spots](pest_name) on my roses
+- I have what looks like clear [gel](pest_name) coming out of my peaches.
+- I think I have spotted lantern [fly](pest_name)
+- I think I may have [termites](pest_name) in my basement. Who should I call?
+- I think i have spotted [lanternfly](pest_name)
+- Is roundup safe to use in my garden?
+- Late [blight](pest_name)
+- Leaves curling
+- My bean seeds didn't germinate.
+- My roses are wilting
+- My tomatoes have black [spots](pest_name) on them.
+- No seedlings
+- Pest is Eating my cotton plant
+- Plants are turning yellow
+- Powdery [mildew](pest_name) on apple
+- Some weird [bug](pest_name) on my tomatos is eating the leaves
+- Something is eating my peaches.
+- Swarming [ants](pest_name)
+- The [cockroaches](pest_name) leave turds
+- The peaches that have the [gel](pest_name) are starting to rot and don't look healthy
+- There are webs with [worms](pest_name) in them on my evergreen tree
+- There is clear [gel](pest_name) coming out of the peaches.
+- They are freaking me out
+- They are [weeds](pest_name)
+- They kill my rose bushes
+- What do I do about swarming [ants](pest_name)?
+- Whats causing my shrubs leaves to turn Yellow?
+- White [insects](pest_name) with black heads killing oak tree
+- White [round](pest_name)
+- a [bug](pest_name) is eating my tomatoes
+- biting [flies](pest_name)
+- black [spots](pest_name)
+- black [spots](pest_name) on my roses
+- black [spots](pest_name) on tomato
+- brown leaves
+- brown leaves on tomato plant
+- brown leaves on tomato plants
+- brown [spots](pest_name)
+- brown [spots](pest_name) and dying flowers
+- dead or brown patches of grass
+- eating the leaves
+- getting in my food
+- have to throw away food
+- holes in leaves
+- holes in the flowers
+- how to prevent tomato [hornworm](pest_name)
+- i have [bugs](pest_name) on my tomato plants
+- i have dead spots in my lawn
+- i have fire [ants](pest_name)
+- i have [spots](pest_name) on my roses
+- it's eating the leaves of my mustard greens
+- on my trees
+- [rat](pest_name) problem
+- some of large [beetle](pest_name) eating my willow tree
+- the [beetles](pest_name) are eating holes in the trunk of the tree
+- their bites are painful
+- tiny [ants](pest_name) in the kitchen
+- white [fuzz](pest_name) on apple tree leaves
+
+
+## lookup:pest_name
+  data/nlu/lookups/pest_name.txt

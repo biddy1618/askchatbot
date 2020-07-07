@@ -83,7 +83,6 @@
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
     - slot{"found_result": "no"}
-    - action_session_start
     
 ## chatgoal pest problem with garbage + handoff
 * intent_chatgoal{"chatgoal_value": "I_have_a_pest"}

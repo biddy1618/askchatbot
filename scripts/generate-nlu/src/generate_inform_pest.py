@@ -4,13 +4,13 @@ from pathlib import Path
 import random
 
 ################################################
-# get current sentences for intent_inform_pest #
+# get current sentences for intent_inform #
 ################################################
 with open(f"{Path(__file__).parents[3]}/data/nlu/nlu-inform-pest.md", "r") as f:
     nlu_inform_pest = []
     while True:
         line = f.readline().rstrip('\n')
-        if line == "## intent:intent_inform_pest":
+        if line == "## intent:intent_inform":
             while True:
                 sentence = f.readline().rstrip('\n')
                 if not sentence or sentence[0] != "-":
@@ -29,7 +29,7 @@ pest_names = random.choices(pest_names, k=10)
 with open(f"{Path(__file__).parents[3]}/data/nlu/nlu-inform-pest.md", "r") as f:
     lines = f.read().splitlines()
     for i, line in enumerate(lines):
-        if line == "## intent:intent_inform_pest":
+        if line == "## intent:intent_inform":
             for pest_name in pest_names:
                 sentence = f"- [{pest_name}](pest_name)"
                 if sentence not in nlu_inform_pest:
