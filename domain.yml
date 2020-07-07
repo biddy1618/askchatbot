@@ -1,8 +1,8 @@
 intents:
+  - intent_configure_bot
   - start
   - session_start
   - restart
-  - session_start_custom
   - intent_hi
   - intent_bye
   - intent_yes
@@ -16,11 +16,26 @@ intents:
   
 
 entities:
+  - bot_config_weight_description
+  - bot_config_weight_damage
+  - bot_config_score_threshold
+  - bot_config_botname
+  - bot_config_urlprivacy
   - chatgoal_value
   - pest_name
   - rating_value
   
 slots:
+  bot_config_weight_description:
+    type: unfeaturized
+  bot_config_weight_damage:
+    type: unfeaturized
+  bot_config_score_threshold:
+    type: unfeaturized
+  bot_config_botname:
+    type: unfeaturized
+  bot_config_urlprivacy:
+    type: unfeaturized
   said_hi:
     type: unfeaturized
   shown_privacypolicy:
@@ -52,7 +67,8 @@ slots:
   
 
 actions:
-  - action_session_start_custom
+  - action_configure_bot
+  - action_session_start
   - action_restart
   - action_hi
   - action_explain_ipm
@@ -64,10 +80,10 @@ forms:
   
 responses:
   utter_hi:
-  - text: Hi, I am the Extension Bot!
+  - text: Hi, I am {bot_config_botname}!
   
   utter_inform_privacypolicy:
-  - text: By chatting with me, you agree to our [privacy policy](https://ucanr.edu/?privacyStatement/).
+  - text: By chatting with me, you agree to our [privacy policy]({bot_config_urlprivacy}).
 
   utter_summarize_skills:
   - text: I can explain what IPM is or help to manage a particular pest.

@@ -12,7 +12,7 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 150
+    epochs: 200
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
@@ -26,6 +26,8 @@ policies:
     epochs: 25
   - name: MappingPolicy
   - name: FormPolicy
+  # Once we have more data, use TwoStageFallback & update thresholds
+  # https://medium.com/rasa-blog/failing-gracefully-with-rasa-8ead6b43f2f4
   - name: "FallbackPolicy"
     nlu_threshold: 0.8
     core_threshold: 0.3

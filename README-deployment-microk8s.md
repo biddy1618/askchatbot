@@ -132,6 +132,11 @@ Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-i
   # then tag it for use in the microk8s built-in registry
   sudo docker images
   sudo docker tag 1fe3d8f47868 localhost:32000/askchatbot-action-server:0.0.2
+  
+  # To quickly test that the container starts up
+  sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 localhost:32000/askchatbot-action-server:0.0.2
+  
+  curl http://<hostname>:5055/actions
   ```
 
 - Push the docker image into the built-in registry of the microk8s cluster
@@ -360,3 +365,4 @@ mv stern_linux_amd64 stern
 #### Connect to Rasa X from browser
 
 Rasa X is available on: http://35.166.13.105:8001/
+

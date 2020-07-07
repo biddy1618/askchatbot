@@ -14,7 +14,7 @@
 #
 # arjaan laptop
 hosts:
-    - host: 192.168.1.6
+    - host: 192.168.1.7
       port: 9200
 
 username: "elastic"
@@ -38,3 +38,17 @@ tfhub-cache-dir: "/tmp/tfhub_modules"
 
 # index name of ipmdata queries
 ipmdata-index-name: "ipmdata"
+
+######################################################################
+# Default bot configurations                                         #
+# These can be set by the channel, by sending this intent:           #
+#  /intent_configure_bot{"bot-config-weight-description": "0.7", "bot-config-weight-damage": "0.3", "bot-config-score-threshold": "1.4", "bot_config_botname":"the Extension Bot", "bot_config_urlprivacy": "https://ucanr.edu/?privacyStatement/"}
+#                                                                    #
+# Once real channel is implemented, this can also be implemented via #
+# a custom REST channel and send it in the metadata                  #
+######################################################################
+bot-config-weight-description: 0.7
+bot-config-weight-damage: 0.3
+bot-config-score-threshold: 1.4
+bot-config-botname: "the Extension Bot"
+bot-config-urlprivacy: "https://ucanr.edu/?privacyStatement/"

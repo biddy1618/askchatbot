@@ -2,6 +2,7 @@
 
 import logging
 import pprint
+import json
 from typing import Any, Text, Dict, List, Union
 
 from rasa_sdk import Action, Tracker
@@ -177,7 +178,8 @@ async def handle_es_query(
     pest_problem_description,
     pest_damage_description,
     index_name,
-    score_threshold,
+    weight_description,
+    weight_damage,
     print_summary=False,
 ):
     """Handles an elastic search query"""
@@ -308,7 +310,7 @@ async def handle_es_query(
     # Combine all hits and sort to max score #
     ##########################################
 
-    # Do not include ndl_damage in the first scoring
+    # Scores based on description vector
     hits = pn_name_hits
     for hit2 in (
         pn_description_hits
@@ -334,8 +336,7 @@ async def handle_es_query(
     if print_summary:
         print_hits(hits, title="Combined & sorted hits")
 
-    # now, rearrange the hits with score above threshold based on the ndl_damage scoring
-    hits = [hit for hit in hits if hit["_score"] >= score_threshold]
+    # Scores based on damage+descrption vector
     if len(hits) > 0:
         for i, hit in enumerate(hits):
             hits[i]["_score_w_damage"] = 0.0
@@ -345,8 +346,18 @@ async def handle_es_query(
                     if hit_ndl_damage["_source"]["name"] == hit["_source"]["name"]:
                         hits[i]["_score_w_damage"] = hit_ndl_damage["_score"]
                         break
-            hits = sorted(hits, key=lambda h: h["_score_w_damage"], reverse=True)
 
+    # Apply weighting
+    for i, hit in enumerate(hits):
+        hits[i]["_score_weighted"] = (
+            weight_description * hits[i]["_score"]
+            + weight_damage * hits[i]["_score_w_damage"]
+        )
+
+    # Sort to weighted score
+    hits = sorted(hits, key=lambda h: h["_score_weighted"], reverse=True)
+
+    # Do not filter on threshold. Leave this up to the caller
     return hits
 
 
@@ -364,6 +375,8 @@ class ActionHi(Action):
         events = []
 
         if not said_hi:
+            dispatcher.utter_message(text=summarize_bot_configuration(tracker))
+
             dispatcher.utter_message(template="utter_hi")
             dispatcher.utter_message(template="utter_summarize_skills")
             events.extend([SlotSet("said_hi", True)])
@@ -509,49 +522,88 @@ class FormQueryKnowledgeBase(FormAction):
                 pest_problem_description,
                 pest_damage_description,
                 ac.ipmdata_index_name,
-                ac.score_threshold,
+                ac.bot_config_weight_description,
+                ac.bot_config_weight_damage,
                 print_summary=False,
             )
 
-            if len(hits) == 0:
-                text = "Sorry, I did not find anything in our knowledge base"
-                dispatcher.utter_message(text=text)
+            # Filter to threshold
+            hits_filtered = [
+                hit
+                for hit in hits
+                if (
+                    hit["_score"] >= ac.bot_config_score_threshold
+                    or hit["_score_w_damage"] >= ac.bot_config_score_threshold
+                )
+            ]
 
-                return [SlotSet("found_result", "no")]
-
-            # List only the top 3
-            for hit in hits[:3]:
+            def create_text_for_pest(i, hit):
                 name = hit["_source"]["name"]
+                score_weighted = hit["_score_weighted"]
                 score = hit["_score"]
                 score_w_damage = hit["_score_w_damage"]
                 pn_url = hit["_source"]["urlPestNote"]
                 qt_url = hit["_source"]["urlQuickTip"]
-                pn_image = None
-                if hit["best_image"]:
-                    pn_image = hit["best_image"]["src"]
-                    pn_image_caption = hit["best_image"]["caption"]
+                # pn_image = None
+                # if hit["best_image"]:
+                #    pn_image = hit["best_image"]["src"]
+                #    pn_image_caption = hit["best_image"]["caption"]
 
-                text = ""
-
-                if pn_image:
-                    text = f"{name}: {pn_image_caption}\n"
-                else:
-                    text = f"{name}\n"
+                # if pn_image:
+                #    text = f"{name}: {pn_image_caption}\n"
+                # else:
+                #    text = f"{name}\n"
+                text = f"\n({i}) Name of the pest: {name}\n"
 
                 if qt_url:
-                    text = f"{text}- [quick tips for '{name}']({qt_url})\n"
+                    text = f"{text}    - [quick tips]({qt_url})\n"
                 if pn_url:
-                    text = f"{text}- [pestnote for '{name}']({pn_url})\n"
+                    text = f"{text}    - [pestnote]({pn_url})\n"
 
                 if hit["best_video"]:
                     video_title = hit["best_video"]["videoTitle"]
                     video_link = hit["best_video"]["videoLink"]
-                    text = f"{text}- [video: '{video_title}']({video_link})\n"
+                    text = f"{text}    - [video: '{video_title}']({video_link})\n\n"
 
-                text = f"{text}- similarity score            ={score:.1f}\n"
-                text = f"{text}- similarity score with damage={score_w_damage:.1f}"
+                text = (
+                    f"{text}    - weighted similarity score   = "
+                    f"{score_weighted:.1f}\n"
+                )
+                text = (
+                    f"{text}    --> score for description     = "
+                    f"{score:.1f} ({ac.bot_config_weight_description:.2f})\n"
+                )
+                text = (
+                    f"{text}    --> score for damage          = "
+                    f"{score_w_damage:.1f} ({ac.bot_config_weight_damage:.2f})\n"
+                )
+                return text
 
-                dispatcher.utter_message(text=text, image=pn_image)
+            if len(hits_filtered) == 0:
+                text = (
+                    "Sorry, I did not find anything within the scoring threshold\n"
+                    "The closest match is: "
+                )
+                text = text + create_text_for_pest(1, hits[0])
+                dispatcher.utter_message(text=text)
+
+                return [
+                    SlotSet("found_result", "no"),
+                    next_intent_events("intent_ask_handoff_to_expert"),
+                ]
+
+            # List only the top 3
+            text = (
+                "I found some results. "
+                "Please click the links below for more details:\n"
+            )
+            for i, hit in enumerate(hits_filtered[:3]):
+                text = text + create_text_for_pest(i + 1, hit)
+
+                # dispatcher.utter_message(text=text, image=pn_image)
+                dispatcher.utter_message(text=text)
+
+                text = "\n"
 
             return [SlotSet("found_result", "yes")]
 
@@ -614,7 +666,7 @@ class ActionTagRating(Action):
 
         # return []
         # Start a new session by sending the session_start intent
-        return next_intent_events("session_start_custom")
+        return next_intent_events("session_start")
 
 
 class ActionSessionStart(Action):
@@ -623,7 +675,7 @@ class ActionSessionStart(Action):
 
     def name(self) -> Text:
         """Overwrite the default action_session_start"""
-        return "action_session_start_custom"
+        return "action_session_start"
 
     @staticmethod
     def fetch_slots(tracker: Tracker) -> List[EventType]:
@@ -637,6 +689,20 @@ class ActionSessionStart(Action):
                 slots.append(SlotSet(key=key, value=value))
 
         logger.debug("Fetched slots = %s", pprint.pformat(slots))
+
+        # if not yet configured, set default bot configurations
+        for key in [
+            "bot_config_weight_description",
+            "bot_config_weight_damage",
+            "bot_config_score_threshold",
+            "bot_config_botname",
+            "bot_config_urlprivacy",
+        ]:
+            value = tracker.get_slot(key)
+            value_default = getattr(ac, key)
+            if value is None:
+                slots.append(SlotSet(key=key, value=value_default))
+
         return slots
 
     async def run(
@@ -672,4 +738,47 @@ class ActionRestart(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
 
-        return [Restarted(), FollowupAction("action_session_start_custom")]
+        return [Restarted(), FollowupAction("action_session_start")]
+
+
+class ActionConfigureBot(Action):
+    """Configure the bot"""
+
+    def name(self) -> Text:
+        return "action_configure_bot"
+
+    async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        # To need to redefine slots, because it is done via entity->slot mapping
+        # Just summarize the new configurations for the user
+        dispatcher.utter_message(text=summarize_bot_configuration(tracker))
+        return []
+
+
+def summarize_bot_configuration(tracker) -> str:
+    """Prepares a message with the bot configurations in the slots"""
+    keys = [
+        "bot_config_weight_description",
+        "bot_config_weight_damage",
+        "bot_config_score_threshold",
+        "bot_config_botname",
+        "bot_config_urlprivacy",
+    ]
+
+    message = (
+        "\n---------------------------------------------------\n"
+        "Bot Configuration (provided for testing purposes):\n"
+    )
+    for key in keys:
+        message = message + f"- {key} = {tracker.get_slot(key)}\n"
+
+    message = (
+        message + "\nOverwrite default bot configuration by sending this message:\n"
+    )
+    message = message + "/intent_configure_bot:"
+    mydict = {}
+    for key in keys:
+        mydict[key] = str(tracker.get_slot(key))
+    message = message + json.dumps(mydict) + "\n"
+    message = message + "---------------------------------------------------\n\n"
+
+    return message
