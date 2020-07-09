@@ -542,7 +542,8 @@ class FormQueryKnowledgeBase(FormAction):
 
             if len(hits_filtered) == 0:
                 text = (
-                    "Sorry, I did not find anything within the scoring threshold\n"
+                    "Notes for tester:\n"
+                    "I did not find anything within the scoring threshold\n"
                     "The closest match is: \n"
                 )
                 text = text + create_text_for_pest(hits[0], tracker)
