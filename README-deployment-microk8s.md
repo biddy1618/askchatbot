@@ -21,7 +21,7 @@ microk8s status
 microk8s enable dns storage helm3 registry 
 ```
 
-To start & stop
+To start & stop  (Or do anything else see the [microk8s command reference](https://microk8s.io/docs/commands))
 
 ```bash
 # stop/start with
@@ -37,9 +37,42 @@ sudo snap remove microk8s
 
 
 
-### Rasa X Install
+### Install Rasa X with AskChatbot
 
 [Rasa X docs on using helm](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/) & [Rasa X Helm Chart repository](https://github.com/rasahq/rasa-x-helm)
+
+#### Build docker image for action server
+
+Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-in)
+
+- Make sure that the build-in registry is enabled:
+
+  ```bash
+  microk8s enable registry
+  ```
+
+- Build docker image with correct tag 
+
+  ```bash
+  # build docker image
+  sudo docker-compose build
+  
+  # then tag it for use in the microk8s built-in registry
+  sudo docker images
+  sudo docker tag 1fe3d8f47868 localhost:32000/askchatbot-action-server:0.0.2
+  
+  # To quickly test that the container starts up
+  sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 localhost:32000/askchatbot-action-server:0.0.2
+  
+  curl http://<hostname>:5055/actions
+  ```
+
+- Push the docker image into the built-in registry of the microk8s cluster
+
+  ```bash
+  sudo docker push localhost:32000/askchatbot-action-server
+  ```
+
 
 #### Make kubernetes cluster accessible & set some aliases
 
@@ -115,48 +148,18 @@ nginx:
 
 ###### (Step 7) Configure the custom action server
 
-Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-in)
+Add this to your `values.yml` 
 
-- Make sure that the build-in registry is enabled:
-
-  ```bash
-  microk8s enable registry
-  ```
-
-- Build docker image with correct tag 
-
-  ```bash
-  # build docker image
-  sudo docker-compose build
-  
-  # then tag it for use in the microk8s built-in registry
-  sudo docker images
-  sudo docker tag 1fe3d8f47868 localhost:32000/askchatbot-action-server:0.0.2
-  
-  # To quickly test that the container starts up
-  sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 localhost:32000/askchatbot-action-server:0.0.2
-  
-  curl http://<hostname>:5055/actions
-  ```
-
-- Push the docker image into the built-in registry of the microk8s cluster
-
-  ```bash
-  sudo docker push localhost:32000/askchatbot-action-server
-  ```
-
-- Add this to your `values.yml` 
-
-  ```bash
-  app:
-      # microk8s build-in registry
-      name: "localhost:32000/askchatbot-action-server"
-      tag: "0.0.2"
-  ```
+```bash
+app:
+    # microk8s build-in registry
+    name: "localhost:32000/askchatbot-action-server"
+    tag: "0.0.2"
+```
 
 #### Deploy  ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#quick-install))
 
-##### Initial deployment
+##### Initial deployment with helm
 
 ```bash
 # Add the repository which contains the Rasa X Helm chart
@@ -165,10 +168,6 @@ helm repo update
 
 # Deploy
 h install my-release --values values.yml rasa-x/rasa-x
-
-# Optional: Check how the kubectl generated objects yaml looks like
-# -> Not using it here, just for educational purposes
-h template --values values.yml my-release rasa-x/rasa-x > rasa-x-deployment.yml
 ```
 
 ###### Add `hostAliases` to `my-release-app` deployment
@@ -233,9 +232,61 @@ fe00::2	ip6-allrouters
 34.211.141.190	ask-chat-db-dev.i.eduworks.com
 ```
 
-##### Upgrade deployment
+##### Initial deployment with kubectl
 
-###### Redeploy when `values.yml` was changed
+Due to long start-up time of the action server, it might be needed to use this approach, so you can patch up the kubernetes objects prior to deployment
+
+```bash
+# Create deployment yaml
+h template --values values.yml my-release rasa-x/rasa-x > rasa-x-deployment.yml
+
+# Add a Startup Probe for the action server
+# https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
+# Allow 5 minutes for startup
+        startupProbe:
+          httpGet:
+            path: /health
+            port: "http"
+          failureThreshold: 30
+          periodSeconds: 10
+
+# Add hostAliases to the pod template spec section:
+spec:
+.
+  template:
+  .
+    spec:
+      hostAliases:
+       - ip: 34.211.141.190
+         hostnames:
+         - ask-chat-db-dev.i.eduworks.com
+      containers:
+      - image: localhost:32000/askchatbot-action-server:0.0.2
+        .
+
+# check correctness of yaml
+k create --dry-run=client -f rasa-x-deployment.yml
+
+# deploy from the yaml
+k create -f rasa-x-deployment.yml
+
+# to update after modifying a resource
+k apply -f rasa-x-deployment.yml
+
+# to delete all the resources
+k delete -f rasa-x-deployment.yml
+
+# sometimes, to fully clean things up, you have to delete & recreate the namespace
+kubectl delete namespaces my-namespace
+kubectl get namespaces # wait till it is gone
+kubectl create namespace my-namespace
+```
+
+
+
+##### Upgrade deployment with helm
+
+When `values.yml` was changed, just issue these commands:
 
 ```bash
 # Add the repository which contains the Rasa X Helm chart
@@ -246,11 +297,23 @@ helm repo update
 h upgrade my-release --values values.yml --reuse-values rasa-x/rasa-x
 ```
 
-###### Redeploy a new action server with unchanged tag
+##### Apply deployment changes with kubectl
+
+When you have a modification to `rasa-x-deployment.yml` , issue this command to apply the changes:
 
 ```bash
-# Restart the app's pod, by scaling it down and back up
-k get deployments
+# to update after modifying a resource
+k apply -f rasa-x-deployment.yml
+```
+
+##### Redeploy a new action server
+
+When the tag changed, just update `values.yml` and redeploy as described above.
+
+If the tag has not changed, then you must restart the app's deployment, by scaling it down and back up
+
+```bash
+# k get deployments
 k scale deployment my-release-app --replicas=0  # wait until it is gone
 k scale deployment my-release-app --replicas=1
 ```
@@ -365,4 +428,49 @@ mv stern_linux_amd64 stern
 #### Connect to Rasa X from browser
 
 Rasa X is available on: http://35.166.13.105:8001/
+
+### Maintain disk space
+
+The disk space will keep going up, and these are some typical maintenance steps to check & reduce.
+
+```bash
+# check available disk space
+df -h /
+
+# find large files on disk
+sudo du -cha --max-depth=1 / | grep -E "M|G" | sort -h
+```
+
+#### Docker containers & images 
+
+```bash
+# clean up docker  (this is safe)
+sudo docker system prune
+```
+
+#### MicroK8s log files
+
+Kubernetes automatically zips & rotates log files, so they do not blow up the disk.
+
+MicroK8s saves the log files for each pod in the hosts' folder `/var/log/pods/{id}`:
+
+```bash
+# check size of microk8s log files larger than 1 Mb
+sudo du -cha --max-depth=1 /var/log/pods | grep -E "M|G" | sort -h
+> # just remove any large, zipped up log files you no longer want
+> # Note that it might be better to configure kubernetes to rotate files differently
+```
+
+
+
+#### MicroK8s Containers & images
+
+Kubernetes does automatic garbage collection for containers & images as described [here](https://kubernetes.io/docs/concepts/cluster-administration/kubelet-garbage-collection/).
+
+If you do like to check out the containers & images, you can use [microk8s ctr](https://microk8s.io/docs/commands#heading--microk8s-ctr):
+
+```bash
+microk8s.ctr images ls
+microk8s.ctr containers
+```
 

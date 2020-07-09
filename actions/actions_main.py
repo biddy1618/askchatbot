@@ -1,7 +1,6 @@
 """Custom Actions & Forms"""
 
 import logging
-import pprint
 import json
 from typing import Any, Text, Dict, List, Union
 
@@ -10,16 +9,13 @@ from rasa_sdk.forms import FormAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
     SlotSet,
-    SessionStarted,
-    Restarted,
-    FollowupAction,
     ActionExecuted,
     EventType,
     UserUttered,
 )
 
-import requests
-import aiohttp
+##import requests
+##import aiohttp
 import inflect
 
 from actions import actions_config as ac
@@ -184,20 +180,15 @@ async def handle_es_query(
 ):
     """Handles an elastic search query"""
 
-    if index_name != "ipmdata":
+    if index_name not in ["ipmdata", "ipmdata-dev"]:
         raise Exception(f"Not implemented for index_name = {index_name}")
 
     # create the embedding vectors
     query_vector = ac.embed([pest_problem_description]).numpy()[0]
 
-    # damage by itself does not work.
-    # encode it together with pest_problem_description and then
-    # check similarity to encoded name+description+life_cycle+damage (ndl_damage)
-    ndl_damage_vector = None
+    damage_vector = None
     if pest_damage_description:
-        ndl_damage_vector = ac.embed(
-            [pest_problem_description + pest_damage_description]
-        ).numpy()[0]
+        damage_vector = ac.embed([pest_damage_description]).numpy()[0]
 
     # Define what the elasticsearch queries need to return in it's response
     _source_query = {
@@ -293,13 +284,13 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pn_ndl_damage_hits = []
+    pn_damage_hits = []
     if pest_damage_description:
-        pn_ndl_damage_hits = cosine_similarity_query(
+        pn_damage_hits = cosine_similarity_query(
             index_name,
             _source_query,
-            ndl_damage_vector,
-            "ndl_damage_vector",
+            damage_vector,
+            "damagePestNote_vector",
             nested=False,
             best_image="first",
             best_video="first",
@@ -336,22 +327,22 @@ async def handle_es_query(
     if print_summary:
         print_hits(hits, title="Combined & sorted hits")
 
-    # Scores based on damage+descrption vector
+    # Scores based on damage vector
     if len(hits) > 0:
         for i, hit in enumerate(hits):
-            hits[i]["_score_w_damage"] = 0.0
+            hits[i]["_score_damage"] = 0.0
         if pest_damage_description:
             for i, hit in enumerate(hits):
-                for hit_ndl_damage in pn_ndl_damage_hits:
-                    if hit_ndl_damage["_source"]["name"] == hit["_source"]["name"]:
-                        hits[i]["_score_w_damage"] = hit_ndl_damage["_score"]
+                for hit_damage in pn_damage_hits:
+                    if hit_damage["_source"]["name"] == hit["_source"]["name"]:
+                        hits[i]["_score_damage"] = hit_damage["_score"]
                         break
 
     # Apply weighting
     for i, hit in enumerate(hits):
         hits[i]["_score_weighted"] = (
             weight_description * hits[i]["_score"]
-            + weight_damage * hits[i]["_score_w_damage"]
+            + weight_damage * hits[i]["_score_damage"]
         )
 
     # Sort to weighted score
@@ -368,22 +359,18 @@ class ActionHi(Action):
         return "action_hi"
 
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        events = []
+
         shown_privacypolicy = tracker.get_slot("shown_privacypolicy")
         said_hi = tracker.get_slot("said_hi")
         explained_ipm = tracker.get_slot("explained_ipm")
 
-        events = []
-
         if not said_hi:
-            dispatcher.utter_message(text=summarize_bot_configuration(tracker))
-
             dispatcher.utter_message(template="utter_hi")
             dispatcher.utter_message(template="utter_summarize_skills")
-            events.extend([SlotSet("said_hi", True)])
 
         if not shown_privacypolicy:
             dispatcher.utter_message(template="utter_inform_privacypolicy")
-            events.extend([SlotSet("shown_privacypolicy", True)])
 
         buttons = []
 
@@ -409,6 +396,18 @@ class ActionHi(Action):
         dispatcher.utter_message(
             text="Please select one of these options", buttons=buttons
         )
+
+        # Make sure to clean up slots from all previous forms
+        events.append(SlotSet("cause_damage_question", None))
+        events.append(SlotSet("chatgoal_value", None))
+        events.append(SlotSet("found_result", None))
+        events.append(SlotSet("pest_causes_damage", None))
+        events.append(SlotSet("pest_damage_description", None))
+        events.append(SlotSet("pest_name", None))
+        events.append(SlotSet("pest_problem_description", None))
+        events.append(SlotSet("rating_value", None))
+        events.append(SlotSet("said_hi", True))
+        events.append(SlotSet("shown_privacypolicy", True))
 
         return events
 
@@ -462,14 +461,18 @@ class FormQueryKnowledgeBase(FormAction):
 
         return {
             "pest_problem_description": [
-                self.from_text(not_intent="intent_garbage_inputs")
+                self.from_text(
+                    not_intent=["intent_garbage_inputs", "intent_configure_bot"]
+                )
             ],
             "pest_causes_damage": [
                 self.from_intent(value="yes", intent="intent_yes"),
                 self.from_intent(value="no", intent="intent_no"),
             ],
             "pest_damage_description": [
-                self.from_text(not_intent="intent_garbage_inputs")
+                self.from_text(
+                    not_intent=["intent_garbage_inputs", "intent_configure_bot"]
+                )
             ],
         }
 
@@ -522,8 +525,8 @@ class FormQueryKnowledgeBase(FormAction):
                 pest_problem_description,
                 pest_damage_description,
                 ac.ipmdata_index_name,
-                ac.bot_config_weight_description,
-                ac.bot_config_weight_damage,
+                float(tracker.get_slot("bot_config_weight_description")),
+                float(tracker.get_slot("bot_config_weight_damage")),
                 print_summary=False,
             )
 
@@ -532,78 +535,32 @@ class FormQueryKnowledgeBase(FormAction):
                 hit
                 for hit in hits
                 if (
-                    hit["_score"] >= ac.bot_config_score_threshold
-                    or hit["_score_w_damage"] >= ac.bot_config_score_threshold
+                    hit["_score_weighted"]
+                    >= float(tracker.get_slot("bot_config_score_threshold"))
                 )
             ]
 
-            def create_text_for_pest(i, hit):
-                name = hit["_source"]["name"]
-                score_weighted = hit["_score_weighted"]
-                score = hit["_score"]
-                score_w_damage = hit["_score_w_damage"]
-                pn_url = hit["_source"]["urlPestNote"]
-                qt_url = hit["_source"]["urlQuickTip"]
-                # pn_image = None
-                # if hit["best_image"]:
-                #    pn_image = hit["best_image"]["src"]
-                #    pn_image_caption = hit["best_image"]["caption"]
-
-                # if pn_image:
-                #    text = f"{name}: {pn_image_caption}\n"
-                # else:
-                #    text = f"{name}\n"
-                text = f"\n({i}) Name of the pest: {name}\n"
-
-                if qt_url:
-                    text = f"{text}    - [quick tips]({qt_url})\n"
-                if pn_url:
-                    text = f"{text}    - [pestnote]({pn_url})\n"
-
-                if hit["best_video"]:
-                    video_title = hit["best_video"]["videoTitle"]
-                    video_link = hit["best_video"]["videoLink"]
-                    text = f"{text}    - [video: '{video_title}']({video_link})\n\n"
-
-                text = (
-                    f"{text}    - weighted similarity score   = "
-                    f"{score_weighted:.1f}\n"
-                )
-                text = (
-                    f"{text}    --> score for description     = "
-                    f"{score:.1f} ({ac.bot_config_weight_description:.2f})\n"
-                )
-                text = (
-                    f"{text}    --> score for damage          = "
-                    f"{score_w_damage:.1f} ({ac.bot_config_weight_damage:.2f})\n"
-                )
-                return text
-
             if len(hits_filtered) == 0:
                 text = (
-                    "Sorry, I did not find anything within the scoring threshold\n"
-                    "The closest match is: "
+                    "Notes for tester:\n"
+                    "I did not find anything within the scoring threshold\n"
+                    "The closest match is: \n"
                 )
-                text = text + create_text_for_pest(1, hits[0])
+                text = text + create_text_for_pest(hits[0], tracker)
                 dispatcher.utter_message(text=text)
 
-                return [
-                    SlotSet("found_result", "no"),
-                    next_intent_events("intent_ask_handoff_to_expert"),
-                ]
+                return [SlotSet("found_result", "no")]
 
             # List only the top 3
             text = (
-                "I found some results. "
-                "Please click the links below for more details:\n"
+                "I think I found something that could help you. "
+                "Please click the links below for more details:"
             )
-            for i, hit in enumerate(hits_filtered[:3]):
-                text = text + create_text_for_pest(i + 1, hit)
+            dispatcher.utter_message(text=text)
 
+            for hit in hits_filtered[:3]:
+                dispatcher.utter_message(text=create_text_for_pest(hit, tracker))
                 # dispatcher.utter_message(text=text, image=pn_image)
-                dispatcher.utter_message(text=text)
-
-                text = "\n"
 
             return [SlotSet("found_result", "yes")]
 
@@ -616,81 +573,23 @@ class FormQueryKnowledgeBase(FormAction):
             f"{pest_damage_description}"
         )
         dispatcher.utter_message(message)
-        return [SlotSet("found_result", "no")]
+        return [SlotSet("found_result", "yes")]
 
 
-async def tag_convo(tracker: Tracker, label: Text) -> None:
-    """Tag a conversation in Rasa X with a given label"""
-    endpoint = f"http://{ac.rasa_x_host}/api/conversations/{tracker.sender_id}/tags"
-    if not USE_AIOHTTP:
-        try:
-            response = requests.post(url=endpoint, data=label)
-            logger.debug("Response status code: %s", response.status_code)
-        except requests.exceptions.ConnectionError as e:
-            logger.error("Rasa X connection error: %s", e)
-    else:
-        logger.info("using aiohttp module")
-        # https://docs.aiohttp.org/en/stable/client_quickstart.html#make-a-request
-        async with aiohttp.ClientSession() as session:
-            async with session.post(url=endpoint, data=label) as response:
-                logger.debug("Response status code %s", response.status)
+class ActionConfigureBot(Action):
+    """Configure the bot by setting the bot_config_----  slots.
+    
+    If a slot is already defined, we leave it as is.
+    Else, we set it using the default value.
+    """
 
-
-class ActionTagRating(Action):
-    """Tag rating of the conversation in Rasa X"""
-
-    def name(self):
-        return "action_tag_rating"
+    def name(self) -> Text:
+        return "action_configure_bot"
 
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
 
-        rating_string = tracker.get_slot("rating_value")
-
-        if rating_string not in ["1", "2", "3", "4", "5"]:
-            logger.debug("Wrong rating %s. Will not tag in Rasa X", rating_string)
-            return []
-
-        rating = int(rating_string)
-        # https://www.color-hex.com/color-palette/30630
-        colors = ["ff4545", "ffa534", "ffe234", "b7dd29", "57e32c"]
-        # Example for label:
-        # '[{"value":"rating=2","color":"ffa534"}]'
-        label = (
-            '[{"value":"rating='
-            + f"{rating}"
-            + '","color":"'
-            + f"{colors[rating-1]}"
-            + '"}]'
-        )
-        await tag_convo(tracker, label)
-
-        # return []
-        # Start a new session by sending the session_start intent
-        return next_intent_events("session_start")
-
-
-class ActionSessionStart(Action):
-    """Greet the user right away when a session starts, not waiting until the
-    user says something first."""
-
-    def name(self) -> Text:
-        """Overwrite the default action_session_start"""
-        return "action_session_start"
-
-    @staticmethod
-    def fetch_slots(tracker: Tracker) -> List[EventType]:
-        """Collect the slots you want to carry over to the next session."""
-
-        slots = []
-
-        for key in ["shown_privacypolicy", "said_hi", "explained_ipm"]:
-            value = tracker.get_slot(key)
-            if value is not None:
-                slots.append(SlotSet(key=key, value=value))
-
-        logger.debug("Fetched slots = %s", pprint.pformat(slots))
-
         # if not yet configured, set default bot configurations
+        events = []
         for key in [
             "bot_config_weight_description",
             "bot_config_weight_damage",
@@ -701,55 +600,18 @@ class ActionSessionStart(Action):
             value = tracker.get_slot(key)
             value_default = getattr(ac, key)
             if value is None:
-                slots.append(SlotSet(key=key, value=value_default))
-
-        return slots
-
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[EventType]:
-
-        # the session should begin with a `session_started` event
-        events = [SessionStarted()]
-
-        # any slots that should be carried over should come after the
-        # `session_started` event
-        events.extend(self.fetch_slots(tracker))
-
-        # pretend user also said 'hi'
-        events.extend(next_intent_events("intent_hi"))
+                events.append(SlotSet(key=key, value=value_default))
 
         return events
 
 
-class ActionRestart(Action):
-    """Restart the session"""
+class ActionListBotConfiguration(Action):
+    """List the bot configuration"""
 
     def name(self) -> Text:
-        return "action_restart"
-
-    async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[EventType]:
-
-        return [Restarted(), FollowupAction("action_session_start")]
-
-
-class ActionConfigureBot(Action):
-    """Configure the bot"""
-
-    def name(self) -> Text:
-        return "action_configure_bot"
+        return "action_list_bot_configuration"
 
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
-        # To need to redefine slots, because it is done via entity->slot mapping
-        # Just summarize the new configurations for the user
         dispatcher.utter_message(text=summarize_bot_configuration(tracker))
         return []
 
@@ -764,21 +626,69 @@ def summarize_bot_configuration(tracker) -> str:
         "bot_config_urlprivacy",
     ]
 
-    message = (
-        "\n---------------------------------------------------\n"
-        "Bot Configuration (provided for testing purposes):\n"
-    )
+    message = "\nNotes for tester:\n"
     for key in keys:
         message = message + f"- {key} = {tracker.get_slot(key)}\n"
 
-    message = (
-        message + "\nOverwrite default bot configuration by sending this message:\n"
-    )
-    message = message + "/intent_configure_bot:"
     mydict = {}
     for key in keys:
         mydict[key] = str(tracker.get_slot(key))
-    message = message + json.dumps(mydict) + "\n"
-    message = message + "---------------------------------------------------\n\n"
+
+    message = message + "\nOverwrite with:\n"
+    for key in keys:
+        message = (
+            message
+            + "/intent_configure_bot"
+            + json.dumps({key: str(tracker.get_slot(key))})
+            + "\n"
+        )
 
     return message
+
+
+def create_text_for_pest(hit, tracker) -> str:
+    """Prepares a message for the user"""
+    name = hit["_source"]["name"]
+    score_weighted = hit["_score_weighted"]
+    score = hit["_score"]
+    score_damage = hit["_score_damage"]
+    pn_url = hit["_source"]["urlPestNote"]
+    qt_url = hit["_source"]["urlQuickTip"]
+    # pn_image = None
+    # if hit["best_image"]:
+    #    pn_image = hit["best_image"]["src"]
+    #    pn_image_caption = hit["best_image"]["caption"]
+
+    # if pn_image:
+    #    text = f"{name}: {pn_image_caption}\n"
+    # else:
+    #    text = f"{name}\n"
+    text = f"{name}\n"
+
+    if qt_url:
+        text = f"{text}- [quick tips]({qt_url})\n"
+    if pn_url:
+        text = f"{text}- [pestnote]({pn_url})\n"
+
+    if hit["best_video"]:
+        video_title = hit["best_video"]["videoTitle"]
+        video_link = hit["best_video"]["videoLink"]
+        text = f"{text}- [video: '{video_title}']({video_link})\n\n"
+
+    text = f"{text}Notes for tester:\n"
+    text = f"{text}- weighted similarity score = {score_weighted:.1f}\n"
+    text = f"{text}- score for description = {score:.1f}\n"
+    text = f"{text}- score for damage = {score_damage:.1f}\n"
+    text = (
+        f"{text}- weight for description = "
+        f"{float(tracker.get_slot('bot_config_weight_description')):.2f}\n"
+    )
+    text = (
+        f"{text}- weight for damage = "
+        f"{float(tracker.get_slot('bot_config_weight_damage')):.2f}\n"
+    )
+    text = (
+        f"{text}- score threshold = "
+        f"{float(tracker.get_slot('bot_config_score_threshold')):.2f}\n"
+    )
+    return text
