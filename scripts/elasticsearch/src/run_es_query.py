@@ -10,6 +10,7 @@ from actions import actions_config as ac
 # Select the index to create by uncommenting one of these
 # INDEX_NAME = 'posts'
 INDEX_NAME = "ipmdata"
+# INDEX_NAME = "ipmdata-dev"
 
 
 def run_query_loop():

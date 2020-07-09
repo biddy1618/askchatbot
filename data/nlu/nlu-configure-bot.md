@@ -1,0 +1,11 @@
+## intent:intent_configure_bot
+- bot_config_botname: [the Extension Bot](bot_config_botname)
+- bot_config_score_threshold: [1.4](bot_config_score_threshold)
+- bot_config_urlprivacy: [https://ucanr.edu/?privacyStatement](bot_config_urlprivacy)
+- bot_config_weight_damage: [0.3](bot_config_weight_damage)
+- bot_config_weight_description: [0.7](bot_config_weight_description)
+- bot_config_botname = [the Extension Bot](bot_config_botname)
+- bot_config_score_threshold = [1.4](bot_config_score_threshold)
+- bot_config_urlprivacy = [https://ucanr.edu/?privacyStatement](bot_config_urlprivacy)
+- bot_config_weight_damage = [0.3](bot_config_weight_damage)
+- bot_config_weight_description = [0.7](bot_config_weight_description)

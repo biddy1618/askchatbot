@@ -30,7 +30,7 @@ def index_data():
     """Create the index"""
     if index_name == "posts":
         index_data_posts()
-    elif index_name == "ipmdata":
+    elif index_name in ["ipmdata", "ipmdata-dev"]:
         index_data_ipmdata()
     else:
         raise Exception(f"Not implemented for index_name = {index_name}")
@@ -143,8 +143,8 @@ def index_batch_ipmdata(docs):
     qt_contents = [doc["contentQuickTips"] for doc in docs]
     qt_content_vectors = ac.embed(qt_contents).numpy()
 
-    # damage by itself does not work.
-    # encode it together with name, description, life_cycle
+    # damage by itself might not work.
+    # also encode it together with name, description, life_cycle
     pn_ndl_damage = [
         doc["name"]
         + doc["descriptionPestNote"]

@@ -1,8 +1,5 @@
 intents:
   - intent_configure_bot
-  - start
-  - session_start
-  - restart
   - intent_hi
   - intent_bye
   - intent_yes
@@ -68,11 +65,9 @@ slots:
 
 actions:
   - action_configure_bot
-  - action_session_start
-  - action_restart
+  - action_list_bot_configuration
   - action_hi
   - action_explain_ipm
-  - action_tag_rating
   - action_ask_handoff_to_expert
   
 forms:
@@ -116,7 +111,10 @@ responses:
          You can find more details [here](https://www2.ipm.ucanr.edu/What-is-IPM/).
   
   utter_bye:
-  - text: Bye!
+  - text: Bye!  (To continue, say 'hi')
+  
+  utter_thanks:
+  - text: Thanks!
   
   utter_you_are_welcome:
   - text: You are welcome!
