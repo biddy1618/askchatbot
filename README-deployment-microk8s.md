@@ -54,6 +54,12 @@ Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-i
 - Build docker image with correct tag 
 
   ```bash
+  # get latest version of the github repo
+  git status
+  git stash push
+  git pull
+  git stash pop
+  
   # build docker image
   sudo docker-compose build
   
@@ -168,6 +174,7 @@ helm repo update
 
 # Deploy
 h install my-release --values values.yml rasa-x/rasa-x
+=> do not forget to upload the model
 ```
 
 ###### Add `hostAliases` to `my-release-app` deployment
@@ -269,6 +276,7 @@ k create --dry-run=client -f rasa-x-deployment.yml
 
 # deploy from the yaml
 k create -f rasa-x-deployment.yml
+=> do not forget to upload the model
 
 # to update after modifying a resource
 k apply -f rasa-x-deployment.yml
@@ -304,6 +312,7 @@ When you have a modification to `rasa-x-deployment.yml` , issue this command to 
 ```bash
 # to update after modifying a resource
 k apply -f rasa-x-deployment.yml
+=> do not forget to upload the model
 ```
 
 ##### Redeploy a new action server
@@ -316,6 +325,7 @@ If the tag has not changed, then you must restart the app's deployment, by scali
 # k get deployments
 k scale deployment my-release-app --replicas=0  # wait until it is gone
 k scale deployment my-release-app --replicas=1
+=> do not forget to upload the model
 ```
 
 

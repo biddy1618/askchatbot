@@ -546,8 +546,9 @@ class FormQueryKnowledgeBase(FormAction):
                     "I did not find anything within the scoring threshold\n"
                     "The closest match is: \n"
                 )
-                text = text + create_text_for_pest(hits[0], tracker)
                 dispatcher.utter_message(text=text)
+
+                dispatcher.utter_message(text=create_text_for_pest(hits[0], tracker))
 
                 return [SlotSet("found_result", "no")]
 
@@ -675,7 +676,7 @@ def create_text_for_pest(hit, tracker) -> str:
         video_link = hit["best_video"]["videoLink"]
         text = f"{text}- [video: '{video_title}']({video_link})\n\n"
 
-    text = f"{text}Notes for tester:\n"
+    text = f"{text}\nNotes for tester:\n"
     text = f"{text}- weighted similarity score = {score_weighted:.1f}\n"
     text = f"{text}- score for description = {score:.1f}\n"
     text = f"{text}- score for damage = {score_damage:.1f}\n"
