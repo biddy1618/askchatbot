@@ -322,7 +322,7 @@ When the tag changed, just update `values.yml` and redeploy as described above.
 If the tag has not changed, then you must restart the app's deployment, by scaling it down and back up
 
 ```bash
-# k get deployments
+k get deployments
 k scale deployment my-release-app --replicas=0  # wait until it is gone
 k scale deployment my-release-app --replicas=1
 => do not forget to upload the model
