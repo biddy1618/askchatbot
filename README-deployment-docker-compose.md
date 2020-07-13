@@ -95,7 +95,7 @@ Install Rasa X using these steps:
 
 ```bash
 cd <project-root>/deploy/docker-compose/secret
-curl -sSL -o install.sh https://storage.googleapis.com/rasa-x-releases/0.29.1/install.sh
+curl -sSL -o install.sh https://storage.googleapis.com/rasa-x-releases/0.30.1/install.sh
 sudo bash ./install.sh
 ```
 
@@ -105,9 +105,9 @@ sudo bash ./install.sh
 cd /etc/rasa
 
 sudo vi .env
-RASA_X_VERSION=0.29.1
-RASA_VERSION=1.10.1
-RASA_X_DEMO_VERSION=0.29.1
+RASA_X_VERSION=0.30.1
+RASA_VERSION=1.10.7
+RASA_X_DEMO_VERSION=0.30.1
 
 ```
 
@@ -120,9 +120,8 @@ sudo vi docker-compose.override.yml
 version: '3.4'
 services:
   app:
-    image: askchatbot-action-server:0.0.1
-  extra_hosts:
-    # TODO: use external IP: 34.211.141.190 
+    image: askchatbot-action-server:0.0.2
+  extra_hosts: 
     - "ask-chat-db-dev.i.eduworks.com:34.211.141.190"
 ```
 
@@ -273,3 +272,26 @@ Rasa X is available on: http://35.166.13.105:8000/
 #### Connect Rasa X to gitlab ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/integrated-version-control/))
 
 TODO.
+
+
+
+### Maintain disk space
+
+The disk space will keep going up, and these are some typical maintenance steps to check & reduce.
+
+```bash
+# check available disk space
+df -h /
+
+# find large files on disk
+sudo du -cha --max-depth=1 / | grep -E "M|G" | sort -h
+```
+
+#### Docker containers & images 
+
+```bash
+# clean up docker  (this is safe)
+sudo docker system prune
+```
+
+#### 

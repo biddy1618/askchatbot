@@ -328,7 +328,13 @@ k scale deployment my-release-app --replicas=1
 => do not forget to upload the model
 ```
 
+##### Upload & activate a trained model
 
+Log into Rasa X at http://35.166.13.105:8001
+
+Go to the `models` screen, and click on `upload model`
+
+Upload a trained model from your local computer.
 
 #### Check deployment progress
 
