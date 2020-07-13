@@ -1,9 +1,9 @@
 version: '3.4'
 services:
   app:
-    image: askchatbot-action-server:0.0.1
+    image: askchatbot-action-server:0.0.2
     extra_hosts:
-      - "ask-chat-db-dev.i.eduworks.com:10.1.100.49"
+      - "ask-chat-db-dev.i.eduworks.com:34.211.141.190"
   nginx:
     ports:
       - "8000:8080"

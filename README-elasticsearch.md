@@ -7,7 +7,7 @@ Details, including password, can be found in this [Jira Ticket](https://jira.edu
 For the Elasticsearch ec2 instance, on the connecting machine add to /etc/hosts:
 
 ```bash
-10.1.100.49 ask-chat-db-dev.i.eduworks.com
+34.211.141.190 ask-chat-db-dev.i.eduworks.com
 ```
 
 - User: elastic

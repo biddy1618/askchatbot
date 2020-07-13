@@ -74,7 +74,7 @@ sudo docker-compose build
 
 # To quickly test that the container starts up
 # TODO: use external IP for --add-host: 34.211.141.190 
-sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:10.1.100.49 askchatbot-action-server:0.0.1
+sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 askchatbot-action-server:0.0.1
 
 curl http://<hostname>:5055/actions
 
@@ -123,7 +123,7 @@ services:
     image: askchatbot-action-server:0.0.1
   extra_hosts:
     # TODO: use external IP: 34.211.141.190 
-    - "ask-chat-db-dev.i.eduworks.com:10.1.100.49"
+    - "ask-chat-db-dev.i.eduworks.com:34.211.141.190"
 ```
 
 

@@ -6,7 +6,6 @@ intents:
   - intent_no
   - intent_chatgoal
   - intent_inform
-  - intent_rating
   - intent_ask_handoff_to_expert
   - intent_thanks
   - intent_garbage_inputs
@@ -135,15 +134,15 @@ responses:
   
   utter_request_rating:
   - buttons:
-    - payload: /intent_rating{"rating_value":"1"}
+    - payload: /intent_inform
       title: "1"
-    - payload: /intent_rating{"rating_value":"2"}
+    - payload: /intent_inform
       title: "2"
-    - payload: /intent_rating{"rating_value":"3"}
+    - payload: /intent_inform
       title: "3"
-    - payload: /intent_rating{"rating_value":"4"}
+    - payload: /intent_inform
       title: "4"
-    - payload: /intent_rating{"rating_value":"5"}
+    - payload: /intent_inform
       title: "5"
     text: To help me improve, please rate this response (1=bad, 5=great)?
 

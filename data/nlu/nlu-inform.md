@@ -101,6 +101,11 @@
 - their bites are painful
 - tiny [ants](pest_name) in the kitchen
 - white [fuzz](pest_name) on apple tree leaves
+- 1
+- 2
+- 3
+- 4
+- 5
 
 
 ## lookup:pest_name

@@ -34,7 +34,7 @@ search-size: 5
 
 # the tfhub pre-trained embedding to use
 tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder/4"
-tfhub-cache-dir: "/tmp/tfhub_modules"
+tfhub-cache-dir: "/var/tmp/tfhub_modules"
 
 # index name of ipmdata queries
 ipmdata-index-name: "ipmdata"

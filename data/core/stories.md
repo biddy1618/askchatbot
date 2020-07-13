@@ -78,7 +78,7 @@
     - form{"name": null}
     - slot{"found_result": "yes"}
     - utter_request_rating
-* intent_rating
+* intent_inform
     - utter_thanks
     - utter_bye
     
@@ -119,7 +119,7 @@
     - form{"name": null}
     - slot{"found_result": "yes"}
     - utter_request_rating
-* intent_rating
+* intent_inform
     - utter_thanks
     - utter_bye
     
@@ -181,7 +181,7 @@
     - form{"name": null}
     - slot{"found_result": "yes"}
     - utter_request_rating
-* intent_rating
+* intent_inform
     - utter_thanks
     - utter_bye
     
