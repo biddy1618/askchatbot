@@ -76,6 +76,8 @@
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "yes"}
     - utter_request_rating
 * intent_inform
@@ -88,11 +90,11 @@
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "no"}
     - action_ask_handoff_to_expert
 * intent_yes
-    - action_deactivate_form
-    - form{"name": null}
     - utter_handoff_to_a_human_expert
     - utter_bye
     
@@ -102,6 +104,8 @@
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "no"}
     - action_ask_handoff_to_expert
 * intent_no
@@ -117,6 +121,8 @@
     - action_list_bot_configuration
     - form_query_knowledge_base
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "yes"}
     - utter_request_rating
 * intent_inform
@@ -133,11 +139,11 @@
     - action_list_bot_configuration
     - form_query_knowledge_base
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "no"}
     - action_ask_handoff_to_expert
 * intent_yes
-    - action_deactivate_form
-    - form{"name": null}
     - utter_handoff_to_a_human_expert
     - utter_bye
     
@@ -151,6 +157,8 @@
     - action_list_bot_configuration
     - form_query_knowledge_base
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "no"}
     - action_ask_handoff_to_expert
 * intent_no
@@ -166,6 +174,7 @@
 * intent_yes
     - action_deactivate_form
     - form{"name": null}
+    - slot{"hits_summaries": []}
     - utter_handoff_to_a_human_expert
     - utter_bye
     
@@ -179,6 +188,8 @@
 * intent_no
     - form_query_knowledge_base
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "yes"}
     - utter_request_rating
 * intent_inform
@@ -195,11 +206,11 @@
 * intent_no
     - form_query_knowledge_base
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "no"}
     - action_ask_handoff_to_expert
 * intent_yes
-    - action_deactivate_form
-    - form{"name": null}
     - utter_handoff_to_a_human_expert
     - utter_bye
     
@@ -213,6 +224,8 @@
 * intent_no
     - form_query_knowledge_base
     - form{"name": null}
+    - slot{"hits_summaries": []}
+    - action_present_hits
     - slot{"found_result": "no"}
     - action_ask_handoff_to_expert
 * intent_no

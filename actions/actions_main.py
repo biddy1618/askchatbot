@@ -529,52 +529,67 @@ class FormQueryKnowledgeBase(FormAction):
                 float(tracker.get_slot("bot_config_weight_damage")),
                 print_summary=False,
             )
+        else:
+            message = (
+                f"Not doing an actual elastic search query.\n"
+                f"A query with the following details would be done: \n"
+                f"pest problem description = "
+                f"{pest_problem_description}\n"
+                f"pest damage description = "
+                f"{pest_damage_description}"
+            )
+            dispatcher.utter_message(message)
+            hits = []
 
-            # Filter to threshold
-            hits_filtered = [
-                hit
-                for hit in hits
-                if (
-                    hit["_score_weighted"]
-                    >= float(tracker.get_slot("bot_config_score_threshold"))
-                )
-            ]
+        hits_summaries = summarize_hits(hits, tracker)
+        return [SlotSet("hits_summaries", hits_summaries)]
 
-            if len(hits_filtered) == 0:
-                text = (
+
+class ActionPresentHits(Action):
+    """Present the hits to the user"""
+
+    def name(self) -> Text:
+        return "action_present_hits"
+
+    async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        hits_summaries = tracker.get_slot("hits_summaries")
+
+        found_result = "no"
+
+        # List only the top 3
+        messages = []
+        for hit_summary in hits_summaries[:3]:
+            if hit_summary["_score_weighted"] < float(
+                tracker.get_slot("bot_config_score_threshold")
+            ):
+                # we always do show the first hit to the tester
+                if not messages:
+                    messages.append(hit_summary["message"])
+                break
+            found_result = "yes"
+            messages.append(hit_summary["message"])
+
+        if found_result == "yes":
+            header = (
+                "I think I found something that could help you. "
+                "Please click the links below for more details:"
+            )
+        else:
+            if messages:
+                header = (
                     "Notes for tester:\n"
                     "I did not find anything within the scoring threshold\n"
                     "The closest match is: \n"
                 )
-                dispatcher.utter_message(text=text)
+            else:
+                header = "Notes for tester:\nI did not find anything.\n"
 
-                dispatcher.utter_message(text=create_text_for_pest(hits[0], tracker))
+        dispatcher.utter_message(text=header)
+        for message in messages:
+            dispatcher.utter_message(text=message)
+            # dispatcher.utter_message(text=message, image=pn_image)
 
-                return [SlotSet("found_result", "no")]
-
-            # List only the top 3
-            text = (
-                "I think I found something that could help you. "
-                "Please click the links below for more details:"
-            )
-            dispatcher.utter_message(text=text)
-
-            for hit in hits_filtered[:3]:
-                dispatcher.utter_message(text=create_text_for_pest(hit, tracker))
-                # dispatcher.utter_message(text=text, image=pn_image)
-
-            return [SlotSet("found_result", "yes")]
-
-        message = (
-            f"Not doing an actual elastic search query.\n"
-            f"A query with the following details would be done: \n"
-            f"pest problem description = "
-            f"{pest_problem_description}\n"
-            f"pest damage description = "
-            f"{pest_damage_description}"
-        )
-        dispatcher.utter_message(message)
-        return [SlotSet("found_result", "yes")]
+        return [SlotSet("found_result", found_result)]
 
 
 class ActionConfigureBot(Action):
@@ -645,6 +660,24 @@ def summarize_bot_configuration(tracker) -> str:
         )
 
     return message
+
+
+def summarize_hits(hits, tracker) -> list:
+    """Create a list of dictionaries, where each dictionary contains those items we
+    want to use when presenting the hits in a conversational manner to the user."""
+    hits_summaries = []
+    if not hits:
+        return hits_summaries
+
+    for hit in hits:
+        hit_summary = {}
+
+        hit_summary["_score_weighted"] = hit["_score_weighted"]
+        hit_summary["message"] = create_text_for_pest(hit, tracker)
+
+        hits_summaries.append(hit_summary)
+
+    return hits_summaries
 
 
 def create_text_for_pest(hit, tracker) -> str:

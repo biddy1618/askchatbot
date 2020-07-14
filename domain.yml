@@ -59,7 +59,9 @@ slots:
   pest_damage_description:
     type: unfeaturized
   rating_value:
-    type: unfeaturized  
+    type: unfeaturized 
+  hits_summaries:
+    type: list
   
 
 actions:
@@ -68,6 +70,7 @@ actions:
   - action_hi
   - action_explain_ipm
   - action_ask_handoff_to_expert
+  - action_present_hits
   
 forms:
   - form_query_knowledge_base
