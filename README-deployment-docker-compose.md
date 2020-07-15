@@ -74,9 +74,9 @@ sudo docker-compose build
 
 # To quickly test that the container starts up
 # TODO: use external IP for --add-host: 34.211.141.190 
-sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 askchatbot-action-server:0.0.1
+sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 askchatbot-action-server:0.0.3
 
-curl http://<hostname>:5055/actions
+curl http://localhost:5055/actions
 
 # use rasa shell to do a quick query, making sure it can reach the elasticsearch host
 rasa shell

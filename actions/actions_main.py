@@ -584,7 +584,7 @@ class FormPresentHits(FormAction):
             return {
                 "pests_summaries": value,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": pest_summary,
+                "pest_summary": pest_summary + "\n",
             }
 
         # we have nothing to present
@@ -615,7 +615,7 @@ class FormPresentHits(FormAction):
             return {
                 "pest_summary_and_did_this_help": None,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": self.pest_summary(pests_summaries_index, tracker),
+                "pest_summary": pest_summary + "\n",
             }
 
         # we have nothing more to present
@@ -788,7 +788,7 @@ def summarize_bot_configuration(tracker) -> str:
                 + "\n"
             )
     else:
-        message = "To debug, type:"
+        message = "To debug:\n"
         message = (
             message
             + "/intent_configure_bot"
