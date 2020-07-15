@@ -62,12 +62,14 @@ For now, we build the docker image on the VM, and do not push it to a docker reg
 ```bash
 cd <project-root>
 
+# get latest version of the github repo
+git status
+git stash push
+git pull
+git stash pop
+
 #
 # Edit the file: ./actions/bot_config.yml > select the correct elasticsearch host!
-
-# Edit the file: ./actions/actions_config.py
-#  (-) If Rasa X is not deployed in same docker network, you can set rasa_x_host here.
-#
 
 # Build the image
 sudo docker-compose build
@@ -293,5 +295,3 @@ sudo du -cha --max-depth=1 / | grep -E "M|G" | sort -h
 # clean up docker  (this is safe)
 sudo docker system prune
 ```
-
-#### 

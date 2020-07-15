@@ -584,7 +584,7 @@ class FormPresentHits(FormAction):
             return {
                 "pests_summaries": value,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": pest_summary + "\n",
+                "pest_summary": pest_summary + "\nDid this help?",
             }
 
         # we have nothing to present
@@ -615,7 +615,7 @@ class FormPresentHits(FormAction):
             return {
                 "pest_summary_and_did_this_help": None,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": pest_summary + "\n",
+                "pest_summary": pest_summary + "\nDid this help?",
             }
 
         # we have nothing more to present
