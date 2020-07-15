@@ -679,8 +679,7 @@ class FormPresentHits(FormAction):
                         "I did not find anything within the scoring threshold\n"
                         "The closest match is: \n"
                     )
-                else:
-                    header = "Notes for tester:\nI did not find anything.\n"
+                    found_result = "yes"
 
         elif i == 1:
             if found_result == "yes":
