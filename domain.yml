@@ -150,10 +150,10 @@ responses:
   utter_ask_pest_summary_and_did_this_help:
   - buttons:
     - payload: /intent_yes
-      title: "Yes"
+      title: 👍
     - payload: /intent_no
-      title: "No"
-    text: "{pest_summary} Did this help?"
+      title: 👎
+    text: "{pest_summary}"
   
 session_config:
   session_expiration_time: 60
