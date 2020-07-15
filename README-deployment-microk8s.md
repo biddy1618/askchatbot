@@ -65,10 +65,10 @@ Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-i
   
   # then tag it for use in the microk8s built-in registry
   sudo docker images
-  sudo docker tag 1fe3d8f47868 localhost:32000/askchatbot-action-server:0.0.2
+  sudo docker tag 1fe3d8f47868 localhost:32000/askchatbot-action-server:0.0.3
   
   # To quickly test that the container starts up
-  sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 localhost:32000/askchatbot-action-server:0.0.2
+  sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 localhost:32000/askchatbot-action-server:0.0.3
   
   curl http://<hostname>:5055/actions
   ```
@@ -160,7 +160,7 @@ Add this to your `values.yml`
 app:
     # microk8s build-in registry
     name: "localhost:32000/askchatbot-action-server"
-    tag: "0.0.2"
+    tag: "0.0.3"
 ```
 
 #### Deploy  ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#quick-install))
@@ -218,7 +218,7 @@ spec:
          hostnames:
          - ask-chat-db-dev.i.eduworks.com
       containers:
-      - image: localhost:32000/askchatbot-action-server:0.0.2
+      - image: localhost:32000/askchatbot-action-server:0.0.3
         .
 
 #####################################################################
@@ -268,7 +268,7 @@ spec:
          hostnames:
          - ask-chat-db-dev.i.eduworks.com
       containers:
-      - image: localhost:32000/askchatbot-action-server:0.0.2
+      - image: localhost:32000/askchatbot-action-server:0.0.3
         .
 
 # check correctness of yaml

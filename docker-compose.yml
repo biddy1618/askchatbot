@@ -2,6 +2,6 @@ version: '3.4'
 services:
   askchatbot-action-server:
     build: .
-    image: askchatbot-action-server:0.0.2
+    image: askchatbot-action-server:0.0.3
     expose:
       - "5055"

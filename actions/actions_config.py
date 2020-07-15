@@ -68,6 +68,7 @@ logger.info("Done loading embedding module %s", tfhub_embedding_url)
 ##############################
 # Default bot configurations #
 ##############################
+bot_config_debug = botconfig.get("bot-config-debug")
 bot_config_weight_description = botconfig.get("bot-config-weight-description")
 bot_config_weight_damage = botconfig.get("bot-config-weight-damage")
 bot_config_score_threshold = botconfig.get("bot-config-score-threshold")
@@ -76,6 +77,7 @@ bot_config_urlprivacy = botconfig.get("bot-config-urlprivacy")
 
 logger.info("----------------------------------------------")
 logger.info("Bot configuration:")
+logger.info("- bot_config_debug              = %s", bot_config_debug)
 logger.info("- bot_config_weight_description = %s", bot_config_weight_description)
 logger.info("- bot_config_weight_damage      = %s", bot_config_weight_damage)
 logger.info("- bot_config_score_threshold    = %s", bot_config_score_threshold)

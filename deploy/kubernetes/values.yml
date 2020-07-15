@@ -10,7 +10,7 @@ nginx:
 app:
     # microk8s build-in registry
     name: "localhost:32000/askchatbot-action-server"
-    tag: "0.0.2"
+    tag: "0.0.3"
 # rasax specific settings
 rasax:
     # initialUser is the user which is created upon the initial start of Rasa X

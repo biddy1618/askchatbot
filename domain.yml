@@ -12,6 +12,7 @@ intents:
   
 
 entities:
+  - bot_config_debug
   - bot_config_weight_description
   - bot_config_weight_damage
   - bot_config_score_threshold
@@ -22,6 +23,8 @@ entities:
   - rating_value
   
 slots:
+  bot_config_debug:
+    type: unfeaturized
   bot_config_weight_description:
     type: unfeaturized
   bot_config_weight_damage:
@@ -59,7 +62,15 @@ slots:
   pest_damage_description:
     type: unfeaturized
   rating_value:
-    type: unfeaturized  
+    type: unfeaturized 
+  pests_summaries:
+    type: unfeaturized
+  pests_summaries_index:
+    type: unfeaturized
+  pest_summary:
+    type: unfeaturized
+  pest_summary_and_did_this_help:
+    type: unfeaturized
   
 
 actions:
@@ -71,6 +82,7 @@ actions:
   
 forms:
   - form_query_knowledge_base
+  - form_present_hits
   
 responses:
   utter_hi:
@@ -115,6 +127,9 @@ responses:
   utter_thanks:
   - text: Thanks!
   
+  utter_great:
+  - text: Great!
+  
   utter_you_are_welcome:
   - text: You are welcome!
   
@@ -132,20 +147,14 @@ responses:
   utter_ask_pest_damage_description:
   - text: Please describe the damage
   
-  utter_request_rating:
+  utter_ask_pest_summary_and_did_this_help:
   - buttons:
-    - payload: /intent_inform
-      title: "1"
-    - payload: /intent_inform
-      title: "2"
-    - payload: /intent_inform
-      title: "3"
-    - payload: /intent_inform
-      title: "4"
-    - payload: /intent_inform
-      title: "5"
-    text: To help me improve, please rate this response (1=bad, 5=great)?
-
+    - payload: /intent_yes
+      title: "Yes"
+    - payload: /intent_no
+      title: "No"
+    text: "{pest_summary}\n Did this help?"
+  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

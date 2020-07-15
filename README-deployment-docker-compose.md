@@ -120,7 +120,7 @@ sudo vi docker-compose.override.yml
 version: '3.4'
 services:
   app:
-    image: askchatbot-action-server:0.0.2
+    image: askchatbot-action-server:0.0.3
   extra_hosts: 
     - "ask-chat-db-dev.i.eduworks.com:34.211.141.190"
 ```

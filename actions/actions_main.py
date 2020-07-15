@@ -3,6 +3,7 @@
 import logging
 import json
 from typing import Any, Text, Dict, List, Union
+from distutils.util import strtobool
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.forms import FormAction
@@ -405,7 +406,14 @@ class ActionHi(Action):
         events.append(SlotSet("pest_damage_description", None))
         events.append(SlotSet("pest_name", None))
         events.append(SlotSet("pest_problem_description", None))
+
         events.append(SlotSet("rating_value", None))
+
+        events.append(SlotSet("pests_summaries", None))
+        events.append(SlotSet("pests_summaries_index", None))
+        events.append(SlotSet("pest_summary", None))
+        events.append(SlotSet("pest_summary_and_did_this_help", None))
+
         events.append(SlotSet("said_hi", True))
         events.append(SlotSet("shown_privacypolicy", True))
 
@@ -525,56 +533,173 @@ class FormQueryKnowledgeBase(FormAction):
                 pest_problem_description,
                 pest_damage_description,
                 ac.ipmdata_index_name,
-                float(tracker.get_slot("bot_config_weight_description")),
-                float(tracker.get_slot("bot_config_weight_damage")),
+                tracker.get_slot("bot_config_weight_description"),
+                tracker.get_slot("bot_config_weight_damage"),
                 print_summary=False,
             )
-
-            # Filter to threshold
-            hits_filtered = [
-                hit
-                for hit in hits
-                if (
-                    hit["_score_weighted"]
-                    >= float(tracker.get_slot("bot_config_score_threshold"))
-                )
-            ]
-
-            if len(hits_filtered) == 0:
-                text = (
-                    "Notes for tester:\n"
-                    "I did not find anything within the scoring threshold\n"
-                    "The closest match is: \n"
-                )
-                dispatcher.utter_message(text=text)
-
-                dispatcher.utter_message(text=create_text_for_pest(hits[0], tracker))
-
-                return [SlotSet("found_result", "no")]
-
-            # List only the top 3
-            text = (
-                "I think I found something that could help you. "
-                "Please click the links below for more details:"
+        else:
+            message = (
+                f"Not doing an actual elastic search query.\n"
+                f"A query with the following details would be done: \n"
+                f"pest problem description = "
+                f"{pest_problem_description}\n"
+                f"pest damage description = "
+                f"{pest_damage_description}"
             )
-            dispatcher.utter_message(text=text)
+            dispatcher.utter_message(message)
+            hits = []
 
-            for hit in hits_filtered[:3]:
-                dispatcher.utter_message(text=create_text_for_pest(hit, tracker))
-                # dispatcher.utter_message(text=text, image=pn_image)
+        pests_summaries = summarize_hits(hits, tracker)
+        return [SlotSet("pests_summaries", pests_summaries)]
 
-            return [SlotSet("found_result", "yes")]
 
-        message = (
-            f"Not doing an actual elastic search query.\n"
-            f"A query with the following details would be done: \n"
-            f"pest problem description = "
-            f"{pest_problem_description}\n"
-            f"pest damage description = "
-            f"{pest_damage_description}"
-        )
-        dispatcher.utter_message(message)
-        return [SlotSet("found_result", "yes")]
+class FormPresentHits(FormAction):
+    """Present the hits to the user"""
+
+    def name(self) -> Text:
+        return "form_present_hits"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        """A list of required slots that the form has to fill"""
+
+        slots = ["pests_summaries", "pest_summary_and_did_this_help"]
+
+        return slots
+
+    async def validate_pests_summaries(
+        self,
+        value: Text,
+        _dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        _domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """The slot pests_summaries is set before form activation, so we use this method
+        to initialize the presentation logic."""
+
+        pests_summaries_index = 0
+        pest_summary = self.pest_summary(pests_summaries_index, tracker)
+
+        if pest_summary:
+            return {
+                "pests_summaries": value,
+                "pests_summaries_index": pests_summaries_index,
+                "pest_summary": pest_summary,
+            }
+
+        # we have nothing to present
+        return {
+            "pests_summaries": value,
+            "pest_summary_and_did_this_help": "no",
+        }
+
+    async def validate_pest_summary_and_did_this_help(
+        self,
+        value: Text,
+        _dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        _domain: Dict[Text, Any],
+    ) -> Dict[Text, Any]:
+        """After presenting a result and asking if it helps."""
+
+        # helpful, stop here
+        if value == "yes":
+            return {"pest_summary_and_did_this_help": value}
+
+        # not helpful, show more if we can
+        pests_summaries_index = tracker.get_slot("pests_summaries_index") + 1
+        pest_summary = self.pest_summary(pests_summaries_index, tracker)
+
+        if pest_summary:
+            # we have more to present
+            return {
+                "pest_summary_and_did_this_help": None,
+                "pests_summaries_index": pests_summaries_index,
+                "pest_summary": self.pest_summary(pests_summaries_index, tracker),
+            }
+
+        # we have nothing more to present
+        return {"pest_summary_and_did_this_help": value}
+
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        """A dictionary to map required slots to
+            - an extracted entity
+            - intent: value pairs
+            - a whole message
+            or a list of them, where a first match will be picked"""
+
+        return {
+            "pest_summary_and_did_this_help": [
+                self.from_intent(value="yes", intent="intent_yes"),
+                self.from_intent(value="no", intent="intent_no"),
+            ]
+        }
+
+    async def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Once we have presented everything, we 'submit' the form"""
+
+        found_result = tracker.get_slot("pest_summary_and_did_this_help")
+        return [SlotSet("found_result", found_result)]
+
+    @staticmethod
+    def pest_summary(i, tracker: Tracker) -> str:
+        """Prepare the text to show to user
+        Returns None if there is nothing to show
+        """
+        pests_summaries = tracker.get_slot("pests_summaries")
+
+        found_result = "no"
+
+        hit_summary = None
+        if pests_summaries:
+            hit_summary = pests_summaries[i]
+            if hit_summary["_score_weighted"] >= tracker.get_slot(
+                "bot_config_score_threshold"
+            ):
+                found_result = "yes"
+
+        text = None
+
+        header = None
+        if i == 0:
+            if found_result == "yes":
+                header = (
+                    "I think I found something that could help you. "
+                    "Please click the links below for more details:"
+                )
+            elif tracker.get_slot("bot_config_debug"):
+                if hit_summary:
+                    header = (
+                        "Notes for tester:\n"
+                        "I did not find anything within the scoring threshold\n"
+                        "The closest match is: \n"
+                    )
+                else:
+                    header = "Notes for tester:\nI did not find anything.\n"
+
+        elif i == 1:
+            if found_result == "yes":
+                header = "Ok, what about this:"
+        elif i == 2:
+            if found_result == "yes":
+                header = "Mmmm..., I have one more that I think is useful:"
+        else:
+            # Note, we should never get here, but make it robust against that
+            if found_result == "yes":
+                header = "What about this:"
+
+        text = header
+
+        if found_result == "yes":
+            text = f"{text}\n {hit_summary['message']}"
+            # dispatcher.utter_message(text=message, image=pn_image)
+
+        return text
 
 
 class ActionConfigureBot(Action):
@@ -589,9 +714,9 @@ class ActionConfigureBot(Action):
 
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
 
-        # if not yet configured, set default bot configurations
         events = []
         for key in [
+            "bot_config_debug",
             "bot_config_weight_description",
             "bot_config_weight_damage",
             "bot_config_score_threshold",
@@ -599,9 +724,25 @@ class ActionConfigureBot(Action):
             "bot_config_urlprivacy",
         ]:
             value = tracker.get_slot(key)
-            value_default = getattr(ac, key)
-            if value is None:
-                events.append(SlotSet(key=key, value=value_default))
+
+            if value:
+                # Correct the type in the tracker
+                if key in ["bot_config_debug"]:
+                    try:
+                        value = bool(strtobool(str(value)))
+                    except ValueError:
+                        value = False
+                if key in [
+                    "bot_config_weight_description",
+                    "bot_config_weight_damage",
+                    "bot_config_score_threshold",
+                ]:
+                    value = float(value)
+            else:
+                # If not yet configured, set default
+                value = getattr(ac, key)
+
+            events.append(SlotSet(key=key, value=value))
 
         return events
 
@@ -619,32 +760,61 @@ class ActionListBotConfiguration(Action):
 
 def summarize_bot_configuration(tracker) -> str:
     """Prepares a message with the bot configurations in the slots"""
-    keys = [
-        "bot_config_weight_description",
-        "bot_config_weight_damage",
-        "bot_config_score_threshold",
-        "bot_config_botname",
-        "bot_config_urlprivacy",
-    ]
+    bot_config_debug = tracker.get_slot("bot_config_debug")
+    if bot_config_debug:
+        keys = [
+            "bot_config_debug",
+            "bot_config_weight_description",
+            "bot_config_weight_damage",
+            "bot_config_score_threshold",
+            "bot_config_botname",
+            "bot_config_urlprivacy",
+        ]
 
-    message = "\nNotes for tester:\n"
-    for key in keys:
-        message = message + f"- {key} = {tracker.get_slot(key)}\n"
+        message = "\nNotes for tester:\n"
+        for key in keys:
+            message = message + f"- {key} = {tracker.get_slot(key)}\n"
 
-    mydict = {}
-    for key in keys:
-        mydict[key] = str(tracker.get_slot(key))
+        mydict = {}
+        for key in keys:
+            mydict[key] = str(tracker.get_slot(key))
 
-    message = message + "\nOverwrite with:\n"
-    for key in keys:
+        message = message + "\nOverwrite with:\n"
+        for key in keys:
+            message = (
+                message
+                + "/intent_configure_bot"
+                + json.dumps({key: str(tracker.get_slot(key))})
+                + "\n"
+            )
+    else:
+        message = "To debug, type:"
         message = (
             message
             + "/intent_configure_bot"
-            + json.dumps({key: str(tracker.get_slot(key))})
+            + json.dumps({"bot_config_debug": "True"})
             + "\n"
         )
 
     return message
+
+
+def summarize_hits(hits, tracker) -> list:
+    """Create a list of dictionaries, where each dictionary contains those items we
+    want to use when presenting the hits in a conversational manner to the user."""
+    pests_summaries = []
+    if not hits:
+        return pests_summaries
+
+    for hit in hits:
+        hit_summary = {}
+
+        hit_summary["_score_weighted"] = hit["_score_weighted"]
+        hit_summary["message"] = create_text_for_pest(hit, tracker)
+
+        pests_summaries.append(hit_summary)
+
+    return pests_summaries
 
 
 def create_text_for_pest(hit, tracker) -> str:
@@ -676,20 +846,21 @@ def create_text_for_pest(hit, tracker) -> str:
         video_link = hit["best_video"]["videoLink"]
         text = f"{text}- [video: '{video_title}']({video_link})\n\n"
 
-    text = f"{text}\nNotes for tester:\n"
-    text = f"{text}- weighted similarity score = {score_weighted:.1f}\n"
-    text = f"{text}- score for description = {score:.1f}\n"
-    text = f"{text}- score for damage = {score_damage:.1f}\n"
-    text = (
-        f"{text}- weight for description = "
-        f"{float(tracker.get_slot('bot_config_weight_description')):.2f}\n"
-    )
-    text = (
-        f"{text}- weight for damage = "
-        f"{float(tracker.get_slot('bot_config_weight_damage')):.2f}\n"
-    )
-    text = (
-        f"{text}- score threshold = "
-        f"{float(tracker.get_slot('bot_config_score_threshold')):.2f}\n"
-    )
+    if tracker.get_slot("bot_config_debug"):
+        text = f"{text}\nNotes for tester:\n"
+        text = f"{text}- weighted similarity score = {score_weighted:.1f}\n"
+        text = f"{text}- score for description = {score:.1f}\n"
+        text = f"{text}- score for damage = {score_damage:.1f}\n"
+        text = (
+            f"{text}- weight for description = "
+            f"{tracker.get_slot('bot_config_weight_description'):.2f}\n"
+        )
+        text = (
+            f"{text}- weight for damage = "
+            f"{tracker.get_slot('bot_config_weight_damage'):.2f}\n"
+        )
+        text = (
+            f"{text}- score threshold = "
+            f"{tracker.get_slot('bot_config_score_threshold'):.2f}\n"
+        )
     return text
