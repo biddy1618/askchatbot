@@ -40,14 +40,19 @@ tfhub-cache-dir: "/var/tmp/tfhub_modules"
 ipmdata-index-name: "ipmdata"
 # ipmdata-index-name: "ipmdata-dev"
 
-######################################################################
+
 # Default bot configurations                                         #
-# These can be set by the channel, by sending this intent:           #
-#  /intent_configure_bot{"bot_config_weight_description": "0.7", "bot_config_weight_damage": "0.3", "bot_config_score_threshold": "1.4", "bot_config_botname":"the Extension Bot", "bot_config_urlprivacy": "https://ucanr.edu/?privacyStatement/"}
-#  /intent_configure_bot{"bot_config_score_threshold": "1.9"}                                                                  #
-# Once real channel is implemented, this can also be implemented via #
-# a custom REST channel and send it in the metadata                  #
-######################################################################
+# These can be set by the channel, by sending this intent:           
+#  /intent_configure_bot{"bot_config_debug": "True"}  <- gives tester feedback
+#  /intent_configure_bot{"bot_config_debug": "False"} <- does not give tester feedback
+#  /intent_configure_bot{"bot_config_weight_description": "0.8"}
+#  /intent_configure_bot{"bot_config_weight_damage": "0.3"}
+#  /intent_configure_bot{"bot_config_score_threshold": "1.4"}
+#  /intent_configure_bot{"bot_config_botname":"the Extension Bot"}
+#  /intent_configure_bot{"bot_config_urlprivacy": "https://ucanr.edu/?privacyStatement/"}
+# 
+# Later, this can also be implemented via metadata of custom rest channel
+bot-config-debug: False
 bot-config-weight-description: 0.8
 bot-config-weight-damage: 0.2
 bot-config-score-threshold: 1.4
