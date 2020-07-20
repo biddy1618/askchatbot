@@ -75,6 +75,7 @@ actions:
   - action_hi
   - action_explain_ipm
   - action_ask_handoff_to_expert
+  - action_kickoff_intent_i_have_a_pest
   
 forms:
   - form_query_knowledge_base
@@ -150,6 +151,14 @@ responses:
     - payload: /intent_no
       title: 👎
     text: "{pest_summary}"
+    
+  utter_another_pest_problem_i_can_help_with:
+  - buttons:
+    - payload: /intent_yes
+      title: "Yes"
+    - payload: /intent_no
+      title: "No"
+    text: "Do you have another pest problem I can help you with?"
   
 session_config:
   session_expiration_time: 60
