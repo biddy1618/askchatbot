@@ -20,6 +20,20 @@
 * intent_thanks
     - utter_you_are_welcome
 
+## you are confused + lets start over + yes
+* intent_you_are_confused
+    - utter_lets_start_over
+* intent_yes
+    - action_list_bot_configuration
+    - action_hi
+    - slot{"found_result": "None"}
+
+## you are confused + lets start over + no
+* intent_you_are_confused
+    - utter_lets_start_over
+* intent_no
+    - utter_bye
+    
 ## garbage + handoff
 * intent_garbage_inputs
     - action_ask_handoff_to_expert
