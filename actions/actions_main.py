@@ -360,8 +360,6 @@ class ActionHi(Action):
         return "action_hi"
 
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
-        events = []
-
         shown_privacypolicy = tracker.get_slot("shown_privacypolicy")
         said_hi = tracker.get_slot("said_hi")
         explained_ipm = tracker.get_slot("explained_ipm")
@@ -376,47 +374,28 @@ class ActionHi(Action):
         buttons = []
 
         buttons.append(
-            {
-                "title": "I have a pest",
-                "payload": '/intent_chatgoal{"chatgoal_value":"I_have_a_pest"}',
-            }
+            {"title": "I have a pest", "payload": '/intent_i_have_a_pest',}
         )
 
         if not explained_ipm:
             buttons.append(
-                {
-                    "title": "Explain IPM",
-                    "payload": '/intent_chatgoal{"chatgoal_value":"explain_ipm"}',
-                }
+                {"title": "Explain IPM", "payload": '/intent_explain_ipm',}
             )
 
         if said_hi:
             buttons.append(
                 {"title": "Goodbye", "payload": "/intent_bye",}
             )
+
+        buttons.append(
+            {"title": "Something else", "payload": '/intent_out_of_scope',}
+        )
+
         dispatcher.utter_message(
             text="Please select one of these options", buttons=buttons
         )
 
-        # Make sure to clean up slots from all previous forms
-        events.append(SlotSet("cause_damage_question", None))
-        events.append(SlotSet("chatgoal_value", None))
-        events.append(SlotSet("found_result", None))
-        events.append(SlotSet("pest_causes_damage", None))
-        events.append(SlotSet("pest_damage_description", None))
-        events.append(SlotSet("pest_name", None))
-        events.append(SlotSet("pest_problem_description", None))
-
-        events.append(SlotSet("rating_value", None))
-
-        events.append(SlotSet("pests_summaries", None))
-        events.append(SlotSet("pests_summaries_index", None))
-        events.append(SlotSet("pest_summary", None))
-        events.append(SlotSet("pest_summary_and_did_this_help", None))
-
-        events.append(SlotSet("said_hi", True))
-        events.append(SlotSet("shown_privacypolicy", True))
-
+        events = reset_slots_from_previous_forms()
         return events
 
 
@@ -429,6 +408,18 @@ class ActionExplainIPM(Action):
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
         dispatcher.utter_message(template="utter_explain_ipm")
         return [SlotSet("explained_ipm", True)]
+
+
+class ActionKickoffAnotherIHaveAPestIntent(Action):
+    """Kickoff another intent_i_have_a_pest, after cleaning out the Tracker"""
+
+    def name(self) -> Text:
+        return "action_kickoff_intent_i_have_a_pest"
+
+    async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        events = reset_slots_from_previous_forms()
+        events.extend(next_intent_events("intent_i_have_a_pest"))
+        return events
 
 
 class ActionAskHandoffToExpert(Action):
@@ -814,6 +805,29 @@ def summarize_hits(hits, tracker) -> list:
         pests_summaries.append(hit_summary)
 
     return pests_summaries
+
+
+def reset_slots_from_previous_forms():
+    """Clean up slots from all previous forms"""
+    events = []
+    events.append(SlotSet("cause_damage_question", None))
+    events.append(SlotSet("found_result", None))
+    events.append(SlotSet("pest_causes_damage", None))
+    events.append(SlotSet("pest_damage_description", None))
+    events.append(SlotSet("pest_name", None))
+    events.append(SlotSet("pest_problem_description", None))
+
+    events.append(SlotSet("rating_value", None))
+
+    events.append(SlotSet("pests_summaries", None))
+    events.append(SlotSet("pests_summaries_index", None))
+    events.append(SlotSet("pest_summary", None))
+    events.append(SlotSet("pest_summary_and_did_this_help", None))
+
+    events.append(SlotSet("said_hi", True))
+    events.append(SlotSet("shown_privacypolicy", True))
+
+    return events
 
 
 def create_text_for_pest(hit, tracker) -> str:

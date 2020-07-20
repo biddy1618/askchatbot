@@ -4,7 +4,9 @@ intents:
   - intent_bye
   - intent_yes
   - intent_no
-  - intent_chatgoal
+  - intent_i_have_a_pest
+  - intent_explain_ipm
+  - intent_out_of_scope
   - intent_inform
   - intent_ask_handoff_to_expert
   - intent_thanks
@@ -18,7 +20,6 @@ entities:
   - bot_config_score_threshold
   - bot_config_botname
   - bot_config_urlprivacy
-  - chatgoal_value
   - pest_name
   - rating_value
   
@@ -41,11 +42,6 @@ slots:
     type: unfeaturized
   explained_ipm:
     type: unfeaturized
-  chatgoal_value:
-    type: categorical
-    values:
-    - explain_ipm
-    - I_have_a_pest
   found_result:
     type: categorical
     values:
@@ -79,6 +75,7 @@ actions:
   - action_hi
   - action_explain_ipm
   - action_ask_handoff_to_expert
+  - action_kickoff_intent_i_have_a_pest
   
 forms:
   - form_query_knowledge_base
@@ -154,6 +151,14 @@ responses:
     - payload: /intent_no
       title: 👎
     text: "{pest_summary}"
+    
+  utter_another_pest_problem_i_can_help_with:
+  - buttons:
+    - payload: /intent_yes
+      title: "Yes"
+    - payload: /intent_no
+      title: "No"
+    text: "Do you have another pest problem I can help you with?"
   
 session_config:
   session_expiration_time: 60
