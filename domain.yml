@@ -4,7 +4,9 @@ intents:
   - intent_bye
   - intent_yes
   - intent_no
-  - intent_chatgoal
+  - intent_i_have_a_pest
+  - intent_explain_ipm
+  - intent_out_of_scope
   - intent_inform
   - intent_ask_handoff_to_expert
   - intent_thanks
@@ -18,7 +20,6 @@ entities:
   - bot_config_score_threshold
   - bot_config_botname
   - bot_config_urlprivacy
-  - chatgoal_value
   - pest_name
   - rating_value
   
@@ -41,11 +42,6 @@ slots:
     type: unfeaturized
   explained_ipm:
     type: unfeaturized
-  chatgoal_value:
-    type: categorical
-    values:
-    - explain_ipm
-    - I_have_a_pest
   found_result:
     type: categorical
     values:

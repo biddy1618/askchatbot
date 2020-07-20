@@ -3,7 +3,6 @@
     - action_configure_bot
     - action_list_bot_configuration
     - action_hi
-    - slot{"chatgoal_value": "None"}
     - slot{"found_result": "None"}
     
 ## hi
@@ -11,7 +10,6 @@
     - action_configure_bot
     - action_list_bot_configuration
     - action_hi
-    - slot{"chatgoal_value": "None"}
     - slot{"found_result": "None"}
 
 ## bye
@@ -35,15 +33,15 @@
 * intent_no
     - utter_bye
     
-## chatgoal other + handoff
-* intent_chatgoal{"chatgoal_value": "__other__"}
+## out of scope, + handoff
+* intent_out_of_scope
     - action_ask_handoff_to_expert
 * intent_yes
     - utter_handoff_to_a_human_expert
     - utter_bye
 
-## chatgoal other + no handoff
-* intent_chatgoal{"chatgoal_value": "__other__"}
+## out of scope, + no handoff
+* intent_out_of_scope
     - action_ask_handoff_to_expert
 * intent_no
     - utter_bye
@@ -61,17 +59,14 @@
 * intent_no
     - utter_bye
     
-## chatgoal explain ipm
-* intent_chatgoal{"chatgoal_value": "explain_ipm"}
-    - slot{"chatgoal_value": "explain_ipm"}
+## explain ipm
+* intent_explain_ipm
     - action_explain_ipm
     - action_hi
-    - slot{"chatgoal_value": "None"}
     - slot{"found_result": "None"}
     
-## chatgoal pest problem, with result
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest, with result
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
@@ -82,9 +77,8 @@
     - utter_great
     - utter_bye
     
-## chatgoal pest problem, without result + handoff
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest, without result + handoff
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
@@ -97,9 +91,8 @@
     - utter_handoff_to_a_human_expert
     - utter_bye
     
-## chatgoal pest problem, without result + no handoff
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest, without result + no handoff
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
     - form{"name": null}
@@ -111,9 +104,8 @@
 * intent_no
     - utter_bye
     
-## chatgoal pest problem, with bot configuration, with result
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest, with bot configuration, with result
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
 * intent_configure_bot
@@ -128,9 +120,8 @@
     - utter_great
     - utter_bye
     
-## chatgoal pest problem, with bot configuration, without result + handoff
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest, with bot configuration, without result + handoff
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
 * intent_configure_bot
@@ -147,9 +138,8 @@
     - utter_handoff_to_a_human_expert
     - utter_bye
     
-## chatgoal pest problem, with bot configuration,  without result + no handoff
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest, with bot configuration,  without result + no handoff
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
 * intent_configure_bot
@@ -165,9 +155,8 @@
 * intent_no
     - utter_bye
     
-## chatgoal pest problem with garbage + handoff
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest,with garbage + handoff
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
 * intent_garbage_inputs
@@ -178,9 +167,8 @@
     - utter_handoff_to_a_human_expert
     - utter_bye
     
-## chatgoal pest problem with garbage + no handoff + continue, with results
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest,with garbage + no handoff + continue, with results
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
 * intent_garbage_inputs
@@ -195,9 +183,8 @@
     - utter_great
     - utter_bye
     
-## chatgoal pest problem with garbage + no handoff + continue, without result + handoff
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest,with garbage + no handoff + continue, without result + handoff
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
 * intent_garbage_inputs
@@ -214,9 +201,8 @@
     - utter_handoff_to_a_human_expert
     - utter_bye
     
-## chatgoal pest problem with garbage + no handoff + continue, without result + no handoff
-* intent_chatgoal{"chatgoal_value": "I_have_a_pest"}
-    - slot{"chatgoal_value": "I_have_a_pest"}
+## i have a pest,with garbage + no handoff + continue, without result + no handoff
+* intent_i_have_a_pest
     - form_query_knowledge_base
     - form{"name": "form_query_knowledge_base"}
 * intent_garbage_inputs

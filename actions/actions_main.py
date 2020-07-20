@@ -376,31 +376,29 @@ class ActionHi(Action):
         buttons = []
 
         buttons.append(
-            {
-                "title": "I have a pest",
-                "payload": '/intent_chatgoal{"chatgoal_value":"I_have_a_pest"}',
-            }
+            {"title": "I have a pest", "payload": 'intent_i_have_a_pest',}
         )
 
         if not explained_ipm:
             buttons.append(
-                {
-                    "title": "Explain IPM",
-                    "payload": '/intent_chatgoal{"chatgoal_value":"explain_ipm"}',
-                }
+                {"title": "Explain IPM", "payload": '/intent_explain_ipm',}
             )
 
         if said_hi:
             buttons.append(
                 {"title": "Goodbye", "payload": "/intent_bye",}
             )
+
+        buttons.append(
+            {"title": "Something else", "payload": '/intent_out_of_scope',}
+        )
+
         dispatcher.utter_message(
             text="Please select one of these options", buttons=buttons
         )
 
         # Make sure to clean up slots from all previous forms
         events.append(SlotSet("cause_damage_question", None))
-        events.append(SlotSet("chatgoal_value", None))
         events.append(SlotSet("found_result", None))
         events.append(SlotSet("pest_causes_damage", None))
         events.append(SlotSet("pest_damage_description", None))
