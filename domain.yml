@@ -11,6 +11,7 @@ intents:
   - intent_ask_handoff_to_expert
   - intent_thanks
   - intent_garbage_inputs
+  - intent_you_are_confused
   
 
 entities:
@@ -90,6 +91,9 @@ responses:
 
   utter_summarize_skills:
   - text: I can explain what IPM is or help to manage a particular pest.
+  
+  utter_lets_start_over:
+  - text: Mmmm..., I am confused. Shall we start over?
   
   utter_do_you_want_to_ask_a_human_expert:
   - buttons:
