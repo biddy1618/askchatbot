@@ -114,12 +114,18 @@ git checkout dev                        # for now, we release from the dev branc
 git pull                                # pull the latest
 git tag -l                              # get a list of the tags
 git tag -a 0.0.1 -m "Initial release"   # Define release tag
-
-# In case you need to move the tag, use this command:
-git tag -a -f 0.0.1 <commit id>
-
 git show 0.0.1                          # to get details about this tag
-git push origin --tags                  # push all tags that are not already there
+git push origin dev --tags              # push all tags that are not already there
+
+#########################################################
+# In case you need to move the tag, use these commands: #
+#########################################################
+# Delete the tag on any remote before you push
+git push origin :refs/tags/0.0.1
+# Replace the tag to reference the most recent commit
+git tag -fa 0.0.1
+# Push the tag to the remote origin
+git push origin dev --tags              # push all tags that are not already there
 
 ```
 
