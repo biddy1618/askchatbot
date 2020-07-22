@@ -1,7 +1,6 @@
 # Keep local
 secret
 .github
-askextensiondata
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
