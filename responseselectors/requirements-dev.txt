@@ -1,0 +1,9 @@
+-r requirements.txt
+# action to create report PR
+pytablewriter
+
+# lint/format/types
+black
+flake8
+pytype
+pylint

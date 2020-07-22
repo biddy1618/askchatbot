@@ -18,11 +18,11 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 #
 
 #
-sys.argv.append('shell')
-#sys.argv.append('--model')
-#sys.argv.append('/home/arjaan/rasa/bots/rasa-demo/rasa-demo/models/20191231-102143.tar.gz')
-sys.argv.append('--enable-api')
-sys.argv.append('--debug')
+sys.argv.append("shell")
+sys.argv.append("--enable-api")
+sys.argv.append("--debug")
 
-from rasa.__main__ import main
-main()
+if __name__ == "__main__":
+    from rasa.__main__ import main
+
+    main()

@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="askchatbot",
-    version="0.0.1",
+    version="0.0.3",
     url="",
     author="",
     author_email="",
