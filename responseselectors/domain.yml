@@ -1,12 +1,9 @@
 intents:
-  - askextension_tomato_california:
-      triggers: respond_askextension_tomato_california
-  - askextension_tomato_other:
-      triggers: respond_askextension_tomato_other
+  - askextension_tomato:
+      triggers: respond_askextension_tomato
 
 actions:
-  - respond_askextension_tomato_california
-  - respond_askextension_tomato_other
+  - respond_askextension_tomato
    
 session_config:
   session_expiration_time: 60

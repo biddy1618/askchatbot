@@ -1,27 +1,21 @@
 """
 nlu-askextension-tomato-california.md
 =====================================
-## intent: askextension_tomato_california/<name_of_intent>
-- <question>
+## intent: askextension_tomato_california/<faq_id>_<state>
+- <title> <question>
 
-name_of_intent: <faq_id>_<state>_<title>
+<title>:
 (-) all lowercase
 (-) strip off '#id' from the end
+(-) add a '.' if it does not yet end with a proper punctuation: 
+    ? ! . , ; :
+
+<title> <question>
 (-) replace unicode with ' ':
     (-) \u00a0
 (-) replace escapes:
     (-) \n -> ' '
     (-) \" -> '
-(-) replace '&' by 'and'
-(-) replace nonalphanumeric by space:
-    (-) ? ! . , ; : - [ ] { } ( ) ' " * -> ' '
-(-) single space
-(-) replace space by '_'
-
-question: <question>
-(-) replace unicode with ' ' (see intent)
-(-) replace escapes (see intent)
-(-) single space
 (-) separate out & mark up urls:
     (-) [name.pdf](http...../name.pdf)   [.pdf]
     (-) [name.php](http...../name.php)   [.php, .php/]
