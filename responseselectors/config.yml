@@ -11,20 +11,8 @@ pipeline:
     analyzer: "char_wb"
     min_ngram: 1
     max_ngram: 4
-  - name: DIETClassifier
-    epochs: 10
-  - name: EntitySynonymMapper
   - name: ResponseSelector
     retrieval_intent: askextension_tomato
     transformer_size: 256
     number_of_transformer_layers: 2
     epochs: 200
-
-# Configuration for Rasa Core.
-# https://rasa.com/docs/rasa/core/policies/
-policies:
-  - name: MemoizationPolicy
-  - name: TEDPolicy
-    max_history: 5
-    epochs: 25
-  - name: MappingPolicy
