@@ -133,19 +133,19 @@ git push origin dev --tags              # push all tags that are not already the
 
 ## To run the bot:
 
-Use `rasa train` to train a model.
+Go to the `askchatbot` directory, and train the model:
 
-Then, to run, first set up your action server in one terminal window:
+```bash
+cd askchatbot/askchatbot
+rasa train
+```
+
+Then, first set up your action server in one terminal window:
 ```bash
 rasa run actions
 ```
 
-In another window, run the duckling server (for entity extraction):
-```bash
-docker run -p 8000:8000 rasa/duckling
-```
-
-Then to talk to the bot, run:
+Then, to talk to the bot from another terminal window:
 ```
 rasa shell --debug
 ```
@@ -154,25 +154,52 @@ Note that `--debug` mode will produce a lot of output meant to help you understa
 under the hood. To simply talk to the bot, you can remove this flag.
 
 
-## Overview of the files
-
-`data/nlu/*.md` - contains NLU training data in markdown format ([docs](https://rasa.com/docs/rasa/nlu/training-data-format/#markdown-format))
-
-`data/core/*.md` - contains the dialog management training data (stories) in markdown format ([docs](https://rasa.com/docs/rasa/core/stories/#format))
-
-`actions.py` - contains custom action/api code ([docs](https://rasa.com/docs/rasa/core/actions/#custom-actions))
-
-`domain.yml` - the domain file, including bot response templates ([docs](https://rasa.com/docs/rasa/core/domains/))
-
-`config.yml` - training configurations for the NLU pipeline ([docs](https://rasa.com/docs/rasa/nlu/choosing-a-pipeline/)) and dialog policies ([docs](https://rasa.com/docs/rasa/core/policies/))
-
-`credentials.yml` - credentials for the voice & chat platforms of the bot ([docs](https://rasa.com/docs/rasa/user-guide/messaging-and-voice-channels/))
-
-`credentials_knowledge_base.yml` - credentials to connect to the knowledge base instance. See `README-deployment.md` for details.
-
-`tests/*.md` - end-to-end test conversations in markdown format ([docs](https://rasa.com/docs/rasa/user-guide/testing-your-assistant/#end-to-end-testing))
-
 
 ## Testing the bot
 
-You can test the bot by running  `rasa test`. 
+Go to the `askchatbot` directory, and train the model:
+
+```bash
+cd askchatbot/askchatbot
+rasa train
+```
+
+Then, run the tests:
+
+```bash
+rasa test
+```
+
+The results of the tests are written to the `askchatbot/askchatbot/results` folder:
+
+- `confmat.png` - confusion matrix of the intent predictions
+- `hist.png` - histogram of intent prediction confidence distribution
+- `DIETClassifier_report.json` - precision, recall, f1-score, support for intent predictions by DIETClassifier
+- `intent_report.json` - precision, recall, f1-score, confused_with, support for intent predictions by NLU
+
+
+
+
+## Overview of the files
+
+In the folder `askchatbot/askchatbot` you can find these files:
+
+- Training data:
+  - `data/nlu/*.md` - contains NLU training data in markdown format ([docs](https://rasa.com/docs/rasa/nlu/training-data-format/#markdown-format))
+  - `data/core/*.md` - contains the dialog management training data (stories) in markdown format ([docs](https://rasa.com/docs/rasa/core/stories/#format))
+  - `domain.yml` - the domain file, including bot response templates ([docs](https://rasa.com/docs/rasa/core/domains/))
+- Custom actions:
+  - `actions/actions_main.py` - contains custom action/api code ([docs](https://rasa.com/docs/rasa/core/actions/#custom-actions))
+  - `actions/actions_config.py` - sets up default configuration for the bot at startup
+  - `config.yml` - training configurations for the NLU pipeline ([docs](https://rasa.com/docs/rasa/nlu/choosing-a-pipeline/)) and dialog policies ([docs](https://rasa.com/docs/rasa/core/policies/))
+  - `actions/bot_config.yml` - define configuration details here, including credentials for elastic search
+  - `actions/cert.pem` - public ssl certificate of elastic search server, used by custom action
+  - `actions/requirements-actions.txt` - the python dependencies for the custom actions
+
+- Deployment:
+  - `docker-compose.yml & Dockerfile` - to build the docker image of the action server
+  - `credentials.yml` - credentials for the voice & chat platforms of the bot ([docs](https://rasa.com/docs/rasa/user-guide/messaging-and-voice-channels/))
+  - `endpoints.yml` - the different endpoints the bot can use ([docs](https://rasa.com/docs/rasa/user-guide/configuring-http-api/#endpoint-configuration))
+- Tests
+  - `tests/*.md` - end-to-end test conversations in markdown format ([docs](https://rasa.com/docs/rasa/user-guide/testing-your-assistant/#end-to-end-testing))
+
