@@ -16,3 +16,4 @@ pipeline:
     transformer_size: 256
     number_of_transformer_layers: 2
     epochs: 200
+    batch_size: [4]
