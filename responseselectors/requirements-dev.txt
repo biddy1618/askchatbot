@@ -3,6 +3,11 @@
 # create nlu data for ResponseSelector
 pandas
 
+# to plot tensorflow models, requires:
+# - pydot_ng
+# - Graphviz software with executables (bin) on system path.
+pydot-ng
+
 # action to create report PR
 pytablewriter
 

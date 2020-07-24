@@ -1444,10 +1444,6 @@
 * askextension_tomato/20594_Maryland
   - This may be a combination of early blight and septoria leaf spot. The life cycles are similar.  Unfortunately, plants can still get early blight even with all the good measures you have taken.  Please read over the info on early blight in our "IPM Series: Tomatoes" to be sure you do each possible task, such as removing all infected debris at the end of the season: http://extension.umd.edu/sites/default/files/_images/programs/hgic/Publications/HG56%20IPM%20Tomatoe...Fungicides cannot cure a fungal disease, but are preventative. Spray when you plant, or as soon as you see the first trace of the disease remove the infected part and spray. Keep in mind that fungicides have been discovered to be toxic to bees, so do not spray the flowers. ECN
 
-## 20692_Minnesota
-* askextension_tomato/20692_Minnesota
-  - &lt;!--  /* Font Definitions */ @font-face 	{font-family:Cambria; 	panose-1:2 4 5 3 5 4 6 3 2 4; 	mso-font-charset:0; 	mso-generic-font-family:auto; 	mso-font-pitch:variable; 	mso-font-signature:3 0 0 0 1 0;}  /* Style Definitions */ p.MsoNormal, li.MsoNormal, div.MsoNormal 	{mso-style-parent:""; 	margin:0in; 	margin-bottom:.0001pt; 	mso-pagination:widow-orphan; 	font-size:12.0pt; 	font-family:"Times New Roman"; 	mso-ascii-font-family:Cambria; 	mso-ascii-theme-font:minor-latin; 	mso-fareast-font-family:Cambria; 	mso-fareast-theme-font:minor-latin; 	mso-hansi-font-family:Cambria; 	mso-hansi-theme-font:minor-latin; 	mso-bidi-font-family:"Times New Roman"; 	mso-bidi-theme-font:minor-bidi;} a:link, span.MsoHyperlink 	{mso-style-noshow:yes; 	color:blue; 	text-decoration:underline; 	text-underline:single;} a:visited, span.MsoHyperlinkFollowed 	{mso-style-noshow:yes; 	color:purple; 	text-decoration:underline; 	text-underline:single;} @page Section1 	{size:8.5in 11.0in; 	margin:1.0in 1.25in 1.0in 1.25in; 	mso-header-margin:.5in; 	mso-footer-margin:.5in; 	mso-paper-source:0;} div.Section1 	{page:Section1;} --&gt;        It has been a cool summer. Tomatoes prefer warm temperatures.    Night temperatures below 60 F or above 70 F can cause flower abortion. http://urbanext.illinois.edu/gardenerscorner/issue_06/summer_05_10.cfm  http://msue.anr.msu.edu/news/prune_your_tomatoes_for_maximum_size
-
 ## 20697_Maryland
 * askextension_tomato/20697_Maryland
   - You are most likely referring to blossom end rot. The  bottom (blossom) end of the fruit bottoms becomes brown and rotted.  Promptly remove any fruits that have blossom-end rot or are badly  malformed. This nutritional disorder is caused by a lack of calcium in  developing fruits and is brought on by dry conditions and inconsistent  watering. Water your plants deeply and regularly and keep them mulched.  Tomato plants may need 1-2 gallons of water each at least twice a week  during droughty periods. Plants tend to grow out of the problem. See our publication for tips on reducing blossom end rot http://extension.umd.edu/sites/default/files/_images/programs/hgic/Publications/HG56%20IPM%20Tomatoe...mh
@@ -2992,10 +2988,6 @@
 * askextension_tomato/39741_Tennessee
   - What disease it is would be difficult to diagnose without pictures or more information about the disease timing and location on the fruit.  Cornell University has a very good web page with pictures that you may find helpful. http://vegetablemdonline.ppath.cornell.edu/DiagnosticKeys/TomFrt/TomFrtKey.html The most common that I would investigate first are anthracnose, gray mold, white mold, and blossom end rot. Your county Extension Agent or State Specialist at UT should be able to assist you in identifying and managing your problem.
 
-## 39773_Georgia
-* askextension_tomato/39773_Georgia
-  - Sweet 100 cherry tomato.
-
 ## 39804_Kentucky
 * askextension_tomato/39804_Kentucky
   - There is not many ways that you can hurry the ripening of tomatoes that are still on the vine without use of gas. You can place a mature green stage tomato in a brown paper bag and speed up the ripening process but not on the vine. Hope this helps.
@@ -4156,10 +4148,6 @@
 * askextension_tomato/61018_Texas
   - Interesting occurance that I'm not familiar with. Research turned up a possibility - high heat during ripening. While we've only had a couple weeks of high temperatures, the heat arrived quickly and skyrocketed.  The Florida Extension has some information with photos. Take a look and see what you conclude.http://edis.ifas.ufl.edu/hs200  "High temperatures during the ripening period in the field seem to trigger the symptoms."
 
-## 61054_Michigan
-* askextension_tomato/61054_Michigan
-  - Hello,
-
 ## 61078_Maryland
 * askextension_tomato/61078_Maryland
   - We are very interested in your tomato problem and would like to follow-up with you. You have done some good research and have made the proper conclusions based on your tests. We would like for you to try one other technique. Select a stem that is just below the wilting portion of the plant and gently slice back a thin section of the epidermis. Note any discoloration. Note: Fusarium wiltbegins at the bottom of the plant and works its way upward. Verticillium wilt begins at the top of the plant and works its way downward.We would like to see some photos of the plants. Please indicate the varieties of the plants that are affected, and it may help to know the source of the plants.Please monitor the plants and keep in touch. LS
@@ -4348,10 +4336,6 @@
 * askextension_tomato/64125_Maryland
   - It's hard to say for sure if this is tomato bacterial speck or spot. (The center photo looks like neither--probably something cultural. ) Here is our info on bacterial speck or spot from our website's Grow It Eat It section called "Problems" : http://extension.umd.edu/growit/bacterial-spotbacterial-speck-vegetablesBothofthese diseasesare uncommon. Earlyblightismuchmorecommonandthat,orSeptoria,maybewhatyou'reseeing. Theclearestwaytodistinguishthesefrom theBacterialspeckorspotisgoingtobe theappearanceof thefruit. Thetomatoesshouldshow raised pimples or lesions if it is, indeed, bacterial speck or spot. Check out the image in the link above and look at other online. You'rewelcometo sendusphotosofthefruit,ifyouseesymptoms.You might want to try a copper fungicide. Also, pull off as many infected leaves as you can. Clean up all these plants at the end of the season. ECN
 
-## 64332_Minnesota
-* askextension_tomato/64332_Minnesota
-  - Hello,Forinformationaboutcanningpleasefollowthislinkto theFoodSafety section....http://www.extension.umn.edu/food/food-safety/preserving/canning/Hopethishelps.
-
 ## 64428_Pennsylvania
 * askextension_tomato/64428_Pennsylvania
   - It sounds like several things going on at once. The bottom leaves on tomato plants often turn brown and die as the plant gains height. Before acting on the pH, I recommend you get a soil test kit from your local Penn State Extension. Here is a link to their website.I have new raised beds this year and my pH probe tested acidic. However, when my soil test came back, I was alkaline. I corrected the problem by top dressing with composted manure. Don't forget that this is new soil that hasn't yet weathered in, and that your plants are doing fine. Penn State will give you a complete profile of you soil and tell you exactly what to do to correct deficiencies.
@@ -4455,10 +4439,6 @@
 ## 65362_Maryland
 * askextension_tomato/65362_Maryland
   - Your tomatoes look like they were subject to a type of environmental issue as well as a fungal leaf spot. the leaves look like they may have been sprayed with a pesticide or possible fertilizer burn. The area looks hot and dry, crowded, with poor air circulation.  Tomatoes need 4-6 sq ft of growing area and will be more productive with 8-10 hours of sunlight. Provide consistent moisture and mulch with an organic mulch to keep weeds down. See our tomato profile http://extension.umd.edu/growit/vegetable-profiles-tomatoes Tomatoes are also susceptible to several leaf spot diseases. Two common foliar diseases are early blight and septoria but it does not matter which disease it is because the management is the same. Select disease resistant varieties, remove the lower leaves to slow the upward spread of the disease, keep plants well mulched to minimize soil splashing, water at the base of the plants, provide adequate spacing, and spray with an organic fungicide (fixed copper) early in the season to lessen the spread of the disease. Fungicide treatments can help to protect new or un-infected foliage, they are not curatives. It is too late to spray. Remove infected plant material at the end of the season. See our website for more information and photos on early blighthttp://extension.umd.edu/growit/early-blight-vegetablesand septoriahttp://extension.umd.edu/growit/septoria-leaf-spot-vegetablesmh
-
-## 65377_Oregon
-* askextension_tomato/65377_Oregon
-  - Thanks for sending your questions to us!
 
 ## 65387_Minnesota
 * askextension_tomato/65387_Minnesota
@@ -4795,10 +4775,6 @@
 ## 69323_California
 * askextension_tomato/69323_California
   - Tomato varieties have definitely gotten sweeter and milder flavor over the last several decades. The tomatoes you find in the store are bred to handle a lot of handling as the first priority and flavor as a second. Most folks a looking for that mild sweet flavor, not a tomato that can bite them back. Flavor is a product of genetics and environment. Some of the old heirloom varieties may be your best bet. Warmer weather may increase the flavor level, as well as denser leaf set on the plants. Really hot weather will cause the plants to set few if any tomatoes. Ideal temperatures are around 80 daytime and 55 nighttime. your daytime temperatures probably exceed that for a lot of the summerBonnie Plants tomato flavor page has more tips.California Extension has Heirloom Tomatoesand more
-
-## 69348_Oregon
-* askextension_tomato/69348_Oregon
-  - Thanks for sending your questions to us!
 
 ## 69410_NewYork
 * askextension_tomato/69410_NewYork
@@ -5520,10 +5496,6 @@
 * askextension_tomato/85152_California
   - To whom it may concern, Please contact your county's UCCE Master Gardener program for free gardening information: http://ccmg.ucanr.edu/Ask_Us/ Best regards, Andrew
 
-## 85222_SouthDakota
-* askextension_tomato/85222_SouthDakota
-  - I will call him.
-
 ## 85226_Michigan
 * askextension_tomato/85226_Michigan
   - Hello,That looks fairly consistent with 2,4-D herbicide damage. Tomatoes are very sensitive to this product. Lots of lawncare herbicides contain that chemic because it kills lots of broadleaf weeds, but not grasses. It is also very prone to vaporizing and moving long distances from it's target. Symptoms will always show up a few days after the initial drift event. So, it can be puzzling to figure out what happened.
@@ -5739,10 +5711,6 @@
 ## 86847_Michigan
 * askextension_tomato/86847_Michigan
   - This appears to be a fungal disease known as Septoria Leaf Spot. Below is a link to an MSU article providing more info about how the fungus affects the plants and overwinters.https://pestid.msu.edu/wp-content/uploads/2014/07/SeptoriaLeafSpotTomato.pdfFor any fungal disease, we would recommend that the infected leaves/materials be removed from the area, watering at the base of the plant rather than overhead and applying a general vegetable fungicide per the instructions on the product. The fungicide will most likely need to be re-applied every 10 to 14 days per the directions. Also, special attention should be paid to application date in relation to harvest.For future planning, crops should be rotated each year to prevent re-infection, planted at a sufficient distance to allow for good air circulation and the purchase of disease -resistant seeds or plants. Unfortunately there is no know cure for early or late blight so if weather conditions are right, the homeowner may still have to deal with these diseases. Preventative fungicide spraying will help mitigate the blight somewhat. Below is an article with more information about other tomato diseases which you the homeowner may be interested in.http://www.clemson.edu/extension/hgic/pests/plant_pests/veg_fruit/hgic2217.htmlHope that helps.
-
-## 86890_Pennsylvania
-* askextension_tomato/86890_Pennsylvania
-  - Can you send pictures?
 
 ## 86929_California
 * askextension_tomato/86929_California
@@ -6468,10 +6436,6 @@
 * askextension_tomato/96472_Oregon
   - I would estimate after the last frost date in the valley (which is usually April 15th). We still had freezing temperatures at night this week, which is not good for summer crops like tomatoes. However, I usually wait until May, when the temperatures are starting to warm up (especially a night). I'd still put a covered cloche of some sort to keep the soil temperature warm, if you plan to plant your tomatoes in mid-April and before May.Good luck!
 
-## 96596_Oregon
-* askextension_tomato/96596_Oregon
-  - https://catalog.extension.oregonstate.edu/sites/catalog/files/project/pdf/ec1333.pdfThislinkprovidesinformationaboutgrowingtomatoesofalltypesinagroundandcontainersaswellassuggestionsforwhichtypemightbebestforyoursituation.
-
 ## 96681_California
 * askextension_tomato/96681_California
   - Thank you for your question.  Since we are part of the Extension system, advice we give is that based on research, and we cant recommend other methods.  Here is a link to an Extension article on control of powdery mildew on tomatoes:  http://ipm.ucanr.edu/PMG/r783100411.html  I know it does not answer yor question, but it is the best information I can provide.  Good luck!
@@ -7048,10 +7012,6 @@
 * askextension_tomato/104754_Oregon
   - Tomato plant leaves seem to curl for a variety of reasons, most of which have to do with the temperature and environment the plant is growing in. If the soil is as wet as you describe this may induce the curling. If you can cut back on the water I think it would benefit the plant and reduce the curling.
 
-## 104772_Colorado
-* askextension_tomato/104772_Colorado
-  - Hi there,
-
 ## 104774_DistrictofColumbia
 * askextension_tomato/104774_DistrictofColumbia
   - Based on the symptoms we see in two of the photos we think your plants were contaminated by a phenoxy herbicide, such as 2,4-D. Herbicides can drift in from long distances and tomato is a very sensitive plant. Drift is the most typical way the injury occurs. It's also possible for compost, straw, and manure to become contaminated. You can perform a bioasay on your growing media to rule out this possibility:Unfortunately,yourplantswill probably notgrowoutoftheproblemandproduceagoodcrop.Trytofind replacement plantsatagarden center.The small white spots on the leaves in the third photo are caused by some type of sucking insect pest- spider mites, aphids, thrips, etc. No treatment is necessary. jt
@@ -7348,10 +7308,6 @@
 * askextension_tomato/107982_Colorado
   - Black tomatoes won't turn red, instead they go from green to black. But the fruit of black tomato plants generally doesn't get completely black when ripe; it's usually more of a purple or maroon color.  There are other ways besides color to tell if a tomato is ripe--first,when youhold the tomato and squeeze it gently it will yield somewhat when ripe, and be firmer when unripe. You also might give it a sniff, since ripe tomatoes are morefragrant than green ones. Ripe tomatoes also feelrather heavy for their size. If still in doubt, just cut open and taste the most likely looking tomato, toseeif it's ripe or still needs some more time. Happy eating! Boulder County Master Gardener Desk
 
-## 108182_Delaware
-* askextension_tomato/108182_Delaware
-  - Hello,
-
 ## 108314_Michigan
 * askextension_tomato/108314_Michigan
   - Hello,Did you notice any stink bugs on the tomato plants? Stink bugs have mouths like straws, which they stick into plants and suck juices through. When they feed on tomato fruit, you will see small dead areas where stinkbugs have fed.
@@ -7415,10 +7371,6 @@
 ## 109408_Minnesota
 * askextension_tomato/109408_Minnesota
   - Without seeing any pictures of the damage, it is hard to say what is causing it. My first thought is voles, as they are known to cause this type of damage, instead of birds. When inspecting the tomatoes, a clue to what is causing the problem can be determined with how the bite looks. Bird damage is going to look like something has been poking the tomato (think of a nail being repeatedly pushed into it) while rodent damage will be much more like an actual bite (starting on the outside and working in). Determine if the damage is happening throughout the garden or just on the edges. Throughout points to mice or voles while just on the outside could be woodchucks. Another clue for the culprit would be with the time the damage is occurring. Bird damage will be occurring during daylight while rodent damage can occur during the day or night.In terms of prevention, the first step is identifying the culprit. If it is birds, then raising the net above the plants will stop the damage provided the birds cannot bet through it. However, if the problem is more "rodent" in nature, then you may have to look at a trapping program to resolve it.
-
-## 109525_NorthDakota
-* askextension_tomato/109525_NorthDakota
-  - Hello,
 
 ## 109662_Minnesota
 * askextension_tomato/109662_Minnesota
@@ -7527,10 +7479,6 @@
 ## 113065_Colorado
 * askextension_tomato/113065_Colorado
   - Tomatoes will be much more difficult in your new environment than they were at 1000.  They like rich soil, but not overly amended.  Recommend soil test to know for sure. CSU can do this for you if you would like!   We have a much shorter growing season and tomatoes are very temperature sensitive.  Over 90 degrees by 10 a.m. and blossoms will drop.  Below 55 degrees consistently  at night and pollen sticks in tubes.  So tomatoes extremely temperature sensitive .  Will definitely need to cover.  Recommend finding a short maturing variety in order to successfully get any kind of crop at that elevation and perhaps something of a Russian derivation . You might try asking neighbors who might save seed which would already be adapted for your environment. Please let me know if there are any other questions I can answer for you!
-
-## 113095_OutsideUnitedStates
-* askextension_tomato/113095_OutsideUnitedStates
-  - Arturo:
 
 ## 113201_Minnesota
 * askextension_tomato/113201_Minnesota
@@ -7643,10 +7591,6 @@
 ## 117150_DistrictofColumbia
 * askextension_tomato/117150_DistrictofColumbia
   - Hi- yes- you can plant those crops now. Air temperatures are expected to be &gt;50 degrees F. for the next week so no expected frosts that could injure seedlings and transplants.The crops you reference grow best when night temperatures are 60-65 degrees F. and day temperatures are 80-90 degrees F.Best soil temps for germination are in the 60-70 degrees F. range for these crops. Okra will germinate and grow best at slightly higher temperatures than the other crops. There's a nice app on our "Spring Frost/Freeze Dates in Maryland" page that allows you to see what the chance of frost is in spring for your zip code:https://extension.umd.edu/hgic/topics/spring-frostfreeze-dates-marylandJon
-
-## 117228_Michigan
-* askextension_tomato/117228_Michigan
-  - Hello
 
 ## 117268_Colorado
 * askextension_tomato/117268_Colorado
@@ -7936,10 +7880,6 @@
 * askextension_tomato/122582_Maryland
   - Good morning,This does look like blossom end rot. The photo of the tomato with a "tail" is out of focus. Would you be able to take another where the tail is in focus? Here is our article on blossom end rot: https://extension.umd.edu/hgic/topics/blossom-end-rot-vegetablesBlossom end rot is caused by not enough calcium getting to the fruit when the plant is growing rapidly. This can be caused by soil pH outside the optimal range, low soil calcium, not enough or inconsistent watering, or too much nitrogen fertilizer causing too fast growth. Blossom end rot is particularly common on the first fruits of the season, so you may have better luck later in the summer. To prevent it from being a problem next year, see the recommendations in our article here: https://extension.umd.edu/hgic/topics/blossom-end-rot-vegetablesAllthe best,,Neith
 
-## 122664_Kentucky
-* askextension_tomato/122664_Kentucky
-  - Hello,
-
 ## 122677_Colorado
 * askextension_tomato/122677_Colorado
   - We have been receiving many questions about this type of thing on tomatoes.     It is a little difficult to tell from photos without plant samples.  Tomatoes are susceptible to many problems. This could possibly be early blight, which is caused by a fungus and is common on tomatoes during the hotter months. It causes brown to black, target-like spots on older leaves. If severe, the fungus also attacks stems and fruit. Affected leaves may turn yellow, then drop.  Septoria leaf spotis another fungal disease that is less common in Colorado than early blight. It causes white or gray spots on leaves, surrounded by a black or brown margin. Control is similar to early blight.   Your plants might survive to produce tomatoes for you anyway. Early treatment would include trimming diseased leaves from the plants and fertilizing lightly with nitrogen once a month. Sulfur dust may help protect new leaves from infection.    Sanitation is the best control for the future. When you are done with the plant, dispose of the plant and any leaves on the ground, as the fungus overwinters on leaf debris.    Here are some links to more information about tomato problems, including early blight:   https://extension.colostate.edu/topic-areas/yard-garden/recognizing-tomato-problems-2-949/   https://ag.purdue.edu/btny/ppdl/Pages/Tomato-Blight.aspx   https://extension.umaine.edu/ipm/ipddl/publications/5087e/      If you would like more information, you are welcome to bring a sample of the plant to us here at Gardening Help.
@@ -8060,10 +8000,6 @@
 * askextension_tomato/123922_Minnesota
   - Tomatoes are self pollinated. Lightly shaking the plant may help with pollination. "Tomato plants will drop their flowers when daytime temperatures are  above 85F or when nighttime temperatures are above 70F. Obviously this  can and does occur during mid-summer. In the early part of the season  low nighttime temperatures below 55F can interfere with the growth of  pollen tubes or cause the pollen to become sterile, preventing normal  fertilization and causing flower drop. Fruit will not set until  nighttime temperatures are above 55F for at least two consecutive  nights. The relative humidity (RH) also can play a role in poor  pollination and fruit set. The best RH for tomato development is between  40% and 70%. Low RH (&lt;40%) can dry pollen out making it unable to  stick to the stigma. A high RH (&gt;70%) can prevent the pollen from  being shed properly. While there are other factors that have been found  to influence pollination in tomato such as levels of nitrogen that are  either too high or too low, too high or low soil moisture, a heavy fruit  set, excessive wind that can desiccate flowers, and the lack of  sufficient light these are minor factors compared with temperature." https://extension.udel.edu/weeklycropupdate/?p=11727
 
-## 123944_NorthDakota
-* askextension_tomato/123944_NorthDakota
-  - Hello,
-
 ## 123990_Colorado
 * askextension_tomato/123990_Colorado
   - Tomato varieties will produce fruit consistent with the varieties planted. Tomato flowers come complete with both male and female organs and are self-fertilizing, so they do not need a second cultivar for pollination. Vibration from the wind or pollinators will sufficiently pollinate the flower of each plant.      Cross-pollination can occur but will only affect the seed and not the fruit, taste or texture of the current year produce. If you are planning to save the seed and plant it next year, it will not grow into the plant you expect if it was cross-pollinated. Below is an explanation of pollination of tomatoes from the University of Nebraska. Hybrid tomatoes can be cross-pollinated; however, it is discouragedtosavetheseedbecause of possible genetic recombination.      https://extension.unl.edu/statewide/douglas-sarpy/pdfs/ce/resources/ce-g1864-selecting-tomatoes-for-...       If you plan to save seed of heirloom tomatoes, here is some good information:   https://extension.colostate.edu/topic-areas/yard-garden/saving-seed-7-602/
@@ -8119,10 +8055,6 @@
 ## 124707_Minnesota
 * askextension_tomato/124707_Minnesota
   - This is an abiotic disorder called blossom end rot. Blossom-end rot is caused by a calcium deficiency in the tomato plant. Tomatoes with this problem tend to fluctuations in soil moisture, heavy applications of nitrogen fertilizer, and injury to roots. Try watering the plant more often. There are calcium sprays for tomatoes to stop this disorder.
-
-## 124777_Delaware
-* askextension_tomato/124777_Delaware
-  - Hello,
 
 ## 124785_Minnesota
 * askextension_tomato/124785_Minnesota
@@ -8624,10 +8556,6 @@
 * askextension_tomato/136798_DistrictofColumbia
   - Hi- the flies are fungus gnats, flies that lay their eggs in organic matter. Larvae feed on fungi and plant roots. They are common in high humidity, high-temperature environments where the grow mix stays overly moist. You can look for the larvae in the top inch of your growing media. Let the top of your media dry a bit before watering. They are not considered a big problem and no controls are required. Fungus gnats can be brought into the home on infested plants but they are fairly ubiquitous in homes in our region.https://extension.umd.edu/hgic/topics/fungus-gnats-houseplantsThe white insect is probably whitefly. (there are white aphids but usually only the females fly during mating. If they are aphids you will see two short "tail pipes" emerging from their backsides). Whitefly immatures sit on the plants, they don't fly. Adults fly off when disturbed. Whitefly can survive indoors year-year on housplants, herbs, and transplants. With climate change, they are probably overwintering outside in urban areas.Yes, insecticidal soap will control whitefly. For a full description, prevention and control:https://extension.umd.edu/hgic/topics/whiteflies-vegetablesJon
 
-## 136832_Colorado
-* askextension_tomato/136832_Colorado
-  - Hi Pete,
-
 ## 136839_Minnesota
 * askextension_tomato/136839_Minnesota
   - Mulching tomato plants is beneficial.  However, it's best to do that only after the soil is thoroughly warm.
@@ -8799,10 +8727,6 @@
 ## 140131_Minnesota
 * askextension_tomato/140131_Minnesota
   - Oh, do I so feel your pain. The two likely culprits are rabbits or squirrels. I've had luck with chicken wire around the raised beds, even just temporarily, I've even had luck just laying the chicken wire gently over the freshly planted veggies. The tender new plants are very tempting to young animals. Once the plants get more mature, they will be less tempting to animals.Another tip with squirrels for later in the summer: They will steal your tomatoes looking for water. If you leave a water source out for most of the summer, they will be less likely to go after your tomatoes.
-
-## 140268_Alaska
-* askextension_tomato/140268_Alaska
-  - Hi Liz,
 
 ## 140269_Maryland
 * askextension_tomato/140269_Maryland

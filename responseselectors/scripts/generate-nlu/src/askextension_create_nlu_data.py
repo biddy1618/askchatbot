@@ -201,13 +201,16 @@ def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
     df = df.drop("question", 1)
 
     #
-    # responses:
+    # cleanup
     #
+    # remove long responses:
+    #
+    shape = df.shape
     df["response"] = remove_encodings_and_escapes(df["response"].tolist())
-
+    #
     if plot:
         plot_word_counts(df)
-
+    #
     if max_word_count:
         # drop rows with excessive word count in response or question
         mask = [
@@ -215,16 +218,33 @@ def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
             for (q, r) in zip(df["title-question"].tolist(), df["response"].tolist())
         ]
         df = df[mask]
+        print(f"Removed {shape[0] - df.shape[0]} with more than {max_word_count} words")
+        if plot:
+            plot_word_counts(df)
+    #
+    # Remove responses with less than 4 words
+    shape = df.shape
+    mask = [len(x.split()) > 4 for x in df["response"].tolist()]
+    df = df[mask]
+    print(f"Removed {shape[0] - df.shape[0]} responses with less than 4 words")
+    #
+    # Remove responses with 'font-'
+    shape = df.shape
+    mask = ['font-' not in x for x in df["response"].tolist()]
+    df = df[mask]
+    print(f"Removed {shape[0] - df.shape[0]} responses with font-")
+    #
+    # Questions with 'font-' data
+    shape = df.shape
+    mask = ['font-' not in x for x in df["title-question"].tolist()]
+    df = df[mask]
+    print(f"Removed {shape[0] - df.shape[0]} questions with font-")
 
-    if plot:
-        plot_word_counts(df)
     #
-    # Sanity checks
     #
-    df_empty_response = df[df["response"] == ""]
-    assert (
-        df_empty_response.shape[0] == 0
-    ), "There are empty responses. Mark them in guide csv"
+    # Identical questions
+    #
+    # Identical responses
 
     if verbose:
         print("ETL completed:")
@@ -277,7 +297,7 @@ def main():
         f"{Path(__file__).parents[0]}/{data_name}-guide.csv",
         max_word_count,
         verbose=1,
-        plot=True,
+        plot=False,
     )
 
     write_training_data(
