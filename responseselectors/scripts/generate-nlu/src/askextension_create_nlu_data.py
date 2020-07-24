@@ -69,22 +69,23 @@ responses-askextension-tomato.md
 (-) separate out & mark up urls (see above)
 
 --
-instruct-and-track.csv
+askextensiondata-guide.csv
 ======================
 A table to instruct the generator
 
-faq-id, skip, selector
+faq-id,include,comments
 
 with:
 (-) faq-id
-(-) skip     : [True/False] - do not include this one
-(-) selector : name of the selector that includes it
+(-) include  : [True/False] - include this one or not
+
 """
 import os
 import string
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 pd.set_option("display.max_columns", 10)
 pd.set_option("display.width", 1000)
@@ -114,6 +115,23 @@ def file_size(file_path):
     return f"File does not exist: {file_path}"
 
 
+def plot_word_counts(df_plot):
+    """Plot histograms of the word counts"""
+    # Histogram of word-count in responses
+    s = pd.Series([len(x) for x in df_plot["response"].tolist()])
+    ax = s.hist(bins=50)
+    ax.set_xlabel("Word count in responses")
+    ax.set_ylabel("Response counts")
+    plt.show()
+    #
+    # Histogram of word-count in questions
+    s = pd.Series([len(x) for x in df_plot["title-question"].tolist()])
+    ax = s.hist(bins=50)
+    ax.set_xlabel("Word count in questions")
+    ax.set_ylabel("Question counts")
+    plt.show()
+
+
 def remove_encodings_and_escapes(sentences):
     """See: https://stackoverflow.com/a/53821967/5480536"""
     return [
@@ -122,7 +140,7 @@ def remove_encodings_and_escapes(sentences):
     ]
 
 
-def etl(path_data, path_guide, verbose=1):
+def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
     """ETL for the extracted ask extension data.
     Returns a pandas dataframe that is ready for processing"""
     df_data = pd.read_json(path_data).set_index("faq-id")
@@ -183,17 +201,50 @@ def etl(path_data, path_guide, verbose=1):
     df = df.drop("question", 1)
 
     #
-    # responses:
+    # cleanup
     #
+    # remove long responses:
+    #
+    shape = df.shape
     df["response"] = remove_encodings_and_escapes(df["response"].tolist())
+    #
+    if plot:
+        plot_word_counts(df)
+    #
+    if max_word_count:
+        # drop rows with excessive word count in response or question
+        mask = [
+            (len(q) <= max_word_count and len(r) <= max_word_count)
+            for (q, r) in zip(df["title-question"].tolist(), df["response"].tolist())
+        ]
+        df = df[mask]
+        print(f"Removed {shape[0] - df.shape[0]} with more than {max_word_count} words")
+        if plot:
+            plot_word_counts(df)
+    #
+    # Remove responses with less than 4 words
+    shape = df.shape
+    mask = [len(x.split()) > 4 for x in df["response"].tolist()]
+    df = df[mask]
+    print(f"Removed {shape[0] - df.shape[0]} responses with less than 4 words")
+    #
+    # Remove responses with 'font-'
+    shape = df.shape
+    mask = ['font-' not in x for x in df["response"].tolist()]
+    df = df[mask]
+    print(f"Removed {shape[0] - df.shape[0]} responses with font-")
+    #
+    # Questions with 'font-' data
+    shape = df.shape
+    mask = ['font-' not in x for x in df["title-question"].tolist()]
+    df = df[mask]
+    print(f"Removed {shape[0] - df.shape[0]} questions with font-")
 
     #
-    # Sanity checks
     #
-    df_empty_response = df[df["response"] == ""]
-    assert (
-        df_empty_response.shape[0] == 0
-    ), "There are empty responses. Mark them in guide csv"
+    # Identical questions
+    #
+    # Identical responses
 
     if verbose:
         print("ETL completed:")
@@ -209,6 +260,9 @@ def write_training_data(
     """Write the training files"""
 
     with open(path_nlu, "w") as f:
+        f.write("<!-- This file is auto-generated from scraped JSON. -->\n")
+        f.write("\n")
+
         for (intent_id, title_question) in zip(
             df["intent-id"].tolist(), df["title-question"].tolist(),
         ):
@@ -216,6 +270,9 @@ def write_training_data(
             f.write(f"- {title_question}\n\n")
 
     with open(path_responses, "w") as f:
+        f.write("<!-- This file is auto-generated from scraped JSON. -->\n")
+        f.write("\n")
+
         for (intent_id, response) in zip(
             df["intent-id"].tolist(), df["response"].tolist(),
         ):
@@ -233,10 +290,14 @@ def main():
     """Main function"""
 
     data_name = "askextensiondata"
+    max_word_count = 2000
 
     df = etl(
         f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-tomato.json",
         f"{Path(__file__).parents[0]}/{data_name}-guide.csv",
+        max_word_count,
+        verbose=1,
+        plot=False,
     )
 
     write_training_data(

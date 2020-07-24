@@ -1,3 +1,5 @@
+<!-- This file is auto-generated from scraped JSON. -->
+
 ## intent: askextension_tomato/146_Colorado
 - Tomato plants died midsummer 2012. Last year (2011) we lost one tomato plant and pulled it up by the roots and disposed of it. This year on 4 plants the fruit set and then one by one the plants turned brown and had to be destroyed. We got no production this year in 2012. I suspect some kind of fungal disease is present in the soil. Do you have a suggestion?
 
@@ -42,9 +44,6 @@
 
 ## intent: askextension_tomato/1513_Colorado
 - tomato container size & material. How deep &amp; wide should a container be for a cherry tomato &amp; an heirloom tomato plant? Should I use wood, terra cotta or plastic or does it matter
-
-## intent: askextension_tomato/1561_Colorado
-- Help me save my tomatoes! Hello! I have tomato plants that I grew from seeds awhile back, and are various sizes, from 6 inches to 3 feet tall now. Many have yellow blossoms, and I am really excited to have tomatoes that I grew myself thriving in my southern window!HOWEVER, I have FLIES, and LOTS of them! I have literally spent hoursreading everything available to me on the net and on your site before writing, and I am moreconfused than ever. I think I might have 2 different kinds of flies, since the symptoms are so diverse. Can you help me identify them all, and get rid of them in the least toxic way? Here is what I see...1. Even when I let the plants dry out to the point of wilting, as soon as I water, little black flies that look like fruitfliesfly out from andaround the soil and water, as if to play &amp;thank me. That is when I thought they were fungus gnats. (and still do), but they do not seem to diminish even when I almost kill the plant by not watering in hopes that they would die instead. 2. NowI also notice now that there are clusters of little lightspots that are alive, and nowhatching on leaves! YUCK!They seem to congregate together in a colony on a few leaves of choice, andwhen I pick off the leaf they are on, they seem too dumb to care much and do not try to get away.This made me think they are aphids, since they are cogregating andhatching on leaves and not in the soil or on the stems.  ??3. There isa white "dandruff" directly under the leaves they are on, and it is all over the plant below those leaves, on the soil, and all over the table. It does not seem to be sticky like I see described in other places. What the heck is this?4. The last symptom is that they DO congregate on the WINDOWS when the sun comes out,and occasionally commit suicide in my morning coffee. But these files do not seem too interested in my compost bin over at the sink, so I am pretty sure they are not fruitflies, although they look like them.SO...doI have aphids, fungus gnats, or BOTH? How do I safely and effectivelyget RID of them?? I read on your site that insecticidal soaps can be too harsh, but there is nothing that tells me what kind I CAN use, or what soapto make it with. How about a recipe?Several other things on the net say to mix garlic juice, cayenne pepper extract, or even a splash of rubbing alcohol with the soapas well. I am so confused! :(When I took these puzzle pieces to Home Depot for help, they didn't seem to have much in the way of helpful info, or safe pesticides for edible plants.I was sold a pretty toxic looking bottle of junk called, "copper fungicide". I used it once awhile back, but I am afraid it will make the tomatoes poison, and I am not even sure which kind of flies I have, or if it worked. There has got to be a better way.I plan to put these tomatoes outside in patiopots as soon as the frost danger has passed. I needto repot them ASAP now, as they are too crowded. I was going to treat them and repot them at the same time, so I need adviceASAP.I am new at this, and need to call in the expert BIG guns...so I am turning toYOU! I am attaching pics below. Could not get shots of the adultflies that go up and down thewindow, but they are a nuisance as well.PLEASEHELP! Thank you SOOOO much! :)Cheers,Lisah Brown
 
 ## intent: askextension_tomato/1656_Texas
 - Tomatos - Dying Leaves. Just planted these nursery tomatos in containers about a week ago.  (2nd post to add additional picture) Soil is potting soil mixed with compost and a couple of tablespoons of plant food.  The dead spots are dry and thin, the remaining green is thicker/normal.  Can you tell me what's wrong and how to fix it?  Thank You
@@ -277,9 +276,6 @@
 ## intent: askextension_tomato/5607_Colorado
 - Is this Tomato Spotted Wilt Virus? One of my 10 tomato plants has started to die. When searching online for possible causes it seemed to look most like theTomato Spotted Wilt Virus. The plant has not yetset fruit so I only have the leaves of the plant to diagnose.How do I tell for certain that it is this disease? Also, if it is TSWV how do I prevent my other tomato plants, as well as nearby peppers and other plants,from getting it too? If I tear it up and dispose of it, can I plant another healthy tomato plant in the same place this season? Thank you so much for your help
 
-## intent: askextension_tomato/5668_Michigan
-- wilting tomato plants. Tomato plants are wilting and dying and not because of lack of water. I think it is a fungus. Shall I have the soil tested and is there a remedy
-
 ## intent: askextension_tomato/5679_Oregon
 - Managing Tomatoes. What is the best way to control tomato bush and promote fruit yield. Year after year our tomato plants vigorously grow but don't yield as much fruit as we would expect. Is there a pruning practice to employ to thin the plant out and allow more opportunity for fruiting flowers to develop? Thanks for your hel
 
@@ -306,9 +302,6 @@
 
 ## intent: askextension_tomato/5844_Colorado
 - Tomato Problem. Bottoms of mytomatoes are turning brown..I think it is called Blossom End Rot? ...I have read there could be several causes..lack of calcium.....and/or too much water....or fertilizer? What do you think is the most likely cause and possible cure? Thank you very much for your assistance
-
-## intent: askextension_tomato/5860_Michigan
-- What is Killing My Tomatoes. Please see the attached picture and answer what is killing my poor tomato plants. I thought it was just leaf spot, but that only kills the branches on the bottom as far as I know. The entire plant seems to be affected here. Is it fusarium or verticillium wilt?
 
 ## intent: askextension_tomato/5965_Colorado
 - Tomato problems:  growing in Earthboxes. Hi; I have tomatoes growing in Earthboxes, but the some of the leaves look like zebra skin and several of the plants have brown patches on the stems and the leaves have dried up and died. They yellow, and get patches on them, then die. I can send more photos if I can get an email address to send them to? I have Costalutos, Cuore de Bue, Cherokee Purples and Sun Sugars. Several of my pepper plants have also exhibited the same symptoms; three of the six have died. In addition, I do have one Cherokee Purple with blossom end rot. I don't know what to treat this with, and I want something organic because my cats go out in the yard and rub against the plants on occasion. Please help!
@@ -412,9 +405,6 @@
 ## intent: askextension_tomato/6844_Maryland
 - I have two tomato plants.... I have two tomato plants. One is Cherry and the other is Grape. Both are well over six feet tall. Most of the leaves have turned brown. The are tomatoes, both green and slightly red. Have been picking the red ones. Source is Home Depot. Planted in a large bucket on a sixth floor balcony. Receives about a half day's sun. Was watered every day. Was fertilized
 
-## intent: askextension_tomato/6967_Montana
-- Tomatoes and footcandles. I am currently living in montana and I would like to grow determinite tomatoes like legend, celebrity or gold nugget indoors during the winter hydroponicly under a 600w HID grow light, and my question is how many footcandles of light per square meter does my tomato plants need to veg and fruit properly
-
 ## intent: askextension_tomato/6984_Colorado
 - hole in ripening tomato. Our ripening tomatoes often have a single pea-sized hole. What organism is causing this damage? What can we do to control this problem
 
@@ -513,12 +503,6 @@
 
 ## intent: askextension_tomato/7958_Iowa
 - Canning Tomato Based Spaghetti Sauce. Hello,  I ran across this recipe online: http://voices.yahoo.com/how-own-tomato-based-spaghetti-sauce-43163.html  I don't plan to add the meat that they have in the recipe. Can you tell me if this is a "safe" recipe? I know that canning tomatoes is touchy, and that I need to take special care to ensure that it is processed safely. I really like the idea of being able to can spaghetti sauce for later use, I have a garden full of tomatoes!  If this recipe is not appropriate, can you provide one that would be? I would like to be able to have the vegetables they list, like carrots, onions etc, and the mushrooms in the sauce. I only have a water bath option, I do not have a pressure canner.   Thank you for much for your help!  Annett
-
-## intent: askextension_tomato/8016_Oregon
-- brandywine tomatoes. Our Brandywine tomatoes are washed out in flavor this year - very inferior to their usual wonderful taste.  We are wondering what we did, or didn't do to the plants.  We live in the Tidewater area so get plenty of sun.  And,we have grown them in the past with great results. Thank you, Linda
-
-## intent: askextension_tomato/8037_Michigan
-- tomato problems. My garden was doing great until the tomatoes started to dry up, there are several different types and all seem affected by the problem. The vines are drying up like a wilt and the fruit has large scbbby areas on it. Out of 25 plants in a couplr areas, we have only had about 5 good tomatoes. Is this because of the hot wet period this summer? Potatoes were not affected
 
 ## intent: askextension_tomato/8112_Ohio
 - My garden of tomatoes bl... My garden of tomatoes, blue lake sting beans, and cumcumbers is dying.  The beans are completely finished.  tomatoe vines have ripening tomatoes, but are dying and cumcumbers plants hae a few cumcumbers, but are also dying.  Is this a normal time for the garden to end or is something wrong.
@@ -721,9 +705,6 @@
 ## intent: askextension_tomato/12657_Florida
 - If a tomato is a fruit th... If a tomato is a fruit thenwhy is itlisted under vegetables
 
-## intent: askextension_tomato/12889_Minnesota
-- WHAT DO I DO WITH TOMATO ... WHAT DO I DO WITH TOMATO BLIGHT.  My garden is 20/40 Ft, so it's difficult to rotate crops
-
 ## intent: askextension_tomato/12913_Oregon
 - Planting Peas before Tomatoes? Can I plant snap and snow peas right now (beginning of March) and expect them to be done producing by the time I want to put tomato starts in the ground in the same garden bed? Thank you
 
@@ -741,9 +722,6 @@
 
 ## intent: askextension_tomato/13450_Iowa
 - using mulch for tomatoes. i have a 10 year old mulch pile, mostly consisting of grass clippings, while smelling and looking richly organic. when used to grow onions and tomatoes last year my fruit was blighted and my onion set never got going.  might i get this soil tested to find out why
-
-## intent: askextension_tomato/13457_Michigan
-- Tomato blight... ughhh. Wondering how I can either get rid of tomato blight or try to manage it
 
 ## intent: askextension_tomato/13580_Colorado
 - Tomato blight. I had a problem with what I believe to be tomato blight last summer. Using photos, I think it was "late blight" given the look of the damage to the stems, but i could not be sure.I grew only two plants and both were destroyed. I disposed of them, but did not have them tested. I grow only in wooden containers. I know I should rotate my tomato plants to other containers as far away as possible in the coming season. Should I destroy the containers or replace the soil in them as well? I do not grow potatos. My pepper plants near the tomatos also did poorly and appeared diseased. Not sure why, but I have not seen info about them being subject to blight.I have only one row of containers to plant in - about 20' long. Most are wooden, some are traditional red clay pots.Your advice would be welcomed. If this happens again, I will bring plant samples to be examined/tested.I am happy to make my question public, but please remove my name.....Thank you
@@ -883,9 +861,6 @@
 ## intent: askextension_tomato/17686_Maryland
 - Tomato leaves are curling... Tomato leaves are curling
 
-## intent: askextension_tomato/17711_Oregon
-- tomatoe wilt. I purchased heirloom tomatoes this year. One of the three is wilted and has dark edges.  The other ones are starting to do the same. I found little tiny round balls on one. I sprayed them with diluted Dawn. What can I do
-
 ## intent: askextension_tomato/17713_Texas
 - Tomato Blues. Hi,  My tomatoes' leaves are curling and I'm not getting flowers. I use the homemade watering system with cleaned out soda bottles so water goes straight to the roots. I've also at times added things into the water like Epsom salt, calcium tablets, and coffee grounds, for a slow release fertilizer.  Well yesterday I checked the bottles and when I opened them the smell was horrible. So what I added was decaying and looked a bit moldy and I'm sure its been poisoning my plants :(  I removed each bottle and will now only water with water. They have 7 hours full sun.  They were started from seed.  Moved outside April 25th.  My other veggies are flowering fine.  Can they be saved???  What should I do from here on?? Please help me save my babies!  Oh, they're Bloody Butcher 55 days, Green Zebra 75 days and Beefsteak 96 days.  Thank you
 
@@ -982,9 +957,6 @@
 ## intent: askextension_tomato/18997_Iowa
 - tomato plants. After all the rain we have had, out tomato plants look wilted.  Will they come out of it? What should we do
 
-## intent: askextension_tomato/19018_Pennsylvania
-- tomato tops drying out. Hello, I have different species of tomato plants in my garden. The plants looked great until this morning.  Probably 30 plants in all, 15 small tomatoes.  The top of two plants look to be wilting, one more then the other at this point, hope it is not a chain reaction. They just look like they are drying out from the top, going downward.  Is there anything I can do to save them
-
 ## intent: askextension_tomato/19114_Illinois
 - tomato plants are very young and leaves are getting crispy. I want to know why and what can be done to stop it. We have small tomato plants in our garden that are small . and they keep getting dead spots in the leaves what is this? And how can I stop it. it turns brown and crispy its dead not the whole plant just on the ends of the leaves some of them not all. I picked them off and ot hers got it.
 
@@ -1009,9 +981,6 @@
 ## intent: askextension_tomato/19360_Oregon
 - Disease identification in Tomato Plants. Hi, I have something going on in two of my tomato plants.  I prune them heavily, water with overhead sprinklers and tie them up to grow.    Some black spots have developed on two of them, and on one of the plants the spots are now on the stem. Is there any way to save the plant?  What disease is this?  How do I control this disease organically and conventionally?  Thank you
 
-## intent: askextension_tomato/19394_Texas
-- Yellowing tomato plant leaves. I have had a recurrent problem with tomato plant leaves turning yellow with spots and then browning from the bottom of the plant to the top; ultimately it kills the plant. I do practice removing the yellowing leaves from thebottom of the plant and where ever they occur; however, this does not eliminate the problem. Every fall or winter I till up the soil and remove any dead plant material. My tomatoes are in a raised bed garden with soil composed of compost/sand/composted cow manure. I have seen no insects on the plants; treatment with a fungicide oncehas not helped. I water the plants when the soil appears dry, not waiting for leaves to wilt; about twice a week. Fertilizer with a granular spread 15-5-10 around the plant about once every two weeks. I really need help with this issue and would appreciate any information I need to control this problem. If chemical sprays are recommended, please be specific on the recommendation. I can submit more photos if needed. Thank you.
-
 ## intent: askextension_tomato/19487_Minnesota
 - I have 6 tomato plants.  ... I have 6 tomato plants.  One does not have blossoms.  The others do.  What is wrong with the one with no blossoms
 
@@ -1026,9 +995,6 @@
 
 ## intent: askextension_tomato/19694_Texas
 - Tomato plant problem. I'm trying to determine what may be living in my garden soil. For the second year in a row I have planted tomatoes and after they get up and going, the leaves become stunted and curled. The plants will bloom &amp; may even set fruit, but the blooms are often very small and the fruit doesn't always reach ripe stage. There are very small nodules along the base of the stems on most of the plants, but not all of them. This condition affects all of my tomato plants, regardless of variety. This year I have at least 4 different varieties planted. I've included photographs of some of my plants in hopes that you can help me with the problem.
-
-## intent: askextension_tomato/19732_Colorado
-- hydroponic tomato nutrients. First, Thanks for being there. Second, I know that this is long but Ill try to be complete.  Problem / Question: based on experience, it seems to me that there should be more flowers on my plants. How can I get more flowers and fruit?  Background: I successfully grew tomatoes for years in the same area of my yard. In recent years, the plants seem to have been affected by fusarium wilt or some late season disease. It is the only area in the yard that I can use so that Im unable to do crop rotation. For this and a great and growing personal interest, Ive set up an outdoor hydroponic system.   There are 13 Dutch Buckets which are fed 45 minutes 3 times per day. These are 4-gallon buckets of Perlite. Each bucket has from one to three plants and each plant has been allowed from one to three stems. There are no more than three stems in each bucket. I have SunGold, Champion, Early Girl, Better Boy, and Beefmaster plants.  Im getting impressive foliage, the vines are thick and very healthy looking, the flowers are setting fruit and except for a few individuals, the fruit has noblemishes, no deformity...nobottom end rot, no cat facing or other problems that Im capable of diagnosing. They look great and theyre growing fast.  I feed:  Master blend  4-18-38 [ 12g / 5 gallons]   Total Nitrogen (N) ............................................................4.00%  Nitrate Nitrogen....................................................3.50%  Ammoniacal Nitrogen...........................................0.50%  Available Phosphoric Acid (P205)...............................18.00%  Soluble Potash (K20).................................................... 38.00% Total Magnesium as (Mg)...................................................0.40% Water Soluble Magnesium as (Mg)........................0.40%  Boron as (B) ......................................................................0.20%Copper as (Cu).................................................................. 0.05%Iron (Chelated) as (Fe).. .....................................................0.40% Total Manganese as (Mn)....................................................0.20%  Soluble Manganese as (Mn) ....................................0.20% Molybdenum as (Mo) .........................................................0.01% Zinc as (Zn).........................................................................0.05% Chlorine as (Cl), not more than........................................... 2.00%  ADDITIONS:  Calcium Nitrate (CaNO3) (15.5  0  0) [ 12g / 5 gallons ]  Magnesium Sulfate (MgSO4)          [ 6g / 5 gallons ]  I use proportions that (are supposed to) give me ~20  18  38  I use a pH of 5.7 to 6.2 ( I add nutrients to the reservoir at pH 5.7 and the feeding cycles raise the pH to the low 6s )    I'm told that some marijuana grow operationsuse different lighting, pH and nutrient mix each stage of their crop life: germination/cloning, foliage, flowering and finish. My plants are outdoors but I do have control of nutrient, pH, and the feed cycles.   The pH I use was chosen for nutrient uptake for young plants. Should I vary the pH or nutrient mixfor fruit bearing?
 
 ## intent: askextension_tomato/19735_Utah
 - Tomato pest with rapid onset. The lower leaves of my tomato plants [Champion VFNT] are very rapidly turning brown and drying up. The leaves a little above them show black spots and area of localized color change. I am enclosing a photo, which if magnified, shows the changes very well. Can you identify
@@ -1059,9 +1025,6 @@
 
 ## intent: askextension_tomato/19927_Texas
 - tomato insect/animal problem. I have looked at your pictures but did not see anything on my problem.  I have a 2,500 sq. ft. tomato garden that islocated 40 miles south of Dallas and 4 miles west of I45.  Out ranch is located directly on the south Ellis County and the north west Navarro county line.  I have quite a few different varieties.  Known pests present are rabbits, grasshoppers, and birds..    My problem is that up to about 25% of the tomato is eaten off almost smooth on one side, like a sander had hit it.  Some of these tomatoes are as tall as 24" above the ground.  The ones eaten are full size and ripe.     While I do use some fertilizer, I do not use pesticides on my garden.     Any suggestions would be greatly appreciated.    Thanks,        Jim Mecom
-
-## intent: askextension_tomato/19937_Pennsylvania
-- Wilted tomato plants. I think my tomatoes might be affected by fusarium wilt.  One day they were lookin' fine / next day one was totally wilted, and the following day, the others.  Can I successfully dig them up (they're about 18 inches tall), rinse off the roots and plant them elsewhere
 
 ## intent: askextension_tomato/19973_Michigan
 - My grape tomato plant lea... My grape tomato plant leaves are turning yellow.  The tomatoes seem to still be growing but the yellow is spreading quickly through the entire plant.  What can I do to remedy or is it not a problem
@@ -1119,9 +1082,6 @@
 
 ## intent: askextension_tomato/20594_Maryland
 - Tomato Leaves - Every yea... Tomato Leaves - Every year, but this year seems worse, the bottom leaves on my tomato plants turn yellow with brown splotches, then all yellow and ultimately all brown and withered. I cut them off and discard, and the plants on the tops seem healthy and I still get a lot of tomatoes. I've attached a picture of a leaf group in transition to its ultimate demise. I thought it might be early blight but it doesn't seem to have a concentric pattern, it's more blotchy. Also, I have my tomatoes staked to a sturdy fence, growing in well amended soil that is covered with landscape fabric, so the soil doesn't splash up on the leaves. What is causing this leaf damage, and can I correct it
-
-## intent: askextension_tomato/20692_Minnesota
-- When to prune tomato vine... When to prune tomato vines?  I'm getting ALL vines and NOT many tomatoes
 
 ## intent: askextension_tomato/20697_Maryland
 - I have six tomato plants.... I have six tomato plants. They have been growing great with what was looking like lots of tomatoes. However, as the tomatoes ripen there is a gray/black rot on the bottom of most of the tomatoes. The tomatoes are small and rotting from the bottom. It looks like I will not get much yield after all. What causes this and what should I do about it?
@@ -1204,9 +1164,6 @@
 ## intent: askextension_tomato/21225_Minnesota
 - tomato leafs wilting from... tomato leafs wilting from crown down, no discoloration and buds not forming or dry up in affected areas. lower part still healthy. help
 
-## intent: askextension_tomato/21273_Delaware
-- Beetles in Red Potato and Tomato Plants. I have red potato and Tomato plants.  There is a particulate beetle that is feasting away and destroying them.  What is the beetle and how do I get rid of it to protect my plants. Thanks,
-
 ## intent: askextension_tomato/21274_Delaware
 - Tomato Plant leaves wilting. I have a problem with my tomato plants.  The leaves are starting to spot, then turn yellow, then shrivel and die.  I have been picking and cutting off the leaves and then throwing them away but the next day more leaves are spotted and starting to turn yellow.  I have a large tomato patch and all of the tomatoes are close together.  What can I do to stop these spots and wilting.  Attached is a picture
 
@@ -1227,9 +1184,6 @@
 
 ## intent: askextension_tomato/21430_Delaware
 - tomato problems. is temperature the main reason my tomato plants are not producing tomatos. My Cherry tomatoes are doing good but right next to them but my beefsteaks are blooming but no fruit.
-
-## intent: askextension_tomato/21532_Colorado
-- What deformed and ruined 16 of our 18 tomato plants? We are desperate to find out what has deformed and ruined at least 16 out of our 18 tomato plants! We purchased this house three summers ago and didnt do anything to the garden for the first two years except kill weeds and pull out old plants.  This last spring we brought in a professional garden builder who helped us build a large rectangular area (15 wide by 11 deep) at the northeast back corner of the yard.  Our neighbor's garden is directly on the other (north) side of the fence and always does very well.  It is a sunny area. He then helped us build a 6-foot deep area along the rest of the length back fence where we put in many new shrubs and trees.  The gardener brought in P3 (Premium 3) compost from Pioneer, and we rented a large tiller to till it into the soil throughout the garden and shrub area.  Then we put in mulch (free mulch we got from the city of Denver which is supposed to be mostly ground-up Christmas trees) only in the area where the new shrubs went.  We then planted 12 tomato plants in rows3 deep and4 wide, using about 12 x 8 of the space in the rectangular garden.  As the trees and shrubs were so small and not yet producing shade, we planted 6 more tomato plants and a zucchini plant between the shrubs along the back fence.  All the tomato plants began to grow well and had about 6 to 8 inches of normal growth from the ground up.  Then suddenly the plants began to look deformed.  Some of them seemed stunted and only grew a few more inches.  Others shot up taller, some with numerous thin stems, some with thick stems, but all the new leaves on all the plants were deformed.  Some of them are curled up very tightly, like a new fern leaf.  Others are long and thin, others twirl, and some are wide and flat.  Some shoots grew into what look to be stumps, like an amputated arm.  We tried to add fertilizer in an attempt to save the plants, but that did not work.  The leaves of the zucchini were quickly eaten (at a nursery they said it was the flea beetle) and although I sprayed the plant twice with a vegetable safe bug killer, it completely died. People have suggested that something is wrong with the soil, but basil plants, one rhubarb, and cucumbers are growing alongside the tomatoes and seem to be growing normally. Also, two of the 18 tomato plants in the middle of the garden are growing at least somewhatnormally. Other people say there must be something wrong with the mulch, but the mulch was always pushed back from the 6 tomato plants along the back fence and was never around the 12 in the garden.  Other people have said the plants must have been diseased from the nursery, but they grew well for the first 6 to 8 inches.  The plants were from an established nursery here in Denver and were not all bought on the same day.  They are of various varieties: Sunsugar, Celebrity, Sungold, Early Girl, Husky Cherry Red, Supersweet 100, Brandywine, German Johnson, Better Boy, Fourth of July, Bloody Butcher, Super Fantastic, etc.  I can only post three photos here but I have many others that show the deformities well.  I would be happy to send them out to anyone who can help us.  We are really heartbroken after all the work and expense that we will have no tomatoes (or zucchini).
 
 ## intent: askextension_tomato/21554_California
 - Tomatoe plants turnoing brown and dying... Have had a veggie garden for 12 years..this is the first year about half of my tomato plants have turned brown, shriveled up and died....do not know what to do....Help, please
@@ -1261,9 +1215,6 @@
 ## intent: askextension_tomato/21716_Virginia
 - Squirrels in the tomatoes. What is the best way to deter squirrels and chipmunks from eating the tomatoes off the vine in my garden
 
-## intent: askextension_tomato/21752_Ohio
-- My tomato plants have sep... My tomato plants have septoria again this year.  I moved them to another section of my garden but it didn't help.  I mulched the plants and did not use over head watering.  Would soil solarization help for next year?  Any ideas besides early spraying schedule of fungicide.  Janet Schaibl
-
 ## intent: askextension_tomato/21762_Oregon
 - Tomatoes with dark spot. My Plum tomatoes have a dark spot on the end . I have thrown away About 4 dozen tomatoes as of this AM is there any remedy for this
 
@@ -1291,12 +1242,6 @@
 ## intent: askextension_tomato/21932_Delaware
 - What is this on my tomato plant? I found this in my garden on a tomato plant. Can you tell me what this is? It is some type of large caterpillar covered in eggs. Should I be concerned?  I've never seen this before. Thank you-
 
-## intent: askextension_tomato/21935_Maine
-- Tomato leaf spotted disease.....soil management. A spotted leaf fungus or disease decimates my tomato plants....I  Spray weekly, but to no avail.I am aware the spores winter over in the soil. My question is----Can I do anything to the soil at the end of the harvest season, or at the beginning of the next planting season, to kill the spores in the soil. (I can't rotate the tomato plants as I would like, as I only have four(4) raised beds)Dan, in York
-
-## intent: askextension_tomato/21967_Oregon
-- What is happening to this tomato plant? The species is "Dorothy's delight". It has a lot of tomatoes on the vine but the stalk is think and looking wierd. The vet said it's time to put sissy down. My heart hurts Help
-
 ## intent: askextension_tomato/21995_Maryland
 - I have tomato worms again... I have tomato worms again this year. How do they actually get on my plants?  They don't fly. They just suddenly appear
 
@@ -1308,9 +1253,6 @@
 
 ## intent: askextension_tomato/22088_NewJersey
 - Plumb tomato rotten inside. Our crop of large plumb tomatoes have at least one row of black rotten seeds as seen in this medium sized tomato. If we were to scoop out the ugly part is the remaining part of the tomato edible either as is or cooked? We have lots of them and don't want to waste most of our crop.Thanks,Bil
-
-## intent: askextension_tomato/22116_Michigan
-- Mealy grainy bland tomatoes. 04Aug2014: A co-worker asked what could cause tomatoes he picked last weekend to be mealy, grainy, bland.  Varieties were Roma and Early Girl. They were red and firm when picked and he sampled them same day  after picking.  A Better Boy tomato he picked the next day was sweet, plump, juicy.  His observation is that all plants are looking healthy, no spots or problems appearing on leaves.  Has not tested soil (so I recommended soil test).  Feeding is weekly using all-purpose Miracle Gro 15-30-15.  Because the unfortunate tomatoes occurred on two varieties, I suspect cultural conditions, particularly the relatively mild Summer this year with nights dipping into 60's and a few nights in 50's.  Locale: Farmington Hills, MI Expert insights will be very appreciated.
 
 ## intent: askextension_tomato/22134_Minnesota
 - Dying tomato plants ever... Dying tomato plants, every year. leaves turn yellow w/ brown spots. Dies from bottom up. I grow tomatoes in straw bales, cover ground w/ mulch &amp; this year purchased 3 grafted tomatoes ( 2 Cherokee purple, 1 mortgage lifter) along w/ 4 regular german tomatoes. I water w/ soaker hose. I have done everything I can to grow tomatoes w/o them getting disease, including trimming off dead leaves &amp; discarding them far away. Any suggestions? I am disgusted, broke, from buying all this stuff to try to get tomatoes to grow! Pictures included. Thank yo
@@ -1552,9 +1494,6 @@
 ## intent: askextension_tomato/24908_Colorado
 - Canning Tomato Soup. Do you have information about canning homemade tomato soup? I have looked on line but could only find instructions for canning the recipes provided by the site. I have included my recipe, if that helps. Mostly I am looking for how much lemon juice to add and how long to water-bath can quarts and pints.Tomato Soup1 T. butter  1 yellow onion, finely chopped   1 clove garlic   5 red ripe tomatoes, quartered (or 1 can 28 oz. whole tomatoes, drained)   1 T. tomato paste   4 c. chicken broth   1 bay leaf   1 tsp. dried basil or 1 T. fresh basil    -juice of 1/2 lemon   1/2 tsp salt   -freshly ground black pepper   -parsley for garnish      Saut onion and garlic in butter until softened, but not brown. Add tomatoes, paste, broth, bay leaf and basil. Cover and simmer 25-30 minutes, then remove bay leaf). Puree soup in a blender and strain into a clean saucepan (I love it strained, but have also added some of the strained solids back in for some structure). Add lemon juice, salt and pepper. Return soup to simmering point. Serve warm.
 
-## intent: askextension_tomato/24936_Michigan
-- Canning Tomatoes. I have not canned tomatoes since my children lived at home 25 years ago. At that time, I canned them like my grandma and mother taught me when I was a child.This past week, I canned tomatoes again like I did years ago. First, I did everything like all the directions online explain which includes washing the jars and lids, washing the tomatoes, peeling the tomatoes, and chopping the tomatoes. Then, I did like I used to years ago and put the tomatoes in a kettle and simmered them for 30 minutes. While they were boiling hot, I put them into boiling hot quart jars using a scoop and a funnel, added 1 tsp. ascorbic acid, wiped the rim of the jar, laid a lid that had been in boiling hot water on the jar, and screwed on a band. I did 18 quarts like this and they appear to have all sealed. The Ball lids have a convex circular spot in the middle of them and all the spots have been sucked down into the jar, leaving the spots concave. After 48+ hours, I took the bands off and lifted the jar by the lid to check the seal. They all appear to have sealed.A few days later, I repeated the procedure for another 18 quarts. This time the convex spot in the center of my Ball lids is flat, not convex or concave. I took the bands off from these jars also and tried to lift the lid. The jars all appear to be sealed.My questions:Are the tomatoes going to be safe to eat if the jars sealed, but they did not go through a boiling water bath in a canner for anywhere from 30 to 85 minutes? (btw...How many minutes do you recommend?)Also, I have since purchased a water bath canner. Can I and should I re-can the tomatoes using the canner?Update: I put the tomatoes from the 2nd batch where the lids were flat, not convex or concave, but apparently sealed into the fridge overnight (within 2 hours of the jars being filled with boiling hot tomatoes). I unsealed them today, reboiled the tomatoes in a large pot for 30 minutes, put them in hot quart jars with new lids, and boiled the jars for 60 minutes in the water bath canner. Do you think they should be okay now?
-
 ## intent: askextension_tomato/25011_Oregon
 - Tomato's not ripening. I planted some Beefsteak  tomato's from seed this summer, they grew and are large, but are staying yellow instead of turning red.  I picked a few and put them in my window to get the morning and afternoon sun, but they are not turning red.  The are firm, so they don't feel ripe either.  I picked them over a week ago, and they have stayed the same - it's like they're petrified!  I watered, and fertilized them with fish fertilizer a few times over the summer.  I has some volunteer cherry tomatoes come up and they turned read and are edible.  Any suggestions
 
@@ -1582,9 +1521,6 @@
 ## intent: askextension_tomato/25392_Virginia
 - tomato cat face. What causes the car whisker deformity on the top of my tomatoe
 
-## intent: askextension_tomato/25472_Iowa
-- Tomato Problem. I planted three tomatoes (Lemon Boy and Golden Jubilee) very late in the spring (2nd week of June).  I have gotten lots of tomatoes from these three plants.  They were spaced appropriately and in cages.  I grew them in a box (4 by 8 feet) which had miniature melons growing in the soil last year. I used annual rye as a compost last fall and added some additional garden soil from a bag.  About a month ago, they started get spots on the leaves and then dying from the bottom up.  I have pulled up the plants (they will be burned in a burn pile) and cleaned up all the leaf debris.  But I am wondering what caused this problem and if I will have the same problem next year, although I don't plant tomatoes in the same spot every year.  We live in Monona County and had up to 13 inches of rain in August. I hardly ever had to water the tomatoes and they were almost too wet all the time.  I also had newspaper and grass cuttings on top of the soil for weeds but now wish I had not done this, as they never seemed to dry out.
-
 ## intent: askextension_tomato/25479_Oregon
 - greentomatoseeds. Can green tomato seeds be saved for next year's tomato plants?        In the past I have been using only ripe tomato seeds to save for next year's plants.
 
@@ -1608,9 +1544,6 @@
 
 ## intent: askextension_tomato/26064_Colorado
 - Tomato canning. The bulletin for canning tomatoes suggests adding bottled lemon juice. I have fresh lemons and limes. How much should I add to each quart when water bath canning crushed tomatoes? Can I use coarsely chopped field tomatoes? (No seeds, no peels)? 2 T bottled lemon juice = ??? Fresh lemon juice?
-
-## intent: askextension_tomato/26112_Iowa
-- Tomato blight. My tomatoes seem to be blighted every year. I move them as best as I can to different locations but they still seem to be affected. I use remesh cages to support them. Is the blight transferred from the cages or from the soil to the plants? What can I do to lessen this problem? Mary Ann Hanso
 
 ## intent: askextension_tomato/26318_Michigan
 - tomato plants died at bottom of stem. I have a man who needs to know why his tomato plants died starting at the bottom of the stem. The stem near the ground turned black and rotted eventually killing the entire plant.What it is and what can be done about it
@@ -1647,9 +1580,6 @@
 
 ## intent: askextension_tomato/27664_Texas
 - Source of Tycoon Tomato Seeds. Johnson County Master Gardeners wish to grow Tycoon Tomato plants for our spring sale, but have not found a source of seeds. Could you help? Thanks, Joan Leach
-
-## intent: askextension_tomato/27726_Ohio
-- Tomato disease. Every year my tomato plants start out great but by mid July start to dry and die from the bottom up. I have been told it is called tomato blight.  What can I do to stop it
 
 ## intent: askextension_tomato/27787_Texas
 - Stunted tomato plants. I have a garden in Blanco County. My problem is that my tomato, squash, pepper, and cabbage-like plants just will not grow. They start out fine but soon appear stunted and never achieve the growth I would expect. Beans, onions, lettuce, corn, potatoes, and sunflowers grow normally. I have full sun and brought in 8 inches of topsoil last year to no avail. My irrigation system uses well water; could this be the cause?  If not, what might the problem be
@@ -1794,9 +1724,6 @@
 
 ## intent: askextension_tomato/32511_Oregon
 - strange tomato. I had a store-bought tomato that was put in a window to further ripen.  It soon developed small "bumps" all around it and after opening a "bump" found that it was small tomato plants inside each of the bumps.  I planted some of the plants and they developed into eight tomato plants!!!!  They are about a foot tall.  What kind of strange tomato plants are these???
-
-## intent: askextension_tomato/32668_Maryland
-- watering instructions for my tomato and string bean plants. My garden plot is 4' by 16'.  Almost full sun.  6 foot fence on the east.  After 10 A.M., full sun until evening.  I've turned the soil over to a depth of 12 inches.  Added peat moss, humus and manure.  All clumps of soil have been broken up.  The soil is soft and ready for root development.  I've planted five tomato plants; three better boys and two  husky cherry red hybrid cherry tomatos..  All 5 are indeterminate and about 10 inches tall.  I planted them two weeks ago (mid - April).  They look healthy and they've about 3 inches of new growth.  I've been watering them lightly twice a day (except on rain days)  When frost was predicted I placed buckets over them at night.  I've been told to stop watering them; only water them if we have a prolonged dry spell here in Gaithersburg.   Huh!!??  I'll be planting string beans in a week.  (5/13/15)  Bush bean seeds will go into pots.  Climbing bean seeds will go into the same soil adjacent to  the tomatoes - I'll use an 8 foot bamboo tripod plus strings to the 6 foot fence (East and South) for these climbers to climb..  For the beans, same question on watering.  To squirt or not to squirt.  That is the question!  The pots will have the same prep as my garden, plus Miracle Grow potting soil for vegies.    Weed Barrier:  New this Year. The garden gets a newspaper base covered with 2 or 3 inches of mulch once the plants get a foot or so high.  I'll put up a wire fence 30 inches high before they start to bear tomatoes and beans.  I have rabbits, squrriles, chip monks, turtles, birds, a lazy ground hog and sev. raccoons.    This is a better plan than last year. I worked hard on preparing the soil.  (much better than last year; just peat moss and a toss or two.) Beans were fine.  The tomatoes were a disappointment.  They produced once, late Sept.  And then gave up.  And I verified that they were indeterminate - same mix as this year,  using those upside-down wire cones..    Thanks for the help!
 
 ## intent: askextension_tomato/32726_Minnesota
 - My tomato and peppers hav... My tomato and peppers have done poorly the last couple of years. I think I have blight or fungus in the soil. What can I do so the soil will grow tomatoes and pepers again? What crops can I plant in my garden that won't be affected by the fungus? My garden only gets afternoon and evening sun. It is in the shade in the AM. Can I plant squash? potatoes? rasberries
@@ -2188,9 +2115,6 @@
 ## intent: askextension_tomato/38451_Michigan
 - Tomato leaves turning yellow and dropping. what can I use to stop the leaves from turning yellow and dropping
 
-## intent: askextension_tomato/38456_Colorado
-- Early Girl Tomato. I have an Early Girl Tomato Plant that is producing Flowers but none of them seem to be setting fruit. I have no outside water available so I am watering the plant daily with 1 gallon of water from my watering can. This is the first time I have had this problem with any tomatoes I have planted
-
 ## intent: askextension_tomato/38482_Iowa
 - tomato blight. I try to raise tomatos in containers about the size of 5 gal. containers.  I put good soil in the containers.  I put two plants in each bucket.  I use some growth additives.  Each year I get a good start and then I get blight and generally loose the crop.  What can I do to change this process ?  Thanks,  Dav
 
@@ -2241,9 +2165,6 @@
 
 ## intent: askextension_tomato/38872_NewYork
 - My tomato plants grow fin... My tomato plants grow fine up to mid-July.  By this time, most are around 3 feet tall, and are starting to have fruit.  Then the leaves dry and brown from the bottom up.  About half  of the fruit already formed will eventually ripen, very slowly, by which time they have blemishes.  The other half rot or fall off before ripening.  The top of the plant stays healthy and green longer, producing buds and fruit, but the same thing happens to this fruit.  The location does not get a full 6 hours of sun per day, but from what I have read, this is not a response to lack of sun.  This is the 3rd year in a row I have had this problem.  I do use liquid fertilizer occasionally, and water properly.  What am I doing wrong?  Thanks
-
-## intent: askextension_tomato/38965_Texas
-- Tomatoes. My tomato plants are about 5 foot tall and appear to continue to gain height. My problem: the flowers bud out nicely then dry up and literally fall off before ever becoming a tomato. I have had success in the past with where they are planted and I use a granual fertilizer designed for tomatoes. The photo/file shows the flower in the foreground is already dead while the flowers behind it appear to be normal.Any suggestions??
 
 ## intent: askextension_tomato/38974_Minnesota
 - My potato has tomatoes. My Kannabec potato plant seems to be growing tomatoes. Why is it doing this and will it still produce potatoes?Thanks
@@ -2320,9 +2241,6 @@
 ## intent: askextension_tomato/39741_Tennessee
 - Tomato problem. I have grown tomatoes in Collierville, TN and as they start to turn from green to red, then develop brown/black soft spots that turn mushy.  Do you know what the problem could be
 
-## intent: askextension_tomato/39773_Georgia
-- can you recommend a sweet tomato to plant in my garden? 
-
 ## intent: askextension_tomato/39804_Kentucky
 - slow to ripen organic heirloom tomatoes. Many I have talked to in kentucky and other nearby states are having trouble getting their heirloom tomatoes to ripen. Any reason for that that you know of? Any way to hurry them along, without adding chemical or poisons
 
@@ -2349,9 +2267,6 @@
 
 ## intent: askextension_tomato/40001_Minnesota
 - tomato disease question. how do you tell the difference between Septoria Leaf Spot (a fungus) and Bacterial spot.  I realize for both some of the things you can do to help are the same like removing infected leaves, mulching, etc. but if it's Septoria Leaf Spot you can spray a fungicide and hope it doesn't get worse.  So how do you know the difference
-
-## intent: askextension_tomato/40016_Minnesota
-- Can You Identify what is happening to my Tomato Plants? I live in central Minnesota. I successfully grew great tomatoes in this plot of land last year. However, this year I have the following happening. Can you help me identify it and offer treatment tips?
 
 ## intent: askextension_tomato/40035_SouthDakota
 - Tomato Question. What is wrong with my tomatoes?  They are big boy champion
@@ -2518,9 +2433,6 @@
 ## intent: askextension_tomato/41836_Pennsylvania
 - Tomato end rot. Ron Gill called and has some tomato's that are turning dark on the bottom's.  Is this end rot and can it be treated organically?  He would prefer to be called at 336-3147
 
-## intent: askextension_tomato/41863_Michigan
-- what's happening to my tomatoes? My black krims. Thinking i may have beginning stages of blight. I know the cracks may just be things like rain checking? Leaving for vacation for5 days in one week. I have 4 other rows of different tomatoes next to out and don't want to cone home to Blight taken over my garden. I've mulched with newspaper and straw to try to prevent this last year we had it but i rotated my garden this year. Do i need to pull all my krims? Is there something i can do to stop it? Is it even blight? Tips to keep other plants free from whatever it is affecting my tomatoes
-
 ## intent: askextension_tomato/41880_Minnesota
 - tomatoe blight. is there any way to stop or cure tomatoe blight
 
@@ -2529,9 +2441,6 @@
 
 ## intent: askextension_tomato/41902_Maryland
 - Cloudy spot s on Tomato. I have had this problem for the last few years, but only on some tomato plants, not all.This year I have grown only 3 tomato plants, each one different varieties; two plants of medium size tomatoes and one large tomatoes. the two small tomatoes of the plants have fruit with "cloudy spots" (per your description).  Is this caused only by stink bugs? Not caused by lack of nutrients in soil? Why only on the two plants?  Is the fruit still edible?
-
-## intent: askextension_tomato/41964_Oregon
-- Dried Tomatoes - storage options. I found a few recipes online for roasting cherry tomatoes.  Their storage option was to put them in a jar with olive oil which kept them for about 2 weeks in the fridge.  My question is about longer storage.  Is there a safe way after roasting to preserve them longer (water bath or pressure)? Also, would this same process work for roasted red peppers? Thank yo
 
 ## intent: askextension_tomato/41984_NewJersey
 - What is wrong with my tomato plant? My tomato plant recently started showing this on its leaves. Is this something I should be worried about? It is spreading quickly
@@ -2614,12 +2523,6 @@
 ## intent: askextension_tomato/43137_Colorado
 - tomato problem. My daughter gave me a tomato plant for Mothers' Day. I think it said it was a Big Girl. I just picked some tomatoes, and they all have rotted bottoms. The bottoms are soft, sort of a light-green with black dots. Why did this happen, and can I just cut off the bottoms and still eat them?
 
-## intent: askextension_tomato/43186_Michigan
-- Mid-August Blight that eventually kills my tomato and cucumber plants. I live in Southern Branch County, MI. In the past 7 or 8 years, my allegedly disease resistant tomato and cucumber plants are invested with a blight that turns the leaves and stems brown,dries them outand spreads over the entire plant eventually killing it. This blight appears about mid-August. Previously, my tomato and cucumber plants stayed green and productive until the first frost killed them. Do you know what this blight is and what can I do to prevent it or slow it's spreadingdown? Any info you can provide would be appreciated. Thank you. Sincerely, Ron Kabacinski Bronson, MI 49028
-
-## intent: askextension_tomato/43224_Maryland
-- Food preparation and safety for tomatoes and cukes. I have two questions:  1. I made refrigerator pickles by packing gherkins into clean glass jars with salt water and spices (followed a published recipe). They have been in the fridge since mid July into early August, but we are just not eating them that quickly. Are they actually still safe to eat? The power has never gone off during that time, by the way.  2. We have an overabundance of roma tomatoes and some others. I planned very poorly for prepping them. On August 28, I skinned them using the method where you cut the X in the bottom, boil them for a very short time, throw them into cold water, and remove the skin. Then I boiled them down over a period of about two hours with some basil leaves and garlic cloves and poured them into clean glass jars, and then put them into the refrigerator. Today, realizing I had better do something with it all, I poured the mixture into clean plastic containers and put them into the freezer. My plan is to thaw them as needed, boil them again, put the mixture through a food mill to get rid of the seeds, prepare tomato sauce, and serve it immediately. Do you think I need to worry about bacteria because they were in fridge for a week?  Maybe next year I'll be brave and organized enough to can our garden's yield! Thank you so much for your help.  Liz Koozmin Frederick, M
-
 ## intent: askextension_tomato/43246_Minnesota
 - My tomatoes look great on... My tomatoes look great on the outside, but when cut open  they have a lot of white, discolored flesh, and a somewhat hard core from the stem down into the center of the tomato.  My neighbors tomatoes aren't bothered with this problem.  I'm having to throw out most of my tomato crop.    Help.  Marily, Plymouth
 
@@ -2640,9 +2543,6 @@
 
 ## intent: askextension_tomato/43604_Minnesota
 - Tomatoe scab. My tomatoes this year are covered with scars.  At first I thought they were being bitten by crickets, but the amount of damage that is on them would have to be something else.  The scars are small and dark and when scalding tomatoes to can, they are difficult to skin.   Please let me know what the cause of this may be. Thank you,  Lee Ann Brow
-
-## intent: askextension_tomato/43632_Minnesota
-- How do we treat the soil after anthracnose on our tomatoes? We believe our tomatoes suffered from anthracnose as they had a big blister-like, fluid-filled "bruise" on what looked like a beautiful tomato. When cut open, the inside was mushy.  We pulled all the plants, but some root remains in the ground. We disposed of them far from our property.  Now, how can we treat the soil this fall? Any ideas?
 
 ## intent: askextension_tomato/43672_Oregon
 - How to prolong my tomato growing season. I planted my San marzano Gigantes by seed into raised beds in June . I know this was late...however, now I have very large plants with blossoms and some fruit. How can I prolong the growing life and what do I feed them now.  Is there any hope for the blossoms to develop fruit
@@ -3070,12 +2970,6 @@
 ## intent: askextension_tomato/58520_Michigan
 - Pruning cherry tomatoes. How is pruning slicer indeterminate plants different than pruning cherry tomatoes or super sweet small tomatoes? I have them in a hoop house and tie them to a string hanging from rafters. Seems like I should have more than just one main branch with the tiny tomatoes than large slicers. Confused.
 
-## intent: askextension_tomato/58577_Texas
-- mutated pear tomatoes. I grew my pear tomatoes from a pkg. of Lilly Miller Yellow Pear. Plants are growing well in my garden but the pear tomatoes on them are up to 4 inches long and look nothing like the yellow pear I have grown in the past. They are still green and growing so not sure if or when they will turn yellow. Will these be safe to eat ? What went wrong ? Thanks, Kathy
-
-## intent: askextension_tomato/58590_Indiana
-- Tomato Plant Blight - What an evil disease! Hello and thank you for the time in reading my message.  I moved into my house four years ago.  The property is old farm land and has, what I would think would be dark, healthy soil.  The first year I was in the house, I planted five tomato plants along the back side of the property in full sun.  They were planted simply in holes that I had dug in the grass, using new garden soil and surrounded with mulch.  The variety that was planted, and has been since (for the purpose of this discussion) was the Better Boy and Big Boy varieties.  The first year, the plants flourished.  I watered them frequently with Miracle Grow and by the time the season was over, the plants had reached over eight feet in height and had produced a very large yield of healthy tomatoes.  The following year, I decided to expand the garden to approximately 10' x 15'.  The area was tilled while removing most of the grass and weeds prior to planting.  Shortly after planting, I noticed the bottom leaves of each of the tomato plants having spots on them (dark spots, surrounded by gray and ultimately yellow. See attached picture).  Before I knew it, the majority of each plant was nearly skeletonized and barely hung on for the remainder of the season.  The rest of the garden (peppers, green beans, cucumbers) seemed to be unaffected.  Last year, I decided to move the tomato plants out of the main garden and away from the affected area (approximately 40 feet from garden).  This time, I planted the tomatoes the same way I did the first year.  Simply dug a large hole, filled with a mixture of new garden soil with native soil.  Shortly after planting, I noticed the same thing taking hold of the plants.  I could not stop it.  The plants were, once again, barely hanging on for the duration of the growing season.    This year, I planted tomatoes in the same area, away from the garden and used an organic fungicide that would supposedly help the plants resist blight (or whatever it is).  I covered the area around each plant with a wide bed of mulch, with the hope that this will aid in the blight prevention.  No use.  The attached picture was taken less than two weeks after I planted the once healthy plants.  With this being said, I need help!  My wife and I long for the taste of good home grown tomatoes.  I feel absolutely helpless at this point.    I have read tons of information regarding "solarizing" the garden soil with plastic prior to planting and even feeding the plants 325 mg of aspirin to a gallon of water.  While I am now trying the aspirin (after removing all of the affected leaves), I did not try to solarizing method.    I guess I would like to get some information from an expert as to how I might get back to having large, wonderful tomato plants and not feel like I am fighting a losing battle.  I understand that it may be too late this year, but I will try anything to turn things around for next year.  Any help you could provide would be wonderful.  Thank you in advance,  Trac
-
 ## intent: askextension_tomato/58620_NorthCarolina
 - Tomato leaf wierdness. My plants that I grew from seed had been in the ground since May 8th. I also planted two nursery bought plants a week ago. Then about 5 days ago I noticed all the new growth was stunted and not developing normally.  What do you think? Ric
 
@@ -3190,9 +3084,6 @@
 ## intent: askextension_tomato/60630_Minnesota
 - How do I protect my potted tomatoes against deer? Is a spray harmful for the plant? Deer comer right next to the house and eat off the plant. Will the plants survive? Suggestions? Thanks. Joneen
 
-## intent: askextension_tomato/60675_Colorado
-- Tomatoes in large containers (7-8 gallon reservoir)  how to add liquid fertilizer. Have added Miraclegrow granules to watering pots of 2.5 gallon capacity weekly. Trying to figure out whether I should add enough granules to the pot to bring the reservoir up to recommended tomato Miraclegrow concentration or whether to pour the 2.5 gallons of Miraclegrow solution directly on the tomatoes growing in the potting mixture. Does one or the other make more sense for point of view of growth and safety?
-
 ## intent: askextension_tomato/60685_Washington
 - growing tomatoes zone 5. Can the leaves get rained on; day or night, when the nights are still in the mid to high 40s' and they are growing in containers on a glass enclosed patio; that I cover with #6 polyethylene greenhouse film and a 60 watt heat lamp, when it rains and always at night, until the nights get warmer here
 
@@ -3220,9 +3111,6 @@
 ## intent: askextension_tomato/61018_Texas
 - top 1/2 of ripe tomato has a hard white layer under the skin. I am growing 2 varieties - Celebrity and Big Beef. The tomatoes are developing into nice, round red fruit. But, when they are peeled, the top 1/2 of the tomato has a hard, white covering all around the tomato. The bottom 1/2 is ripe and very tasty
 
-## intent: askextension_tomato/61054_Michigan
-- Tomato plant blight. Can I get rid of tomato plant blight?? I read one gallon of water and three tbsp of baking soda will this work or are my plants going to die
-
 ## intent: askextension_tomato/61078_Maryland
 - tomato wilt. Two plants on the end of my row are wilting badly. They seem to recover over night, but wilt again immediately when the sum hits them  I tried watering.  My research seems to indicate bacterial wilt. The recommendation for diagnosis was to cut the stem near the ground and suspend in a glass of water. I did this and waited the suggested 3-5 minutes. There is not any slime or white milky looking substance to bee seen. There is no discoloration of the inside of the stem.  There is no yellowing of the leave.  They are blooming and have tomatoes on them.  They were not recently fertilized and no pesticides have been used in my yard.
 
@@ -3243,9 +3131,6 @@
 
 ## intent: askextension_tomato/61537_California
 - Tomato problems. Attached are some pictures of several different tomato plants. I can't figure out the problem that's causing them to curl.  Thanks, Tom Porter
-
-## intent: askextension_tomato/61672_Michigan
-- What is wrong with my tomatoes and squash?? I have problems with my tomatoes every year.  I've tried rotating them, taking off top layer of soil, etc.  This year, it is starting earlier.  There are so many diseases I'm not sure which one I have so I can treat it.   Basically, dark brown spots on the leaves.  Not all, but it appears to be mostly older leaves.  The squash appears very light green, especially around the veins.  Do I need to just give up on tomatoes forever???
 
 ## intent: askextension_tomato/61799_Colorado
 - Tomato leaves curling. We have multiple tomato plants that have leaves curling.  We are hoping you can help us solve the problem and give us a treatment idea
@@ -3316,9 +3201,6 @@
 ## intent: askextension_tomato/62915_Texas
 - What is eating my purple hull peas? Maybe the tomatoes too? The peas are extracted with precision cuts on the hull. I've never found an insect on them. I'm wondering if the same bug is eating my tomatoes?
 
-## intent: askextension_tomato/62971_Colorado
-- Tomato Jeruselum Artichoke and peppers. Weird leaf curling going on, new leaves only. No purpling, no yellowing (usually). No pesticides. Thinking it may possibly be from compost purchased from Hagemans.I do see ants on some of the plants,What do you think?
-
 ## intent: askextension_tomato/63040_Kentucky
 - tomatoe rout. Why is my tomatos routing on the bottom just as they start to turn rip
 
@@ -3333,9 +3215,6 @@
 
 ## intent: askextension_tomato/63249_Minnesota
 - tomatoes blossom rot. My plants have tomatoes blossom rot.. should I pull them up or will they be ok
-
-## intent: askextension_tomato/63277_Oregon
-- Watering Tomatoes from Reese Creek. Started to get mushy stems and stunted growth. Is Reese Creek known for having negative pathogens that may attack plants?  Pythium? Phytokthara?  Some of my stems are becoming soft, also some brown lesions that look like scaring or stretch marks on the stalks
 
 ## intent: askextension_tomato/63285_NewYork
 - Roma Tomatoes in July. i have two tomato plants right now, one delicious tomato plant and one cherry tomato. I just realized I want to be able to make my own pasta sauce and I know Roma's are the best for pasta sauce but now it's July is it ok to plant one now? Will or grow fast enough
@@ -3372,9 +3251,6 @@
 
 ## intent: askextension_tomato/64125_Maryland
 - Possible bacteria spot or speck on tomato plants? Hello, We have been noticing small dark brown spots appearing on several tomato plants, leading to eventual leaf and stem loss. It seems to have started on one plant and spread to the others. I'm attaching a photos from affected plants. I'm not sure how to discern which disease this is, and what if anything can be done about it?  I'm also attaching a photo of a tomato plant with leaves with raised bumps, without the brown spots
-
-## intent: askextension_tomato/64332_Minnesota
-- tomatoes. after canning tomatoes the top 1 inch of tomatoes turn dark.  jar is sealed.  I use a pressure canner. Any suggestions.
 
 ## intent: askextension_tomato/64428_Pennsylvania
 - How can I change the soil PH in my raised beds for tomatoes and peppers? I noticed the tomato plants in my recently built and planted raised beds are turning brown and some are dying.  The peppers are doing better.  I checked the PH with a probe and it is extremely alkaline.  The wetness probe also indicated "wet".  The screened top soil is from a supplier and has a distinct woody smell and seems to contain what appears to be particles of shredded wood.   Do you have any suggestions?  Can I adjust the PH with lime and how would I best do that?   Thank you,  Gene Castle
@@ -3454,20 +3330,11 @@
 ## intent: askextension_tomato/65362_Maryland
 - What is going on with my tomato plants. Recently, my tomato plant's leaves started to turn brown and die. The main stalks are fine and it continues to produce and ripen fruit. However, with the lack of exterior branches, the tomatoes are sun-scorching and dying. The plants are about 4 months old and have had fruit for about a month. This started in one corner of my raised beds and has spread through the front line of the garden. It has affected about 5 plants so far
 
-## intent: askextension_tomato/65377_Oregon
-- yellow tomato leaves. What causes yellow leaves on tomatoes?  Only one of three plants, all planted near each other in a raised bed have yellow leaves.  They are in full sun. What causes this and what should be done
-
 ## intent: askextension_tomato/65387_Minnesota
 - tomato plant. One of my tomato plants has had the tops chewed off.  I have no idea how this happened, and am worried it will happen to the rest of my tomatoes.  I have been unable to locate any insects that may have caused this problem.  Any idea?    Thanks for your time.  Jil
 
-## intent: askextension_tomato/65405_Minnesota
-- tomato plants. instructions for pruning tomato plant
-
 ## intent: askextension_tomato/65417_Oregon
 - Tomato plant problem. Can you please tell me what is wrong with my tomato plants? Some of them are thriving but others have curled leaves as if they need water. I am keeping them watered every 4-5 days. Some look like too much water and some not enough. They do not perk up when watered either.
-
-## intent: askextension_tomato/65429_Oregon
-- Tomato blight? Good morning,  We replaced old soil with new this Spring and our tomato plants looked fine until a couple of weeks ago.  I'm not very familiar with plant diseases and am trying to figure out what this is, it looks like blight to me but I've had 2 nurseries tell me it's too late for early blight and too early for late blight.    The leaves got black spots that started at the bottom of the plant, spread quickly from bottom to top, killing the leaves, but has not damaged either the stem or the fruit.  It looks like blight to me based on photos from the internet but no one can really confirm that for me.    Any help you can give me will be greatly appreciated!!  Thanks so much!  Kathie Burk
 
 ## intent: askextension_tomato/65457_Minnesota
 - Tomato problem. Several of my large tomato plants have upward curled and wilted leaves on the top, new growth.  I initially thought stem borers, but found no holes.  I am very concerned about virus, but there is no discoloration or mottling of leaves.  I see no evidence of aphids or other insects.  It matches the description of abiotic leaf roll except that it has not been dry, the plants are mulched and the lower lleqves of he plants are currently not affected.  It is not possible that it is herbicide damage.  One last thing.  I put a stem into soapy water to see if insects washed off and the leaves uncurled.
@@ -3559,9 +3426,6 @@
 ## intent: askextension_tomato/66628_SouthCarolina
 - Hot weather tomato plants. What are good choices for back yard tomato plants in very hot weather, 90~100 daytime, 80+ night time temps?
 
-## intent: askextension_tomato/66661_Oregon
-- Bore holes in tomatoes. My tomatoes are starting to get round, bore holes in them.  I have not yet found any insect associated with the holes, but I'm sure it has to be one.  What can I do to save my tomatoes?  I have Captain Jack, a spinosad, that I use for other pests
-
 ## intent: askextension_tomato/66742_Wisconsin
 - raising tomatoes. My tomatoes are not ripening on the top. They stay yellow
 
@@ -3643,9 +3507,6 @@
 ## intent: askextension_tomato/67829_Minnesota
 - Tomato blossoms. We have some Heirloom tomato plants (2) in a large pot on the deck.  The fruit it has is growing beautifully.  My question is, why do so many of the later blooms turn yellow at the base of the bloom and die off?  See pics
 
-## intent: askextension_tomato/67854_Oregon
-- tomato rot. tomatoes are 1/2 lite green with the bottom 1/2 dark brown and hard
-
 ## intent: askextension_tomato/68173_Texas
 - Can I get tomatoes in the fall from my spring indeterminate plants or should I plant new plants? Hello, I live in north Harris County. I grew a good crop this spring of tomatoes from several indeterminate plants (Better Boy variety). They stopped producing with the heat of the summer. They have continued to grow and now are a little out of control. From the beginning, I staked each plant on 7 foot tall 2x2 inch poles. They have grown taller than the stakes and are now growing on an adjacent trelise. My question is: if I want to try to get a crop of tomatoes in the fall, would you suggest that I trim them back and try to get them to produce in the fall or plant new plants? If you think that I have a chance at getting these plants to produce, how would you suggest that I pruning the plants? Do I prune a little at a time so that they don't go into shock? Any suggestions would be very much appreciated. Also, if you advise that I plant new plants to get tomatoes in the fall, what variety would you suggest planting and when would you suggest planting them? Thanks so much
 
@@ -3720,9 +3581,6 @@
 
 ## intent: askextension_tomato/69323_California
 - Tomato acidity. I'd like to find a list of high-acid tomatoes that taste like vegetables (savory, a bit salty), with a robust, intense tomato flavor that holds its own on a burger or jumps out in a salad. It's been years since tasting such a wonderful tomato. People seem to really like low-acid, sweet tasting tomatoes (more like fruit than a good, sassy tomato). Also--can a good high-acid tomato grow in the hot parts of Southern California (like Norco)? Even when we plant early, our tomatoes burn when the temps soar. To get that acid full-flavor: Is there a special soil prep I should? A special nutrient I should add? A special watering technique? Thanks for your help. I'm grateful for your expertise.
-
-## intent: askextension_tomato/69348_Oregon
-- Tomato Woes. Hi, the YCAP veggie patch has some serious Tomato Woes.  I don't think that they have the means for a soil sample, but here's some pictures of the plants.  There's also a Cucumber plant that's also affected. There are also issues with growth problems in various beds. Thank you for your help
 
 ## intent: askextension_tomato/69410_NewYork
 - tomatoes squash and peppers failure to grow and produce. I planted three tomato plants, 2 squash and 2 peppers early JUne. They appear to be relatively the same size since. Tomatoes--flowers turned brown, only 1 or 2 new flowers have developed. Squash--flowers develop, but no further growth or produce, same with peppers. I had my soil tested at Cornell and only recommendation was more Nitrogen. I have fertilized appropriately. We have had a very hot summer. Could this be the cause? Any recommendations? I have observed other gardens in this area and they look good. The garden is fenced, so animals do not have access.
@@ -3826,9 +3684,6 @@
 ## intent: askextension_tomato/72987_Oregon
 - Tomato stem end showing black instead of white. Context: I have been growing Juliet tomatoes for several years in my above ground planter. The planter is 3 feet x 8 feet x 2 feet deep. I have excellent growth of the plant, and a bounty of tomatoes.  Issue: This year, I have noticed that many of the tomatoes show a black connection at the stem end rather than what I expect which is white. I don't find any internal differences in the tomatoes. I also seem to have more falling fruit this year than normal. That indicates to me that there might be a soil or nutrient problem. I am getting ready to winterize- pull the plant and fallow the soil. Should I be adding anything this fall, or next spring before planting the next Juliet tomato? Or is the black something else
 
-## intent: askextension_tomato/73163_California
-- TOMATO CANNING. I canned a batch of chopped tomatoes (cooked) but forgot to add lemon juice for additional acid. I realize I probably have to go back now, open up the bottles and add the acid, but I'm not sure- do i have to take the tomato sauce out and re-heat it? or can i just open up the lids, add the leer mon juice and re-seal with new lids, then process in a hot water bath
-
 ## intent: askextension_tomato/73237_Colorado
 - Does adding phosphorus to soil help in Denver for tomatoes. My tomato plants are small, have few leaves, have rolled leaves, and have a purplish cast.  The tomatoes themselves are very tiny - less than half of what I expected.  Almighty Google suggests this is a problem with not enough phosphorus.  But many phosphorus sources say they don't work in soil with ph7 or higher.  Do you recommend trying to add phosphorus to soil?  If so, when and how much?  My community's garden requires it to be organic.
 
@@ -3918,9 +3773,6 @@
 
 ## intent: askextension_tomato/76521_Maryland
 - tomatoes. i had a real problem with stink bugs on my tomatoes this year causing i think they call it white cloud. my beautiful pink brandywines were not so beautiful. i read about keeping the area clean of weeds, tried that. i did not spray or dust. had thought about dust but i know they are killed by contact. i read about traps but it seems like you waste your money on them. they don't go after the smaller tomatoes as much. maybe i should'nt say that! also i hardly ever saw a stink bug on the tomatoes when i was out picking them.  i really don't like to spray. i seem to not have much luck when i do. i spray before 6am or after 6pm, when i do i always seem to loose the plant. any thing i have missed? would dusting the soil and area around help? i am sure this is stink bug damage,had someone look at them
-
-## intent: askextension_tomato/76571_OutsideUnitedStates
-- Growing tomatoes in northern Thailand. I am in northern Thailand. I read where I can give too much water. Would morning watering be better than evening watering?I have a very good supply of cow manure. Is it ok for tomatoes in a liquid form?. ( in a 40 gallon drum full of water and topped up regularly)
 
 ## intent: askextension_tomato/76600_Washington
 - early-blight-resistant potato and tomato cultivars? Seeking early blight resistant potato and tomato cultivars for Twin Cities area garden, not willing to spray....
@@ -4270,9 +4122,6 @@
 ## intent: askextension_tomato/85152_California
 - bushy tomato plant. My cherry tom is quite bushy at 4'. shall I trim off any branches without  any possibility of flowers or fruit
 
-## intent: askextension_tomato/85222_SouthDakota
-- Beans and tomato question. Rustic Acres dropped off samples from a row of tomato and bean plants.  The browning and curling of the leaves started 2 days ago.  A water drip line is used on the plants with a plastic mulch to keep the weeds under control.  The beans were sprayed and fertilized within the week. Contact info is Aaron at 605-480-1373 or nat@racindustries.us
-
 ## intent: askextension_tomato/85226_Michigan
 - What is happening to my tomato plants? I have several plants in my garden and some in a greenhouse, and all of them look like this. I first noticed it a few weeks ago. Any idea what is causing this?
 
@@ -4434,9 +4283,6 @@
 
 ## intent: askextension_tomato/86847_Michigan
 - Blight or Disease on Tomato Plant. I am contacting you from Antrim County MSUE a client brought in tomato plant samples that are covered in a blight. He said it is happening from the bottom of plant and continuing through out the plant. He also mentioned his cucumber plants were only growing to a few inches high and then just stop growing. He did not bring in samples for me to send in a photo. Please send answer to campb536@msu as I am on vacation starting Monday, July 24th. Thank you.
-
-## intent: askextension_tomato/86890_Pennsylvania
-- tomato disease. On my tomato plants, the lower leaves are turning black. I have these staked up in cages. What is it and how can it be treated
 
 ## intent: askextension_tomato/86929_California
 - My tomatoes won't ripen. I have two enormous tomato plants that have been dripping with big green tomatoes for at least a month. None of them look like they will ripen anytime soon, and a few are starting to turn yellow. I can't figure out what's up! The weather has been normal, and I've been watering them plenty. Help
@@ -4641,9 +4487,6 @@
 
 ## intent: askextension_tomato/88968_Maryland
 - Blotchy tomatoes. Earlier our tomatoes grew beautifully uniformly red, Now they are blotchy in appearance. We are using 30% shade cloth above,  but shade cloth is not touching the tomatoes. Are the tomatoes safe to eat. Should we cut out the light spots? Leaves still look good
-
-## intent: askextension_tomato/88970_Oregon
-- Canning tomatoes. I tried a new method this year and am worried they may go bad.  I cut up my Roma tomatoes And put them in pints and added 1/2 tsp each of salt and lemon juice ( left peels on).  I didn't squeeze them down in the jar so they are very chunky.  Will they be okay
 
 ## intent: askextension_tomato/89006_Oregon
 - Celebrity Tomatoes failing! I was in with leaves 2 weeks ago at the Eugene Extension office. The three tomato plants not doing well are Celebrity Tomatoes. Leaf holes, curl and browning and large brown area on the underside of many of the full grown fruit. What so you think is the problem? Do we need to change the soil in this bed? The same problem occurred last year, in the same garden bed. It does not seem to affect the cherry tomato plant near by.Thank you- Joan Kleban, Eugene O
@@ -4927,9 +4770,6 @@
 ## intent: askextension_tomato/92926_Oregon
 - Is this Green Tomato Relish (Hot Dog Relish) recipe one that can be safely canned? There are so many recipes posted on Pinterest and this one sounds good. It supposedly was found in a canning book but there is no mention of the books title or date of publication. We have some concerns about whether this has enough acidity for safe hot water bath canning.   We would also like to substitute mustard seed for the prepared mustard and celery seed for the celery salt.   Any insights?                                                                                                                                                                                     READY IN:                                                                                       1hr                                                                                       50mins                                                                                                                                                                                                        YIELD:                                                              5 half pints                                                                                                      Ingredients                     Nutrition                                    1  quart chopped green tomato  1  large  sweet white onion, chopped 1  large  green pepper, chopped 2  tablespoons  canning salt  1  cup  sugar  1  tablespoon  prepared mustard  1  teaspoon  celery salt 4    whole cloves  1  cup  vinegar (5% acidity)
 
-## intent: askextension_tomato/93481_Michigan
-- large scale tomato trellis. Hello! I have struggled over the years on how to trellis my tomatoes. I own a farm market so I like to do a couple thousand tomato plants each year. I can generally get tomatoes trellised in one of my gardens, maybe 50 plants, but the rest usually go untrellised. What kind of trellis system do most big tomato farmers use? I would like to use something that is both economical, easier to keep up with, and that will last multiple seasons. Also, where would I find the material to do these trellises?  I suppose another question would be trellising smaller determinate plants. I like to grow the Mountain series of tomatoes that are generally smaller bush type tomatoes. Do these need to be trellised? Is there a way to keep them somewhat off the ground without a trellis? I've decided most of these would be sold for canning tomatoes so they don't need to be perfect, but I find most people still like them to look good. Thanks!
-
 ## intent: askextension_tomato/93737_Maryland
 - Timing for sowing peppers vs tomatoes. Hello, I want to sow my tomato seeds on the last week of March for May 15 transplant (since they get too big if I sow them earlier). My question is - do I need to sow peppers and eggplant earlier (mid-March) since they don't get as big as the tomatoes
 
@@ -4986,12 +4826,6 @@
 
 ## intent: askextension_tomato/96472_Oregon
 - Tomato Starts. What is the earliest date recommended for planting tomatoes outside in the Willamette Valley
-
-## intent: askextension_tomato/96497_Maryland
-- Tomatoes. I am trying to grow a variety of peppers ranging from mild to super hot.  I have setup up four - 72 hydroponic containers.  I have a 7 inch lid to maintain humidity.  I use heating pads on the base of all four of the hydroponics containers.  I am using several full spectrum fluorescent bulbs for light.  I used peat pods to germinate the seeds.  I keep everything wet all the time.  I cycle the light off usually at night when I go to bed and on when I get up.  They started out fast growing.  My issue now is the seedling plants are not looking so good.  They stopped growing.  Leaves are turning yellow.  Leaves are falling off.  At one point the leaves look translucent.  I took the lids off to give them natural air.  It did help a little.  Still don't look so good.  I am growing everything in my basement with very little natural light.  The lids off seemed to help but did not stop the leaves from falling off.  I have planted 288 plants (half peppers and half tomatoes).  About 200 of them are not looking good.  I tried to put some of the bigger ones in larger self standing pots.  That didn't help.  I believe all of them will not survive before the final frost date comes so I can put them in the garden.  Everything I am growing are not available anywhere pre-grown.  I wanted to plant unique peppers and unique tomatoes.  My super hot peppers consist of reapers, apocalypse scorpions, comodo, ghost, yellow 7 pot, milds are of the violet, chocolate, mini and a bunch of others.  I have habanero, banana as well.  Just to name a few.  Tomatoes are watermelon, gigatamo, Sicilian grown, Italian grown (not sure on the names), purple Cherokee, chocolate Cherokee, black krim, blue beauty and a whole bunch of odd colored ones.  Everything are all non-GMO and organic.  There is nothing on my list you can get from the Amish or Lowes.  I have tried a water soluble fertilizer.  Used about 3/4 the dose.  I believe the numbers were 5-4-4.  Before I realized what I had done I used granular fertilizer in the bigger pots and it pretty much killed the roots and the bases of the plants.  It was way too strong. What can I do to save them?  I am tempted to put them outside on warmer days to get real sun.  It still gets cold at night
-
-## intent: askextension_tomato/96596_Oregon
-- Tomato questions. We plant tomatoes for our own enjoyment on our patio. We use a self watering  planter box.  We would like a recommendation as to the type of tomatoes; when to plant them;  and how often to fertilize.  We have not been happy with our choice of tomatoes in the past.  We prefer a large round smooth tomato for slicing onto sandwiches, etc. Thank you so much for your help
 
 ## intent: askextension_tomato/96681_California
 - issues with powder mildrew on tomato leaves. Ive heard a great natural way to treat the mildew issues on the leaves of my tomato plant instead of the milk can I substitutew with almond milk instead
@@ -5176,14 +5010,8 @@
 ## intent: askextension_tomato/101421_Maryland
 - deformed new growth on tomato plants. about 3 weeks ago I noticed that new growth on my five tomato plants looks deformed.  Could this be due to all the recent rain or could it be some disease or malnutrition of some type?  Images are attached  Thanks,  Matt
 
-## intent: askextension_tomato/101474_Oregon
-- Tomato Plant Issues. I am a home gardener (10yrs). I have a raised bed garden space on the west side of our house in Happy Valley....For the past three years I have experienced the same problem with most/if not all of my tomato plants. i plant my tomatoes during the first couple of weeks of May...Good growth takes place, blooms start to appear, and some fruit are set.......Then within a few days, new growth leafs and stems start to wether and curl, then the blooms start to drop. This normally starts with one or two plants (I normally plant 7, mixed varieties) and within a week or two almost all of my plants are showing the same symptoms...... Once I reach this time, I have read that the plants need to be removed and placed in garbage or burned..... I have tried transplanting, but by mid-June most varieties are picked over or are gone..... It's a small garden, but keeps the family and neighbors stocked with some fresh veggies and sauces....... Curly Leaf, White Flies, Shows signs of Tobacco Mosaic, can effect peppers ( have pepper plants, but they haven't show similar symptoms), crop rotation (can and do but really moving plants from one bed to another.....I am stumped and frustrated.... Hope you can help.......Thanks for your help, Bob Murph
-
 ## intent: askextension_tomato/101526_Florida
 - Tomato plant problem. Are you able to determine if this problem is the result of herbicide damage or something else? Both photos are from the same plant.  Thank you for your hel
-
-## intent: askextension_tomato/101535_Minnesota
-- Tomato plant rot? Hi, I have two tomato plants that looked great until about 2 weeks ago. Now the leaves are dying and the tomatoes are rotting on the bottom. How do I fix this? They get a lot of sun and I water and fertilize regularly. There are also holes on the bottom for drainage. Thanks
 
 ## intent: askextension_tomato/101569_Maryland
 - tomato early leaf alternaria. I have the early leaf blight on my tomatoes already ...I know I shouldn't have planted them in the same soil as last year but is there anything I can treat it with now
@@ -5359,9 +5187,6 @@
 ## intent: askextension_tomato/103877_Maryland
 - yellowing leaves on my tomato plants. For the last several years, I have had vigorous growth of my tomato plants early in the season, but as the fruit emerges and ripens the plant foliage beings to yellow and die from the bottom of the plant up. This year I had my soil tested and have top-dressed as directed, but it is happening again.  I have heard this may be overspray from Roundup, etc. - however we have not used this at all.  What is happening
 
-## intent: askextension_tomato/103913_Colorado
-- Tomato plants. All my tomato plants have brown spots as if something is eating it, please see picture, anything I can d
-
 ## intent: askextension_tomato/103930_Minnesota
 - Tomatoes sprouting in canned jars. I have been canning for quite a while and do my best to keep the Ph levels at safe levels. In a few batches last fall, the jars have shown that the tomatoes have sprouted. I still have 1 quart jar of tomatoes that I can volunteer to be tested. The tomatoes were all grown on organic farms (certified) west of the Twin Cities
 
@@ -5434,9 +5259,6 @@
 ## intent: askextension_tomato/104754_Oregon
 - Tomato plant problems. Tomato plant's at top and end of branch's are curling up and look like ends are curling inwardly. The soil is realy wet, you sink in it
 
-## intent: askextension_tomato/104772_Colorado
-- Tomato disease I.D. Hi hoping you can help identify a problem with a tomato plant the we have. It is a pomodoro san marzano redorta that we started from seed. We have two plants and the one in question is not thriving like its sister plant. Recently we discovered that some of its newer leaves are showing bronzy-brown splotches on the underside of the leaves with accompanying leaf curl. I am attaching several photos in the hope that you can identify the problem.  Thank you very much Gary Klei
-
 ## intent: askextension_tomato/104774_DistrictofColumbia
 - Tomato issue: virus pest other? Hi there,  I am a first-time tomato grower, and am noticing some symptoms that lead me to believe the tomatoes are not well. The leaves are curling, and some of the leaves have yellow spots, and some of them are yellowed. They just started producing a few fruits.  They are cherry tomatoes that I am growing in a 5 gallon Root Pouch in soil that is a mix of compost, peat moss, and vermiculite. I water them if the soil feels dry about 1/2 inch down. They are in an exposed, sunny location in my front yard.   Also, I recently fed tall my veggies this: https://jobescompany.com/product/jobes-organics-vegetable-tomato-granular. It is a 2-5-3 granular fertilizer.  Could this be a virus, pest, or other problem with the growing conditions? Thanks so much for your help! Let me know if you need additional images or information.
 
@@ -5451,9 +5273,6 @@
 
 ## intent: askextension_tomato/104822_Maryland
 - damaged tomatoes. I've been taught that tomatoes should never be refrigerated.  I also understand that despite how much we hate the cardboard taste of hothouse tomatoes, once a tomato begins to show pink it can be picked to ripen on counter to then taste as good as picking when ripe.  Is this approach actually viable or is taste compromised?  Every morning I find at least one tomato on the ground or still on the vine with 1 bite to 1/4 eaten.  Assume it is squirrels.  Some are totally green while others have begun to ripen.  Instead of tossing, I have cut off the chewed end, then cooked the remainder.  However, I wonder if it is showing pink or red, can the cut be covered with saran wrap (to keep out bugs), then left of the counter to ripen, or is the ripening process stopped by the cut (or does it matter if the cut is at the vine or blossom end), or would a natural rotting process take precedence once the protective shield of the skin is broken?   tn
-
-## intent: askextension_tomato/104846_Oregon
-- Tomatoes and sunchokes stunted and curling. My tomatoes and sunchokes are stunted and curling. The sunchokes just stopped at 3 ft.
 
 ## intent: askextension_tomato/104850_Maryland
 - Tomato & Cucumber problems. My tomato and cucumber plants are having some problems.  As you can see on picture #7047, their leaves are being eaten by something.  The tomatoes (7049) are healthy and producing fruit.  The cucumbers have many flower buds, but few actual cucumbers (7048).  Any idea what the problem is and what the solution might be?  Michael Mendelevitz 4701 Hornbeam Drive Rockville, MD  20853 301-924-9338
@@ -5517,9 +5336,6 @@
 
 ## intent: askextension_tomato/105662_Michigan
 - Tomato bug? Any idea what this is and what I can do to prevent it from spreading
-
-## intent: askextension_tomato/105763_Oregon
-- Tomato problems. My tomatoes aren't so great this year. Is this earlier blight or another problem? I have them mulched with straw, deep system, and bottom 10" cut off for circulation and I still have this going on. I also have something similar going on with my Lemon cucumber
 
 ## intent: askextension_tomato/105781_Minnesota
 - TALL TOMATO PLANTS. CAN I CUT BACK MY TOMATO PLANTS?  SOME ARE ALMOST 7 FT TALL.  THEY HAVE SOME BLOSSOMS AND FEW SMALL TOMATOES UP HIGH.  HAVE LOTS OF TOMATOES LOWER BUT NOT RIPE YET.  PLANTS ARE GREEN &amp; VERY HEALTHY LOOKING.  I WONDER IF CUTTING THEM SHORTER WILL SEND MORE ENERGY INTO LOWER FRUIT. IF SO, HOW MUCH CAN I CUT BACK? THANK
@@ -5593,9 +5409,6 @@
 ## intent: askextension_tomato/106448_Maryland
 - My tomato plants. Hello, I planted these plants in late May. We have had tremendous amounts of rain over the past 2 weeks.  My tomatoes are splitting.  what should I do to stop this splitting.  Also they have these black spots on them. What should I do to stop this from happening?  Thanksdm
 
-## intent: askextension_tomato/106454_Michigan
-- Tomato plants die every year. Why? Every year I plant tomato plants, sometimes from seed, sometimes from varying nurseries.Every year they grow up well and about August 1, they suddenly begin wilting from the top down in a few days.They have started wilting again this year.I water them well any time there is no rain for two days.I have pulled them up to look for root bugs etc.....none.I have put them in raised beds with newly purchased soil....still wilt and die.Does anyone want to see them as this happens?Th experts just shrug and don't know.Is there a real expert out there that can identifythe problem..........or is this another case of the exotic, South American jungle potato thesslonium veritevirus imported on the back of the henson's varigated brazalian three toed drisolopha that snuck in under the Chiquita Banana label from Krogers?Every 'expert' I consult just has no idea of what is happening?What is the problem....is everyone just stumped?Skip McWilliams248 318 6624
-
 ## intent: askextension_tomato/106545_Minnesota
 - tomato rot. My tomatoes rot as they begin to turn red, some earlier. I water them about every 2 or 3 days and about once a week using Miracle Grow tomato fertilizer. They are in large pots on the west side of the house. The bushes look great but the tomatoes rot, usually from the bottom up, as they start to grow. What can I do
 
@@ -5668,9 +5481,6 @@
 ## intent: askextension_tomato/107982_Colorado
 - Black Heirloom tomatoes. How do I know when a black heirloom tomato is ripe? Does it turn red? The plant was a gift with no information. The fruit is large and looks good but doesn't seem to ripen.
 
-## intent: askextension_tomato/108182_Delaware
-- Tomato problems. My tomatoes have brown and sunken splotches on them. Can you tell me what the problem is
-
 ## intent: askextension_tomato/108314_Michigan
 - Brown bottom on tomatoes. All. Of our flower pot tomatoes have large brow spot on the bottom. They are not setting on the ground and it affects all of the tomatoes. We changed the soil this year but it did not make a difference. I have enclosed pictures thank you for your hel
 
@@ -5701,9 +5511,6 @@
 ## intent: askextension_tomato/108824_SouthDakota
 - Sticky jars after canning diced tomatoes. I canned diced tomatoes and after processing them, they came out sticky and I could see and smell that tomato had leaked put into the water they were processing in. I can also see that rhere is bits of tomato stuck between the jar and the lid. Are these ok to just wipe down and eat later or should I reprocess them?
 
-## intent: askextension_tomato/108947_Michigan
-- Tomato Disaster! I am having a problem with my heirloom tomatoes that I never experienced before. They have been sitting so long just green, not ripening. Now that they are starting to ripen a creature or 2 is beating me to my tomatoes. I find them with holes bored into them. I can never find who is doing this though. When I cut into them I find roly poly bugs of assorted sizes .I don't think the roly polys are doing the boring though. I'm losing around 50% of my harvest. Some are trimmable and others are descimated. I am an organic gardener and have tried Neem oil and Captain Jack's Deadbug (spinosad) to no avail. I did try a new approach this year and I laid a layer of newsprint on top of dirt then straw mulched on top of that. It worked great for eliminating weeds, but I fear I may have provided a lovely home for the offending creatures . Please, any help offered would be greatly appreciated by me and those that love my tomato pies. Many thanks
-
 ## intent: askextension_tomato/109153_Oregon
 - Tomato sauce. Hello, In your booklet about how to can tomatoes, it says that tomato sauce can be canned like tomato juice with some added vegetables, and water bath canning is lite as an option. But when I look at the recipe for tomato sauce in the book, it only gives instructions for pressure canning.  Can I use that recipe for tomato sauce with the water bath method? Thanks in advance. Ambe
 
@@ -5721,9 +5528,6 @@
 
 ## intent: askextension_tomato/109408_Minnesota
 - something is eating my tomatoes. About 2 weeks ago, I noticed that the tomatoes that were ripening had small bites - about the size of a dime. they were high up on the plants so I doubt that it is from a rabbit or squirrel.  the bites are too small for a deer and I have the plants covered with a deer net. as times goes on, they are being eaten every day (probably at night) even the green ones. I am assuming they are from birds. What do you think?  Any ideas on how to prevent the tomatoes from being eaten
-
-## intent: askextension_tomato/109525_NorthDakota
-- Tomatoes won't turn red??? We have planted tomatoes for the last 6 years in a small south facing garden. It gets sunlight for about 1/2 the day (some shade trees block early morning and late afternoon). The soil is black dirt with peat moss rototilled in every other year, it seems loose easy to break up. The plants do very well in big steel cages 5' high, leaves and branches galore. We get many tomatoes but few turn red? Most will eventually turn if we pick them but they can rot prior to finishing? We pick off all new flowers starting in August and try to trim back some of the vines, but this doesn't seem to help? Lots of area residents seem to have the same issue?
 
 ## intent: askextension_tomato/109662_Minnesota
 - something is eating my tomatoes. Hello, I grew tomatoes in straw bales this year and something has been eating the bottom of my tomatoes.  The garden is fenced but it has a gate that critters may be squeezing through.  I have voles (field mice) and rabbits in my yard but I don't see squirrels or other critters.  The yard is 10 years old so there isn't a lot of cover.  The pest will pick one tomatoe and eat about 1/3 of it from the bottom.  They seem to prefer ripe tomatoes and they have come back several times to eat one ripe tomatoe each time.  The tomatoes that were damaged were about one to two feet above the straw bale.  Do you know what could be doing this and what I could do to prevent it?
@@ -5806,9 +5610,6 @@
 ## intent: askextension_tomato/113065_Colorado
 - tomatoes at 10200 feet elev. I remember the tomatoes we used to grow on our SD farm (1000 ft elev). I haven't tasted a tomato since that tasted even close to as good.I have a cabin at 10.2 k on the eastern side of Weston Pass, off-the-grid. I know the soil will need changing but any specific advice is welcome. I'll probably build a "cold-frame".Also, will I need to cover the plants during the summer? Temps in the summer are usually 40's or 50's F.Any other advice is most welcome.
 
-## intent: askextension_tomato/113095_OutsideUnitedStates
-- Question about Estimating Heritability and BLUPs for Traits Using Tomato Phenotypic Data tutorial. First of all, I would like to thank the author, Heather L. Merk for this great tutorial. She might not know it, but she is helping a lot of passionate farmers/amateurstudents like me to understand how Linear Mix Models works and how to apply the theoterical knowledge into the practical real one.Afte that, I would like to ask two things: Why do you select Lines as Random effects? Do you have more tutorials like this one for calculating variance components or how to estimate GCA/SCA in real variety trials? If so, could you share them? As a farmer myself, I really find interesting to understand how researchers develop new varieties and I would love to have some more real case tutorials, not just theoretical.Thanks again! Hope Heather finds out about this message :)Regards,Artur
-
 ## intent: askextension_tomato/113201_Minnesota
 - Tomato variety recomendation. Is there a tomato variety that will thrive in soil that has been accessed by chickens and is, therefore, quite "hot."   I know the soil could be amended but along with that an acid loving variety would give more assurance of success. Thanks so much!  I can hardly wait to start seedlings
 
@@ -5863,9 +5664,6 @@
 ## intent: askextension_tomato/116186_Oregon
 - Deformed tomato seedlings. Please see the attached photo of some of the tomatoes I started from seed indoors. The tops are all deformed. It's just the tomatoes planted in this "row" of cells, the others in the adjacent cells appear to be fine. I'm wondering what happened to them, if I should scrap the plants, and if so do I need to take care not to spread a virus or something
 
-## intent: askextension_tomato/116312_Minnesota
-- home grown tomatoes. I have 12 Aussie heirloom plants growing under lights. they are now 10"- 12" tall. I don't know if I should start hardening them off yet. I think it is to cold for that. I am afraid I might harm them, but I also think they don't need to be under the lights anymore. I need advice on what to do with these plants so I don't ruin them
-
 ## intent: askextension_tomato/116364_Michigan
 - Transplanting tomatoes. I want to transplant tomatoes and bury them past the cotelydon. Should the cotelydon leaves be plucked, with time for the stem to heal before transplanting? Or can the plant be buried up to the first real leaves with the cotelydon still on? Will the cotelydons get a soil born disease from being buried
 
@@ -5895,9 +5693,6 @@
 
 ## intent: askextension_tomato/117150_DistrictofColumbia
 - Is it warm enough to plant peppers tomatoes and squash and okra? What temp is good for the above plants
-
-## intent: askextension_tomato/117228_Michigan
-- Tomatoes. I had a fungus last year on my tomatoes that milled them. Im concerned about it again this year. What should I do
 
 ## intent: askextension_tomato/117268_Colorado
 - Tomato Leaf Mold? I have yellowing leaves on my tomato seedlings. The ventilation in my growing area is not great, so Im concerned that it is disease vs just over/under watering. Im guessing it might be tomato leaf mold, but Im not certain. Should I attempt to treat these seedlings or throw them all out and start from scratch?  I also have leaf curling happening on a couple of my soybean seedlings grown in the same indoor area. Is it possible that these are the same disease, or just a second problem
@@ -5955,9 +5750,6 @@
 
 ## intent: askextension_tomato/118683_Maryland
 - How can I revive Tomato Plant leaf curl? I have tomato plants in a raised bed with a mixture of compost and gardening soil mixture. Most are fine but two have these curled leaves. They all get watered at least once a day unless it rains then I wait.
-
-## intent: askextension_tomato/118866_Michigan
-- cucumber and tomato blight. Is there a way to prevent or reduce these blights before I plant. I usually mix composted manure to the soil before planting. Should I try something else? Thanks, Jeff GO SPARTANS
 
 ## intent: askextension_tomato/118938_Maryland
 - Stunted Tomatoes. My tomato seedlings were doing fine then suddenly new growth is stunted and deformed.  This has happened on four different varieties. Is this a fatal condition or is there a cure?  Will I need to discard them and can I then put new plants in the same location? Photos included below
@@ -6033,9 +5825,6 @@
 
 ## intent: askextension_tomato/120821_Maryland
 - Spots on tomato plant leaves. Hello, it looks like our tomato plants are dying - it appears that these dark black spots are spreading throughout the plants. There are no insects that I can see. Do you know what the cause might be, and how I can stop the spread?  Photo attached. Thank you
-
-## intent: askextension_tomato/120921_Michigan
-- Tomato plant problems. I am having trouble with my tomato plants. It was fine when I bought it already established with about 6 small tomatoes on it. Almost immediately after I got it home I noticed the leaves were turning yellow with brown spots and they would curl up. Then the stems to the tomato's have like a mold on them. The tomato falls off on its on. With in a couple days, rots and is no good. I am so frustrated. Thats 3 tomato's and I can't find anything on the internet about that powdery stuff in that area. Please, please, please help me before they are all dead. Affecting my squash plant leaves to.Thank you
 
 ## intent: askextension_tomato/121166_Oregon
 - yellowing tomato leaves. while my tomatoes are growing great, I saw the yellow spots on a couple of the plant. I've had it happen in past yr ears but typically remove the leaves and discard them. do you know what might be causing this and if it can be remedied? I've gotten lots of good information from this site, thanks
@@ -6121,12 +5910,6 @@
 ## intent: askextension_tomato/122582_Maryland
 - Is this blossom end rot and why do my tomatoes have tails? I have 8 large healthy (or so I thought) tomato plants, 2 of each of 4 varieties, all set with lots of large green fruit.  This evening I noticed black spots on a few tomatoes on two different plants. The spots were not completed centered on the base of the fruit in each case, and many of the tomatoes seem to have small tails.  I have never noticed this before.  Could the black spots be blossom end rot (BER), why are there tails on my fruit, do the tails have anything to do with the black spots, and what should I do if this is BER?  I thank you. The fruit with the spots seen in the photo are Tiren F1, a San Marzano  variety from Jonnyseed, and they are supposed to be resistant to  Fusarium Wilt (Race 1), Tomato Mosaic Virus, and Verticillium Wilt
 
-## intent: askextension_tomato/122642_Michigan
-- Chili sauce with canned tomatoes. My mother's recipe from the 1930s calls for using a peck of tomatoes and cooking them with ground celery, onions and bell peppers and spices before canning them. My daughter is here visiting and would like to make a batch but tomatoes aren't in season yet. Could we used canned diced tomatoes instead. How many ounces of canned tomatoes should I use to equate to a peck?  Thanks and hope to hear back from you soon.  Ann Morri
-
-## intent: askextension_tomato/122664_Kentucky
-- Regions Main Type Of Tomato Plant. Hello,  I was wondering what the region's best growing tomato plant is for the Kenton County area? Thank you muc
-
 ## intent: askextension_tomato/122677_Colorado
 - Green Zebra tomato from CSU extension sale. Hi, we bought a number of plants at the CSU extension plant sale in may, and the green zebra heirloom tomato is experiencing leaf issues. The stems are fine and the plant is flowering. See attached image. Would love any thoughts you have on the issue - could it be sunscald?
 
@@ -6144,9 +5927,6 @@
 
 ## intent: askextension_tomato/122837_Colorado
 - Please help - ALL our tomato plants are in bad shape!! Hello,I would greatly appreciate help to diagnose the problem with our tomato plants. We live in a residential neighborhood in southeast Denver. In May I bought 11 tomato plants and transplanted them into pots. For over a month I took them in and out of the house - putting them out when it was sunny but keeping them in when we had hail and late snowstorms and frost. On June 8 we finally planted the tomatoes in the garden. We had purchased bags of manure from Ace Hardware and had it tilled in very deeply before we planted. All the plants were healthy and growing for over two weeks.We then went out of town from June 26-July 8 (a neighbor watered the garden while we were away) and when we got home, all 11 of the plants were in terrible shape. They look like they are all going to die. There are several distinct issues. On the stems there are both light-colored and dark spots. On some leaves there are also light-colored spots, but most of the leaves have black on them. Some look like they have been eaten away (with little of the leaf left), others look like they were beaten by hail, others are drying up and curling and cracking, like they were burned. We have almost no flowers and on the couple fruits we have, there are light-colored spots on them. The plants are thin and just don't look good at all (which you can see if you enlarge the last photo). I understood we did have a hail storm while we were gone, but clearly this cannot be the only problem. We don't know what to do to try and save these plants!Please, please give us some idea of what we are up against and how we can save these plants! I have many more photos but will add what I am allowed here.Thank you!!P.S. I found out after posting this my husband made an inquiry via email; not sure if it will go to the same office or not.
-
-## intent: askextension_tomato/122871_Oregon
-- Tomato growing. What is the best soil and fertilizer for growing tomatoes? I planted one (Better Boy) in potting soil with 16-16-16 fertilizer. It's now 6 ft. tall! Several small tomatoes have appeared. Would it be good to prune off branches that are not bearing fruit?      We potted two other tomato varieties (Celebrity, Willamette) with very little fertilizer. They are quite small, with a few blossoms. What fertilizer do you recommend for each? Any lime?
 
 ## intent: askextension_tomato/122891_Michigan
 - Tomato plant wilt. Our tomatoes have wilted again this year and last year.  There is a progression from one plant to the next. Also a zucchini plant is following suit.  Do you know what might be the cause and what can be done?  Bill Harney Ypsilant
@@ -6220,9 +6000,6 @@
 ## intent: askextension_tomato/123922_Minnesota
 - Tomato problems. I have several tomato plants that are showing signs of leaves wilting and turning yellow, starting from the bottom of the plan and working themselves up.  More recently I noticed several blossoms are drying before they set fruit.   Can you help me figure our what is happening and what I need to do to contain the damage?  Thanks much, Martha Jo
 
-## intent: askextension_tomato/123944_NorthDakota
-- Help identifying tomato disease or insect. Hello, we have a home garden in grand forks and finally got some tomatoes but they appear to have some sort of disease or maybe being caused by insects. The plant / leaves seem to be ok. In doing research I thought maybe a bacterial canker, but not sure. I sure hope not though. Any help would be appreciated! Thank you.
-
 ## intent: askextension_tomato/123990_Colorado
 - can tomatoes be cross pollinated? can tomatoes be cross pollinated?we have beefsteak and cherry tomato plants growing side by side. what kind of fruit will we get?we are in aurora, colorado if it matters.thank you
 
@@ -6264,9 +6041,6 @@
 
 ## intent: askextension_tomato/124707_Minnesota
 - Tomato Trouble. Hello, I have 4 potted tomato plants. I planted them with a vegetable potting soil.  They have full sun access. I water almost daily, keeping the soil moist. As they mature Im finding the bottoms of the fruits are rotting/turning black and ruining the tomatoes.  Is there any way to save them at this point?   Thank you for any feedback you can provide me
-
-## intent: askextension_tomato/124777_Delaware
-- Planting tomatoes in same location each year. My garden has a variety of vegetables, but the majority is tomatoes.  I dont really have a way to rotate my crops because of this.  Is there anything I can do to my soil that will allow me to plant in the same places next year.  I have produced beautiful tomatoes especially last year and this year.  Im pretty sure I have had Septoria leaf spot the last two years.  I usually cut away the bad leaves and try to spray with an anti fungal, but it keeps coming back.  My tomatoes this year have been really nice, but in the beginning of the season I did have some blossom end rot which I treated and is much better now.
 
 ## intent: askextension_tomato/124785_Minnesota
 - Tomato blight. How do I treat my tomatoes that are showing blight on the lower leaves?    Also, my pepper plants are not growing.    They look the same as when I planted them.
@@ -6330,9 +6104,6 @@
 
 ## intent: askextension_tomato/126041_Maryland
 - No tomatoes. I planted 2 different tomato plants in a pro gro type container. All of the nutrients were in a separate tube laid on top of the  planting soil. I faithfully watered it every day but plant has had an abundance of yellow flowers but no tomatoes. Is the extremely hot weather the cause of not producing any tomatoes
-
-## intent: askextension_tomato/126075_Colorado
-- Tomatoe Plant Failure. I have a greenhouse (12x14 feet). In it is a raised bed (4x10 feet) where tomatoes are planted. In particle this year I planted three Big Boy hybrids and one Beefsteak . These were purchased from Amazon because no tomatoe plants were available early in the year. They were planted in mid-April and grew well through June. I trimmed branches low down to keep the amount of greenery under control. There were many blossoms which I pollinated with an electric tooth brush. The first tomatoe was harvested on July 16.       By August 15 all the four plants appeared to be dead, withered. The leaves began getting withered and droopy in July and the plants stopped growing and now appear to be completely dead. I expected them to grow and produce until late in the year.      The raised bed has 8 inches of soil depth. The plants are watered with a drip system. It is possible that the plants were over watered, according to a gardening friend of mine. My chief concern has been the high temperature in the greenhouse during the day. I have a max/min thermometer which measured a high of 103'F during this time, with temperatures frequently measuring 95'F on the hottest days. I have a sun shade which blocks 65% that covers about  half the exposed area. There has also been a fan added to move the air in the greenhouse.      As an experiment I purchased the last two tomatoe plants from a local retailer in pots. These were large with green tomatoes. They are in the greenhouse beside the dying plants. I have been watering them more diligently, though they get withered in the day time and recover overnight.       I think the main problem is the prolonged high temperatures and its effect on these particular varieties of tomatoes. Next season I am considering increasing the sun shade area to cover the entire exposed roof and sides of the greenhouse. I plan to raise several hotter climate varieties of tomatoes (Arkansas Traveler, Phoenix, Heatmaster, Solar Flare) .      My question is: am I understanding the situation or are there other, different appraoches I should pursue?      Thanks,   Mike
 
 ## intent: askextension_tomato/126108_Oregon
 - Black dots on tomato leaves. Hi, these black dots are starting to show up on all my tomato leaves. Is it a fungus or a bug? I put really good soil, black gold etc and they were really flourishing. Now they are starting to look yellowish and not as healthy? Thank you!!!!
@@ -6433,9 +6204,6 @@
 ## intent: askextension_tomato/128751_Colorado
 - Unknown tomato thef. Hello,Trying to find out if you can help us with a new animal that seems to be eating our raised garden from the top down. All we have found are some leavings and some barren stems of what was a tomato plant.
 
-## intent: askextension_tomato/128928_Michigan
-- Tomato leaf spots. My tomato plants suffered horribly from tomato rust.  I got very few tomatoes this year despite taking off affected leaves, spraying with neem oil etc.  what can I do to prevent this next year
-
 ## intent: askextension_tomato/129019_Oregon
 - tomatoes. We had our first light frost last night. And it got me to thinking about my tomatoes. they did sooooo well this year, are still growing like weeds, putting on lots of new growth which I pinch off. I know they are an annual plant. If I lived in an area that didnt have cool winters, frosty nights, or the zero to 1, 2 days of very light snow, would the plants just keep growing? Or do they have a set life span
 
@@ -6447,9 +6215,6 @@
 
 ## intent: askextension_tomato/129466_Michigan
 - What is happening to my tomatoes? We planted tomatoes in an area that previously contained many ferns. Can you help to identify what is happening with our tomato plants? They are producing but the leaves are turning black and wilting. Could this be a deficiency in the soil or a fungal disease? Our zucchinis were also very small which were in the same area of the garden
-
-## intent: askextension_tomato/129518_Minnesota
-- Green Tomatoes. What is the best way to ripen green tomatoes? Thanks
 
 ## intent: askextension_tomato/129608_OutsideUnitedStates
 - Tomato Plant Problem. I have a tomato plant problem where the plants are healthy until about 8-10 tall then start to go bad.  I have attached photos of plant 1 where the problem is progressed and will later send photos of plant 2 where the plant is just starting to turn, both are heirlooms.  Plant 1a photo  general view Plant 1b photo  underside of leaf Plant 1c photo  close-up of leaf  I live in Thailand but the seeds are from the States (Territorial Seed Company).  This has happened on several different plantings; I have tried changing where I plant them to different locations to see if it is a localized problem.  I also have tried them in hoop houses.  This last planting I have not seen any bugs (other plantings I have battled thrips and white flies).  Appreciate any guidance.  Thanks &amp; Regards,  Brent
@@ -6477,9 +6242,6 @@
 
 ## intent: askextension_tomato/130037_Massachusetts
 - Home garden tomatoes. pressure canned. Hi, My question would Pressure canned tomatoes from my garden in 2014 be safe to eat. The look perfectly good in the jars. Not sure if i should toss them out or eat them
-
-## intent: askextension_tomato/130154_Maryland
-- Tomatoes not good this year. We had a pretty hot year this past summer down in southern Maryland and it seriously impacted my tomato plants.  I had very few tomatoes off of my 50- plants I put in the ground.  They dried up a few weeks ago when last year I was still getting tomatoes at this time.  In fact I went into early Dec before pulling up the tomato plants last year.  I sent you several messages earlier in the year about starting my seeds way too early (mid Jan) and you had told me they were stressed out for being inside for so long from the pictures.  I planted them around the end of April outside after taking them outside 2 weeks to become aclimated to the outside.  They started out good, growing really fast.  I had brought in new soil just before planting that had manure and compost in it.  I also put down a bunch of organic material underneath the root where I planted the tomatoes.  I buried them about 9 inches to a foot underground to get the stem underground as much as possible.  A few weeks after they were planted the leaves started to turn yellow with brown spots on them.  Most of the plants were doing this.  I assumed blight and sprayed with a baking soda solution.  The yellow seriously slowed at that point but never really stopped.  I put down mulch about 3-4 inches over the ground to control splash up and evaporation.  The mulch was put down for the whole row.  I put a water drip system underneath the mulch and used a water sensor to see if the surrounding ground needed water and watered when it was down.  I thought I did everything right except for the starting way too early.  I am not sure if I actually had blight or an issue with watering.  I know my plants were seriously stressed when I put them in ground but they did grow really fast for the first 3-4 weeks.  Super fast in fact so I thought they bounced back.  This past weekend I pulled all the dead and near dead tomato plants and noticed a common theme.  The roots were super small compared to previous years.  Most roots were about 3-4 round and 3-4 tall or even smaller.  The stem part of the tomato that was underground the roots grew maybe 1 inch.  Nothing like years past.  Could this be the soil I brought?  Could this be the fact they were stressed out big time because I started them way too early?  Could this because of blight I never got rid of?  Or could this be from the heat? Next year we are going to have another hot summer and I really like fresh tomatoes.  What do I need to do different.  Already know I am not starting tomatoes till mid March next year.  And this year I had more than a dozen hook worms, some were 5 inches long.  Thank heavens for the parasitic wasps that killed all but a few.  Also too when should I start pepper plants if I plan on putting them in the ground by the end of April?  And should I put the tomato and pepper plants in the ground earlier then the end of April with us getting a hot summer again next year
 
 ## intent: askextension_tomato/130365_Maryland
 - Will Tomatoes Still Ripen? Will tomatoes that are still on the vine but have not yet turned pink ripen at this time of year? Can they be left on the vine to ripen or should they now be harvested green? Despite the cold weather, they have not been damaged by the frost.
@@ -6528,9 +6290,6 @@
 
 ## intent: askextension_tomato/132813_Illinois
 - Small tomato garden. I grow tomatoes in my small garden. A cucumber sometimes. I feel Im depleting the soil by only growing tomatoes however, thats all I want to grow.   Is there a way to amend the soil for better results
-
-## intent: askextension_tomato/132873_Michigan
-- Tomato Blight. is there a way to economically rid a field of the previous years tomato blight.  I plant several hundred tomato plants for a farm stand at my farm Thanks for your assistance Meeghan Siera Cherry Bend Farm TRaverse Cit
 
 ## intent: askextension_tomato/133398_Maryland
 - Tomatoes. Hi, my soil has tested positive for Fusarium and Verticillium wilt so I have a hard time getting tomatoes that can be planted in my garden. I am getting ready to purchase seeds. Do all or most hybrids resist these or do they specifically say that they are resistant? Thank yo
@@ -6658,9 +6417,6 @@
 ## intent: askextension_tomato/136798_DistrictofColumbia
 - Insect identification on collards and tomatoes. Hi there,  I have noticed two different looking insects on my collards and tomatoes. For background, there are about 7 collards and 14 tomatoes. The plants are awaiting transplanting into their final homes (in containers), but have been kept indoors in close quarters. I've attached photos of the insects; hopefully they are clear enough for you. The whitish ones in the first pic fly away when disturbed. And now for my questions:
 
-## intent: askextension_tomato/136832_Colorado
-- Tomato Leaf Condition Inquiry. Thanks for taking this question
-
 ## intent: askextension_tomato/136839_Minnesota
 - Mulch for tomato plants. I started my own tomato plants from seed. I am wondering if it is a good idea to use any kind of mulch around them when I transplant them to my garden. I will have a mesh cover the soil for weed control. I have tested the soil - it is good except for needing some nitrogen. Should I add mulch and if so, what kind? Thank you
 
@@ -6693,9 +6449,6 @@
 
 ## intent: askextension_tomato/137731_Oregon
 - Amending the soil for tomatoes. Hi.  We have only one place in our yard where we can grow tomatoes.  Fortunately, it's very sunny and is up against our house.  We've planted our tomatoes there for probably 15 years or more.  We amend with lime every year.  However, the last few years our tomatoes haven't done that well.  I'm wondering if we should amend the soil with something in addition to lime before we plant this year
-
-## intent: askextension_tomato/137732_Michigan
-- tomato fungus. The first year that I planted in this garden space my tomato plants were excellent. in subsequent years, the plants start out very healthy then mid season develop yellow spots on the leaves from the bottom of the plant and it works it's way up the foliage and affects the fruit. I do not water from above.  I have tried various copper fungicides, and I can't seem to stop it.  I feel that it is in my soil.  Can you provide any help?  Thank yo
 
 ## intent: askextension_tomato/137773_Oregon
 - Is it absolutely necessary to rotate Tomato plants to different raised beds every year? My husband and I LOVE home-grown tomatoes and really only want to grow tomatoes in the 3 raised beds in our back yard.  So far, we've been successful planting tomatoes in 2 of the beds for the past 2 years.  We always plant different varieties so there are not two plants of the same variety in the same bed.  Each bed is 8' x 4', and we've had 6 plants to each bed, mostly small to medium sized tomatoes.   I've spent the last few hours researching various sources online re: the necessity of crop rotation with tomatoes.  About 25% of the sources say that this is not absolutely necessary as long as the soil is amended each year to provide nutrients that might have been leached in previous growing seasons.  One source even said that tomatoes prefer to be planted in the same spot!   What does Cooperative Extension say?  While we also have 3 raised beds in our front yard next to the sidewalk, we'd prefer to keep the tomato plants in the backyard to prevent passers-by from helping themselves to our crops.  If we don't absolutely have to rotate the tomato plants to the front-yard beds, what else (besides amending the soil) can we do to ensure a good healthy crop of tomatoes?  Thank you so much for any advice you can give us
@@ -6792,9 +6545,6 @@
 
 ## intent: askextension_tomato/140131_Minnesota
 - tomato plants ruined by an invader! Six tomato plants in a raised bed, planted about a week ago, a 8 - 10 inches high were mostly ruined over one day.  One is still in tact.  They others have all leaves eaten off, including side branches.  Two of them were dug up and lay next to the bed, with all but the main stem left. In the other beds are peas and beans that have germinated...a few inches high.  And strawberries.  All of these were left alone.  Any idea what animal would do this?  Thank you
-
-## intent: askextension_tomato/140268_Alaska
-- tomato virus? Some of my greenhouse tomato leaves are upwardly curling and of those some have irregular tan spots on both sides of leaves. Is this a virus and how do i treat? Thanks -  Li
 
 ## intent: askextension_tomato/140269_Maryland
 - Tomato plant. I have tomato plants that suddenly got brown leaves. Can you help.

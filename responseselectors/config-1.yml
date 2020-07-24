@@ -2,7 +2,8 @@
 # https://rasa.com/docs/rasa/nlu/components/
 language: en
 pipeline:
-  - name: WhitespaceTokenizer
+  - name: ConveRTTokenizer
+  - name: ConveRTFeaturizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -12,4 +13,6 @@ pipeline:
     max_ngram: 4
   - name: ResponseSelector
     retrieval_intent: askextension_tomato
-    epochs: 1
+    transformer_size: 256
+    number_of_transformer_layers: 2
+    epochs: 200
