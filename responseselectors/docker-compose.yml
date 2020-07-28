@@ -1,0 +1,7 @@
+version: '3.4'
+services:
+  responseselectors-action-server:
+    build: .
+    image: responseselectors-action-server:0.0.4
+    expose:
+      - "5055"

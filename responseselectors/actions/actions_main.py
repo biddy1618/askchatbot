@@ -40,6 +40,7 @@ class ActionRetrieval(Action):
             faq_id = int(faq_id)
             osticket = {
                 "url": f"{ac.askextension_url}/faq.php?id={faq_id}",
+                "faq_id": faq_id,
                 "state": state,
                 "confidence": rank["confidence"],
                 "your-question": event["text"],
@@ -76,10 +77,12 @@ class ActionRetrieval(Action):
 
 def create_osticket_message(osticket):
     """Create message to utter"""
-    message = f"[osticket]({osticket['url']})\n"
+    message = f"[osticket {osticket['faq_id']}]({osticket['url']})\n"
     message = f"{message}- confidence: {osticket['confidence']:.2f}\n"
     message = f"{message}- state: {osticket['state']}\n"
     message = f"{message}- osticket answer: {osticket['osticket-answer']}\n"
-    message = f"{message}- your question: {osticket['your-question']}\n"
-    message = f"{message}- osticket question: {osticket['osticket-question']}\n"
+    message = f"{message}- your question was: {osticket['your-question']}\n"
+    message = (
+        f"{message}- original osticket question was: {osticket['osticket-question']}\n"
+    )
     return message

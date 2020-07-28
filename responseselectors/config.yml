@@ -22,7 +22,7 @@ pipeline:
     BILOU_flag: False
   - name: ResponseSelector
     retrieval_intent: askextension_tomato
-    epochs: 3
+    epochs: 10
     tensorboard_log_directory: tensorboard
 
 # Configuration for Rasa Core.

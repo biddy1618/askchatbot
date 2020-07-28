@@ -16,3 +16,9 @@ askextension_parquet = botconfig.get("askextension-parquet", None)
 
 # original osticket that was scraped
 askextension_url = botconfig.get("askextension-url", None)
+
+logger.info("----------------------------------------------")
+logger.info("ResponseSelector configuration:")
+logger.info("- askextension_parquet = %s", askextension_parquet)
+logger.info("- askextension_url     = %s", askextension_url)
+logger.info("----------------------------------------------")

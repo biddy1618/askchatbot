@@ -1,6 +1,9 @@
 """parquet related functions"""
 import os
+import logging
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 
 def convert_bytes(num):
@@ -44,7 +47,7 @@ def persist_df(df, local_dir, fname, verbose=1):
         True if sucessfull, else False
     """
     if verbose > 0:
-        print("---------------------------------------------------------------")
+        logger.info("---------------------------------------------------------------")
 
     if isinstance(df.index, pd.MultiIndex):
         raise ValueError("df has a MultiIndex. This is not supported by fastparquet")
@@ -56,8 +59,10 @@ def persist_df(df, local_dir, fname, verbose=1):
     local_fname = f"{local_dir}/{fname}"
     df.to_parquet(local_fname, engine="fastparquet", compression="gzip")
     if verbose > 0:
-        print(f"Completed writing local file ({file_size(local_fname)}): {local_fname}")
-
+        logger.info(
+            "Completed writing local file (%s): %s", file_size(local_fname), local_fname
+        )
+        logger.info("---------------------------------------------------------------")
     return True
 
 
@@ -78,15 +83,16 @@ def read_df(local_dir, fname, verbose=1):
         a pandas dataframe
     """
     if verbose > 0:
-        print("---------------------------------------------------------------")
+        logger.info("---------------------------------------------------------------")
 
     local_fname = f"{local_dir}/{fname}"
     if verbose > 0:
-        print(f"Reading: {local_fname} ({file_size(local_fname)})")
+        logger.info("Reading: %s (%s)", local_fname, file_size(local_fname))
 
     df = pd.read_parquet(local_fname, engine="fastparquet")
 
     if verbose > 0:
-        print(f"shape of dataframe = {df.shape}")
+        logger.info("shape of dataframe = %s", df.shape)
+        logger.info("---------------------------------------------------------------")
 
     return df
