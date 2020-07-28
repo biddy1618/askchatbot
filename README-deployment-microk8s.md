@@ -41,7 +41,7 @@ sudo snap remove microk8s
 
 [Rasa X docs on using helm](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/) & [Rasa X Helm Chart repository](https://github.com/rasahq/rasa-x-helm)
 
-#### Build docker image for action server
+#### Build docker images for action servers
 
 Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-in)
 
@@ -51,7 +51,7 @@ Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-i
   microk8s enable registry
   ```
 
-- Build docker image with correct tag 
+- Build docker images with correct tag 
 
   ```bash
   # get latest version of the github repo
@@ -60,23 +60,34 @@ Docs for [Using the build-in registry](https://microk8s.io/docs/registry-built-i
   git pull
   git stash pop
   
-  # build docker image
+  # build docker image for askchatbot
+  cd <-->/askchatbot/askchatbot
   sudo docker-compose build
   
-  # then tag it for use in the microk8s built-in registry
+  # build docker image for response selector
+  cd <-->/askchatbot/responseselectors
+  sudo docker-compose build
+  
+  
+  # then tag them for use in the microk8s built-in registry
   sudo docker images
-  sudo docker tag 1fe3d8f47868 localhost:32000/askchatbot-action-server:0.0.3
+  sudo docker tag IMAGE-ID localhost:32000/askchatbot-action-server:0.0.4
+  sudo docker tag IMAGE-ID localhost:32000/responseselectors-action-server:0.0.4
   
   # To quickly test that the container starts up
-  sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 localhost:32000/askchatbot-action-server:0.0.3
+  sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 localhost:32000/askchatbot-action-server:0.0.4
+  --
+  sudo docker run -p 5055:5055 localhost:32000/responseselectors-action-server:0.0.4
+  
   
   curl http://<hostname>:5055/actions
   ```
 
-- Push the docker image into the built-in registry of the microk8s cluster
+- Push the docker images into the built-in registry of the microk8s cluster
 
   ```bash
   sudo docker push localhost:32000/askchatbot-action-server
+  sudo docker push localhost:32000/responseselectors-action-server
   ```
 
 
@@ -105,7 +116,7 @@ source ~/.bashrc
 
 
 
-#### Create the Kubernetes name-space
+#### Create the Kubernetes name-spaces
 
 ```bash
 # Verify all is in place
@@ -113,18 +124,22 @@ kubectl version --short --client
 kubectl version --short
 helm version
 
-# Create the namespaces
+# Create the namespace for askchatbot
 kubectl create namespace my-namespace
+
+# Create the namespace for responseselector
+kubectl create namespace my-namespace-1
 ```
 
 
 
 #### Define `values.yml` ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#quick-install))
 
-On the ec2 instance, you can find the file at:
+On the ec2 instance, you can find the files at:
 
 ```bash
-/home/abuijk/repos/askchatbot/deploy/kubernetes/secret/values.yml
+/home/abuijk/repos/askchatbot/askchatbot/deploy/kubernetes/secret/values.yml
+/home/abuijk/repos/askchatbot/responseselectors/deploy/kubernetes/secret/values.yml
 ```
 
 The file was created using these [instructions](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#deploy-to-a-cluster-rasa-enterprise), with a few additional comments & tips are given below:
@@ -172,8 +187,14 @@ app:
 helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
 helm repo update
 
-# Deploy
+# Deploy askchatbot
+cd /home/abuijk/repos/askchatbot/askchatbot/deploy/kubernetes/secret
 h install my-release --values values.yml rasa-x/rasa-x
+=> do not forget to upload the model
+
+# Deploy responseselectors
+cd /home/abuijk/repos/askchatbot/responseselectors/deploy/kubernetes/secret
+h1 install my-release-1 --values values.yml rasa-x/rasa-x
 => do not forget to upload the model
 ```
 
@@ -301,8 +322,11 @@ When `values.yml` was changed, just issue these commands:
 helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
 helm repo update
 
-# Upgrade
+# Upgrade askchatbot
 h upgrade my-release --values values.yml --reuse-values rasa-x/rasa-x
+
+# Upgrade responseselectors
+h1 upgrade my-release-1 --values values.yml --reuse-values rasa-x/rasa-x
 ```
 
 ##### Apply deployment changes with kubectl

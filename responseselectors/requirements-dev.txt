@@ -1,7 +1,8 @@
 -r requirements.txt
 
-# create nlu data for ResponseSelector
+# ETL
 pandas
+fastparquet
 
 # to plot tensorflow models, requires:
 # - pydot_ng

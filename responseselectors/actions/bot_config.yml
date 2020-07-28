@@ -1,0 +1,5 @@
+# askextension data after ETL
+askextension-parquet: "askextension.parquet"
+
+# original web-site where data was scraped
+askextension-url: "https://dev.osticket.eduworks.com/kb"

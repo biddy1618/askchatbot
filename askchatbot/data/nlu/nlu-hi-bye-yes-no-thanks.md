@@ -65,7 +65,7 @@
 - Cool. Thanks
 - Great, thanks
 - Thank you
-- Thank you Sara
+- Thank you
 - Thank you so much
 - Thank's!
 - Thanks
