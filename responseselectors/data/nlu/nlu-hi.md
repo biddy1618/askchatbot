@@ -1,0 +1,17 @@
+## intent:intent_hi
+- hI
+- HI
+- Hi
+- hi
+- heY
+- HEY
+- Hey
+- hey
+- hellO
+- HELLO
+- Hello
+- hello
+- halLo
+- HALLO
+- Hallo
+- hallo

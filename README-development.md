@@ -35,11 +35,19 @@ $ source ~/.bashrc  # installer updated this, and will activate the base environ
 (base) > conda --version
 ```
 
-##### Create conda environment & install the bot for development
+##### Create conda environments & install the bot for development
+
+There are two 'bots'. One called `askchatbot` and one called `responseselectors`. 
+
+You need to create a separate conda environment for each, and install the respective package in editable mode.
+
+(TODO: make it possible to install it in a single environment)
+
+###### Conda: `askchatbot`
 
 ```bash
 conda create --name askchatbot python=3.7
-conda activate askchatbot
+conda activate askchatbot/askchatbot
 
 git clone https://git.eduworks.us/ask-extension/askchatbot.git
 cd askchatbot
@@ -60,6 +68,24 @@ Workarounds:
 - Use WSL on windows
 - Use docker-on-windows
 - Use the `WhitespaceTokenizer` instead
+
+###### Conda: responseselectors
+
+```bash
+conda create --name responseselectors python=3.7
+conda activate responseselectors
+
+git clone https://git.eduworks.us/ask-extension/askchatbot.git
+cd askchatbot/responseselectors
+
+# install the dependencies
+pip install -r requirements-dev.txt
+
+# install the responseselector package in editable mode
+pip install -e .
+```
+
+
 
 ## Pylint & black
 

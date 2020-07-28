@@ -10,6 +10,22 @@ pipeline:
     analyzer: "char_wb"
     min_ngram: 1
     max_ngram: 4
+  - name: DIETClassifier
+    epochs: 1
+    hidden_layers_sizes:
+      text: [8, 4]
+    number_of_transformer_layers: 0
+    weight_sparsity: 0
+    intent_classification: True
+    entity_recognition: False
+    use_masked_language_model: False
+    BILOU_flag: False
   - name: ResponseSelector
     retrieval_intent: askextension_tomato
-    epochs: 1
+    epochs: 3
+    tensorboard_log_directory: tensorboard
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+policies:
+  - name: MappingPolicy

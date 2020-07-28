@@ -4515,9 +4515,6 @@
 ## intent: askextension_tomato/89193_Minnesota
 - tomato disease. what is this?  what caused it?  how can we prevent it
 
-## intent: askextension_tomato/89194_Minnesota
-- another pic of our Big Mama tomato with disease. what is this?  how did it happen?  what can we do to prevent it
-
 ## intent: askextension_tomato/89266_Minnesota
 - Grape tomatoes. Some of my larger grape tomatoes have skin splits, not the fruit, when ripe.  Can we eat these or should we discard
 
@@ -5493,9 +5490,6 @@
 ## intent: askextension_tomato/108416_Minnesota
 - Roma tomatoes. My Roma is beautiful- looks like a prize winner Inside has long black rot What is wrong
 
-## intent: askextension_tomato/108455_Michigan
-- tomatoes. This summer in July after the first harvest, my plants stopped growing, flowering and producing.  I have never had this happen.  In two separate locations, some in pots and across the back yard in raised gardens so must be air borne.  Plenty of water and sun.  Last year I shared with everyone and this year, nothing.  Could this be blight, my grandmother talked about
-
 ## intent: askextension_tomato/108569_Michigan
 - Small black hard growth inside San Marzono tomatoes. Are the tomatoes safe to can with this growth present.  I canned the tomatoes and I believe I cut out most of the growth but I could have missed some.  Thanks
 
@@ -6395,9 +6389,6 @@
 
 ## intent: askextension_tomato/136499_Maryland
 - Tomato Leaf Problem. I started some tomato plants in the house about 6-7 weeks ago and they have been doing great until this last week.  They have white spots on the back of the leaves now on a bunch and it is for the most part killing the leaves.  Suspect it will kill the plant eventually.  I have noticed some gnats flying around and was wondering if that is what is happening to them - flying insect eggs.  I don't see powder from what I can see so I don't believe it to be powdery mildew.  The dirt I am using is store bought from Lowes.  I have included two pictures which show my issue for the most part.  Any help would be greatly appreciated.  I have unique stuff growing here in the house and you can't get anywhere else.  By the way, I am growing these plants in my finished basement.  They are a heat mat.  Been on one since the beginning.  Never took them off.  The room is usually 78-80 degrees thanks to computers running and those heat mats.  There is humidity in the air.  Not a huge amount but definitely there.  I have full spectrum fluorescent bulbs giving light source.  No natural sun yet.  Was going to start taking them outside this week or next for hardening.  They really have looked good up to this week.  I was patting myself on the back they were doing so well.  I originally started them in peat plugs, then when they sprouted about 2 weeks or so I took the humidity lid off and transplanted to larger peat pod (3-4 inch size) and filled with dirt.  Been watching every day for watering and waiting till the peat pots start to feel dry and then I water so I don not believe I have been watering too much.  When I do water I put a little water on top dirt and fill containers with about half inch of water so the pots absorb the water.  I try to not get water on leaves but that does happen on occasion.  Most of the water does evaporate because of the heat mats.  Please help.
-
-## intent: askextension_tomato/136542_Oregon
-- Bugs in my indoor tomato starts. Hello! I have a bunch of seedlings I started inside, and little tiny gnat-like bugs are flying around them and in the soil. Any idea what they could be? I noticed my potted citrus trees have the same thing (which yields scale though I'm not sure if that's related to the flying insects in the soil). So far the seedlings don't seem affected (besides the squash damping off bc over irrigated). Thank you very much for your services.
 
 ## intent: askextension_tomato/136679_Florida
 - Acidic tomatoes. Im from Ohio and love acidic tomatoes. My husband had terrific acidic tomatoes in Maryland last year. How can we hook up with some great tomatoes? Were in Florida now

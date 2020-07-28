@@ -80,39 +80,18 @@ with:
 (-) include  : [True/False] - include this one or not
 
 """
-import os
 import string
 from pathlib import Path
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+from actions import actions_config as ac
+from actions.actions_parquet import file_size, persist_df
+
 pd.set_option("display.max_columns", 10)
 pd.set_option("display.width", 1000)
 # pd.set_option('display.max_colwidth', None)
-
-
-def convert_bytes(num):
-    """
-    this function will convert bytes to MB.... GB... etc
-    """
-    for x in ["bytes", "KB", "MB", "GB", "TB"]:
-        if num < 1024.0:
-            break
-        num /= 1024.0
-
-    return f"{num:.1f} {x}"
-
-
-def file_size(file_path):
-    """
-    this function will return the file size
-    """
-    if os.path.isfile(file_path):
-        file_info = os.stat(file_path)
-        return convert_bytes(file_info.st_size)
-
-    return f"File does not exist: {file_path}"
 
 
 def plot_word_counts(df_plot):
@@ -169,10 +148,10 @@ def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
     df["response"] = [answer["1"]["response"] for answer in df["answer"]]
 
     # we only use a few columns
-    df = df.loc[:, ["state", "title", "question", "response"]]
+    df = df.loc[:, ["state", "title", "question", "response", "answer"]]
 
     # strip all spaces
-    for column in df.columns:
+    for column in ["state", "title", "question", "response"]:
         df[column] = df[column].str.strip()
 
     # intent-id
@@ -197,8 +176,6 @@ def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
     tqs = [title + " " + question for (title, question) in zip(titles, questions)]
     tqs = remove_encodings_and_escapes(tqs)
     df["title-question"] = tqs
-    df = df.drop("title", 1)
-    df = df.drop("question", 1)
 
     #
     # cleanup
@@ -230,21 +207,15 @@ def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
     #
     # Remove responses with 'font-'
     shape = df.shape
-    mask = ['font-' not in x for x in df["response"].tolist()]
+    mask = ["font-" not in x for x in df["response"].tolist()]
     df = df[mask]
     print(f"Removed {shape[0] - df.shape[0]} responses with font-")
     #
     # Questions with 'font-' data
     shape = df.shape
-    mask = ['font-' not in x for x in df["title-question"].tolist()]
+    mask = ["font-" not in x for x in df["title-question"].tolist()]
     df = df[mask]
     print(f"Removed {shape[0] - df.shape[0]} questions with font-")
-
-    #
-    #
-    # Identical questions
-    #
-    # Identical responses
 
     if verbose:
         print("ETL completed:")
@@ -305,6 +276,13 @@ def main():
         f"{Path(__file__).parents[3]}/data/nlu/nlu-{data_name}-tomato.md",
         f"{Path(__file__).parents[3]}/data/nlu/responses-{data_name}-tomato.md",
         "askextension_tomato",
+    )
+
+    # save the ETL result, used by the custom action
+    persist_df(
+        df,
+        local_dir=f"{Path(__file__).parents[3]}/actions",
+        fname=ac.askextension_parquet,
     )
 
 

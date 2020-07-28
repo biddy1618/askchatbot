@@ -1,3 +1,0 @@
--r askchatbot/actions/requirements-actions.txt
-rasa[convert]~=1.10.7
-rasa-sdk~=1.10.0

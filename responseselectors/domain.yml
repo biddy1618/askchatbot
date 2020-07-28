@@ -1,10 +1,16 @@
 intents:
+  - intent_hi:
+      triggers: utter_hi
   - askextension_tomato:
-      triggers: respond_askextension_tomato
+      triggers: action_retrieval
 
 actions:
-  - respond_askextension_tomato
-   
+  - action_retrieval
+
+responses:
+  utter_hi:
+  - text: Hi, please ask a question and I will show you the Response Selector results!
+  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

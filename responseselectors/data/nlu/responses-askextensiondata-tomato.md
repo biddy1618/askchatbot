@@ -6020,10 +6020,6 @@
 * askextension_tomato/89193_Minnesota
   - Tomatoes are susceptible to several fungal and bacterial diseases that affect the leaves, stems and fruits.  More than one may be present and laboratory analysis is sometimes needed to determine which is which.The following bulletins illustrate the symptoms of some of these pathogens and explain what can be done to control them. We aren't certain, but our guess is that the fruit shown has been affected by buckeye rot or late blight.http://vegetablemdonline.ppath.cornell.edu/DiagnosticKeys/TomFrt/TomFrtKey.html https://njaes.rutgers.edu/pubs/fs547/
 
-## 89194_Minnesota
-* askextension_tomato/89194_Minnesota
-  - We don't see a photo here.
-
 ## 89266_Minnesota
 * askextension_tomato/89266_Minnesota
   - Tomatoes split because of sudden uptake of water. They are perfectly o.k. to eat, but because their skin has been broken, they will quickly deteriorate as pathogens or insects enter the flesh. So eat them quickly. Read here:https://www.extension.umn.edu/garden/yard-garden/vegetables/disorders-of-tomato/#cracks
@@ -7324,10 +7320,6 @@
 * askextension_tomato/108416_Minnesota
   - Most likely your beautiful Roma tomato has experienced blossom end rot. The same thing happens to my Romas at times, especially the ones I grow in containers. This is not a disease but caused by a calcium deficiency in the tomato. This calcium deficiency is produced by an inconsistent supply of water, which impedes calcium uptake into the plant. Usually this rotting is visible on the outside of the tomato. However, in its early stages it starts inside of the tomato. Here is some information about this condition:   http://blog-yard-garden-news.extension.umn.edu/2016/07/prevent-blossom-end-rot.html  Unless the blackening is extensive, it is possible just to cut it out before eating. At least in my experience, the taste is unaffected by this condition.   Thanks for the question!!
 
-## 108455_Michigan
-* askextension_tomato/108455_Michigan
-  - Hello,If you aren't seeing leaves with discoloration and spotting, it is unlikely to be a disease that comes in with the wind (such as late blight).  My guess would be that this is related to the weather, plant nutrition, or your tomato variety. One thing thing to think about would be the weather conditions this season.  It has been a challenging summer for vegetables, with heat and rain either scarce or in over abundance.  We had periods of time where daytime and nighttime temperatures were warm enough that your tomato plants could have aborted their flower leading to no fruit. The plantscouldalsobestressedgenerally,loweringproductivity.Another thing that could affect plantings in multiple locations would be plant nutrition.  Tomato plants use a lot of nutrients, so think about if you fertilized enough.  Alternatively, if your plants are big and bushy, it might be that they are getting too much nitrogen, and cutting back on nitrogen will prompt the plant to slow down vegetative growth and it will start producing flowers and eventuallyfruit.Finally, think about if this variety is something you've grown before and had success with, or if this variety new to you.  One thing to look into is if the variety is determinate or indeterminate.  Determinate tomatoes are more likely to set one bunch of fruit that will ripen over a few weeks.  Indeterminate tomatoes will grow until they are killed by a frost, producing fruit along the way. For  more information and tips, see: http://www.canr.msu.edu/uploads/resources/pdfs/michigan_fresh_growing_tomatoes_(sp)_(e3174).pdfIt is hard to pinpoint the exact issue, but I hope this gets you started! Feel free to respond if you have any questions.
-
 ## 108569_Michigan
 * askextension_tomato/108569_Michigan
   - So sorry for your problem with the tomatoes . This is called blossom end rot and appears as a dark, rotten spot on the bottom of the tomato. It may start out as a dime-size brown patch, then grow bigger and deeper, and eventually become covered with black mold.http://msue.anr.msu.edu/news/dont_let_blossom_end_rot_ruin_your_vegetableshttps://www.canr.msu.edu/resources/blossom_end_rot_tip_sheetAs for preserving themqualityisessential.Select only disease-free, preferably vine-ripened, firm fruitforcanning/preserving.FromwhatIhaveresearchedandreadaslongasthetomato rotisremovedcompletelyandnoblackmoldispresentthentheymaybepreserved.Icautionyoutomakesurethatnomoldsarepresent.Ihopethishelpsinyourdecision.EileenHaraminacFoodSafetyEducator
@@ -8527,10 +8519,6 @@
 ## 136499_Maryland
 * askextension_tomato/136499_Maryland
   - Hi- the flying insects are likely fungus gnats, a type of small fly that thrives in warm, moist, humid conditions. Digging around in your containers may reveal the larvae that feed on microorganisms in the grow mix and plant roots. They are not considered a serious pest:https://extension.umd.edu/hgic/topics/fungus-gnatsThe symptom you see on the tomato leaves appears to be edema- a rupturing of plant cells due to moist, high humidity conditions. The plants are taking up more water than they can release through transpiration. Remove any plastic covers, create more space between plants, if possible, and use a small fan to circulate air. Water just enough to keep the grow mix moist.https://extension.umd.edu/hgic/topics/edema-vegetablesYour plants should fully recover.Jon
-
-## 136542_Oregon
-* askextension_tomato/136542_Oregon
-  - Thank you for the images.
 
 ## 136679_Florida
 * askextension_tomato/136679_Florida
