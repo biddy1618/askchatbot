@@ -41,8 +41,6 @@ There are two 'bots'. One called `askchatbot` and one called `responseselectors`
 
 You need to create a separate conda environment for each, and install the respective package in editable mode.
 
-(TODO: make it possible to install it in a single environment)
-
 ###### Conda: `askchatbot`
 
 ```bash
@@ -50,7 +48,7 @@ conda create --name askchatbot python=3.7
 conda activate askchatbot/askchatbot
 
 git clone https://git.eduworks.us/ask-extension/askchatbot.git
-cd askchatbot
+cd askchatbot/askchatbot
 
 # install the dependencies
 pip install -r requirements-dev.txt
@@ -228,4 +226,14 @@ In the folder `askchatbot/askchatbot` you can find these files:
   - `endpoints.yml` - the different endpoints the bot can use ([docs](https://rasa.com/docs/rasa/user-guide/configuring-http-api/#endpoint-configuration))
 - Tests
   - `tests/*.md` - end-to-end test conversations in markdown format ([docs](https://rasa.com/docs/rasa/user-guide/testing-your-assistant/#end-to-end-testing))
+
+## Trouble shooting
+
+### Module not found for `actions`
+
+Make sure you install the `askchatbot` or `responseselectors` package in editable mode into your conda environment, as described above:
+
+```bash
+pip install -e .
+```
 

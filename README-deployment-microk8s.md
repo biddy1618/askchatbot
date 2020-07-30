@@ -1,6 +1,21 @@
 # Deploy the chatbot w MicroK8s
 
-- This method is used to deploy the QA chatbot at http://35.166.13.105:8001/
+- This method is used to deploy the QA chatbot at http://34.219.35.63:8001/
+
+### Install docker & docker-compose
+
+For Ubuntu 20.04, you can just install Docker from a standard Ubuntu Repository
+
+```bash
+sudo apt-get update
+sudo apt install docker.io docker-compose
+
+sudo docker --version
+19.03.#
+
+sudo docker-compose --version
+docker-compose version 1.25.0, build unknown
+```
 
 ### Install microk8s with required addons ([docs](https://microk8s.io/docs)) 
 
@@ -103,9 +118,11 @@ alias helm='microk8s.helm3'
 
 # set aliases for using kubectl in a namespace
 alias k="kubectl --namespace my-namespace"
+alias k1="kubectl --namespace my-namespace-1"
 
 # set aliases for using helm  in a namespace
 alias h="helm --namespace my-namespace"
+alias h1="helm --namespace my-namespace-1"
 ```
 
 After you added these to your ~/.bashrc, don't forget to run:
@@ -177,6 +194,18 @@ app:
     name: "localhost:32000/askchatbot-action-server"
     tag: "0.0.3"
 ```
+
+###### ProbeDelay
+
+To allow the containers to come up properly, use a larger value than the default (10) for probedelay. 
+
+```bash
+rasa:
+    # initialProbeDelay for the `readinessProbe` and the `livenessProbe`
+    initialProbeDelay: 60
+```
+
+
 
 #### Deploy  ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/openshift-kubernetes/#quick-install))
 
@@ -267,6 +296,7 @@ Due to long start-up time of the action server, it might be needed to use this a
 ```bash
 # Create deployment yaml
 h template --values values.yml my-release rasa-x/rasa-x > rasa-x-deployment.yml
+h1 template --values values.yml my-release-1 rasa-x/rasa-x > rasa-x-deployment.yml
 
 # Add a Startup Probe for the action server
 # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
@@ -354,7 +384,7 @@ k scale deployment my-release-app --replicas=1
 
 ##### Upload & activate a trained model
 
-Log into Rasa X at http://35.166.13.105:8001
+Log into Rasa X at http://34.219.35.63:8001
 
 Go to the `models` screen, and click on `upload model`
 
@@ -400,8 +430,10 @@ my-release-redis-master           ClusterIP    10.152.183.114  <none>          6
 helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
 helm repo update
 
-# Upgrade
+# Upgrade askchatbot
 h uninstall my-release
+# Upgrade responseselectors
+h1 uninstall my-release-1
 ```
 
 
@@ -467,7 +499,7 @@ mv stern_linux_amd64 stern
 
 #### Connect to Rasa X from browser
 
-Rasa X is available on: http://35.166.13.105:8001/
+Rasa X is available on: http://34.219.35.63:8001/
 
 ### Maintain disk space
 

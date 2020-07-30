@@ -1,117 +1,147 @@
 {
-  "settings": {
-    "number_of_shards": 2,
-    "number_of_replicas": 1
-  },
-   "mappings": {
-    "dynamic": "true",
-    "_source": {
-      "enabled": "true"
-    },
-    "properties": {
-      "name": {
-        "type": "text"
-      },
-      "name_vector": {
-        "type": "dense_vector",
-        "dims": 512
-      },
-      "urlPestNote": {
-        "type": "text"
-      },
-      "descriptionPestNote": {
-        "type": "text"
-      },
-      "descriptionPestNote_vector": {
-        "type": "dense_vector",
-        "dims": 512
-      },
-      "life_cycle": {
-        "type": "text"
-      },
-      "life_cycle_vector": {
-        "type": "dense_vector",
-        "dims": 512
-      },
-      "damagePestNote": {
-        "type": "text"
-      },
-      "damagePestNote_vector": {
-        "type": "dense_vector",
-        "dims": 512
-      },
-      "managementPestNote": {
-        "type": "text"
-      },
-      "managementPestNote_vector": {
-        "type": "dense_vector",
-        "dims": 512
-      },
-      "imagePestNote": {
-        "type": "nested",
+    "settings": {"number_of_shards": 2, "number_of_replicas": 1},
+    "mappings": {
+        "dynamic": "true",
+        "_source": {"enabled": "true"},
         "properties": {
-          "caption": {
-            "type": "text"
-          },
-          "caption_vector": {
-            "type": "dense_vector",
-            "dims": 512
-          },
-          "link": {
-            "type": "text"
-          },
-          "src": {
-            "type": "text"
-          }
+            "name": {"type": "text"},
+            "name_vector": {"type": "dense_vector", "dims": 512},
+            "urlPestNote": {"type": "text"},
+            "descriptionPestNote": {"type": "text"},
+            "descriptionPestNote_vector": {"type": "dense_vector", "dims": 512},
+            "life_cycle": {"type": "text"},
+            "life_cycle_vector": {"type": "dense_vector", "dims": 512},
+            "damagePestNote": {"type": "text"},
+            "damagePestNote_vector": {"type": "dense_vector", "dims": 512},
+            "managementPestNote": {"type": "text"},
+            "managementPestNote_vector": {"type": "dense_vector", "dims": 512},
+            "imagePestNote": {
+                "type": "nested",
+                "properties": {
+                    "caption": {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"},
+                    "src": {"type": "text"}
+                }
+            },
+            "urlQuickTip": {"type": "text"},
+            "contentQuickTips": {"type": "text"},
+            "contentQuickTips_vector": {"type": "dense_vector", "dims": 512},
+            "imageQuickTips": {
+                "type": "nested",
+                "properties": {
+                    "caption": {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"},
+                    "src": {"type": "text"}
+                }
+            },
+            "video": {
+                "type": "nested",
+                "properties": {
+                    "videoLink": {"type": "text"},
+                    "videoTitle": {"type": "text"},
+                    "videoTitle_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+            "ndl_damage_vector": {"type": "dense_vector", "dims": 512},
+            "urlFruitVeggieItems": {"type": "text"},
+            "cultural_tipsFruitVeggieItems": {
+                "type": "nested",
+                "properties": {
+                    "tip": {"type": "text"},
+                    "tip_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"}
+                }
+            },
+            "pests_and_disordersFruitVeggieItems": {
+                "type": "nested",
+                "properties": {
+                    "problem": {"type": "text"},
+                    "problem_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"}
+                }
+            },
+            "urlPestDiseaseItems": {"type": "text"},
+            "descriptionPestDiseaseItems": {"type": "text"},
+            "descriptionPestDiseaseItems_vector": {"type": "dense_vector", "dims": 512},
+            "identificationPestDiseaseItems": {"type": "text"},
+            "identificationPestDiseaseItems_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "life_cyclePestDiseaseItems": {"type": "text"},
+            "life_cyclePestDiseaseItems_vector": {"type": "dense_vector", "dims": 512},
+            "damagePestDiseaseItems": {"type": "text"},
+            "damagePestDiseaseItems_vector": {"type": "dense_vector", "dims": 512},
+            "solutionsPestDiseaseItems": {"type": "text"},
+            "solutionsPestDiseaseItems_vector": {"type": "dense_vector", "dims": 512},
+            "imagesPestDiseaseItems": {
+                "type": "nested",
+                "properties": {
+                    "caption": {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"},
+                    "src": {"type": "text"}
+                }
+            },
+            "urlPlantFlowerItems": {"type": "text"},
+            "identificationPlantFlowerItems": {"type": "text"},
+            "identificationPlantFlowerItems_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "optimum_conditionsPlantFlowerItems": {"type": "text"},
+            "optimum_conditionsPlantFlowerItems_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "pests_and_disordersPlantFlowerItems": {
+                "type": "nested",
+                "properties": {
+                    "problem": {"type": "text"},
+                    "problem_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"}
+                }
+            },
+            "imagesPlantFlowerItems": {
+                "type": "nested",
+                "properties": {
+                    "caption": {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"},
+                    "src": {"type": "text"}
+                }
+            },
+            "urlTurfPests": {"type": "text"},
+            "textTurfPests": {"type": "text"},
+            "textTurfPests_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "imagesTurfPests": {
+                "type": "nested",
+                "properties": {
+                    "caption": {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"},
+                    "src": {"type": "text"}
+                }
+            },
+            "urlWeedItems": {"type": "text"},
+            "descriptionWeedItems": {"type": "text"},
+            "descriptionWeedItems_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "imagesWeedItems": {
+                "type": "nested",
+                "properties": {
+                    "caption": {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"}
+                }
+            }
         }
-      },
-      "urlQuickTip": {
-        "type": "text"
-      },
-      "contentQuickTips": {
-        "type": "text"
-      },
-      "contentQuickTips_vector": {
-        "type": "dense_vector",
-        "dims": 512
-      },
-      "imageQuickTips": {
-        "type": "nested",
-        "properties": {
-          "caption": {
-            "type": "text"
-          },
-          "caption_vector": {
-            "type": "dense_vector",
-            "dims": 512
-          },
-          "link": {
-            "type": "text"
-          },
-          "src": {
-            "type": "text"
-          }
-        }
-      },
-      "video": {
-        "type": "nested",
-        "properties": {
-          "videoLink": {
-            "type": "text"
-          },
-          "videoTitle": {
-            "type": "text"
-          },
-          "videoTitle_vector": {
-            "type": "dense_vector",
-            "dims": 512
-          }
-        }
-      },
-      "ndl_damage_vector": {
-        "type": "dense_vector",
-        "dims": 512
-      }
     }
-  }
 }
