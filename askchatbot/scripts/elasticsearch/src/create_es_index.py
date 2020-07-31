@@ -12,12 +12,18 @@ from actions import actions_config as ac
 index_name = ac.ipmdata_index_name
 
 
-INDEX_FILE = f"{Path(__file__).parents[1]}/data/{index_name}/index.json"
+INDEX_FILE = f"{Path(__file__).parents[1]}/data/ipmdata/index.json"
 
 DATA_FILE_NAMES = [
     "cleanedFruitVeggieItems.json",
     "cleanedPestDiseaseItems.json",
     "cleanedPlantFlowerItems.json",
+    "cleanedTurfPests.json",
+    "cleanedWeedItems.json",
+    "ipmdata.json",
+]
+DATA_FILE_NAMES = [
+    "cleanedPestDiseaseItems.json",
     "cleanedTurfPests.json",
     "cleanedWeedItems.json",
     "ipmdata.json",
@@ -37,7 +43,7 @@ GPU_LIMIT = 0.5
 
 def index_data():
     """Create the index"""
-    if index_name in ["ipmdata"]:
+    if index_name in ["ipmdata", "ipmdata-dev"]:
         index_data_ipmdata()
     else:
         raise Exception(f"Not implemented for index_name = {index_name}")
@@ -57,7 +63,7 @@ def index_data_ipmdata():
 
     docs_total = []
     for data_file_name in DATA_FILE_NAMES:
-        data_file = f"{Path(__file__).parents[1]}/data/{index_name}/{data_file_name}"
+        data_file = f"{Path(__file__).parents[1]}/data/ipmdata/{data_file_name}"
         with open(data_file) as f:
             docs_all = json.load(f)
             docs_total.extend(docs_all)
@@ -104,9 +110,9 @@ def index_batch_ipmdata(docs, data_file_name):
     ]:
         docs = rename_fields_to_be_unique(docs, data_file_name)
         docs = update_docs_for_ipmdata(docs)
-        docs = update_docs_for_cleanedfruitveggieitems(docs)
+        ##        docs = update_docs_for_cleanedfruitveggieitems(docs)
         docs = update_docs_for_cleanedpestdiseaseitems(docs)
-        docs = update_docs_for_cleanedplantfloweritems(docs)
+        ##        docs = update_docs_for_cleanedplantfloweritems(docs)
         docs = update_docs_for_cleanedturfpests(docs)
         docs = update_docs_for_cleanedweeditems(docs)
     else:
@@ -383,6 +389,12 @@ def update_docs_for_cleanedpestdiseaseitems(docs):
     pdi_descriptions = [doc["descriptionPestDiseaseItems"] for doc in docs]
     pdi_description_vectors = ac.embed(pdi_descriptions).numpy()
 
+    pdi_identifications = [doc["identificationPestDiseaseItems"] for doc in docs]
+    pdi_identification_vectors = ac.embed(pdi_identifications).numpy()
+
+    pdi_life_cycles = [doc["life_cyclePestDiseaseItems"] for doc in docs]
+    pdi_life_cycle_vectors = ac.embed(pdi_life_cycles).numpy()
+
     pdi_damages = [doc["damagePestDiseaseItems"] for doc in docs]
     pdi_damage_vectors = ac.embed(pdi_damages).numpy()
 
@@ -394,6 +406,8 @@ def update_docs_for_cleanedpestdiseaseitems(docs):
         (
             pdi_name_vector,
             pdi_description_vector,
+            pdi_identification_vector,
+            pdi_life_cycle_vector,
             pdi_damage_vector,
             pdi_solution_vector,
         ),
@@ -401,12 +415,16 @@ def update_docs_for_cleanedpestdiseaseitems(docs):
         zip(
             pdi_name_vectors,
             pdi_description_vectors,
+            pdi_identification_vectors,
+            pdi_life_cycle_vectors,
             pdi_damage_vectors,
             pdi_solution_vectors,
         )
     ):
         docs[i]["name_vector"] = pdi_name_vector
         docs[i]["descriptionPestDiseaseItems_vector"] = pdi_description_vector
+        docs[i]["identificationPestDiseaseItems_vector"] = pdi_identification_vector
+        docs[i]["life_cyclePestDiseaseItems_vector"] = pdi_life_cycle_vector
         docs[i]["damagePestDiseaseItems_vector"] = pdi_damage_vector
         docs[i]["solutionsPestDiseaseItems_vector"] = pdi_solution_vector
 

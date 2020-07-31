@@ -37,8 +37,8 @@ tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder/4"
 tfhub-cache-dir: "/var/tmp/tfhub_modules"
 
 # index name of ipmdata queries
-ipmdata-index-name: "ipmdata"
-# ipmdata-index-name: "ipmdata-dev"
+# ipmdata-index-name: "ipmdata"
+ipmdata-index-name: "ipmdata-dev"
 
 
 # Default bot configurations                                         #
@@ -52,9 +52,9 @@ ipmdata-index-name: "ipmdata"
 #  /intent_configure_bot{"bot_config_urlprivacy": "https://ucanr.edu/?privacyStatement/"}
 # 
 # Later, this can also be implemented via metadata of custom rest channel
-bot-config-debug: False
-bot-config-weight-description: 0.8
-bot-config-weight-damage: 0.2
+bot-config-debug: True
+bot-config-weight-description: 0.9
+bot-config-weight-damage: 0.1
 bot-config-score-threshold: 1.4
 bot-config-botname: "the Extension Bot"
 bot-config-urlprivacy: "https://ucanr.edu/?privacyStatement/"
