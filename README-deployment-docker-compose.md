@@ -1,6 +1,6 @@
 # Deploy the chatbot w/ docker-compose
 
-This method is used to deploy the QA chatbot at http://35.166.13.105:8000/
+This method is used to deploy the QA chatbot at http://34.219.35.63:8000/
 
 ### Install docker & docker-compose
 
@@ -204,7 +204,7 @@ sudo python rasa_x_commands.py create --update admin me <PASSWORD>
 
 #### Upload & activate a trained model
 
-Log into Rasa X at http://35.166.13.105:8000
+Log into Rasa X at http://34.219.35.63:8000
 
 Go to the `models` screen, and click on `upload model`
 
@@ -232,7 +232,7 @@ sudo docker logs rasa_rasa-x_1
 
 ```bash
 # version of rasa x
-http://35.166.13.105:8000/api/version  # rasa-x
+http://34.219.35.63:8000/api/version  # rasa-x
 
 # check action server endpoints directly on the VM
 curl http://localhost:5055/health  
@@ -267,7 +267,7 @@ curl http://localhost:8000/api/version
 
 #### Connect to Rasa X from browser
 
-Rasa X is available on: http://35.166.13.105:8000/
+Rasa X is available on: http://34.219.35.63:8000/
 
 
 

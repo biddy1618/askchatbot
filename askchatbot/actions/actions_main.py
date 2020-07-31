@@ -205,9 +205,22 @@ async def handle_es_query(
             "contentQuickTips",
             "imageQuickTips",
             "video",
+            "urlPestDiseaseItems",
+            "descriptionPestDiseaseItems",
+            "identificationPestDiseaseItems",
+            "life_cyclePestDiseaseItems",
+            "damagePestDiseaseItems",
+            "solutionsPestDiseaseItems",
+            "urlTurfPests",
+            "textTurfPests",
+            "imagesTurfPests",
+            "urlWeedItems",
+            "descriptionWeedItems",
+            "imagesWeedItems",
         ]
     }
 
+    # ipmdata.json
     pn_name_hits = cosine_similarity_query(
         index_name,
         _source_query,
@@ -252,39 +265,6 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pn_caption_hits = cosine_similarity_query(
-        index_name,
-        _source_query,
-        query_vector,
-        "imagePestNote.caption_vector",
-        nested=True,
-        best_image="caption",
-        best_video="first",
-        print_summary=print_summary,
-    )
-
-    qt_caption_hits = cosine_similarity_query(
-        index_name,
-        _source_query,
-        query_vector,
-        "imageQuickTips.caption_vector",
-        nested=True,
-        best_image="caption",
-        best_video="first",
-        print_summary=print_summary,
-    )
-
-    video_link_hits = cosine_similarity_query(
-        index_name,
-        _source_query,
-        query_vector,
-        "video.videoTitle_vector",
-        nested=True,
-        best_image="first",
-        best_video="title",
-        print_summary=print_summary,
-    )
-
     pn_damage_hits = []
     if pest_damage_description:
         pn_damage_hits = cosine_similarity_query(
@@ -295,6 +275,127 @@ async def handle_es_query(
             nested=False,
             best_image="first",
             best_video="first",
+            print_summary=print_summary,
+        )
+
+    # cleanedPestDiseaseItems.json
+    pdi_description_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "descriptionPestDiseaseItems_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    pdi_identification_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "identificationPestDiseaseItems_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    pdi_life_cycle_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "life_cyclePestDiseaseItems_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    pdi_damage_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "damagePestDiseaseItems_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    pdi_solutions_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "solutionsPestDiseaseItems_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    # cleanedTurfPests.json
+    tp_text_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "textTurfPests_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    # cleanedWeedItems.json
+    wi_description_hits = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "descriptionWeedItems_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    do_nested = False
+    pn_caption_hits = []
+    qt_caption_hits = []
+    video_link_hits = []
+    if not do_nested:
+        print("SKIPPING SEARCH IN NESTED FIELDS")
+    if do_nested:
+        # ipmdata.json
+        pn_caption_hits = cosine_similarity_query(
+            index_name,
+            _source_query,
+            query_vector,
+            "imagePestNote.caption_vector",
+            nested=True,
+            best_image="caption",
+            best_video="first",
+            print_summary=print_summary,
+        )
+
+        qt_caption_hits = cosine_similarity_query(
+            index_name,
+            _source_query,
+            query_vector,
+            "imageQuickTips.caption_vector",
+            nested=True,
+            best_image="caption",
+            best_video="first",
+            print_summary=print_summary,
+        )
+
+        video_link_hits = cosine_similarity_query(
+            index_name,
+            _source_query,
+            query_vector,
+            "video.videoTitle_vector",
+            nested=True,
+            best_image="first",
+            best_video="title",
             print_summary=print_summary,
         )
 
@@ -311,6 +412,13 @@ async def handle_es_query(
         + pn_caption_hits
         + qt_caption_hits
         + video_link_hits
+        + pdi_description_hits
+        + pdi_identification_hits
+        + pdi_life_cycle_hits
+        + pdi_damage_hits
+        + pdi_solutions_hits
+        + tp_text_hits
+        + wi_description_hits
     ):
         duplicate = False
         for i, hit in enumerate(hits):
@@ -337,6 +445,12 @@ async def handle_es_query(
                 for hit_damage in pn_damage_hits:
                     if hit_damage["_source"]["name"] == hit["_source"]["name"]:
                         hits[i]["_score_damage"] = hit_damage["_score"]
+                        break
+                for hit_damage in pdi_damage_hits:
+                    if hit_damage["_source"]["name"] == hit["_source"]["name"]:
+                        hits[i]["_score_damage"] = max(
+                            hits[i]["_score_damage"], hit_damage["_score"]
+                        )
                         break
 
     # Apply weighting
@@ -374,12 +488,12 @@ class ActionHi(Action):
         buttons = []
 
         buttons.append(
-            {"title": "I have a pest", "payload": '/intent_i_have_a_pest',}
+            {"title": "I have a pest", "payload": "/intent_i_have_a_pest",}
         )
 
         if not explained_ipm:
             buttons.append(
-                {"title": "Explain IPM", "payload": '/intent_explain_ipm',}
+                {"title": "Explain IPM", "payload": "/intent_explain_ipm",}
             )
 
         if said_hi:
@@ -388,7 +502,7 @@ class ActionHi(Action):
             )
 
         buttons.append(
-            {"title": "Something else", "payload": '/intent_out_of_scope',}
+            {"title": "Something else", "payload": "/intent_out_of_scope",}
         )
 
         dispatcher.utter_message(
@@ -838,6 +952,9 @@ def create_text_for_pest(hit, tracker) -> str:
     score_damage = hit["_score_damage"]
     pn_url = hit["_source"]["urlPestNote"]
     qt_url = hit["_source"]["urlQuickTip"]
+    pdi_url = hit["_source"]["urlPestDiseaseItems"]
+    tp_url = hit["_source"]["urlTurfPests"]
+    wi_url = hit["_source"]["urlWeedItems"]
     # pn_image = None
     # if hit["best_image"]:
     #    pn_image = hit["best_image"]["src"]
@@ -850,9 +967,15 @@ def create_text_for_pest(hit, tracker) -> str:
     text = f"{name}\n"
 
     if qt_url:
-        text = f"{text}- [quick tips]({qt_url})\n"
+        text = f"{text}- [quick tip]({qt_url})\n"
     if pn_url:
         text = f"{text}- [pestnote]({pn_url})\n"
+    if pdi_url:
+        text = f"{text}- [pest disease item]({pdi_url})\n"
+    if tp_url:
+        text = f"{text}- [turf pest]({tp_url})\n"
+    if wi_url:
+        text = f"{text}- [weed item]({wi_url})\n"
 
     if hit["best_video"]:
         video_title = hit["best_video"]["videoTitle"]
