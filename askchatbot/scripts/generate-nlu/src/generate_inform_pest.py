@@ -9,10 +9,10 @@ import random
 with open(f"{Path(__file__).parents[3]}/data/nlu/nlu-inform-pest.md", "r") as f:
     nlu_inform_pest = []
     while True:
-        line = f.readline().rstrip('\n')
+        line = f.readline().rstrip("\n")
         if line == "## intent:intent_inform":
             while True:
-                sentence = f.readline().rstrip('\n')
+                sentence = f.readline().rstrip("\n")
                 if not sentence or sentence[0] != "-":
                     break
                 nlu_inform_pest.append(sentence)
@@ -37,4 +37,4 @@ with open(f"{Path(__file__).parents[3]}/data/nlu/nlu-inform-pest.md", "r") as f:
             break
 
 with open(f"{Path(__file__).parents[3]}/data/nlu/nlu-inform-pest-new.md", "w") as f:
-    f.write('\n'.join(lines))
+    f.write("\n".join(lines))

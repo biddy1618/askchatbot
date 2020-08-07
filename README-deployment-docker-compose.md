@@ -43,7 +43,7 @@ $ source ~/.bashrc  # installer updated this, and will activate the base environ
 
 ```bash
 git clone https://git.eduworks.us/ask-extension/askchatbot
-cd askchatbot
+cd askchatbot/askchatbot
 
 conda create --name askchatbot python=3.7
 conda activate askchatbot

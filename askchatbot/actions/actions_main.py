@@ -93,9 +93,9 @@ def cosine_similarity_query(
 
     hits = response["hits"]["hits"]
 
-    if print_summary and (best_image == "first" or best_video == "first"):
-        # print it before filling out best_image & best_video fields
-        print_hits(hits, title=vector_name)
+    ##    if print_summary:
+    ##        # print it before filling out best_image & best_video fields
+    ##        print_hits(hits, title=vector_name)
 
     if best_image == "first":
         hits = set_first_image_as_best(hits)
@@ -103,6 +103,8 @@ def cosine_similarity_query(
         if vector_name in [
             "imagePestNote.caption_vector",
             "imageQuickTips.caption_vector",
+            "imagesPestDiseaseItems.caption_vector",
+            "imagesExoticPests.caption_vector",
         ]:
             # When scored on image caption, fist of the innerhits had the highest score
             for i, hit in enumerate(hits):
@@ -110,6 +112,12 @@ def cosine_similarity_query(
                 hits[i]["best_image"] = hit["inner_hits"][path]["hits"]["hits"][0][
                     "_source"
                 ]
+        else:
+            raise Exception(
+                f"Not implemented.\n "
+                f"- best_image = {best_image}.\n"
+                f"- vector_name = {vector_name}"
+            )
     else:
         raise Exception(f"Not implemented. best_image = {best_image}")
 
@@ -125,10 +133,16 @@ def cosine_similarity_query(
                 hits[i]["best_video"] = hit["inner_hits"][path]["hits"]["hits"][0][
                     "_source"
                 ]
+        else:
+            raise Exception(
+                f"Not implemented.\n "
+                f"- best_video = {best_video}.\n"
+                f"- vector_name = {vector_name}"
+            )
     else:
         raise Exception(f"Not implemented. best_video = {best_video}")
 
-    if print_summary and (best_image == "caption" or best_video == "title"):
+    if print_summary:
         # print it after filling out best_image or best_video fields
         print_hits(hits, title=vector_name)
 
@@ -136,23 +150,37 @@ def cosine_similarity_query(
 
 
 def set_first_image_as_best(hits):
-    """When scored we do not know the best image. Just pick the first."""
-    for i, hit in enumerate(hits):
-        hits[i]["best_image"] = None
-        if hit["_source"]["imagePestNote"]:
-            hits[i]["best_image"] = hit["_source"]["imagePestNote"][0]
-        elif hit["_source"]["imageQuickTips"]:
-            hits[i]["best_image"] = hit["_source"]["imageQuickTips"][0]
+    """When scored we do not know the best image. Just pick the first if not yet set."""
+    for hit in hits:
+        if "best_image" not in hit.keys():
+            hit["best_image"] = None
+
+        if not hit["best_image"]:
+            if hit["_source"]["imagePestNote"]:
+                hit["best_image"] = hit["_source"]["imagePestNote"][0]
+            elif hit["_source"]["imageQuickTips"]:
+                hit["best_image"] = hit["_source"]["imageQuickTips"][0]
+            elif hit["_source"]["imagesPestDiseaseItems"]:
+                hit["best_image"] = hit["_source"]["imagesPestDiseaseItems"][0]
+            elif hit["_source"]["imagesTurfPests"]:
+                hit["best_image"] = hit["_source"]["imagesTurfPests"][0]
+            elif hit["_source"]["imagesWeedItems"]:
+                hit["best_image"] = hit["_source"]["imagesWeedItems"][0]
+            elif hit["_source"]["imagesExoticPests"]:
+                hit["best_image"] = hit["_source"]["imagesExoticPests"][0]
 
     return hits
 
 
 def set_first_video_as_best(hits):
-    """When scored we do not know the best video. Just pick the first."""
-    for i, hit in enumerate(hits):
-        hits[i]["best_video"] = None
-        if hit["_source"]["video"]:
-            hits[i]["best_image"] = hit["_source"]["video"][0]
+    """When scored we do not know the best video. Just pick the first if not yet set."""
+    for hit in hits:
+        if "best_video" not in hit.keys():
+            hit["best_video"] = None
+
+        if not hit["best_video"]:
+            if hit["_source"]["video"]:
+                hit["best_video"] = hit["_source"]["video"][0]
 
     return hits
 
@@ -162,29 +190,64 @@ def print_hits(hits, title=""):
     print("----------------------------------------------------------")
     print(title)
     # print("{} total hits.".format(response["hits"]["total"]["value"]))
-    for hit in hits:
-        print(
-            f'{hit["_score"]}; '
+    for hit in reversed(hits[:5]):
+
+        text = (
+            # f'{hit["_id"]}; '
+            f'wght={hit.get("_score_weighted", 0.0):.3f}; '
+            f'name={hit.get("_score_name",0.0):.3f}; '
+            f'othr={hit.get("_score_other",0.0):.3f}; '
+            f'capt={hit.get("_score_caption", 0.0):.3f}; '
+            f'vdeo={hit.get("_score_video", 0.0):.3f}; '
+            f'damg={hit.get("_score_damage", 0.0):.3f}; '
+            f'{hit["_source"]["doc_id"]}; '
             f'{hit["_source"]["name"]}; '
             f'image-caption={(hit.get("best_image", {}) or {}).get("caption")}; '
-            f'video-title={(hit.get("best_video", {}) or {}).get("videoTitle")}'
+            f'video-title={(hit.get("best_video", {}) or {}).get("videoTitle")}; '
         )
 
+        pn_url = hit["_source"]["urlPestNote"]
+        qt_url = hit["_source"]["urlQuickTip"]
+        pdi_url = hit["_source"]["urlPestDiseaseItems"]
+        tp_url = hit["_source"]["urlTurfPests"]
+        wi_url = hit["_source"]["urlWeedItems"]
+        ep_url = hit["_source"]["urlExoticPests"]
 
-async def handle_es_query(
+        text = f"{text}URLS:"
+
+        if qt_url:
+            text = f"{text} [quick tip]({qt_url}),"
+        if pn_url:
+            text = f"{text} [pestnote]({pn_url}),"
+        if pdi_url:
+            text = f"{text} [pest disease item]({pdi_url}),"
+        if tp_url:
+            text = f"{text} [turf pest]({tp_url}),"
+        if wi_url:
+            text = f"{text} [weed item]({wi_url})"
+        if ep_url:
+            text = f"{text} [exotic pests]({ep_url})"
+
+        print(text)
+
+
+async def do_es_queries(
+    pest_name,
     pest_problem_description,
     pest_damage_description,
     index_name,
-    weight_description,
-    weight_damage,
     print_summary=False,
 ):
-    """Handles an elastic search query"""
+    """Do the actual queries and return a dictionary with the lists of hits"""
 
-    if index_name not in ["ipmdata", "ipmdata-dev"]:
+    if index_name not in ["ipmdata", "ipmdata-dev", "ipmdata-dev-large-5"]:
         raise Exception(f"Not implemented for index_name = {index_name}")
 
     # create the embedding vectors
+    pest_name_vector = None
+    if pest_name:
+        pest_name_vector = ac.embed([pest_name]).numpy()[0]
+
     query_vector = ac.embed([pest_problem_description]).numpy()[0]
 
     damage_vector = None
@@ -194,6 +257,7 @@ async def handle_es_query(
     # Define what the elasticsearch queries need to return in it's response
     _source_query = {
         "includes": [
+            "doc_id",
             "name",
             "urlPestNote",
             "descriptionPestNote",
@@ -211,17 +275,35 @@ async def handle_es_query(
             "life_cyclePestDiseaseItems",
             "damagePestDiseaseItems",
             "solutionsPestDiseaseItems",
+            "imagesPestDiseaseItems",
+            "other_headersPestDiseaseItems",
             "urlTurfPests",
             "textTurfPests",
             "imagesTurfPests",
             "urlWeedItems",
             "descriptionWeedItems",
             "imagesWeedItems",
+            "urlExoticPests",
+            "descriptionExoticPests",
+            "damageExoticPests",
+            "identificationExoticPests",
+            "life_cycleExoticPests",
+            "monitoringExoticPests",
+            "managementExoticPests",
+            "related_linksExoticPests",
+            "imagesExoticPests",
         ]
     }
 
-    # ipmdata.json
-    pn_name_hits = cosine_similarity_query(
+    # TODO: Refactor this into loops
+    es_name_hits = {}
+    es_other_hits = {}
+    es_damage_hits = {}
+    es_caption_hits = {}
+    es_video_hits = {}
+
+    # all
+    es_name_hits["name_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -232,7 +314,21 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pn_description_hits = cosine_similarity_query(
+    es_name_hits["pest_name_hits"] = []
+    if pest_name:
+        es_name_hits["pest_name_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            pest_name_vector,
+            "name_vector",
+            nested=False,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
+
+    # ipmdata.json
+    es_other_hits["pn_description_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -243,7 +339,7 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pn_life_cycle_hits = cosine_similarity_query(
+    es_other_hits["pn_life_cycle_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -254,7 +350,7 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    qt_content_hits = cosine_similarity_query(
+    es_other_hits["qt_content_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -265,9 +361,9 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pn_damage_hits = []
+    es_damage_hits["pn_damage_hits"] = []
     if pest_damage_description:
-        pn_damage_hits = cosine_similarity_query(
+        es_damage_hits["pn_damage_hits"] = cosine_similarity_query(
             index_name,
             _source_query,
             damage_vector,
@@ -279,7 +375,7 @@ async def handle_es_query(
         )
 
     # cleanedPestDiseaseItems.json
-    pdi_description_hits = cosine_similarity_query(
+    es_other_hits["pdi_description_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -290,7 +386,7 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pdi_identification_hits = cosine_similarity_query(
+    es_other_hits["pdi_identification_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -301,7 +397,7 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pdi_life_cycle_hits = cosine_similarity_query(
+    es_other_hits["pdi_life_cycle_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -312,18 +408,20 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    pdi_damage_hits = cosine_similarity_query(
-        index_name,
-        _source_query,
-        query_vector,
-        "damagePestDiseaseItems_vector",
-        nested=False,
-        best_image="first",
-        best_video="first",
-        print_summary=print_summary,
-    )
+    es_damage_hits["pdi_damage_hits"] = []
+    if pest_damage_description:
+        es_damage_hits["pdi_damage_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            damage_vector,
+            "damagePestDiseaseItems_vector",
+            nested=False,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
 
-    pdi_solutions_hits = cosine_similarity_query(
+    es_other_hits["pdi_solutions_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -335,7 +433,7 @@ async def handle_es_query(
     )
 
     # cleanedTurfPests.json
-    tp_text_hits = cosine_similarity_query(
+    es_other_hits["tp_text_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -347,7 +445,7 @@ async def handle_es_query(
     )
 
     # cleanedWeedItems.json
-    wi_description_hits = cosine_similarity_query(
+    es_other_hits["wi_description_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -358,112 +456,481 @@ async def handle_es_query(
         print_summary=print_summary,
     )
 
-    do_nested = False
-    pn_caption_hits = []
-    qt_caption_hits = []
-    video_link_hits = []
+    # cleanedExoticPests.json
+    es_other_hits["ep_description_hits"] = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "descriptionExoticPests_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    es_damage_hits["ep_damage_hits"] = []
+    if pest_damage_description:
+        es_damage_hits["ep_damage_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            damage_vector,
+            "damageExoticPests_vector",
+            nested=False,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
+
+    es_other_hits["ep_identification_hits"] = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "identificationExoticPests_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    es_other_hits["ep_life_cycle_hits"] = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "life_cycleExoticPests_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    es_other_hits["ep_monitoring_hits"] = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "monitoringExoticPests_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    es_other_hits["ep_management_hits"] = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "managementExoticPests_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    do_nested = True
+    # image captions might not be helping in the rating of the docs
+    do_captions = True
+    do_videos = True
+
+    es_caption_hits["pn_caption_hits"] = []
+    es_caption_hits["qt_caption_hits"] = []
+    es_video_hits["video_link_hits"] = []
+    es_caption_hits["pdi_caption_hits"] = []
+    es_other_hits["pdi_header_hits"] = []
+    es_other_hits["pdi_text_hits"] = []
+    es_other_hits["ep_text_hits"] = []
+    es_caption_hits["ep_caption_hits"] = []
     if not do_nested:
         print("SKIPPING SEARCH IN NESTED FIELDS")
     if do_nested:
         # ipmdata.json
-        pn_caption_hits = cosine_similarity_query(
-            index_name,
-            _source_query,
-            query_vector,
-            "imagePestNote.caption_vector",
-            nested=True,
-            best_image="caption",
-            best_video="first",
-            print_summary=print_summary,
-        )
+        if do_captions:
+            es_caption_hits["pn_caption_hits"] = cosine_similarity_query(
+                index_name,
+                _source_query,
+                query_vector,
+                "imagePestNote.caption_vector",
+                nested=True,
+                best_image="caption",
+                best_video="first",
+                print_summary=print_summary,
+            )
+            if pest_name:
+                es_caption_hits["pn_caption_hits"] = es_caption_hits[
+                    "pn_caption_hits"
+                ] + cosine_similarity_query(
+                    index_name,
+                    _source_query,
+                    pest_name_vector,
+                    "imagePestNote.caption_vector",
+                    nested=True,
+                    best_image="caption",
+                    best_video="first",
+                    print_summary=print_summary,
+                )
 
-        qt_caption_hits = cosine_similarity_query(
-            index_name,
-            _source_query,
-            query_vector,
-            "imageQuickTips.caption_vector",
-            nested=True,
-            best_image="caption",
-            best_video="first",
-            print_summary=print_summary,
-        )
+            es_caption_hits["qt_caption_hits"] = cosine_similarity_query(
+                index_name,
+                _source_query,
+                query_vector,
+                "imageQuickTips.caption_vector",
+                nested=True,
+                best_image="caption",
+                best_video="first",
+                print_summary=print_summary,
+            )
+            if pest_name:
+                es_caption_hits["qt_caption_hits"] = es_caption_hits[
+                    "qt_caption_hits"
+                ] + cosine_similarity_query(
+                    index_name,
+                    _source_query,
+                    pest_name_vector,
+                    "imageQuickTips.caption_vector",
+                    nested=True,
+                    best_image="caption",
+                    best_video="first",
+                    print_summary=print_summary,
+                )
 
-        video_link_hits = cosine_similarity_query(
+        if do_videos:
+            es_video_hits["video_link_hits"] = cosine_similarity_query(
+                index_name,
+                _source_query,
+                query_vector,
+                "video.videoTitle_vector",
+                nested=True,
+                best_image="first",
+                best_video="title",
+                print_summary=print_summary,
+            )
+            if pest_name:
+                es_video_hits["video_link_hits"] = es_video_hits[
+                    "video_link_hits"
+                ] + cosine_similarity_query(
+                    index_name,
+                    _source_query,
+                    pest_name_vector,
+                    "video.videoTitle_vector",
+                    nested=True,
+                    best_image="first",
+                    best_video="title",
+                    print_summary=print_summary,
+                )
+
+        # cleanedPestDiseaseItems.json
+        if do_captions:
+            es_caption_hits["pdi_caption_hits"] = cosine_similarity_query(
+                index_name,
+                _source_query,
+                query_vector,
+                "imagesPestDiseaseItems.caption_vector",
+                nested=True,
+                best_image="caption",
+                best_video="first",
+                print_summary=print_summary,
+            )
+            if pest_name:
+                es_caption_hits["pdi_caption_hits"] = es_caption_hits[
+                    "pdi_caption_hits"
+                ] + cosine_similarity_query(
+                    index_name,
+                    _source_query,
+                    pest_name_vector,
+                    "imagesPestDiseaseItems.caption_vector",
+                    nested=True,
+                    best_image="caption",
+                    best_video="first",
+                    print_summary=print_summary,
+                )
+
+        es_other_hits["pdi_header_hits"] = cosine_similarity_query(
             index_name,
             _source_query,
             query_vector,
-            "video.videoTitle_vector",
+            "other_headersPestDiseaseItems.header_vector",
             nested=True,
             best_image="first",
-            best_video="title",
+            best_video="first",
             print_summary=print_summary,
         )
+        if pest_name:
+            es_other_hits["pdi_header_hits"] = es_other_hits[
+                "pdi_header_hits"
+            ] + cosine_similarity_query(
+                index_name,
+                _source_query,
+                pest_name_vector,
+                "other_headersPestDiseaseItems.header_vector",
+                nested=True,
+                best_image="first",
+                best_video="first",
+                print_summary=print_summary,
+            )
 
-    ##########################################
-    # Combine all hits and sort to max score #
-    ##########################################
+        es_other_hits["ep_text_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            query_vector,
+            "other_headersPestDiseaseItems.text_vector",
+            nested=True,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
+        if pest_name:
+            es_other_hits["ep_text_hits"] = es_other_hits[
+                "ep_text_hits"
+            ] + cosine_similarity_query(
+                index_name,
+                _source_query,
+                pest_name_vector,
+                "other_headersPestDiseaseItems.text_vector",
+                nested=True,
+                best_image="first",
+                best_video="first",
+                print_summary=print_summary,
+            )
 
-    # Scores based on description vector
-    hits = pn_name_hits
-    for hit2 in (
-        pn_description_hits
-        + pn_life_cycle_hits
-        + qt_content_hits
-        + pn_caption_hits
-        + qt_caption_hits
-        + video_link_hits
-        + pdi_description_hits
-        + pdi_identification_hits
-        + pdi_life_cycle_hits
-        + pdi_damage_hits
-        + pdi_solutions_hits
-        + tp_text_hits
-        + wi_description_hits
-    ):
+        # cleanedExoticPests.json
+        ep_text_hits = cosine_similarity_query(
+            index_name,
+            _source_query,
+            query_vector,
+            "related_linksExoticPests.text_vector",
+            nested=True,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
+        if pest_name:
+            ep_text_hits = ep_text_hits + cosine_similarity_query(
+                index_name,
+                _source_query,
+                pest_name_vector,
+                "related_linksExoticPests.text_vector",
+                nested=True,
+                best_image="first",
+                best_video="first",
+                print_summary=print_summary,
+            )
+
+        if do_captions:
+            es_caption_hits["ep_caption_hits"] = cosine_similarity_query(
+                index_name,
+                _source_query,
+                query_vector,
+                "imagesExoticPests.caption_vector",
+                nested=True,
+                best_image="caption",
+                best_video="first",
+                print_summary=print_summary,
+            )
+            if pest_name:
+                es_caption_hits["ep_caption_hits"] = es_caption_hits[
+                    "ep_caption_hits"
+                ] + cosine_similarity_query(
+                    index_name,
+                    _source_query,
+                    pest_name_vector,
+                    "imagesExoticPests.caption_vector",
+                    nested=True,
+                    best_image="caption",
+                    best_video="first",
+                    print_summary=print_summary,
+                )
+    return es_name_hits, es_other_hits, es_damage_hits, es_caption_hits, es_video_hits
+
+
+async def merge_and_score_hits(
+    es_name_hits,
+    es_other_hits,
+    es_damage_hits,
+    es_caption_hits,
+    es_video_hits,
+    pest_damage_description,
+):
+    """Combine all hits and score per category"""
+
+    hits = []
+
+    # The name searches
+    for hit2 in es_name_hits["name_hits"] + es_name_hits["pest_name_hits"]:
+        hit2["_score_name"] = hit2.get("_score", 0.0)
         duplicate = False
-        for i, hit in enumerate(hits):
-            if hit2["_source"]["name"] == hit["_source"]["name"]:
-                hits[i]["_score"] = max(hit["_score"], hit2["_score"])
-                hits[i]["best_image"] = hit2["best_image"]
-                hits[i]["best_video"] = hit2["best_video"]
+        for hit in hits:
+            if hit2["_source"]["doc_id"] == hit["_source"]["doc_id"]:
+                hit["_score_name"] = max(hit.get("_score_name", 0.0), hit2["_score"])
                 duplicate = True
                 break
         if not duplicate:
             hits.append(hit2)
 
-    hits = sorted(hits, key=lambda h: h["_score"], reverse=True)
+    # first the non-image-caption & non-video-title searches
+    for hit in hits:
+        hit["_score_other"] = 0.0
+    for hit2 in (
+        es_other_hits["pn_description_hits"]
+        + es_other_hits["pn_life_cycle_hits"]
+        + es_other_hits["qt_content_hits"]
+        + es_other_hits["pdi_description_hits"]
+        + es_other_hits["pdi_identification_hits"]
+        + es_other_hits["pdi_life_cycle_hits"]
+        + es_other_hits["pdi_solutions_hits"]
+        + es_other_hits["pdi_header_hits"]
+        + es_other_hits["pdi_text_hits"]
+        + es_other_hits["tp_text_hits"]
+        + es_other_hits["wi_description_hits"]
+        + es_other_hits["ep_description_hits"]
+        + es_other_hits["ep_identification_hits"]
+        + es_other_hits["ep_life_cycle_hits"]
+        + es_other_hits["ep_monitoring_hits"]
+        + es_other_hits["ep_management_hits"]
+        + es_other_hits["ep_text_hits"]
+    ):
+        hit2["_score_other"] = hit2.get("_score", 0.0)
+        duplicate = False
+        for hit in hits:
+            if hit2["_source"]["doc_id"] == hit["_source"]["doc_id"]:
+                hit["_score_other"] = max(hit.get("_score_other", 0.0), hit2["_score"])
+                duplicate = True
+                break
+        if not duplicate:
+            hits.append(hit2)
 
-    if print_summary:
-        print_hits(hits, title="Combined & sorted hits")
+    # then the image caption searches
+    for hit in hits:
+        hit["_score_caption"] = 0.0
+    for hit2 in (
+        es_caption_hits["pn_caption_hits"]
+        + es_caption_hits["qt_caption_hits"]
+        + es_caption_hits["pdi_caption_hits"]
+        + es_caption_hits["ep_caption_hits"]
+    ):
+        hit2["_score_caption"] = hit2.get("_score", 0.0)
+        duplicate = False
+        for hit in hits:
+            if hit2["_source"]["doc_id"] == hit["_source"]["doc_id"]:
+                hit["_score_caption"] = max(
+                    hit.get("_score_caption", 0.0), hit2.get("_score", 0.0)
+                )
+                hit["best_image"] = hit2["best_image"]
+                duplicate = True
+                break
+        if not duplicate:
+            hits.append(hit2)
+
+    # then the video-title searches
+    for hit in hits:
+        hit["_score_video"] = 0.0
+    for hit2 in es_video_hits["video_link_hits"]:
+        hit2["_score_video"] = hit2.get("_score", 0.0)
+        duplicate = False
+        for hit in hits:
+            if hit2["_source"]["doc_id"] == hit["_source"]["doc_id"]:
+                hit["_score_video"] = max(
+                    hit.get("_score_video", 0.0), hit2.get("_score", 0.0)
+                )
+                hit["best_video"] = hit2["best_video"]
+                duplicate = True
+                break
+        if not duplicate:
+            hits.append(hit2)
+
+    # hits = sorted(hits, key=lambda h: h["_score"], reverse=True)
 
     # Scores based on damage vector
-    if len(hits) > 0:
-        for i, hit in enumerate(hits):
-            hits[i]["_score_damage"] = 0.0
-        if pest_damage_description:
-            for i, hit in enumerate(hits):
-                for hit_damage in pn_damage_hits:
-                    if hit_damage["_source"]["name"] == hit["_source"]["name"]:
-                        hits[i]["_score_damage"] = hit_damage["_score"]
-                        break
-                for hit_damage in pdi_damage_hits:
-                    if hit_damage["_source"]["name"] == hit["_source"]["name"]:
-                        hits[i]["_score_damage"] = max(
-                            hits[i]["_score_damage"], hit_damage["_score"]
-                        )
-                        break
+    for hit in hits:
+        hit["_score_damage"] = 0.0
+    if pest_damage_description:
+        for hit2 in (
+            es_damage_hits["pn_damage_hits"]
+            + es_damage_hits["pdi_damage_hits"]
+            + es_damage_hits["ep_damage_hits"]
+        ):
+            hit2["_score_damage"] = hit2.get("_score", 0.0)
+            duplicate = False
+            for hit in hits:
+                if hit2["_source"]["doc_id"] == hit["_source"]["doc_id"]:
+                    hit["_score_damage"] = max(
+                        hit.get("_score_damage", 0.0), hit2.get("_score", 0.0)
+                    )
+                    duplicate = True
+                    break
+            if not duplicate:
+                hits.append(hit2)
 
-    # Apply weighting
-    for i, hit in enumerate(hits):
-        hits[i]["_score_weighted"] = (
-            weight_description * hits[i]["_score"]
-            + weight_damage * hits[i]["_score_damage"]
+    return hits
+
+
+async def weight_score(hits, _weight_description, _weight_damage):
+    """Apply weighting"""
+    for hit in hits:
+        score_name = hit.get("_score_name", 0.0)
+
+        score_other = max(
+            hit.get("_score_other", 0.0),
+            hit.get("_score_caption", 0.0),
+            hit.get("_score_video", 0.0),
+        )
+
+        score_damage = hit.get("_score_damage", 0.0)
+
+        w = [0.9, 0.05, 0.05]
+
+        if score_damage < 1.0:
+            w[0] += 0.5 * w[2]
+            w[1] += 0.5 * w[2]
+            w[2] = 0.0
+
+        hit["_score_weighted"] = (
+            w[0] * score_name + w[1] * score_other + w[2] * score_damage
         )
 
     # Sort to weighted score
     hits = sorted(hits, key=lambda h: h["_score_weighted"], reverse=True)
 
     # Do not filter on threshold. Leave this up to the caller
+    return hits
+
+
+async def handle_es_query(
+    pest_name,
+    pest_problem_description,
+    pest_damage_description,
+    index_name,
+    weight_description,
+    weight_damage,
+    print_summary=False,
+):
+    """Handles an elastic search query"""
+
+    (
+        es_name_hits,
+        es_other_hits,
+        es_damage_hits,
+        es_caption_hits,
+        es_video_hits,
+    ) = await do_es_queries(
+        pest_name,
+        pest_problem_description,
+        pest_damage_description,
+        index_name,
+        print_summary,
+    )
+
+    hits = await merge_and_score_hits(
+        es_name_hits,
+        es_other_hits,
+        es_damage_hits,
+        es_caption_hits,
+        es_video_hits,
+        pest_damage_description,
+    )
+
+    hits = await weight_score(hits, weight_description, weight_damage,)
+
+    if print_summary:
+        print_hits(hits, title="Combined, Weighted & sorted hits")
+
     return hits
 
 
@@ -627,6 +1094,7 @@ class FormQueryKnowledgeBase(FormAction):
         """Define what the form has to do
             after all required slots are filled"""
 
+        pest_name = tracker.get_slot("pest_name")
         pest_problem_description = tracker.get_slot("pest_problem_description")
         pest_causes_damage = tracker.get_slot("pest_causes_damage")
         pest_damage_description = None
@@ -635,6 +1103,7 @@ class FormQueryKnowledgeBase(FormAction):
 
         if ac.do_the_queries:
             hits = await handle_es_query(
+                pest_name,
                 pest_problem_description,
                 pest_damage_description,
                 ac.ipmdata_index_name,
@@ -947,14 +1416,12 @@ def reset_slots_from_previous_forms():
 def create_text_for_pest(hit, tracker) -> str:
     """Prepares a message for the user"""
     name = hit["_source"]["name"]
-    score_weighted = hit["_score_weighted"]
-    score = hit["_score"]
-    score_damage = hit["_score_damage"]
     pn_url = hit["_source"]["urlPestNote"]
     qt_url = hit["_source"]["urlQuickTip"]
     pdi_url = hit["_source"]["urlPestDiseaseItems"]
     tp_url = hit["_source"]["urlTurfPests"]
     wi_url = hit["_source"]["urlWeedItems"]
+    ep_url = hit["_source"]["urlExoticPests"]
     # pn_image = None
     # if hit["best_image"]:
     #    pn_image = hit["best_image"]["src"]
@@ -976,6 +1443,8 @@ def create_text_for_pest(hit, tracker) -> str:
         text = f"{text}- [turf pest]({tp_url})\n"
     if wi_url:
         text = f"{text}- [weed item]({wi_url})\n"
+    if ep_url:
+        text = f"{text}- [exotic pests]({ep_url})\n"
 
     if hit["best_video"]:
         video_title = hit["best_video"]["videoTitle"]
@@ -984,9 +1453,12 @@ def create_text_for_pest(hit, tracker) -> str:
 
     if tracker.get_slot("bot_config_debug"):
         text = f"{text}\nNotes for tester:\n"
-        text = f"{text}- weighted similarity score = {score_weighted:.1f}\n"
-        text = f"{text}- score for description = {score:.1f}\n"
-        text = f"{text}- score for damage = {score_damage:.1f}\n"
+        text = f'{text}- score for wght={hit.get("_score_weighted", 0.0):.3f}\n'
+        text = f'{text}- score for name={hit.get("_score_name",0.0):.3f}\n'
+        text = f'{text}- score for othr={hit.get("_score_other",0.0):.3f}\n'
+        text = f'{text}- score for capt={hit.get("_score_caption", 0.0):.3f}\n'
+        text = f'{text}- score for vdeo={hit.get("_score_video", 0.0):.3f}\n'
+        text = f'{text}- score for damg={hit.get("_score_damage", 0.0):.3f}\n'
         text = (
             f"{text}- weight for description = "
             f"{tracker.get_slot('bot_config_weight_description'):.2f}\n"

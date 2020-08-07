@@ -4,6 +4,7 @@
         "dynamic": "true",
         "_source": {"enabled": "true"},
         "properties": {
+            "doc_id": {"type": "text"},
             "name": {"type": "text"},
             "name_vector": {"type": "dense_vector", "dims": 512},
             "urlPestNote": {"type": "text"},
@@ -45,23 +46,6 @@
                 }
             },
             "ndl_damage_vector": {"type": "dense_vector", "dims": 512},
-            "urlFruitVeggieItems": {"type": "text"},
-            "cultural_tipsFruitVeggieItems": {
-                "type": "nested",
-                "properties": {
-                    "tip": {"type": "text"},
-                    "tip_vector": {"type": "dense_vector", "dims": 512},
-                    "link": {"type": "text"}
-                }
-            },
-            "pests_and_disordersFruitVeggieItems": {
-                "type": "nested",
-                "properties": {
-                    "problem": {"type": "text"},
-                    "problem_vector": {"type": "dense_vector", "dims": 512},
-                    "link": {"type": "text"}
-                }
-            },
             "urlPestDiseaseItems": {"type": "text"},
             "descriptionPestDiseaseItems": {"type": "text"},
             "descriptionPestDiseaseItems_vector": {"type": "dense_vector", "dims": 512},
@@ -85,32 +69,13 @@
                     "src": {"type": "text"}
                 }
             },
-            "urlPlantFlowerItems": {"type": "text"},
-            "identificationPlantFlowerItems": {"type": "text"},
-            "identificationPlantFlowerItems_vector": {
-                "type": "dense_vector",
-                "dims": 512
-            },
-            "optimum_conditionsPlantFlowerItems": {"type": "text"},
-            "optimum_conditionsPlantFlowerItems_vector": {
-                "type": "dense_vector",
-                "dims": 512
-            },
-            "pests_and_disordersPlantFlowerItems": {
+            "other_headersPestDiseaseItems": {
                 "type": "nested",
                 "properties": {
-                    "problem": {"type": "text"},
-                    "problem_vector": {"type": "dense_vector", "dims": 512},
-                    "link": {"type": "text"}
-                }
-            },
-            "imagesPlantFlowerItems": {
-                "type": "nested",
-                "properties": {
-                    "caption": {"type": "text"},
-                    "caption_vector": {"type": "dense_vector", "dims": 512},
-                    "link": {"type": "text"},
-                    "src": {"type": "text"}
+                    "header": {"type": "text"},
+                    "header_vector": {"type": "dense_vector", "dims": 512},
+                    "text": {"type": "text"},
+                    "text_vector": {"type": "dense_vector", "dims": 512}
                 }
             },
             "urlTurfPests": {"type": "text"},
@@ -140,6 +105,54 @@
                     "caption": {"type": "text"},
                     "caption_vector": {"type": "dense_vector", "dims": 512},
                     "link": {"type": "text"}
+                }
+            },
+            "urlExoticPests": {"type": "text"},
+            "descriptionExoticPests": {"type": "text"},
+            "descriptionExoticPests_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "damageExoticPests": {"type": "text"},
+            "damageExoticPests_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "identificationExoticPests": {"type": "text"},
+            "identificationExoticPests_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "life_cycleExoticPests": {"type": "text"},
+            "life_cycleExoticPests_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "monitoringExoticPests": {"type": "text"},
+            "monitoringExoticPests_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "managementExoticPests": {"type": "text"},
+            "managementExoticPests_vector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "related_linksExoticPests": {
+                "type": "nested",
+                "properties": {
+                    "text": {"type": "text"},
+                    "text_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"}
+                }
+            },
+            "imagesExoticPests": {
+                "type": "nested",
+                "properties": {
+                    "caption": {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512},
+                    "link": {"type": "text"},
+                    "src": {"type": "text"}
                 }
             }
         }

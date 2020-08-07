@@ -101,6 +101,9 @@
 - their bites are painful
 - tiny [ants](pest_name) in the kitchen
 - white [fuzz](pest_name) on apple tree leaves
+- I think i have spotted [lantern fly](pest_name)
+- They look like [lantern flies](pest_name)
+- [lanternflies](pest_name)
 - 1
 - 2
 - 3
@@ -110,3 +113,11 @@
 
 ## lookup:pest_name
   data/nlu/lookups/pest_name.txt
+  
+## synonym:lanternfly
+- lantern fly
+- lantern flies
+- lanternflies
+- lanter fly
+- lanter flies
+- lanterflies
