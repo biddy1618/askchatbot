@@ -29,8 +29,6 @@ async def my_submit(pest_name, pest_problem_description, pest_damage_description
         pest_problem_description,
         pest_damage_description,
         ac.ipmdata_index_name,
-        ac.bot_config_weight_description,
-        ac.bot_config_weight_damage,
         print_summary=True,
     )
 

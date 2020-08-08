@@ -16,8 +16,6 @@ intents:
 
 entities:
   - bot_config_debug
-  - bot_config_weight_description
-  - bot_config_weight_damage
   - bot_config_score_threshold
   - bot_config_botname
   - bot_config_urlprivacy
@@ -26,10 +24,6 @@ entities:
   
 slots:
   bot_config_debug:
-    type: unfeaturized
-  bot_config_weight_description:
-    type: unfeaturized
-  bot_config_weight_damage:
     type: unfeaturized
   bot_config_score_threshold:
     type: unfeaturized

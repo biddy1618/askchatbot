@@ -20,22 +20,22 @@
 - [Snails](pest_name)
 - I have [boxelder bugs](pest_name)
 - I have [ants](pest_name)
-- I have fire [ants](pest_name)
+- I have [fire ants](pest_name)
 - It is a small [insect](pest_name)
 - I have [cockroaches](pest_name) near my sink
 - i have [bugs](pest_name) on my tomato plants
 - There is a hole in the trim on the wall
 - Affected branches are dying
-- Black [spots](pest_name) on the ripe tomatoes.
+- Black spots on the ripe tomatoes.
 - [Cockroaches](pest_name) are invading my house
 - Eating leaves
 - Eating plant
 - How do I kill [cockroaches](pest_name)?
 - How to manage pest in my farm
 - I found dirt tunnels in my basement. When I broke up the dirt, I found little [bugs](pest_name) and larve inside.
-- I have a pest in collton planr
-- I have a pest in cotton plant
-- I have a pest in mango tree
+- I have a [pest](pest_name) in collton planr
+- I have a [pest](pest_name) in cotton plant
+- I have a [pest](pest_name) in mango tree
 - I have [ants](pest_name) in my kitchen
 - I have [ants](pest_name) in my lawn
 - I have black [bugs](pest_name) in begonias
@@ -43,45 +43,44 @@
 - I have [dandelions](pest_name) in my lawn
 - I have [flies](pest_name) in the house
 - I have large black [bugs](pest_name) running around on my patio at night
-- I have [spots](pest_name) on my roses
-- I have what looks like clear [gel](pest_name) coming out of my peaches.
-- I think I have spotted lantern [fly](pest_name)
+- I have spots on my roses
+- I have what looks like clear gel coming out of my peaches.
 - I think I may have [termites](pest_name) in my basement. Who should I call?
 - I think i have spotted [lanternfly](pest_name)
 - Is roundup safe to use in my garden?
-- Late [blight](pest_name)
+- [Late blight](pest_name)
 - Leaves curling
 - My bean seeds didn't germinate.
 - My roses are wilting
-- My tomatoes have black [spots](pest_name) on them.
+- My tomatoes have black spots on them.
 - No seedlings
-- Pest is Eating my cotton plant
+- [Pest](pest_name) is Eating my cotton plant
 - Plants are turning yellow
-- Powdery [mildew](pest_name) on apple
+- [Powdery mildew](pest_name) on apple
 - Some weird [bug](pest_name) on my tomatos is eating the leaves
 - Something is eating my peaches.
 - Swarming [ants](pest_name)
 - The [cockroaches](pest_name) leave turds
-- The peaches that have the [gel](pest_name) are starting to rot and don't look healthy
+- The peaches that have the gel are starting to rot and don't look healthy
 - There are webs with [worms](pest_name) in them on my evergreen tree
-- There is clear [gel](pest_name) coming out of the peaches.
+- There is clear gel coming out of the peaches.
 - They are freaking me out
 - They are [weeds](pest_name)
 - They kill my rose bushes
 - What do I do about swarming [ants](pest_name)?
 - Whats causing my shrubs leaves to turn Yellow?
 - White [insects](pest_name) with black heads killing oak tree
-- White [round](pest_name)
+- [White round](pest_name)
 - a [bug](pest_name) is eating my tomatoes
 - biting [flies](pest_name)
-- black [spots](pest_name)
-- black [spots](pest_name) on my roses
-- black [spots](pest_name) on tomato
+- black spots
+- black spots on my roses
+- black spots on tomato
 - brown leaves
 - brown leaves on tomato plant
 - brown leaves on tomato plants
-- brown [spots](pest_name)
-- brown [spots](pest_name) and dying flowers
+- brown spots
+- brown spots and dying flowers
 - dead or brown patches of grass
 - eating the leaves
 - getting in my food
@@ -91,8 +90,8 @@
 - how to prevent tomato [hornworm](pest_name)
 - i have [bugs](pest_name) on my tomato plants
 - i have dead spots in my lawn
-- i have fire [ants](pest_name)
-- i have [spots](pest_name) on my roses
+- i have [fire ants](pest_name)
+- i have spots on my roses
 - it's eating the leaves of my mustard greens
 - on my trees
 - [rat](pest_name) problem
@@ -100,10 +99,11 @@
 - the [beetles](pest_name) are eating holes in the trunk of the tree
 - their bites are painful
 - tiny [ants](pest_name) in the kitchen
-- white [fuzz](pest_name) on apple tree leaves
+- white fuzz on apple tree leaves
 - I think i have spotted [lantern fly](pest_name)
 - They look like [lantern flies](pest_name)
 - [lanternflies](pest_name)
+- I have small green [grubs](pest_name) in my lawn.
 - 1
 - 2
 - 3

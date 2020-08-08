@@ -27,6 +27,9 @@ inflecter = inflect.engine()
 
 USE_AIOHTTP = False
 
+# TODO: push into external file and add more items
+PEST_NAME_MUST_BE_SINGULAR = ["powdery white mildew", "powdery mildew", "mildew"]
+
 # https://forum.rasa.com/t/trigger-a-story-or-intent-from-a-custom-action/13784/9?u=arjaan
 def next_intent_events(next_intent: Text) -> List[Dict]:
     """Add next intent events, mimicking a prediction by NLU"""
@@ -861,7 +864,7 @@ async def merge_and_score_hits(
     return hits
 
 
-async def weight_score(hits, _weight_description, _weight_damage):
+async def weight_score(hits):
     """Apply weighting"""
     for hit in hits:
         score_name = hit.get("_score_name", 0.0)
@@ -897,8 +900,6 @@ async def handle_es_query(
     pest_problem_description,
     pest_damage_description,
     index_name,
-    weight_description,
-    weight_damage,
     print_summary=False,
 ):
     """Handles an elastic search query"""
@@ -926,7 +927,7 @@ async def handle_es_query(
         pest_damage_description,
     )
 
-    hits = await weight_score(hits, weight_description, weight_damage,)
+    hits = await weight_score(hits)
 
     if print_summary:
         print_hits(hits, title="Combined, Weighted & sorted hits")
@@ -1072,17 +1073,36 @@ class FormQueryKnowledgeBase(FormAction):
         tracker: Tracker,
         _domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        """Once pest problem is described, build damage question to ask, using the
-        pest name in plural form, if it was extracted from the pest problem 
-        description"""
+        """Once pest problem is described:
+        
+        If no pest name was extracted:
+          -> do not ask for damage
+          -> set the damage equal to the description
+          
+        If a pest name was extracted:
+          -> build damage question to ask, using the pest name in plural form
+          """
 
+        # see if a pest name was extracted from the problem description
         pest_name = tracker.get_slot("pest_name")
-        if not pest_name:
-            question = "Is it causing any damage?"
-        else:
-            pest_plural = self.pest_name_plural(pest_name)
-            question = f"Are the {pest_plural} causing any damage?"
 
+        if not pest_name:
+            # question = "Is there any damage?"
+            return {
+                "pest_problem_description": value,
+                "pest_causes_damage": "did-not-ask",
+                "pest_damage_description": value,
+            }
+
+        if pest_name.lower() in PEST_NAME_MUST_BE_SINGULAR:
+            question = f"Is the {pest_name.lower()} causing any damage?"
+            return {
+                "pest_problem_description": value,
+                "cause_damage_question": question,
+            }
+
+        pest_plural = self.pest_name_plural(pest_name)
+        question = f"Are the {pest_plural.lower()} causing any damage?"
         return {"pest_problem_description": value, "cause_damage_question": question}
 
     async def submit(
@@ -1098,7 +1118,7 @@ class FormQueryKnowledgeBase(FormAction):
         pest_problem_description = tracker.get_slot("pest_problem_description")
         pest_causes_damage = tracker.get_slot("pest_causes_damage")
         pest_damage_description = None
-        if pest_causes_damage == "yes":
+        if pest_causes_damage != "no":
             pest_damage_description = tracker.get_slot("pest_damage_description")
 
         if ac.do_the_queries:
@@ -1107,8 +1127,6 @@ class FormQueryKnowledgeBase(FormAction):
                 pest_problem_description,
                 pest_damage_description,
                 ac.ipmdata_index_name,
-                tracker.get_slot("bot_config_weight_description"),
-                tracker.get_slot("bot_config_weight_damage"),
                 print_summary=False,
             )
         else:
@@ -1151,14 +1169,22 @@ class FormPresentHits(FormAction):
         """The slot pests_summaries is set before form activation, so we use this method
         to initialize the presentation logic."""
 
-        pests_summaries_index = 0
-        pest_summary = self.pest_summary(pests_summaries_index, tracker)
+        pests_summaries_index = -1
+        (
+            pest_summaries,
+            pests_summaries_index,
+        ) = await self.get_multiple_pest_summaries(pests_summaries_index, tracker)
 
-        if pest_summary:
+        if len(pest_summaries) > 0:
+            # we have more to present
+            text = ""
+            for pest_summary in pest_summaries:
+                text = f"{text} {pest_summary} \n"
+
             return {
-                "pests_summaries": value,
+                "pest_summary_and_did_this_help": None,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": pest_summary + "\nDid this help?",
+                "pest_summary": text + "\nDid this help?",
             }
 
         # we have nothing to present
@@ -1181,19 +1207,43 @@ class FormPresentHits(FormAction):
             return {"pest_summary_and_did_this_help": value}
 
         # not helpful, show more if we can
-        pests_summaries_index = tracker.get_slot("pests_summaries_index") + 1
-        pest_summary = self.pest_summary(pests_summaries_index, tracker)
+        pests_summaries_index = tracker.get_slot("pests_summaries_index")
+        (
+            pest_summaries,
+            pests_summaries_index,
+        ) = await self.get_multiple_pest_summaries(pests_summaries_index, tracker)
 
-        if pest_summary:
+        if len(pest_summaries) > 0:
             # we have more to present
+            text = ""
+            for pest_summary in pest_summaries:
+                text = f"{text} {pest_summary} \n"
+
             return {
                 "pest_summary_and_did_this_help": None,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": pest_summary + "\nDid this help?",
+                "pest_summary": text + "\nDid this help?",
             }
 
         # we have nothing more to present
         return {"pest_summary_and_did_this_help": value}
+
+    async def get_multiple_pest_summaries(
+        self, pests_summaries_index, tracker, max_pests=10
+    ):
+        """Show 3 results at a time, up to max_pests"""
+        pest_summaries = []
+        for _i in range(3):
+            pest_summary = None
+            if pests_summaries_index < max_pests - 1:
+                pests_summaries_index = pests_summaries_index + 1
+                pest_summary = self.pest_summary(pests_summaries_index, tracker)
+
+            if pest_summary:
+                pest_summaries.append(pest_summary)
+            else:
+                break
+        return pest_summaries, pests_summaries_index
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         """A dictionary to map required slots to
@@ -1239,38 +1289,49 @@ class FormPresentHits(FormAction):
 
         text = None
 
-        header = None
+        header = ""
+        below_threshold = ""
         if i == 0:
             if found_result == "yes":
                 header = (
                     "I think I found something that could help you. "
-                    "Please click the links below for more details:"
+                    "Please click the links below for more details: \n"
                 )
             elif tracker.get_slot("bot_config_debug"):
                 if hit_summary:
                     header = (
                         "Notes for tester:\n"
                         "I did not find anything within the scoring threshold\n"
-                        "The closest match is: \n"
                     )
+                    below_threshold = "below scoring threshold..."
                     found_result = "yes"
 
-        elif i == 1:
-            if found_result == "yes":
-                header = "Ok, what about this:"
-        elif i == 2:
-            if found_result == "yes":
-                header = "Mmmm..., I have one more that I think is useful:"
         else:
-            # Note, we should never get here, but make it robust against that
             if found_result == "yes":
-                header = "What about this:"
+                header = " \n"
+            elif tracker.get_slot("bot_config_debug"):
+                if hit_summary:
+                    below_threshold = "below scoring threshold..."
+                    found_result = "yes"
 
-        text = header
+        ##        elif i == 1:
+        ##            if found_result == "yes":
+        ##                header = "Here is another document I found:"
+        ##        elif i == 2:
+        ##            if found_result == "yes":
+        ##                header = "I have one more that I think is useful:"
+        ##        else:
+        ##            # Note, we should never get here, but make it robust against that
+        ##            if found_result == "yes":
+        ##                header = "What about this:"
 
         if found_result == "yes":
+            text = header
+            text = f"{text}\n ({i+1}) {below_threshold}"
             text = f"{text}\n {hit_summary['message']}"
             # dispatcher.utter_message(text=message, image=pn_image)
+        else:
+            text = None
 
         return text
 
@@ -1290,8 +1351,6 @@ class ActionConfigureBot(Action):
         events = []
         for key in [
             "bot_config_debug",
-            "bot_config_weight_description",
-            "bot_config_weight_damage",
             "bot_config_score_threshold",
             "bot_config_botname",
             "bot_config_urlprivacy",
@@ -1306,8 +1365,6 @@ class ActionConfigureBot(Action):
                     except ValueError:
                         value = False
                 if key in [
-                    "bot_config_weight_description",
-                    "bot_config_weight_damage",
                     "bot_config_score_threshold",
                 ]:
                     value = float(value)
@@ -1337,8 +1394,6 @@ def summarize_bot_configuration(tracker) -> str:
     if bot_config_debug:
         keys = [
             "bot_config_debug",
-            "bot_config_weight_description",
-            "bot_config_weight_damage",
             "bot_config_score_threshold",
             "bot_config_botname",
             "bot_config_urlprivacy",
@@ -1453,20 +1508,12 @@ def create_text_for_pest(hit, tracker) -> str:
 
     if tracker.get_slot("bot_config_debug"):
         text = f"{text}\nNotes for tester:\n"
-        text = f'{text}- score for wght={hit.get("_score_weighted", 0.0):.3f}\n'
-        text = f'{text}- score for name={hit.get("_score_name",0.0):.3f}\n'
-        text = f'{text}- score for othr={hit.get("_score_other",0.0):.3f}\n'
-        text = f'{text}- score for capt={hit.get("_score_caption", 0.0):.3f}\n'
-        text = f'{text}- score for vdeo={hit.get("_score_video", 0.0):.3f}\n'
-        text = f'{text}- score for damg={hit.get("_score_damage", 0.0):.3f}\n'
-        text = (
-            f"{text}- weight for description = "
-            f"{tracker.get_slot('bot_config_weight_description'):.2f}\n"
-        )
-        text = (
-            f"{text}- weight for damage = "
-            f"{tracker.get_slot('bot_config_weight_damage'):.2f}\n"
-        )
+        text = f'{text}- weighted score    ={hit.get("_score_weighted", 0.0):.3f}\n'
+        text = f'{text}- score for name    ={hit.get("_score_name",0.0):.3f}\n'
+        text = f'{text}- score for other   ={hit.get("_score_other",0.0):.3f}\n'
+        text = f'{text}- score for caption ={hit.get("_score_caption", 0.0):.3f}\n'
+        text = f'{text}- score for video   ={hit.get("_score_video", 0.0):.3f}\n'
+        text = f'{text}- score for damage  ={hit.get("_score_damage", 0.0):.3f}\n'
         text = (
             f"{text}- score threshold = "
             f"{tracker.get_slot('bot_config_score_threshold'):.2f}\n"
