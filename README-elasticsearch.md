@@ -28,13 +28,7 @@ curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_cat/ind
 
 
 
-The URL is: https://ask-chat-db-dev.i.eduworks.com:9200/
-
-
-
-# Ingest & Test ipmdata
-
-### Create the index
+# Create & Test the index
 
 ```bash
 git clone https://git.eduworks.us/ask-extension/askchatbot
@@ -48,10 +42,10 @@ pip install -e .
 #
 # Edit the file: ./actions/bot_config.yml
 # Uncomment the correct host
+#hosts: "https://ask-chat-db-dev.i.eduworks.com:9200/"
     
 # Uncomment the correct index name of ipmdata queries
-ipmdata-index-name: "ipmdata"
-ipmdata-index-name: "ipmdata-dev"
+#ipmdata-index-name: "ipmdata-dev-large-5"
 
 # ingest the ipmdata
 cd <->/askchatbot/askchatbot/scripts/elasticsearch/src
@@ -65,22 +59,6 @@ curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_aliases
 python3 -m run_es_query
 
 ```
-
-### Test query
-
-```bash
-# to verify the index is there
-curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_aliases?pretty'
-
-# run a test query
-cd <project-root>/scripts/elasticsearch/src
-$ vi create_es_index.py
-INDEX_NAME = 'impdata'
-
-python3 -m run_es_query
-```
-
-
 
 # Appendix A: Local docker-compose 
 
