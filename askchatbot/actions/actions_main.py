@@ -27,8 +27,11 @@ inflecter = inflect.engine()
 
 USE_AIOHTTP = False
 
+
 # TODO: push into external file and add more items
-PEST_NAME_MUST_BE_SINGULAR = ["powdery white mildew", "powdery mildew", "mildew"]
+PEST_NAME_MUST_BE_SINGULAR = ["mildew"]
+PEST_NAME_MUST_BE_SINGULAR = [p.lower() for p in PEST_NAME_MUST_BE_SINGULAR]
+
 
 # https://forum.rasa.com/t/trigger-a-story-or-intent-from-a-custom-action/13784/9?u=arjaan
 def next_intent_events(next_intent: Text) -> List[Dict]:
@@ -1066,6 +1069,15 @@ class FormQueryKnowledgeBase(FormAction):
         pest_plural = inflecter.plural_noun(pest_singular)
         return pest_plural
 
+    @staticmethod
+    def keep_pest_name_singular(name):
+        """Returns True if the pest name only makes sense in singular form"""
+        name_lower = name.lower()
+        for key in PEST_NAME_MUST_BE_SINGULAR:
+            if key in name_lower:
+                return True
+        return False
+
     async def validate_pest_problem_description(
         self,
         value: Text,
@@ -1094,7 +1106,7 @@ class FormQueryKnowledgeBase(FormAction):
                 "pest_damage_description": value,
             }
 
-        if pest_name.lower() in PEST_NAME_MUST_BE_SINGULAR:
+        if self.keep_pest_name_singular(pest_name):
             question = f"Is the {pest_name.lower()} causing any damage?"
             return {
                 "pest_problem_description": value,
@@ -1104,6 +1116,113 @@ class FormQueryKnowledgeBase(FormAction):
         pest_plural = self.pest_name_plural(pest_name)
         question = f"Are the {pest_plural.lower()} causing any damage?"
         return {"pest_problem_description": value, "cause_damage_question": question}
+
+    def summarize_hits(self, hits, tracker) -> list:
+        """Create a list of dictionaries, where each dictionary contains those items we
+        want to use when presenting the hits in a conversational manner to the user."""
+        pests_summaries = []
+        if not hits:
+            return pests_summaries
+
+        for i, hit in enumerate(hits):
+            hit_summary = {}
+
+            hit_summary["_score_weighted"] = hit["_score_weighted"]
+            hit_summary["message"] = self.create_text_for_pest(i, hit, tracker)
+
+            pests_summaries.append(hit_summary)
+
+        return pests_summaries
+
+    @staticmethod
+    def create_text_for_pest(_i, hit, tracker) -> str:
+        """Prepares a message for the user"""
+        name = hit["_source"]["name"]
+        pn_url = hit["_source"]["urlPestNote"]
+        qt_url = hit["_source"]["urlQuickTip"]
+        pdi_url = hit["_source"]["urlPestDiseaseItems"]
+        tp_url = hit["_source"]["urlTurfPests"]
+        wi_url = hit["_source"]["urlWeedItems"]
+        ep_url = hit["_source"]["urlExoticPests"]
+        # pn_image = None
+        # if hit["best_image"]:
+        #    pn_image = hit["best_image"]["src"]
+        #    pn_image_caption = hit["best_image"]["caption"]
+
+        # if pn_image:
+        #    text = f"{name}: {pn_image_caption}\n"
+        # else:
+        #    text = f"{name}\n"
+
+        #
+        # BE VERY CAREFUL:
+        # \n\n does not work. It does not wrap the sentences
+        #
+
+        # list symbol
+        # Do not use:
+        # "-", " >", "\t", "+"
+        # s = " o"  # this works, but not so nice
+        s = r"\-"
+
+        # divider line
+        # Do not use:
+        # divider = "======================================"
+        # divider = "\  \n"
+        divider = r"\-\-\-"
+
+        # text = f"{i+1}: {name}\n"
+        text = f"**{name}**\n"
+
+        if qt_url:
+            text = f"{text}{s} _[quick tip]({qt_url})_\n"
+        if pn_url:
+            text = f"{text}{s} _[pestnote]({pn_url})_\n"
+        if pdi_url:
+            text = f"{text}{s} _[pest disease item]({pdi_url})_\n"
+        if tp_url:
+            text = f"{text}{s} _[turf pest]({tp_url})_\n"
+        if wi_url:
+            text = f"{text}{s} _[weed item]({wi_url})_\n"
+        if ep_url:
+            text = f"{text}{s} _[exotic pests]({ep_url})_\n"
+
+        if hit["best_video"]:
+            video_title = hit["best_video"]["videoTitle"]
+            video_link = hit["best_video"]["videoLink"]
+            text = f"{text}{s} _[video: '{video_title}']({video_link})_\n"
+
+        if tracker.get_slot("bot_config_debug"):
+            text = (
+                f'{text}{s} _weighted score  ={hit.get("_score_weighted", 0.0):.3f}_\n'
+            )
+            text = f'{text}{s} _score for name    ={hit.get("_score_name",0.0):.3f}_\n'
+            text = f'{text}{s} _score for other   ={hit.get("_score_other",0.0):.3f}_\n'
+            text = (
+                f'{text}{s} _score for caption ={hit.get("_score_caption", 0.0):.3f}_\n'
+            )
+            text = (
+                f'{text}{s} _score for video   ={hit.get("_score_video", 0.0):.3f}_\n'
+            )
+            text = (
+                f'{text}{s} _score for damage  ={hit.get("_score_damage", 0.0):.3f}_\n'
+            )
+            if hit.get("_score_weighted", 0.0) < tracker.get_slot(
+                "bot_config_score_threshold"
+            ):
+                text = (
+                    f"{text}{s} _Below score threshold of "
+                    f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
+                )
+            else:
+                text = (
+                    f"{text}{s} _Above score threshold of "
+                    f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
+                )
+
+            # Note that \n\n is not working
+            text = f"{text}{divider}\n"
+        return text
 
     async def submit(
         self,
@@ -1141,7 +1260,7 @@ class FormQueryKnowledgeBase(FormAction):
             dispatcher.utter_message(message)
             hits = []
 
-        pests_summaries = summarize_hits(hits, tracker)
+        pests_summaries = self.summarize_hits(hits, tracker)
         return [SlotSet("pests_summaries", pests_summaries)]
 
 
@@ -1179,12 +1298,12 @@ class FormPresentHits(FormAction):
             # we have more to present
             text = ""
             for pest_summary in pest_summaries:
-                text = f"{text} {pest_summary} \n"
+                text = f"{text}{pest_summary}"
 
             return {
                 "pest_summary_and_did_this_help": None,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": text + "\nDid this help?",
+                "pest_summary": text,
             }
 
         # we have nothing to present
@@ -1217,12 +1336,12 @@ class FormPresentHits(FormAction):
             # we have more to present
             text = ""
             for pest_summary in pest_summaries:
-                text = f"{text} {pest_summary} \n"
+                text = f"{text}{pest_summary}"
 
             return {
                 "pest_summary_and_did_this_help": None,
                 "pests_summaries_index": pests_summaries_index,
-                "pest_summary": text + "\nDid this help?",
+                "pest_summary": text,
             }
 
         # we have nothing more to present
@@ -1275,63 +1394,17 @@ class FormPresentHits(FormAction):
         """Prepare the text to show to user
         Returns None if there is nothing to show
         """
-        pests_summaries = tracker.get_slot("pests_summaries")
-
-        found_result = "no"
-
-        hit_summary = None
-        if pests_summaries:
-            hit_summary = pests_summaries[i]
-            if hit_summary["_score_weighted"] >= tracker.get_slot(
-                "bot_config_score_threshold"
-            ):
-                found_result = "yes"
 
         text = None
 
-        header = ""
-        below_threshold = ""
-        if i == 0:
-            if found_result == "yes":
-                header = (
-                    "I think I found something that could help you. "
-                    "Please click the links below for more details: \n"
-                )
-            elif tracker.get_slot("bot_config_debug"):
-                if hit_summary:
-                    header = (
-                        "Notes for tester:\n"
-                        "I did not find anything within the scoring threshold\n"
-                    )
-                    below_threshold = "below scoring threshold..."
-                    found_result = "yes"
-
-        else:
-            if found_result == "yes":
-                header = " \n"
-            elif tracker.get_slot("bot_config_debug"):
-                if hit_summary:
-                    below_threshold = "below scoring threshold..."
-                    found_result = "yes"
-
-        ##        elif i == 1:
-        ##            if found_result == "yes":
-        ##                header = "Here is another document I found:"
-        ##        elif i == 2:
-        ##            if found_result == "yes":
-        ##                header = "I have one more that I think is useful:"
-        ##        else:
-        ##            # Note, we should never get here, but make it robust against that
-        ##            if found_result == "yes":
-        ##                header = "What about this:"
-
-        if found_result == "yes":
-            text = header
-            text = f"{text}\n ({i+1}) {below_threshold}"
-            text = f"{text}\n {hit_summary['message']}"
-            # dispatcher.utter_message(text=message, image=pn_image)
-        else:
-            text = None
+        pests_summaries = tracker.get_slot("pests_summaries")
+        if pests_summaries:
+            hit_summary = pests_summaries[i]
+            if hit_summary:
+                if tracker.get_slot("bot_config_debug") or hit_summary[
+                    "_score_weighted"
+                ] >= tracker.get_slot("bot_config_score_threshold"):
+                    text = f"{hit_summary['message']}"
 
         return text
 
@@ -1427,24 +1500,6 @@ def summarize_bot_configuration(tracker) -> str:
     return message
 
 
-def summarize_hits(hits, tracker) -> list:
-    """Create a list of dictionaries, where each dictionary contains those items we
-    want to use when presenting the hits in a conversational manner to the user."""
-    pests_summaries = []
-    if not hits:
-        return pests_summaries
-
-    for hit in hits:
-        hit_summary = {}
-
-        hit_summary["_score_weighted"] = hit["_score_weighted"]
-        hit_summary["message"] = create_text_for_pest(hit, tracker)
-
-        pests_summaries.append(hit_summary)
-
-    return pests_summaries
-
-
 def reset_slots_from_previous_forms():
     """Clean up slots from all previous forms"""
     events = []
@@ -1466,56 +1521,3 @@ def reset_slots_from_previous_forms():
     events.append(SlotSet("shown_privacypolicy", True))
 
     return events
-
-
-def create_text_for_pest(hit, tracker) -> str:
-    """Prepares a message for the user"""
-    name = hit["_source"]["name"]
-    pn_url = hit["_source"]["urlPestNote"]
-    qt_url = hit["_source"]["urlQuickTip"]
-    pdi_url = hit["_source"]["urlPestDiseaseItems"]
-    tp_url = hit["_source"]["urlTurfPests"]
-    wi_url = hit["_source"]["urlWeedItems"]
-    ep_url = hit["_source"]["urlExoticPests"]
-    # pn_image = None
-    # if hit["best_image"]:
-    #    pn_image = hit["best_image"]["src"]
-    #    pn_image_caption = hit["best_image"]["caption"]
-
-    # if pn_image:
-    #    text = f"{name}: {pn_image_caption}\n"
-    # else:
-    #    text = f"{name}\n"
-    text = f"{name}\n"
-
-    if qt_url:
-        text = f"{text}- [quick tip]({qt_url})\n"
-    if pn_url:
-        text = f"{text}- [pestnote]({pn_url})\n"
-    if pdi_url:
-        text = f"{text}- [pest disease item]({pdi_url})\n"
-    if tp_url:
-        text = f"{text}- [turf pest]({tp_url})\n"
-    if wi_url:
-        text = f"{text}- [weed item]({wi_url})\n"
-    if ep_url:
-        text = f"{text}- [exotic pests]({ep_url})\n"
-
-    if hit["best_video"]:
-        video_title = hit["best_video"]["videoTitle"]
-        video_link = hit["best_video"]["videoLink"]
-        text = f"{text}- [video: '{video_title}']({video_link})\n\n"
-
-    if tracker.get_slot("bot_config_debug"):
-        text = f"{text}\nNotes for tester:\n"
-        text = f'{text}- weighted score    ={hit.get("_score_weighted", 0.0):.3f}\n'
-        text = f'{text}- score for name    ={hit.get("_score_name",0.0):.3f}\n'
-        text = f'{text}- score for other   ={hit.get("_score_other",0.0):.3f}\n'
-        text = f'{text}- score for caption ={hit.get("_score_caption", 0.0):.3f}\n'
-        text = f'{text}- score for video   ={hit.get("_score_video", 0.0):.3f}\n'
-        text = f'{text}- score for damage  ={hit.get("_score_damage", 0.0):.3f}\n'
-        text = (
-            f"{text}- score threshold = "
-            f"{tracker.get_slot('bot_config_score_threshold'):.2f}\n"
-        )
-    return text

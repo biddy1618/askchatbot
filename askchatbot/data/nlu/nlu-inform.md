@@ -104,6 +104,7 @@
 - They look like [lantern flies](pest_name)
 - [lanternflies](pest_name)
 - I have small green [grubs](pest_name) in my lawn.
+- [Downy mildew](pest_name) of roses
 - 1
 - 2
 - 3
