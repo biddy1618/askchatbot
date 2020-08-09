@@ -465,6 +465,9 @@ h status my-release
 # To get the details of the nodes 
 kubectl get nodes -o wide
 
+# To list all namespaces
+kubectl get namespaces
+
 # To delete a namespace, will also delete all resources associated with it
 kubectl delete namespace my-namespace
 

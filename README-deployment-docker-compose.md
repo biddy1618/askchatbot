@@ -76,7 +76,7 @@ sudo docker-compose build
 
 # To quickly test that the container starts up
 # TODO: use external IP for --add-host: 34.211.141.190 
-sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 askchatbot-action-server:0.0.3
+sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 askchatbot-action-server:0.0.5
 
 curl http://localhost:5055/actions
 
@@ -107,9 +107,9 @@ sudo bash ./install.sh
 cd /etc/rasa
 
 sudo vi .env
-RASA_X_VERSION=0.30.1
-RASA_VERSION=1.10.7
-RASA_X_DEMO_VERSION=0.30.1
+RASA_X_VERSION=0.31.4
+RASA_VERSION=1.10.9
+RASA_X_DEMO_VERSION=0.31.4
 
 ```
 
@@ -122,7 +122,7 @@ sudo vi docker-compose.override.yml
 version: '3.4'
 services:
   app:
-    image: askchatbot-action-server:0.0.3
+    image: askchatbot-action-server:0.0.5
   extra_hosts: 
     - "ask-chat-db-dev.i.eduworks.com:34.211.141.190"
 ```
