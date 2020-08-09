@@ -38,7 +38,7 @@ The URL is: https://ask-chat-db-dev.i.eduworks.com:9200/
 
 ```bash
 git clone https://git.eduworks.us/ask-extension/askchatbot
-cd askchatbot
+cd askchatbot/askchatbot
 
 conda create --name askchatbot python=3.7
 conda activate askchatbot
@@ -47,18 +47,14 @@ pip install -e .
 
 #
 # Edit the file: ./actions/bot_config.yml
-# Select the correct Ipv4 !
-# Notes:
-#  - arjaan-Kudu : IPv4 = 192.168.1.6
-#  - ec2 instance: IPv4 = 10.1.100.167
-hosts:
-    - host: 10.1.100.167
+# Uncomment the correct host
     
-# index name of ipmdata queries
+# Uncomment the correct index name of ipmdata queries
 ipmdata-index-name: "ipmdata"
+ipmdata-index-name: "ipmdata-dev"
 
 # ingest the ipmdata
-cd <project-root>/scripts/elasticsearch/src
+cd <->/askchatbot/askchatbot/scripts/elasticsearch/src
 
 python3 -m create_es_index
 

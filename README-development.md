@@ -87,7 +87,7 @@ pip install -e .
 
 ## Pylint & black
 
-The code is compliant with [pylint](https://pylint.readthedocs.io/en/latest/user_guide/installation.html), with some configurations adjusted to accept reformatting of [black](https://github.com/ambv/black)
+The python code is compliant with [pylint](https://pylint.readthedocs.io/en/latest/user_guide/installation.html), with some configurations adjusted to accept reformatting of [black](https://github.com/ambv/black)
 
 A Pylint configuration file can be found in the top level directory:
 
@@ -102,11 +102,12 @@ To black & pylint all python files in the project, run these commands:
 cd <project-root>  
 
 # run black on all files
-python -m black **/*.py
+python -m black $(find ./ -name *.py)
 
 # run pylint as a module in your python environment:
 # NOTE: running as a module bypasses the #! line inside the pylint script
-python -m pylint -j 4 **/*.py  # use 4 cores to run pylint on all project code
+# -j 4: use 4 cores to run pylint on all project code
+python -m pylint -j 4 $(find ./ -name *.py)  
 
 # Alternatively, you can run the pylint script directly, but this is dangerous, because
 # the pylint script will use the python command defined by the #! at the top.
@@ -115,12 +116,12 @@ python -m pylint -j 4 **/*.py  # use 4 cores to run pylint on all project code
 #  E0401: Unable to import '---' (import-error)
 pylint -j 4 **/*.py  # use 4 cores to run pylint on all project code
 
-#################################################################################
-# NOTE:                                                                         #
-# When you run pylint with this projects' .pylintrc, sys.path is printed.       #
-# This allows you to check that the correct python version is used.             #
-# See init_hook in the .pylintrc file                                           # 
-#################################################################################
+###########################################################################
+# NOTE:                                                                   #
+# When you run pylint with this projects' .pylintrc, sys.path is printed. #
+# This allows you to check that the correct python version is used.       #
+# See init_hook in the .pylintrc file                                     # 
+###########################################################################
 ```
 
 ### Line length

@@ -14,7 +14,7 @@
 #
 # arjaan laptop
 hosts:
-    - host: 192.168.1.7
+    - host: 192.168.1.8
       port: 9200
 
 username: "elastic"
@@ -33,28 +33,30 @@ score-threshold: 1.4
 search-size: 5
 
 # the tfhub pre-trained embedding to use
-tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder/4"
+# tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder/4"
+tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder-large/5"
 tfhub-cache-dir: "/var/tmp/tfhub_modules"
 
 # index name of ipmdata queries
 # ipmdata-index-name: "ipmdata"
-ipmdata-index-name: "ipmdata-dev"
+# ipmdata-index-name: "ipmdata-dev"
+ipmdata-index-name: "ipmdata-dev-large-5"
 
 
 # Default bot configurations                                         #
 # These can be set by the channel, by sending this intent:           
 #  /intent_configure_bot{"bot_config_debug": "True"}  <- gives tester feedback
 #  /intent_configure_bot{"bot_config_debug": "False"} <- does not give tester feedback
-#  /intent_configure_bot{"bot_config_weight_description": "0.8"}
-#  /intent_configure_bot{"bot_config_weight_damage": "0.3"}
+#no #  /intent_configure_bot{"bot_config_weight_description": "0.8"}
+#no #  /intent_configure_bot{"bot_config_weight_damage": "0.3"}
 #  /intent_configure_bot{"bot_config_score_threshold": "1.4"}
 #  /intent_configure_bot{"bot_config_botname":"the Extension Bot"}
 #  /intent_configure_bot{"bot_config_urlprivacy": "https://ucanr.edu/?privacyStatement/"}
 # 
 # Later, this can also be implemented via metadata of custom rest channel
 bot-config-debug: True
-bot-config-weight-description: 0.9
-bot-config-weight-damage: 0.1
+#bot-config-weight-description: 0.9
+#bot-config-weight-damage: 0.1
 bot-config-score-threshold: 1.4
 bot-config-botname: "the Extension Bot"
 bot-config-urlprivacy: "https://ucanr.edu/?privacyStatement/"

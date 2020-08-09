@@ -1,4 +1,8 @@
 -r requirements.txt
+
+# ETL
+pandas
+
 # action to create report PR
 pytablewriter
 

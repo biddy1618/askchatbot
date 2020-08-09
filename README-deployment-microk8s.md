@@ -192,7 +192,7 @@ Add this to your `values.yml`
 app:
     # microk8s build-in registry
     name: "localhost:32000/askchatbot-action-server"
-    tag: "0.0.3"
+    tag: "0.0.4"
 ```
 
 ###### ProbeDelay
@@ -289,7 +289,7 @@ fe00::2	ip6-allrouters
 34.211.141.190	ask-chat-db-dev.i.eduworks.com
 ```
 
-##### Initial deployment with kubectl
+##### Initial deployment with kubectl *(modify startupProbe)*
 
 Due to long start-up time of the action server, it might be needed to use this approach, so you can patch up the kubernetes objects prior to deployment
 
@@ -301,6 +301,15 @@ h1 template --values values.yml my-release-1 rasa-x/rasa-x > rasa-x-deployment.y
 # Add a Startup Probe for the action server
 # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
 # Allow 5 minutes for startup
+spec:
+.
+  template:
+  .
+    spec:
+      .
+      containers:
+      - image: localhost:32000/askchatbot-action-server:0.0.4
+        .
         startupProbe:
           httpGet:
             path: /health
@@ -319,7 +328,7 @@ spec:
          hostnames:
          - ask-chat-db-dev.i.eduworks.com
       containers:
-      - image: localhost:32000/askchatbot-action-server:0.0.3
+      - image: localhost:32000/askchatbot-action-server:0.0.4
         .
 
 # check correctness of yaml

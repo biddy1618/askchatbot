@@ -1,11 +1,16 @@
 """Create the elasticsearch index for scraped data"""
-import json
 from pathlib import Path
 from elasticsearch.helpers import bulk
+import pandas as pd
 
 import setup_logger  # pylint: disable=unused-import
 
 from actions import actions_config as ac
+
+pd.set_option("display.max_columns", 100)
+pd.set_option("display.width", 1000)
+# pd.set_option('display.max_colwidth', None)
+pd.set_option("display.max_colwidth", 80)
 
 
 # Define the index
@@ -15,17 +20,10 @@ index_name = ac.ipmdata_index_name
 INDEX_FILE = f"{Path(__file__).parents[1]}/data/ipmdata/index.json"
 
 DATA_FILE_NAMES = [
-    "cleanedFruitVeggieItems.json",
-    "cleanedPestDiseaseItems.json",
-    "cleanedPlantFlowerItems.json",
-    "cleanedTurfPests.json",
-    "cleanedWeedItems.json",
-    "ipmdata.json",
-]
-DATA_FILE_NAMES = [
     "cleanedPestDiseaseItems.json",
     "cleanedTurfPests.json",
     "cleanedWeedItems.json",
+    "cleanedExoticPests.json",
     "ipmdata.json",
 ]
 
@@ -37,13 +35,13 @@ for DATA_FILE_NAME in DATA_FILE_NAMES:
 print("-----------------------------------------------------------")
 
 
-BATCH_SIZE = 1000
+BATCH_SIZE = 10
 GPU_LIMIT = 0.5
 
 
 def index_data():
     """Create the index"""
-    if index_name in ["ipmdata", "ipmdata-dev"]:
+    if index_name in ["ipmdata", "ipmdata-dev", "ipmdata-dev-large-5"]:
         index_data_ipmdata()
     else:
         raise Exception(f"Not implemented for index_name = {index_name}")
@@ -51,6 +49,9 @@ def index_data():
 
 def index_data_ipmdata():
     """Create the index for ipmdata"""
+
+    df_docs = docs_etl()
+
     print(f"Creating the index: {index_name}")
     ac.es_client.indices.delete(index=index_name, ignore=[404])
 
@@ -61,62 +62,62 @@ def index_data_ipmdata():
     docs_batch = []
     count = 0
 
-    docs_total = []
-    for data_file_name in DATA_FILE_NAMES:
-        data_file = f"{Path(__file__).parents[1]}/data/ipmdata/{data_file_name}"
-        with open(data_file) as f:
-            docs_all = json.load(f)
-            docs_total.extend(docs_all)
+    docs = df_docs.reset_index().to_dict("records")
 
+    print("Indexing...")
+    docs_batch = []
+    for doc in docs:
+
+        docs_batch.append(doc)
+        count += 1
+
+        if count % BATCH_SIZE == 0:
+            index_batch_ipmdata(docs_batch)
             docs_batch = []
-            for doc in docs_all:
+            print("Indexed {} documents.".format(count))
 
-                docs_batch.append(doc)
-                count += 1
-
-                if count % BATCH_SIZE == 0:
-                    index_batch_ipmdata(docs_batch, data_file_name)
-                    docs_batch = []
-                    print("Indexed {} documents.".format(count))
-
-            if docs_batch:
-                index_batch_ipmdata(docs_batch, data_file_name)
-                print("Indexed {} documents.".format(count))
+    if docs_batch:
+        index_batch_ipmdata(docs_batch)
+        print("Indexed {} documents.".format(count))
 
     ac.es_client.indices.refresh(index=index_name)
     print("Done indexing.")
 
-    # check if there are docs with the same name field
-    docs_total_names = [doc["name"] for doc in docs_total]
-    num_equals = len(docs_total_names) - len(set(docs_total_names))
-    if num_equals > 0:
-        print("TODO: rewrite things to merge docs that have the same name field")
-        print(f"There are {num_equals} equals")
+
+def docs_etl():
+    """Read all docs and pre-process them"""
+    print("ETL for docs...")
+
+    df_docs_json = {}
+    for data_file_name in DATA_FILE_NAMES:
+        path_data = f"{Path(__file__).parents[1]}/data/ipmdata/{data_file_name}"
+        df_docs_json[data_file_name] = pd.read_json(path_data)
+
+        before_shape = df_docs_json[data_file_name].shape
+
+        df_docs_json[data_file_name] = df_docs_json[data_file_name].drop_duplicates(
+            "name"
+        )
+        after_shape = df_docs_json[data_file_name].shape
+        num_dropped = before_shape[0] - after_shape[0]
+        if num_dropped > 0:
+            print(f"Dropped {num_dropped} with same 'name' in {data_file_name}")
+
+    df_docs_json = unique_column_names(df_docs_json)
+
+    df_docs = concat_docs(df_docs_json)
+
+    df_docs.index = df_docs.index.set_names("doc_id")
+
+    df_docs = replace_nan(df_docs)
+
+    return df_docs
 
 
-def index_batch_ipmdata(docs, data_file_name):
+def index_batch_ipmdata(docs):
     """Index a batch of docs"""
 
-    # Update the docs prior to inserting
-    # - Note: this will also take care of duplicates found in:
-    #    https://jira.eduworks.us/browse/AE-470
-    if data_file_name in [
-        "ipmdata.json",
-        "cleanedFruitVeggieItems.json",
-        "cleanedPestDiseaseItems.json",
-        "cleanedPlantFlowerItems.json",
-        "cleanedTurfPests.json",
-        "cleanedWeedItems.json",
-    ]:
-        docs = rename_fields_to_be_unique(docs, data_file_name)
-        docs = update_docs_for_ipmdata(docs)
-        ##        docs = update_docs_for_cleanedfruitveggieitems(docs)
-        docs = update_docs_for_cleanedpestdiseaseitems(docs)
-        ##        docs = update_docs_for_cleanedplantfloweritems(docs)
-        docs = update_docs_for_cleanedturfpests(docs)
-        docs = update_docs_for_cleanedweeditems(docs)
-    else:
-        raise Exception(f"Not implemented for data_file_name = {data_file_name}")
+    docs = create_embedding_vectors(docs)
 
     # ingest this batch into the elastic search index
     requests = []
@@ -128,106 +129,125 @@ def index_batch_ipmdata(docs, data_file_name):
     bulk(ac.es_client, requests)
 
 
-def rename_fields_to_be_unique(docs, data_file_name):
-    """some json files have same fields that should be unique"""
+def unique_column_names(df_docs_json):
+    """Column names must be unique and identify the file they came from"""
 
-    if data_file_name == "ipmdata.json":
-        pass
-    elif data_file_name == "cleanedFruitVeggieItems.json":
-        for doc in docs:
-            if "url" in doc.keys():
-                doc["urlFruitVeggieItems"] = doc.pop("url")
-            if "cultural_tips" in doc.keys():
-                doc["cultural_tipsFruitVeggieItems"] = doc.pop("cultural_tips")
-            if "pests_and_disorders" in doc.keys():
-                doc["pests_and_disordersFruitVeggieItems"] = doc.pop(
-                    "pests_and_disorders"
-                )
-    elif data_file_name == "cleanedPestDiseaseItems.json":
-        for doc in docs:
-            if "url" in doc.keys():
-                doc["urlPestDiseaseItems"] = doc.pop("url")
-            if "description" in doc.keys():
-                doc["descriptionPestDiseaseItems"] = doc.pop("description")
-            if "identification" in doc.keys():
-                doc["identificationPestDiseaseItems"] = doc.pop("identification")
-            if "life_cycle" in doc.keys():
-                doc["life_cyclePestDiseaseItems"] = doc.pop("life_cycle")
-            if "damage" in doc.keys():
-                doc["damagePestDiseaseItems"] = doc.pop("damage")
-            if "solutions" in doc.keys():
-                doc["solutionsPestDiseaseItems"] = doc.pop("solutions")
-            if "imagesQuickTips" in doc.keys():
-                doc["imagesPestDiseaseItems"] = doc.pop("imagesQuickTips")
-            if "images" in doc.keys():
-                doc["imagesPestDiseaseItems"] = doc.pop("images")
-    elif data_file_name == "cleanedPlantFlowerItems.json":
-        for doc in docs:
-            if "url" in doc.keys():
-                doc["urlPlantFlowerItems"] = doc.pop("url")
-            if "identification" in doc.keys():
-                doc["identificationPlantFlowerItems"] = doc.pop("identification")
-            if "optimum_conditions" in doc.keys():
-                doc["optimum_conditionsPlantFlowerItems"] = doc.pop(
-                    "optimum_conditions"
-                )
-            if "pests_and_disorders" in doc.keys():
-                doc["pests_and_disordersPlantFlowerItems"] = doc.pop(
-                    "pests_and_disorders"
-                )
-            if "imagesQuickTips" in doc.keys():
-                doc["imagesPlantFlowerItems"] = doc.pop("imagesQuickTips")
-            if "images" in doc.keys():
-                doc["imagesPlantFlowerItems"] = doc.pop("images")
-    elif data_file_name == "cleanedTurfPests.json":
-        for doc in docs:
-            if "url" in doc.keys():
-                doc["urlTurfPests"] = doc.pop("url")
-            if "text" in doc.keys():
-                doc["textTurfPests"] = doc.pop("text")
-            if "images" in doc.keys():
-                doc["imagesTurfPests"] = doc.pop("images")
-    elif data_file_name == "cleanedWeedItems.json":
-        for doc in docs:
-            if "url" in doc.keys():
-                doc["urlWeedItems"] = doc.pop("url")
-            if "description" in doc.keys():
-                doc["descriptionWeedItems"] = doc.pop("description")
-            if "images" in doc.keys():
-                doc["imagesWeedItems"] = doc.pop("images")
-    else:
-        raise Exception(f"Not implemented for data_file_name = {data_file_name}")
+    df_docs_json["cleanedPestDiseaseItems.json"] = df_docs_json[
+        "cleanedPestDiseaseItems.json"
+    ].rename(
+        columns={
+            "url": "urlPestDiseaseItems",
+            "description": "descriptionPestDiseaseItems",
+            "identification": "identificationPestDiseaseItems",
+            "life_cycle": "life_cyclePestDiseaseItems",
+            "damage": "damagePestDiseaseItems",
+            "solutions": "solutionsPestDiseaseItems",
+            "imagesQuickTips": "imagesQuickTipsPestDiseaseItems",
+            "images": "imagesPestDiseaseItems",
+            "other_headers": "other_headersPestDiseaseItems",
+        }
+    )
 
-    return docs
+    df_docs_json["cleanedTurfPests.json"] = df_docs_json[
+        "cleanedTurfPests.json"
+    ].rename(
+        columns={
+            "url": "urlTurfPests",
+            "text": "textTurfPests",
+            "images": "imagesTurfPests",
+        }
+    )
+
+    df_docs_json["cleanedWeedItems.json"] = df_docs_json[
+        "cleanedWeedItems.json"
+    ].rename(
+        columns={
+            "url": "urlWeedItems",
+            "description": "descriptionWeedItems",
+            "images": "imagesWeedItems",
+        }
+    )
+
+    df_docs_json["cleanedExoticPests.json"] = df_docs_json[
+        "cleanedExoticPests.json"
+    ].rename(
+        columns={
+            "url": "urlExoticPests",
+            "description": "descriptionExoticPests",
+            "damage": "damageExoticPests",
+            "identification": "identificationExoticPests",
+            "life_cycle": "life_cycleExoticPests",
+            "monitoring": "monitoringExoticPests",
+            "management": "managementExoticPests",
+            "related_links": "related_linksExoticPests",
+            "images": "imagesExoticPests",
+        }
+    )
+
+    ##    df_docs_json["cleanedFruitVeggieItems.json"] = df_docs_json[
+    ##        "cleanedFruitVeggieItems.json"
+    ##    ].rename(
+    ##        columns={
+    ##            "url": "urlFruitVeggieItems",
+    ##            "cultural_tips": "cultural_tipsFruitVeggieItems",
+    ##            "pests_and_disorders": "pests_and_disordersFruitVeggieItems",
+    ##        }
+    ##    )
+
+    ##    df_docs_json["cleanedPlantFlowerItems.json"] = df_docs_json[
+    ##        "cleanedPlantFlowerItems.json"
+    ##    ].rename(
+    ##        columns={
+    ##            "url": "urlPlantFlowerItems",
+    ##            "identification": "identificationPlantFlowerItems",
+    ##            "optimum_conditions": "optimum_conditionsPlantFlowerItems",
+    ##            "pests_and_disorders": "pests_and_disordersPlantFlowerItems",
+    ##            "imagesQuickTips": "imagesPlantFlowerItems",
+    ##            "images": "imagesPlantFlowerItems",
+    ##        }
+    ##    )
+
+    return df_docs_json
 
 
-def update_docs_for_ipmdata(docs):
-    """Update the docs for ipmdata.json"""
+def concat_docs(df_docs_json):
+    """Concatenate the docs of different json files into one big dataframe"""
+    df_docs = pd.concat(
+        [df_docs_json[name] for name in DATA_FILE_NAMES], ignore_index=True
+    )
+    return df_docs
 
-    #########################################
-    # use empty values for undefined fields #
-    #########################################
 
-    for doc in docs:
-        # ipmdata.json
-        doc["urlPestNote"] = doc.get("urlPestNote", "")
-        doc["descriptionPestNote"] = doc.get("descriptionPestNote", "")
-        doc["life_cycle"] = doc.get("life_cycle", "")
-        doc["damagePestNote"] = doc.get("damagePestNote", "")
-        doc["managementPestNote"] = doc.get("managementPestNote", "")
-        doc["contentQuickTips"] = doc.get("contentQuickTips", "")
-        doc["imagePestNote"] = doc.get("imagePestNote", {})
-        doc["urlQuickTip"] = doc.get("urlQuickTip", "")
-        doc["contentQuickTips"] = doc.get("contentQuickTips", "")
-        doc["imageQuickTips"] = doc.get("imageQuickTips", {})
-        doc["video"] = doc.get("video", {})
+def replace_nan(df_docs):
+    """Replace all NaN values in the dataframe with appropriate content"""
+    df_docs = df_docs.fillna("")
+    # nested types require an empty list if non existing
+    for column in [
+        "imagePestNote",
+        "imageQuickTips",
+        "video",
+        "imagesPestDiseaseItems",
+        "other_headersPestDiseaseItems",
+        "imagesTurfPests",
+        "imagesWeedItems",
+        "related_linksExoticPests",
+        "imagesExoticPests",
+    ]:
+        df_docs[column] = [[] if x == "" else x for x in df_docs[column]]
+
+    return df_docs
+
+
+def create_embedding_vectors(docs):
+    """Add the embedding vectors to the docs"""
+
+    print(f"Creating embeddings for {len(docs)} documents...")
 
     ########################################
     # add embedding vectors for text items #
     ########################################
-
-    pn_names = [doc["name"] for doc in docs]
-    pn_name_vectors = ac.embed(pn_names).numpy()
+    names = [doc["name"] for doc in docs]
+    name_vectors = ac.embed(names).numpy()
 
     pn_descriptions = [doc["descriptionPestNote"] for doc in docs]
     pn_description_vectors = ac.embed(pn_descriptions).numpy()
@@ -241,9 +261,6 @@ def update_docs_for_ipmdata(docs):
     pn_managements = [doc["managementPestNote"] for doc in docs]
     pn_management_vectors = ac.embed(pn_managements).numpy()
 
-    qt_contents = [doc["contentQuickTips"] for doc in docs]
-    qt_content_vectors = ac.embed(qt_contents).numpy()
-
     # damage by itself might not work.
     # also encode it together with name, description, life_cycle
     pn_ndl_damage = [
@@ -255,136 +272,8 @@ def update_docs_for_ipmdata(docs):
     ]
     pn_ndl_damage_vectors = ac.embed(pn_ndl_damage).numpy()
 
-    for (
-        i,
-        (
-            pn_name_vector,
-            pn_description_vector,
-            pn_life_cycle_vector,
-            pn_damage_vector,
-            pn_management_vector,
-            qt_content_vector,
-            pn_ndl_damage_vector,
-        ),
-    ) in enumerate(
-        zip(
-            pn_name_vectors,
-            pn_description_vectors,
-            pn_life_cycle_vectors,
-            pn_damage_vectors,
-            pn_management_vectors,
-            qt_content_vectors,
-            pn_ndl_damage_vectors,
-        )
-    ):
-        docs[i]["name_vector"] = pn_name_vector
-        docs[i]["descriptionPestNote_vector"] = pn_description_vector
-        docs[i]["life_cycle_vector"] = pn_life_cycle_vector
-        docs[i]["damagePestNote_vector"] = pn_damage_vector
-        docs[i]["managementPestNote_vector"] = pn_management_vector
-        docs[i]["contentQuickTips_vector"] = qt_content_vector
-        docs[i]["ndl_damage_vector"] = pn_ndl_damage_vector
-
-    ########################################################
-    # add embedding vectors for text items of nested items #
-    ########################################################
-
-    for i, doc in enumerate(docs):
-        pn_images = docs[i]["imagePestNote"]
-        if pn_images:
-            captions = [pn_image["caption"] for pn_image in pn_images]
-            captions_vectors = ac.embed(captions).numpy()
-            for j, caption_vector in enumerate(captions_vectors):
-                docs[i]["imagePestNote"][j]["caption_vector"] = caption_vector
-
-        qt_images = docs[i]["imageQuickTips"]
-        if qt_images:
-            captions = [qt_image["caption"] for qt_image in qt_images]
-            captions_vectors = ac.embed(captions).numpy()
-            for j, caption_vector in enumerate(captions_vectors):
-                docs[i]["imageQuickTips"][j]["caption_vector"] = caption_vector
-
-        videos = docs[i]["video"]
-        if videos:
-            titles = [video["videoTitle"] for video in videos]
-            titles_vectors = ac.embed(titles).numpy()
-            for j, title_vector in enumerate(titles_vectors):
-                docs[i]["video"][j]["videoTitle_vector"] = title_vector
-
-    return docs
-
-
-def update_docs_for_cleanedfruitveggieitems(docs):
-    """Update the docs for cleanedFruitVeggieItems.json"""
-
-    #########################################
-    # use empty values for undefined fields #
-    #########################################
-
-    for doc in docs:
-        doc["urlFruitVeggieItems"] = doc.get("urlFruitVeggieItems", "")
-        doc["cultural_tipsFruitVeggieItems"] = doc.get(
-            "cultural_tipsFruitVeggieItems", {}
-        )
-        doc["pests_and_disordersFruitVeggieItems"] = doc.get(
-            "pests_and_disordersFruitVeggieItems", {}
-        )
-
-    ########################################
-    # add embedding vectors for text items #
-    ########################################
-    fvi_names = [doc["name"] for doc in docs]
-    fvi_name_vectors = ac.embed(fvi_names).numpy()
-
-    for (i, fvi_name_vector) in enumerate(fvi_name_vectors):
-        docs[i]["name_vector"] = fvi_name_vector
-
-    ########################################################
-    # add embedding vectors for text items of nested items #
-    ########################################################
-
-    for doc in docs:
-        fvi_tips = doc["cultural_tipsFruitVeggieItems"]
-        if fvi_tips:
-            tips = [fvi_tip["tip"] for fvi_tip in fvi_tips]
-            tips_vectors = ac.embed(tips).numpy()
-            for j, tip_vector in enumerate(tips_vectors):
-                doc["cultural_tipsFruitVeggieItems"][j]["tip_vector"] = tip_vector
-
-        fvi_pds = doc["pests_and_disordersFruitVeggieItems"]
-        if fvi_pds:
-            pds = [fvi_pd["problem"] for fvi_pd in fvi_pds]
-            pds_vectors = ac.embed(pds).numpy()
-            for j, pd_vector in enumerate(pds_vectors):
-                doc["pests_and_disordersFruitVeggieItems"][j]["pd_vector"] = pd_vector
-
-    return docs
-
-
-def update_docs_for_cleanedpestdiseaseitems(docs):
-    """Update the docs for cleanedPestDiseaseItems.json"""
-
-    #########################################
-    # use empty values for undefined fields #
-    #########################################
-
-    for doc in docs:
-        doc["urlPestDiseaseItems"] = doc.get("urlPestDiseaseItems", "")
-        doc["descriptionPestDiseaseItems"] = doc.get("descriptionPestDiseaseItems", "")
-        doc["identificationPestDiseaseItems"] = doc.get(
-            "identificationPestDiseaseItems", ""
-        )
-        doc["life_cyclePestDiseaseItems"] = doc.get("life_cyclePestDiseaseItems", "")
-        doc["damagePestDiseaseItems"] = doc.get("damagePestDiseaseItems", "")
-        doc["solutionsPestDiseaseItems"] = doc.get("solutionsPestDiseaseItems", "")
-
-        doc["imagesPestDiseaseItems"] = doc.get("imagesPestDiseaseItems", {})
-
-    ########################################
-    # add embedding vectors for text items #
-    ########################################
-    pdi_names = [doc["name"] for doc in docs]
-    pdi_name_vectors = ac.embed(pdi_names).numpy()
+    qt_contents = [doc["contentQuickTips"] for doc in docs]
+    qt_content_vectors = ac.embed(qt_contents).numpy()
 
     pdi_descriptions = [doc["descriptionPestDiseaseItems"] for doc in docs]
     pdi_description_vectors = ac.embed(pdi_descriptions).numpy()
@@ -401,38 +290,124 @@ def update_docs_for_cleanedpestdiseaseitems(docs):
     pdi_solutions = [doc["solutionsPestDiseaseItems"] for doc in docs]
     pdi_solution_vectors = ac.embed(pdi_solutions).numpy()
 
+    tp_texts = [doc["textTurfPests"] for doc in docs]
+    tp_text_vectors = ac.embed(tp_texts).numpy()
+
+    wi_descriptions = [doc["descriptionWeedItems"] for doc in docs]
+    wi_description_vectors = ac.embed(wi_descriptions).numpy()
+
+    ep_descriptions = [doc["descriptionExoticPests"] for doc in docs]
+    ep_description_vectors = ac.embed(ep_descriptions).numpy()
+
+    ep_damages = [doc["damageExoticPests"] for doc in docs]
+    ep_damage_vectors = ac.embed(ep_damages).numpy()
+
+    ep_identifications = [doc["identificationExoticPests"] for doc in docs]
+    ep_identification_vectors = ac.embed(ep_identifications).numpy()
+
+    ep_life_cycles = [doc["life_cycleExoticPests"] for doc in docs]
+    ep_life_cycle_vectors = ac.embed(ep_life_cycles).numpy()
+
+    ep_monitorings = [doc["monitoringExoticPests"] for doc in docs]
+    ep_monitoring_vectors = ac.embed(ep_monitorings).numpy()
+
+    ep_managements = [doc["managementExoticPests"] for doc in docs]
+    ep_management_vectors = ac.embed(ep_managements).numpy()
+
     for (
         i,
         (
-            pdi_name_vector,
+            name_vector,
+            pn_description_vector,
+            pn_life_cycle_vector,
+            pn_damage_vector,
+            pn_management_vector,
+            qt_content_vector,
+            pn_ndl_damage_vector,
             pdi_description_vector,
             pdi_identification_vector,
             pdi_life_cycle_vector,
             pdi_damage_vector,
             pdi_solution_vector,
+            tp_text_vector,
+            wi_description_vector,
+            ep_description_vector,
+            ep_damage_vector,
+            ep_identification_vector,
+            ep_life_cycle_vector,
+            ep_monitoring_vector,
+            ep_management_vector,
         ),
     ) in enumerate(
         zip(
-            pdi_name_vectors,
+            name_vectors,
+            pn_description_vectors,
+            pn_life_cycle_vectors,
+            pn_damage_vectors,
+            pn_management_vectors,
+            qt_content_vectors,
+            pn_ndl_damage_vectors,
             pdi_description_vectors,
             pdi_identification_vectors,
             pdi_life_cycle_vectors,
             pdi_damage_vectors,
             pdi_solution_vectors,
+            tp_text_vectors,
+            wi_description_vectors,
+            ep_description_vectors,
+            ep_damage_vectors,
+            ep_identification_vectors,
+            ep_life_cycle_vectors,
+            ep_monitoring_vectors,
+            ep_management_vectors,
         )
     ):
-        docs[i]["name_vector"] = pdi_name_vector
+        docs[i]["name_vector"] = name_vector
+        docs[i]["descriptionPestNote_vector"] = pn_description_vector
+        docs[i]["life_cycle_vector"] = pn_life_cycle_vector
+        docs[i]["damagePestNote_vector"] = pn_damage_vector
+        docs[i]["managementPestNote_vector"] = pn_management_vector
+        docs[i]["contentQuickTips_vector"] = qt_content_vector
+        docs[i]["ndl_damage_vector"] = pn_ndl_damage_vector
         docs[i]["descriptionPestDiseaseItems_vector"] = pdi_description_vector
         docs[i]["identificationPestDiseaseItems_vector"] = pdi_identification_vector
         docs[i]["life_cyclePestDiseaseItems_vector"] = pdi_life_cycle_vector
         docs[i]["damagePestDiseaseItems_vector"] = pdi_damage_vector
         docs[i]["solutionsPestDiseaseItems_vector"] = pdi_solution_vector
+        docs[i]["textTurfPests_vector"] = tp_text_vector
+        docs[i]["descriptionWeedItems_vector"] = wi_description_vector
+        docs[i]["descriptionExoticPests_vector"] = ep_description_vector
+        docs[i]["damageExoticPests_vector"] = ep_damage_vector
+        docs[i]["identificationExoticPests_vector"] = ep_identification_vector
+        docs[i]["life_cycleExoticPests_vector"] = ep_life_cycle_vector
+        docs[i]["monitoringExoticPests_vector"] = ep_monitoring_vector
+        docs[i]["managementExoticPests_vector"] = ep_management_vector
 
     ########################################################
     # add embedding vectors for text items of nested items #
     ########################################################
-
     for doc in docs:
+        pn_images = doc["imagePestNote"]
+        if pn_images:
+            captions = [pn_image["caption"] for pn_image in pn_images]
+            captions_vectors = ac.embed(captions).numpy()
+            for j, caption_vector in enumerate(captions_vectors):
+                doc["imagePestNote"][j]["caption_vector"] = caption_vector
+
+        qt_images = doc["imageQuickTips"]
+        if qt_images:
+            captions = [qt_image["caption"] for qt_image in qt_images]
+            captions_vectors = ac.embed(captions).numpy()
+            for j, caption_vector in enumerate(captions_vectors):
+                doc["imageQuickTips"][j]["caption_vector"] = caption_vector
+
+        videos = doc["video"]
+        if videos:
+            titles = [video["videoTitle"] for video in videos]
+            titles_vectors = ac.embed(titles).numpy()
+            for j, title_vector in enumerate(titles_vectors):
+                doc["video"][j]["videoTitle_vector"] = title_vector
+
         pdi_images = doc["imagesPestDiseaseItems"]
         if pdi_images:
             captions = [pdi_image["caption"] for pdi_image in pdi_images]
@@ -440,109 +415,20 @@ def update_docs_for_cleanedpestdiseaseitems(docs):
             for j, caption_vector in enumerate(captions_vectors):
                 doc["imagesPestDiseaseItems"][j]["caption_vector"] = caption_vector
 
-    return docs
+        pdi_other_headers = doc["other_headersPestDiseaseItems"]
+        if pdi_other_headers:
+            headers = [
+                pdi_other_header["header"] for pdi_other_header in pdi_other_headers
+            ]
+            headers_vectors = ac.embed(headers).numpy()
+            texts = [pdi_other_header["text"] for pdi_other_header in pdi_other_headers]
+            texts_vectors = ac.embed(texts).numpy()
+            for j, (header_vector, text_vector) in enumerate(
+                zip(headers_vectors, texts_vectors)
+            ):
+                doc["other_headersPestDiseaseItems"][j]["header_vector"] = header_vector
+                doc["other_headersPestDiseaseItems"][j]["text_vector"] = text_vector
 
-
-def update_docs_for_cleanedplantfloweritems(docs):
-    """Update the docs for cleanedPlantFlowerItems.json"""
-
-    #########################################
-    # use empty values for undefined fields #
-    #########################################
-
-    for doc in docs:
-        doc["urlPlantFlowerItems"] = doc.get("urlPlantFlowerItems", "")
-        doc["identificationPlantFlowerItems"] = doc.get(
-            "identificationPlantFlowerItems", ""
-        )
-        doc["optimum_conditionsPlantFlowerItems"] = doc.get(
-            "optimum_conditionsPlantFlowerItems", ""
-        )
-
-        doc["pests_and_disordersPlantFlowerItems"] = doc.get(
-            "pests_and_disordersPlantFlowerItems", {}
-        )
-        doc["imagesPlantFlowerItems"] = doc.get("imagesPlantFlowerItems", {})
-
-    ########################################
-    # add embedding vectors for text items #
-    ########################################
-    pfi_names = [doc["name"] for doc in docs]
-    pfi_name_vectors = ac.embed(pfi_names).numpy()
-
-    pfi_identifications = [doc["identificationPlantFlowerItems"] for doc in docs]
-    pfi_identification_vectors = ac.embed(pfi_identifications).numpy()
-
-    pfi_conditions = [doc["optimum_conditionsPlantFlowerItems"] for doc in docs]
-    pfi_condition_vectors = ac.embed(pfi_conditions).numpy()
-
-    for (
-        i,
-        (pfi_name_vector, pfi_identification_vector, pfi_condition_vector,),
-    ) in enumerate(
-        zip(pfi_name_vectors, pfi_identification_vectors, pfi_condition_vectors,)
-    ):
-        docs[i]["name_vector"] = pfi_name_vector
-        docs[i]["identificationPlantFlowerItems_vector"] = pfi_identification_vector
-        docs[i]["optimum_conditionsPlantFlowerItems_vector"] = pfi_condition_vector
-
-    ########################################################
-    # add embedding vectors for text items of nested items #
-    ########################################################
-
-    for doc in docs:
-        pfi_pds = doc["pests_and_disordersPlantFlowerItems"]
-        if pfi_pds:
-            problems = [pfi_pd["problem"] for pfi_pd in pfi_pds]
-            problems_vectors = ac.embed(problems).numpy()
-            for j, problem_vector in enumerate(problems_vectors):
-                doc["pests_and_disordersPlantFlowerItems"][j][
-                    "problem_vector"
-                ] = problem_vector
-
-        pfi_images = doc["imagesPlantFlowerItems"]
-        if pfi_images:
-            captions = [pfi_image["caption"] for pfi_image in pfi_images]
-            captions_vectors = ac.embed(captions).numpy()
-            for j, caption_vector in enumerate(captions_vectors):
-                doc["imagesPlantFlowerItems"][j]["caption_vector"] = caption_vector
-
-    return docs
-
-
-def update_docs_for_cleanedturfpests(docs):
-    """Update the docs for cleanedTurfPests.json"""
-
-    #########################################
-    # use empty values for undefined fields #
-    #########################################
-
-    for doc in docs:
-        doc["urlTurfPests"] = doc.get("urlTurfPests", "")
-        doc["textTurfPests"] = doc.get("textTurfPests", "")
-
-        doc["imagesTurfPests"] = doc.get("imagesTurfPests", {})
-
-    ########################################
-    # add embedding vectors for text items #
-    ########################################
-    tp_names = [doc["name"] for doc in docs]
-    tp_name_vectors = ac.embed(tp_names).numpy()
-
-    tp_texts = [doc["textTurfPests"] for doc in docs]
-    tp_text_vectors = ac.embed(tp_texts).numpy()
-
-    for (i, (tp_name_vector, tp_text_vector,),) in enumerate(
-        zip(tp_name_vectors, tp_text_vectors,)
-    ):
-        docs[i]["name_vector"] = tp_name_vector
-        docs[i]["textTurfPests_vector"] = tp_text_vector
-
-    ########################################################
-    # add embedding vectors for text items of nested items #
-    ########################################################
-
-    for doc in docs:
         tp_images = doc["imagesTurfPests"]
         if tp_images:
             captions = [tp_image["caption"] for tp_image in tp_images]
@@ -550,48 +436,26 @@ def update_docs_for_cleanedturfpests(docs):
             for j, caption_vector in enumerate(captions_vectors):
                 doc["imagesTurfPests"][j]["caption_vector"] = caption_vector
 
-    return docs
-
-
-def update_docs_for_cleanedweeditems(docs):
-    """Update the docs for cleanedWeedItems.json"""
-
-    #########################################
-    # use empty values for undefined fields #
-    #########################################
-
-    for doc in docs:
-        doc["urlWeedItems"] = doc.get("urlWeedItems", "")
-        doc["descriptionWeedItems"] = doc.get("descriptionWeedItems", "")
-
-        doc["imagesWeedItems"] = doc.get("imagesWeedItems", {})
-
-    ########################################
-    # add embedding vectors for text items #
-    ########################################
-    wi_names = [doc["name"] for doc in docs]
-    wi_name_vectors = ac.embed(wi_names).numpy()
-
-    wi_descriptions = [doc["descriptionWeedItems"] for doc in docs]
-    wi_description_vectors = ac.embed(wi_descriptions).numpy()
-
-    for (i, (wi_name_vector, wi_description_vector,),) in enumerate(
-        zip(wi_name_vectors, wi_description_vectors,)
-    ):
-        docs[i]["name_vector"] = wi_name_vector
-        docs[i]["descriptionWeedItems_vector"] = wi_description_vector
-
-    ########################################################
-    # add embedding vectors for text items of nested items #
-    ########################################################
-
-    for doc in docs:
         wi_images = doc["imagesWeedItems"]
         if wi_images:
             captions = [wi_image["caption"] for wi_image in wi_images]
             captions_vectors = ac.embed(captions).numpy()
             for j, caption_vector in enumerate(captions_vectors):
                 doc["imagesWeedItems"][j]["caption_vector"] = caption_vector
+
+        ep_related_links = doc["related_linksExoticPests"]
+        if ep_related_links:
+            texts = [ep_related_link["text"] for ep_related_link in ep_related_links]
+            texts_vectors = ac.embed(texts).numpy()
+            for j, text_vector in enumerate(texts_vectors):
+                doc["related_linksExoticPests"][j]["text_vector"] = text_vector
+
+        ep_images = doc["imagesExoticPests"]
+        if ep_images:
+            captions = [ep_image["caption"] for ep_image in ep_images]
+            captions_vectors = ac.embed(captions).numpy()
+            for j, caption_vector in enumerate(captions_vectors):
+                doc["imagesExoticPests"][j]["caption_vector"] = caption_vector
 
     return docs
 
