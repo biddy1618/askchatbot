@@ -57,7 +57,7 @@
   
     - Transformation rules take into account the position of pronouns,  auxiliary and main verbs as well as phrases that are in active and  passive form.
   
-      ![](/./images/table-1.png)
+      ![](./images/table-1.png)
   
     - We have considered several particular cases where the sentences needed certain adjustments. These cases are listed as follows:
     
