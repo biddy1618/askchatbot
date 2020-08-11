@@ -6,7 +6,7 @@
 
 - text > candidate sentences > generate questions with `POS/NER` & answers with `SPO Tuples`
   
-  ![Fig. 1](/home/arjaan/llc/toptal/eduworks/repos/askchatbot/secret/images/fig-1.png)
+  ![Fig. 1](./images/fig-1.png)
   
     ```bash
     text
@@ -57,7 +57,7 @@
   
     - Transformation rules take into account the position of pronouns,  auxiliary and main verbs as well as phrases that are in active and  passive form.
   
-      ![](/home/arjaan/llc/toptal/eduworks/repos/askchatbot/secret/images/table-1.png)
+      ![](/./images/table-1.png)
   
     - We have considered several particular cases where the sentences needed certain adjustments. These cases are listed as follows:
     
