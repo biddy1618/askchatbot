@@ -67,7 +67,7 @@
       - The main verb is in the past and, for that case, it changes the verb tense.
       
     
-    ![](/home/arjaan/llc/toptal/eduworks/repos/askchatbot/secret/images/table-2.png)
+    ![](./images/table-2.png)
   
 - **Tokenization** is done with [NLTK](www.nltk.org):
   
