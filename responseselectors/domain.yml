@@ -1,11 +1,12 @@
 intents:
   - intent_hi:
       triggers: utter_hi
-  - askextension_tomato:
+  - askextension_california:
       triggers: action_retrieval
 
 actions:
   - action_retrieval
+  - utter_hi
 
 responses:
   utter_hi:

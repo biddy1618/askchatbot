@@ -29,7 +29,7 @@ class ActionRetrieval(Action):
 
     async def run(self, dispatcher, tracker, domain) -> List[EventType]:
         event = tracker.events[-1]
-        rankings = event["parse_data"]["response_selector"]["askextension_tomato"][
+        rankings = event["parse_data"]["response_selector"]["askextension_california"][
             "ranking"
         ]
         ostickets_california = []

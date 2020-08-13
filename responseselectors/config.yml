@@ -21,8 +21,10 @@ pipeline:
     use_masked_language_model: False
     BILOU_flag: False
   - name: ResponseSelector
-    retrieval_intent: askextension_tomato
+    retrieval_intent: askextension_california
     epochs: 10
+    number_of_transformer_layers: 2
+    transformer_size: 256
     tensorboard_log_directory: tensorboard
 
 # Configuration for Rasa Core.
