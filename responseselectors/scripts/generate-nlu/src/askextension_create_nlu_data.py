@@ -282,23 +282,37 @@ def etl_spacy(df, verbose=1):
         title if (title and title[-1] in string.punctuation) else title + "."
         for title in titles
     ]
-    # Use title only if it is not already exactly in the question
-    titles = [
+    # In short_question, use title only if it is not already exactly in the question
+    titles_for_questions = [
         "" if (title and question.startswith(title[:-1])) else title
         for (title, question) in zip(titles, questions)
     ]
 
     short_questions = []
     short_responses = []
-    for title, question, response in zip(
-        tqdm(titles, desc="Create short strings"), questions, responses
+    for title, title_for_question, question, response in zip(
+        tqdm(titles, desc="Create short strings"),
+        titles_for_questions,
+        questions,
+        responses,
     ):
+        # build short question
         short_question = make_it_short(
-            title, question, do_title=True, do_questions=True, do_nouns=True
+            title_for_question,
+            question,
+            do_title=True,
+            do_questions=True,
+            do_nouns=True,
         )
+
+        # build short response
         short_response = make_it_short(
             title, response, do_title=True, do_questions=False, do_nouns=True
         )
+        question_nouns_string = make_it_short(
+            title, question, do_title=False, do_questions=False, do_nouns=True
+        )
+        short_response = f"{short_response} {question_nouns_string}"
 
         short_questions.append(short_question)
         short_responses.append(short_response)

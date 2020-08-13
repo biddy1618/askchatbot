@@ -22,7 +22,9 @@ pipeline:
     BILOU_flag: False
   - name: ResponseSelector
     retrieval_intent: askextension_california
-    epochs: 200
+    epochs: 10
+    number_of_transformer_layers: 2
+    transformer_size: 256
     tensorboard_log_directory: tensorboard
 
 # Configuration for Rasa Core.
