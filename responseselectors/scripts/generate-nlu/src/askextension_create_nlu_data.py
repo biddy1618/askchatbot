@@ -263,6 +263,7 @@ def etl_spacy(df, verbose=1):
 
     df = df.copy()
 
+    faq_ids = df.index.tolist()
     titles = df["title"].tolist()
     questions = df["question"].tolist()
     responses = df["response"].tolist()
@@ -289,7 +290,7 @@ def etl_spacy(df, verbose=1):
     ]
 
     short_questions = []
-    short_responses = []
+    short_responses = faq_ids
     for title, title_for_question, question, response in zip(
         tqdm(titles, desc="Create short strings"),
         titles_for_questions,
@@ -304,18 +305,17 @@ def etl_spacy(df, verbose=1):
             do_questions=True,
             do_nouns=True,
         )
-
-        # build short response
-        short_response = make_it_short(
-            title, response, do_title=True, do_questions=False, do_nouns=True
-        )
-        question_nouns_string = make_it_short(
-            title, question, do_title=False, do_questions=False, do_nouns=True
-        )
-        short_response = f"{short_response} {question_nouns_string}"
-
         short_questions.append(short_question)
-        short_responses.append(short_response)
+
+        # for response, just use the faq_id. Seems to work best
+    ##        # build short response
+    ##        short_response = make_it_short(
+    ##            title, response, do_title=True, do_questions=False, do_nouns=True
+    ##        )
+    ##        question_nouns_string = make_it_short(
+    ##            title, question, do_title=False, do_questions=False, do_nouns=True
+    ##        )
+    ##        short_response = f"{short_response} {question_nouns_string}"
 
     df["short-question"] = short_questions
     df["short-response"] = short_responses
