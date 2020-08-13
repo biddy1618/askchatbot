@@ -1,27 +1,27 @@
 """To view/modify/explore/prepare-for-indexing the askextensiondata json"""
 import json
-import pprint
 from pathlib import Path
 
 # Define the index
-index_name = "askextensiondata"  # pylint: disable=invalid-name
+data_name = "askextensiondata"  # pylint: disable=invalid-name
 
-DATA_FILE = f"{Path(__file__).parents[1]}/data/{index_name}/{index_name}.json"
-DATA_FILE_SMALL = (
-    f"{Path(__file__).parents[1]}/data/{index_name}-eda/{index_name}-small.json"
-)
+DATA_FILE = f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}.json"
+DATA_FILE_SMALL = f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-small.json"
 DATA_FILE_TOMATO = (
-    f"{Path(__file__).parents[1]}/data/{index_name}-eda/{index_name}-tomato.json"
+    f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-tomato.json"
 )
 DATA_FILE_TOMATO_SPOTS = (
-    f"{Path(__file__).parents[1]}/data/{index_name}-eda/{index_name}-tomato-spots.json"
+    f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-tomato-spots.json"
+)
+DATA_FILE_CALIFORNIA = (
+    f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-california.json"
 )
 
 EXPORTED_DATA_FILES = [
-    f"{Path(__file__).parents[1]}/data/{index_name}/2012-2014.json",
-    f"{Path(__file__).parents[1]}/data/{index_name}/2014-2016.json",
-    f"{Path(__file__).parents[1]}/data/{index_name}/2016-2018.json",
-    f"{Path(__file__).parents[1]}/data/{index_name}/2018-2020.json",
+    f"{Path(__file__).parents[6]}/data/{data_name}/2012-2014.json",
+    f"{Path(__file__).parents[6]}/data/{data_name}/2014-2016.json",
+    f"{Path(__file__).parents[6]}/data/{data_name}/2016-2018.json",
+    f"{Path(__file__).parents[6]}/data/{data_name}/2018-2020.json",
 ]
 
 """
@@ -77,18 +77,29 @@ def merge_exported_data_files(exported_data_files, data_file, data_file_small):
         json.dump(data, f, indent=2)
 
 
-def eda_spots_on_tomato_plants(data_file, data_file_tomato, data_file_tomato_spots):
+def eda_california_and_spots_on_tomato_plants(
+    data_file, data_file_california, data_file_tomato, data_file_tomato_spots
+):
     """To do exploratory data analysis"""
     with open(data_file) as f:
         data = json.load(f)
 
-    # get all documents with 'tomato' in the title
+    # get all documents with question from california
+    docs_california = []
+    for doc in data:
+        if doc["state"] and doc["state"].lower() == "california":
+            docs_california.append(doc)
+
+    with open(data_file_california, "w") as f:
+        json.dump(docs_california, f, indent=2)
+
+    # get all documents with 'tomato' in the title or question
     docs = []
     docs_spots = []
     for doc in data:
-        if "tomato" in doc["title"].lower():
+        if "tomato" in " ".join((doc["title"].lower(), doc["question"].lower())):
             docs.append(doc)
-            if "spots" in doc["title"].lower():
+            if "spots" in " ".join((doc["title"].lower(), doc["question"].lower())):
                 docs_spots.append(doc)
 
     with open(data_file_tomato, "w") as f:
@@ -96,9 +107,10 @@ def eda_spots_on_tomato_plants(data_file, data_file_tomato, data_file_tomato_spo
 
     with open(data_file_tomato_spots, "w") as f:
         json.dump(docs_spots, f, indent=2)
-    ...
 
 
 if __name__ == "__main__":
-    # merge_exported_data_files(EXPORTED_DATA_FILES, DATA_FILE, DATA_FILE_SMALL)
-    eda_spots_on_tomato_plants(DATA_FILE, DATA_FILE_TOMATO, DATA_FILE_TOMATO_SPOTS)
+    merge_exported_data_files(EXPORTED_DATA_FILES, DATA_FILE, DATA_FILE_SMALL)
+    eda_california_and_spots_on_tomato_plants(
+        DATA_FILE, DATA_FILE_CALIFORNIA, DATA_FILE_TOMATO, DATA_FILE_TOMATO_SPOTS
+    )

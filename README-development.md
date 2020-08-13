@@ -1,4 +1,4 @@
-# Instructions to develop new skills for the chatbot
+# Development
 
 ## Install the bot locally for development purposes
 
@@ -78,6 +78,13 @@ cd askchatbot/responseselectors
 
 # install the dependencies
 pip install -r requirements-dev.txt
+
+# Install spacy with english language model
+# sm = small
+# md = medium
+# lg = large
+python -m spacy download en_core_web_md
+python -m spacy link en_core_web_md en
 
 # install the responseselector package in editable mode
 pip install -e .

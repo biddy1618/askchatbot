@@ -1,97 +1,41 @@
 """
-Create training data for the ResponseSelector from the scraped AskExtension data.
+Create training data for a ResponseSelector from the scraped AskExtension data:
+https://dev.osticket.eduworks.com/kb/faq.php?id=faq_id   
+https://dev.osticket.eduworks.com/kb/faq.php?id=221      (example for Potatoes)
 
-Retrieval Actions & Response Selectors, with training data format are discribed here:
+Retrieval Actions & Response Selectors, with training data format are described here:
 https://rasa.com/docs/rasa/core/retrieval-actions/
 
 The JSON files representing questions and answers from the Ask Extension system:
 https://drive.google.com/drive/folders/12CyhdvCwNLgtdUHTcmWkAKR4oIWhGKHq 
-
-A reference conversation with multiple turns between asker & expert:
-(This is not common, most have only 1 question & answer)
-  {
-    "faq-id": 1190,
-    "title": "Ditch water for organic farming #118171",
-    "created": "2013-03-20 19:08:34",
-    "updated": "2013-03-29 21:26:34",
-    "tags": [
-      "irrigation and water management",
-      "organic production"
-    ],
-    "state": "Colorado",
-    "county": "Mesa County",
-    "question": "I have been told that if I...",
-    "answer": {
-      "1": {
-        "response": "That's ...",
-        "author": "Susan Rose"
-      },
-      "2": {
-        "response": "Thank you ...",
-        "author": "The Question Asker"
-      },
-      "3": {
-        "response": "Hello. I'm going ...",
-        "author": "Cindy Salter"
-      },
-      "4": {
-        "response": "Thank you for ...",
-        "author": "The Question Asker"
-      },
-      "5": {
-        "response": "Hello again,See ...",
-        "author": "Cindy Salter"
-      }
-    }
-
-The following files will be created, with text manipulation as described:
-
-nlu-askextension-tomato.md
-==========================
-## intent: askextension_tomato/<faq_id>_<state>
-- <title>. <question>
-
-<title>. <question>
-(-) separate out & mark up urls:
-    (-) [name.pdf](http...../name.pdf)   [.pdf]
-    (-) [name.php](http...../name.php)   [.php, .php/]
-    (-) [name.html](http..../name.html)  [.html]
-
---
-responses-askextension-tomato.md
-================================
-## <faq_id>_<state>
-* askextension_tomato/<faq_id>_<state>
-    - <response>
-
-<response>    
-
-(-) separate out & mark up urls (see above)
-
---
-askextensiondata-guide.csv
-======================
-A table to instruct the generator
-
-faq-id,include,comments
-
-with:
-(-) faq-id
-(-) include  : [True/False] - include this one or not
-
 """
+import logging
+import sys
 import string
 from pathlib import Path
+import spacy
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 from actions import actions_config as ac
-from actions.actions_parquet import file_size, persist_df
+from actions.actions_parquet import file_size, persist_df, read_df
+from actions.actions_spacy import (
+    pd_tokens_from_spacy,
+    pd_sentences_from_spacy,
+)
 
-pd.set_option("display.max_columns", 10)
+pd.set_option("display.max_columns", 100)
+pd.set_option("display.min_rows", 25)
+pd.set_option("display.max_rows", 25)
 pd.set_option("display.width", 1000)
 # pd.set_option('display.max_colwidth', None)
+
+nlp = spacy.load("en")
+
+# log to stdout instead of default stderr
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def plot_word_counts(df_plot):
@@ -121,7 +65,7 @@ def remove_encodings_and_escapes(sentences):
 
 def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
     """ETL for the extracted ask extension data.
-    Returns a pandas dataframe that is ready for processing"""
+    Returns a pandas dataframe for processing by spacy"""
     df_data = pd.read_json(path_data).set_index("faq-id")
 
     df_guide = pd.read_csv(path_guide).set_index("faq-id")
@@ -166,19 +110,33 @@ def etl(path_data, path_guide, max_word_count=None, verbose=1, plot=True):
     #
     titles = df["title"].tolist()
     questions = df["question"].tolist()
-    # strip '#number' from title
-    titles = ["".join(title.split("#")[:-1]).strip() for title in titles]
+    # strip ' #number' from title
+    # strip '...' from titles like https://dev.osticket.eduworks.com/kb/faq.php?id=7826
+    titles = ["".join(title.split("#")[:-1]).strip().strip("...") for title in titles]
     # add a '.' if it does not yet end with a punctuation
     titles = [
-        title if title[-1] in string.punctuation else title + "." for title in titles
+        title if (title and title[-1] in string.punctuation) else title + "."
+        for title in titles
     ]
-    #
-    tqs = [title + " " + question for (title, question) in zip(titles, questions)]
+    # Add title to tqs, but only if it is not already exactly in the question
+    tqs = [
+        question
+        if (title and question.startswith(title[:-1]))
+        else title + " " + question
+        for (title, question) in zip(titles, questions)
+    ]
     tqs = remove_encodings_and_escapes(tqs)
     df["title-question"] = tqs
 
     #
     # cleanup
+    #
+    #
+    # Remove questions with less than 2 words in title-question
+    shape = df.shape
+    mask = [len(x.split()) > 2 for x in df["title-question"].tolist()]
+    df = df[mask]
+    print(f"Removed {shape[0] - df.shape[0]} title-question with less than 2 words")
     #
     # remove long responses:
     #
@@ -234,22 +192,22 @@ def write_training_data(
         f.write("<!-- This file is auto-generated from scraped JSON. -->\n")
         f.write("\n")
 
-        for (intent_id, title_question) in zip(
-            df["intent-id"].tolist(), df["title-question"].tolist(),
+        for (intent_id, short_question) in zip(
+            df["intent-id"].tolist(), df["short-question"].tolist(),
         ):
             f.write(f"## intent: {response_selector_name}/{intent_id}\n")
-            f.write(f"- {title_question}\n\n")
+            f.write(f"- {short_question}\n\n")
 
     with open(path_responses, "w") as f:
         f.write("<!-- This file is auto-generated from scraped JSON. -->\n")
         f.write("\n")
 
-        for (intent_id, response) in zip(
-            df["intent-id"].tolist(), df["response"].tolist(),
+        for (intent_id, short_response) in zip(
+            df["intent-id"].tolist(), df["short-response"].tolist(),
         ):
             f.write(f"## {intent_id}\n")
             f.write(f"* {response_selector_name}/{intent_id}\n")
-            f.write(f"  - {response}\n\n")
+            f.write(f"  - {short_response}\n\n")
 
     if verbose:
         print("-----------------------------------------------------------------------")
@@ -257,32 +215,136 @@ def write_training_data(
         print(f"{path_responses} ({file_size(path_responses)})")
 
 
+def make_it_short(title, text, do_title=True, do_questions=True, do_nouns=True):
+    """Create a representative short version"""
+
+    titles = []
+    if do_title:
+        titles = [title]
+
+    # sentences that are questions
+    questions = []
+    if do_questions:
+        df_sentences = pd_sentences_from_spacy(nlp, text)
+        mask = df_sentences["is_question"]
+        questions = df_sentences.loc[mask, "sentence"].tolist()
+        # cutoff those long rambling questions at 100 characters
+        questions = [text[:100] for text in questions]
+
+    # nouns.
+    nouns = []
+    if do_nouns:
+        df_tokens = pd_tokens_from_spacy(nlp, text)
+        mask = df_tokens["pos_"] == "NOUN"
+        # the top 10 most occuring nouns
+        nouns = df_tokens.loc[mask, "text"].value_counts().index.tolist()[:10]
+
+    # join it all into one string
+    short_text = " ".join(titles + questions + nouns)
+
+    # remove some unwelcome words
+    banned = ["%"]
+    short_text = " ".join([word for word in short_text.split() if word not in banned])
+
+    banned_starts_with = ["http"]
+    for bsw in banned_starts_with:
+        short_text = " ".join(
+            [word for word in short_text.split() if not word.startswith(bsw)]
+        )
+
+    return short_text
+
+
+def etl_spacy(df, verbose=1):
+    """Extract representive 'short strings' for each title & question, using spacy.
+    Returns a pandas dataframe for writing NLU training data"""
+    if verbose:
+        print("ETL with spacy to create shorter strings for questions & responses")
+
+    df = df.copy()
+
+    titles = df["title"].tolist()
+    questions = df["question"].tolist()
+    responses = df["response"].tolist()
+
+    titles = remove_encodings_and_escapes(titles)
+    questions = remove_encodings_and_escapes(questions)
+    responses = remove_encodings_and_escapes(responses)
+
+    #
+    # titles:
+    #
+    # strip ' #number' from title
+    # strip '...' from titles like https://dev.osticket.eduworks.com/kb/faq.php?id=7826
+    titles = ["".join(title.split("#")[:-1]).strip().strip("...") for title in titles]
+    # add a '.' if it does not yet end with a punctuation
+    titles = [
+        title if (title and title[-1] in string.punctuation) else title + "."
+        for title in titles
+    ]
+    # Use title only if it is not already exactly in the question
+    titles = [
+        "" if (title and question.startswith(title[:-1])) else title
+        for (title, question) in zip(titles, questions)
+    ]
+
+    short_questions = []
+    short_responses = []
+    for title, question, response in zip(
+        tqdm(titles, desc="Create short strings"), questions, responses
+    ):
+        short_question = make_it_short(
+            title, question, do_title=True, do_questions=True, do_nouns=True
+        )
+        short_response = make_it_short(
+            title, response, do_title=True, do_questions=False, do_nouns=True
+        )
+
+        short_questions.append(short_question)
+        short_responses.append(short_response)
+
+    df["short-question"] = short_questions
+    df["short-response"] = short_responses
+    return df
+
+
 def main():
     """Main function"""
 
     data_name = "askextensiondata"
-    max_word_count = 2000
+    max_word_count = None
 
-    df = etl(
-        f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-tomato.json",
-        f"{Path(__file__).parents[0]}/{data_name}-guide.csv",
-        max_word_count,
-        verbose=1,
-        plot=False,
-    )
+    do_etl = True
+
+    if do_etl:
+
+        df = etl(
+            f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-california.json",
+            f"{Path(__file__).parents[0]}/{data_name}-guide.csv",
+            max_word_count,
+            verbose=1,
+            plot=False,
+        )
+
+        df = etl_spacy(df, verbose=2)
+
+        # save the ETL result, also used by the custom action
+        persist_df(
+            df,
+            local_dir=f"{Path(__file__).parents[3]}/actions",
+            fname=ac.askextension_parquet,
+        )
+    else:
+        df = read_df(
+            local_dir=f"{Path(__file__).parents[3]}/actions",
+            fname=ac.askextension_parquet,
+        )
 
     write_training_data(
         df,
-        f"{Path(__file__).parents[3]}/data/nlu/nlu-{data_name}-tomato.md",
-        f"{Path(__file__).parents[3]}/data/nlu/responses-{data_name}-tomato.md",
-        "askextension_tomato",
-    )
-
-    # save the ETL result, used by the custom action
-    persist_df(
-        df,
-        local_dir=f"{Path(__file__).parents[3]}/actions",
-        fname=ac.askextension_parquet,
+        f"{Path(__file__).parents[3]}/data/nlu/nlu-{data_name}-california.md",
+        f"{Path(__file__).parents[3]}/data/nlu/responses-{data_name}-california.md",
+        "askextension_california",
     )
 
 
