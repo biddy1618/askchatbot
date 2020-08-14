@@ -12,8 +12,8 @@ def ask_query():
     pest_name = input("Enter mapped pest_name (Return if none): ")
     if pest_name == "":
         pest_name = None
-    pest_problem_description = input("Enter problem description: ")
-    pest_causes_damage = input("Is it causing damage? [y,n]: ")
+    pest_problem_description = input("Enter problem description or ask a question: ")
+    pest_causes_damage = input("Is it causing damage? [y,n] (n): ")
     pest_damage_description = None
     if pest_causes_damage == "y":
         pest_damage_description = input("Enter damage description: ")

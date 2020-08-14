@@ -154,6 +154,26 @@
                     "link": {"type": "text"},
                     "src": {"type": "text"}
                 }
+            },
+            "ask_faq_id": {"type": "text"},
+            "ask_url": {"type": "text"},
+            "ask_title": {"type": "text"},
+            "ask_title_vector": {"type": "dense_vector", "dims": 512},
+            "ask_title_question": {"type": "text"},
+            "ask_title_question_vector": {"type": "dense_vector", "dims": 512},
+            "ask_created": {"type": "text"},
+            "ask_updated": {"type": "text"},
+            "ask_state": {"type": "text"},
+            "ask_county": {"type": "text"},
+            "ask_question": {"type": "text"},
+            "ask_question_vector": {"type": "dense_vector", "dims": 512},
+            "ask_answer": {
+                "type": "nested",
+                "properties": {
+                    "response": {"type": "text"},
+                    "response_vector": {"type": "dense_vector", "dims": 512},
+                    "author": {"type": "text"}
+                }
             }
         }
     }

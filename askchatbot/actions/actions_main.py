@@ -196,18 +196,24 @@ def print_hits(hits, title=""):
     print("----------------------------------------------------------")
     print(title)
     # print("{} total hits.".format(response["hits"]["total"]["value"]))
-    for hit in reversed(hits[:5]):
+    for hit in reversed(hits[:25]):
 
+        if "_score_weighted" not in hit.keys():
+            scores = f'score={hit.get("_score", 0.0):.3f}; '
+        else:
+            scores = (
+                f'wght={hit.get("_score_weighted", 0.0):.3f}; '
+                f'name={hit.get("_score_name",0.0):.3f}; '
+                f'othr={hit.get("_score_other",0.0):.3f}; '
+                f'capt={hit.get("_score_caption", 0.0):.3f}; '
+                f'vdeo={hit.get("_score_video", 0.0):.3f}; '
+                f'damg={hit.get("_score_damage", 0.0):.3f}; '
+            )
         text = (
             # f'{hit["_id"]}; '
-            f'wght={hit.get("_score_weighted", 0.0):.3f}; '
-            f'name={hit.get("_score_name",0.0):.3f}; '
-            f'othr={hit.get("_score_other",0.0):.3f}; '
-            f'capt={hit.get("_score_caption", 0.0):.3f}; '
-            f'vdeo={hit.get("_score_video", 0.0):.3f}; '
-            f'damg={hit.get("_score_damage", 0.0):.3f}; '
-            f'{hit["_source"]["doc_id"]}; '
-            f'{hit["_source"]["name"]}; '
+            f"{scores}"
+            f'({hit["_source"]["doc_id"]}, {hit["_source"]["name"]}); '
+            f'({hit["_source"]["ask_faq_id"]}, {hit["_source"]["ask_title"]}); '
             f'image-caption={(hit.get("best_image", {}) or {}).get("caption")}; '
             f'video-title={(hit.get("best_video", {}) or {}).get("videoTitle")}; '
         )
@@ -218,6 +224,7 @@ def print_hits(hits, title=""):
         tp_url = hit["_source"]["urlTurfPests"]
         wi_url = hit["_source"]["urlWeedItems"]
         ep_url = hit["_source"]["urlExoticPests"]
+        ask_url = hit["_source"]["ask_url"]
 
         text = f"{text}URLS:"
 
@@ -233,6 +240,8 @@ def print_hits(hits, title=""):
             text = f"{text} [weed item]({wi_url})"
         if ep_url:
             text = f"{text} [exotic pests]({ep_url})"
+        if ask_url:
+            text = f"{text} [askextension]({ask_url})"
 
         print(text)
 
@@ -246,7 +255,12 @@ async def do_es_queries(
 ):
     """Do the actual queries and return a dictionary with the lists of hits"""
 
-    if index_name not in ["ipmdata", "ipmdata-dev", "ipmdata-dev-large-5"]:
+    if index_name not in [
+        "ipmdata",
+        "ipmdata-dev",
+        "ipmdata-dev-large-5",
+        "ipm-and-ask-large-5",
+    ]:
         raise Exception(f"Not implemented for index_name = {index_name}")
 
     # create the embedding vectors
@@ -298,6 +312,15 @@ async def do_es_queries(
             "managementExoticPests",
             "related_linksExoticPests",
             "imagesExoticPests",
+            "ask_faq_id",
+            "ask_url",
+            "ask_title",
+            "ask_created",
+            "ask_updated",
+            "ask_state",
+            "ask_county",
+            "ask_question",
+            "ask_answer",
         ]
     }
 
@@ -308,7 +331,7 @@ async def do_es_queries(
     es_caption_hits = {}
     es_video_hits = {}
 
-    # all
+    # all, except askextenstion
     es_name_hits["name_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
@@ -531,6 +554,55 @@ async def do_es_queries(
         print_summary=print_summary,
     )
 
+    # askextenstion
+    es_name_hits["ask_name_title_hits"] = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "ask_title_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    es_name_hits["ask_pest_name_title_hits"] = []
+    if pest_name:
+        es_name_hits["ask_pest_name_title_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            pest_name_vector,
+            "ask_title_vector",
+            nested=False,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
+
+    es_other_hits["ask_question_hits"] = cosine_similarity_query(
+        index_name,
+        _source_query,
+        query_vector,
+        "ask_title_question_vector",
+        nested=False,
+        best_image="first",
+        best_video="first",
+        print_summary=print_summary,
+    )
+
+    es_damage_hits["ask_question_hits"] = []
+    if pest_damage_description:
+        es_damage_hits["ask_question_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            damage_vector,
+            "ask_title_question_vector",
+            nested=False,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
+
     do_nested = True
     # image captions might not be helping in the rating of the docs
     do_captions = True
@@ -544,6 +616,7 @@ async def do_es_queries(
     es_other_hits["pdi_text_hits"] = []
     es_other_hits["ep_text_hits"] = []
     es_caption_hits["ep_caption_hits"] = []
+    es_other_hits["ask_response_hits"] = []
     if not do_nested:
         print("SKIPPING SEARCH IN NESTED FIELDS")
     if do_nested:
@@ -743,6 +816,31 @@ async def do_es_queries(
                     best_video="first",
                     print_summary=print_summary,
                 )
+
+        es_other_hits["ask_response_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            query_vector,
+            "ask_answer.response_vector",
+            nested=True,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
+        if pest_name:
+            es_other_hits["ask_response_hits"] = es_other_hits[
+                "ask_response_hits"
+            ] + cosine_similarity_query(
+                index_name,
+                _source_query,
+                pest_name_vector,
+                "ask_answer.response_vector",
+                nested=True,
+                best_image="first",
+                best_video="first",
+                print_summary=print_summary,
+            )
+
     return es_name_hits, es_other_hits, es_damage_hits, es_caption_hits, es_video_hits
 
 
@@ -759,7 +857,14 @@ async def merge_and_score_hits(
     hits = []
 
     # The name searches
-    for hit2 in es_name_hits["name_hits"] + es_name_hits["pest_name_hits"]:
+    # NOTE: Testing to include ask_question_hits too, which is title+question
+    for hit2 in (
+        es_name_hits["name_hits"]
+        + es_name_hits["pest_name_hits"]
+        + es_name_hits["ask_name_title_hits"]
+        + es_name_hits["ask_pest_name_title_hits"]
+        + es_other_hits["ask_question_hits"]
+    ):
         hit2["_score_name"] = hit2.get("_score", 0.0)
         duplicate = False
         for hit in hits:
@@ -791,6 +896,7 @@ async def merge_and_score_hits(
         + es_other_hits["ep_monitoring_hits"]
         + es_other_hits["ep_management_hits"]
         + es_other_hits["ep_text_hits"]
+        + es_other_hits["ask_response_hits"]
     ):
         hit2["_score_other"] = hit2.get("_score", 0.0)
         duplicate = False
@@ -841,7 +947,7 @@ async def merge_and_score_hits(
         if not duplicate:
             hits.append(hit2)
 
-    # hits = sorted(hits, key=lambda h: h["_score"], reverse=True)
+    hits = sorted(hits, key=lambda h: h["_score"], reverse=True)
 
     # Scores based on damage vector
     for hit in hits:
@@ -851,6 +957,7 @@ async def merge_and_score_hits(
             es_damage_hits["pn_damage_hits"]
             + es_damage_hits["pdi_damage_hits"]
             + es_damage_hits["ep_damage_hits"]
+            + es_damage_hits["ask_question_hits"]
         ):
             hit2["_score_damage"] = hit2.get("_score", 0.0)
             duplicate = False
@@ -1138,12 +1245,14 @@ class FormQueryKnowledgeBase(FormAction):
     def create_text_for_pest(_i, hit, tracker) -> str:
         """Prepares a message for the user"""
         name = hit["_source"]["name"]
+        ask_title = hit["_source"]["ask_title"]
         pn_url = hit["_source"]["urlPestNote"]
         qt_url = hit["_source"]["urlQuickTip"]
         pdi_url = hit["_source"]["urlPestDiseaseItems"]
         tp_url = hit["_source"]["urlTurfPests"]
         wi_url = hit["_source"]["urlWeedItems"]
         ep_url = hit["_source"]["urlExoticPests"]
+        ask_url = hit["_source"]["ask_url"]
         # pn_image = None
         # if hit["best_image"]:
         #    pn_image = hit["best_image"]["src"]
@@ -1171,8 +1280,12 @@ class FormQueryKnowledgeBase(FormAction):
         # divider = "\  \n"
         divider = r"\-\-\-"
 
-        # text = f"{i+1}: {name}\n"
         text = f"**{name}**\n"
+        if ask_title:
+            if name:
+                text = f"{text}{s} **{ask_title}**\n"
+            else:
+                text = f"**{ask_title}**\n"
 
         if qt_url:
             text = f"{text}{s} _[quick tip]({qt_url})_\n"
@@ -1186,6 +1299,8 @@ class FormQueryKnowledgeBase(FormAction):
             text = f"{text}{s} _[weed item]({wi_url})_\n"
         if ep_url:
             text = f"{text}{s} _[exotic pests]({ep_url})_\n"
+        if ask_url:
+            text = f"{text}{s} _[exotic pests]({ask_url})_\n"
 
         if hit["best_video"]:
             video_title = hit["best_video"]["videoTitle"]
