@@ -5,11 +5,9 @@ Repo for the Ask Extension chatbot component demonstration completed in the 2019
 ## Things you can ask the bot
 
 The bot can:
-1. Say `hi` & `bye`
+2. Explain `Integrated Pest Management (IPM)`
 
-2. Explain Integrated Pest Management (IPM)
-
-3. Find  information based on an open question, for example:
+2. Find  information based on an open question, for example:
 
    ```bash
    - when I import a christmas tree from Michigan to california, is there a tax I need to pay?
@@ -33,7 +31,7 @@ The bot can:
 
    
 
-4. Find information based on a `pest problem description` & an optional `damage description`, for example:
+3. Find information based on a `pest problem description` & an optional `damage description`, for example:
 
    ```bash
    - pest problem description: I have ants in the house 
@@ -41,8 +39,8 @@ The bot can:
    ```
 
    ```bash
-   - pest problem description: There a lot of bees in my back yard
-   -       damage description: They seem to burrow into the wood piles
+   - pest problem description: There are a lot of bees in my back yard
+   -       damage description: They burrow into the wood piles
    ```
 
    ```bash
@@ -52,7 +50,7 @@ The bot can:
 
    
 
-5. If the bot cannot find anything, or if the provided information is not helpful, the bot will ask the user if they would like to ask an expert. If yes, a link will be provided where the user can ask their question.
+5. If the chatbot cannot find anything, or if the user indicates that the provided information is not helpful, the bot will ask the user if they would like to ask an expert. If yes, a link will be provided where the user can ask their question to an expert.
 
 
 
