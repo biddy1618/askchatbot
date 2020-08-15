@@ -20,6 +20,7 @@ index_name = ac.ipmdata_index_name
 INDEX_FILE = f"{Path(__file__).parents[1]}/data/ipmdata/index.json"
 
 DATA_FILE_NAMES = [
+    "askextensiondata-california.json",
     "cleanedPestDiseaseItems.json",
     "cleanedTurfPests.json",
     "cleanedWeedItems.json",
@@ -41,7 +42,12 @@ GPU_LIMIT = 0.5
 
 def index_data():
     """Create the index"""
-    if index_name in ["ipmdata", "ipmdata-dev", "ipmdata-dev-large-5"]:
+    if index_name in [
+        "ipmdata",
+        "ipmdata-dev",
+        "ipmdata-dev-large-5",
+        "ipm-and-ask-large-5",
+    ]:
         index_data_ipmdata()
     else:
         raise Exception(f"Not implemented for index_name = {index_name}")
@@ -93,15 +99,15 @@ def docs_etl():
         path_data = f"{Path(__file__).parents[1]}/data/ipmdata/{data_file_name}"
         df_docs_json[data_file_name] = pd.read_json(path_data)
 
-        before_shape = df_docs_json[data_file_name].shape
-
-        df_docs_json[data_file_name] = df_docs_json[data_file_name].drop_duplicates(
-            "name"
-        )
-        after_shape = df_docs_json[data_file_name].shape
-        num_dropped = before_shape[0] - after_shape[0]
-        if num_dropped > 0:
-            print(f"Dropped {num_dropped} with same 'name' in {data_file_name}")
+        if 'name' in df_docs_json[data_file_name].columns:
+            before_shape = df_docs_json[data_file_name].shape
+            df_docs_json[data_file_name] = df_docs_json[data_file_name].drop_duplicates(
+                "name"
+            )
+            after_shape = df_docs_json[data_file_name].shape
+            num_dropped = before_shape[0] - after_shape[0]
+            if num_dropped > 0:
+                print(f"Dropped {num_dropped} with same 'name' in {data_file_name}")
 
     df_docs_json = unique_column_names(df_docs_json)
 
@@ -184,6 +190,23 @@ def unique_column_names(df_docs_json):
         }
     )
 
+    df_docs_json["askextensiondata-california.json"] = df_docs_json[
+        "askextensiondata-california.json"
+    ].rename(
+        columns={
+            "faq-id": "ask_faq_id",
+            "url": "ask_url",
+            "title": "ask_title",
+            "title-question": "ask_title_question",
+            "created": "ask_created",
+            "updated": "ask_updated",
+            "state": "ask_state",
+            "county": "ask_county",
+            "question": "ask_question",
+            "answer": "ask_answer",
+        }
+    )
+
     ##    df_docs_json["cleanedFruitVeggieItems.json"] = df_docs_json[
     ##        "cleanedFruitVeggieItems.json"
     ##    ].rename(
@@ -232,6 +255,7 @@ def replace_nan(df_docs):
         "imagesWeedItems",
         "related_linksExoticPests",
         "imagesExoticPests",
+        "ask_answer",
     ]:
         df_docs[column] = [[] if x == "" else x for x in df_docs[column]]
 
@@ -314,6 +338,15 @@ def create_embedding_vectors(docs):
     ep_managements = [doc["managementExoticPests"] for doc in docs]
     ep_management_vectors = ac.embed(ep_managements).numpy()
 
+    ask_titles = [doc["ask_title"] for doc in docs]
+    ask_title_vectors = ac.embed(ask_titles).numpy()
+
+    ask_title_questions = [doc["ask_title_question"] for doc in docs]
+    ask_title_question_vectors = ac.embed(ask_title_questions).numpy()
+
+    ask_questions = [doc["ask_question"] for doc in docs]
+    ask_question_vectors = ac.embed(ask_questions).numpy()
+
     for (
         i,
         (
@@ -337,6 +370,9 @@ def create_embedding_vectors(docs):
             ep_life_cycle_vector,
             ep_monitoring_vector,
             ep_management_vector,
+            ask_title_vector,
+            ask_title_question_vector,
+            ask_question_vector,
         ),
     ) in enumerate(
         zip(
@@ -360,6 +396,9 @@ def create_embedding_vectors(docs):
             ep_life_cycle_vectors,
             ep_monitoring_vectors,
             ep_management_vectors,
+            ask_title_vectors,
+            ask_title_question_vectors,
+            ask_question_vectors,
         )
     ):
         docs[i]["name_vector"] = name_vector
@@ -382,6 +421,9 @@ def create_embedding_vectors(docs):
         docs[i]["life_cycleExoticPests_vector"] = ep_life_cycle_vector
         docs[i]["monitoringExoticPests_vector"] = ep_monitoring_vector
         docs[i]["managementExoticPests_vector"] = ep_management_vector
+        docs[i]["ask_title_vector"] = ask_title_vector
+        docs[i]["ask_title_question_vector"] = ask_title_question_vector
+        docs[i]["ask_question_vector"] = ask_question_vector
 
     ########################################################
     # add embedding vectors for text items of nested items #
@@ -456,6 +498,13 @@ def create_embedding_vectors(docs):
             captions_vectors = ac.embed(captions).numpy()
             for j, caption_vector in enumerate(captions_vectors):
                 doc["imagesExoticPests"][j]["caption_vector"] = caption_vector
+
+        ask_answers = doc["ask_answer"]
+        if ask_answers:
+            responses = [ask_answer["response"] for ask_answer in ask_answers]
+            responses_vectors = ac.embed(responses).numpy()
+            for j, response_vector in enumerate(responses_vectors):
+                doc["ask_answer"][j]["response_vector"] = response_vector
 
     return docs
 

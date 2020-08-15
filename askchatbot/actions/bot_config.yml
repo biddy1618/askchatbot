@@ -29,8 +29,8 @@ do-the-queries: true
 # Note: this does not apply to the damage score
 score-threshold: 1.4
 
-# number of items to search for
-search-size: 5
+# number of items to retrieve from each elastic search query
+search-size: 10
 
 # the tfhub pre-trained embedding to use
 # tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder/4"
@@ -40,7 +40,8 @@ tfhub-cache-dir: "/var/tmp/tfhub_modules"
 # index name of ipmdata queries
 # ipmdata-index-name: "ipmdata"
 # ipmdata-index-name: "ipmdata-dev"
-ipmdata-index-name: "ipmdata-dev-large-5"
+# ipmdata-index-name: "ipmdata-dev-large-5"
+ipmdata-index-name: "ipm-and-ask-large-5"
 
 
 # Default bot configurations                                         #

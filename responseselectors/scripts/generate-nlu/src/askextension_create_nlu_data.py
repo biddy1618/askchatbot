@@ -334,7 +334,7 @@ def main():
 
         df = etl(
             f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-california.json",
-            f"{Path(__file__).parents[0]}/{data_name}-guide.csv",
+            f"{Path(__file__).parents[6]}/data/{data_name}/{data_name}-guide.csv",
             max_word_count,
             verbose=1,
             plot=False,

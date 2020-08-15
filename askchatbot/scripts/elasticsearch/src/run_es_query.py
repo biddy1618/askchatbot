@@ -9,22 +9,37 @@ from actions.actions_main import handle_es_query
 
 def ask_query():
     """Get the input from user"""
-    pest_name = input("Enter mapped pest_name (Return if none): ")
+    question = None
+    pest_name = None
+    pest_problem_description = None
+    pest_causes_damage = "n"
+    pest_damage_description = None
+
+    pest_name = input(
+        "Enter mapped pest_name that Rasa will extract (Return if none): "
+    )
     if pest_name == "":
         pest_name = None
-    pest_problem_description = input("Enter problem description: ")
-    pest_causes_damage = input("Is it causing damage? [y,n]: ")
-    pest_damage_description = None
-    if pest_causes_damage == "y":
-        pest_damage_description = input("Enter damage description: ")
 
-    return pest_name, pest_problem_description, pest_damage_description
+    if input("Do you have a question? [y, n] (y): ") in ["y", ""]:
+        question = input("Enter your question: ")
+    elif input("Do you have a pest problem? [y, n] (y): ") in ["y", ""]:
+
+        pest_problem_description = input("Enter pest problem description: ")
+        pest_damage_description = None
+        if input("Is it causing damage? [y,n] (y): ") in ["y", ""]:
+            pest_damage_description = input("Enter damage description: ")
+
+    return question, pest_name, pest_problem_description, pest_damage_description
 
 
-async def my_submit(pest_name, pest_problem_description, pest_damage_description=None):
+async def my_submit(
+    question, pest_name, pest_problem_description, pest_damage_description=None
+):
     """similar to submit function of the form"""
 
-    hits = await handle_es_query(
+    await handle_es_query(
+        question,
         pest_name,
         pest_problem_description,
         pest_damage_description,
@@ -32,21 +47,28 @@ async def my_submit(pest_name, pest_problem_description, pest_damage_description
         print_summary=True,
     )
 
-    print(f"Found {len(hits)} hits for:")
-    print(f"- problem: {pest_problem_description}")
-    print(f"- damage : {pest_damage_description}")
-    print("---")
-
 
 async def main():
     """Run an infinite query loop. ^C to interrupt"""
     while True:
         try:
-            (pest_name, pest_problem_description, pest_damage_description) = ask_query()
+            (
+                question,
+                pest_name,
+                pest_problem_description,
+                pest_damage_description,
+            ) = ask_query()
 
-            await my_submit(
-                pest_name, pest_problem_description, pest_damage_description
-            )
+            if question or pest_problem_description:
+                await my_submit(
+                    question,
+                    pest_name,
+                    pest_problem_description,
+                    pest_damage_description,
+                )
+            else:
+                print("Please try again...")
+                print(" ")
 
         except KeyboardInterrupt:
             return

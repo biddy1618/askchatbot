@@ -46,6 +46,8 @@ pip install -e .
     
 # Uncomment the correct index name of ipmdata queries
 #ipmdata-index-name: "ipmdata-dev-large-5"
+ipmdata-index-name: "ipm-and-ask-large-5"
+
 
 # ingest the ipmdata
 cd <->/askchatbot/askchatbot/scripts/elasticsearch/src
