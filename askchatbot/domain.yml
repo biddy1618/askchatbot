@@ -87,9 +87,6 @@ responses:
   
   utter_inform_privacypolicy:
   - text: By chatting with me, you agree to our [privacy policy]({bot_config_urlprivacy}).
-
-  utter_summarize_skills:
-  - text: I can explain what IPM is or help to manage a particular pest.
   
   utter_lets_start_over:
   - text: Mmmm..., I am confused. Shall we start over?

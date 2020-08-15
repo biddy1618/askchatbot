@@ -1109,7 +1109,6 @@ class ActionHi(Action):
 
         if not said_hi:
             dispatcher.utter_message(template="utter_hi")
-            dispatcher.utter_message(template="utter_summarize_skills")
 
         if not shown_privacypolicy:
             dispatcher.utter_message(template="utter_inform_privacypolicy")
@@ -1126,17 +1125,16 @@ class ActionHi(Action):
 
         if not explained_ipm:
             buttons.append(
-                {"title": "Explain IPM", "payload": "/intent_explain_ipm",}
+                {
+                    "title": "I want to learn more about IPM",
+                    "payload": "/intent_explain_ipm",
+                }
             )
 
         if said_hi:
             buttons.append(
                 {"title": "Goodbye", "payload": "/intent_bye",}
             )
-
-        buttons.append(
-            {"title": "Something else", "payload": "/intent_out_of_scope",}
-        )
 
         dispatcher.utter_message(
             text="Please select one of these options", buttons=buttons
@@ -1381,66 +1379,57 @@ class FormQueryKnowledgeBase(FormAction):
         # Do not use:
         # divider = "======================================"
         # divider = "\  \n"
-        divider = r"\-"
-        divider_long = r"\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-"
+        # divider = r"\-"  # OK
+        divider_long = r"\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-"
 
         text = ""
         if i == 0:
             text = f"{divider_long}\n{header}\n"
 
-        if name:
-            text = f"{text}\n({score})**{name}**\n"
-        if ask_title:
-            text = f"{text}\n({score})**{ask_title}**\n"
-
-        if qt_url:
-            text = f"{text}{s} _[quick tip]({qt_url})_\n"
-        if pn_url:
-            text = f"{text}{s} _[pestnote]({pn_url})_\n"
-        if pdi_url:
-            text = f"{text}{s} _[pest disease item]({pdi_url})_\n"
-        if tp_url:
-            text = f"{text}{s} _[turf pest]({tp_url})_\n"
-        if wi_url:
-            text = f"{text}{s} _[weed item]({wi_url})_\n"
-        if ep_url:
-            text = f"{text}{s} _[exotic pests]({ep_url})_\n"
         if ask_url:
-            text = f"{text}{s} _[askextension]({ask_url})_\n"
+            if not ask_title:
+                ask_title = "askextension"
 
-        if hit["best_video"]:
-            video_title = hit["best_video"]["videoTitle"]
-            video_link = hit["best_video"]["videoLink"]
-            text = f"{text}{s} _[video: '{video_title}']({video_link})_\n"
+            text = f"{text}({score:.2f})**[{ask_title}]({ask_url})**\n"
 
-        if tracker.get_slot("bot_config_debug"):
-            ##text = (
-            ##    f'{text}{s} _weighted score  ={hit.get("_score_weighted", 0.0):.3f}_\n'
-            ##)
-            ##text = f'{text}{s} _score for name  ={hit.get("_score_name",0.0):.3f}_\n'
-            ##text = f'{text}{s} _score for other ={hit.get("_score_other",0.0):.3f}_\n'
-            ##text = (
-            ##    f'{text}{s} _score for caption={hit.get("_score_caption", 0.0):.3f}_\n'
-            ##)
-            ##text = (
-            ##    f'{text}{s} _score for video   ={hit.get("_score_video", 0.0):.3f}_\n'
-            ##)
-            ##text = (
-            ##    f'{text}{s} _score for damage  ={hit.get("_score_damage", 0.0):.3f}_\n'
-            ##)
-            if score < tracker.get_slot("bot_config_score_threshold"):
-                text = (
-                    f"{text}{s} _Below score threshold of "
-                    f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
-                )
-            ##            else:
-            ##                text = (
-            ##                    f"{text}{s} _Above score threshold of "
-            ##                f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
-            ##                )
+        else:
 
-            # Note that \n\n is not working
-            text = f"{text}{divider}\n"
+            if not name:
+                name = "ipm"
+
+            # just pick one ipm url, with pest notes the most important one
+            ipm_url = ""
+
+            if pdi_url:
+                ipm_url = pdi_url
+            if tp_url:
+                ipm_url = tp_url
+            if wi_url:
+                ipm_url = wi_url
+            if ep_url:
+                ipm_url = ep_url
+            if qt_url:
+                ipm_url = qt_url
+            if pn_url:
+                ipm_url = pn_url
+
+            video_link = None
+            if hit["best_video"]:
+                video_title = hit["best_video"]["videoTitle"]
+                video_link = hit["best_video"]["videoLink"]
+
+            text = f"{text}({score:.2f})**[{name}]({ipm_url})**\n"
+            if video_link:
+                text = f"{text}{s} _[video: '{video_title}']({video_link})_\n"
+
+        ##        if score < tracker.get_slot("bot_config_score_threshold"):
+        ##            text = (
+        ##                f"{text}{s} _Below score threshold of "
+        ##                f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
+        ##            )
+
+        # No longer need a divider between the items.
+        # text = f"{text}{divider}\n"
         return text
 
     async def submit(
@@ -1613,7 +1602,7 @@ class FormPresentHits(FormAction):
         text = None
 
         pests_summaries = tracker.get_slot("pests_summaries")
-        if pests_summaries:
+        if pests_summaries and i < len(pests_summaries):
             hit_summary = pests_summaries[i]
             if hit_summary:
                 if tracker.get_slot("bot_config_debug") or hit_summary[
