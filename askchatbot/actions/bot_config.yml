@@ -30,7 +30,7 @@ do-the-queries: true
 score-threshold: 1.4
 
 # number of items to retrieve from each elastic search query
-search-size: 25
+search-size: 10
 
 # the tfhub pre-trained embedding to use
 # tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder/4"

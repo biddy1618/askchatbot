@@ -7,32 +7,9 @@ Repo for the Ask Extension chatbot component demonstration completed in the 2019
 The bot can:
 1. Say `hi` & `bye`
 
-   
-
 2. Explain Integrated Pest Management (IPM)
 
-   
-
-3. Find information based on a `pest description` & an optional `damage description`, for example:
-
-   ```bash
-   - pest problem description: I have ants in the house 
-   - pest damage  description: They create holes in my wall
-   ```
-
-   ```bash
-   - pest problem description: I think I have lanternflies
-   - pest damage  description: -
-   ```
-
-   ```bash
-   - pest problem description: I have grubs in my lawn 
-   - pest damage  description: The grass is completely dead in certain spots
-   ```
-
-   
-
-4. Find  information based on an open question, for example:
+3. Find  information based on an open question, for example:
 
    ```bash
    - when I import a christmas tree from Michigan to california, is there a tax I need to pay?
@@ -43,7 +20,34 @@ The bot can:
    ```
 
    ```bash
-   -  have ants in my kitchen and want to know how to get rid of them
+   - I have ants in my kitchen and want to know how to get rid of them
+   ```
+
+   ```bash
+   - I think I have lanternflies
+   ```
+
+   ```bash
+   - My tomatoes have black spots, any idea what it could be?
+   ```
+
+   
+
+4. Find information based on a `pest problem description` & an optional `damage description`, for example:
+
+   ```bash
+   - pest problem description: I have ants in the house 
+   -       damage description: They create holes in my wall
+   ```
+
+   ```bash
+   - pest problem description: There a lot of bees in my back yard
+   -       damage description: They seem to burrow into the wood piles
+   ```
+
+   ```bash
+   - pest problem description: I got grubs in my lawn 
+   -       damage description: The grass is completely dead in certain spots
    ```
 
    

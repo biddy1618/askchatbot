@@ -1,9 +1,11 @@
 intents:
-  - intent_configure_bot
+  - intent_configure_bot:
+      triggers: action_configure_bot
   - intent_hi
   - intent_bye
   - intent_yes
   - intent_no
+  - intent_i_have_a_question
   - intent_i_have_a_pest
   - intent_explain_ipm
   - intent_out_of_scope
@@ -42,6 +44,8 @@ slots:
     values:
     - yes
     - no
+  question:
+    type: unfeaturized
   pest_name:
     type: unfeaturized
   pest_problem_description:
@@ -71,6 +75,7 @@ actions:
   - action_explain_ipm
   - action_ask_handoff_to_expert
   - action_kickoff_intent_i_have_a_pest
+  - action_kickoff_intent_i_have_a_question
   
 forms:
   - form_query_knowledge_base
@@ -128,6 +133,9 @@ responses:
   utter_you_are_welcome:
   - text: You are welcome!
   
+  utter_ask_question:
+  - text: Please enter your question
+  
   utter_ask_pest_problem_description:
   - text: Please describe your pest problem
   
@@ -157,7 +165,15 @@ responses:
     - payload: /intent_no
       title: "No"
     text: "Do you have another pest problem I can help you with?"
-  
+
+  utter_another_question_i_can_help_with:
+  - buttons:
+    - payload: /intent_yes
+      title: "Yes"
+    - payload: /intent_no
+      title: "No"
+    text: "Do you have another question I can help you with?"
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

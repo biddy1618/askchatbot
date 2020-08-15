@@ -13,11 +13,12 @@ from rasa_sdk.events import (
     ActionExecuted,
     EventType,
     UserUttered,
+    UserUtteranceReverted,
+    FollowupAction,
 )
 
-##import requests
-##import aiohttp
 import inflect
+import pandas as pd
 
 from actions import actions_config as ac
 
@@ -32,6 +33,11 @@ USE_AIOHTTP = False
 PEST_NAME_MUST_BE_SINGULAR = ["mildew"]
 PEST_NAME_MUST_BE_SINGULAR = [p.lower() for p in PEST_NAME_MUST_BE_SINGULAR]
 
+pd.set_option("display.max_columns", 100)
+pd.set_option("display.min_rows", 25)
+pd.set_option("display.max_rows", 25)
+pd.set_option("display.width", 1000)
+# pd.set_option('display.max_colwidth', None)
 
 # https://forum.rasa.com/t/trigger-a-story-or-intent-from-a-custom-action/13784/9?u=arjaan
 def next_intent_events(next_intent: Text) -> List[Dict]:
@@ -199,7 +205,7 @@ def print_hits(hits, title=""):
     for hit in reversed(hits[:25]):
 
         if "_score_weighted" not in hit.keys():
-            scores = f'score={hit.get("_score", 0.0):.3f}; '
+            scores = f'score={hit.get("_score_max", 0.0):.3f}; '
         else:
             scores = (
                 f'wght={hit.get("_score_weighted", 0.0):.3f}; '
@@ -247,6 +253,7 @@ def print_hits(hits, title=""):
 
 
 async def do_es_queries(
+    question,
     pest_name,
     pest_problem_description,
     pest_damage_description,
@@ -264,11 +271,19 @@ async def do_es_queries(
         raise Exception(f"Not implemented for index_name = {index_name}")
 
     # create the embedding vectors
+    question_vector = None
+    if question:
+        question_vector = ac.embed([question]).numpy()[0]
+
     pest_name_vector = None
     if pest_name:
         pest_name_vector = ac.embed([pest_name]).numpy()[0]
 
-    query_vector = ac.embed([pest_problem_description]).numpy()[0]
+    query_vector = None
+    if pest_problem_description:
+        query_vector = ac.embed([pest_problem_description]).numpy()[0]
+    else:
+        query_vector = question_vector
 
     damage_vector = None
     if pest_damage_description:
@@ -325,6 +340,7 @@ async def do_es_queries(
     }
 
     # TODO: Refactor this into loops
+    es_ask_hits = {}
     es_name_hits = {}
     es_other_hits = {}
     es_damage_hits = {}
@@ -555,7 +571,7 @@ async def do_es_queries(
     )
 
     # askextenstion
-    es_name_hits["ask_name_title_hits"] = cosine_similarity_query(
+    es_ask_hits["ask_name_title_hits"] = cosine_similarity_query(
         index_name,
         _source_query,
         query_vector,
@@ -566,9 +582,9 @@ async def do_es_queries(
         print_summary=print_summary,
     )
 
-    es_name_hits["ask_pest_name_title_hits"] = []
+    es_ask_hits["ask_pest_name_title_hits"] = []
     if pest_name:
-        es_name_hits["ask_pest_name_title_hits"] = cosine_similarity_query(
+        es_ask_hits["ask_pest_name_title_hits"] = cosine_similarity_query(
             index_name,
             _source_query,
             pest_name_vector,
@@ -579,20 +595,22 @@ async def do_es_queries(
             print_summary=print_summary,
         )
 
-    es_other_hits["ask_question_hits"] = cosine_similarity_query(
-        index_name,
-        _source_query,
-        query_vector,
-        "ask_title_question_vector",
-        nested=False,
-        best_image="first",
-        best_video="first",
-        print_summary=print_summary,
-    )
+    es_ask_hits["ask_question_hits"] = []
+    if question:
+        es_ask_hits["ask_question_hits"] = cosine_similarity_query(
+            index_name,
+            _source_query,
+            question_vector,
+            "ask_title_question_vector",
+            nested=False,
+            best_image="first",
+            best_video="first",
+            print_summary=print_summary,
+        )
 
-    es_damage_hits["ask_question_hits"] = []
+    es_ask_hits["ask_damage_hits"] = []
     if pest_damage_description:
-        es_damage_hits["ask_question_hits"] = cosine_similarity_query(
+        es_ask_hits["ask_damage_hits"] = cosine_similarity_query(
             index_name,
             _source_query,
             damage_vector,
@@ -616,7 +634,7 @@ async def do_es_queries(
     es_other_hits["pdi_text_hits"] = []
     es_other_hits["ep_text_hits"] = []
     es_caption_hits["ep_caption_hits"] = []
-    es_other_hits["ask_response_hits"] = []
+    es_ask_hits["ask_response_hits"] = []
     if not do_nested:
         print("SKIPPING SEARCH IN NESTED FIELDS")
     if do_nested:
@@ -817,23 +835,12 @@ async def do_es_queries(
                     print_summary=print_summary,
                 )
 
-        es_other_hits["ask_response_hits"] = cosine_similarity_query(
-            index_name,
-            _source_query,
-            query_vector,
-            "ask_answer.response_vector",
-            nested=True,
-            best_image="first",
-            best_video="first",
-            print_summary=print_summary,
-        )
-        if pest_name:
-            es_other_hits["ask_response_hits"] = es_other_hits[
-                "ask_response_hits"
-            ] + cosine_similarity_query(
+        es_ask_hits["ask_response_hits"] = []
+        if question:
+            es_ask_hits["ask_response_hits"] = cosine_similarity_query(
                 index_name,
                 _source_query,
-                pest_name_vector,
+                question_vector,
                 "ask_answer.response_vector",
                 nested=True,
                 best_image="first",
@@ -841,10 +848,18 @@ async def do_es_queries(
                 print_summary=print_summary,
             )
 
-    return es_name_hits, es_other_hits, es_damage_hits, es_caption_hits, es_video_hits
+    return (
+        es_ask_hits,
+        es_name_hits,
+        es_other_hits,
+        es_damage_hits,
+        es_caption_hits,
+        es_video_hits,
+    )
 
 
 async def merge_and_score_hits(
+    es_ask_hits,
     es_name_hits,
     es_other_hits,
     es_damage_hits,
@@ -854,17 +869,39 @@ async def merge_and_score_hits(
 ):
     """Combine all hits and score per category"""
 
+    ####################################
+    # askextension docs
+    # Do not use categories, just max it accross all scores
+    #
+    hits = []
+    for hit2 in (
+        es_ask_hits["ask_name_title_hits"]
+        + es_ask_hits["ask_pest_name_title_hits"]
+        + es_ask_hits["ask_question_hits"]
+        + es_ask_hits["ask_damage_hits"]
+        + es_ask_hits["ask_response_hits"]
+    ):
+        hit2["_score_max"] = hit2.get("_score", 0.0)
+        duplicate = False
+        for hit in hits:
+            if hit2["_source"]["doc_id"] == hit["_source"]["doc_id"]:
+                hit["_score_max"] = max(hit.get("_score_max", 0.0), hit2["_score"])
+                duplicate = True
+                break
+        if not duplicate:
+            hits.append(hit2)
+
+    # this sort is not needed, just for debugging
+    if len(hits) > 0:
+        hits = sorted(hits, key=lambda h: h["_score_max"], reverse=True)
+    hits_ask = hits
+
+    ############################################################
+    # ipmdata
     hits = []
 
     # The name searches
-    # NOTE: Testing to include ask_question_hits too, which is title+question
-    for hit2 in (
-        es_name_hits["name_hits"]
-        + es_name_hits["pest_name_hits"]
-        + es_name_hits["ask_name_title_hits"]
-        + es_name_hits["ask_pest_name_title_hits"]
-        + es_other_hits["ask_question_hits"]
-    ):
+    for hit2 in es_name_hits["name_hits"] + es_name_hits["pest_name_hits"]:
         hit2["_score_name"] = hit2.get("_score", 0.0)
         duplicate = False
         for hit in hits:
@@ -896,7 +933,6 @@ async def merge_and_score_hits(
         + es_other_hits["ep_monitoring_hits"]
         + es_other_hits["ep_management_hits"]
         + es_other_hits["ep_text_hits"]
-        + es_other_hits["ask_response_hits"]
     ):
         hit2["_score_other"] = hit2.get("_score", 0.0)
         duplicate = False
@@ -947,8 +983,6 @@ async def merge_and_score_hits(
         if not duplicate:
             hits.append(hit2)
 
-    hits = sorted(hits, key=lambda h: h["_score"], reverse=True)
-
     # Scores based on damage vector
     for hit in hits:
         hit["_score_damage"] = 0.0
@@ -957,7 +991,6 @@ async def merge_and_score_hits(
             es_damage_hits["pn_damage_hits"]
             + es_damage_hits["pdi_damage_hits"]
             + es_damage_hits["ep_damage_hits"]
-            + es_damage_hits["ask_question_hits"]
         ):
             hit2["_score_damage"] = hit2.get("_score", 0.0)
             duplicate = False
@@ -971,41 +1004,55 @@ async def merge_and_score_hits(
             if not duplicate:
                 hits.append(hit2)
 
-    return hits
+    # this sort is not needed, just for debugging
+    if len(hits) > 0:
+        hits = sorted(hits, key=lambda h: h["_score"], reverse=True)
+    hits_ipm = hits
+
+    return hits_ask, hits_ipm
 
 
-async def weight_score(hits):
+async def weight_score(hits_ask, hits_ipm):
     """Apply weighting"""
-    for hit in hits:
-        score_name = hit.get("_score_name", 0.0)
+    #######################################################################
+    # For searches in the askextension data, we do not weigh. Already maxed
 
-        score_other = max(
-            hit.get("_score_other", 0.0),
-            hit.get("_score_caption", 0.0),
-            hit.get("_score_video", 0.0),
-        )
+    if len(hits_ask) > 0:
+        hits_ask = sorted(hits_ask, key=lambda h: h["_score_max"], reverse=True)
 
-        score_damage = hit.get("_score_damage", 0.0)
+    #######################################################################
+    if len(hits_ipm) > 0:
+        for hit in hits_ipm:
+            score_name = hit.get("_score_name", 0.0)
 
-        w = [0.9, 0.05, 0.05]
+            score_other = max(
+                hit.get("_score_other", 0.0),
+                hit.get("_score_caption", 0.0),
+                hit.get("_score_video", 0.0),
+            )
 
-        if score_damage < 1.0:
-            w[0] += 0.5 * w[2]
-            w[1] += 0.5 * w[2]
-            w[2] = 0.0
+            score_damage = hit.get("_score_damage", 0.0)
 
-        hit["_score_weighted"] = (
-            w[0] * score_name + w[1] * score_other + w[2] * score_damage
-        )
+            w = [0.9, 0.05, 0.05]
 
-    # Sort to weighted score
-    hits = sorted(hits, key=lambda h: h["_score_weighted"], reverse=True)
+            if score_damage < 1.0:
+                w[0] += 0.5 * w[2]
+                w[1] += 0.5 * w[2]
+                w[2] = 0.0
+
+            hit["_score_weighted"] = (
+                w[0] * score_name + w[1] * score_other + w[2] * score_damage
+            )
+
+        # Sort to weighted score
+        hits_ipm = sorted(hits_ipm, key=lambda h: h["_score_weighted"], reverse=True)
 
     # Do not filter on threshold. Leave this up to the caller
-    return hits
+    return hits_ask, hits_ipm
 
 
 async def handle_es_query(
+    question,
     pest_name,
     pest_problem_description,
     pest_damage_description,
@@ -1015,12 +1062,14 @@ async def handle_es_query(
     """Handles an elastic search query"""
 
     (
+        es_ask_hits,
         es_name_hits,
         es_other_hits,
         es_damage_hits,
         es_caption_hits,
         es_video_hits,
     ) = await do_es_queries(
+        question,
         pest_name,
         pest_problem_description,
         pest_damage_description,
@@ -1028,7 +1077,8 @@ async def handle_es_query(
         print_summary,
     )
 
-    hits = await merge_and_score_hits(
+    hits_ask, hits_ipm = await merge_and_score_hits(
+        es_ask_hits,
         es_name_hits,
         es_other_hits,
         es_damage_hits,
@@ -1037,12 +1087,13 @@ async def handle_es_query(
         pest_damage_description,
     )
 
-    hits = await weight_score(hits)
+    hits_ask, hits_ipm = await weight_score(hits_ask, hits_ipm)
 
     if print_summary:
-        print_hits(hits, title="Combined, Weighted & sorted hits")
+        print_hits(hits_ask, title="Combined, Weighted & sorted hits_ask")
+        print_hits(hits_ipm, title="Combined, Weighted & sorted hits_ipm")
 
-    return hits
+    return hits_ask, hits_ipm
 
 
 class ActionHi(Action):
@@ -1066,7 +1117,11 @@ class ActionHi(Action):
         buttons = []
 
         buttons.append(
-            {"title": "I have a pest", "payload": "/intent_i_have_a_pest",}
+            {"title": "I have a question", "payload": "/intent_i_have_a_question",}
+        )
+
+        buttons.append(
+            {"title": "I have a pest problem", "payload": "/intent_i_have_a_pest",}
         )
 
         if not explained_ipm:
@@ -1114,6 +1169,18 @@ class ActionKickoffAnotherIHaveAPestIntent(Action):
         return events
 
 
+class ActionKickoffAnotherIHaveAQuestionIntent(Action):
+    """Kickoff another intent_i_have_a_question, after cleaning out the Tracker"""
+
+    def name(self) -> Text:
+        return "action_kickoff_intent_i_have_a_question"
+
+    async def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        events = reset_slots_from_previous_forms()
+        events.extend(next_intent_events("intent_i_have_a_question"))
+        return events
+
+
 class ActionAskHandoffToExpert(Action):
     """Asks if user wants to ask the question to an expert/human"""
 
@@ -1134,12 +1201,35 @@ class FormQueryKnowledgeBase(FormAction):
     def required_slots(tracker: Tracker) -> List[Text]:
         """A list of required slots that the form has to fill"""
 
-        slots = ["pest_problem_description"]
+        def how_did_we_get_here(tracker: Tracker) -> Text:
+            """Find out if we came here because of a question or a pest problem.
+            Do this by looking at all the events, and find the latest one that could have
+            triggered the calling of this form.
+            """
+            df = pd.DataFrame(tracker.events)
+            loc_pest = 0
+            loc_question = 0
+            if "/intent_i_have_a_pest" in df["text"].values:
+                loc_pest = df[df["text"] == "/intent_i_have_a_pest"].index.values[-1]
+            if "/intent_i_have_a_question" in df["text"].values:
+                loc_question = df[
+                    df["text"] == "/intent_i_have_a_question"
+                ].index.values[-1]
 
-        if tracker.get_slot("pest_causes_damage") != "no":
-            slots.extend(
-                ["pest_causes_damage", "pest_damage_description",]
-            )
+            if loc_pest > loc_question:
+                return "/intent_i_have_a_pest"
+
+            return "/intent_i_have_a_question"
+
+        if how_did_we_get_here(tracker) == "/intent_i_have_a_pest":
+            slots = ["pest_problem_description"]
+
+            if tracker.get_slot("pest_causes_damage") != "no":
+                slots.extend(
+                    ["pest_causes_damage", "pest_damage_description",]
+                )
+        else:
+            slots = ["question"]
 
         return slots
 
@@ -1151,6 +1241,11 @@ class FormQueryKnowledgeBase(FormAction):
             or a list of them, where a first match will be picked"""
 
         return {
+            "question": [
+                self.from_text(
+                    not_intent=["intent_garbage_inputs", "intent_configure_bot"]
+                )
+            ],
             "pest_problem_description": [
                 self.from_text(
                     not_intent=["intent_garbage_inputs", "intent_configure_bot"]
@@ -1224,25 +1319,33 @@ class FormQueryKnowledgeBase(FormAction):
         question = f"Are the {pest_plural.lower()} causing any damage?"
         return {"pest_problem_description": value, "cause_damage_question": question}
 
-    def summarize_hits(self, hits, tracker) -> list:
+    def summarize_hits(self, hits_ask, hits_ipm, tracker) -> list:
         """Create a list of dictionaries, where each dictionary contains those items we
         want to use when presenting the hits in a conversational manner to the user."""
         pests_summaries = []
-        if not hits:
+        if not hits_ask and not hits_ipm:
             return pests_summaries
 
-        for i, hit in enumerate(hits):
+        for i, hit in enumerate(hits_ask[: min(3, len(hits_ask))]):
             hit_summary = {}
+            score = hit["_score_max"]
+            hit_summary["message"] = self.create_text_for_pest(
+                i, hit, score, tracker, "From askextension data:"
+            )
+            pests_summaries.append(hit_summary)
 
-            hit_summary["_score_weighted"] = hit["_score_weighted"]
-            hit_summary["message"] = self.create_text_for_pest(i, hit, tracker)
-
+        for i, hit in enumerate(hits_ipm[: min(3, len(hits_ipm))]):
+            hit_summary = {}
+            score = hit["_score_weighted"]
+            hit_summary["message"] = self.create_text_for_pest(
+                i, hit, score, tracker, "From IPM data:"
+            )
             pests_summaries.append(hit_summary)
 
         return pests_summaries
 
     @staticmethod
-    def create_text_for_pest(_i, hit, tracker) -> str:
+    def create_text_for_pest(i, hit, score, tracker, header) -> str:
         """Prepares a message for the user"""
         name = hit["_source"]["name"]
         ask_title = hit["_source"]["ask_title"]
@@ -1278,14 +1381,17 @@ class FormQueryKnowledgeBase(FormAction):
         # Do not use:
         # divider = "======================================"
         # divider = "\  \n"
-        divider = r"\-\-\-"
+        divider = r"\-"
+        divider_long = r"\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-"
 
-        text = f"**{name}**\n"
+        text = ""
+        if i == 0:
+            text = f"{divider_long}\n{header}\n"
+
+        if name:
+            text = f"{text}\n({score})**{name}**\n"
         if ask_title:
-            if name:
-                text = f"{text}{s} **{ask_title}**\n"
-            else:
-                text = f"**{ask_title}**\n"
+            text = f"{text}\n({score})**{ask_title}**\n"
 
         if qt_url:
             text = f"{text}{s} _[quick tip]({qt_url})_\n"
@@ -1300,7 +1406,7 @@ class FormQueryKnowledgeBase(FormAction):
         if ep_url:
             text = f"{text}{s} _[exotic pests]({ep_url})_\n"
         if ask_url:
-            text = f"{text}{s} _[exotic pests]({ask_url})_\n"
+            text = f"{text}{s} _[askextension]({ask_url})_\n"
 
         if hit["best_video"]:
             video_title = hit["best_video"]["videoTitle"]
@@ -1308,32 +1414,30 @@ class FormQueryKnowledgeBase(FormAction):
             text = f"{text}{s} _[video: '{video_title}']({video_link})_\n"
 
         if tracker.get_slot("bot_config_debug"):
-            text = (
-                f'{text}{s} _weighted score  ={hit.get("_score_weighted", 0.0):.3f}_\n'
-            )
-            text = f'{text}{s} _score for name    ={hit.get("_score_name",0.0):.3f}_\n'
-            text = f'{text}{s} _score for other   ={hit.get("_score_other",0.0):.3f}_\n'
-            text = (
-                f'{text}{s} _score for caption ={hit.get("_score_caption", 0.0):.3f}_\n'
-            )
-            text = (
-                f'{text}{s} _score for video   ={hit.get("_score_video", 0.0):.3f}_\n'
-            )
-            text = (
-                f'{text}{s} _score for damage  ={hit.get("_score_damage", 0.0):.3f}_\n'
-            )
-            if hit.get("_score_weighted", 0.0) < tracker.get_slot(
-                "bot_config_score_threshold"
-            ):
+            ##text = (
+            ##    f'{text}{s} _weighted score  ={hit.get("_score_weighted", 0.0):.3f}_\n'
+            ##)
+            ##text = f'{text}{s} _score for name  ={hit.get("_score_name",0.0):.3f}_\n'
+            ##text = f'{text}{s} _score for other ={hit.get("_score_other",0.0):.3f}_\n'
+            ##text = (
+            ##    f'{text}{s} _score for caption={hit.get("_score_caption", 0.0):.3f}_\n'
+            ##)
+            ##text = (
+            ##    f'{text}{s} _score for video   ={hit.get("_score_video", 0.0):.3f}_\n'
+            ##)
+            ##text = (
+            ##    f'{text}{s} _score for damage  ={hit.get("_score_damage", 0.0):.3f}_\n'
+            ##)
+            if score < tracker.get_slot("bot_config_score_threshold"):
                 text = (
                     f"{text}{s} _Below score threshold of "
                     f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
                 )
-            else:
-                text = (
-                    f"{text}{s} _Above score threshold of "
-                    f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
-                )
+            ##            else:
+            ##                text = (
+            ##                    f"{text}{s} _Above score threshold of "
+            ##                f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
+            ##                )
 
             # Note that \n\n is not working
             text = f"{text}{divider}\n"
@@ -1354,9 +1458,11 @@ class FormQueryKnowledgeBase(FormAction):
         pest_damage_description = None
         if pest_causes_damage != "no":
             pest_damage_description = tracker.get_slot("pest_damage_description")
+        question = tracker.get_slot("question")
 
         if ac.do_the_queries:
-            hits = await handle_es_query(
+            hits_ask, hits_ipm = await handle_es_query(
+                question,
                 pest_name,
                 pest_problem_description,
                 pest_damage_description,
@@ -1364,18 +1470,12 @@ class FormQueryKnowledgeBase(FormAction):
                 print_summary=False,
             )
         else:
-            message = (
-                f"Not doing an actual elastic search query.\n"
-                f"A query with the following details would be done: \n"
-                f"pest problem description = "
-                f"{pest_problem_description}\n"
-                f"pest damage description = "
-                f"{pest_damage_description}"
-            )
+            message = "Not doing an actual elastic search query."
             dispatcher.utter_message(message)
-            hits = []
+            hits_ask = []
+            hits_ipm = []
 
-        pests_summaries = self.summarize_hits(hits, tracker)
+        pests_summaries = self.summarize_hits(hits_ask, hits_ipm, tracker)
         return [SlotSet("pests_summaries", pests_summaries)]
 
 
@@ -1465,9 +1565,9 @@ class FormPresentHits(FormAction):
     async def get_multiple_pest_summaries(
         self, pests_summaries_index, tracker, max_pests=10
     ):
-        """Show 3 results at a time, up to max_pests"""
+        """Show 6 results at a time, up to max_pests"""
         pest_summaries = []
-        for _i in range(3):
+        for _i in range(6):
             pest_summary = None
             if pests_summaries_index < max_pests - 1:
                 pests_summaries_index = pests_summaries_index + 1
@@ -1562,6 +1662,14 @@ class ActionConfigureBot(Action):
 
             events.append(SlotSet(key=key, value=value))
 
+        active_form_name = None
+        if tracker.active_form:
+            active_form_name = tracker.active_form.get("name")
+
+        if active_form_name:
+            # list new bot configuration, revert tracker & next step is form
+            events.extend([UserUtteranceReverted(), FollowupAction(active_form_name)])
+
         return events
 
 
@@ -1624,6 +1732,7 @@ def reset_slots_from_previous_forms():
     events.append(SlotSet("pest_damage_description", None))
     events.append(SlotSet("pest_name", None))
     events.append(SlotSet("pest_problem_description", None))
+    events.append(SlotSet("question", None))
 
     events.append(SlotSet("rating_value", None))
 
