@@ -1,3 +1,4 @@
+# pylint: disable=too-many-statements, fixme
 """Custom Actions & Forms"""
 
 import logging
@@ -62,7 +63,7 @@ def cosine_similarity_query(
 ):
     """Does a query on cosine similarity between query_vector and the index field
     vector_name, and returns the list of hits
-    
+
     _source_query = dict, defining what the query should return in the _source
     query_vector = the embedding vector we are sending
     vector_name = name of a dense_vector in the elasticsearch index
@@ -1286,11 +1287,11 @@ class FormQueryKnowledgeBase(FormAction):
         _domain: Dict[Text, Any],
     ) -> Dict[Text, Any]:
         """Once pest problem is described:
-        
+
         If no pest name was extracted:
           -> do not ask for damage
           -> set the damage equal to the description
-          
+
         If a pest name was extracted:
           -> build damage question to ask, using the pest name in plural form
           """
@@ -1317,7 +1318,7 @@ class FormQueryKnowledgeBase(FormAction):
         question = f"Are the {pest_plural.lower()} causing any damage?"
         return {"pest_problem_description": value, "cause_damage_question": question}
 
-    def summarize_hits(self, hits_ask, hits_ipm, tracker) -> list:
+    def summarize_hits(self, hits_ask, hits_ipm) -> list:
         """Create a list of dictionaries, where each dictionary contains those items we
         want to use when presenting the hits in a conversational manner to the user."""
         pests_summaries = []
@@ -1328,7 +1329,7 @@ class FormQueryKnowledgeBase(FormAction):
             hit_summary = {}
             score = hit["_score_max"]
             hit_summary["message"] = self.create_text_for_pest(
-                i, hit, score, tracker, "From askextension data:"
+                i, hit, score, "From askextension data:"
             )
             pests_summaries.append(hit_summary)
 
@@ -1336,14 +1337,14 @@ class FormQueryKnowledgeBase(FormAction):
             hit_summary = {}
             score = hit["_score_weighted"]
             hit_summary["message"] = self.create_text_for_pest(
-                i, hit, score, tracker, "From IPM data:"
+                i, hit, score, "From IPM data:"
             )
             pests_summaries.append(hit_summary)
 
         return pests_summaries
 
     @staticmethod
-    def create_text_for_pest(i, hit, score, tracker, header) -> str:
+    def create_text_for_pest(i, hit, score, header) -> str:
         """Prepares a message for the user"""
         name = hit["_source"]["name"]
         ask_title = hit["_source"]["ask_title"]
@@ -1380,7 +1381,10 @@ class FormQueryKnowledgeBase(FormAction):
         # divider = "======================================"
         # divider = "\  \n"
         # divider = r"\-"  # OK
-        divider_long = r"\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-"
+        divider_long = (
+            r"\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-"
+            r"\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-"
+        )
 
         text = ""
         if i == 0:
@@ -1422,14 +1426,6 @@ class FormQueryKnowledgeBase(FormAction):
             if video_link:
                 text = f"{text}{s} _[video: '{video_title}']({video_link})_\n"
 
-        ##        if score < tracker.get_slot("bot_config_score_threshold"):
-        ##            text = (
-        ##                f"{text}{s} _Below score threshold of "
-        ##                f"{tracker.get_slot('bot_config_score_threshold'):.2f}_\n"
-        ##            )
-
-        # No longer need a divider between the items.
-        # text = f"{text}{divider}\n"
         return text
 
     async def submit(
@@ -1464,7 +1460,7 @@ class FormQueryKnowledgeBase(FormAction):
             hits_ask = []
             hits_ipm = []
 
-        pests_summaries = self.summarize_hits(hits_ask, hits_ipm, tracker)
+        pests_summaries = self.summarize_hits(hits_ask, hits_ipm)
         return [SlotSet("pests_summaries", pests_summaries)]
 
 
@@ -1615,7 +1611,7 @@ class FormPresentHits(FormAction):
 
 class ActionConfigureBot(Action):
     """Configure the bot by setting the bot_config_----  slots.
-    
+
     If a slot is already defined, we leave it as is.
     Else, we set it using the default value.
     """

@@ -1,12 +1,12 @@
-"""ETL for the scraped askextensiondata json, to prepare it for ingestion into 
+"""ETL for the scraped askextensiondata json, to prepare it for ingestion into
 elastic search.
 
 The scraped AskExtension data:
-https://dev.osticket.eduworks.com/kb/faq.php?id=faq_id   
+https://dev.osticket.eduworks.com/kb/faq.php?id=faq_id
 https://dev.osticket.eduworks.com/kb/faq.php?id=221      (example for Potatoes)
 
 The JSON files representing questions and answers from the Ask Extension system:
-https://drive.google.com/drive/folders/12CyhdvCwNLgtdUHTcmWkAKR4oIWhGKHq 
+https://drive.google.com/drive/folders/12CyhdvCwNLgtdUHTcmWkAKR4oIWhGKHq
 """
 
 import json
