@@ -108,7 +108,7 @@ cd /etc/rasa
 
 sudo vi .env
 RASA_X_VERSION=0.31.4
-RASA_VERSION=1.10.9
+RASA_VERSION=1.10.10
 RASA_X_DEMO_VERSION=0.31.4
 
 ```

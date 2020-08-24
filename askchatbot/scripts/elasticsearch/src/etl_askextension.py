@@ -188,7 +188,7 @@ def etl(path_data, path_guide, data_file_california, max_word_count=None, verbos
 
 if __name__ == "__main__":
 
-    MERGE_IT = False
+    MERGE_IT = True
     if MERGE_IT:
         merge_scraped_data_files(SCRAPED_DATA_FILES, DATA_FILE)
     else:
