@@ -1,7 +1,7 @@
 """Run elastic search queries from the command line"""
 
 import asyncio
-import setup_logger  # pylint: disable=unused-import
+import setup_logger  # pylint: disable=unused-import, import-error
 
 from actions import actions_config as ac
 from actions.actions_main import handle_es_query
@@ -12,7 +12,6 @@ def ask_query():
     question = None
     pest_name = None
     pest_problem_description = None
-    pest_causes_damage = "n"
     pest_damage_description = None
 
     pest_name = input(

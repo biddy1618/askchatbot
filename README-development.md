@@ -35,17 +35,13 @@ $ source ~/.bashrc  # installer updated this, and will activate the base environ
 (base) > conda --version
 ```
 
-##### Create conda environments & install the bot for development
+##### Create conda environment & install the bot for development
 
-There are two 'bots'. One called `askchatbot` and one called `responseselectors`. 
-
-You need to create a separate conda environment for each, and install the respective package in editable mode.
-
-###### Conda: `askchatbot`
+Create a separate conda environment for the bot, and install the python dependencies in editable mode.
 
 ```bash
 conda create --name askchatbot python=3.7
-conda activate askchatbot/askchatbot
+conda activate askchatbot
 
 git clone https://git.eduworks.us/ask-extension/askchatbot.git
 cd askchatbot/askchatbot
@@ -67,31 +63,6 @@ Workarounds:
 - Use docker-on-windows
 - Use the `WhitespaceTokenizer` instead
 
-###### Conda: responseselectors
-
-```bash
-conda create --name responseselectors python=3.7
-conda activate responseselectors
-
-git clone https://git.eduworks.us/ask-extension/askchatbot.git
-cd askchatbot/responseselectors
-
-# install the dependencies
-pip install -r requirements-dev.txt
-
-# Install spacy with english language model
-# sm = small
-# md = medium
-# lg = large
-python -m spacy download en_core_web_md
-python -m spacy link en_core_web_md en
-
-# install the responseselector package in editable mode
-pip install -e .
-```
-
-
-
 ## Pylint & black
 
 The python code is compliant with [pylint](https://pylint.readthedocs.io/en/latest/user_guide/installation.html), with some configurations adjusted to accept reformatting of [black](https://github.com/ambv/black)
@@ -105,30 +76,16 @@ A Pylint configuration file can be found in the top level directory:
 To black & pylint all python files in the project, run these commands:
 
 ```bash
-# goto top level of project (where this README.md resides)
-cd <project-root>  
+# goto top level of project, where the .pylintrc resides
+cd askchatbot
 
 # run black on all files
-python -m black $(find ./ -name *.py)
+python -m black $(find ./askchatbot -name *.py)
 
 # run pylint as a module in your python environment:
 # NOTE: running as a module bypasses the #! line inside the pylint script
 # -j 4: use 4 cores to run pylint on all project code
-python -m pylint -j 4 $(find ./ -name *.py)  
-
-# Alternatively, you can run the pylint script directly, but this is dangerous, because
-# the pylint script will use the python command defined by the #! at the top.
-# When this happens to point to a python version different than your anaconda or
-# virtual env, you will get these type of errors:
-#  E0401: Unable to import '---' (import-error)
-pylint -j 4 **/*.py  # use 4 cores to run pylint on all project code
-
-###########################################################################
-# NOTE:                                                                   #
-# When you run pylint with this projects' .pylintrc, sys.path is printed. #
-# This allows you to check that the correct python version is used.       #
-# See init_hook in the .pylintrc file                                     # 
-###########################################################################
+python -m pylint -j 4 $(find ./askchatbot -name *.py)  
 ```
 
 ### Line length

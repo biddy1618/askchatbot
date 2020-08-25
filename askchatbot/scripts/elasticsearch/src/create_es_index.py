@@ -1,3 +1,4 @@
+# pylint: disable=too-many-statements
 """Create the elasticsearch index for scraped data"""
 from pathlib import Path
 from elasticsearch.helpers import bulk
@@ -12,10 +13,8 @@ pd.set_option("display.width", 1000)
 # pd.set_option('display.max_colwidth', None)
 pd.set_option("display.max_colwidth", 80)
 
-
 # Define the index
 index_name = ac.ipmdata_index_name
-
 
 INDEX_FILE = f"{Path(__file__).parents[1]}/data/ipmdata/index.json"
 
@@ -34,7 +33,6 @@ print(f"INDEX_FILE = {INDEX_FILE}")
 for DATA_FILE_NAME in DATA_FILE_NAMES:
     print(f"DATA_FILE_NAME  = {DATA_FILE_NAME}")
 print("-----------------------------------------------------------")
-
 
 BATCH_SIZE = 10
 GPU_LIMIT = 0.5
@@ -99,7 +97,7 @@ def docs_etl():
         path_data = f"{Path(__file__).parents[1]}/data/ipmdata/{data_file_name}"
         df_docs_json[data_file_name] = pd.read_json(path_data)
 
-        if 'name' in df_docs_json[data_file_name].columns:
+        if "name" in df_docs_json[data_file_name].columns:
             before_shape = df_docs_json[data_file_name].shape
             df_docs_json[data_file_name] = df_docs_json[data_file_name].drop_duplicates(
                 "name"
@@ -206,29 +204,6 @@ def unique_column_names(df_docs_json):
             "answer": "ask_answer",
         }
     )
-
-    ##    df_docs_json["cleanedFruitVeggieItems.json"] = df_docs_json[
-    ##        "cleanedFruitVeggieItems.json"
-    ##    ].rename(
-    ##        columns={
-    ##            "url": "urlFruitVeggieItems",
-    ##            "cultural_tips": "cultural_tipsFruitVeggieItems",
-    ##            "pests_and_disorders": "pests_and_disordersFruitVeggieItems",
-    ##        }
-    ##    )
-
-    ##    df_docs_json["cleanedPlantFlowerItems.json"] = df_docs_json[
-    ##        "cleanedPlantFlowerItems.json"
-    ##    ].rename(
-    ##        columns={
-    ##            "url": "urlPlantFlowerItems",
-    ##            "identification": "identificationPlantFlowerItems",
-    ##            "optimum_conditions": "optimum_conditionsPlantFlowerItems",
-    ##            "pests_and_disorders": "pests_and_disordersPlantFlowerItems",
-    ##            "imagesQuickTips": "imagesPlantFlowerItems",
-    ##            "images": "imagesPlantFlowerItems",
-    ##        }
-    ##    )
 
     return df_docs_json
 

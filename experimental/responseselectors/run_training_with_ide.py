@@ -14,9 +14,9 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 # This is exactly like issuing the command:
 #  $ rasa train --debug
 #
-sys.argv.append('train')
-sys.argv.append('nlu')
-sys.argv.append('--debug')
+sys.argv.append("train")
+sys.argv.append("nlu")
+sys.argv.append("--debug")
 # sys.argv.append('--force')  # to force re-training even if data has not changed
 # sys.argv.append('--dump-stories')
 # sys.argv.append('--debug-plots')
