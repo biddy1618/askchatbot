@@ -156,6 +156,10 @@ def etl(path_data, path_guide, data_file_california, max_word_count=None, verbos
         df = df[mask]
         print(f"Removed {shape[0] - df.shape[0]} with more than {max_word_count} words")
 
+    #
+    # replace NaN with [] for attachments
+    df["attachments"] = [[] if x is np.nan else x for x in df["attachments"]]
+
     # Write it to disk, for ingestion into elastic search
     # The writing is a little weird, as a list, to make it the consistent with others
     # we only use a few columns
@@ -173,6 +177,7 @@ def etl(path_data, path_guide, data_file_california, max_word_count=None, verbos
             "county",
             "question",
             "answer",
+            "attachments",
         ],
     ]
     with open(data_file_california, "w") as f:
@@ -188,7 +193,7 @@ def etl(path_data, path_guide, data_file_california, max_word_count=None, verbos
 
 if __name__ == "__main__":
 
-    MERGE_IT = True
+    MERGE_IT = False
     if MERGE_IT:
         merge_scraped_data_files(SCRAPED_DATA_FILES, DATA_FILE)
     else:

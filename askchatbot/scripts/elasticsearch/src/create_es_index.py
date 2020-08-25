@@ -202,6 +202,7 @@ def unique_column_names(df_docs_json):
             "county": "ask_county",
             "question": "ask_question",
             "answer": "ask_answer",
+            "attachments": "ask_attachments",
         }
     )
 
@@ -219,7 +220,7 @@ def concat_docs(df_docs_json):
 def replace_nan(df_docs):
     """Replace all NaN values in the dataframe with appropriate content"""
     df_docs = df_docs.fillna("")
-    # nested types require an empty list if non existing
+    # nested types & arrays require an empty list if non existing
     for column in [
         "imagePestNote",
         "imageQuickTips",
@@ -231,6 +232,7 @@ def replace_nan(df_docs):
         "related_linksExoticPests",
         "imagesExoticPests",
         "ask_answer",
+        "ask_attachments",
     ]:
         df_docs[column] = [[] if x == "" else x for x in df_docs[column]]
 

@@ -174,7 +174,8 @@
                     "response_vector": {"type": "dense_vector", "dims": 512},
                     "author": {"type": "text"}
                 }
-            }
+            },
+            "ask_attachments": {"type": "text"}
         }
     }
 }
