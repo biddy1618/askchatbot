@@ -58,5 +58,5 @@ The bot can:
 
 The bot uses data that was scraped from these websites:
 
-- http://ipm.ucanr.edu/
-- https://dev.osticket.eduworks.com/  (Only questions from the State of California are included)
+- [ipm data](http://ipm.ucanr.edu/)
+- [askextension ostickets](https://osticket.eduworks.com/kb/faq.php?id=675271) (Only questions from the State of California are included)

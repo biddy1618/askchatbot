@@ -1,10 +1,14 @@
 # Elasticsearch for Askchatbot
 
-# Elasticsearch ec2 instance
+The bot does elastic search queries, and this README explains how to create the index.
 
-Details, including password, can be found in this [Jira Ticket](https://jira.eduworks.us/browse/AE-283?focusedCommentId=31925&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-31925)
+# Elasticsearch instance
 
-For the Elasticsearch ec2 instance, on the connecting machine add to /etc/hosts:
+For local development, it is useful to install elastic search locally with docker-compose, as described in Appendix A.
+
+For deployment, elasticsearch was deployed on a dedicated EC2 instance. Details, including password, can be found in this [Jira Ticket](https://jira.eduworks.us/browse/AE-283?focusedCommentId=31925&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-31925)
+
+For the Elasticsearch EC2 instance, on the connecting machine add to /etc/hosts:
 
 ```bash
 34.211.141.190 ask-chat-db-dev.i.eduworks.com
@@ -30,37 +34,77 @@ curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_cat/ind
 
 # Create & Test the index
 
-```bash
-git clone https://git.eduworks.us/ask-extension/askchatbot
-cd askchatbot/askchatbot
+### Conda
 
+```bash
 conda create --name askchatbot python=3.7
 conda activate askchatbot
+
+git clone https://git.eduworks.us/ask-extension/askchatbot
+cd askchatbot/askchatbot
 pip install -r requirements-dev.txt
 pip install -e .
+```
 
-#
-# Edit the file: ./actions/bot_config.yml
-# Uncomment the correct host
-#hosts: "https://ask-chat-db-dev.i.eduworks.com:9200/"
+### ETL
+
+The scraped JSON files from the [ipm website](http://ipm.ucanr.edu/) can be placed as is in the `ipmdata` folder, which is included in the gitlab repo:
+
+```bash
+askchatbot/askchatbot/scripts/elasticsearch/data/ipmdata:
+- cleanedPestDiseaseItems.json
+- cleanedTurfPests.json
+- cleanedWeedItems.json
+- cleanedExoticPests.json
+- ipmdata.json
+```
+
+The JSON scraped from the [askextension ostickets](https://osticket.eduworks.com/kb/faq.php?id=675271) requires some processing. Download [the scraped JSON files](https://drive.google.com/drive/folders/14iXEta0_dFsjAtBKM510mM78H3iVku8o?usp=sharing) in a folder on your computer and then run the ETL script `etl_askextension.py`:
+
+```bash
+cd askchatbot/askchatbot/scripts/elasticsearch/src
+python -m etl_askextension
+```
+
+The ETL script will create a file in the `ipmdata` folder:
+
+```bash
+askchatbot/askchatbot/scripts/elasticsearch/data/ipmdata:
+- askextensiondata-california.json
+```
+
+### Ingest
+
+The script to ingest the documents into elasticsearch uses code & configuration settings from the bots' custom action code.
+
+```bash
+# Edit the file: askchatbot/askchatbot/actions/bot_config.yml
+# Uncomment the correct host, for example a local version as described in Appendix A,
+#  or this version that is used by the deployed bot:
+hosts: "https://ask-chat-db-dev.i.eduworks.com:9200/"
     
 # Uncomment the correct index name of ipmdata queries
 #ipmdata-index-name: "ipmdata-dev-large-5"
 ipmdata-index-name: "ipm-and-ask-large-5"
 
-
 # ingest the ipmdata
-cd <->/askchatbot/askchatbot/scripts/elasticsearch/src
-
+cd askchatbot/askchatbot/scripts/elasticsearch/src
 python3 -m create_es_index
+```
 
+### Test
+
+```bash
 # to verify the index is there
 curl -u elastic:<password> 'https://ask-chat-db-dev.i.eduworks.com:9200/_aliases?pretty'
 
 # run a test query
 python3 -m run_es_query
-
 ```
+
+
+
+ 
 
 # Appendix A: Local docker-compose 
 

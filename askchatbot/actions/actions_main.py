@@ -29,8 +29,6 @@ inflecter = inflect.engine()
 
 USE_AIOHTTP = False
 
-
-# TODO: push into external file and add more items
 PEST_NAME_MUST_BE_SINGULAR = ["mildew"]
 PEST_NAME_MUST_BE_SINGULAR = [p.lower() for p in PEST_NAME_MUST_BE_SINGULAR]
 
@@ -105,10 +103,6 @@ def cosine_similarity_query(
     )
 
     hits = response["hits"]["hits"]
-
-    ##    if print_summary:
-    ##        # print it before filling out best_image & best_video fields
-    ##        print_hits(hits, title=vector_name)
 
     if best_image == "first":
         hits = set_first_image_as_best(hits)
@@ -337,10 +331,10 @@ async def do_es_queries(
             "ask_county",
             "ask_question",
             "ask_answer",
+            "ask_attachments",
         ]
     }
 
-    # TODO: Refactor this into loops
     es_ask_hits = {}
     es_name_hits = {}
     es_other_hits = {}
