@@ -53,7 +53,7 @@ pip install -e .
 
 ### Create the elasticsearch index
 
-See README-elasticsearch.md
+See `README-01-elasticsearch.md`
 
 ### Build the docker image for the action server
 
@@ -75,7 +75,6 @@ git stash pop
 sudo docker-compose build
 
 # To quickly test that the container starts up
-# TODO: use external IP for --add-host: 34.211.141.190 
 sudo docker run -p 5055:5055 --add-host ask-chat-db-dev.i.eduworks.com:34.211.141.190 askchatbot-action-server:0.0.5
 
 curl http://localhost:5055/actions
@@ -273,7 +272,8 @@ Rasa X is available on: http://34.219.35.63:8000/
 
 #### Connect Rasa X to gitlab ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/integrated-version-control/))
 
-TODO.
+This was not yet done. 
+When you start annotating training data, this is highly recommended.
 
 
 
