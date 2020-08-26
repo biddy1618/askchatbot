@@ -60,7 +60,7 @@ See `README-01-elasticsearch.md`
 For now, we build the docker image on the VM, and do not push it to a docker registry.
 
 ```bash
-cd <project-root>
+cd askchatbot
 
 # get latest version of the github repo
 git status
@@ -190,7 +190,7 @@ sudo docker-compose up -d
 sudo docker-compose down
 ```
 
-
+Note that upon startup, the action server container downloads the pre-trained embedding model from `tfhub`. This takes a few minutes, and you have to wait until that is done before you can talk to the bot.
 
 #### Set password of admin
 
@@ -275,7 +275,9 @@ Rasa X is available on: http://34.219.35.63:8000/
 This was not yet done. 
 When you start annotating training data, this is highly recommended.
 
+### Share the bot with guest testers
 
+To create a link that you can share with guest testers, follow [these instructions](https://rasa.com/docs/rasa-x/user-guide/share-assistant/#share-your-bot).
 
 ### Maintain disk space
 

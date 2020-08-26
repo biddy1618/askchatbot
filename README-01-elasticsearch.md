@@ -78,10 +78,25 @@ askchatbot/askchatbot/scripts/elasticsearch/data/ipmdata:
 The script to ingest the documents into elasticsearch uses code & configuration settings from the bots' custom action code.
 
 ```bash
+# When deploying on the EC2 instance, first get latest version of the github repo
+cd askchatbot
+git status
+git stash push
+git pull
+git stash pop
+
+# Before starting the ingesting process, stop the bot, else the EC2 will run out of memory
+cd /etc/rasa
+sudo docker-compose down
+
 # Edit the file: askchatbot/askchatbot/actions/bot_config.yml
-# Uncomment the correct host, for example a local version as described in Appendix A,
+# (1) Uncomment the correct host, for example a local version as described in Appendix A,
 #  or this version that is used by the deployed bot:
 hosts: "https://ask-chat-db-dev.i.eduworks.com:9200/"
+#
+# (2) Uncomment the sentence encoder you want to use
+# tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder/4"
+tfhub-embedding-url: "https://tfhub.dev/google/universal-sentence-encoder-large/5"
     
 # Uncomment the correct index name of ipmdata queries
 #ipmdata-index-name: "ipmdata-dev-large-5"
@@ -90,6 +105,10 @@ ipmdata-index-name: "ipm-and-ask-large-5"
 # ingest the ipmdata
 cd askchatbot/askchatbot/scripts/elasticsearch/src
 python3 -m create_es_index
+
+# You can now restart the bot
+cd /etc/rasa
+sudo docker-compose up -d
 ```
 
 ### Test

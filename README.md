@@ -5,7 +5,7 @@ Repo for the Ask Extension chatbot component demonstration completed in the 2019
 ## Things you can ask the bot
 
 The bot can:
-2. Find  information based on an open question, for example:
+1. Find  information based on an open question, for example:
 
    ```bash
    - when I import a christmas tree from Michigan to california, is there a tax I need to pay?
@@ -29,7 +29,7 @@ The bot can:
 
    
 
-3. Find information based on a `pest problem description` & an optional `damage description`, for example:
+2. Find information based on a `pest problem description` & an optional `damage description`, for example:
 
    ```bash
    - pest problem description: I have ants in the house 
