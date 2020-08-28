@@ -65,9 +65,9 @@ The bot uses data that was scraped from these websites:
 
 ## Developer resources
 
-The bot is deployed at http://34.219.35.63:8000/
-
-The architecture diagram can be found [here](https://docs.google.com/drawings/d/1h_DHiiTr2km3OKpcsoGScElEtyXSR3jL6PHumcRPwQI/edit)
+- The bot is deployed at http://34.219.35.63:8000/
+- [Architecture Diagram](https://docs.google.com/drawings/d/1h_DHiiTr2km3OKpcsoGScElEtyXSR3jL6PHumcRPwQI/edit)
+- [Rasa X HTTP API](https://rasa.com/docs/rasa-x/api/rasa-x-http-api/)
 
 
 
