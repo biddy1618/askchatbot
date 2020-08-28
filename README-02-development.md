@@ -147,17 +147,35 @@ under the hood. To simply talk to the bot, you can remove this flag.
 
 ## Rasa X on your local machine
 
-It is recommended to simply deploy Rasa X on your computer as described in [README-03-deployment.md](https://git.eduworks.us/ask-extension/askchatbot/-/blob/dev/README-03-deployment.md):
+Rasa X is a server application, but you can spin up a local version as well. 
 
-- This gives you full control
-- Ensures that you are using the exact same setup as used in the deployment
-- Allows to connect your version of Rasa X to the gitlab repo
+You can do this by [installing Rasa X in Local Mode](https://rasa.com/docs/rasa-x/installation-and-setup/install/local-mode/):
 
+> ```bash
+> conda create --name askchatbot-x-local-mode python=3.7
+> conda activate askchatbot-x-local-mode
+> 
+> # install the bot as usual
+> cd askchatbot/askchatbot
+> pip install -r requirements-dev.txt
+> pip install -e .
+> 
+> # add Rasa X Local Mode
+> pip install rasa-x --extra-index-url https://pypi.rasa.com/simple
+> 
+> # make sure elastic-search is up
+> # start the action server
+> cd askchatbot/askchatbot
+> rasa run actions
+> 
+> # in another window, start up Rasa X, from the bot's folder
+> cd askchatbot/askchatbot
+> rasa x
+> ```
 
+Next, check out the [docs](https://rasa.com/docs/rasa-x/) how to use Rasa X for conversation driven development (CDD).
 
-Alternatively, you can spin up a local version by [installing Rasa X in Local Mode](https://rasa.com/docs/rasa-x/installation-and-setup/install/local-mode/):
-
-- This is only recommended to enable exploration of the capabilities
+Because Rasa X & Rasa Open Source are developing rapidly, it is recommended to upgrade on a regular basis.
 
 
 
