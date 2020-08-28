@@ -120,7 +120,7 @@ git push origin dev --tags              # push all tags that are not already the
 
 
 
-## To run the bot:
+## Train the bot:
 
 Go to the `askchatbot` directory, and train the model:
 
@@ -129,7 +129,10 @@ cd askchatbot/askchatbot
 rasa train
 ```
 
+## Talk to the bot from the command line
+
 Then, first set up your action server in one terminal window:
+
 ```bash
 rasa run actions
 ```
@@ -141,6 +144,20 @@ rasa shell --debug
 
 Note that `--debug` mode will produce a lot of output meant to help you understand how the bot is working 
 under the hood. To simply talk to the bot, you can remove this flag.
+
+## Rasa X on your local machine
+
+It is recommended to simply deploy Rasa X on your computer as described in [README-03-deployment.md](https://git.eduworks.us/ask-extension/askchatbot/-/blob/dev/README-03-deployment.md):
+
+- This gives you full control
+- Ensures that you are using the exact same setup as used in the deployment
+- Allows to connect your version of Rasa X to the gitlab repo
+
+
+
+Alternatively, you can spin up a local version by [installing Rasa X in Local Mode](https://rasa.com/docs/rasa-x/installation-and-setup/install/local-mode/):
+
+- This is only recommended to enable exploration of the capabilities
 
 
 

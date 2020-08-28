@@ -60,3 +60,23 @@ The bot uses data that was scraped from these websites:
 
 - [ipm data](http://ipm.ucanr.edu/)
 - [askextension ostickets](https://osticket.eduworks.com/kb/faq.php?id=675271) (Only questions from the State of California are included)
+
+
+
+## Developer resources
+
+The bot is deployed at http://34.219.35.63:8000/
+
+The architecture diagram can be found [here](https://docs.google.com/drawings/d/1h_DHiiTr2km3OKpcsoGScElEtyXSR3jL6PHumcRPwQI/edit)
+
+
+
+## Front ends & widgets
+
+- [Messaging and Voice Channels](https://rasa.com/docs/rasa/user-guide/connectors/custom-connectors/#id1)
+
+- [botfront: rasa-webchat *(very popular web widget)*](https://github.com/botfront/rasa-webchat)
+
+- [Custom connectors](https://rasa.com/docs/rasa/user-guide/connectors/custom-connectors)
+
+  
