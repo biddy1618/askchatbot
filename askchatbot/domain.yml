@@ -1,41 +1,39 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
 intents:
-  - intent_configure_bot:
-      triggers: action_configure_bot
-  - intent_hi
-  - intent_bye
-  - intent_yes
-  - intent_no
-  - intent_i_have_a_question
-  - intent_i_have_a_pest
-  - intent_explain_ipm
-  - intent_out_of_scope
-  - intent_inform
-  - intent_ask_handoff_to_expert
-  - intent_thanks
-  - intent_garbage_inputs
-  - intent_you_are_confused
-  
-
+- intent_configure_bot:
+    triggers: action_configure_bot
+- intent_hi
+- intent_bye
+- intent_yes
+- intent_no
+- intent_i_have_a_question
+- intent_i_have_a_pest
+- intent_explain_ipm
+- intent_out_of_scope
+- intent_inform
+- intent_ask_handoff_to_expert
+- intent_thanks
+- intent_garbage_inputs
+- intent_you_are_confused
 entities:
-  - bot_config_debug
-  - bot_config_score_threshold
-  - bot_config_botname
-  - bot_config_urlprivacy
-  - pest_name
-  - rating_value
-  
+- bot_config_debug
+- bot_config_score_threshold
+- bot_config_botname
+- bot_config_urlprivacy
+- pest_name
+- rating_value
 slots:
+  bot_config_botname:
+    type: unfeaturized
   bot_config_debug:
     type: unfeaturized
   bot_config_score_threshold:
     type: unfeaturized
-  bot_config_botname:
-    type: unfeaturized
   bot_config_urlprivacy:
     type: unfeaturized
-  said_hi:
-    type: unfeaturized
-  shown_privacypolicy:
+  cause_damage_question:
     type: unfeaturized
   explained_ipm:
     type: unfeaturized
@@ -44,133 +42,107 @@ slots:
     values:
     - yes
     - no
-  question:
+  pest_causes_damage:
+    type: unfeaturized
+  pest_damage_description:
     type: unfeaturized
   pest_name:
     type: unfeaturized
   pest_problem_description:
     type: unfeaturized
-  cause_damage_question:
-    type: unfeaturized
-  pest_causes_damage:
-    type: unfeaturized
-  pest_damage_description:
-    type: unfeaturized
-  rating_value:
-    type: unfeaturized 
-  pests_summaries:
-    type: unfeaturized
-  pests_summaries_index:
-    type: unfeaturized
   pest_summary:
     type: unfeaturized
   pest_summary_and_did_this_help:
     type: unfeaturized
-  
-
-actions:
-  - action_configure_bot
-  - action_list_bot_configuration
-  - action_hi
-  - action_explain_ipm
-  - action_ask_handoff_to_expert
-  - action_kickoff_intent_i_have_a_pest
-  - action_kickoff_intent_i_have_a_question
-  
-forms:
-  - form_query_knowledge_base
-  - form_present_hits
-  
+  pests_summaries:
+    type: unfeaturized
+  pests_summaries_index:
+    type: unfeaturized
+  question:
+    type: unfeaturized
+  rating_value:
+    type: unfeaturized
+  said_hi:
+    type: unfeaturized
+  shown_privacypolicy:
+    type: unfeaturized
 responses:
   utter_hi:
   - text: Hi, I am {bot_config_botname}!
-  
   utter_inform_privacypolicy:
   - text: By chatting with me, you agree to our [privacy policy]({bot_config_urlprivacy}).
-  
   utter_lets_start_over:
   - text: Mmmm..., I am confused. Shall we start over?
-  
   utter_do_you_want_to_ask_a_human_expert:
   - buttons:
     - payload: /intent_yes
-      title: "Yes"
+      title: Yes
     - payload: /intent_no
-      title: "No"
-    text: "Sorry, I am not able to answer the question.\nDo you want to ask a human expert?"
-  
+      title: No
+    text: "Sorry, I am not able to answer the question.\nDo you want to ask a human\
+      \ expert?"
   utter_handoff_to_a_human_expert:
   - text: You can ask one of our experts at [ask extension](https://qa.osticket.eduworks.com/open.php).
-    
   utter_explain_ipm:
-  - text: IPM is an ecosystem-based strategy that focuses on long-term prevention 
-         of pests or their damage through a combination of techniques such as 
-         biological control, habitat manipulation, modification of cultural 
-         practices, and use of resistant varieties. 
-         
-         Pesticides are used only after monitoring indicates they are needed 
-         according to established guidelines, and treatments are made with the 
-         goal of removing only the target organism. 
-         
-         Pest control materials are selected and applied in a manner that 
-         minimizes risks to human health, beneficial and nontarget organisms, 
-         and the environment.
-         
-         You can find more details [here](https://www2.ipm.ucanr.edu/What-is-IPM/).
-  
+  - text: "IPM is an ecosystem-based strategy that focuses on long-term prevention\
+      \ of pests or their damage through a combination of techniques such as biological\
+      \ control, habitat manipulation, modification of cultural practices, and use\
+      \ of resistant varieties.\nPesticides are used only after monitoring indicates\
+      \ they are needed according to established guidelines, and treatments are made\
+      \ with the goal of removing only the target organism.\nPest control materials\
+      \ are selected and applied in a manner that minimizes risks to human health,\
+      \ beneficial and nontarget organisms, and the environment.\nYou can find more\
+      \ details [here](https://www2.ipm.ucanr.edu/What-is-IPM/)."
   utter_bye:
   - text: Bye!  (To continue, say 'hi')
-  
   utter_thanks:
   - text: Thanks!
-  
   utter_great:
   - text: Great!
-  
   utter_you_are_welcome:
   - text: You are welcome!
-  
   utter_ask_question:
   - text: Please enter your question
-  
   utter_ask_pest_problem_description:
   - text: Please describe your pest problem
-  
   utter_ask_pest_causes_damage:
   - buttons:
     - payload: /intent_yes
-      title: "Yes"
+      title: Yes
     - payload: /intent_no
-      title: "No"
-    text: "{cause_damage_question}"
-    
+      title: No
+    text: '{cause_damage_question}'
   utter_ask_pest_damage_description:
   - text: Please describe the damage
-  
   utter_ask_pest_summary_and_did_this_help:
   - buttons:
     - payload: /intent_yes
       title: 👍
     - payload: /intent_no
       title: 👎
-    text: "{pest_summary}"
-    
+    text: '{pest_summary}'
   utter_another_pest_problem_i_can_help_with:
   - buttons:
     - payload: /intent_yes
-      title: "Yes"
+      title: Yes
     - payload: /intent_no
-      title: "No"
-    text: "Do you have another pest problem I can help you with?"
-
+      title: No
+    text: Do you have another pest problem I can help you with?
   utter_another_question_i_can_help_with:
   - buttons:
     - payload: /intent_yes
-      title: "Yes"
+      title: Yes
     - payload: /intent_no
-      title: "No"
-    text: "Do you have another question I can help you with?"
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+      title: No
+    text: Do you have another question I can help you with?
+actions:
+- action_configure_bot
+- action_list_bot_configuration
+- action_hi
+- action_explain_ipm
+- action_ask_handoff_to_expert
+- action_kickoff_intent_i_have_a_pest
+- action_kickoff_intent_i_have_a_question
+forms:
+- form_query_knowledge_base
+- form_present_hits

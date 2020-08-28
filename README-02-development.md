@@ -120,7 +120,7 @@ git push origin dev --tags              # push all tags that are not already the
 
 
 
-## To run the bot:
+## Train the bot:
 
 Go to the `askchatbot` directory, and train the model:
 
@@ -129,7 +129,10 @@ cd askchatbot/askchatbot
 rasa train
 ```
 
+## Talk to the bot from the command line
+
 Then, first set up your action server in one terminal window:
+
 ```bash
 rasa run actions
 ```
@@ -141,6 +144,38 @@ rasa shell --debug
 
 Note that `--debug` mode will produce a lot of output meant to help you understand how the bot is working 
 under the hood. To simply talk to the bot, you can remove this flag.
+
+## Rasa X on your local machine
+
+Rasa X is a server application, but you can spin up a local version as well. 
+
+You can do this by [installing Rasa X in Local Mode](https://rasa.com/docs/rasa-x/installation-and-setup/install/local-mode/):
+
+> ```bash
+> conda create --name askchatbot-x-local-mode python=3.7
+> conda activate askchatbot-x-local-mode
+> 
+> # install the bot as usual
+> cd askchatbot/askchatbot
+> pip install -r requirements-dev.txt
+> pip install -e .
+> 
+> # add Rasa X Local Mode
+> pip install rasa-x --extra-index-url https://pypi.rasa.com/simple
+> 
+> # make sure elastic-search is up
+> # start the action server
+> cd askchatbot/askchatbot
+> rasa run actions
+> 
+> # in another window, start up Rasa X, from the bot's folder
+> cd askchatbot/askchatbot
+> rasa x
+> ```
+
+Next, check out the [docs](https://rasa.com/docs/rasa-x/) how to use Rasa X for conversation driven development (CDD).
+
+Because Rasa X & Rasa Open Source are developing rapidly, it is recommended to upgrade on a regular basis.
 
 
 

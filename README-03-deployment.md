@@ -1,6 +1,8 @@
 # Deploy the chatbot w/ docker-compose
 
-This method is used to deploy the QA chatbot at http://34.219.35.63:8000/
+The bot is deployed at http://34.219.35.63:8000/
+
+The architecture diagram can be found [here](https://docs.google.com/drawings/d/1h_DHiiTr2km3OKpcsoGScElEtyXSR3jL6PHumcRPwQI/edit).
 
 ### Install docker & docker-compose
 
