@@ -76,6 +76,7 @@ The bot uses data that was scraped from these websites:
 - The bot is deployed at http://34.219.35.63:8000/
 - [Architecture Diagram](https://docs.google.com/drawings/d/1h_DHiiTr2km3OKpcsoGScElEtyXSR3jL6PHumcRPwQI/edit)
 - [Rasa X HTTP API](https://rasa.com/docs/rasa-x/api/rasa-x-http-api/)
+- See [Jira AE-314](https://jira.eduworks.us/browse/AE-314) for Rasa X to Gitlab connection.
 
 
 

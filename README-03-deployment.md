@@ -270,12 +270,9 @@ curl http://localhost:8000/api/version
 
 Rasa X is available on: http://34.219.35.63:8000/
 
-
-
 #### Connect Rasa X to gitlab ([docs](https://rasa.com/docs/rasa-x/installation-and-setup/integrated-version-control/))
 
-This was not yet done. 
-When you start annotating training data, this is highly recommended.
+See [Jira AE-314](https://jira.eduworks.us/browse/AE-314) for Rasa X to Gitlab connection.
 
 ### Share the bot with guest testers
 
