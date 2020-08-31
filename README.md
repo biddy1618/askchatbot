@@ -54,6 +54,14 @@ The bot can:
 
 
 
+## Hardware requirements
+
+The bot was developed & deployed on an EC2 of **c5.2xlarge**:
+
+- 8 vCPU
+- 16 Gb RAM   (Recommended to increase to 32 Gb)
+- 100 Gb disk  (Recommended to increase to 200 Gb)
+
 ## Data sources
 
 The bot uses data that was scraped from these websites:
