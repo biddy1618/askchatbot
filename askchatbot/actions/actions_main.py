@@ -32,6 +32,9 @@ USE_AIOHTTP = False
 PEST_NAME_MUST_BE_SINGULAR = ["mildew"]
 PEST_NAME_MUST_BE_SINGULAR = [p.lower() for p in PEST_NAME_MUST_BE_SINGULAR]
 
+TARGET_NAME_MUST_BE_SINGULAR = ["house", "kitchen", "basement", "lawn"]
+TARGET_NAME_MUST_BE_SINGULAR = [p.lower() for p in PEST_NAME_MUST_BE_SINGULAR]
+
 pd.set_option("display.max_columns", 100)
 pd.set_option("display.min_rows", 25)
 pd.set_option("display.max_rows", 25)
@@ -1273,6 +1276,24 @@ class FormQueryKnowledgeBase(FormAction):
                 return True
         return False
 
+    @staticmethod
+    def target_name_plural(target_name):
+        """Returns the target_name in plural form"""
+        target_singular = inflecter.singular_noun(target_name)
+        if not target_singular:
+            target_singular = target_name
+        target_plural = inflecter.plural_noun(target_singular)
+        return target_plural
+
+    @staticmethod
+    def keep_target_name_singular(name):
+        """Returns True if the target name only makes sense in singular form"""
+        name_lower = name.lower()
+        for key in TARGET_NAME_MUST_BE_SINGULAR:
+            if key in name_lower:
+                return True
+        return False
+
     async def validate_pest_problem_description(
         self,
         value: Text,
@@ -1293,6 +1314,9 @@ class FormQueryKnowledgeBase(FormAction):
         # see if a pest name was extracted from the problem description
         pest_name = tracker.get_slot("pest_name")
 
+        # see if a target name was extracted from the problem description
+        target_name = tracker.get_slot("target_name")
+
         if not pest_name:
             # question = "Is there any damage?"
             return {
@@ -1302,14 +1326,26 @@ class FormQueryKnowledgeBase(FormAction):
             }
 
         if self.keep_pest_name_singular(pest_name):
-            question = f"Is the {pest_name.lower()} causing any damage?"
+            if target_name:
+                question = (
+                    f"Is the {pest_name.lower()} causing any damage to the "
+                    f"{target_name.lower()}?"
+                )
+            else:
+                question = f"Is the {pest_name.lower()} causing any damage?"
             return {
                 "pest_problem_description": value,
                 "cause_damage_question": question,
             }
 
         pest_plural = self.pest_name_plural(pest_name)
-        question = f"Are the {pest_plural.lower()} causing any damage?"
+        if target_name:
+            question = (
+                f"Are the {pest_plural.lower()} causing any damage to the "
+                f"{target_name.lower()}?"
+            )
+        else:
+            question = f"Are the {pest_plural.lower()} causing any damage?"
         return {"pest_problem_description": value, "cause_damage_question": question}
 
     def summarize_hits(self, hits_ask, hits_ipm) -> list:
@@ -1710,6 +1746,7 @@ def reset_slots_from_previous_forms():
     events.append(SlotSet("pest_causes_damage", None))
     events.append(SlotSet("pest_damage_description", None))
     events.append(SlotSet("pest_name", None))
+    events.append(SlotSet("target_name", None))
     events.append(SlotSet("pest_problem_description", None))
     events.append(SlotSet("question", None))
 
