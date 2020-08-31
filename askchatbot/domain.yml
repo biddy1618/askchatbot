@@ -23,6 +23,7 @@ entities:
 - bot_config_botname
 - bot_config_urlprivacy
 - pest_name
+- target_name
 - rating_value
 slots:
   bot_config_botname:
@@ -65,6 +66,8 @@ slots:
   said_hi:
     type: unfeaturized
   shown_privacypolicy:
+    type: unfeaturized
+  target_name:
     type: unfeaturized
 responses:
   utter_hi:
