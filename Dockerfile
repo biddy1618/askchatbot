@@ -2,7 +2,7 @@
 FROM rasa/rasa-sdk:1.10.2
 
 USER root
-COPY requirements-actions.txt /app/actions
+COPY requirements-actions.txt /app/actions/requirements-actions.txt
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r /app/actions/requirements-actions.txt
