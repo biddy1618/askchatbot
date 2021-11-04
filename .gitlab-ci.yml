@@ -20,7 +20,7 @@ buildDocker:
 
 
 deployDevDocker:
-   stage: dockerize
+   stage: deploy
    rules:
        - if: $CI_COMMIT_BRANCH == "dev"
    image:
