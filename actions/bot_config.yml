@@ -10,12 +10,12 @@
 #   host = IPv4 External or Domain Name of that other computer
 #
 # ec2 instance
-#hosts: "https://ask-chat-db-dev.i.eduworks.com:9200/"
+hosts: "https://ask-chat-db-dev.i.eduworks.com:9200/"
 #
 # arjaan laptop
-hosts:
-    - host: 192.168.1.8
-      port: 9200
+#hosts:
+#    - host: 192.168.1.8
+#      port: 9200
 
 username: "elastic"
 password: "e8fyGZgkH2"
