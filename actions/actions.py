@@ -219,28 +219,28 @@ class ValidatePlantProblemForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_plant_problem_form"
 
-    async def extract_plant_damages(
-        self, dispatcher: CollectingDispatcher, 
-        tracker: Tracker, 
-        domain: Dict[Text, Any]
-    ) -> Dict[Text, Any]:
-        """Custom slot extraction for plant_damages"""
+    # async def extract_plant_damages(
+    #     self, dispatcher: CollectingDispatcher, 
+    #     tracker: Tracker, 
+    #     domain: Dict[Text, Any]
+    # ) -> Dict[Text, Any]:
+    #     """Custom slot extraction for plant_damages"""
 
-        logger.info(f'Requested slot: {tracker.slots["requested_slot"]}')
+    #     logger.info(f'Requested slot: {tracker.slots["requested_slot"]}')
             
-        if tracker.slots['requested_slot'] != 'plant_damages':
-            logger.info(f'REQUESTING SLOT: {tracker.slots["requested_slot"]}')
-            return {}
+    #     if tracker.slots['requested_slot'] != 'plant_damages':
+    #         logger.info(f'REQUESTING SLOT: {tracker.slots["requested_slot"]}')
+    #         return {}
 
-        logger.info('validate_plant_problem_form - extract_plant_damages - START')
+    #     logger.info('validate_plant_problem_form - extract_plant_damages - START')
         
-        last_message = tracker.latest_message.get("text")
+    #     last_message = tracker.latest_message.get("text")
         
-        logger.info(f'validate_plant_problem_form - extract_plant_damages - last message {last_message}')
-        plant_damages = last_message
+    #     logger.info(f'validate_plant_problem_form - extract_plant_damages - last message {last_message}')
+    #     plant_damages = last_message
 
-        logger.info(f'validate_plant_problem_form - extract_plant_damages - extracted values {plant_damages}')
-        return {"plant_damages": plant_damages}
+    #     logger.info(f'validate_plant_problem_form - extract_plant_damages - extracted values {plant_damages}')
+    #     return {"plant_damages": plant_damages}
     
     def validate_plant_type(
         self,
@@ -331,4 +331,51 @@ class ValidatePlantProblemForm(FormValidationAction):
         
         logger.info('validate_plant_problem_form - validate_plant_damages - END')
         return {'plant_damages': plant_damages}
+
+class ActionSubmitPlantProblemForm(Action):
+    """Custom action for submitting form - plant_problem_form"""
+    
+    def name(self) -> Text:
+        return 'action_submit_plant_problem_form'
+    
+    def run(
+        self,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any]
+        ) -> List[EventType]:
+
+        logger.info('action_submit_plant_problem_form - START')
+
+        plant_type      = tracker.get_slot('plant_type')
+        plant_name      = tracker.get_slot('plant_name')
+        plant_part      = tracker.get_slot('plant_part')
+        plant_damages   = tracker.get_slot('plant_damages')
+        
+        dispatcher.utter_message(
+            text = f'Searching for problem description as follows'\
+                f'\nPlant type: {plant_type}'\
+                f'\nPlant name: {plant_name}'\
+                f'\nPlant part: {plant_part}'\
+                f'\nPlant damages: {", ".join(plant_damages)}')
+
+        results = helper._get_problem_links(
+            plant_type = plant_type, 
+            plant_name = plant_name,
+            plant_part = plant_part,
+            plant_damages = plant_damages)
+    
+        buttons = [
+            {'title': 'Thanks',                 'payload': '/not_implemented'},
+            {'title': 'Connect me to expert',   'payload': '/not_implemented'}
+        ]
+
+        nl = '\n'
+        dispatcher.utter_message(
+            text = f'Found following articles that are most closely related the provided query details:'\
+                f'{nl.join(results)}',
+            buttons = buttons)
+        
+        logger.info('action_submit_plant_problem_form - END')
+        return []
 

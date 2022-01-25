@@ -16,13 +16,13 @@ logger = logging.getLogger(__name__)
 
 logger.info('----------------------------------------------')
 logger.info('Rasa Actions Server')
-logger.info('- loading static files')
+logger.info('* loading static files')
 db = None
 try:
-    plant_df        = pd.read_pickle(PATH_STATIC + 'plant_tree.pkl')
+    plant_tree      = pd.read_pickle(PATH_STATIC + 'plant_tree.pkl')
     plant_matches   = pd.read_pickle(PATH_STATIC + 'plant_matches.pkl')
     db = {
-        'plant_df'      : plant_df,
+        'plant_tree'    : plant_tree,
         'plant_matches' : plant_matches
     }
     logger.info('  success')
@@ -95,3 +95,24 @@ def _get_plant_damages(
         pd = pd.sample(10)
     
     return pd.tolist()
+
+def _get_problem_links(
+    plant_type      : Text = 'other',
+    plant_name      : Text = 'other',
+    plant_part      : Text = 'other',
+    plant_damages   : List[Text] = []) -> List[Text]:
+    """Get information associated with plant problem descriptions"""
+
+    df = db['plant_tree']
+
+    df = df[df['plant_type'] == plant_type] if plant_type != 'other' else df
+    df = df[df['plant_name'] == plant_name] if plant_name != 'other' else df
+    df = df[df['plant_part'] == plant_part] if plant_part != 'other' else df
+
+    
+    
+    return ['http://ipm.ucanr.edu/PMG/PESTNOTES/pn7477.html',
+       'http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/armillariartrot.html',
+       'http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/vertwilt.html',
+       'http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html',
+       'http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/armillariartrot.html']
