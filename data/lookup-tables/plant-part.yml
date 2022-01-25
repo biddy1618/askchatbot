@@ -1,0 +1,29 @@
+version: "3.0"
+
+nlu:
+
+- lookup: plant_part
+  examples: |
+    - seedlings
+    - leaves
+    - stems
+    - roots
+    - flowers
+    - blossoms
+    - overall
+    - shoots
+    - buds
+    - crown
+    - bulbs
+    - fruit
+    - twigs
+    - branches
+    - trunk
+    - canes
+    - nuts
+    - kernels
+    - needles
+    - ferns
+    - spears
+    - tubers
+    - pods

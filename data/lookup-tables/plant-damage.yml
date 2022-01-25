@@ -1,0 +1,172 @@
+version: "3.0"
+
+nlu:
+
+- lookup: plant_damage
+  examples: |
+    - chewed
+    - curled
+    - cupped
+    - folded
+    - rolled
+    - twisted
+    - decayed
+    - hollow
+    - water-soaked
+    - soft
+    - rot
+    - deformed
+    - distorted
+    - dwarfed
+    - discolored
+    - bleached
+    - darkened
+    - necrosis
+    - chlorosis
+    - don't develop
+    - drop
+    - cling to branches
+    - galls
+    - swell
+    - rough
+    - gumming
+    - holes
+    - notching
+    - scalloped
+    - circular
+    - irregular
+    - ragged
+    - mines
+    - trails
+    - not emerged or developed
+    - shrivel
+    - droop
+    - withered
+    - wilted
+    - specks
+    - flecks
+    - dots
+    - stippled
+    - spots
+    - blotches
+    - lesions
+    - mottled
+    - sticky
+    - sooty
+    - stunted
+    - slow growth
+    - weak
+    - collapsed
+    - webbing
+    - "nests"
+    - boring
+    - defoliate
+    - skeletonize
+    - bushy
+    - feeding
+    - tunnels
+    - swellings
+    - tumors
+    - powdery
+    - cottony growth
+    - rotted
+    - spores
+    - pustules
+    - blisters
+    - tunneling
+    - girdled
+    - don't open
+    - feeding damage
+    - watery
+    - small
+    - dieback of tips
+    - margins
+    - thin
+    - defoliated
+    - cankers
+    - mushy
+    - tattered
+    - crinkled
+    - leathery
+    - streaks
+    - mushrooms
+    - mycelia
+    - branch structures
+    - swollen
+    - bumps
+    - warty
+    - foamy
+    - moldy
+    - waxy
+    - chalky
+    - wounds
+    - stains
+    - frass
+    - sawdust
+    - cracked
+    - creases
+    - bands
+    - flat
+    - dieback
+    - flagged
+    - shriveled
+    - discolored beneath bark
+    - flagging
+    - break
+    - decay
+    - gouges
+    - bites
+    - growths
+    - gummy
+    - mining
+    - lack of fruit
+    - mycelial growth
+    - suckers
+    - dimpled areas
+    - scabs
+    - sap
+    - oozing liquid
+    - oozing
+    - bleeding
+    - split
+    - creased
+    - streaked
+    - spotted
+    - vascular discoloration
+    - excrement
+    - cottony
+    - flaky
+    - papery
+    - hard
+    - pithy
+    - dry
+    - russetted
+    - scarred
+    - stings
+    - punctured
+    - sour
+    - bitter
+    - fused
+    - stiff
+    - forms rosette
+    - bolting
+    - develop too fast
+    - frothy
+    - pitch masses
+    - notched
+    - honeydew
+    - soot
+    - drippy
+    - discolored tissue hanging
+    - hanging tissue
+    - pitch
+    - fungal growth
+    - scars
+    - misshapen
+    - watery rot
+    - knobby
+    - malformed
+    - tiny holes
+    - not developed
+    - tough
+    - slimy

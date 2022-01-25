@@ -1,0 +1,218 @@
+version: "3.0"
+
+nlu:
+
+- lookup: plant_pest
+  examples: |
+    - bulb mites
+    - spider mites
+    - tomato russet mite
+    - wheat curl mite
+    - asparagus beetles
+    - bean weevils
+    - cucumber beetles
+    - darkling beetles
+    - driedfruit and sap beetles
+    - flea beeles
+    - pea leaf weevil
+    - pea weevil
+    - pepper weevil
+    - sowbugs and pillbugs
+    - vegetable weevil
+    - wireworms
+    - earwigs
+    - cabbage maggot
+    - carrot rust fly
+    - leafminers (combined)
+    - onion maggot
+    - seedcorn maggot
+    - brown marmorated stink bug
+    - harlequin bug
+    - leaffooted bug
+    - lygus bugs (combined)
+    - squash bugs
+    - stink bugs (combined)
+    - aphids
+    - buffalo treehopper
+    - leafhoppers
+    - psyllids
+    - spittlebugs (combined)
+    - whiteflies
+    - armyworms
+    - artichoke plume moth
+    - corn earworm / tomato fruitworm
+    - cutworms
+    - diamondback moth
+    - hornworms
+    - imported cabbageworm
+    - loopers
+    - lycaenid pod borers
+    - omnivorous leafroller
+    - painted lady butterfly larva
+    - pea moth
+    - potato tuberworm
+    - saltmarsh caterpillar
+    - tomato pinworm
+    - crickets
+    - grasshoppers
+    - jerusalem cricket
+    - snails and slugs
+    - garden symphylans
+    - thrips
+    - nematodes
+    - brown mite
+    - avocado brown mite
+    - citrus bud mite
+    - citrus red mite
+    - citrus rust mite / silver mite
+    - cyclamen mite (combined)
+    - dryberry mite
+    - european red mite
+    - grape erineum mite
+    - pear rust mite
+    - pearleaf blister mite
+    - persea mite
+    - sixspotted mite
+    - black vine weevil
+    - branch and twig borer
+    - diaprepes root weevil
+    - fuller rose beetle (combined)
+    - grape bud beetle
+    - green fruit beetle
+    - hoplia beetle
+    - pacific flatheaded borer
+    - root weevil (weevils)
+    - shothole borer
+    - twig beetles (walnut twig beetle)
+    - apple maggot
+    - fruit fly/vinegar fly
+    - raspberry cane maggot
+    - spotted wing drosophila
+    - walnut husk fly
+    - avocado lace bug
+    - boxelder bug
+    - lace bugs
+    - asian citrus psyllid
+    - cottony cushion scale
+    - giant whitefly
+    - gill's mealybug
+    - glassy-winged sharpshooter
+    - grape phylloxera
+    - mealybugs
+    - grape meaybug
+    - pear psylla
+    - armored scales
+    - soft scales
+    - woolly apple aphid
+    - california pear sawfly
+    - pear sawfly (pearslug, cherryslug)
+    - raspberry horntail
+    - raspberry sawfly
+    - american plum borer
+    - amorbia
+    - carpenterworm
+    - citrus cutworm
+    - citrus leafminer
+    - clearwing moths
+    - climbing cutworms
+    - codling moth
+    - european grapevine moth
+    - fall cankerworm
+    - fall webworm
+    - grape leaffolder
+    - green fruitworms
+    - leafrollers (strawberry)
+    - leafrollers
+    - light brown apple moth
+    - navel orangeworm
+    - omnivorous looper
+    - orange tortrix
+    - oriental fruit moth
+    - peach twig borer
+    - peachtree borer
+    - raspberry crown borer
+    - redhumped caterpillar
+    - sphinx moths
+    - strawberry crown moth
+    - tent caterpillars
+    - tentiform leafminers
+    - western grapeleaf skeletonizer
+    - western tussock moth
+    - katydids
+    - fuchsia gall mite
+    - gall and blister mites (eriophyid mites)
+    - pinewood nematode
+    - asian longhorned beetle
+    - bark beetles
+    - elm leaf beetle
+    - eucalyptus longhorned borer
+    - eucalyptus snout beetle
+    - eucalyptus tortoise beetle
+    - filbert weevil
+    - flatheaded borers
+    - giant palm borer
+    - goldspotted oak borer
+    - lead cable borer
+    - leaf beetles
+    - pine needle weevils/pine wevils
+    - poplar and willow borer
+    - red palm weevil
+    - rose curculio
+    - roundheaded (longhorned) borers
+    - tumbling flower beetle
+    - yucca weevil
+    - baccharis gall fly
+    - boxwood leafminer
+    - honeylocust pod gall midge
+    - monterey pine midge
+    - needle and twig midges
+    - olive fruit fly
+    - ash plant bugs
+    - chinch and false chinch bug
+    - true bugs
+    - adelgids
+    - hackberry woolly aphid
+    - cypress bark scale / cypress bark mealybug /monterey cypress scale
+    - eucalyptus redgum lerp psyllid
+    - european elm scale
+    - gall aphids
+    - oak leaf phylloxera
+    - oak pit scales
+    - pit scales
+    - sharpshooters
+    - sycamore scale
+    - treehoppers
+    - woolly aphids
+    - gall makers
+    - leafcutting bees
+    - sawflies
+    - twohorned oak gall wasp
+    - willow leaf gall sawfly
+    - acorn moth
+    - banana moth
+    - bougainvillea looper
+    - california oakworm
+    - casemakers and skeletonizers
+    - ceanothus stem gall moth
+    - cypress bark moths
+    - cypress tip miner
+    - filbertworm
+    - foliage feeding caterpillars
+    - foliage miners
+    - juniper twig girdler
+    - leafrollers 
+    - monterey pine bud moth
+    - opogona crown borer
+    - pine tip or shoot moths
+    - pitch moths
+    - shield bearers
+    - broad mite and cyclamen mite
+    - gall and bud mites
+    - sixspotted mite on plumeria
+    - carrot beetle
+    - leaf beetles, cucumber beetles, flea beetles
+    - sunflower stem weevil
+    - weevils
+    - bulb flies
+    - gall midges
+    - leafminers

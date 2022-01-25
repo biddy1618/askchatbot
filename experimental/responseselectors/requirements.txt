@@ -1,3 +1,0 @@
--r actions/requirements-actions.txt
-rasa[convert]~=1.10.10
-
