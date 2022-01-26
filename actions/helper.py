@@ -8,7 +8,6 @@ from rasa_sdk.events import (
     SlotSet,
 )
 
-
 PATH_STATIC = './actions/static/'
 
 import logging
@@ -109,10 +108,17 @@ def _get_problem_links(
     df = df[df['plant_name'] == plant_name] if plant_name != 'other' else df
     df = df[df['plant_part'] == plant_part] if plant_part != 'other' else df
 
+    query = set(plant_damages)
+
+    df['coef'] = df['plant_damage'].apply(lambda s: _jaccard_coef(s, query))
+    df = df.sort_values('coef', ascending = False).head(3)
     
-    
-    return ['http://ipm.ucanr.edu/PMG/PESTNOTES/pn7477.html',
-       'http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/armillariartrot.html',
-       'http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/vertwilt.html',
-       'http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html',
-       'http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/armillariartrot.html']
+    res = [f'[Link]({r[1]["link"]}) for following plant problem: '\
+        f'type - {r[1]["plant_type"]}, name - {r[1]["plant_type"]}'\
+        f'part - {r[1]["plant_part"]}, damages - {", ".join(r[1]["plant_damage"])}' for r in df.iterrows()]
+
+    return res
+
+
+def _jaccard_coef(s1, s2):  
+    return len(s1.intersection(s2)) / len(s1.union(s2))

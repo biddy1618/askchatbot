@@ -370,10 +370,10 @@ class ActionSubmitPlantProblemForm(Action):
             {'title': 'Connect me to expert',   'payload': '/not_implemented'}
         ]
 
-        nl = '\n'
+        results = '\n'.join(results)
         dispatcher.utter_message(
-            text = f'Found following articles that are most closely related the provided query details:'\
-                f'{nl.join(results)}',
+            text = f'Found following articles that are most closely related the provided query details:\n'\
+                f'{results}',
             buttons = buttons)
         
         logger.info('action_submit_plant_problem_form - END')
