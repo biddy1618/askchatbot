@@ -137,29 +137,9 @@ Verify it works:
 
 Create conda environment and install dependencies for local development (use legacy dependency resolver for pip, otherwise it might take time):
 ```
-conda create --name askchatbot python=3.7
+conda create --name askchatbot python=3.8
 conda activate askchatbot
-pip install --use-deprecated=legacy-resolver -r requirements-dev.txt
-```
-
-Once the libraries are installed, try running the pip install command once again.
-```
-pip install -r requirements-dev.txt
+pip install -r requirements.txt
 ```
 
 It is __recommended to install the libraries explicitly stating versions and in order__, if you face some dependency issues.
-```
-pip install rasa=1.10.10 rasa-sdk=1.10.0 elasticsearch==7.7.0
-pip install infelct pandas pillow
-```
-
-### Installing Rasa X locally using miniconda
-
-Activate the conda environment where the Rasa was installed then run the following (Rasa 1.10.* is compatible with Rasa-X 0.32.0):
-```
-pip install rasa-x==0.32.0 --extra-index-url https://pypi.rasa.com/simple
-```
-
-# Host address
-
-Use the following address to access the gitlab - `git@160.1.7.191:ask-extension/askchatbot.git`

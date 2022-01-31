@@ -3,8 +3,8 @@
 ## Initial scetches
 
 For the first iteration, we are going to address the following parts:
-1. Disease and pests
-2. Plant problem
+1. Plant problem
+2. Disease and pests
 
 In order to accomplish that we need to build some form of possible tree to address the issues of the user. THE MOST FUNDAMENTAL PART in my opinion is the plant itself in resolving this question. Since pests and diseases can be subject to plant type, the foremost question that we need to ask is the plant type and name.
 

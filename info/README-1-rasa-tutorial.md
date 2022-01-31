@@ -19,34 +19,6 @@
 
 Correct any errors your assisstant made in a conversation, manually review and annotate conversations - __CONVERSATION-DRIVEN DEVELOPMENT__.
 
-## Rasa project structuring
-
-```
-📂 /path/to/project
-┣━━ 📂 actions
-┃   ┣━━ 🐍 __init__.py
-┃   ┗━━ 🐍 actions.py
-┣━━ 📂 data   
-┃   ┣━━ 📄 nlu.yml
-┃   ┣━━ 📄 rules.yml
-┃   ┗━━ 📄 stories.yml
-┣━━ 📂 models 
-┣━━ 📂 tests  
-┃   ┗━━ 📄 test_stories.yml
-┣━━ 📄 config.yml
-┣━━ 📄 credentials.yml
-┣━━ 📄 domain.yml
-┗━━ 📄 endpoints.yml
-```
-Minimal files for Rasa:
-* `config.yml`
-* `domain.yml`
-* Data files:
-    * `nlu.yml`
-    * `rules.yml`
-    * `stories.yml`
-
-
 # Domain file
 
 Contains:
@@ -276,15 +248,3 @@ One can run `rasa run --enable-api` to be able to talk to the bot through API.
 Also one can run `rasa run --enable-api --cors="*"` to configure CORS to allow all traffic to connect.
 
 Also one can run `rasa run --enable-api --cors="*" --debug` to help debugging while intergrating with website.
-
-# CDD and Rasa X
-
-To install Rasa X, run the following command:
-```
-conda create --name rasa-x python=3.7
-conda activate rasa-x
-pip install --upgrade pip
-pip install rasa-x --extra-index-url https://pypi.rasa.com/simple
-```
-
-One can use ngrok to share the bot with external users.
