@@ -34,6 +34,12 @@ Test the chat through RESTful API:
 curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sender\": \"1\"}" "0.0.0.0:5005/webhooks/rest/webhook"
 ```
 
+## Docker Compose (version 2.2.2)
+
+Try setting the services using `docker compose`:
+```bash
+docker compose up
+```
 
 ## Basic front end
 
@@ -44,9 +50,22 @@ Launch the server typing the following commands (python version 3.8):
 python -m http.server 8000
 ```
 
-Make sure to run the Rasa chatbot with `--cors="*"` commands additionally one can use `--debug` command for debugging:
+Make sure to run the Rasa chatbot with `--cors="*"` command. Additionally one can use `--debug` command for debugging:
 ```bash
-rasa run --cors="*" --port 5005
+rasa run --cors="*" # --debug
+```
+
+__NOTE__ - to test if CORS is enabled or not in our RESTful API:
+```bash
+MY_URL=http://0.0.0.0:5005
+curl -I -X OPTIONS \
+  -H "Origin: ${MY_URL}" \
+  -H 'Access-Control-Request-Method: GET' \
+  "${MY_URL}" 2>&1 | grep 'Access-Control-Allow-Origin'
+```
+It should output 
+```bash
+Access-Control-Allow-Origin: MY_URL # your specified URL
 ```
 
 ## Rasa project structure details
@@ -60,8 +79,8 @@ rasa run --cors="*" --port 5005
 ┃   ┣━━ 🐍 __init__.py              #
 ┃   ┣━━ 🐍 actions.py               # actions main module
 ┃   ┣━━ 🐍 helper.py                # helper functions for actions module
-┃   ┣━━ 🐍 plant_matching.ipynb     # EDA for scraped data
-┃   ┗━━ 🐍 requirements-action.txt  # modules used in actions module
+┃   ┣━━ 📄 plant_matching.ipynb     # EDA for scraped data
+┃   ┗━━ 📄 requirements-action.txt  # modules used in actions module
 ┣━━ 📂 data                         # data for training Rasa chatbot
 ┃   ┣━━ 📂 lookup-tables            # lookup tables, i.e., synonyms
 ┃   ┃   ┣━━ 📄 plant-damage.yml     # 
@@ -83,9 +102,11 @@ rasa run --cors="*" --port 5005
 ┣━━ 📄 endpoints.yml                # endpoints file
 ┣━━ 🐋 Dockerfile                   # dockerfile for rasa server
 ┣━━ 🐋 rasa-sdk.dockerfile          # dockerfile for rasa actions server
+┣━━ 🐋 docker-compose.yml           # docker compose file
 ┣━━ 📄 index.html                   # HTML file for python web-client
-┗━━ 📄 README.md                    # readme file
-┗━━ 📄 endpoints.yml                # endpoints file
+┣━━ 📄 README.md                    # readme file
+┣━━ 📄 endpoints.yml                # endpoints file
+┗━━ 📄 requirements.txt             # requirements file
 ```
 
 ## Regarding Rasa X

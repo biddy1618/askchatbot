@@ -6,10 +6,11 @@ services:
     ports:
       - "5005:5005"
     volumes:
-      - .:/app
+      - ./:/app
+    command: ["run", "--cors", "*"]
   rasa-actions:
     build:
       context: .
       dockerfile: rasa-actions.dockerfile
     volumes:
-      - ./actions:app/actions
+      - ./actions/:/app/actions
