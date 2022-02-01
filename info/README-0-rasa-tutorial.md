@@ -224,7 +224,7 @@ For additional information, please, visit default actions page in Rasa documenta
 ## Entities recognized only within the form
 
 One can set up entity in a way that it can be recognized only while some active form loop by setting conditions in slots definition:
-```
+```yml
 slots:
     pizza_size:
         type: text

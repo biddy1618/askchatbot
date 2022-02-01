@@ -3,29 +3,34 @@
 ## Docker (version 20.10.12)
 
 Pull images for Rasa and Rasa-SDK:
-```
+```bash
 docker pull rasa/rasa:3.0.4-spacy-en
 docker pull rasa/rasa-sdk:3.0.2
 ```
 
 Create network for communicating between the services:
-```
+```bash
 docker network create rasa
 ```
 
-Run the actions server with volume for actions:
+Build the images:
+```bash
+docker build -t rasa-actions -f rasa-actions.dockerfile .
+docker build -t rasa .
 ```
-docker build -t rasa-sdk -f rasa-sdk.dockerfile .
-docker run --rm -it -v $(pwd)/actions:/app/actions --net rasa --name action-server rasa-sdk
+
+Run the Rasa Actions server:
+```bash
+docker run --rm -it -v $(pwd)/actions:/app/actions --net rasa --name rasa-actions rasa-actions
 ```
 
 Run the Rasa Chatbot:
-```
-docker run --rm -it -p 0.0.0.0:5005:5005 -v $(pwd):/app --net rasa --name rasa --entrypoint="" rasa/rasa:3.0.4-spacy-en bash -c "rasa run --cors=\"*\""
+```bash
+docker run --rm -it -p 0.0.0.0:5005:5005 -v $(pwd):/app --net rasa --name rasa rasa rasa
 ```
 
 Test the chat through RESTful API:
-```
+```bash
 curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sender\": \"1\"}" "0.0.0.0:5005/webhooks/rest/webhook"
 ```
 
@@ -35,18 +40,18 @@ curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sen
 Copy the `index.html` file and put it in the project folder from this [github repo](https://github.com/RasaHQ/how-to-rasa/tree/main/video-10-connectors). Visit the [official github page](https://github.com/scalableminds/chatroom) of the project for more details. 
 
 Launch the server typing the following commands (python version 3.8):
-```
+```bash
 python -m http.server 8000
 ```
 
 Make sure to run the Rasa chatbot with `--cors="*"` commands additionally one can use `--debug` command for debugging:
-```
+```bash
 rasa run --cors="*" --port 5005
 ```
 
 ## Rasa project structure details
 
-```
+```bash
 📂 /path/to/project
 ┣━━ 📂 actions                      # actions
 ┃   ┣━━ 📂 static                   # static files

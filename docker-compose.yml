@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  rasa:
+    build:
+      context: .
+    ports:
+      - "5005:5005"
+    volumes:
+      - .:/app
+  rasa-actions:
+    build:
+      context: .
+      dockerfile: rasa-actions.dockerfile
+    volumes:
+      - ./actions:app/actions

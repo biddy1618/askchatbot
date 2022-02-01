@@ -13,7 +13,7 @@ TCP connections set up for all complete port range.
 Download __aws.pen__ key-pair (RSA) for access and identity.
 
 Connect through SSH (locate key-pair - `aws.pen`) using hostname generated after restart of instance:
-```
+```bash
 ssh -i "aws.pem" ubuntu@ec2-18-203-253-240.eu-west-1.compute.amazonaws.com
 ```
 
@@ -21,7 +21,7 @@ ssh -i "aws.pem" ubuntu@ec2-18-203-253-240.eu-west-1.compute.amazonaws.com
 
 1) Install __Remote SSH__ extension.
 2) Set up config file for remote SSH connect as follows and change the hostname accordingly - __EC2 instances generate new host name every time restart__:
-```
+```text
 Host aws-ec2-test
     HostName ec2-34-241-180-151.eu-west-1.compute.amazonaws.com
     User ubuntu
@@ -54,27 +54,27 @@ Update system: `sudo apt get update`.
 ### Docker set up
 
 Run the following to check for updates and installing 3rd packages:
-```
+```bash
 sudo apt remove docker docker-engine docker.io containerd runc
 sudo apt update
 sudo apt install ca-certificates curl gnupg lsb-release
 ```
 
 Run the following to add official Docker GPG key and setting up the stable repository:
-```
+```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 Install docker engine:
-```
+```bash
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
 Make `docker` command `sudo`:
-```
+```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
@@ -82,7 +82,7 @@ sudo usermod -aG docker $USER
 Reboot the instance.
 
 Test the installation:
-```
+```bash
 docker --version
 ```
 
@@ -91,14 +91,14 @@ Source at official Docker page - [source](https://docs.docker.com/engine/install
 ### Docker compose set up
 
 Run the following command (replace the uname with [last version](https://github.com/docker/compose/releases)):
-```
+```bash
 mkdir -p ~/.docker/cli-plugins/
 curl -SL https://github.com/docker/compose/releases/download/v2.0.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 chmod +x ~/.docker/cli-plugins/docker-compose
 ```
 
 Test the installation:
-```
+```bash
 docker compose version
 ```
 
@@ -107,13 +107,13 @@ More info can be found at [here](https://docs.docker.com/compose/cli-command/#in
 ### Portrainer for container management
 
 Create volume for portrainer:
-```
+```bash
 cd ~/
 docker volume create portainer_data
 ```
 
 Run the container and forward the ports (8000 for UI):
-```
+```bash
 docker run -d  -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
 
@@ -124,19 +124,19 @@ More can be found in [here](https://docs.portainer.io/v/ce-2.9/start/install/ser
 ### Setting up Rasa locally using miniconda
 
 Install miniconda:
-```
+```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod +x Miniconda3-latest-Linux-x86_64.sh
 ./Miniconda3-latest-Linux-x86_64.sh
 ```
 
 Verify it works:
-```
+```bash
 (base) > conda --version
 ```
 
 Create conda environment and install dependencies for local development (use legacy dependency resolver for pip, otherwise it might take time):
-```
+```bash
 conda create --name askchatbot python=3.8
 conda activate askchatbot
 pip install -r requirements.txt
