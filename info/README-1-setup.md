@@ -21,12 +21,12 @@ docker build -t rasa .
 
 Run the Rasa Actions server:
 ```bash
-docker run --rm -it -v $(pwd)/actions:/app/actions --net rasa --name rasa-actions rasa-actions
+docker run --rm -it --net rasa --name rasa-actions rasa-actions
 ```
 
 Run the Rasa Chatbot:
 ```bash
-docker run --rm -it -p 0.0.0.0:5005:5005 -v $(pwd):/app --net rasa --name rasa rasa rasa
+docker run --rm -it -p 0.0.0.0:5005:5005 --net rasa --name rasa rasa
 ```
 
 Test the chat through RESTful API:
@@ -38,6 +38,7 @@ curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sen
 
 Try setting the services using `docker compose`:
 ```bash
+docker compose build
 docker compose up
 ```
 
@@ -50,14 +51,15 @@ Launch the server typing the following commands (python version 3.8):
 python -m http.server 8000
 ```
 
-Make sure to run the Rasa chatbot with `--cors="*"` command. Additionally one can use `--debug` command for debugging:
+Make sure to run the Rasa chatbot with `--cors="*"` command inside the docker (the default). Additionally one can use `--debug` command for debugging:
 ```bash
 rasa run --cors="*" # --debug
 ```
 
-__NOTE__ - to test if CORS is enabled or not in our RESTful API:
+__NOTE__ - to test if CORS is enabled or not in our RESTful API (enabled by default):
 ```bash
 MY_URL=http://0.0.0.0:5005
+
 curl -I -X OPTIONS \
   -H "Origin: ${MY_URL}" \
   -H 'Access-Control-Request-Method: GET' \

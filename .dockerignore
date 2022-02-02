@@ -1,9 +1,17 @@
 # Rasa
-.rasa
+.config/
+.keras/
+.rasa/
+models/
 
-# Python cache 
-__pychache__
+# python cache 
+__pycache__
 
-# Markdown except for main README.md
-*.md
-!README.md
+# miscallenous
+info/
+
+# simple front-end
+index.html
+
+# PIP requirements file
+requirements.txt

@@ -1,15 +1,11 @@
-# rasa models
+# Rasa files and models
+.config/
+.keras/
 .rasa/
 models/
 
 # python byte code
 __pycache__/
 
-# test project for testing out features
-rasa-test/
-
-# rasa-x files
-*.sh
-
-# vscode
+# VScode files
 .vscode/

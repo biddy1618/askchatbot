@@ -3,14 +3,12 @@ services:
   rasa:
     build:
       context: .
+    container_name: rasa
     ports:
       - "5005:5005"
-    volumes:
-      - ./:/app
     command: ["run", "--cors", "*"]
   rasa-actions:
     build:
       context: .
       dockerfile: rasa-actions.dockerfile
-    volumes:
-      - ./actions/:/app/actions
+    container_name: rasa-actions

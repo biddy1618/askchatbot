@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1
 # escape=\
 # About
+# Dockerfile for building Rasa Actions server
+# More about the image - https://hub.docker.com/r/rasa/rasa-sdk/dockerfile
 
 # FROM <image> (ARG <tag>)
 # base image
@@ -8,7 +10,7 @@ ARG VERSION=3.0.2
 FROM rasa/rasa-sdk:$VERSION AS rasa-sdk
 
 USER root
-COPY ./actions/requirements-actions.txt /app/actions/requirements-actions.txt
+COPY ./actions /app/actions
 RUN pip install --upgrade -r actions/requirements-actions.txt
 
 USER 1001
