@@ -6,7 +6,7 @@ buildDocker:
     stage: dockerize
     rules:
         - if: $CI_COMMIT_BRANCH == "dev"
-        - if: $CI_COMMIT_BRANCH == "devDauren"
+        - if: $CI_COMMIT_BRANCH == "dev-dauren"
         - if: $CI_COMMIT_BRANCH == "qa"
         - if: $CI_COMMIT_BRANCH == "prod"
     image:
