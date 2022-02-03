@@ -23,7 +23,6 @@ deployDevDocker:
    stage: deploy
    rules:
        - if: $CI_COMMIT_BRANCH == "dev"
-       - if: $CI_COMMIT_BRANCH == "devDauren"
    image:
        name: git.eduworks.us:5050/infrastructure/build-images/git:2.30.1-2
    script:
