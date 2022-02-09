@@ -1,0 +1,2 @@
+# tiny dependency resolver
+pipdeptree==2.2.1

@@ -118,5 +118,3 @@ Rasa X as of 04.01.2022 is not supported by Rasa 3.0.* - [source](https://rasa.c
 ## `rasa-webchat` intergration
 
 It is not compatible with `Rasa 3.0.*` since `rasa-webchat` requires `socket.io-client` be version of 3.1.2, but `Rasa 3.0.*` requires `python-socketio` (which `socketio` client) be later than 4.4 (and less than 6).
-
-curl -H "Content-Type: application/json" -X POST http://0.0.0.0:5005/webhooks/rest/webhook -d "{\"message\": \"Flowers\", \"sender\": \"8428f3c3-23f2-4455-aedc-4c564c2616c7\"}"

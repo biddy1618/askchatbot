@@ -9,3 +9,6 @@ __pycache__/
 
 # VScode files
 .vscode/
+
+# ES data and scraped data
+es/data/
