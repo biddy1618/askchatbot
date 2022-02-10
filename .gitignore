@@ -11,4 +11,4 @@ __pycache__/
 .vscode/
 
 # ES data and scraped data
-es/data/
+es/data/**/*.json
