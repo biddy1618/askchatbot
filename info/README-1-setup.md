@@ -26,12 +26,12 @@ docker run --rm -it --net rasa --name rasa-actions rasa-actions
 
 Run the Rasa Chatbot:
 ```bash
-docker run --rm -it -p 0.0.0.0:5005:5005 --net rasa --name rasa rasa
+docker run --rm -it -p 127.0.0.1:5005:5005 --net rasa --name rasa rasa
 ```
 
 Test the chat through RESTful API:
 ```bash
-curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sender\": \"1\"}" "0.0.0.0:5005/webhooks/rest/webhook"
+curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sender\": \"1\"}" "127.0.0.1:5005/webhooks/rest/webhook"
 ```
 
 ## Docker Compose (version 2.2.2)
@@ -58,7 +58,7 @@ rasa run --cors="*" # --debug
 
 __NOTE__ - to test if CORS is enabled or not in our RESTful API (enabled by default):
 ```bash
-MY_URL=http://0.0.0.0:5005
+MY_URL=http://127.0.0.1:5005
 
 curl -I -X OPTIONS \
   -H "Origin: ${MY_URL}" \

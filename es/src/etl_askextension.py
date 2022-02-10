@@ -94,7 +94,7 @@ def _merge_title_question(df):
 
     return tqs
 
-def _transform_save(data, path_save, min_word_count = 2, max_str_len = None, state_filters = ['California']):
+def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, state_filters = ['California']):
     '''
     Read json string data, transform and save.
     '''
@@ -104,7 +104,7 @@ def _transform_save(data, path_save, min_word_count = 2, max_str_len = None, sta
     
     # Leave tickets from California state
     logger.info(f'Filtering states - {state_filters}')
-    df = df[df['state'] == 'California']
+    df = df[df['state'].isin(state_filters)]
 
     # Add the URL and leave blank URL for questions with no ID
     logger.info('Adding URL')
@@ -138,10 +138,10 @@ def _transform_save(data, path_save, min_word_count = 2, max_str_len = None, sta
     logger.info('Creating new field out of title and question')
     df['title-question'] = _merge_title_question(df)
     
-    # Remove questions with less than 2 words in title-question
-    # shape = df.shape
-    logger.info(f'Filtering out questions wiht less than {min_word_count} words')
-    df = df[df['title-question'].str.split().str.len() > min_word_count]
+    # Remove questions with small number words in title-question
+    if min_word_count:
+        logger.info(f'Filtering out questions wiht less than {min_word_count} words')
+        df = df[df['title-question'].str.split().str.len() > min_word_count]
     
     
     # Trim extremely long questions or responses, if constraint given:
@@ -150,7 +150,7 @@ def _transform_save(data, path_save, min_word_count = 2, max_str_len = None, sta
         df['question']          = df['question'].str[:max_str_len]
         df['title-question']    = df['title-question'].str[:max_str_len]
         
-        df = df['answer'].apply(lambda answer: [
+        df['answer'] = df['answer'].apply(lambda answer: [
             r['response'][:max_str_len] for r in answer
             ])
     

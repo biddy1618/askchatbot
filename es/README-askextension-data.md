@@ -43,7 +43,7 @@ It is a list of dictionary objects with following fields:
 - `state` - state ticket was created in
 - `county` - county ticket was created in
 - `question` - question that has been posted
-- `answer` - lists presented in numbered dictionary data type
+- `answer` - responselists presented in numbered dictionary data type
 
 
 ## Person of contact
