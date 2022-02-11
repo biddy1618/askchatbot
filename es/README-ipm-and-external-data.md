@@ -109,3 +109,6 @@ Data can be obtained through DVC ([installation guide](https://wiki.eduworks.com
 | text   | string                                |
 | images | [{link: " ", src: " ", caption: " "}] |
 
+## Universal Sentence Encoder
+
+[Paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/46808.pdf)
