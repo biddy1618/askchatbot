@@ -10,7 +10,7 @@ FROM rasa/rasa:$VERSION AS rasa
 COPY . .
 
 RUN ["rasa", "train"]
-CMD ["run", "--cors", "*"]
+CMD ["run", "--cors", "*", "--endpoints", "endpoints-prod.yml"]
 
 # chage shell
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]

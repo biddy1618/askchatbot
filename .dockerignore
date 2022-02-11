@@ -3,6 +3,7 @@
 .keras/
 .rasa/
 models/
+endpoints.yml
 
 # python cache 
 __pycache__

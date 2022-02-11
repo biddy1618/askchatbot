@@ -29,17 +29,34 @@ Run the Rasa Chatbot:
 docker run --rm -it -p 127.0.0.1:5005:5005 --net rasa --name rasa rasa
 ```
 
-Test the chat through RESTful API:
+## Or alternatively use Docker Compose (version 2.2.2)
+
+Try setting the services up using `docker compose`:
 ```bash
-curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sender\": \"1\"}" "127.0.0.1:5005/webhooks/rest/webhook"
+docker compose build # if you already built images, omit
+docker compose up
 ```
 
-## Docker Compose (version 2.2.2)
-
-Try setting the services using `docker compose`:
+If you have already built the images, run the following to resume:
 ```bash
-docker compose build
-docker compose up
+docker compose start
+```
+
+And to remove stopped containers and they are no longer needed, run following:
+```bash
+docker compose down
+```
+
+## Testing
+
+Test the Rasa Actions server (should return the list of actions):
+```bash
+curl -X GET "localhost:5055/actions"
+```
+
+Test the Rasa Chatbot through RESTful API (should return response for message "Hi"):
+```bash
+curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sender\": \"1\"}" "localhost:5005/webhooks/rest/webhook"
 ```
 
 ## Basic front end
@@ -50,6 +67,7 @@ Launch the server typing the following commands (python version 3.8):
 ```bash
 python -m http.server 8000
 ```
+You can access the simple web-client through `http://localhost:8000/`.
 
 Make sure to run the Rasa chatbot with `--cors="*"` command inside the docker (the default). Additionally one can use `--debug` command for debugging:
 ```bash
@@ -58,16 +76,13 @@ rasa run --cors="*" # --debug
 
 __NOTE__ - to test if CORS is enabled or not in our RESTful API (enabled by default):
 ```bash
-MY_URL=http://127.0.0.1:5005
-
-curl -I -X OPTIONS \
-  -H "Origin: ${MY_URL}" \
-  -H 'Access-Control-Request-Method: GET' \
-  "${MY_URL}" 2>&1 | grep 'Access-Control-Allow-Origin'
+SOURCE_URL=http://some-random-site
+TARGET_URL=http://localhost:5005
+curl -X OPTIONS -H "Origin: ${SOURCE_URL}" --head ${TARGET_URL}
 ```
-It should output 
+It should output following:
 ```bash
-Access-Control-Allow-Origin: MY_URL # your specified URL
+Access-Control-Allow-Origin: ${SOURCE_URL} # http://some-random-site
 ```
 
 ## Rasa project structure details
