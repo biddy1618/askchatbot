@@ -12,3 +12,4 @@ __pycache__/
 
 # ES data and scraped data
 es/data/**/*.json
+es.log

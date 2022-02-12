@@ -4,7 +4,7 @@ from pathlib import Path
 _PATH = Path(__file__).parents[1].as_posix()
 
 PATH_DATA_ASKEXTENSION  = _PATH + '/data/askextension/2020-08-20/'
-PATH_DATA_UCIPM         = _PATH + '/data/uc_ipmdata/updated/'
+PATH_DATA_UCIPM         = _PATH + '/data/uc-ipm/updated/'
 PATH_DATA_RESULTS       = _PATH + '/data/transformed/'
 
 if not os.path.exists(PATH_DATA_RESULTS):
