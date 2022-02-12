@@ -9,10 +9,14 @@ FROM rasa/rasa:$VERSION AS rasa
 
 COPY . .
 
+USER root
+RUN ["pip", "install", "--upgrade", "-r", "requirements-update.txt"]
 RUN ["rasa", "train"]
+
+USER 1001
 CMD ["run", "--cors", "*", "--endpoints", "endpoints-prod.yml"]
 
-# chage shell
+# change shell
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # the entry point

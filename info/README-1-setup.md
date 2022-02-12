@@ -61,13 +61,23 @@ curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sen
 
 ## Basic front end
 
-Copy the `index.html` file and put it in the project folder from this [github repo](https://github.com/RasaHQ/how-to-rasa/tree/main/video-10-connectors). Visit the [official github page](https://github.com/scalableminds/chatroom) of the project for more details. 
+### [Rasa-Chat](https://www.npmjs.com/package/@rasahq/rasa-chat) and Socket IO channel
 
 Launch the server typing the following commands (python version 3.8):
 ```bash
-python -m http.server 8000
+python -m http.server -d ./web-client/socket-io/
 ```
 You can access the simple web-client through `http://localhost:8000/`.
+
+### Rest API
+
+Launch the server typing the following commands (python version 3.8):
+```bash
+python -m http.server -d ./web-client/rest-api/
+```
+You can access the simple web-client through `http://localhost:8000/`.
+
+More info at [github repo](https://github.com/RasaHQ/how-to-rasa/tree/main/video-10-connectors). Visit the [official github page](https://github.com/scalableminds/chatroom) of the project for more details. 
 
 Make sure to run the Rasa chatbot with `--cors="*"` command inside the docker (the default). Additionally one can use `--debug` command for debugging:
 ```bash

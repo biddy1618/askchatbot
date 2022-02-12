@@ -19,7 +19,7 @@ certifi==2021.10.8
 cffi==1.15.0
 chardet==3.0.4
 clang==5.0
-click==8.0.3
+click==7.1.2
 cloudpickle==1.6.0
 colorclass==2.2.0
 coloredlogs==15.0.1

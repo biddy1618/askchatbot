@@ -1,0 +1,6 @@
+pip==22.0.3
+
+# socket-io require these updates
+sanic==21.6.2
+Sanic-Cors==1.0.0
+sanic-routing==0.7.2
