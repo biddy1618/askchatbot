@@ -16,10 +16,9 @@ from io import StringIO
 import re
 from string import punctuation as pn
 
-import constants
+import config
 
 import logging
-logging.basicConfig(level = logging.INFO)
 logger = logging.getLogger(__file__)
 
 
@@ -109,7 +108,7 @@ def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, stat
     # Add the URL and leave blank URL for questions with no ID
     logger.info('Adding URL')
     df['url'] = [
-        f"{constants.ASKEXTENSION_QUESTION_URL}{ticket_no}" if len(ticket_no) == 6 else ""
+        f"{config.ASKEXTENSION_QUESTION_URL}{ticket_no}" if len(ticket_no) == 6 else ""
         for ticket_no in df['title'].str.split('#').str[-1]
     ]
 
@@ -181,7 +180,7 @@ def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, stat
 if __name__ == "__main__":
 
     logger.info('Merging source files into one')
-    tmp_json = _merge_json(constants.ASKEXTENSION_FILE_NAMES)
+    tmp_json = _merge_json(config.ASKEXTENSION_FILE_NAMES)
 
     logger.info('Start transforming data')
-    _transform_save(tmp_json, constants.ASKEXTENSION_FILE_RESULT)
+    _transform_save(tmp_json, config.ASKEXTENSION_FILE_RESULT)
