@@ -33,7 +33,7 @@ def create_index(index_name: str, mapping: Dict) -> None:
     config.es_client.indices.delete(index = index_name, ignore = 404)        
     config.es_client.indices.create(index=index_name, ignore=400, body=mapping)
 
-def populate_index(self, path: str, index_name: str) -> None:
+def populate_index(path: str, index_name: str) -> None:
     '''
     Populate an index from a CSV file.
     :param path: The path to the CSV file.
@@ -43,10 +43,10 @@ def populate_index(self, path: str, index_name: str) -> None:
     df.loc[:, 'title-question-vector'] = _get_embed(df['title-question'])
     df = df.to_dict('records')
 
-    logger.info(f'Writing {df.shape[0]} documents to ES index {index_name}')
-    deque(parallel_bulk(self.es_client, df, index = index_name), maxlen = 0)
+    logger.info(f'Writing {len(df)} documents to ES index {index_name}')
+    deque(parallel_bulk(config.es_client, df, index = index_name), maxlen = 0)
     config.es_client.indices.refresh()
-    success_insertions = self.es_client.cat.count(index_name, params={"format": "json"})[0]['count']
+    success_insertions = config.es_client.cat.count(index_name, params={"format": "json"})[0]['count']
     logger.info(f'Finished inserting. Succesful insertions: {success_insertions}')
 
 def query():
@@ -65,10 +65,10 @@ async def es_query(query: str, index_name: str = 'askextension', vector_name: st
         }
     }
     response = config.es_client.search(
-        index=index_name,
-        query=script_query,
-        size = 3,
-        _source={"includes": ["title", "question",]},
+        index   = index_name,
+        query   = script_query,
+        size    = 3,
+        _source = {"includes": ["title", "question",]},
     )
     print(json.dumps(response['hits']['hits'], indent=2))
 
@@ -83,8 +83,9 @@ async def main():
 
 if __name__ == '__main__':
 
-    if not config.es_client.indices.exists(index = config.askextension_index):
-        create_index(config.askextension_index, config.askextension_mapping)
+    # if not config.es_client.indices.exists(index = config.ES_ASKEXTENSION_INDEX):
+    create_index(config.ES_ASKEXTENSION_INDEX, config.ES_ASKEXTENSION_MAPPING)
+    populate_index(config.ASKEXTENSION_FILE_RESULT, config.ES_ASKEXTENSION_INDEX)
     
     asyncio.run(main(), debug = True)
 

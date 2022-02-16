@@ -7,9 +7,6 @@ from pathlib import Path
 from ruamel import yaml
 import json
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
-import tensorflow_hub as tf_hub
 from elasticsearch import Elasticsearch
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -27,9 +24,9 @@ if not os.path.exists(PATH_DATA_RESULTS):
     os.makedirs(PATH_DATA_RESULTS)
 
 # Askexntension data
-ASKEXTENSION_FILE_NAMES = [f'{PATH_DATA_ASKEXTENSION}{f}' for f in os.listdir(PATH_DATA_ASKEXTENSION)]
-ASKEXTENSION_FILE_RESULT = PATH_DATA_RESULTS + 'askextension_transformed.json'
-ASKEXTENSION_QUESTION_URL = 'https://ask2.extension.org/kb/faq.php?id='
+ASKEXTENSION_FILE_NAMES     = [f'{PATH_DATA_ASKEXTENSION}{f}' for f in os.listdir(PATH_DATA_ASKEXTENSION)]
+ASKEXTENSION_FILE_RESULT    = PATH_DATA_RESULTS + 'askextension_transformed.json'
+ASKEXTENSION_QUESTION_URL   = 'https://ask2.extension.org/kb/faq.php?id='
 
 # UC IPM data
 UCIPM_FILE_NAMES        = [f'{PATH_DATA_UCIPM}{f}' for f in os.listdir(PATH_DATA_UCIPM)]
@@ -41,8 +38,15 @@ UCIPM_FILE_NAMES        = [f'{PATH_DATA_UCIPM}{f}' for f in os.listdir(PATH_DATA
 # ES configuration
 es_config = (yaml.safe_load(open(f'{_PATH}/src/es_config.yml', 'r')) or {})
 
-host            = es_config.get('host'                  , None)
-tf_embed_url    = es_config.get('tfhub-embdedding-url'  , None)
+host                    = es_config.get('host'                  , None)
+tf_embed_url            = es_config.get('tfhub-embdedding-url'  , None)
+tfhub_cache_dir         = es_config.get('tfhub-cache-dir'       , None)
+tf_cpp_min_log_level    = es_config.get('tf-cpp-min-log-level'  , None)
+
+# os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
+os.environ['TFHUB_CACHE_DIR']       = tfhub_cache_dir
+
+import tensorflow_hub as tf_hub
 
 logger.info("----------------------------------------------")
 logger.info("Elasticsearch configuration:")
@@ -52,16 +56,21 @@ logger.info("- host                     = %s", host)
 # logger.info("- do_the_queries           = %s", do_the_queries)
 # logger.info("- ipmdata_index_name       = %s", ipmdata_index_name)
 logger.info("- tfhub_embedding_url      = %s", tf_embed_url)
+logger.info("- tfhub_cache_dir          = %s", tfhub_cache_dir)
 logger.info("----------------------------------------------")
 
-askextension_index      = es_config.get('askextension-index'    , None)
-askextension_mapping    = es_config.get('askextension-mapping'  , None)
+# index mappings
+ES_ASKEXTENSION_MAPPING     = json.load(open(f'{_PATH}/data/mappings/askextension_mapping.json'))
+ES_COMBINED_MAPPING_VECTOR  = json.load(open(f'{_PATH}/data/mappings/combined_mapping_vector.json'))
+ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
 
-askextension_mapping    = json.loads(askextension_mapping)
+ES_ASKEXTENSION_INDEX   = es_config.get('askextension-index', None)
+ES_COMBINED_INDEX       = es_config.get('combined-index'    , None)
 
 logger.info("----------------------------------------------")
 logger.info("Elasticsearch indexes:")
-logger.info("- index                    = %s", askextension_index)
+logger.info("- askextension index       = %s", ES_ASKEXTENSION_INDEX)
+logger.info("- combined index           = %s", ES_COMBINED_INDEX)
 # logger.info("- username                 = %s", pprint.pformat(username))
 # logger.info("- password                 = %s", pprint.pformat(password))
 # logger.info("- do_the_queries           = %s", do_the_queries)

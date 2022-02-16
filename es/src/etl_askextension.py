@@ -54,10 +54,10 @@ def _transform_answer(answer_dict):
     '''
     answers = [{}] * len(answer_dict)
     
-    for key, value in answer_dict.items():
+    for k, v in answer_dict.items():
         # clean the response up
-        value['response'] = _clean(value['response'])
-        answers[int(key) - 1] = value
+        v['response'] = _clean(v['response'])
+        answers[int(k) - 1] = v
     
     return answers
 
@@ -99,8 +99,11 @@ def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, stat
     '''
     # Read all data
     logger.info('Reading data into DataFrame')
-    df = pd.read_json(StringIO(data)).set_index("faq-id")
+    df = pd.read_json(StringIO(data))
     
+    # Convert 'faq-id' to str type
+    df['faq-id'] = df['faq-id'].astype(str)
+
     # Leave tickets from California state
     logger.info(f'Filtering states - {state_filters}')
     df = df[df['state'].isin(state_filters)]
@@ -115,7 +118,7 @@ def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, stat
     # Add the ticket number from title and leave blank for questions without
     logger.info('Adding ticket number from title')
     df['ticket-no'] = [
-        int(ticket_no) if len(ticket_no) == 6 else 0
+        ticket_no if len(ticket_no) == 6 else ""
         for ticket_no in df['title'].str.split('#').str[-1]
     ]
 
@@ -149,12 +152,13 @@ def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, stat
         df['question']          = df['question'].str[:max_str_len]
         df['title-question']    = df['title-question'].str[:max_str_len]
         
-        df['answer'] = df['answer'].apply(lambda answer: [
-            r['response'][:max_str_len] for r in answer
-            ])
+        answers = df['answer']
+        for answer in answers:
+            for response in answer:
+                response['response'] = response['response'][:max_str_len]
+        df['answer'] = answers
     
     logger.info(f'Saving data as JSON at {path_save}')  
-    df = df.reset_index()
     df = df.loc[
         :,
         [
@@ -173,7 +177,7 @@ def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, stat
     ]
 
     with open(path_save, "w") as f:
-        f.write(df.reset_index().to_json(orient="records", indent=2))
+        f.write(df.to_json(orient="records", indent=2))
     
     return df
 

@@ -3,6 +3,16 @@
 ## Initial scetches
 
 For the first iteration, we are going to address the following parts:
+
+- Cultural tips. Entities: `plant_type`, `plant_name`, `tip_formulation`
+    - Question
+- Plant problem. Entities: `plant_type`, `plant_name`, `problem_description`, `plant_damage`, `general_question`, `pest_name`, `problem_name`
+    - Pest problem
+    - Disease problem
+    - Description
+- 
+
+
 1. Plant problem
 2. Disease and pests
 
