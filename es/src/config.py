@@ -1,8 +1,6 @@
 import os
 import sys
 import logging
-from contextlib import suppress
-
 from pathlib import Path
 from ruamel import yaml
 import json
@@ -43,7 +41,7 @@ tf_embed_url            = es_config.get('tfhub-embdedding-url'  , None)
 tfhub_cache_dir         = es_config.get('tfhub-cache-dir'       , None)
 tf_cpp_min_log_level    = es_config.get('tf-cpp-min-log-level'  , None)
 
-# os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
+os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
 os.environ['TFHUB_CACHE_DIR']       = tfhub_cache_dir
 
 import tensorflow_hub as tf_hub
@@ -61,7 +59,7 @@ logger.info("----------------------------------------------")
 
 # index mappings
 ES_ASKEXTENSION_MAPPING     = json.load(open(f'{_PATH}/data/mappings/askextension_mapping.json'))
-ES_COMBINED_MAPPING_VECTOR  = json.load(open(f'{_PATH}/data/mappings/combined_mapping_vector.json'))
+ES_COMBINED_VECTOR_MAPPING  = json.load(open(f'{_PATH}/data/mappings/combined_vector_mapping.json'))
 ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
 
 ES_ASKEXTENSION_INDEX   = es_config.get('askextension-index', None)
