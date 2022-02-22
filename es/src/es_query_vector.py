@@ -668,7 +668,7 @@ async def main():
                     pest_damage
                 )
             else:
-                logger.info("Please try again...")
+                logger.info('Please try again...')
         except KeyboardInterrupt:
             return
 
@@ -769,12 +769,9 @@ def populate_index(recreate: bool = False) -> None:
             df = df.drop_duplicates('name')
             a_s = df.shape[0]
             dropped = b_s - a_s
-            # if dropped > 0:
-            #     print(f"Dropped {dropped} with same 'name' from {f}")
-        
-        # we then rename the columns to signal where that columns is from
+            
+        # we then rename the columns to indicate where those columns is from
         f_name = f.split('/')[-1]
-        
         if f_name in rename_data:
             df = df.rename(columns = rename_data[f_name])
             df = df[rename_data[f_name].values()]
