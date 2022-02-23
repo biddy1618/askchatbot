@@ -1,18 +1,9 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
 from typing import Dict, Text, Any, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
 from rasa_sdk.events import (
-    SlotSet,
-    FollowupAction,
     EventType
 )
 
@@ -21,74 +12,8 @@ logger = logging.getLogger(__name__)
 
 from actions import helper
 
-
-class ActionGreet(Action):
-    """Get the conversation going."""
-
-    def name(self) -> Text:
-        return 'action_greet'
-    
-    def run(
-        self,
-        dispatcher  : CollectingDispatcher,
-        tracker     : Tracker,
-        domain      : Dict[Text, Any]
-        ) -> List[EventType]:
-
-        logger.info('action_greet - START')
-        shown_greeting          = tracker.get_slot('shown_greeting')
-        shown_privacy_policy    = tracker.get_slot('shown_privacy_policy')
-        shown_explain_ipm       = tracker.get_slot('shown_explain_ipm')
-
-        if not shown_greeting:
-            dispatcher.utter_message(response = 'utter_greet')
-        
-        if not shown_privacy_policy:
-            dispatcher.utter_message(response = 'utter_privacy_policy')
-        
-        buttons = [
-            {'title': 'I have problem with my plant.',                          'payload': '/request_plant_problem'},
-            {'title': 'I have a picture and I would like to get help on that.', 'payload': '/request_plant_picture'},
-            {'title': 'I have generic request.',                                'payload': '/request_generic'},
-            {'title': 'Connect me to askextension expert.',                     'payload': '/request_expert'},
-        ]
-
-        if not shown_explain_ipm:
-            buttons.append({'title': 'I want to learn more about IPM', 'payload': '/intent_explain_ipm'})
-
-        if shown_greeting:
-            buttons.append({'title': 'Goodbye', 'payload': '/intent_goodbye'})
-
-        dispatcher.utter_message(text = 'Please, select one of the these options:', buttons = buttons)
-        events = helper._reset_slots(tracker)
-
-        logger.info('action_greet - END')
-        return events
-    
-
-class ActionExplainIPM(Action):
-    """Explain IPM"""
-
-    def name(self) -> Text:
-        return "action_explain_ipm"
-    
-    def run(
-        self,
-        dispatcher  : CollectingDispatcher,
-        tracker     : Tracker,
-        domain      : Dict[Text, Any]
-        ) -> List[EventType]:
-
-        logger.info('action_explain_ipm - START')
-        
-        dispatcher.utter_message(response = 'utter_explain_ipm')
-        
-        logger.info('action_explain_ipm - END')
-        return [SlotSet('shown_explain_ipm', True), FollowupAction('action_greet')]
-
-
 class ActionAskForPlantType(Action):
-    """Custom action for slot validation - plant_type"""
+    '''Custom action for slot validation - plant_type.'''
     
     def name(self) -> Text:
         return 'action_ask_plant_type'
@@ -116,7 +41,7 @@ class ActionAskForPlantType(Action):
         return []
 
 class ActionAskForPlantName(Action):
-    """Custom action for slot validation - plant_name"""
+    '''Custom action for slot validation - plant_name.'''
     
     def name(self) -> Text:
         return 'action_ask_plant_name'
@@ -142,7 +67,7 @@ class ActionAskForPlantName(Action):
         return []
 
 class ActionAskForPlantPart(Action):
-    """Custom action for slot validation - plant_part"""
+    '''Custom action for slot validation - plant_part.'''
     
     def name(self) -> Text:
         return 'action_ask_plant_part'
@@ -173,7 +98,7 @@ class ActionAskForPlantPart(Action):
 
 
 class ActionAskForPlantDamage(Action):
-    """Custom action for slot validation - plant_damages"""
+    '''Custom action for slot validation - plant_damages.'''
     
     def name(self) -> Text:
         return 'action_ask_plant_damages'
@@ -198,26 +123,29 @@ class ActionAskForPlantDamage(Action):
             n = 10)
         buttons = [{'title': 'I don\'t have any description', 'payload': '/request_plant_problem{"plant_damage": ["other"]}'}]
 
-        dispatcher.utter_message(text = 'Please, describe your damage using explicit descriptive words as below:')
-        dispatcher.utter_message(text = ', '.join(pd), buttons = buttons)
+        if pd:
+            dispatcher.utter_message(text = 'Please, describe your damage using explicit descriptive words as below:')
+            dispatcher.utter_message(text = ', '.join(pd), buttons = buttons)
+        else:
+            dispatcher.utter_message(text = 'Please, describe your damage using explicit descriptive words.')
+            
 
         
         logger.info('action_ask_plant_damages - END')
         return []
 
 class ValidatePlantProblemForm(FormValidationAction):
-    """
+    '''
     Form for plant problem description validation form.
     Required slots:
     - plant_type
     - plant_name
     - plant_part
     - plant_damage
-    """
-
+    '''
 
     def name(self) -> Text:
-        return "validate_plant_problem_form"
+        return 'validate_plant_problem_form'
 
     # async def extract_plant_damages(
     #     self, dispatcher: CollectingDispatcher, 
@@ -249,7 +177,7 @@ class ValidatePlantProblemForm(FormValidationAction):
         tracker     : Tracker,
         domain      : Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        """Validate slot plant_type"""
+        '''Validate slot plant_type.'''
 
         logger.info('validate_plant_problem_form - validate_plant_type - START')
         logger.info(f'validate_plant_problem_form - validate_plant_type - SLOT VALUE: {value}')
@@ -271,7 +199,7 @@ class ValidatePlantProblemForm(FormValidationAction):
         tracker     : Tracker,
         domain      : Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        """Validate slot plant_name"""
+        '''Validate slot plant_name.'''
     
         logger.info('validate_plant_problem_form - validate_plant_name - START')
         logger.info(f'validate_plant_problem_form - validate_plant_name - SLOT VALUE: {value}')
@@ -293,7 +221,7 @@ class ValidatePlantProblemForm(FormValidationAction):
         tracker     : Tracker,
         domain  : Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        """Validate slot plant_part"""
+        '''Validate slot plant_part.'''
 
         logger.info('validate_plant_problem_form - validate_plant_part - START')
         logger.info(f'validate_plant_problem_form - validate_plant_part - SLOT VALUE: {value}')
@@ -317,7 +245,7 @@ class ValidatePlantProblemForm(FormValidationAction):
         tracker     : Tracker,
         domain      : Dict[Text, Any],
     ) -> Dict[Text, Any]:
-        """Validate slot plant_damages"""
+        '''Validate slot plant_damages.'''
 
         logger.info('validate_plant_problem_form - validate_plant_damages - START')
         logger.info(f'validate_plant_problem_form - validate_plant_damages - SLOT VALUE: {value}')
@@ -333,7 +261,7 @@ class ValidatePlantProblemForm(FormValidationAction):
         return {'plant_damages': plant_damages}
 
 class ActionSubmitPlantProblemForm(Action):
-    """Custom action for submitting form - plant_problem_form"""
+    '''Custom action for submitting form - plant_problem_form.'''
     
     def name(self) -> Text:
         return 'action_submit_plant_problem_form'

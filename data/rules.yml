@@ -33,3 +33,21 @@ rules:
     - requested_slot: null
   - action: action_submit_plant_problem_form
 
+- rule: Activate form for querying knowledge base
+  steps:
+  - intent: request_plant_problem
+  - action: query_knowledge_base_form
+  - active_loop: query_knowledge_base_form
+
+- rule: Submit form for querying knowledge base
+  condition:
+  - active_loop: query_knowledge_base_form
+  steps:
+  - action: query_knowledge_base_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_submit_query_knowledge_base_form
+
+
+

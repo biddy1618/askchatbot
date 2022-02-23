@@ -6,6 +6,8 @@ from difflib import get_close_matches
 from rasa_sdk import Tracker
 from rasa_sdk.events import (
     SlotSet,
+    ActionExecuted,
+    UserUttered
 )
 
 PATH_STATIC = './actions/static/'
@@ -31,7 +33,7 @@ logger.info('----------------------------------------------')
     
 
 def _reset_slots(tracker: Tracker) -> List[Any]:
-    """Clean up slots from all previous forms"""
+    '''Clean up slots from all previous forms.'''
     
     events = []
 
@@ -45,10 +47,21 @@ def _reset_slots(tracker: Tracker) -> List[Any]:
 
     return events
 
+def _next_intent(next_intent: Text) -> List[Dict]:
+    '''Add next intent events, mimicking a prediction by NLU.'''
+    return [
+        ActionExecuted("action_listen"),
+        UserUttered(
+            '/' + next_intent,
+            {'intent': {'name': next_intent, 'confidence': 1.0}, 'entities': {}},
+        )
+    ]
+
+
 def _get_plant_names(
     plant_type      : Text          = 'other',
     n               : int           = 10) -> List[Text]:
-    """Get plant names corresponding to plant type"""
+    '''Get plant names corresponding to plant type.'''
 
     df = db['plant_matches']
     df = df[df['plant_type'] == plant_type] if plant_type != 'other' else df
@@ -63,7 +76,7 @@ def _get_plant_parts(
     plant_type      : Text          = 'other',
     plant_name      : Text          = 'other',
     n               : int           = 10) -> List[Text]:
-    """Get plant details corresponding to plant descriptions"""
+    '''Get plant details corresponding to plant descriptions.'''
 
     pp = None
     df = db['plant_matches']
@@ -81,7 +94,7 @@ def _get_plant_damages(
     plant_name      : Text          = 'other',
     plant_part      : Text          = 'other',
     n               : int           = 10) -> List[Text]:
-    """Get plant details corresponding to plant descriptions"""
+    '''Get plant details corresponding to plant descriptions.'''
 
     pd = []
     df = db['plant_matches']
@@ -100,7 +113,7 @@ def _get_problem_links(
     plant_name      : Text = 'other',
     plant_part      : Text = 'other',
     plant_damages   : List[Text] = []) -> List[Text]:
-    """Get information associated with plant problem descriptions"""
+    '''Get information associated with plant problem descriptions.'''
 
     df = db['plant_tree']
 

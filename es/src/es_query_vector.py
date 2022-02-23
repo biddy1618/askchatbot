@@ -467,7 +467,7 @@ async def _handle_es_result(
 
     hits_ipm = hits
 
-    return hits_ipm, hits_ask
+    return hits_ask, hits_ipm
 
 
 async def _weight_score(

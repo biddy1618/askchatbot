@@ -85,6 +85,15 @@ responses:
   - text: Hi, I am AskExtension Assistant!
   utter_privacy_policy:
   - text: By chatting with me, you agree to our [privacy policy](https://ucanr.edu/?privacyStatement/).
+  utter_ask_connect_expert:
+  - buttons:
+    - payload: /intent_affirm
+      title: Yes
+    - payload: /intent_deny
+      title: No
+    text: "Sorry, I am not able to answer the question.\nDo you want to ask a human expert?"
+  utter_connect_expert:
+  - text: You can ask one of our experts at [ask extension](https://ask2.extension.org/open.php).
   utter_explain_ipm:
   - text: |-
       IPM is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties.
