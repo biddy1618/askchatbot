@@ -44,9 +44,13 @@ def _merge_json(source_files):
     for file in source_files:
     
         with open(file) as f:
-            data.extend(json.load(f))
+            print(f)
+            data = json.load(f)
+        df = pd.read_json(StringIO(json.dumps(data)))
+    # return json.dumps(data)
+        print(df.shape)
+    # df = pd.read_json(data)
     
-    return json.dumps(data)
 
 def _transform_answer(answer_dict):
     '''
@@ -100,6 +104,7 @@ def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, stat
     # Read all data
     logger.info('Reading data into DataFrame')
     df = pd.read_json(StringIO(data))
+    
     
     # Convert 'faq-id' to str type
     df['faq-id'] = df['faq-id'].astype(str)
@@ -187,4 +192,4 @@ if __name__ == "__main__":
     tmp_json = _merge_json(config.ASKEXTENSION_FILE_NAMES)
 
     logger.info('Start transforming data')
-    _transform_save(tmp_json, config.ASKEXTENSION_FILE_RESULT)
+    # _transform_save(tmp_json, config.ASKEXTENSION_FILE_RESULT)

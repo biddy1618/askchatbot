@@ -17,25 +17,27 @@ rules:
   - intent: intent_greet
   - action: action_greet
 
-- rule: Activate form for plant problem description
-  steps:
-  - intent: request_plant_problem
-  - action: plant_problem_form
-  - active_loop: plant_problem_form
+# - rule: Activate form for plant problem description
+#   steps:
+#   - intent: request_plant_problem
+#   - action: plant_problem_form
+#   - active_loop: plant_problem_form
 
-- rule: Submit form for plant problem description
-  condition:
-  - active_loop: plant_problem_form
-  steps:
-  - action: plant_problem_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - action: action_submit_plant_problem_form
+# - rule: Submit form for plant problem description
+#   condition:
+#   - active_loop: plant_problem_form
+#   steps:
+#   - action: plant_problem_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: action_submit_plant_problem_form
 
 - rule: Activate form for querying knowledge base
   steps:
-  - intent: request_plant_problem
+  - or:
+    - intent: intent_i_have_a_pest
+    - intent: intent_i_have_a_question
   - action: query_knowledge_base_form
   - active_loop: query_knowledge_base_form
 

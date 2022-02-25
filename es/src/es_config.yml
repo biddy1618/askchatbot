@@ -3,6 +3,7 @@ host: "http://localhost:9200/"
 
 # Universal Sentence Encoder config in TF Hub
 tfhub-embdedding-url  : "https://tfhub.dev/google/universal-sentence-encoder/4"
+# tfhub-embdedding-url  : "https://tfhub.dev/google/universal-sentence-encoder-large/5"
 tfhub-cache-dir       : "/var/tmp/tfhub_modules"
 tf-cpp-min-log-level  : "3"
 

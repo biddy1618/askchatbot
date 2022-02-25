@@ -31,7 +31,7 @@ class ActionAskForPlantType(Action):
             {'title': 'Flowers',        'payload': '/request_plant_problem{"plant_type": "flowers"}'},
             {'title': 'Fruits',         'payload': '/request_plant_problem{"plant_type": "fruits"}'},
             {'title': 'Vegetables',     'payload': '/request_plant_problem{"plant_type": "vegetables"}'},
-            {'title': 'Trees',           'payload': '/request_plant_problem{"plant_type": "trees"}'},
+            {'title': 'Trees',          'payload': '/request_plant_problem{"plant_type": "trees"}'},
             {'title': 'I don\'t know',  'payload': '/request_plant_problem{"plant_type": "other"}'}
         ]
 

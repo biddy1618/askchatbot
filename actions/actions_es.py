@@ -78,15 +78,20 @@ class ActionAskHandoffToExpert(Action):
         dispatcher.utter_message(template = 'utter_ask_connect_expert')
     
 
-class ValidateQueryKnowledgeBase(FormValidationAction):
+class ValidateQueryKnowledgeBaseForm(FormValidationAction):
     '''Query the Knowledge Base.'''
 
     def name(self) -> Text:
         return 'validate_query_knowledge_base_form'
 
 
-    @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
+    async def required_slots(
+        self,
+        domain_slots: List[Text],
+        dispatcher  : CollectingDispatcher,
+        tracker : Tracker,
+        domain: Dict[Text, Any],
+        ) -> List[Text]:
         '''A list of required slots that the form has to fill.'''
 
         def how_did_we_get_here(tracker: Tracker) -> Text:
@@ -119,38 +124,37 @@ class ValidateQueryKnowledgeBase(FormValidationAction):
         return slots
 
 
-    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-        '''A dictionary to map required slots to
-            - an extracted entity
-            - intent: value pairs
-            - a whole message
-            or a list of them, where a first match will be picked.'''
+    # def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+    #     '''A dictionary to map required slots to
+    #         - an extracted entity
+    #         - intent: value pairs
+    #         - a whole message
+    #         or a list of them, where a first match will be picked.'''
 
-        return {
-            "question": [
-                self.from_text(
-                    not_intent=["intent_garbage_inputs", "intent_configure_bot"]
-                )
-            ],
-            "pest_problem_description": [
-                self.from_text(
-                    not_intent=["intent_garbage_inputs", "intent_configure_bot"]
-                )
-            ],
-            "pest_causes_damage": [
-                self.from_intent(value="yes", intent="intent_yes"),
-                self.from_intent(value="no" , intent="intent_no"),
-            ],
-            "pest_damage_description": [
-                self.from_text(
-                    not_intent=["intent_garbage_inputs", "intent_configure_bot"]
-                )
-            ],
-        }
+    #     return {
+    #         "question": [
+    #             self.from_text(
+    #                 not_intent=["intent_garbage_inputs", "intent_configure_bot"]
+    #             )
+    #         ],
+    #         "pest_problem_description": [
+    #             self.from_text(
+    #                 not_intent=["intent_garbage_inputs", "intent_configure_bot"]
+    #             )
+    #         ],
+    #         "pest_causes_damage": [
+    #             self.from_intent(value="yes", intent="intent_yes"),
+    #             self.from_intent(value="no" , intent="intent_no"),
+    #         ],
+    #         "pest_damage_description": [
+    #             self.from_text(
+    #                 not_intent=["intent_garbage_inputs", "intent_configure_bot"]
+    #             )
+    #         ],
+    #     }
 
 
-    @staticmethod
-    def pest_name_plural(pest_name):
+    def pest_name_plural(self, pest_name: str) -> str:
         '''Returns the pest_name in plural form.'''
         
         pest_singular = inflecter.singular_noun(pest_name)
@@ -161,8 +165,7 @@ class ValidateQueryKnowledgeBase(FormValidationAction):
         return pest_plural
 
 
-    @staticmethod
-    def keep_pest_name_singular(name):
+    def keep_pest_name_singular(self,name: str) -> str:
         '''Returns True if the pest name only makes sense in singular form.'''
         
         name_lower = name.lower()
@@ -172,33 +175,71 @@ class ValidateQueryKnowledgeBase(FormValidationAction):
                 return True
         
         return False
+    
 
+    def validate_pest_problem_description(
+        self,
+        value       : Text,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any],
+        ) -> Dict[Text, Any]:
+        '''Once pest problem is described:
 
-    @staticmethod
-    def target_name_plural(target_name):
-        '''Returns the target_name in plural form.'''
-        
-        target_singular = inflecter.singular_noun(target_name)
-        if not target_singular: target_singular = target_name
-        target_plural = inflecter.plural_noun(target_singular)
-        
-        return target_plural
+        If no pest name was extracted:
+          -> do not ask for damage
+          -> set the damage equal to the description
 
+        If a pest name was extracted:
+          -> build damage question to ask, using the pest name in plural form
+        '''
 
-    @staticmethod
-    def keep_target_name_singular(name):
-        '''Returns True if the target name only makes sense in singular form.'''
-        name_lower = name.lower()
+        # see if a pest name was extracted from the problem description
+        pest_name   = tracker.get_slot('pest_name')
 
-        for key in TARGET_NAME_MUST_BE_SINGULAR:
-            if key in name_lower:
-                return True
-        
-        return False
+        # see if a target name was extracted from the problem description
+        target_name = tracker.get_slot('target_name')
 
+        if not pest_name:
+            # question = "Is there any damage?"
+            return {
+                'pest_problem_description'  : value,
+                'pest_causes_damage'        : 'did-not-ask',
+                'pest_damage_description'   : value,
+            }
 
-    @staticmethod
-    def create_text_for_pest(
+        if self.keep_pest_name_singular(pest_name):
+            if target_name:
+                question = (
+                    f'Is the {pest_name.lower()} causing any damage to the '
+                    f'{target_name.lower()}?'
+                )
+            else:
+                question = f'Is the {pest_name.lower()} causing any damage?'
+            return {
+                'pest_problem_description'  : value,
+                'cause_damage_question' : question,
+            }
+
+        pest_plural = self.pest_name_plural(pest_name)
+        if target_name:
+            question = (
+                f"Are the {pest_plural.lower()} causing any damage to the "
+                f"{target_name.lower()}?"
+            )
+        else:
+            question = f"Are the {pest_plural.lower()} causing any damage?"
+        return {"pest_problem_description": value, "cause_damage_question": question}
+    
+class ActionSubmitQueryKnowledgeBaseForm(Action):
+    '''Custom action for submitting form - query_knowledge_base_form.'''
+    
+    def name(self) -> Text:
+        return 'action_submit_query_knowledge_base_form'
+    
+
+    def _create_text_for_pest(
+        self,
         index   : int, 
         hit     : dict, 
         score   : float, 
@@ -291,68 +332,11 @@ class ValidateQueryKnowledgeBase(FormValidationAction):
 
         return text
 
-    def validate_pest_problem_description(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-        ) -> Dict[Text, Any]:
-        '''Once pest problem is described:
-
-        If no pest name was extracted:
-          -> do not ask for damage
-          -> set the damage equal to the description
-
-        If a pest name was extracted:
-          -> build damage question to ask, using the pest name in plural form
-        '''
-
-        # see if a pest name was extracted from the problem description
-        pest_name   = tracker.get_slot('pest_name')
-
-        # see if a target name was extracted from the problem description
-        target_name = tracker.get_slot('target_name')
-
-        if not pest_name:
-            # question = "Is there any damage?"
-            return {
-                'pest_problem_description'  : value,
-                'pest_causes_damage'        : 'did-not-ask',
-                'pest_damage_description'   : value,
-            }
-
-        if self.keep_pest_name_singular(pest_name):
-            if target_name:
-                question = (
-                    f'Is the {pest_name.lower()} causing any damage to the '
-                    f'{target_name.lower()}?'
-                )
-            else:
-                question = f'Is the {pest_name.lower()} causing any damage?'
-            return {
-                'pest_problem_description'  : value,
-                'cause_damage_question' : question,
-            }
-
-        pest_plural = self.pest_name_plural(pest_name)
-        if target_name:
-            question = (
-                f"Are the {pest_plural.lower()} causing any damage to the "
-                f"{target_name.lower()}?"
-            )
-        else:
-            question = f"Are the {pest_plural.lower()} causing any damage?"
-        return {"pest_problem_description": value, "cause_damage_question": question}
-    
-class ActionSubmitQueryKnowledgeBaseForm(Action):
-    '''Custom action for submitting form - query_knowledge_base_form.'''
-    
-    def name(self) -> Text:
-        return 'action_submit_query_knowledge_base_form'
-    
-
-    def summarize_hits(self, hits_ask, hits_ipm) -> list:
+    def summarize_hits(
+        self,    
+        hits_ask: dict, 
+        hits_ipm: dict
+        ) -> list:
         '''Create a list of dictionaries, where each dictionary contains those items we
         want to use when presenting the hits in a conversational manner to the user.'''
         
@@ -381,9 +365,9 @@ class ActionSubmitQueryKnowledgeBaseForm(Action):
     
     def run(
         self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any],
     ) -> List[Dict]:
         '''Define what the form has to do after all required slots are filled.'''
 
