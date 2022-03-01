@@ -1,0 +1,19 @@
+version: "3.0"
+
+nlu:
+- intent: request_plant_picture
+  examples: |
+    - I have a picture and I would like to get help on that
+    - Picture
+    - I would like to upload a picture
+- intent: request_generic
+  examples: |
+    - I have generic request
+    - I have other request
+    - General request
+- intent: request_expert
+  examples: |
+    - Connect me to expert
+    - Expert
+    - Please, connect me to agent
+    - I would like to connect to expert

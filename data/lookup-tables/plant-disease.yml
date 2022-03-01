@@ -1,180 +1,180 @@
-version: "3.0"
+# version: "3.0"
 
-nlu:
+# nlu:
 
-- lookup: plant_disease
-  examples: |
-    - bacterial leafspot
-    - bacterial ring rot
-    - bacterial soft rot (cc)
-    - bacterial soft rot (carrot)
-    - bacterial soft rot (corn)
-    - bacterial soft rot (on/gar)
-    - bacterial soft rot and blackleg (pot)
-    - seed piece decay
-    - angular leaf spot
-    - ascochyta blight
-    - basal rot
-    - basal stem rots
-    - bean rust
-    - big vein
-    - black mold
-    - blue mold rot
-    - botrytis leafspot
-    - botrytis rot (gray mold)
-    - botrytis rot (gray mold)
-    - cavity spot
-    - clubroot
-    - common rust
-    - common scab
-    - common smut
-    - damping off
-    - damping off and root dieback
-    - downy mildew
-    - early blight
-    - fusarium crown and foot rot
-    - fusarium ear and stalk rot
-    - fusarium root rot
-    - fusarium wilt
-    - fusarium yellows
-    - head smut
-    - late blight
-    - leaf spots
-    - neck rot (botrytis bulb rot)
-    - phythophthora crown and spear rot
-    - phytophthora root and crown rot
-    - phytophthora root rot
-    - pink root
-    - powdery mildew
-    - powdery scab
-    - purple blotch and stemphylium leaf blight
-    - ringspot (black blight)
-    - root rot and damping off 
-    - root rot
-    - rust
-    - seed piece decay (duplicate)-other in bacteria-different pics
-    - sooty mold
-    - verticillium wilt
-    - white mold
-    - white mold (sclerotinia lettuce drop)
-    - white rot
-    - beet leafhopper transmitted virescence agent (bltva)
-    - curly top
-    - maize dwarf mosaic virus
-    - mosaic viruses
-    - potato leafroll
-    - spotted wilt virus
-    - tobacco mosaic virus
-    - tomato spotted wilt virus
-    - tomato yellow leaf curl
-    - virus diseases
-    - viruses
-    - bacterial canker
-    - bacterial canker and blast
-    - crown gall
-    - bacterial leaf scorch / oleander leaf scorch
-    - citrus greening
-    - deep bark canker (walnuts)
-    - fire blight
-    - pierce's disease
-    - shallow bark canker
-    - walnut blight
-    - alternaria rot
-    - anthracnose
-    - apple and pear scab
-    - armillaria root rot
-    - armillaria root rot (oak root fungus)
-    - avocado root rot
-    - black root rot
-    - botrytis fruit rot (gray mold)
-    - branch wilt
-    - brown rot
-    - bunch rots
-    - cane blight
-    - cherry leaf spot
-    - citrus blast
-    - cytospora canker
-    - dothiorella canker
-    - european canker
-    - eutypa dieback
-    - leaf scorch
-    - leaf spot
-    - measles
-    - orange rust
-    - peach leaf curl
-    - pear rust
-    - phomopsis cane and leaf spot
-    - phomopsis canker
-    - phytophthora crown and root rot
-    - phytophthora gummosis
-    - phytophthora root and crown rot (red stele)
-    - purple blotch
-    - rhizopus rot (leak)
-    - sappy bark
-    - scab
-    - shot hole disease
-    - souring
-    - stamen blight
-    - thousand cankers
-    - yellow rust
-    - cherry buckskin
-    - pear decline
-    - exocortis
-    - apple mosaic
-    - blackline
-    - fig mosaic
-    - sunblotch
-    - tristeza disease complex
-    - bacterial blight
-    - bacterial gall/crown gall
-    - drippy oak
-    - foamy canker
-    - hairy root
-    - oleander knot
-    - olive knot
-    - wetwood or slime flux
-    - annosus root disease
-    - ash dieback
-    - black spot
-    - botrytis blight
-    - branch and twig dieback
-    - camellia petal and flower blight
-    - canker diseases
-    - canker stain
-    - collar, foot, root, and crown rot
-    - cryptomeria blight
-    - damping off diseases
-    - dematophora root rot
-    - downy mildew of rose
-    - dutch elm disease
-    - eastern filbert blight
-    - entomosporium leaf spot
-    - flower blight
-    - leaf gall
-    - leaf spot diseases
-    - needle blight
-    - needle cast fungi
-    - oak branch dieback
-    - oak twig blight
-    - palm diseases
-    - pitch canker
-    - pseudonectria canker
-    - rusts
-    - septoria leaf spot
-    - stem cankers and dieback
-    - stem gall
-    - sudden oak death
-    - taphrina leaf curl (oak leaf blister)
-    - twig blights
-    - witches' brooms
-    - wood decay
-    - escallonia dieback
-    - hackberry dieback
-    - bacterial soft rots, leaf spots, blights, wilts
-    - alternaria blight
-    - dry rot
-    - fusarium wilt, basal rot
-    - root, stem, and crown rots
-    - smoulder
-    - aster yellows
-    - fasciation
+# - lookup: plant_disease
+#   examples: |
+#     - bacterial leafspot
+#     - bacterial ring rot
+#     - bacterial soft rot (cc)
+#     - bacterial soft rot (carrot)
+#     - bacterial soft rot (corn)
+#     - bacterial soft rot (on/gar)
+#     - bacterial soft rot and blackleg (pot)
+#     - seed piece decay
+#     - angular leaf spot
+#     - ascochyta blight
+#     - basal rot
+#     - basal stem rots
+#     - bean rust
+#     - big vein
+#     - black mold
+#     - blue mold rot
+#     - botrytis leafspot
+#     - botrytis rot (gray mold)
+#     - botrytis rot (gray mold)
+#     - cavity spot
+#     - clubroot
+#     - common rust
+#     - common scab
+#     - common smut
+#     - damping off
+#     - damping off and root dieback
+#     - downy mildew
+#     - early blight
+#     - fusarium crown and foot rot
+#     - fusarium ear and stalk rot
+#     - fusarium root rot
+#     - fusarium wilt
+#     - fusarium yellows
+#     - head smut
+#     - late blight
+#     - leaf spots
+#     - neck rot (botrytis bulb rot)
+#     - phythophthora crown and spear rot
+#     - phytophthora root and crown rot
+#     - phytophthora root rot
+#     - pink root
+#     - powdery mildew
+#     - powdery scab
+#     - purple blotch and stemphylium leaf blight
+#     - ringspot (black blight)
+#     - root rot and damping off 
+#     - root rot
+#     - rust
+#     - seed piece decay (duplicate)-other in bacteria-different pics
+#     - sooty mold
+#     - verticillium wilt
+#     - white mold
+#     - white mold (sclerotinia lettuce drop)
+#     - white rot
+#     - beet leafhopper transmitted virescence agent (bltva)
+#     - curly top
+#     - maize dwarf mosaic virus
+#     - mosaic viruses
+#     - potato leafroll
+#     - spotted wilt virus
+#     - tobacco mosaic virus
+#     - tomato spotted wilt virus
+#     - tomato yellow leaf curl
+#     - virus diseases
+#     - viruses
+#     - bacterial canker
+#     - bacterial canker and blast
+#     - crown gall
+#     - bacterial leaf scorch / oleander leaf scorch
+#     - citrus greening
+#     - deep bark canker (walnuts)
+#     - fire blight
+#     - pierce's disease
+#     - shallow bark canker
+#     - walnut blight
+#     - alternaria rot
+#     - anthracnose
+#     - apple and pear scab
+#     - armillaria root rot
+#     - armillaria root rot (oak root fungus)
+#     - avocado root rot
+#     - black root rot
+#     - botrytis fruit rot (gray mold)
+#     - branch wilt
+#     - brown rot
+#     - bunch rots
+#     - cane blight
+#     - cherry leaf spot
+#     - citrus blast
+#     - cytospora canker
+#     - dothiorella canker
+#     - european canker
+#     - eutypa dieback
+#     - leaf scorch
+#     - leaf spot
+#     - measles
+#     - orange rust
+#     - peach leaf curl
+#     - pear rust
+#     - phomopsis cane and leaf spot
+#     - phomopsis canker
+#     - phytophthora crown and root rot
+#     - phytophthora gummosis
+#     - phytophthora root and crown rot (red stele)
+#     - purple blotch
+#     - rhizopus rot (leak)
+#     - sappy bark
+#     - scab
+#     - shot hole disease
+#     - souring
+#     - stamen blight
+#     - thousand cankers
+#     - yellow rust
+#     - cherry buckskin
+#     - pear decline
+#     - exocortis
+#     - apple mosaic
+#     - blackline
+#     - fig mosaic
+#     - sunblotch
+#     - tristeza disease complex
+#     - bacterial blight
+#     - bacterial gall/crown gall
+#     - drippy oak
+#     - foamy canker
+#     - hairy root
+#     - oleander knot
+#     - olive knot
+#     - wetwood or slime flux
+#     - annosus root disease
+#     - ash dieback
+#     - black spot
+#     - botrytis blight
+#     - branch and twig dieback
+#     - camellia petal and flower blight
+#     - canker diseases
+#     - canker stain
+#     - collar, foot, root, and crown rot
+#     - cryptomeria blight
+#     - damping off diseases
+#     - dematophora root rot
+#     - downy mildew of rose
+#     - dutch elm disease
+#     - eastern filbert blight
+#     - entomosporium leaf spot
+#     - flower blight
+#     - leaf gall
+#     - leaf spot diseases
+#     - needle blight
+#     - needle cast fungi
+#     - oak branch dieback
+#     - oak twig blight
+#     - palm diseases
+#     - pitch canker
+#     - pseudonectria canker
+#     - rusts
+#     - septoria leaf spot
+#     - stem cankers and dieback
+#     - stem gall
+#     - sudden oak death
+#     - taphrina leaf curl (oak leaf blister)
+#     - twig blights
+#     - witches' brooms
+#     - wood decay
+#     - escallonia dieback
+#     - hackberry dieback
+#     - bacterial soft rots, leaf spots, blights, wilts
+#     - alternaria blight
+#     - dry rot
+#     - fusarium wilt, basal rot
+#     - root, stem, and crown rots
+#     - smoulder
+#     - aster yellows
+#     - fasciation

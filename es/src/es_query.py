@@ -39,9 +39,13 @@ def create_index(index_name: str, mapping: Dict) -> None:
     """
     logger.info(f'Creating index {index_name}.')
     config.es_client.indices.delete(index = index_name, ignore = 404)        
-    config.es_client.indices.create(index = index_name, ignore = 400, body = mapping)
+    config.es_client.indices.create(
+        index       = index_name,
+        mappings    = mapping['mappings'],
+        settings    = mapping['settings']
+    )
 
-def populate_index(path: str, index_name: str) -> None:
+def populate_index(index_name: str, path: str, ) -> None:
     """Populate an index from a CSV file.
     
     Args:
@@ -55,7 +59,7 @@ def populate_index(path: str, index_name: str) -> None:
     logger.info(f'Writing {len(df)} documents to ES index {index_name}')
     deque(parallel_bulk(config.es_client, df, index = index_name), maxlen = 0)
     config.es_client.indices.refresh()
-    success_insertions = config.es_client.cat.count(index_name, params = {"format": "json"})[0]['count']
+    success_insertions = config.es_client.cat.count(index = index_name, params = {"format": "json"})[0]['count']
     logger.info(f'Finished inserting. Succesful insertions: {success_insertions}')
 
 
@@ -100,9 +104,9 @@ async def main() -> None:
 
 if __name__ == '__main__':
 
-    # if not config.es_client.indices.exists(index = config.ES_ASKEXTENSION_INDEX):
-    create_index(config.ES_ASKEXTENSION_INDEX, config.ES_ASKEXTENSION_MAPPING)
-    populate_index(config.ASKEXTENSION_FILE_RESULT, config.ES_ASKEXTENSION_INDEX)
+    # if not config.es_client.indices.exists(index = config.es_combined_index):
+    create_index(config.es_askextension_index, config.ES_ASKEXTENSION_MAPPING)
+    populate_index(config.es_askextension_index, config.ASKEXTENSION_FILE_RESULT)
     
     asyncio.run(main(), debug = True)
     print('Done.')

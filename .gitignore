@@ -3,6 +3,7 @@
 .keras/
 .rasa/
 models/
+story_graph.dot
 
 # python byte code
 __pycache__/
@@ -12,4 +13,4 @@ __pycache__/
 
 # ES data and scraped data
 es/data/**/*.json
-es.log
+.logs

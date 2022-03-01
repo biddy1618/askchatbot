@@ -1,17 +1,10 @@
 import logging
 
 from typing import Dict, List, Tuple
-from collections import deque
-import json
-
-import asyncio
 
 import numpy as np
-import pandas as pd
 
-from elasticsearch.helpers import parallel_bulk
-
-import config
+from actions.es import config
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +34,7 @@ def _cos_sim_query(
     }
 
     response = config.es_client.search(
-        index   = config.ES_COMBINED_INDEX,
+        index   = config.es_combined_index,
         query   = script_query,
         size    = 10,
         _source = source_query
@@ -514,94 +507,6 @@ async def _weight_score(
     # Do not filter on threshold. Leave this up to the caller
     return hits_ask, hits_ipm
 
-
-def _print_hits(
-    hits    : dict, 
-    title   : str
-    ) -> None:
-    '''Print results.
-
-    Args:
-        hits (dict): Results to print.
-        title (str): Name of the result set.
-    '''    
-
-    logger.info("----------------------------------------------------------")
-    logger.info(title)
-    
-    for hit in reversed(hits[:25]):
-
-        if '_score_weighted' not in hit.keys():
-            scores = f'score={hit.get("_score_max"  , 0.0):.3f}; '
-        else:
-            scores = (
-                f'wght={hit.get("_score_weighted"   , 0.0):.3f}; '
-                f'name={hit.get("_score_name"       , 0.0):.3f}; '
-                f'othr={hit.get("_score_other"      , 0.0):.3f}; '
-                f'damg={hit.get("_score_damage"     , 0.0):.3f}; '
-            )
-        text = (
-            # f'{hit["_id"]}; '
-            f'{scores}'
-            f'({hit["_source"]["doc_id"]}, {hit["_source"]["name"]}); '
-            f'({hit["_source"]["ask_faq_id"]}, {hit["_source"]["ask_title"]}); '
-        )
-
-        pdi_url = hit['_source']['urlPestDiseaseItems'  ]
-        tp_url  = hit["_source"]['urlTurfPests'         ]
-        wi_url  = hit["_source"]["urlWeedItems"         ]
-        ep_url  = hit["_source"]["urlExoticPests"       ]
-        pn_url  = hit["_source"]["urlPestNote"          ]
-        qt_url  = hit["_source"]["urlQuickTipPestNote"  ]
-        ask_url = hit["_source"]["ask_url"              ]
-
-        text = f"{text}URLS:"
-
-        if qt_url:
-            text = f"{text} [quick tip]({qt_url}),"
-        if pn_url:
-            text = f"{text} [pestnote]({pn_url}),"
-        if pdi_url:
-            text = f"{text} [pest disease item]({pdi_url}),"
-        if tp_url:
-            text = f"{text} [turf pest]({tp_url}),"
-        if wi_url:
-            text = f"{text} [weed item]({wi_url})"
-        if ep_url:
-            text = f"{text} [exotic pests]({ep_url})"
-        if ask_url:
-            text = f"{text} [askextension]({ask_url})"
-        
-        logger.info(text)
-
-
-def query() -> Tuple[str, str, str, str]:
-    '''Get input from user
-
-    Returns:
-        Tuple[str, str, str, str]: Input from the user - question, pest name, pest description, and pest damage.
-    '''   
-    question    = None
-    pest_name   = None
-    pest_descr  = None
-    pest_damage = None
-
-    pest_name = input(
-        'Enter mapped pest_name that Rasa will extract (Return if none): '
-    )
-    
-    if input('Do you have a question? [y, n] (y): ')        in ['y', '']:
-        question    = input('Enter your question: ')
-    
-    elif input('Do you have a pest problem? [y ,n] (y): ')  in ['y', '']:
-        pest_descr  = input('Enter your pest problem description: ')
-        
-        if input('Is it causing damage? [y, n] (y): ')      in ['y', '']:
-            pest_damage = input('Enter damage description: ')
-    
-    return question, pest_name, pest_descr, pest_damage
-
-
 async def submit(
     question    : str,
     pest_name   : str,
@@ -643,206 +548,7 @@ async def submit(
         hits_ask, hits_ipm
     )
 
-    _print_hits(hits_ask, 'Ask Extension'   )
-    _print_hits(hits_ipm, 'IPM Data'        )
+    # _print_hits(hits_ask, 'Ask Extension'   )
+    # _print_hits(hits_ipm, 'IPM Data'        )
     
     return hits_ask, hits_ipm
-
-
-async def main():
-    '''Run the ES query simulation while there is input from user'''    
-    while True:
-        try:
-            (
-                question,
-                pest_name,
-                pest_desc,
-                pest_damage
-            ) = query()
-
-            if question or pest_desc:
-                await submit(
-                    question,
-                    pest_name,
-                    pest_desc,
-                    pest_damage
-                )
-            else:
-                logger.info('Please try again...')
-        except KeyboardInterrupt:
-            return
-
-
-def populate_index(recreate: bool = False) -> None:
-    '''Populate an index from a CSV file.
-
-    Args:
-        recreate (bool, optional): _description_. Defaults to False.
-    '''
-
-    # for some reason he uses these files for injecting
-
-    DATA_FILE_NAMES = [
-        # 'askextension_transformed.json',
-        'pestDiseaseItems_new.json',
-        'turfPests.json',
-        'weedItems.json',
-        'exoticPests.json',
-        'ipmdata_new.json',
-    ]
-
-    DATA_FILE_NAMES = [config.PATH_DATA_UCIPM + f for f in DATA_FILE_NAMES]
-    DATA_FILE_NAMES.append(config.ASKEXTENSION_FILE_RESULT)
-
-    rename_data = {
-        "ipmdata_new.json": {
-            "name"                  : "name",
-            "urlPestNote"           : "urlPestNote",
-            "descriptionPestNote"   : "descriptionPestNote",
-            "life_cycle"            : "life_cyclePestNote",
-            "damagePestNote"        : "damagePestNote",
-            "managementPestNote"    : "managementPestNote",
-            "imagePestNote"         : "imagePestNote",
-            "urlQuickTip"           : "urlQuickTipPestNote",
-            "contentQuickTips"      : "contentQuickTipsPestNote",
-            "imageQuickTips"        : "imageQuickTipsPestNote",
-            "video"                 : "videoPestNote"
-        },
-        "pestDiseaseItems_new.json": {
-            "name"              : "name",
-            "url"               : "urlPestDiseaseItems",
-            "description"       : "descriptionPestDiseaseItems",
-            "identification"    : "identificationPestDiseaseItems",
-            "life_cycle"        : "life_cyclePestDiseaseItems",
-            "damage"            : "damagePestDiseaseItems",
-            "solutions"         : "solutionsPestDiseaseItems",
-            "images"            : "imagesPestDiseaseItems",
-        },
-        "turfPests.json": {
-            "name"  : "name",
-            "url"   : "urlTurfPests",
-            "text"  : "textTurfPests",
-            "images": "imagesTurfPests",
-        },
-        "weedItems.json": {
-            "name"          : "name",
-            "url"           : "urlWeedItems",
-            "description"   : "descriptionWeedItems",
-            "images"        : "imagesWeedItems",
-        },
-        "exoticPests.json": {
-            "name"          : "name",
-            "url"           : "urlExoticPests",
-            "description"   : "descriptionExoticPests",
-            "damage"        : "damageExoticPests",
-            "identification": "identificationExoticPests",
-            "life_cycle"    : "life_cycleExoticPests",
-            "monitoring"    : "monitoringExoticPests",
-            "management"    : "managementExoticPests",
-            "related_links" : "related_linksExoticPests",
-            "images"        : "imagesExoticPests", 
-        },
-        "askextension_transformed.json": {
-            "faq-id"        : "ask_faq_id",
-            "ticket-no"     : "ask_ticket_no",
-            "url"           : "ask_url",
-            "title"         : "ask_title",
-            "title-question": "ask_title_question",
-            "created"       : "ask_created",
-            "updated"       : "ask_updated",
-            "state"         : "ask_state",
-            "county"        : "ask_county",
-            "question"      : "ask_question",
-            "answer"        : "ask_answer",
-        }
-    }
-
-    df_docs_json = {}
-
-    logger.info('Reading in files')
-    for f in DATA_FILE_NAMES:
-        df = pd.read_json(f)
-        
-        if 'name' in df.columns:
-            # for some reason he drops the duplicates from these files
-            b_s = df.shape[0]
-            df = df.drop_duplicates('name')
-            a_s = df.shape[0]
-            dropped = b_s - a_s
-            
-        # we then rename the columns to indicate where those columns is from
-        f_name = f.split('/')[-1]
-        if f_name in rename_data:
-            df = df.rename(columns = rename_data[f_name])
-            df = df[rename_data[f_name].values()]
-        df_docs_json[f] = df
-
-    # we then concatenate all the data
-    logger.info('Concatening...')
-    df_docs = pd.concat([df_docs_json[k] for k in df_docs_json.keys()], ignore_index=True)
-
-    # we rename the index by 'doc_id'
-    df_docs.index = df_docs.index.set_names('doc_id')
-    df_docs.index = df_docs.index.map(str)
-    df_docs = df_docs.reset_index()
-    df_docs['ask_faq_id'] = df_docs['ask_faq_id'].map(str)
-    df_docs['ask_ticket_no'] = df_docs['ask_ticket_no'].map(str)
-    
-    # we then replace nans and fill nested fields
-    logger.info('Filling fields and nested fields...')
-    df_docs = df_docs.fillna('')
-
-    columnsNested = ['imagePestNote', 'imageQuickTipsPestNote', 'videoPestNote', 
-        'imagesPestDiseaseItems', 'imagesTurfPests', 'imagesWeedItems', 
-        'related_linksExoticPests', 'imagesExoticPests', 'ask_answer']
-
-    for c in columnsNested:
-        df_docs[c] = [[] if x == '' else x for x in df_docs[c]]
-
-    df_json = df_docs.to_dict('records')
-    # docs = docs[:10]
-
-    logger.info('Vectorizing text fields...')
-    columnsVectorized = ['name', 'descriptionPestDiseaseItems', 'identificationPestDiseaseItems',
-        'life_cyclePestDiseaseItems', 'damagePestDiseaseItems', 'solutionsPestDiseaseItems',
-        'textTurfPests', 'descriptionWeedItems', 'descriptionExoticPests', 'damageExoticPests', 
-        'identificationExoticPests', 'life_cycleExoticPests', 'monitoringExoticPests', 'managementExoticPests',
-        'descriptionPestNote', 'life_cyclePestNote', 'damagePestNote', 'managementPestNote', 
-        'contentQuickTipsPestNote', 'ask_title', 'ask_title_question', 'ask_question']
-
-    docs_vectors = {}
-
-    for c in columnsVectorized:
-        c_list      = [d[c] for d in df_json]
-        c_vectors   = config.embed(c_list).numpy()
-        docs_vectors[c] = c_vectors
-
-    for i in range(len(df_json)):
-        for c in columnsVectorized:
-            df_json[i][c + '_vector'] = docs_vectors[c][i]
-    
-
-    
-    if recreate:
-        logger.info('Deleting existing index...')
-        config.es_client.indices.delete(index = config.es_combined_index, ignore = 404)
-    
-    logger.info('Creating new index...')
-    config.es_client.indices.create(
-        index       = config.es_combined_index, 
-        settings    = config.ES_COMBINED_VECTOR_MAPPING['settings'],
-        mappings    = config.ES_COMBINED_VECTOR_MAPPING['mappings']
-    )        
-    logger.info('Inserting data...')
-    deque(parallel_bulk(config.es_client, df_json, index = config.es_combined_index), maxlen = 0)
-    config.es_client.indices.refresh()
-    success_insertions = config.es_client.cat.count(index = config.es_combined_index, params = {"format": "json"})[0]['count']
-    logger.info(f'Finished inserting. Succesful insertions: {success_insertions}')
-    
-    
-
-if __name__ == '__main__':
-    populate_index(recreate = True)
-
-    asyncio.run(main(), debug = True)
-    logger.info('Done.')

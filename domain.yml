@@ -3,16 +3,18 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+# base intents
 - intent_greet
 - intent_explain_ipm
 - intent_deny
 - intent_goodbye
 - intent_affirm
 - intent_bot_challenge
-- request_plant_problem
-- request_plant_picture
-- request_generic_question
-- request_expert
+# Decision Tree intents
+# - request_plant_problem
+# - request_plant_picture
+# - request_generic_question
+# - request_expert
 # ES intents
 - intent_i_have_a_pest
 - intent_i_have_a_question
@@ -37,52 +39,49 @@ slots:
     influence_conversation: false
     mappings:
     - type: custom
-  plant_type:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: plant_type
-      conditions:
-      - active_loop: plant_problem_form
-        requested_slot: plant_type
-  plant_name:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: plant_name
-      conditions:
-      - active_loop: plant_problem_form
-        requested_slot: plant_name
-  plant_part:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: plant_part
-      conditions:
-      - active_loop: plant_problem_form
-        requested_slot: plant_part
-  plant_damages:
-    type: list
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: plant_damage
-      conditions:
-      - active_loop: plant_problem_form
-        requested_slot: plant_damages
-# slots for ES request
+  # Decision Tree slots
+  # plant_type:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: plant_type
+  #     conditions:
+  #     - active_loop: plant_problem_form
+  #       requested_slot: plant_type
+  # plant_name:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: plant_name
+  #     conditions:
+  #     - active_loop: plant_problem_form
+  #       requested_slot: plant_name
+  # plant_part:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: plant_part
+  #     conditions:
+  #     - active_loop: plant_problem_form
+  #       requested_slot: plant_part
+  # plant_damages:
+  #   type: list
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: plant_damage
+  #     conditions:
+  #     - active_loop: plant_problem_form
+  #       requested_slot: plant_damages
+# Knowledge Base Query slots
   question:
     type: text
     influence_conversation: true
     mappings:
       - type: from_text
-        # intent: None
-        # not_intent:
-        # - request_plant_problem
-        # - request_expert
         conditions:
         - active_loop: query_knowledge_base_form
           requested_slot: question
@@ -91,10 +90,6 @@ slots:
     influence_conversation: false
     mappings:
       - type: from_text
-        intent: None
-        # not_intent:
-        # - request_plant_problem
-        # - request_expert
         conditions:
         - active_loop: query_knowledge_base_form
           requested_slot: pest_problem_description
@@ -113,13 +108,13 @@ slots:
     influence_conversation: false
     mappings:
       - type: from_text
-        intent: None
-        not_intent:
-        - request_plant_problem
-        - request_expert
         conditions:
         - active_loop: query_knowledge_base_form
           requested_slot: pest_damage_description
+  pests_summaries:
+    type: text
+    mappings:
+      - type: custom
 responses:
   utter_default:
   - text: I'm sorry, I am still learning thanks to your inputs.
@@ -192,32 +187,34 @@ responses:
 actions:
 - action_explain_ipm
 - action_greet
-- action_ask_plant_type
-- action_ask_plant_name
-- action_ask_plant_part
-- action_ask_plant_damages
-- validate_plant_problem_form
-- action_submit_plant_problem_form
-# ES actions
+# Decision Tree actions
+# - action_ask_plant_type
+# - action_ask_plant_name
+# - action_ask_plant_part
+# - action_ask_plant_damages
+# - validate_plant_problem_form
+# - action_submit_plant_problem_form
+# Knowledge Base Query actions
 - action_kickoff_intent_i_have_a_pest
 - action_kickoff_intent_i_have_a_question
 - action_ask_handoff_to_expert
 - action_submit_query_knowledge_base_form
-- validate_query_knowledge_base_form
+# - validate_query_knowledge_base_form
 forms:
-  plant_problem_form:
-    required_slots:
-    - plant_type
-    - plant_name
-    - plant_part
-    - plant_damages
+  # DT form
+  # plant_problem_form:
+  #   required_slots:
+  #   - plant_type
+  #   - plant_name
+  #   - plant_part
+  #   - plant_damages
   # ES forms
   query_knowledge_base_form:
-    ignored_intents: 
-    - request_plant_problem
-    - request_plant_picture
-    - request_generic_question
-    - request_expert
+    # ignored_intents: 
+    # - request_plant_problem
+    # - request_plant_picture
+    # - request_generic_question
+    # - request_expert
     required_slots:
     - question
     - pest_problem_description

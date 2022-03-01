@@ -37,52 +37,47 @@ UCIPM_FILE_NAMES        = [f'{PATH_DATA_UCIPM}{f}' for f in os.listdir(PATH_DATA
 es_config = (yaml.safe_load(open(f'{_PATH}/src/es_config.yml', 'r')) or {})
 
 host                    = es_config.get('host'                  , None)
+username                = es_config.get('username'              , None)
+password                = es_config.get('password'              , None)
 tf_embed_url            = es_config.get('tfhub-embdedding-url'  , None)
 tfhub_cache_dir         = es_config.get('tfhub-cache-dir'       , None)
 tf_cpp_min_log_level    = es_config.get('tf-cpp-min-log-level'  , None)
+es_askextension_index   = es_config.get('askextension-index'    , None)
+es_combined_index       = es_config.get('combined-index'        , None)
+
 
 os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
 os.environ['TFHUB_CACHE_DIR']       = tfhub_cache_dir
 
 import tensorflow_hub as tf_hub
 
-logger.info("----------------------------------------------")
-logger.info("Elasticsearch configuration:")
-logger.info("- host                     = %s", host)
-# logger.info("- username                 = %s", pprint.pformat(username))
-# logger.info("- password                 = %s", pprint.pformat(password))
-# logger.info("- do_the_queries           = %s", do_the_queries)
-# logger.info("- ipmdata_index_name       = %s", ipmdata_index_name)
-logger.info("- tfhub_embedding_url      = %s", tf_embed_url)
-logger.info("- tfhub_cache_dir          = %s", tfhub_cache_dir)
-logger.info("----------------------------------------------")
+logger.info('----------------------------------------------')
+logger.info('Elasticsearch configuration:')
+logger.info(f'- host                     = {host            }')
+logger.info(f'- username                 = {username        }')
+logger.info(f'- password                 = {password        }')
+logger.info(f'- tfhub_embedding_url      = {tf_embed_url    }')
+logger.info(f'- tfhub_cache_dir          = {tfhub_cache_dir }')
+logger.info('----------------------------------------------')
 
 # index mappings
 ES_ASKEXTENSION_MAPPING     = json.load(open(f'{_PATH}/data/mappings/askextension_mapping.json'))
 ES_COMBINED_VECTOR_MAPPING  = json.load(open(f'{_PATH}/data/mappings/combined_vector_mapping.json'))
 ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
 
-ES_ASKEXTENSION_INDEX   = es_config.get('askextension-index', None)
-ES_COMBINED_INDEX       = es_config.get('combined-index'    , None)
-
-logger.info("----------------------------------------------")
-logger.info("Elasticsearch indexes:")
-logger.info("- askextension index       = %s", ES_ASKEXTENSION_INDEX)
-logger.info("- combined index           = %s", ES_COMBINED_INDEX)
-# logger.info("- username                 = %s", pprint.pformat(username))
-# logger.info("- password                 = %s", pprint.pformat(password))
-# logger.info("- do_the_queries           = %s", do_the_queries)
-# logger.info("- ipmdata_index_name       = %s", ipmdata_index_name)
-# logger.info("- mapping                  = \n%s", json.dumps(askextension_mapping, indent=4))
-logger.info("----------------------------------------------")
+logger.info('----------------------------------------------')
+logger.info('Elasticsearch indexes:')
+logger.info(f'- askextension index       = {es_askextension_index}')
+logger.info(f'- combined index           = {es_combined_index    }')
+logger.info('----------------------------------------------')
 
 
-logger.info("Initializing the Elasticsearch client")
-es_client = Elasticsearch(host)
-logger.info("Done initiliazing ElasticSearch client")
+logger.info('Initializing the Elasticsearch client')
+es_client = Elasticsearch([host], http_auth=(username, password))
+logger.info('Done initiliazing ElasticSearch client')
 
-logger.info("Start loading embedding module %s", tf_embed_url)
+logger.info(f'Start loading embedding module {tf_embed_url}')
 embed = tf_hub.load(tf_embed_url)
-logger.info("Done loading embedding module %s", tf_embed_url)
+logger.info(f'Done loading embedding module {tf_embed_url}')
 # -------------------------------------------------------------
 

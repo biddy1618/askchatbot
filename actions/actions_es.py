@@ -11,6 +11,8 @@ from rasa_sdk.events import (
     EventType
 )
 
+from actions.es import config
+from actions.es.es import submit
 
 import logging
 logger = logging.getLogger(__name__)
@@ -78,50 +80,50 @@ class ActionAskHandoffToExpert(Action):
         dispatcher.utter_message(template = 'utter_ask_connect_expert')
     
 
-class ValidateQueryKnowledgeBaseForm(FormValidationAction):
-    '''Query the Knowledge Base.'''
+# class ValidateQueryKnowledgeBaseForm(FormValidationAction):
+#     '''Query the Knowledge Base.'''
 
-    def name(self) -> Text:
-        return 'validate_query_knowledge_base_form'
+#     def name(self) -> Text:
+#         return 'validate_query_knowledge_base_form'
 
 
-    async def required_slots(
-        self,
-        domain_slots: List[Text],
-        dispatcher  : CollectingDispatcher,
-        tracker : Tracker,
-        domain: Dict[Text, Any],
-        ) -> List[Text]:
-        '''A list of required slots that the form has to fill.'''
+    # async def required_slots(
+    #     self,
+    #     domain_slots: List[Text],
+    #     dispatcher  : CollectingDispatcher,
+    #     tracker : Tracker,
+    #     domain: Dict[Text, Any],
+    #     ) -> List[Text]:
+    #     '''A list of required slots that the form has to fill.'''
 
-        def how_did_we_get_here(tracker: Tracker) -> Text:
-            '''Find out if we came here because of a question or a pest problem.
-            Do this by looking at all the events, and find the latest one that could have
-            triggered the calling of this form.'''
+    #     def how_did_we_get_here(tracker: Tracker) -> Text:
+    #         '''Find out if we came here because of a question or a pest problem.
+    #         Do this by looking at all the events, and find the latest one that could have
+    #         triggered the calling of this form.'''
             
-            df = pd.DataFrame(tracker.events)
-            loc_pest        = 0
-            loc_question    = 0
-            if '/intent_i_have_a_pest'      in df['text'].values:
-                loc_pest        = df[df['text'] == '/intent_i_have_a_pest'      ].index.values[-1]
-            if '/intent_i_have_a_question'  in df['text'].values:
-                loc_question    = df[df['text'] == '/intent_i_have_a_question'  ].index.values[-1]
+    #         df = pd.DataFrame(tracker.events)
+    #         loc_pest        = 0
+    #         loc_question    = 0
+    #         if '/intent_i_have_a_pest'      in df['text'].values:
+    #             loc_pest        = df[df['text'] == '/intent_i_have_a_pest'      ].index.values[-1]
+    #         if '/intent_i_have_a_question'  in df['text'].values:
+    #             loc_question    = df[df['text'] == '/intent_i_have_a_question'  ].index.values[-1]
 
-            if loc_pest > loc_question:
-                return '/intent_i_have_a_pest'
+    #         if loc_pest > loc_question:
+    #             return '/intent_i_have_a_pest'
 
-            return '/intent_i_have_a_question'
+    #         return '/intent_i_have_a_question'
 
-        slots = []
+    #     slots = []
 
-        if how_did_we_get_here(tracker) == '/intent_i_have_a_pest':
-            slots = ['pest_problem_description']
-            if tracker.get_slot('pest_causes_damage') != 'no':
-                slots.extend(['pest_causes_damage', 'pest_damage_description'])
+    #     if how_did_we_get_here(tracker) == '/intent_i_have_a_pest':
+    #         slots = ['pest_problem_description']
+    #         if tracker.get_slot('pest_causes_damage') != 'no':
+    #             slots.extend(['pest_causes_damage', 'pest_damage_description'])
         
-        else: slots = ['question']
+    #     else: slots = ['question']
 
-        return slots
+    #     return slots
 
 
     # def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
@@ -154,82 +156,82 @@ class ValidateQueryKnowledgeBaseForm(FormValidationAction):
     #     }
 
 
-    def pest_name_plural(self, pest_name: str) -> str:
-        '''Returns the pest_name in plural form.'''
+    # def pest_name_plural(self, pest_name: str) -> str:
+    #     '''Returns the pest_name in plural form.'''
         
-        pest_singular = inflecter.singular_noun(pest_name)
-        if not pest_singular: pest_singular = pest_name
+    #     pest_singular = inflecter.singular_noun(pest_name)
+    #     if not pest_singular: pest_singular = pest_name
         
-        pest_plural = inflecter.plural_noun(pest_singular)
+    #     pest_plural = inflecter.plural_noun(pest_singular)
         
-        return pest_plural
+    #     return pest_plural
 
 
-    def keep_pest_name_singular(self,name: str) -> str:
-        '''Returns True if the pest name only makes sense in singular form.'''
+    # def keep_pest_name_singular(self,name: str) -> str:
+    #     '''Returns True if the pest name only makes sense in singular form.'''
         
-        name_lower = name.lower()
+    #     name_lower = name.lower()
         
-        for key in PEST_NAME_MUST_BE_SINGULAR:
-            if key in name_lower:
-                return True
+    #     for key in PEST_NAME_MUST_BE_SINGULAR:
+    #         if key in name_lower:
+    #             return True
         
-        return False
+    #     return False
     
 
-    def validate_pest_problem_description(
-        self,
-        value       : Text,
-        dispatcher  : CollectingDispatcher,
-        tracker     : Tracker,
-        domain      : Dict[Text, Any],
-        ) -> Dict[Text, Any]:
-        '''Once pest problem is described:
+    # def validate_pest_problem_description(
+    #     self,
+    #     value       : Text,
+    #     dispatcher  : CollectingDispatcher,
+    #     tracker     : Tracker,
+    #     domain      : Dict[Text, Any],
+    #     ) -> Dict[Text, Any]:
+    #     '''Once pest problem is described:
 
-        If no pest name was extracted:
-          -> do not ask for damage
-          -> set the damage equal to the description
+    #     If no pest name was extracted:
+    #       -> do not ask for damage
+    #       -> set the damage equal to the description
 
-        If a pest name was extracted:
-          -> build damage question to ask, using the pest name in plural form
-        '''
+    #     If a pest name was extracted:
+    #       -> build damage question to ask, using the pest name in plural form
+    #     '''
 
-        # see if a pest name was extracted from the problem description
-        pest_name   = tracker.get_slot('pest_name')
+    #     # see if a pest name was extracted from the problem description
+    #     pest_name   = tracker.get_slot('pest_name')
 
-        # see if a target name was extracted from the problem description
-        target_name = tracker.get_slot('target_name')
+    #     # see if a target name was extracted from the problem description
+    #     target_name = tracker.get_slot('target_name')
 
-        if not pest_name:
-            # question = "Is there any damage?"
-            return {
-                'pest_problem_description'  : value,
-                'pest_causes_damage'        : 'did-not-ask',
-                'pest_damage_description'   : value,
-            }
+    #     if not pest_name:
+    #         # question = "Is there any damage?"
+    #         return {
+    #             'pest_problem_description'  : value,
+    #             'pest_causes_damage'        : 'did-not-ask',
+    #             'pest_damage_description'   : value,
+    #         }
 
-        if self.keep_pest_name_singular(pest_name):
-            if target_name:
-                question = (
-                    f'Is the {pest_name.lower()} causing any damage to the '
-                    f'{target_name.lower()}?'
-                )
-            else:
-                question = f'Is the {pest_name.lower()} causing any damage?'
-            return {
-                'pest_problem_description'  : value,
-                'cause_damage_question' : question,
-            }
+    #     if self.keep_pest_name_singular(pest_name):
+    #         if target_name:
+    #             question = (
+    #                 f'Is the {pest_name.lower()} causing any damage to the '
+    #                 f'{target_name.lower()}?'
+    #             )
+    #         else:
+    #             question = f'Is the {pest_name.lower()} causing any damage?'
+    #         return {
+    #             'pest_problem_description'  : value,
+    #             'cause_damage_question' : question,
+    #         }
 
-        pest_plural = self.pest_name_plural(pest_name)
-        if target_name:
-            question = (
-                f"Are the {pest_plural.lower()} causing any damage to the "
-                f"{target_name.lower()}?"
-            )
-        else:
-            question = f"Are the {pest_plural.lower()} causing any damage?"
-        return {"pest_problem_description": value, "cause_damage_question": question}
+    #     pest_plural = self.pest_name_plural(pest_name)
+    #     if target_name:
+    #         question = (
+    #             f"Are the {pest_plural.lower()} causing any damage to the "
+    #             f"{target_name.lower()}?"
+    #         )
+    #     else:
+    #         question = f"Are the {pest_plural.lower()} causing any damage?"
+    #     return {"pest_problem_description": value, "cause_damage_question": question}
     
 class ActionSubmitQueryKnowledgeBaseForm(Action):
     '''Custom action for submitting form - query_knowledge_base_form.'''
@@ -348,7 +350,7 @@ class ActionSubmitQueryKnowledgeBaseForm(Action):
         for index, hit in enumerate(hits_ask[: min(3, len(hits_ask))]):
             hit_summary = {}
             score = hit["_score_max"]
-            hit_summary["message"] = self.create_text_for_pest(
+            hit_summary["message"] = self._create_text_for_pest(
                 index, hit, score, "From askextension data:"
             )
             pests_summaries.append(hit_summary)
@@ -356,14 +358,14 @@ class ActionSubmitQueryKnowledgeBaseForm(Action):
         for index, hit in enumerate(hits_ipm[: min(3, len(hits_ipm))]):
             hit_summary = {}
             score = hit["_score_weighted"]
-            hit_summary["message"] = self.create_text_for_pest(
+            hit_summary["message"] = self._create_text_for_pest(
                 index, hit, score, "From IPM data:"
             )
             pests_summaries.append(hit_summary)
 
         return pests_summaries
     
-    def run(
+    async def run(
         self,
         dispatcher  : CollectingDispatcher,
         tracker     : Tracker,
@@ -371,30 +373,28 @@ class ActionSubmitQueryKnowledgeBaseForm(Action):
     ) -> List[Dict]:
         '''Define what the form has to do after all required slots are filled.'''
 
-        pest_name                   = tracker.get_slot('pest_name')
+        pest_name                   = tracker.get_slot('question')
         pest_problem_description    = tracker.get_slot('pest_problem_description')
         pest_causes_damage          = tracker.get_slot('pest_causes_damage')
-        pest_damage_description     = None
+        # pest_damage_description     = None
         
-        if pest_causes_damage != "no":
-            pest_damage_description = tracker.get_slot('pest_damage_description')
+        # if pest_causes_damage != "no":
+        pest_damage_description = tracker.get_slot('pest_damage_description')
         
         question = tracker.get_slot('question')
 
-        # if ac.do_the_queries:
-        #     hits_ask, hits_ipm = await handle_es_query(
-        #         question,
-        #         pest_name,
-        #         pest_problem_description,
-        #         pest_damage_description,
-        #         ac.ipmdata_index_name,
-        #         print_summary=False,
-        #     )
-        # else:
-        message = "Not doing an actual elastic search query."
-        dispatcher.utter_message(message)
-        hits_ask = []
-        hits_ipm = []
+        if not config.imitate:
+            hits_ask, hits_ipm = await submit(
+                question,
+                pest_name,
+                pest_problem_description,
+                pest_damage_description
+            )
+        else:
+            message = "Not doing an actual elastic search query."
+            dispatcher.utter_message(message)
+            hits_ask = []
+            hits_ipm = []
 
         pests_summaries = self.summarize_hits(hits_ask, hits_ipm)
         return [SlotSet("pests_summaries", pests_summaries)]

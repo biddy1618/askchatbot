@@ -11,8 +11,5 @@ tfhub-embdedding-url  : "https://tfhub.dev/google/universal-sentence-encoder/4"
 tfhub-cache-dir       : "/var/tmp/tfhub_modules"
 tf-cpp-min-log-level  : "3"
 
-# Index name for Askextension data
-askextension-index: "askextension"
-
-# Index name for combined data
-combined-index    : "combined"
+# Index name for combined AskExtension data
+index                 : "combined"
