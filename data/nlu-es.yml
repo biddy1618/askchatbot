@@ -1,14 +1,14 @@
 version: "3.0"
 
 nlu:
-- intent: intent_i_have_a_pest
+- intent: intent_help_pest
   examples: |
     - I have a pest
     - I have a pest problem
     - pests
     - pest problem
     - I have a problem with pests
-- intent: intent_i_have_a_question
+- intent: intent_help_question
   examples: |
     - I have a question
     - question

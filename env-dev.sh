@@ -10,8 +10,8 @@ export TFHUB_CACHE_DIR=/var/tmp/tfhub_modules
 export TF_CPP_MIN_LOG_LEVEL=3
 
 # Elasticsearch settings
-# export ES_IMITATE=false
 export ES_IMITATE=true
+# export ES_IMITATE=true
 export ELASTIC_USERNAME=elastic
 export ELASTIC_PASSWORD=changeme
 export ES_HOST=http://localhost:9200/

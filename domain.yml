@@ -10,14 +10,14 @@ intents:
 - intent_goodbye
 - intent_affirm
 - intent_bot_challenge
+# Main intents
+- intent_request_expert
+- intent_help_image
 # Decision Tree intents
 # - request_plant_problem
-# - request_plant_picture
-# - request_generic_question
-# - request_expert
 # ES intents
-- intent_i_have_a_pest
-- intent_i_have_a_question
+- intent_help_pest
+- intent_help_question
 entities:
 - plant_damage
 - plant_name
@@ -79,11 +79,11 @@ slots:
 # Knowledge Base Query slots
   question:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_text
         conditions:
-        - active_loop: query_knowledge_base_form
+        - active_loop: es_query_form
           requested_slot: question
   pest_problem_description:
     type: text
@@ -91,7 +91,7 @@ slots:
     mappings:
       - type: from_text
         conditions:
-        - active_loop: query_knowledge_base_form
+        - active_loop: es_query_form
           requested_slot: pest_problem_description
   pest_causes_damage:
     type: text
@@ -100,88 +100,95 @@ slots:
       - type: from_intent
         value: yes
         intent: intent_affirm
+        conditions:
+        - active_loop: es_query_form
+          requested_slot: pest_causes_damage
       - type: from_intent
         value: no
-        intent: intent_deny        
+        intent: intent_deny
+        conditions:
+        - active_loop: es_query_form
+          requested_slot: pest_causes_damage
   pest_damage_description:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
         conditions:
-        - active_loop: query_knowledge_base_form
+        - active_loop: es_query_form
           requested_slot: pest_damage_description
   pests_summaries:
     type: text
     mappings:
       - type: custom
 responses:
+  # Basic responses
   utter_default:
-  - text: I'm sorry, I am still learning thanks to your inputs.
-  utter_did_that_help:
-  - text: Did that help you?
-  utter_happy:
-  - text: Great, carry on!
+  - buttons:
+    - payload: /intent_greet
+      title: Main menu.
+    - payload: /intent_request_expert
+      title: Connect me to expert.
+    text: I'm sorry, I am still learning thanks to your inputs.
   utter_goodbye:
-  - text: Bye
+  - buttons:
+    - payload: /intent_greet
+      title: Main menu.
+    text: Bye!
   utter_iamabot:
-  - text: I am a bot, powered by Rasa.
+  - buttons:
+    - payload: /intent_greet
+      title: Main menu.
+    text: I am a bot, powered by Rasa.    
   utter_greet:
   - text: Hi, I am AskExtension Assistant!
   utter_privacy_policy:
   - text: By chatting with me, you agree to our [privacy policy](https://ucanr.edu/?privacyStatement/).
-  utter_ask_connect_expert:
+  utter_connect_expert:
+  - buttons:
+    - payload: /intent_greet
+      title: Main menu.
+    text: You can ask one of our experts at [Ask Extension](https://ask2.extension.org/open.php).
+  utter_explain_ipm:
+  - text: >
+      IPM is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, 
+      habitat manipulation, modification of cultural practices, and use of resistant varieties. Pesticides are used only after monitoring indicates they are needed 
+      according to established guidelines, and treatments are made with the goal of removing only the target organism. Pest control materials are selected and applied 
+      in a manner that minimizes risks to human health, beneficial and nontarget organisms, and the environment. You can find more details [here](https://www2.ipm.ucanr.edu/What-is-IPM/).
+  utter_help_image:
+  - buttons:
+    - payload: /intent_greet
+      title: Main menu.
+    - payload: /intent_request_expert
+      title: Connect me to expert.
+    text: Not implemented. To be available soon.
+  # Decision Tree responses
+  # utter_submit_plant_problem_form:
+  # - text: |-
+  #     I am going to run a plant problem search using the following parameters:
+  #      - plant_type: {plant_type}
+  #      - plant_name: {plant_name}
+  #      - plant_part: {plant_part}
+  #      - plant_damages: {plant_damages}
+  # ES questions responses
+  utter_ask_question:
+  - text: Please enter your question.
+  utter_ask_pest_problem_description:
+  - text: Please describe your pest problem.
+  utter_ask_pest_causes_damage:
   - buttons:
     - payload: /intent_affirm
       title: Yes
     - payload: /intent_deny
       title: No
-    text: "Sorry, I am not able to answer the question.\nDo you want to ask a human expert?"
-  utter_connect_expert:
-  - text: You can ask one of our experts at [ask extension](https://ask2.extension.org/open.php).
-  utter_explain_ipm:
-  - text: |-
-      IPM is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties.
-      Pesticides are used only after monitoring indicates they are needed according to established guidelines, and treatments are made with the goal of removing only the target organism.
-      Pest control materials are selected and applied in a manner that minimizes risks to human health, beneficial and nontarget organisms, and the environment.
-      You can find more details [here](https://www2.ipm.ucanr.edu/What-is-IPM/).
-  utter_select_options:
-  - text: How can I help you?
-    buttons:
-    - payload: /request_plant_problem
-      title: I have problem with my plant.
-    - payload: /request_plant_picture
-      title: I have a picture and I would like to get help on that.
-    - payload: /request_generic
-      title: I have generic request.
-    - payload: /request_expert
-      title: Connect me to askextension expert.
-  utter_submit_plant_problem_form:
-  - text: |-
-      I am going to run a plant problem search using the following parameters:
-       - plant_type: {plant_type}
-       - plant_name: {plant_name}
-       - plant_part: {plant_part}
-       - plant_damages: {plant_damages}
-  # ES questions
-  utter_ask_question:
-  - text: Please enter your question
-  utter_ask_pest_problem_description:
-  - text: Please describe your pest problem
-  utter_ask_pest_causes_damage:
-  - buttons:
-    - payload: /intent_yes
-      title: Yes
-    - payload: /intent_no
-      title: No
-    text: '{cause_damage_question}'
+    text: Do you see any traces of damage?
   utter_ask_pest_damage_description:
-  - text: Please describe the damage
+  - text: Please describe the damage.
   utter_ask_pest_summary_and_did_this_help:
   - buttons:
-    - payload: /intent_yes
+    - payload: /intent_affirm
       title: 👍
-    - payload: /intent_no
+    - payload: /intent_deny
       title: 👎
     text: '{pest_summary}'
 actions:
@@ -195,13 +202,11 @@ actions:
 # - validate_plant_problem_form
 # - action_submit_plant_problem_form
 # Knowledge Base Query actions
-- action_kickoff_intent_i_have_a_pest
-- action_kickoff_intent_i_have_a_question
-- action_ask_handoff_to_expert
-- action_submit_query_knowledge_base_form
-# - validate_query_knowledge_base_form
+- validate_es_query_form
+# - action_ask_question
+- action_submit_es_query_form
 forms:
-  # DT form
+  # Decision Tree form
   # plant_problem_form:
   #   required_slots:
   #   - plant_type
@@ -209,7 +214,7 @@ forms:
   #   - plant_part
   #   - plant_damages
   # ES forms
-  query_knowledge_base_form:
+  es_query_form:
     # ignored_intents: 
     # - request_plant_problem
     # - request_plant_picture

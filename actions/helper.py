@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 logger.info('----------------------------------------------')
 logger.info('Rasa Actions Server')
-logger.info('* loading static files')
+logger.info('- loading static files')
 db = None
 try:
     plant_tree      = pd.read_pickle(PATH_STATIC + 'plant_tree.pkl')
@@ -26,7 +26,7 @@ try:
         'plant_tree'    : plant_tree,
         'plant_matches' : plant_matches
     }
-    logger.info('  success')
+    logger.info('- success')
 except:
     logger.error('  error loading static files')
 logger.info('----------------------------------------------')

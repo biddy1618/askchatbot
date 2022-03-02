@@ -18,6 +18,16 @@ rules:
   - intent: intent_greet
   - action: action_greet
 
+- rule: Image search temporary solution
+  steps:
+  - intent: intent_help_image
+  - action: utter_help_image
+
+- rule: Connect to expert
+  steps:
+  - intent: intent_request_expert
+  - action: utter_connect_expert
+
 # Decision Tree form rule
 # - rule: Activate form for plant problem description
 #   steps:
@@ -35,24 +45,24 @@ rules:
 #     - requested_slot: null
 #   - action: action_submit_plant_problem_form
 
-# Knowledge Base Query form rule
-- rule: Activate form for querying knowledge base
+# ES Query form rule
+- rule: Activate form for querying ES
   steps:
   - or:
-    - intent: intent_i_have_a_pest
-    - intent: intent_i_have_a_question
-  - action: query_knowledge_base_form
-  - active_loop: query_knowledge_base_form
+    - intent: intent_help_pest
+    - intent: intent_help_question
+  - action: es_query_form
+  - active_loop: es_query_form
 
-- rule: Submit form for querying knowledge base
+- rule: Submit form for querying ES
   condition:
-  - active_loop: query_knowledge_base_form
+  - active_loop: es_query_form
   steps:
-  - action: query_knowledge_base_form
+  - action: es_query_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - action: action_submit_query_knowledge_base_form
+  - action: action_submit_es_query_form
 
 
 

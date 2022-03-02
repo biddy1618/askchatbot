@@ -11,6 +11,8 @@ from rasa_sdk.events import (
     EventType
 )
 
+import json
+
 from actions.es import config
 from actions.es.es import submit
 
@@ -24,220 +26,90 @@ PEST_NAME_MUST_BE_SINGULAR      = ['mildew']
 TARGET_NAME_MUST_BE_SINGULAR    = ['house', 'kitchen', 'basement', 'lawn']
 
 from actions import helper
-
-class ActionKickoffAnotherIHaveAPestIntent(Action):
-    '''Kickoff another intent_i_have_a_pest, after cleaning out the Tracker.'''
-
-    def name(self) -> Text:
-        return "action_kickoff_intent_i_have_a_pest"
-
-    async def run(
-        self,
-        dispatcher  : CollectingDispatcher,
-        tracker     : Tracker,
-        domain      : Dict[Text, Any]
-        ) -> List[EventType]:
-        
-        events = helper._reset_slots()
-        events.extend(helper._next_intent("intent_i_have_a_pest"))
-        
-        return events
-
-
-class ActionKickoffAnotherIHaveAQuestionIntent(Action):
-    '''Kickoff another intent_i_have_a_question, after cleaning out the Tracker.'''
-
-    def name(self) -> Text:
-        return 'action_kickoff_intent_i_have_a_question'
-
-    async def run(
-        self,
-        dispatcher  : CollectingDispatcher,
-        tracker     : Tracker,
-        domain      : Dict[Text, Any]
-        ) -> List[EventType]:
-        
-        events = helper._reset_slots()
-        events.extend(helper._next_intent('intent_i_have_a_question'))
-        
-        return events
-
-
-
-class ActionAskHandoffToExpert(Action):
-    '''Asks if user wants to ask the question to an expert/human.'''
-
-    def name(self) -> Text:
-        return 'action_ask_handoff_to_expert'
-
-    async def run(
-        self,
-        dispatcher  : CollectingDispatcher,
-        tracker     : Tracker,
-        domain      : Dict[Text, Any]
-        ) -> List[EventType]:
-
-        dispatcher.utter_message(template = 'utter_ask_connect_expert')
     
 
-# class ValidateQueryKnowledgeBaseForm(FormValidationAction):
-#     '''Query the Knowledge Base.'''
+class ValidateESQueryForm(FormValidationAction):
+    '''Query the ES Knowledge Base.'''
 
+    def name(self) -> Text:
+        return 'validate_es_query_form'
+
+
+    async def required_slots(
+        self,
+        domain_slots: List[Text],
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any],
+        ) -> List[Text]:
+        '''A list of required slots that the form has to fill.'''
+
+        logger.info('validate_es_query_form - required slots - START')
+        
+
+        slots = []
+        last_intent = tracker.active_form.get("trigger_message", {})\
+            .get("intent", {}).get("name", 'intent_help_question')
+        if last_intent == 'intent_help_pest':
+            slots = ['pest_problem_description']
+            if tracker.get_slot('pest_causes_damage') != 'no':
+                slots.extend(['pest_causes_damage', 'pest_damage_description'])
+
+        else: slots = ['question']
+
+        logger.info(f'validate_es_query_form - required slots - {slots}')
+        logger.info(f'validate_es_query_form - required slots - END')
+
+        return slots
+    
+    async def extract_question(
+        self, 
+        dispatcher  : CollectingDispatcher, 
+        tracker     : Tracker, 
+        domain      : Dict[Text, Any]
+    ) -> Dict[Text, Any]:
+        '''Custom slot extraction for plant_damages'''
+
+        logger.info(f'Requested slot: {tracker.slots["requested_slot"]}')
+        last_intent = tracker.active_form.get("trigger_message", {})\
+            .get("intent", {}).get("name", 'intent_help_question')
+        logger.info(last_intent)
+        logger.info(tracker.latest_message.get('text'))
+        if last_intent == '/intent_help_pest':
+            slots = {'pest_problem_description': tracker.latest_message.get('text')}
+        else:
+            slots = {'question': tracker.latest_message.get('text')}   
+        logger.info(slots)
+        
+        return slots
+
+# class ActionAskQuestion(Action):
+#     '''Custom action for slot validation - plant_part.'''
+    
 #     def name(self) -> Text:
-#         return 'validate_query_knowledge_base_form'
-
-
-    # async def required_slots(
-    #     self,
-    #     domain_slots: List[Text],
-    #     dispatcher  : CollectingDispatcher,
-    #     tracker : Tracker,
-    #     domain: Dict[Text, Any],
-    #     ) -> List[Text]:
-    #     '''A list of required slots that the form has to fill.'''
-
-    #     def how_did_we_get_here(tracker: Tracker) -> Text:
-    #         '''Find out if we came here because of a question or a pest problem.
-    #         Do this by looking at all the events, and find the latest one that could have
-    #         triggered the calling of this form.'''
-            
-    #         df = pd.DataFrame(tracker.events)
-    #         loc_pest        = 0
-    #         loc_question    = 0
-    #         if '/intent_i_have_a_pest'      in df['text'].values:
-    #             loc_pest        = df[df['text'] == '/intent_i_have_a_pest'      ].index.values[-1]
-    #         if '/intent_i_have_a_question'  in df['text'].values:
-    #             loc_question    = df[df['text'] == '/intent_i_have_a_question'  ].index.values[-1]
-
-    #         if loc_pest > loc_question:
-    #             return '/intent_i_have_a_pest'
-
-    #         return '/intent_i_have_a_question'
-
-    #     slots = []
-
-    #     if how_did_we_get_here(tracker) == '/intent_i_have_a_pest':
-    #         slots = ['pest_problem_description']
-    #         if tracker.get_slot('pest_causes_damage') != 'no':
-    #             slots.extend(['pest_causes_damage', 'pest_damage_description'])
-        
-    #     else: slots = ['question']
-
-    #     return slots
-
-
-    # def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-    #     '''A dictionary to map required slots to
-    #         - an extracted entity
-    #         - intent: value pairs
-    #         - a whole message
-    #         or a list of them, where a first match will be picked.'''
-
-    #     return {
-    #         "question": [
-    #             self.from_text(
-    #                 not_intent=["intent_garbage_inputs", "intent_configure_bot"]
-    #             )
-    #         ],
-    #         "pest_problem_description": [
-    #             self.from_text(
-    #                 not_intent=["intent_garbage_inputs", "intent_configure_bot"]
-    #             )
-    #         ],
-    #         "pest_causes_damage": [
-    #             self.from_intent(value="yes", intent="intent_yes"),
-    #             self.from_intent(value="no" , intent="intent_no"),
-    #         ],
-    #         "pest_damage_description": [
-    #             self.from_text(
-    #                 not_intent=["intent_garbage_inputs", "intent_configure_bot"]
-    #             )
-    #         ],
-    #     }
-
-
-    # def pest_name_plural(self, pest_name: str) -> str:
-    #     '''Returns the pest_name in plural form.'''
-        
-    #     pest_singular = inflecter.singular_noun(pest_name)
-    #     if not pest_singular: pest_singular = pest_name
-        
-    #     pest_plural = inflecter.plural_noun(pest_singular)
-        
-    #     return pest_plural
-
-
-    # def keep_pest_name_singular(self,name: str) -> str:
-    #     '''Returns True if the pest name only makes sense in singular form.'''
-        
-    #     name_lower = name.lower()
-        
-    #     for key in PEST_NAME_MUST_BE_SINGULAR:
-    #         if key in name_lower:
-    #             return True
-        
-    #     return False
+#         return 'action_ask_question'
     
+#     def run(
+#         self,
+#         dispatcher  : CollectingDispatcher,
+#         tracker     : Tracker,
+#         domain      : Dict[Text, Any]
+#         ) -> List[EventType]:
 
-    # def validate_pest_problem_description(
-    #     self,
-    #     value       : Text,
-    #     dispatcher  : CollectingDispatcher,
-    #     tracker     : Tracker,
-    #     domain      : Dict[Text, Any],
-    #     ) -> Dict[Text, Any]:
-    #     '''Once pest problem is described:
+#         logger.info('debug')
 
-    #     If no pest name was extracted:
-    #       -> do not ask for damage
-    #       -> set the damage equal to the description
+#         logger.info(tracker.active_loop)
+#         logger.info(tracker.active_loop_name)
+#         logger.info(tracker.active_loop)
+#         dispatcher.utter_message(response = 'dauren')
 
-    #     If a pest name was extracted:
-    #       -> build damage question to ask, using the pest name in plural form
-    #     '''
-
-    #     # see if a pest name was extracted from the problem description
-    #     pest_name   = tracker.get_slot('pest_name')
-
-    #     # see if a target name was extracted from the problem description
-    #     target_name = tracker.get_slot('target_name')
-
-    #     if not pest_name:
-    #         # question = "Is there any damage?"
-    #         return {
-    #             'pest_problem_description'  : value,
-    #             'pest_causes_damage'        : 'did-not-ask',
-    #             'pest_damage_description'   : value,
-    #         }
-
-    #     if self.keep_pest_name_singular(pest_name):
-    #         if target_name:
-    #             question = (
-    #                 f'Is the {pest_name.lower()} causing any damage to the '
-    #                 f'{target_name.lower()}?'
-    #             )
-    #         else:
-    #             question = f'Is the {pest_name.lower()} causing any damage?'
-    #         return {
-    #             'pest_problem_description'  : value,
-    #             'cause_damage_question' : question,
-    #         }
-
-    #     pest_plural = self.pest_name_plural(pest_name)
-    #     if target_name:
-    #         question = (
-    #             f"Are the {pest_plural.lower()} causing any damage to the "
-    #             f"{target_name.lower()}?"
-    #         )
-    #     else:
-    #         question = f"Are the {pest_plural.lower()} causing any damage?"
-    #     return {"pest_problem_description": value, "cause_damage_question": question}
-    
-class ActionSubmitQueryKnowledgeBaseForm(Action):
-    '''Custom action for submitting form - query_knowledge_base_form.'''
+#         logger.info('action_ask_plant_part - END')
+#         return []
+class ActionSubmitESQueryForm(Action):
+    '''Custom action for submitting form - action_submit_es_query_form.'''
     
     def name(self) -> Text:
-        return 'action_submit_query_knowledge_base_form'
+        return 'action_submit_es_query_form'
     
 
     def _create_text_for_pest(
@@ -376,10 +248,10 @@ class ActionSubmitQueryKnowledgeBaseForm(Action):
         pest_name                   = tracker.get_slot('question')
         pest_problem_description    = tracker.get_slot('pest_problem_description')
         pest_causes_damage          = tracker.get_slot('pest_causes_damage')
-        # pest_damage_description     = None
+        pest_damage_description     = None
         
-        # if pest_causes_damage != "no":
-        pest_damage_description = tracker.get_slot('pest_damage_description')
+        if pest_causes_damage != "no":
+            pest_damage_description = tracker.get_slot('pest_damage_description')
         
         question = tracker.get_slot('question')
 

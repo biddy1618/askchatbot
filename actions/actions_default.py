@@ -47,10 +47,10 @@ class ActionGreet(Action):
             dispatcher.utter_message(response = 'utter_privacy_policy')
         
         buttons = [
-            {'title': 'I have problem with my plant.',                          'payload': '/request_plant_problem'},
-            {'title': 'I have a picture and I would like to get help on that.', 'payload': '/request_plant_picture'},
-            {'title': 'I have generic request.',                                'payload': '/request_generic'},
-            {'title': 'Connect me to askextension expert.',                     'payload': '/request_expert'},
+            {'title': 'I would like to ask question.'       , 'payload': '/intent_help_question'},
+            {'title': 'I have a pest problem.'              , 'payload': '/intent_help_pest'},
+            {'title': 'I would like to get help on image.'  , 'payload': '/intent_help_image'},
+            {'title': 'Connect me to askextension expert.'  , 'payload': '/intent_request_expert'},
         ]
 
         if not shown_explain_ipm:
@@ -59,7 +59,7 @@ class ActionGreet(Action):
         if shown_greeting:
             buttons.append({'title': 'Goodbye', 'payload': '/intent_goodbye'})
 
-        dispatcher.utter_message(text = 'Please, select one of the these options:', buttons = buttons)
+        dispatcher.utter_message(text = 'How can I help you?', buttons = buttons)
         events = helper._reset_slots(tracker)
 
         logger.info('action_greet - END')
