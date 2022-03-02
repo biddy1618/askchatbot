@@ -12,7 +12,7 @@ __pycache__/
 .vscode/
 
 # ES data and scraped data
-es/data/**/*.json
+actions/es/data/**/*.json
 
 # Development environment variables
 dev-env.sh
