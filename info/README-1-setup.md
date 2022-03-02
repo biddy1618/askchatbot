@@ -1,38 +1,12 @@
 # Local set up
 
-## Docker (version 20.10.12)
+Instructions for linux-based machines.
 
-Pull images for Rasa and Rasa-SDK:
+## Docker Compose (version 2.2.2)
+
+Launch the services up using `docker compose`:
 ```bash
-docker pull rasa/rasa:3.0.4-spacy-en
-docker pull rasa/rasa-sdk:3.0.2
-```
-
-Create network for communicating between the services:
-```bash
-docker network create rasa
-```
-
-Build the images:
-```bash
-docker build -t rasa-actions -f rasa-actions.dockerfile .
-docker build -t rasa .
-```
-
-Run the Rasa Actions server:
-```bash
-docker run --rm -it --net rasa --name rasa-actions rasa-actions
-```
-
-Run the Rasa Chatbot:
-```bash
-docker run --rm -it -p 127.0.0.1:5005:5005 --net rasa --name rasa rasa
-```
-
-## Or alternatively use Docker Compose (version 2.2.2)
-
-Try setting the services up using `docker compose`:
-```bash
+source env-dev.sh
 docker compose build # if you already built images, omit
 docker compose up
 ```

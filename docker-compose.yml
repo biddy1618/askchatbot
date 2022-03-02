@@ -4,6 +4,9 @@ services:
     build:
       context: .
     container_name: rasa
+    environment:
+      STAGE: ${STAGE}
+      ACTION_ENDPOINT: http://rasa-actions:5055/webhook
     ports:
       - "5005:5005"
     command: ["run", "--cors", "*"]
@@ -12,3 +15,15 @@ services:
       context: .
       dockerfile: rasa-actions.dockerfile
     container_name: rasa-actions
+    environment:
+      STAGE: ${STAGE}
+      TFHUB_EMBEDDING_URL: https://tfhub.dev/google/universal-sentence-encoder/4
+      TFHUB_CACHE_DIR: /var/tmp/tfhub_modules
+      TF_CPP_MIN_LOG_LEVEL: 3
+      ES_IMITATE: ${ES_IMITATE}
+      ELASTIC_USERNAME: ${ES_USERNAME}
+      ELASTIC_PASSWORD: ${ES_PASSWORD}
+      ES_HOST: ${ES_HOST}
+      ASKEXTENSION_INDEX: askextension
+      COMBINED_INDEX: combined
+    

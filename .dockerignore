@@ -3,7 +3,6 @@
 .keras/
 .rasa/
 models/
-endpoints.yml
 
 # python cache 
 __pycache__
@@ -13,6 +12,18 @@ __pycache__
 
 # miscallenous
 info/
+.env
+.gitignore
+.gitlab-ci.yml
+docker-compose.yml
+Dockerfile
+env-dev.sh
+rasa-actions.dockerfile
+requirements-auxiliary.txt
+requirements.txt
+
+# web-clients
+web-client/
 
 # ES data and scraped data
 es/data/**/*.json

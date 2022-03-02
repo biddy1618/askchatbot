@@ -13,4 +13,6 @@ __pycache__/
 
 # ES data and scraped data
 es/data/**/*.json
-.logs
+
+# Development environment variables
+dev-env.sh

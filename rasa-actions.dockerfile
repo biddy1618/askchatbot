@@ -12,6 +12,7 @@ FROM rasa/rasa-sdk:$VERSION AS rasa-sdk
 USER root
 COPY ./actions /app/actions
 RUN pip install --upgrade -r actions/requirements-actions.txt
+RUN pip install --upgrade -r actions/es/requirements-es.txt
 
 USER 1001
 

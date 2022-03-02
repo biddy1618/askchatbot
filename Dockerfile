@@ -14,7 +14,7 @@ RUN ["pip", "install", "--upgrade", "-r", "requirements-update.txt"]
 RUN ["rasa", "train"]
 
 USER 1001
-CMD ["run", "--cors", "*", "--endpoints", "endpoints-prod.yml"]
+CMD ["run", "--cors", "*"]
 
 # change shell
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]

@@ -383,7 +383,7 @@ class ActionSubmitQueryKnowledgeBaseForm(Action):
         
         question = tracker.get_slot('question')
 
-        if not config.imitate:
+        if not config.es_imitate:
             hits_ask, hits_ipm = await submit(
                 question,
                 pest_name,

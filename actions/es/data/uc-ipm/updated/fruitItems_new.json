@@ -1,0 +1,2988 @@
+[
+  {
+    "name": "Walnuts",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/walnut.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/depbrkcanfert.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondfirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/walnutharvet.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/walnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/walnutpruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondsite.html?src=exchbt"
+      },
+      {
+        "tip": "Thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/walnutthinning.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherrytraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Thousand cankers disease",
+        "link": "http://ipm.ucanr.edu/EXOTIC/thousandcankers.html?src=exchbt"
+      },
+      {
+        "problem": "Field ID guide:",
+        "link": "http://ipm.ucanr.edu/PDF/MISC/thousand_cankers_field_guide.pdf?src=exchbt"
+      },
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Dusky-veined walnut aphid",
+        "link": ""
+      },
+      {
+        "problem": "Walnut aphid",
+        "link": ""
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Walnut scale",
+        "link": ""
+      },
+      {
+        "problem": "Bark beetles and borers",
+        "link": ""
+      },
+      {
+        "problem": "Pacific flatheaded borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pacfltheadbor.html?src=exchbt"
+      },
+      {
+        "problem": "Shothole borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/shothlborer.html?src=exchbt"
+      },
+      {
+        "problem": "Twig beetles",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7421.html?src=exchbt"
+      },
+      {
+        "problem": "Carpenterworm",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html?src=exchbt"
+      },
+      {
+        "problem": "Codling moth",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7412.html?src=exchbt"
+      },
+      {
+        "problem": "Fall webworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallwebworm.html?src=exchbt"
+      },
+      {
+        "problem": "Fruittree leafroller",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7473.html?src=exchbt"
+      },
+      {
+        "problem": "Lace bugs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7428.html?src=exchbt"
+      },
+      {
+        "problem": "Navel orangeworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "European red mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/waleuroprdmite.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "European fruit lecanium",
+        "link": ""
+      },
+      {
+        "problem": "Frosted scale",
+        "link": ""
+      },
+      {
+        "problem": "Tent caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt"
+      },
+      {
+        "problem": "Walnut husk fly",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7430.html?src=exchbt"
+      },
+      {
+        "problem": "Anthracnose",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7420.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Blackline",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/walblackline.html?src=exchbt"
+      },
+      {
+        "problem": "Branch wilt",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/branchwilt.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Deep bark canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/deepbrkcank.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html?src=exchbt"
+      },
+      {
+        "problem": "Shallow bark canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/shalbrkcank.html?src=exchbt"
+      },
+      {
+        "problem": "Walnut blight",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/walnutbli.html?src=exchbt"
+      },
+      {
+        "problem": "Wood decay",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74109.html?src=exchbt"
+      },
+      {
+        "problem": "Frost damage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/frostdamage.html?src=exchbt"
+      },
+      {
+        "problem": "Molds",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/walnutmold.html?src=exchbt"
+      },
+      {
+        "problem": "Overwatering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/watering.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/walsunburn.html?src=exchbt"
+      },
+      {
+        "problem": "Wind injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/windburn.html?src=exchbt"
+      },
+      {
+        "problem": "Broadleaf mistletoe",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7437.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Citrus",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/citrus.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Citrus Varieties for the Home Gardener",
+        "link": "http://anrcatalog.ucdavis.edu/Details.aspx?itemNo=8472?src=exchbt"
+      },
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/citfertilization.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cirusharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/armrtrotplant.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/citrussite.html?src=exchbt"
+      },
+      {
+        "tip": "Training, pruning, and thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/citruspruning.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/citruswatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Asian Citrus Psyllid",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74155.html?src=exchbt"
+      },
+      {
+        "problem": "Diaprepes Root Weevil",
+        "link": "http://ipm.ucanr.edu/PDF/PUBS/Diaprepes_Flyer.pdf?src=exchbt"
+      },
+      {
+        "problem": "Amorbia",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/amorbia.html?src=exchbt"
+      },
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "California red scale",
+        "link": ""
+      },
+      {
+        "problem": "Purple scale",
+        "link": ""
+      },
+      {
+        "problem": "Asian Citrus Psyllid",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74155.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus cutworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citruscutwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus leafminer",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74137.html?src=exchbt"
+      },
+      {
+        "problem": "Cottony cushion scale",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7410.html?src=exchbt"
+      },
+      {
+        "problem": "Fuller rose beetles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/fullerrosebeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Glassy-winged sharpshooter",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7492.html?src=exchbt"
+      },
+      {
+        "problem": "Hoplia beetle",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7499.html?src=exchbt"
+      },
+      {
+        "problem": "Katydids",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/katydids.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Mealybugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt"
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "Citrus bud mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citbudmite.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus red mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citrredmite.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus rust mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citrustmite.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Snails",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Black scale",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74160.html?src=exchbt"
+      },
+      {
+        "problem": "Brown soft scale",
+        "link": ""
+      },
+      {
+        "problem": "Citricola scale",
+        "link": ""
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Whiteflies",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7401.html?src=exchbt"
+      },
+      {
+        "problem": "Giant whitefly",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7400.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Alternaria rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/alternariarot.html?src=exchbt"
+      },
+      {
+        "problem": "Anthracnose",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/citanthracnose.html?src=exchbt"
+      },
+      {
+        "problem": "Brown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/citbrownrot.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus blast",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/citrusblast.html?src=exchbt"
+      },
+      {
+        "problem": "Exocortis",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/exocortis.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora gummosis",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/phytogumm.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/citphytorootrot.html?src=exchbt"
+      },
+      {
+        "problem": "Tristeza disease complex",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/tristeza.html?src=exchbt"
+      },
+      {
+        "problem": "Wood decay",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74109.html?src=exchbt"
+      },
+      {
+        "problem": "Frost",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/citrusfrost.html?src=exchbt"
+      },
+      {
+        "problem": "Fruit drop",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/fruitdrop.html?src=exchbt"
+      },
+      {
+        "problem": "Fruit splitting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/fruitsplit.html?src=exchbt"
+      },
+      {
+        "problem": "Graft incompatibility",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/graftincaomat.html?src=exchbt"
+      },
+      {
+        "problem": "Irregular fertilization",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/irrfertil.html?src=exchbt"
+      },
+      {
+        "problem": "Lack of sweet flavor",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/sweet.html?src=exchbt"
+      },
+      {
+        "problem": "Lack of water",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/lackwater.html?src=exchbt"
+      },
+      {
+        "problem": "Mineral deficiencies and toxicities",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/mineraldef.html?src=exchbt"
+      },
+      {
+        "problem": "Overwatering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/overwatering.html?src=exchbt"
+      },
+      {
+        "problem": "Regreening",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/regreening.html?src=exchbt"
+      },
+      {
+        "problem": "Rind stipple of grapefruit",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/rindstip.html?src=exchbt"
+      },
+      {
+        "problem": "Wind injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/windingjury.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Cherries ",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/cherries.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotfert.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondfirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherryharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherpruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearsite.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherrytraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Spotted wing drosophila",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74158.html?src=exchbt"
+      },
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Borers",
+        "link": ""
+      },
+      {
+        "problem": "American plum borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/amerplumbor.html?src=exchbt"
+      },
+      {
+        "problem": "Pacific flatheaded borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pacfltheadbor.html?src=exchbt"
+      },
+      {
+        "problem": "Peach twig borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtwigbor.html?src=exchbt"
+      },
+      {
+        "problem": "Peachtree borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtrborer.html?src=exchbt"
+      },
+      {
+        "problem": "Shothole borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/shothlborer.html?src=exchbt"
+      },
+      {
+        "problem": "Boxelder bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus cutworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citruscutwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Clearwing moths",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7477.html?src=exchbt"
+      },
+      {
+        "problem": "Earwigs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74102.html?src=exchbt"
+      },
+      {
+        "problem": "Fall cankerworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallcankerwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Fall webworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallwebworm.html?src=exchbt"
+      },
+      {
+        "problem": "Grasshoppers",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74103.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruit beetle",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grfruitbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruitworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/greenfruitworm.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Lygus bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Pear sawfly (Pearslug, Cherryslug)",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pearslug.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74160.html?src=exchbt"
+      },
+      {
+        "problem": "Calico scale",
+        "link": ""
+      },
+      {
+        "problem": "European fruit lecanium",
+        "link": ""
+      },
+      {
+        "problem": "Kuno scale",
+        "link": ""
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Spotted wing drosophila",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74158.html?src=exchbt"
+      },
+      {
+        "problem": "Stink bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt"
+      },
+      {
+        "problem": "Tent caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt"
+      },
+      {
+        "problem": "Western flower thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Western tussock moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/westtussmth.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial canker and blast",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/baccanker.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial leaf scorch (similar to",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7480.html?src=exchbt"
+      },
+      {
+        "problem": "Brown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/aprbrownrot.html?src=exchbt"
+      },
+      {
+        "problem": "Cherry buckskin",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/cherbuckskin.html?src=exchbt"
+      },
+      {
+        "problem": "Cherry leaf spot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/cherrylfspot.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Cytospora canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/cytocanker.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Verticillium wilt",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticilliumwilt.html?src=exchbt"
+      },
+      {
+        "problem": "Virus diseases",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/virusdiseases.html?src=exchbt"
+      },
+      {
+        "problem": "Wood decay",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74109.html?src=exchbt"
+      },
+      {
+        "problem": "Cherry crinkle",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/cherrycrinkle.html?src=exchbt"
+      },
+      {
+        "problem": "Deep suture",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/deepsuture.html?src=exchbt"
+      },
+      {
+        "problem": "Frost injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/frostinjury.html?src=exchbt"
+      },
+      {
+        "problem": "Fruit cracking",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/fruitcracking.html?src=exchbt"
+      },
+      {
+        "problem": "Fruit doubling and spurs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/fruitdoubling.html?src=exchbt"
+      },
+      {
+        "problem": "Nutrient deficiencies",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/nutrientdefic.html?src=exchbt"
+      },
+      {
+        "problem": "Oil burn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/oilburn.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/cherrysunburn.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Figs",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/figs.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fgfertilizing.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondfirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/figsharvesting.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning and thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/figpruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/figsite.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherrytraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Ants",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html?src=exchbt"
+      },
+      {
+        "problem": "Carpenterworm",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html?src=exchbt"
+      },
+      {
+        "problem": "Darkling beetles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/darklingbeetles.html?src=exchbt"
+      },
+      {
+        "problem": "Driedfruit and sap beetles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/driedfrtbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Earwigs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74102.html?src=exchbt"
+      },
+      {
+        "problem": "Fig scale",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruit beetle",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grfruitbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Navel orangeworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Vinegar flies",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fruitflies.html?src=exchbt"
+      },
+      {
+        "problem": "Fig mosaic",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/figmosaic.html?src=exchbt"
+      },
+      {
+        "problem": "Phomopsis canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/phomopsiscan.html?src=exchbt"
+      },
+      {
+        "problem": "Souring",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/figsouring.html?src=exchbt"
+      },
+      {
+        "problem": "Fruit drop or no crop",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/figdroop.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Strawberries",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Bed preparation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/strbedprep.html?src=exchbt"
+      },
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/fertilizstrawb.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/strawberryharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/strawplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/strawberrypruning.html?src=exchbt"
+      },
+      {
+        "tip": "Rotating plantings",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/strawrotating.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/sitesel.html?src=exchbt"
+      },
+      {
+        "tip": "Soil improvement",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/soilimprove.html?src=exchbt"
+      },
+      {
+        "tip": "Soil preparation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/soilprep.html?src=exchbt"
+      },
+      {
+        "tip": "Soil recommendations",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/soilrecom.html?src=exchbt"
+      },
+      {
+        "tip": "Time to plant",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/strawberrytime.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/strawbwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Spotted wing drosophila",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74158.html?src=exchbt"
+      },
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Armyworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/armyworm.html?src=exchbt"
+      },
+      {
+        "problem": "Corn earworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cornearworm.html?src=exchbt"
+      },
+      {
+        "problem": "Cutworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cutworm.html?src=exchbt"
+      },
+      {
+        "problem": "Earwigs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74102.html?src=exchbt"
+      },
+      {
+        "problem": "Garden symphylans",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/gardensymphylans.html?src=exchbt"
+      },
+      {
+        "problem": "Hoplia beetle",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7499.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strleafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Loopers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html?src=exchbt"
+      },
+      {
+        "problem": "Lygus bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html?src=exchbt"
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "Cyclamen mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/cyclamenmite.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Root weevils",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/weevil.html?src=exchbt"
+      },
+      {
+        "problem": "Snails and slugs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html?src=exchbt"
+      },
+      {
+        "problem": "Sowbugs and pillbugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/sowbugs.html?src=exchbt"
+      },
+      {
+        "problem": "Spittlebugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/spittlebugs.html?src=exchbt"
+      },
+      {
+        "problem": "Spotted wing drosophila",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74158.html?src=exchbt"
+      },
+      {
+        "problem": "Strawberry crown moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strawcrmoth.html?src=exchbt"
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Wireworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/wireworm.html?src=exchbt"
+      },
+      {
+        "problem": "Black root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strblkrot.html?src=exchbt"
+      },
+      {
+        "problem": "Botrytis rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html?src=exchbt"
+      },
+      {
+        "problem": "Leaf scorch",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/leafscorch.html?src=exchbt"
+      },
+      {
+        "problem": "Leaf spot diseases",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strleafspot.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora rot and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/phytoprot.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Rhizopus rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/rhizopusrot.html?src=exchbt"
+      },
+      {
+        "problem": "Verticillium wilt",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strverticwilt.html?src=exchbt"
+      },
+      {
+        "problem": "Virus diseases",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strvirusdis.html?src=exchbt"
+      },
+      {
+        "problem": "Low temperature injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/lowtemp.html?src=exchbt"
+      },
+      {
+        "problem": "Nitrogen and phosphorus deficiencies",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/nutrientdef.html?src=exchbt"
+      },
+      {
+        "problem": "Salt toxicity",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/salttoxicity.html?src=exchbt"
+      },
+      {
+        "problem": "Tipburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/strawtipbrn.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Pomegranate",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/pomegranate.html?src=exchbt",
+    "pests_and_disorders": [
+      {
+        "problem": "Leaffooted bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html?src=exchbt"
+      },
+      {
+        "problem": "Mealybugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt"
+      },
+      {
+        "problem": "Vine mealybug",
+        "link": ""
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Citricola scale",
+        "link": ""
+      },
+      {
+        "problem": "Whiteflies",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7401.html?src=exchbt"
+      },
+      {
+        "problem": "Ash whitefly",
+        "link": ""
+      },
+      {
+        "problem": "Citrus whitefly",
+        "link": ""
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/armillariartrot.html?src=exchbt"
+      },
+      {
+        "problem": "Botrytis blight",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/botrytis.html?src=exchbt"
+      },
+      {
+        "problem": "Mineral deficiencies",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/ENVIRON/mineraldef.html?src=exchbt"
+      },
+      {
+        "problem": "Nutrient and mineral excesses",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/ENVIRON/salttoxicity.html?src=exchbt"
+      },
+      {
+        "problem": "Poor water management",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/ENVIRON/poorwater.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Blackberries and Raspberries",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/blackberries.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/blackberryfert.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/blackberryharvesting.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/blackberryplantinh.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/blackberryprune.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/blackberrysanit.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/blackberrysite.html?src=exchbt"
+      },
+      {
+        "tip": "Trellising",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/trellising.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/irrigation.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Spotted wing drosophila",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74158.html?src=exchbt"
+      },
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Cutworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cutworm.html?src=exchbt"
+      },
+      {
+        "problem": "Leafhoppers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/leafhopper.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "Dryberry mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/dryberrymite.html?src=exchbt"
+      },
+      {
+        "problem": "Redberry mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/redbermite.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Raspberry cane maggot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/raspberrycanemag.html?src=exchbt"
+      },
+      {
+        "problem": "Raspberry crown borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/rascrownbor.html?src=exchbt"
+      },
+      {
+        "problem": "Raspberry horntail",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/raspberryhorntail.html?src=exchbt"
+      },
+      {
+        "problem": "Raspberry sawfly",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/raspsawfly.html?src=exchbt"
+      },
+      {
+        "problem": "Root weevils",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/weevil.html?src=exchbt"
+      },
+      {
+        "problem": "Scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Spotted wing drosophila",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74158.html?src=exchbt"
+      },
+      {
+        "problem": "Strawberry crown moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strawcrmoth.html?src=exchbt"
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Anthracnose",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/canthracnose.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/armillariartrot.html?src=exchbt"
+      },
+      {
+        "problem": "Botrytis fruit rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/graymold.html?src=exchbt"
+      },
+      {
+        "problem": "Cane blight",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/caneblight.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Downy mildew",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/downymildew.html?src=exchbt"
+      },
+      {
+        "problem": "Leaf spot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/leafspot.html?src=exchbt"
+      },
+      {
+        "problem": "Orange rust",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/orangerust.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/phytophrtroot.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Purple blotch",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/purpleblotch.html?src=exchbt"
+      },
+      {
+        "problem": "Stamen blight",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/stamenblight.html?src=exchbt"
+      },
+      {
+        "problem": "Verticillium wilt",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/vertwilt.html?src=exchbt"
+      },
+      {
+        "problem": "Virus diseases",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/visusdiseases.html?src=exchbt"
+      },
+      {
+        "problem": "Yellow rust",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/yellowrust.html?src=exchbt"
+      },
+      {
+        "problem": "Dieback",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/dieback.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Pears",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/pears.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotfert.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/applefirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/applepruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearsite.html?src=exchbt"
+      },
+      {
+        "tip": "Thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearthinning.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/appletraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Borers",
+        "link": ""
+      },
+      {
+        "problem": "Pacific flatheaded borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pacfltheadbor.html?src=exchbt"
+      },
+      {
+        "problem": "Shothole borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/shothlborer.html?src=exchbt"
+      },
+      {
+        "problem": "Boxelder bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html?src=exchbt"
+      },
+      {
+        "problem": "California pear sawfly",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/capearsawfly.html?src=exchbt"
+      },
+      {
+        "problem": "Carpenterworm",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html?src=exchbt"
+      },
+      {
+        "problem": "Codling moth",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7412.html?src=exchbt"
+      },
+      {
+        "problem": "Cribrate weevil",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/weevil.html?src=exchbt"
+      },
+      {
+        "problem": "Fall webworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallwebworm.html?src=exchbt"
+      },
+      {
+        "problem": "Grasshoppers",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74103.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruitworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/greenfruitworm.html?src=exchbt"
+      },
+      {
+        "problem": "Katydids",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/katydids.html?src=exchbt"
+      },
+      {
+        "problem": "Lace bugs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7428.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Lygus bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html?src=exchbt"
+      },
+      {
+        "problem": "Mealybugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt"
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "European red mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/waleuroprdmite.html?src=exchbt"
+      },
+      {
+        "problem": "Pear rust mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pearrustmite.html?src=exchbt"
+      },
+      {
+        "problem": "Pearleaf blister mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pearlfblmite.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Pear psylla",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pearpsylla.html?src=exchbt"
+      },
+      {
+        "problem": "Pear sawfly (Pearslug, Cherryslug)",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pearslug.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "European fruit lecanium",
+        "link": ""
+      },
+      {
+        "problem": "Stink bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt"
+      },
+      {
+        "problem": "Tentiform leafminers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tenleafminer.html?src=exchbt"
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial blossom blast",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/baccanker.html?src=exchbt"
+      },
+      {
+        "problem": "European canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/europeancanker.html?src=exchbt"
+      },
+      {
+        "problem": "Fire blight",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7414.html?src=exchbt"
+      },
+      {
+        "problem": "Pear decline",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/peardecline.html?src=exchbt"
+      },
+      {
+        "problem": "Pear rust",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pearrust.html?src=exchbt"
+      },
+      {
+        "problem": "Pear scab",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pearscab.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Frost injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/applefrost.html?src=exchbt"
+      },
+      {
+        "problem": "Oil burn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/oilburn.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/appleburn.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Plums and Prunes",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/plumsprunes.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotfert.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondfirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/plumharvesting.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/plumpruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearsite.html?src=exchbt"
+      },
+      {
+        "tip": "Thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/plumthining.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherrytraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Borers",
+        "link": ""
+      },
+      {
+        "problem": "Boxelder bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus cutworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citruscutwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Clearwing moths",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7477.html?src=exchbt"
+      },
+      {
+        "problem": "Codling moth",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7412.html?src=exchbt"
+      },
+      {
+        "problem": "Driedfruit beetles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/driedfrtbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Earwigs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74102.html?src=exchbt"
+      },
+      {
+        "problem": "Fall cankerworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallcankerwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Fall webworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallwebworm.html?src=exchbt"
+      },
+      {
+        "problem": "Grasshoppers",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74103.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruit beetle",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grfruitbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruitworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/greenfruitworm.html?src=exchbt"
+      },
+      {
+        "problem": "Katydids",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/katydids.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Oriental fruit moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/orientfrmoth.html?src=exchbt"
+      },
+      {
+        "problem": "Pear sawfly (Pearslug, Cherryslug)",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pearslug.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "European fruit lecanium",
+        "link": ""
+      },
+      {
+        "problem": "Kuno scale",
+        "link": ""
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Tent caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt"
+      },
+      {
+        "problem": "Western flower thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Western tussock moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/westtussmth.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial canker and blast",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/baccanker.html?src=exchbt"
+      },
+      {
+        "problem": "Brown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/aprbrownrot.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Cytospora canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/cytocanker.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Frost injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/frostinjury.html?src=exchbt"
+      },
+      {
+        "problem": "Lacy scab",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/lacyscab.html?src=exchbt"
+      },
+      {
+        "problem": "Noninfectious plum shothole",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/noninfectplmsht.html?src=exchbt"
+      },
+      {
+        "problem": "Nutrient deficiencies",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/nutrientdefic.html?src=exchbt"
+      },
+      {
+        "problem": "Oil burn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/oilburn.html?src=exchbt"
+      },
+      {
+        "problem": "Pitburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/pitburn.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/cherrysunburn.html?src=exchbt"
+      },
+      {
+        "problem": "Wind injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/windingjury.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Grapes",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/grapes.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapefertil.html?src=exchbt"
+      },
+      {
+        "tip": "First-year and second-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapefirstprun.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapeharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/graplant.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapesanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapesite.html?src=exchbt"
+      },
+      {
+        "tip": "Thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapethin.html?src=exchbt"
+      },
+      {
+        "tip": "Training and pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grtrainprune.html?src=exchbt"
+      },
+      {
+        "tip": "Trellising",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapetrell.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/grapewatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Black vine weevil",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/blvinwee.html?src=exchbt"
+      },
+      {
+        "problem": "Boxelder bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html?src=exchbt"
+      },
+      {
+        "problem": "Branch and twig borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/branchtwingbor.html?src=exchbt"
+      },
+      {
+        "problem": "Cutworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grcutworms.html?src=exchbt"
+      },
+      {
+        "problem": "Glassy-winged sharpshooter",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7492.html?src=exchbt"
+      },
+      {
+        "problem": "Grape bud beetle",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grapebdbeet.html?src=exchbt"
+      },
+      {
+        "problem": "Grape leaffolder",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grleaffolder.html?src=exchbt"
+      },
+      {
+        "problem": "Grape phylloxera",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grapephylloxera.html?src=exchbt"
+      },
+      {
+        "problem": "Grasshoppers",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74103.html?src=exchbt"
+      },
+      {
+        "problem": "Hoplia beetle",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7499.html?src=exchbt"
+      },
+      {
+        "problem": "Katydids",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/katydids.html?src=exchbt"
+      },
+      {
+        "problem": "Leafhoppers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/leafhopper.html?src=exchbt"
+      },
+      {
+        "problem": "Mealybugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt"
+      },
+      {
+        "problem": "Gill's mealybug",
+        "link": ""
+      },
+      {
+        "problem": "Grape mealybug",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grmealybug.html?src=exchbt"
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "Grape erineum mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grerineummte.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Omnivorous leafroller",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/omnileafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Saltmarsh caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/saltmarshcater.html?src=exchbt"
+      },
+      {
+        "problem": "Scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Sphinx moths",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/spinxmoths.html?src=exchbt"
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Western grapeleaf skeletonizer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/wesgrskeleton.html?src=exchbt"
+      },
+      {
+        "problem": "Whiteflies",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7401.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/groakrootfun.html?src=exchbt"
+      },
+      {
+        "problem": "Bunch rots",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/bunchrots.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Downy mildew",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/grdownymildew.html?src=exchbt"
+      },
+      {
+        "problem": "Eutypa dieback",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/eutypadiebk.html?src=exchbt"
+      },
+      {
+        "problem": "Measles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/measles.html?src=exchbt"
+      },
+      {
+        "problem": "Phomopsis cane and leaf spot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/phomopsis.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora crown and root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/phytocrnrt.html?src=exchbt"
+      },
+      {
+        "problem": "Pierce's disease",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/piercesdis.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Viruses",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/viruses.html?src=exchbt"
+      },
+      {
+        "problem": "Herbicide injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/herbicideinjury.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Nectarines and Peaches",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/nectarines.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotfert.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondfirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/peachharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/peachprune.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearsite.html?src=exchbt"
+      },
+      {
+        "tip": "Thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/peachthinning.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherrytraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Borers",
+        "link": ""
+      },
+      {
+        "problem": "American plum borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/amerplumbor.html?src=exchbt"
+      },
+      {
+        "problem": "Pacific flatheaded borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pacfltheadbor.html?src=exchbt"
+      },
+      {
+        "problem": "Peach twig borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtwigbor.html?src=exchbt"
+      },
+      {
+        "problem": "Peachtree borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtrborer.html?src=exchbt"
+      },
+      {
+        "problem": "Shothole borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/shothlborer.html?src=exchbt"
+      },
+      {
+        "problem": "Boxelder bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus cutworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citruscutwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Clearwing moths",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7477.html?src=exchbt"
+      },
+      {
+        "problem": "Driedfruit beetles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/driedfrtbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Earwigs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74102.html?src=exchbt"
+      },
+      {
+        "problem": "Fall cankerworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallcankerwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Fall webworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallwebworm.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruit beetle",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grfruitbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruitworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/greenfruitworm.html?src=exchbt"
+      },
+      {
+        "problem": "Katydids",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/katydids.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Lygus bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html?src=exchbt"
+      },
+      {
+        "problem": "Mealybugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt"
+      },
+      {
+        "problem": "Gill's mealybug",
+        "link": ""
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Oriental fruit moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/orientfrmoth.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "European fruit lecanium",
+        "link": ""
+      },
+      {
+        "problem": "Kuno scale",
+        "link": ""
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Stink bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt"
+      },
+      {
+        "problem": "Tent caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt"
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Western tussock moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/westtussmth.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial canker and blast",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/baccanker.html?src=exchbt"
+      },
+      {
+        "problem": "Brown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/aprbrownrot.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Cytospora canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/cytocanker.html?src=exchbt"
+      },
+      {
+        "problem": "Peach leaf curl",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Rust",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/peachrust.html?src=exchbt"
+      },
+      {
+        "problem": "Scab",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/scab.html?src=exchbt"
+      },
+      {
+        "problem": "Shot hole disease",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/shothole.html?src=exchbt"
+      },
+      {
+        "problem": "Wood decay",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74109.html?src=exchbt"
+      },
+      {
+        "problem": "False wart",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/falsewart.html?src=exchbt"
+      },
+      {
+        "problem": "Frost injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/frostinjury.html?src=exchbt"
+      },
+      {
+        "problem": "Lack of water",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/lacofwater.html?src=exchbt"
+      },
+      {
+        "problem": "Nutrient deficiencies",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/nutrientdefic.html?src=exchbt"
+      },
+      {
+        "problem": "Oil burn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/oilburn.html?src=exchbt"
+      },
+      {
+        "problem": "Peach split pit",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/pchsplitpit.html?src=exchbt"
+      },
+      {
+        "problem": "Pitburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/pitburn.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/cherrysunburn.html?src=exchbt"
+      },
+      {
+        "problem": "Suture split",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/suturesplit.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Avocados",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/avocados.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/avocadofert.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/avocadoharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/avoplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/avocadosite.html?src=exchbt"
+      },
+      {
+        "tip": "Training and pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/avocadotraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/citruswatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Amorbia",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/amorbia.html?src=exchbt"
+      },
+      {
+        "problem": "Avocado lace bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74134.html?src=exchbt"
+      },
+      {
+        "problem": "Latania scale",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Mealybugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt"
+      },
+      {
+        "problem": "Coconut mealybug",
+        "link": ""
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "Avocado brown mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/brownmite.html?src=exchbt"
+      },
+      {
+        "problem": "Persea mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/perseamite.html?src=exchbt"
+      },
+      {
+        "problem": "Sixspotted mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/sixspotmite.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Omnivorous looper",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/omnilooper.html?src=exchbt"
+      },
+      {
+        "problem": "Orange tortrix",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/orangetortix.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Brown soft scale",
+        "link": ""
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Avocado thrips",
+        "link": ""
+      },
+      {
+        "problem": "Greenhouse thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Whiteflies",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7401.html?src=exchbt"
+      },
+      {
+        "problem": "Giant whitefly",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7400.html?src=exchbt"
+      },
+      {
+        "problem": "Avocado root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/avocadortrot.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/bacterialcanker.html?src=exchbt"
+      },
+      {
+        "problem": "Dothiorella canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/avodoth.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/phytortcrrot.html?src=exchbt"
+      },
+      {
+        "problem": "Sunblotch",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/sunblotch.html?src=exchbt"
+      },
+      {
+        "problem": "Verticillium wilt",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticillwilt.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Apricots",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/apricots.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotfert.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondfirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apripruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearsite.html?src=exchbt"
+      },
+      {
+        "tip": "Thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotthinning.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherrytraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Aphids",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Borers",
+        "link": ""
+      },
+      {
+        "problem": "American plum borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/amerplumbor.html?src=exchbt"
+      },
+      {
+        "problem": "Pacific flatheaded borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pacfltheadbor.html?src=exchbt"
+      },
+      {
+        "problem": "Peach twig borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtwigbor.html?src=exchbt"
+      },
+      {
+        "problem": "Peachtree borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtrborer.html?src=exchbt"
+      },
+      {
+        "problem": "Shothole borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/shothlborer.html?src=exchbt"
+      },
+      {
+        "problem": "Carpenterworm",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html?src=exchbt"
+      },
+      {
+        "problem": "Citrus cutworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/citruscutwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Clearwing moths",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7477.html?src=exchbt"
+      },
+      {
+        "problem": "Codling moth",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7412.html?src=exchbt"
+      },
+      {
+        "problem": "Cribrate weevil",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/weevil.html?src=exchbt"
+      },
+      {
+        "problem": "Cucumber beetles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cucumberbeet.html?src=exchbt"
+      },
+      {
+        "problem": "Driedfruit beetles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/driedfrtbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Earwigs",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74102.html?src=exchbt"
+      },
+      {
+        "problem": "Fall cankerworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallcankerwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Fall webworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallwebworm.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruit beetle",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/grfruitbeetle.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruitworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/greenfruitworm.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Lygus bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Oriental fruit moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/orientfrmoth.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "European fruit lecanium",
+        "link": ""
+      },
+      {
+        "problem": "Kuno scale",
+        "link": ""
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Stink bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt"
+      },
+      {
+        "problem": "Tent caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt"
+      },
+      {
+        "problem": "Western flower thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Western tussock moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/westtussmth.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial canker and blast",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/baccanker.html?src=exchbt"
+      },
+      {
+        "problem": "Brown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/aprbrownrot.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Cytospora canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/cytocanker.html?src=exchbt"
+      },
+      {
+        "problem": "Eutypa dieback",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/eutypadieback.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Shot hole disease",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/shothole.html?src=exchbt"
+      },
+      {
+        "problem": "Frost injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/frostinjury.html?src=exchbt"
+      },
+      {
+        "problem": "Nutrient deficiencies",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/nutrientdefic.html?src=exchbt"
+      },
+      {
+        "problem": "Oil burn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/oilburn.html?src=exchbt"
+      },
+      {
+        "problem": "Pitburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/pitburn.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/cherrysunburn.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Almonds",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fertilizing.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondfirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondharvest.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning and thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondpruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/almondsite.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/cherrytraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Ants",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Borers",
+        "link": ""
+      },
+      {
+        "problem": "American plum borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/amerplumbor.html?src=exchbt"
+      },
+      {
+        "problem": "Pacific flatheaded borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pacfltheadbor.html?src=exchbt"
+      },
+      {
+        "problem": "Peachtree borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtrborer.html?src=exchbt"
+      },
+      {
+        "problem": "Peach twig borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/peachtwigbor.html?src=exchbt"
+      },
+      {
+        "problem": "Shothole borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/shothlborer.html?src=exchbt"
+      },
+      {
+        "problem": "Leafhoppers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/leafhopper.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Mites",
+        "link": ""
+      },
+      {
+        "problem": "Brown mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/avbrownmite.html?src=exchbt"
+      },
+      {
+        "problem": "European red mite",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/waleuroprdmite.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mite",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Navel orangeworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Oriental fruit moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/orientfrmoth.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Tent caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/baccanker.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial leaf scorch (similar to",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7480.html?src=exchbt"
+      },
+      {
+        "problem": "Brown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/brownrot.html?src=exchbt"
+      },
+      {
+        "problem": "Crown gall",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crowngall.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html?src=exchbt"
+      },
+      {
+        "problem": "Scab",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/scab.html?src=exchbt"
+      },
+      {
+        "problem": "Shot hole disease",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/shothole.html?src=exchbt"
+      },
+      {
+        "problem": "Verticillium wilt",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticilliumwil.html?src=exchbt"
+      },
+      {
+        "problem": "Frost injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/frost.html?src=exchbt"
+      },
+      {
+        "problem": "Poor or incomplete pollination",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/pollination.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/sunburn.html?src=exchbt"
+      },
+      {
+        "problem": "Wind injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/windburn.html?src=exchbt"
+      }
+    ]
+  },
+  {
+    "name": "Apples",
+    "url": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/apples.html?src=exchbt",
+    "cultural_tips": [
+      {
+        "tip": "Fertilizing",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/apricotfert.html?src=exchbt"
+      },
+      {
+        "tip": "First-year pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/applefirst.html?src=exchbt"
+      },
+      {
+        "tip": "Harvesting and storage",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/harvesting.html?src=exchbt"
+      },
+      {
+        "tip": "Planting",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitnutplanting.html?src=exchbt"
+      },
+      {
+        "tip": "Pruning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/applepruning.html?src=exchbt"
+      },
+      {
+        "tip": "Sanitation",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/sanitation.html?src=exchbt"
+      },
+      {
+        "tip": "Site selection",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/pearsite.html?src=exchbt"
+      },
+      {
+        "tip": "Thinning",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/thinning.html?src=exchbt"
+      },
+      {
+        "tip": "Training",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/appletraining.html?src=exchbt"
+      },
+      {
+        "tip": "Watering",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/CULTURAL/fruitwatering.html?src=exchbt"
+      }
+    ],
+    "pests_and_disorders": [
+      {
+        "problem": "Light brown apple moth",
+        "link": "http://ipm.ucanr.edu/EXOTIC/lightbrownapplemoth.html?src=exchbt"
+      },
+      {
+        "problem": "Aphids, foliar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt"
+      },
+      {
+        "problem": "Aphids, woolly apple",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/woolyapaph.html?src=exchbt"
+      },
+      {
+        "problem": "Apple maggot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/applemaggot.html?src=exchbt"
+      },
+      {
+        "problem": "Armored scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "San Jose scale",
+        "link": ""
+      },
+      {
+        "problem": "Borers",
+        "link": ""
+      },
+      {
+        "problem": "Pacific flatheaded borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/pacfltheadbor.html?src=exchbt"
+      },
+      {
+        "problem": "Shothole borer",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/shothlborer.html?src=exchbt"
+      },
+      {
+        "problem": "Boxelder bug",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html?src=exchbt"
+      },
+      {
+        "problem": "Climbing cutworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/climbingcutwrm.html?src=exchbt"
+      },
+      {
+        "problem": "Codling moth",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7412.html?src=exchbt"
+      },
+      {
+        "problem": "Cribrate weevil",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/weevil.html?src=exchbt"
+      },
+      {
+        "problem": "Fall webworm",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fallwebworm.html?src=exchbt"
+      },
+      {
+        "problem": "Grasshoppers",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74103.html?src=exchbt"
+      },
+      {
+        "problem": "Green fruitworms",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/greenfruitworm.html?src=exchbt"
+      },
+      {
+        "problem": "Katydids",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/katydids.html?src=exchbt"
+      },
+      {
+        "problem": "Leafhoppers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/leafhopper.html?src=exchbt"
+      },
+      {
+        "problem": "Leafrollers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/leafroller.html?src=exchbt"
+      },
+      {
+        "problem": "Lygus bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html?src=exchbt"
+      },
+      {
+        "problem": "Mealybugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt"
+      },
+      {
+        "problem": "Nematodes",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7489.html?src=exchbt"
+      },
+      {
+        "problem": "Redhumped caterpillar",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7474.html?src=exchbt"
+      },
+      {
+        "problem": "Soft scales",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt"
+      },
+      {
+        "problem": "Spider mites",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html?src=exchbt"
+      },
+      {
+        "problem": "Stink bugs",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt"
+      },
+      {
+        "problem": "Tent caterpillars",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt"
+      },
+      {
+        "problem": "Tentiform leafminers",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tenleafminer.html?src=exchbt"
+      },
+      {
+        "problem": "Thrips",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt"
+      },
+      {
+        "problem": "Western tussock moth",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/westtussmth.html?src=exchbt"
+      },
+      {
+        "problem": "Armillaria root rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/oakrootfungus.html?src=exchbt"
+      },
+      {
+        "problem": "Apple mosaic",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/applemosaic.html?src=exchbt"
+      },
+      {
+        "problem": "Apple scab",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7413.html?src=exchbt"
+      },
+      {
+        "problem": "Bacterial blossom blast",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/baccanker.html?src=exchbt"
+      },
+      {
+        "problem": "European canker",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/europeancanker.html?src=exchbt"
+      },
+      {
+        "problem": "Fire blight",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7414.html?src=exchbt"
+      },
+      {
+        "problem": "Phytophthora root and crown rot",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/pchphytoph.html?src=exchbt"
+      },
+      {
+        "problem": "Powdery mildew",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7494.html?src=exchbt"
+      },
+      {
+        "problem": "Sappy bark",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/sappybark.html?src=exchbt"
+      },
+      {
+        "problem": "Wood decay",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn74109.html?src=exchbt"
+      },
+      {
+        "problem": "Apple measles",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/applemeasles.html?src=exchbt"
+      },
+      {
+        "problem": "Bitter pit",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/bitterpit.html?src=exchbt"
+      },
+      {
+        "problem": "Frost injury",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/applefrost.html?src=exchbt"
+      },
+      {
+        "problem": "Oil burn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/oilburn.html?src=exchbt"
+      },
+      {
+        "problem": "Sunburn",
+        "link": "http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/ENVIRON/appleburn.html?src=exchbt"
+      },
+      {
+        "problem": "Broadleaf mistletoe",
+        "link": "http://ipm.ucanr.edu/PMG/PESTNOTES/pn7437.html?src=exchbt"
+      }
+    ]
+  }
+]
