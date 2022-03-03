@@ -1,11 +1,11 @@
 from re import A
-from typing import Dict, Text, Any, List, Union
+from typing import Dict, Text, Any, List, Union, Optional
 
 import pandas as pd
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormValidationAction
+from rasa_sdk.forms import FormValidationAction, ValidationAction
 from rasa_sdk.events import (
     SlotSet,
     EventType
@@ -22,18 +22,13 @@ logger = logging.getLogger(__name__)
 import inflect
 inflecter = inflect.engine()
 
-PEST_NAME_MUST_BE_SINGULAR      = ['mildew']
-TARGET_NAME_MUST_BE_SINGULAR    = ['house', 'kitchen', 'basement', 'lawn']
-
 from actions import helper
     
-
 class ValidateESQueryForm(FormValidationAction):
     '''Query the ES Knowledge Base.'''
 
     def name(self) -> Text:
         return 'validate_es_query_form'
-
 
     async def required_slots(
         self,
@@ -47,64 +42,22 @@ class ValidateESQueryForm(FormValidationAction):
         logger.info('validate_es_query_form - required slots - START')
         
 
-        slots = []
+        updated_slots = domain_slots.copy()
         last_intent = tracker.active_form.get("trigger_message", {})\
             .get("intent", {}).get("name", 'intent_help_question')
+
         if last_intent == 'intent_help_pest':
-            slots = ['pest_problem_description']
-            if tracker.get_slot('pest_causes_damage') != 'no':
-                slots.extend(['pest_causes_damage', 'pest_damage_description'])
+            if tracker.get_slot('pest_causes_damage') == 'no':
+                updated_slots.remove('pest_damage_description')
+        else: 
+            updated_slots.remove('pest_causes_damage')
+            updated_slots.remove('pest_damage_description')
 
-        else: slots = ['question']
-
-        logger.info(f'validate_es_query_form - required slots - {slots}')
+        logger.info(f'validate_es_query_form - required slots - {updated_slots}')
         logger.info(f'validate_es_query_form - required slots - END')
 
-        return slots
-    
-    async def extract_question(
-        self, 
-        dispatcher  : CollectingDispatcher, 
-        tracker     : Tracker, 
-        domain      : Dict[Text, Any]
-    ) -> Dict[Text, Any]:
-        '''Custom slot extraction for plant_damages'''
+        return updated_slots
 
-        logger.info(f'Requested slot: {tracker.slots["requested_slot"]}')
-        last_intent = tracker.active_form.get("trigger_message", {})\
-            .get("intent", {}).get("name", 'intent_help_question')
-        logger.info(last_intent)
-        logger.info(tracker.latest_message.get('text'))
-        if last_intent == '/intent_help_pest':
-            slots = {'pest_problem_description': tracker.latest_message.get('text')}
-        else:
-            slots = {'question': tracker.latest_message.get('text')}   
-        logger.info(slots)
-        
-        return slots
-
-# class ActionAskQuestion(Action):
-#     '''Custom action for slot validation - plant_part.'''
-    
-#     def name(self) -> Text:
-#         return 'action_ask_question'
-    
-#     def run(
-#         self,
-#         dispatcher  : CollectingDispatcher,
-#         tracker     : Tracker,
-#         domain      : Dict[Text, Any]
-#         ) -> List[EventType]:
-
-#         logger.info('debug')
-
-#         logger.info(tracker.active_loop)
-#         logger.info(tracker.active_loop_name)
-#         logger.info(tracker.active_loop)
-#         dispatcher.utter_message(response = 'dauren')
-
-#         logger.info('action_ask_plant_part - END')
-#         return []
 class ActionSubmitESQueryForm(Action):
     '''Custom action for submitting form - action_submit_es_query_form.'''
     
@@ -245,23 +198,23 @@ class ActionSubmitESQueryForm(Action):
     ) -> List[Dict]:
         '''Define what the form has to do after all required slots are filled.'''
 
-        pest_name                   = tracker.get_slot('question')
-        pest_problem_description    = tracker.get_slot('pest_problem_description')
+        problem_description         = tracker.get_slot('problem_description')
         pest_causes_damage          = tracker.get_slot('pest_causes_damage')
         pest_damage_description     = None
         
         if pest_causes_damage != "no":
             pest_damage_description = tracker.get_slot('pest_damage_description')
         
-        question = tracker.get_slot('question')
-
+        
         if not config.es_imitate:
             hits_ask, hits_ipm = await submit(
-                question,
-                pest_name,
-                pest_problem_description,
+                problem_description,
                 pest_damage_description
             )
+            logger.info('ASK results')
+            logger.info(json.dumps(hits_ask, indent = 4))
+            logger.info('IPM results')
+            logger.info(json.dumps(hits_ipm, indent = 4))
         else:
             message = "Not doing an actual elastic search query."
             dispatcher.utter_message(message)

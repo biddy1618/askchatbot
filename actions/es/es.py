@@ -36,7 +36,7 @@ def _cos_sim_query(
     response = config.es_client.search(
         index   = config.es_combined_index,
         query   = script_query,
-        size    = 10,
+        size    = 5,
         _source = source_query
     )
 
@@ -47,40 +47,22 @@ def _cos_sim_query(
 
 async def _handle_es_query(
     question    : str,
-    pest_name   : str,
-    pest_desc   : str,
     pest_damage : str
     ) -> Tuple[dict, dict, dict, dict]:
     '''Perform search in ES base.
 
     Args:
         question (str): Question.
-        pest_name (str): Pest name retrieved by Rasa.
-        pest_desc (str): Pest description.
         pest_damage (str): Pest damage description.
 
     Returns:
         Tuple[dict, dict, dict, dict]: return tuples for AE data matches, name matches, other sources matches, and damage matches. 
     '''    
     
-    question_vector     = None
-    pest_name_vector    = None
-    pest_desc_vector    = None
-    pest_damage_vector  = None
-    
-    if question:
-        question_vector     = config.embed([question    ]).numpy()[0]
-    
-    if pest_name:
-        pest_name_vector    = config.embed([pest_name   ]).numpy()[0]
-    
-    if pest_desc:
-        pest_desc_vector    = config.embed([pest_desc   ]).numpy()[0]
-    else:
-        pest_desc_vector = question_vector
-    
     if pest_damage:
-        pest_damage_vector = config.embed([pest_damage  ]).numpy()[0]
+        question = '. '.join([question, pest_damage])    
+    
+    question_vector = config.embed([question]).numpy()[0]
    
 
     source_query = {
@@ -134,17 +116,9 @@ async def _handle_es_query(
 
     es_name_hits['name'] = _cos_sim_query(
         source_query    = source_query     ,
-        query_vector    = pest_desc_vector ,
+        query_vector    = question_vector ,
         vector_name     = 'name_vector'
     )
-
-    es_name_hits['pest_name'] = []
-    if pest_name:
-        es_name_hits['pest_name'] = _cos_sim_query(
-            source_query    = source_query     ,
-            query_vector    = pest_name_vector ,
-            vector_name     = 'name_vector'
-        )
     
     '''
     Pest Diseases Items
@@ -159,33 +133,31 @@ async def _handle_es_query(
     '''
     es_other_hits['pd_description']     = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'descriptionPestDiseaseItems_vector'
     )
 
     es_other_hits['pd_identification']  = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'identificationPestDiseaseItems_vector'
     )
 
     es_other_hits['pd_life_cycle']      = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'life_cyclePestDiseaseItems_vector'
     )
 
-    es_damage_hits['pd_damage_hits'] = []
-    if pest_damage:
-        es_damage_hits['pd_damage_hits'] = _cos_sim_query(
-            source_query    = source_query,
-            query_vector    = pest_damage_vector,
-            vector_name     = 'damagePestDiseaseItems_vector'
-        )
-    
+    es_damage_hits['pd_damage_hits'] = _cos_sim_query(
+        source_query    = source_query,
+        query_vector    = question_vector,
+        vector_name     = 'damagePestDiseaseItems_vector'
+    )
+
     es_other_hits['pd_solutions']       = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'solutionsPestDiseaseItems_vector'
     )
 
@@ -197,7 +169,7 @@ async def _handle_es_query(
     '''
     es_other_hits['tp_text']            = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'textTurfPests_vector'
     )
 
@@ -209,7 +181,7 @@ async def _handle_es_query(
     '''
     es_other_hits['wi_text']            = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'descriptionWeedItems_vector'
     )
 
@@ -228,39 +200,37 @@ async def _handle_es_query(
     '''
     es_other_hits['ep_description']     = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'descriptionExoticPests_vector'
     )
 
-    es_damage_hits['ep_damage'] = []
-    if pest_damage:
-        es_damage_hits['ep_damage']     = _cos_sim_query(
-            source_query    = source_query,
-            query_vector    = pest_damage_vector,
-            vector_name     = 'damageExoticPests_vector'
-        )
+    es_damage_hits['ep_damage']     = _cos_sim_query(
+        source_query    = source_query,
+        query_vector    = question_vector,
+        vector_name     = 'damageExoticPests_vector'
+    )
     
     es_other_hits['ep_identification']  = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'identificationExoticPests_vector'
     )
 
     es_other_hits['ep_life_cycle']      = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'life_cycleExoticPests_vector'
     )
 
     es_other_hits['ep_monitoring']      = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'monitoringExoticPests_vector'
     )
 
     es_other_hits['ep_management']      = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'managementExoticPests_vector'
     )
 
@@ -279,33 +249,31 @@ async def _handle_es_query(
     '''
     es_other_hits['pn_description']     = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'descriptionPestNote_vector'
     )
 
     es_other_hits['pn_life_cycle']      = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'life_cyclePestNote_vector'
     )
 
-    es_damage_hits['pn_damage'] = []
-    if pest_damage:
-        es_damage_hits['pn_damage'] = _cos_sim_query(
-            source_query    = source_query,
-            query_vector    = pest_damage_vector,
-            vector_name     = 'damagePestNote_vector'
-        )
+    es_damage_hits['pn_damage'] = _cos_sim_query(
+        source_query    = source_query,
+        query_vector    = question_vector,
+        vector_name     = 'damagePestNote_vector'
+    )
 
     es_other_hits['pn_management']      = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'managementPestNote_vector'
     )
 
     es_other_hits['pn_content_tips']    = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'contentQuickTipsPestNote_vector'
     )
 
@@ -321,33 +289,23 @@ async def _handle_es_query(
 
     es_ask_hits['ask_name_title']   = _cos_sim_query(
         source_query    = source_query,
-        query_vector    = pest_desc_vector,
+        query_vector    = question_vector,
         vector_name     = 'ask_title_vector'
     )
 
-    if pest_name:
-        es_ask_hits['ask_name_title'] = _cos_sim_query(
-            source_query    = source_query,
-            query_vector    = pest_name_vector,
-            vector_name     = 'ask_title_vector'
-        )
     
-    es_ask_hits['ask_question'] = []
-    if question:
-        es_ask_hits['ask_question'] = _cos_sim_query(
-            source_query    = source_query,
-            query_vector    = question_vector,
-            vector_name     = 'ask_title_question_vector'
-        )
-    
-    es_ask_hits['ask_damage'] = []
-    if pest_damage:
-        es_ask_hits['ask_damage'] = _cos_sim_query(
-            source_query    = source_query,
-            query_vector    = pest_damage_vector,
-            vector_name     = 'ask_title_question_vector'
-        )
-    
+    es_ask_hits['ask_question'] = _cos_sim_query(
+        source_query    = source_query,
+        query_vector    = question_vector,
+        vector_name     = 'ask_title_question_vector'
+    )
+
+    es_ask_hits['ask_damage'] = _cos_sim_query(
+        source_query    = source_query,
+        query_vector    = question_vector,
+        vector_name     = 'ask_title_question_vector'
+    )
+
     return (es_ask_hits, es_name_hits, es_other_hits, es_damage_hits)
 
 
@@ -393,7 +351,7 @@ async def _handle_es_result(
     # ipm data
     hits = []
 
-    for h1 in (es_name_hits['name'] + es_name_hits['pest_name']):
+    for h1 in es_name_hits['name']:
         
         h1['_score_name'] = h1.get('_score', 0.0)
         duplicate = False
@@ -510,8 +468,6 @@ async def _weight_score(
 
 async def submit(
     question    : str,
-    pest_name   : str,
-    pest_desc   : str,
     pest_damage : str
     ) -> Tuple[dict, dict]:
     
@@ -519,8 +475,6 @@ async def submit(
 
     Args:
         question    (str): Question that is asked.
-        pest_name   (str): Name of the pest.
-        pest_desc   (str): Pest description.
         pest_damage (str): Pest damage description.
     
     Returns:
@@ -533,8 +487,6 @@ async def submit(
         es_damage_hits
     ) = await _handle_es_query(
         question,
-        pest_name,
-        pest_desc,
         pest_damage
     )
 

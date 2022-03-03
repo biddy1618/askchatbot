@@ -44,17 +44,18 @@ if stage == 'dev':
     UCIPM_FILE_NAMES        = [f'{PATH_DATA_UCIPM}{f}' for f in os.listdir(PATH_DATA_UCIPM)]
     # -------------------------------------------------------------
 
-    os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
-    os.environ['TFHUB_CACHE_DIR']       = tfhub_cache_dir
-
     # index mappings
     ES_ASKEXTENSION_MAPPING     = json.load(open(f'{_PATH}/data/mappings/askextension_mapping.json'))
     ES_COMBINED_VECTOR_MAPPING  = json.load(open(f'{_PATH}/data/mappings/combined_vector_mapping.json'))
     ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
 
 if not es_imitate:
-    import tensorflow_hub as tf_hub
+    
+    os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
+    os.environ['TFHUB_CACHE_DIR']       = tfhub_cache_dir
 
+    import tensorflow_hub as tf_hub
+    
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch configuration:')
     logger.info(f'- host                     = {es_host         }')
@@ -63,7 +64,6 @@ if not es_imitate:
     logger.info(f'- tfhub_embedding_url      = {tf_embed_url    }')
     logger.info(f'- tfhub_cache_dir          = {tfhub_cache_dir }')
     logger.info('----------------------------------------------')
-
 
 
     logger.info('----------------------------------------------')

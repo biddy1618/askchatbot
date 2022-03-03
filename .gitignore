@@ -15,4 +15,4 @@ __pycache__/
 actions/es/data/**/*.json
 
 # Development environment variables
-dev-env.sh
+env-dev.sh

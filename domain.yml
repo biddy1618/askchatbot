@@ -18,11 +18,13 @@ intents:
 # ES intents
 - intent_help_pest
 - intent_help_question
+- intent_inform
 entities:
 - plant_damage
 - plant_name
 - plant_part
 - plant_type
+- pest_name
 slots:
   shown_greeting:
     type: bool
@@ -77,22 +79,22 @@ slots:
   #     - active_loop: plant_problem_form
   #       requested_slot: plant_damages
 # Knowledge Base Query slots
-  question:
+  problem_description:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
         conditions:
         - active_loop: es_query_form
-          requested_slot: question
-  pest_problem_description:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_text
-        conditions:
-        - active_loop: es_query_form
-          requested_slot: pest_problem_description
+          requested_slot: problem_description
+  # pest_problem_description:
+  #   type: text
+  #   influence_conversation: false
+  #   mappings:
+  #     - type: from_text
+  #       conditions:
+  #       - active_loop: es_query_form
+  #         requested_slot: pest_problem_description
   pest_causes_damage:
     type: text
     influence_conversation: false
@@ -171,10 +173,10 @@ responses:
   #      - plant_part: {plant_part}
   #      - plant_damages: {plant_damages}
   # ES questions responses
-  utter_ask_question:
-  - text: Please enter your question.
-  utter_ask_pest_problem_description:
-  - text: Please describe your pest problem.
+  utter_ask_problem_description:
+  - text: Please describe your problem.
+  # utter_ask_pest_problem_description:
+  # - text: Please describe your pest problem.
   utter_ask_pest_causes_damage:
   - buttons:
     - payload: /intent_affirm
@@ -221,7 +223,7 @@ forms:
     # - request_generic_question
     # - request_expert
     required_slots:
-    - question
-    - pest_problem_description
+    # - question
+    - problem_description
     - pest_causes_damage
     - pest_damage_description
