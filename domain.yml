@@ -130,7 +130,7 @@ responses:
     - payload: /intent_greet
       title: Main menu.
     - payload: /intent_request_expert
-      title: Connect me to expert.
+      title: Connect me to an expert.
     text: I'm sorry, I am still learning thanks to your inputs.
   utter_goodbye:
   - buttons:
@@ -141,28 +141,28 @@ responses:
   - buttons:
     - payload: /intent_greet
       title: Main menu.
-    text: I am a bot, powered by Rasa.    
+    text: I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a>.    
   utter_greet:
-  - text: Hi, I am AskExtension Assistant!
+  - text: Hi, I'm AskExtension Assistant!
   utter_privacy_policy:
-  - text: By chatting with me, you agree to our [privacy policy](https://ucanr.edu/?privacyStatement/).
+  - text: By chatting with me, you agree to our <a href="https://ucanr.edu/?privacyStatement/" target="_blank">privacy policy</a>.
   utter_connect_expert:
   - buttons:
     - payload: /intent_greet
       title: Main menu.
-    text: You can ask one of our experts at [Ask Extension](https://ask2.extension.org/open.php).
+    text: You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.
   utter_explain_ipm:
   - text: >
       IPM is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, 
       habitat manipulation, modification of cultural practices, and use of resistant varieties. Pesticides are used only after monitoring indicates they are needed 
       according to established guidelines, and treatments are made with the goal of removing only the target organism. Pest control materials are selected and applied 
-      in a manner that minimizes risks to human health, beneficial and nontarget organisms, and the environment. You can find more details [here](https://www2.ipm.ucanr.edu/What-is-IPM/).
+      in a manner that minimizes risks to human health, beneficial and nontarget organisms, and the environment. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.
   utter_help_image:
   - buttons:
     - payload: /intent_greet
       title: Main menu.
     - payload: /intent_request_expert
-      title: Connect me to expert.
+      title: Connect me to an expert.
     text: Not implemented. To be available soon.
   # Decision Tree responses
   # utter_submit_plant_problem_form:
