@@ -23,6 +23,11 @@ es_imitate              = os.getenv('ES_IMITATE'            , 'false'           
 es_imitate              = es_imitate == 'true'
 
 if stage == 'dev':
+
+    logger.info('----------------------------------------------')
+    logger.info('Environment variables are for DEV environment')
+    logger.info('----------------------------------------------')
+    
     
     _PATH = Path(__file__).parent.as_posix()
 

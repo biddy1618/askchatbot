@@ -8,7 +8,6 @@ from actions.es import config
 
 logger = logging.getLogger(__name__)
 
-
 def _cos_sim_query(
     source_query: dict,
     query_vector: np.ndarray,
@@ -17,9 +16,9 @@ def _cos_sim_query(
     '''Exectute vector search in ES based on cosine similarity.
 
     Args:
-        source_query (dict): Fields to include in result hits. 
-        query_vector (np.ndarray): Query vector.
-        vector_name (str): Field vector to be compared against query vector.
+        source_query (dict)         : Fields to include in result hits. 
+        query_vector (np.ndarray)   : Query vector.
+        vector_name (str)           : Field vector to be compared against query vector.
 
     Returns:
         dict: Return hits.
@@ -36,14 +35,13 @@ def _cos_sim_query(
     response = config.es_client.search(
         index   = config.es_combined_index,
         query   = script_query,
-        size    = 5,
+        size    = 10,
         _source = source_query
     )
 
     hits = response['hits']['hits']
 
     return hits
-
 
 async def _handle_es_query(
     question    : str,
@@ -52,8 +50,8 @@ async def _handle_es_query(
     '''Perform search in ES base.
 
     Args:
-        question (str): Question.
-        pest_damage (str): Pest damage description.
+        question (str)      : Question.
+        pest_damage (str)   : Pest damage description.
 
     Returns:
         Tuple[dict, dict, dict, dict]: return tuples for AE data matches, name matches, other sources matches, and damage matches. 
@@ -64,7 +62,7 @@ async def _handle_es_query(
     
     question_vector = config.embed([question]).numpy()[0]
    
-
+    
     source_query = {
         "includes": [
             "doc_id"    ,
@@ -115,10 +113,11 @@ async def _handle_es_query(
     # es_video_hits   = {}
 
     es_name_hits['name'] = _cos_sim_query(
-        source_query    = source_query     ,
-        query_vector    = question_vector ,
+        source_query    = source_query,
+        query_vector    = question_vector,
         vector_name     = 'name_vector'
     )
+
     
     '''
     Pest Diseases Items
@@ -154,7 +153,7 @@ async def _handle_es_query(
         query_vector    = question_vector,
         vector_name     = 'damagePestDiseaseItems_vector'
     )
-
+    
     es_other_hits['pd_solutions']       = _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
@@ -293,7 +292,6 @@ async def _handle_es_query(
         vector_name     = 'ask_title_vector'
     )
 
-    
     es_ask_hits['ask_question'] = _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
@@ -308,7 +306,6 @@ async def _handle_es_query(
 
     return (es_ask_hits, es_name_hits, es_other_hits, es_damage_hits)
 
-
 async def _handle_es_result(
     es_ask_hits     : dict,
     es_name_hits    : dict,
@@ -318,15 +315,20 @@ async def _handle_es_result(
     '''Merge different sources into single source.
 
     Args:
-        es_ask_hits (dict): Results from Ask Extension data.
-        es_name_hits (dict): Results from name vector comparison.
-        es_other_hits (dict): Results from other fields.
-        es_damage_hits (dict): Results from damage-related fields.
+        es_ask_hits (dict)      : Results from Ask Extension data.
+        es_name_hits (dict)     : Results from name vector comparison.
+        es_other_hits (dict)    : Results from other fields.
+        es_damage_hits (dict)   : Results from damage-related fields.
 
     Returns:
         Tuple[dict, dict]: Two dictionaries, for Ask Extension results and IPM data results.
     '''
-    # ask extension data
+
+    '''
+    ask extension data
+    
+    es_ask_hits has following keys: ['ask_name_title', 'ask_question', 'ask_damage']
+    '''
     hits = []
 
     for h1 in (es_ask_hits['ask_name_title'] + es_ask_hits['ask_question'] + es_ask_hits['ask_damage']):
@@ -345,29 +347,32 @@ async def _handle_es_result(
     if len(hits):
         hits = sorted(hits, key = lambda h: h['_score_max'], reverse = True)
 
+    # new field - _score_max
     hits_ask = hits
 
+    '''
+    ipm data - es_name_hits
+    
+    es_name_hits has following keys: ['name']
+    '''
+    hits = es_name_hits['name']
 
-    # ipm data
-    hits = []
+    for h1 in hits:
+        h1['_score_name']   = h1.get('_score', 0.0)
 
-    for h1 in es_name_hits['name']:
-        
-        h1['_score_name'] = h1.get('_score', 0.0)
-        duplicate = False
+    
+    '''
+    ipm data - es_other_hits
 
-        for h2 in hits:
-            if h1['_source']['doc_id'] == h2['_source']['doc_id']:
-                h2['_score_name'] = max(h2.get('_score_name', 0.0), h1['_score'])
-                duplicate = True
-        
-        if not duplicate:
-            hits.append(h1)
-
-    for h in hits:
-        h['_score_other'] = 0.0
-
-    for h in (
+    es_other_hits has following keys: 
+        # pest diseases - ['pd_description', 'pd_identification', 'pd_life_cycle', 'pd_solutions'   ]
+        # turf pests    - ['tp_text']
+        # weed items    - ['wi_text']
+        # exotic pests  - ['ep_description', 'ep_identification', 'ep_life_cycle', 'ep_monitoring'  , 'ep_management']
+        # pest notes    - ['pn_description', 'pn_life_cycle'    , 'pn_management', 'pn_content_tips']
+    
+    '''
+    for h1 in (
         es_other_hits['pd_description'      ] +
         es_other_hits['pd_identification'   ] +
         es_other_hits['pd_life_cycle'       ] +
@@ -385,7 +390,7 @@ async def _handle_es_result(
         es_other_hits['pn_content_tips'     ]
         ):
         
-        h['_score_other'] = h.get('_score', 0.0)
+        h1['_score_other'] = h1.get('_score', 0.0)
         duplicate = False
 
         for h2 in hits:
@@ -396,15 +401,19 @@ async def _handle_es_result(
         if not duplicate:
             hits.append(h1)
 
-    for hit in hits:
-            hit["_score_damage"] = 0.0
-
-    for h in (
+    '''
+    ipm data - es_damage_hits
+    es_damage_hits has following keys: ['pd_damage_hits', 'ep_damage', 'pn_damage']
+    '''
+    
+    for h1 in (
         es_damage_hits['pd_damage_hits' ] +
         es_damage_hits['ep_damage'      ] +
         es_damage_hits['pn_damage'      ]
         ):
 
+        h1['_score_damage'] = h1.get('_score', 0.0)
+        
         for h2 in hits:
             if h1['_source']['doc_id'] == h2['_source']['doc_id']:
                 h2['_score_damage'] = max(h2.get('_score_damage', 0.0), h1['_score'])
@@ -412,14 +421,19 @@ async def _handle_es_result(
         
         if not duplicate:
             hits.append(h1)
+    
+    for h in hits:
+        h['_score_name'     ] = h.get('_score_name'   , 0.0)
+        h['_score_other'    ] = h.get('_score_other'  , 0.0)
+        h['_score_damage'   ] = h.get('_score_damage' , 0.0)
 
     if len(hits):
         hits = sorted(hits, key = lambda h: h['_score'], reverse = True)
 
+    # new fields - _score_name, _score_other, _score_damage
     hits_ipm = hits
 
     return hits_ask, hits_ipm
-
 
 async def _weight_score(
     hits_ask: dict, 
@@ -448,7 +462,7 @@ async def _weight_score(
             score_other     = hit.get('_score_other'    , 0.0)
             score_damage    = hit.get('_score_damage'   , 0.0)
 
-            w = [0.9, 0.05, 0.05]
+            w = [0.8, 0.05, 0.05]
 
             if score_damage < 1.0:
                 w[0] += 0.5 * w[2]
@@ -465,6 +479,190 @@ async def _weight_score(
     # Do not filter on threshold. Leave this up to the caller
     return hits_ask, hits_ipm
 
+async def _get_text(
+    hits_ask: dict, 
+    hits_ipm: dict, 
+    ) -> None:
+    '''Print results.
+
+    Args:
+        hits_ask (dict): Results from Ask Extension base.
+        hits_ipm (dict): Results from IPM data.
+    '''    
+    results = ''
+    if len(hits_ask):
+        results += (f'Found {len(hits_ask)} similar posts from Ask Extension Base.\n')
+        results += (f'Top 3 results:\n')
+
+        '''
+        Fields:
+        "ask_url"
+        "ask_faq_id"
+        "ask_title"
+        "ask_title_question"
+        "ask_question"
+        '''
+        for i, h in enumerate(hits_ask[:3]):
+            score   = h.get('_score_max', 0.0)
+            source  = h.get('_source')
+
+            url         = source.get('ask_url'      )
+            title       = source.get('ask_title'    )
+            question    = source.get('ask_question' )
+
+            results += ('----------------------------------------------------------------\n')
+            results += (f'{i+1}) {title:>30} (score: {score:.2f})\n'      )
+            results += (f'Title   : {title}\n'             )
+            results += (f'Question: {question[:100]}\n'    )
+            results += (f'URL     : {url}\n'    )
+            results += ('----------------------------------------------------------------\n')
+    
+    if len(hits_ipm):
+
+        results += (f'Found {len(hits_ipm)} articles from IPM sources\n')
+        results += (f'Top 3 results:\n')
+
+        for i, h in enumerate(hits_ipm[:3]):
+            score   = h.get('_score_weighted', 0.0)
+            source  = h.get('_source')
+
+            if source['urlPestDiseaseItems'] != '':
+                
+                '''
+                Fields:
+                "name"
+                "urlPestDiseaseItems"   
+                "descriptionPestDiseaseItems"
+                "identificationPestDiseaseItems"
+                "life_cyclePestDiseaseItems"
+                "damagePestDiseaseItems"
+                "solutionsPestDiseaseItems"
+                '''
+                url             = source.get('urlPestDiseaseItems'              )
+                name            = source.get('name'                             )
+                description     = source.get('descriptionPestDiseaseItems'      )
+                identification  = source.get('identificationPestDiseaseItems'   )
+                life_cycle      = source.get('life_cyclePestDiseaseItems'       )
+                damage          = source.get('damagePestDiseaseItems'           )
+                solutions       = source.get('solutionsPestDiseaseItems'        )
+                results += ('----------------------------------------------------------------\n')
+                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Pest Diseases)\n'      )
+                if description:
+                    results += (f'Description     : {description[:100]}\n'      )
+                if identification:
+                    results += (f'Identification  : {identification[:100]}\n'   )
+                if life_cycle:
+                    results += (f'Life Cycle      : {life_cycle[:100]}\n'       )
+                if damage:
+                    results += (f'Damage          : {damage[:100]}\n'           )
+                if solutions:
+                    results += (f'Solutions       : {solutions[:100]}\n'        )
+                results += (f'URL             : {url}\n')    
+                results += ('----------------------------------------------------------------\n')
+        
+            elif source['urlTurfPests'] != '': 
+                '''
+                Fields:
+                "name"
+                "urlTurfPests"
+                "textTurfPests"
+                '''
+                url             = source.get('urlTurfPests' )
+                description     = source.get('textTurfPests')
+                results += ('----------------------------------------------------------------\n')
+                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Turf Pests)\n'      )
+                if description:
+                    results += (f'Description     : {description[:100]}\n'      )
+                results += (f'URL             : {url}\n')    
+                results += ('----------------------------------------------------------------\n')
+
+            elif source['urlWeedItems'] != '':
+                '''
+                Fields:
+                "name"
+                "urlWeedItems"
+                "descriptionWeedItems"
+                '''
+                url             = source.get('urlWeedItems' )
+                description     = source.get('descriptionWeedItems')
+                results += ('----------------------------------------------------------------\n')
+                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Weed Items)\n'      )
+                if description:
+                    results += (f'Description     : {description[:100]}\n'      )
+                results += (f'URL             : {url}\n')    
+                results += ('----------------------------------------------------------------\n')
+            
+            elif source['urlExoticPests'] != '':
+                '''
+                Fields:
+                "name"
+                "urlExoticPests"
+                "descriptionExoticPests"
+                "damageExoticPests"
+                "identificationExoticPests"
+                "life_cycleExoticPests"
+                "monitoringExoticPests"
+                "managementExoticPests"
+                '''
+                url             = source.get('urlExoticPests'               )
+                name            = source.get('name'                         )
+                description     = source.get('descriptionExoticPests'       )
+                damage          = source.get('damageExoticPests'            )
+                identification  = source.get('identificationExoticPests'    )
+                life_cycle      = source.get('life_cycleExoticPests'        )
+                monitoring      = source.get('monitoringExoticPests'        )
+                management      = source.get('managementExoticPests'        )
+                results += ('----------------------------------------------------------------\n')
+                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Exotic Pests)\n'      )
+                if description:
+                    results += (f'Description     : {description[:100]}\n'      )
+                if damage:
+                    results += (f'Damage          : {damage[:100]}\n'           )
+                if identification:
+                    results += (f'Identification  : {identification[:100]}\n'   )
+                if life_cycle:
+                    results += (f'Life Cycle      : {life_cycle[:100]}\n'       )
+                if monitoring:
+                    results += (f'Monitoring      : {monitoring[:100]}\n'       )
+                if management:
+                    results += (f'Monitoring      : {management[:100]}\n'       )
+                results += (f'URL             : {url}\n')    
+                results += ('----------------------------------------------------------------\n')
+            elif source['urlPestNote'] != '':
+                '''
+                Fields:
+                "name"
+                "urlPestNote"
+                "urlQuickTipPestNote"
+                "descriptionPestNote"
+                "life_cyclePestNote"
+                "damagePestNote"
+                "managementPestNote"
+                "contentQuickTipsPestNote"
+                '''
+                url             = source.get('urlPestNote'               )
+                name            = source.get('name'                      )
+                description     = source.get('descriptionPestNote'       )
+                life_cycle      = source.get('life_cyclePestNote'        )
+                damage          = source.get('damagePestNote'            )
+                management      = source.get('managementPestNote'        )
+                quicktips       = source.get('contentQuickTipsPestNote'  )
+                results += ('----------------------------------------------------------------\n')
+                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Pest Notes)\n'      )
+                if description:
+                    results += (f'Description     : {description[:100]}\n'      )
+                if life_cycle:
+                    results += (f'Life Cycle      : {life_cycle[:100]}\n'       )
+                if damage:
+                    results += (f'Damage          : {damage[:100]}\n'           )
+                if management:
+                    results += (f'Monitoring      : {management[:100]}\n'       )
+                if quicktips:
+                    results += (f'Quick tips      : {quicktips[:100]}\n'        )
+                results += (f'URL             : {url}\n')    
+                results += ('----------------------------------------------------------------\n')
+
+    return results
 
 async def submit(
     question    : str,
@@ -501,7 +699,8 @@ async def submit(
         hits_ask, hits_ipm
     )
 
+    result_test = await _get_text(hits_ask, hits_ipm)
     # _print_hits(hits_ask, 'Ask Extension'   )
     # _print_hits(hits_ipm, 'IPM Data'        )
     
-    return hits_ask, hits_ipm
+    return result_test

@@ -207,19 +207,26 @@ class ActionSubmitESQueryForm(Action):
         
         
         if not config.es_imitate:
-            hits_ask, hits_ipm = await submit(
+            results = await submit(
                 problem_description,
                 pest_damage_description
             )
-            logger.info('ASK results')
-            logger.info(json.dumps(hits_ask, indent = 4))
-            logger.info('IPM results')
-            logger.info(json.dumps(hits_ipm, indent = 4))
+
+            buttons = [
+                {'title': 'Start over',                 'payload': '/intent_greet'},
+                {'title': 'Connect me to expert',   'payload': '/intent_request_expert'}
+            ]
+
+            
+            dispatcher.utter_message(text = results, buttons = buttons)
+            # logger.info('ASK results')
+            # logger.info(json.dumps(hits_ask, indent = 4))
+            # logger.info('IPM results')
+            # logger.info(json.dumps(hits_ipm, indent = 4))
         else:
             message = "Not doing an actual elastic search query."
             dispatcher.utter_message(message)
             hits_ask = []
             hits_ipm = []
 
-        pests_summaries = self.summarize_hits(hits_ask, hits_ipm)
-        return [SlotSet("pests_summaries", pests_summaries)]
+        return []
