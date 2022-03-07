@@ -23,6 +23,11 @@ rules:
   - intent: intent_help_image
   - action: utter_help_image
 
+- rule: More about IPM
+  steps:
+  - intent: intent_explain_ipm
+  - action: utter_explain_ipm
+
 - rule: Connect to expert
   steps:
   - intent: intent_request_expert
@@ -64,5 +69,34 @@ rules:
     - requested_slot: null
   - action: action_submit_es_query_form
 
+# Test rules
+- rule: Test images
+  steps:
+  - intent: intent_test_images
+  - action: utter_test_images
 
+- rule: Test videos
+  steps:
+  - intent: intent_test_videos
+  - action: utter_test_videos
+
+- rule: Test dropdowns
+  steps:
+  - intent: intent_test_dropdows
+  - action: utter_test_droprows
+
+- rule: Test quick replies
+  steps:
+  - intent: intent_test_quick_replies
+  - action: utter_test_quick_replies
+
+- rule: Test collapsibles
+  steps:
+  - intent: intent_test_collapsible
+  - action: utter_test_collapsible
+
+- rule: Test carousel
+  steps:
+  - intent: intent_test_carousel
+  - action: utter_test_carousel
 

@@ -213,7 +213,7 @@ class ActionSubmitESQueryForm(Action):
             )
 
             buttons = [
-                {'title': 'Start over',                 'payload': '/intent_greet'},
+                {'title': 'Start over',              'payload': '/intent_greet'},
                 {'title': 'Connect me to expert',   'payload': '/intent_request_expert'}
             ]
 

@@ -6,11 +6,3 @@ stories:
   steps:
   - intent: intent_greet
   - action: action_greet
-  - slot_was_set:
-    - requested_slot: null
-  - intent: intent_explain_ipm
-  - action: action_explain_ipm
-  - slot_was_set:
-    - shown_explain_ipm: true
-  - action: action_greet
-

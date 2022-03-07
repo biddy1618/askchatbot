@@ -491,8 +491,8 @@ async def _get_text(
     '''    
     results = ''
     if len(hits_ask):
-        results += (f'Found {len(hits_ask)} similar posts from Ask Extension Base.\n')
-        results += (f'Top 3 results:\n')
+        results += (f'Found {len(hits_ask)} similar posts from Ask Extension Base.</br>')
+        results += (f'Top 3 results:<br>')
 
         '''
         Fields:
@@ -510,17 +510,17 @@ async def _get_text(
             title       = source.get('ask_title'    )
             question    = source.get('ask_question' )
 
-            results += ('----------------------------------------------------------------\n')
-            results += (f'{i+1}) {title:>30} (score: {score:.2f})\n'      )
-            results += (f'Title   : {title}\n'             )
-            results += (f'Question: {question[:100]}\n'    )
-            results += (f'URL     : {url}\n'    )
-            results += ('----------------------------------------------------------------\n')
+            results += ('-----------------------------------------</br>')
+            results += (f'{i+1}) {title:>30} (score: {score:.2f})</br>'      )
+            results += (f'Title   : {title}</br>'             )
+            results += (f'Question: {question[:100]}</br>'    )
+            results += (f'URL     : {url}</br>'    )
+            results += ('-----------------------------------------</br>')
     
     if len(hits_ipm):
 
-        results += (f'Found {len(hits_ipm)} articles from IPM sources\n')
-        results += (f'Top 3 results:\n')
+        results += (f'Found {len(hits_ipm)} articles from IPM sources</br>')
+        results += (f'Top 3 results:</br>')
 
         for i, h in enumerate(hits_ipm[:3]):
             score   = h.get('_score_weighted', 0.0)
@@ -545,20 +545,20 @@ async def _get_text(
                 life_cycle      = source.get('life_cyclePestDiseaseItems'       )
                 damage          = source.get('damagePestDiseaseItems'           )
                 solutions       = source.get('solutionsPestDiseaseItems'        )
-                results += ('----------------------------------------------------------------\n')
-                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Pest Diseases)\n'      )
+                results += ('-----------------------------------------</br>')
+                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Pest Diseases)</br>'      )
                 if description:
-                    results += (f'Description     : {description[:100]}\n'      )
+                    results += (f'Description     : {description[:100]}</br>'      )
                 if identification:
-                    results += (f'Identification  : {identification[:100]}\n'   )
+                    results += (f'Identification  : {identification[:100]}</br>'   )
                 if life_cycle:
-                    results += (f'Life Cycle      : {life_cycle[:100]}\n'       )
+                    results += (f'Life Cycle      : {life_cycle[:100]}</br>'       )
                 if damage:
-                    results += (f'Damage          : {damage[:100]}\n'           )
+                    results += (f'Damage          : {damage[:100]}</br>'           )
                 if solutions:
-                    results += (f'Solutions       : {solutions[:100]}\n'        )
+                    results += (f'Solutions       : {solutions[:100]}</br>'        )
                 results += (f'URL             : {url}\n')    
-                results += ('----------------------------------------------------------------\n')
+                results += ('-----------------------------------------</br>')
         
             elif source['urlTurfPests'] != '': 
                 '''
@@ -568,13 +568,14 @@ async def _get_text(
                 "textTurfPests"
                 '''
                 url             = source.get('urlTurfPests' )
+                name            = source.get('name'         )
                 description     = source.get('textTurfPests')
-                results += ('----------------------------------------------------------------\n')
-                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Turf Pests)\n'      )
+                results += ('-----------------------------------------</br>')
+                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Turf Pests)</br>'      )
                 if description:
-                    results += (f'Description     : {description[:100]}\n'      )
-                results += (f'URL             : {url}\n')    
-                results += ('----------------------------------------------------------------\n')
+                    results += (f'Description     : {description[:100]}</br>'      )
+                results += (f'URL             : {url}</br>')    
+                results += ('-----------------------------------------</br>')
 
             elif source['urlWeedItems'] != '':
                 '''
@@ -583,8 +584,9 @@ async def _get_text(
                 "urlWeedItems"
                 "descriptionWeedItems"
                 '''
-                url             = source.get('urlWeedItems' )
-                description     = source.get('descriptionWeedItems')
+                url             = source.get('urlWeedItems'         )
+                name            = source.get('name'                 )
+                description     = source.get('descriptionWeedItems' )
                 results += ('----------------------------------------------------------------\n')
                 results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Weed Items)\n'      )
                 if description:

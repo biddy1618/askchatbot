@@ -37,14 +37,10 @@ class ActionGreet(Action):
         
         logger.info('action_greet - START')
         shown_greeting          = tracker.get_slot('shown_greeting')
-        shown_privacy_policy    = tracker.get_slot('shown_privacy_policy')
         shown_explain_ipm       = tracker.get_slot('shown_explain_ipm')
 
         if not shown_greeting:
             dispatcher.utter_message(response = 'utter_greet')
-        
-        if not shown_privacy_policy:
-            dispatcher.utter_message(response = 'utter_privacy_policy')
         
         buttons = [
             {'title': 'I would like to ask question.'       , 'payload': '/intent_help_question'},
