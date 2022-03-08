@@ -1,4 +1,5 @@
 import logging
+from operator import index
 
 from typing import Dict, List, Tuple
 
@@ -306,7 +307,7 @@ async def _handle_es_query(
 
     return (es_ask_hits, es_name_hits, es_other_hits, es_damage_hits)
 
-async def _handle_es_result(
+def _handle_es_result(
     es_ask_hits     : dict,
     es_name_hits    : dict,
     es_other_hits   : dict,
@@ -435,7 +436,7 @@ async def _handle_es_result(
 
     return hits_ask, hits_ipm
 
-async def _weight_score(
+def _weight_score(
     hits_ask: dict, 
     hits_ipm: dict
     ) -> Tuple[dict, dict]:
@@ -479,7 +480,48 @@ async def _weight_score(
     # Do not filter on threshold. Leave this up to the caller
     return hits_ask, hits_ipm
 
-async def _get_text(
+
+def _format_result(
+    index           = None,
+    score           = None,
+    url             = None,
+    title           = None,
+    question        = None,
+    description     = None,
+    damage          = None,
+    identification  = None,
+    life_cycle      = None,
+    monitoring      = None,
+    management      = None,
+    solutions       = None,
+    quicktips       = None
+    ) -> str:
+
+    f_text = ('-----------------------------------------</br>')
+    f_text += (f'{index+1}) <a href="{url}" target="_blank">{title:>30}</a> (score: {score:.2f})</br>')
+    if question:
+        f_text += (f'Question          : {question[:100]}</br>'        )
+    if description:
+        f_text += (f'Description       : {description[:100]}</br>'     )
+    if damage:
+        f_text += (f'Damage            : {damage[:100]}</br>'          )
+    if identification:
+        f_text += (f'Identification    : {identification[:100]}</br>'  )
+    if life_cycle:
+        f_text += (f'Life Cycle        : {life_cycle[:100]}</br>'      )
+    if monitoring:
+        f_text += (f'Monitoring        : {monitoring[:100]}</br>'      )
+    if management:
+        f_text += (f'Monitoring        : {management[:100]}</br>'      )
+    if solutions:
+        f_text += (f'Solutions         : {solutions[:100]}</br>'       )
+    if quicktips:
+        f_text += (f'Quick Tips        : {quicktips[:100]}</br>'       )
+    f_text += ('-----------------------------------------</br></br>')
+
+    return f_text
+
+def _get_text(
     hits_ask: dict, 
     hits_ipm: dict, 
     ) -> None:
@@ -491,6 +533,7 @@ async def _get_text(
     '''    
     results = ''
     if len(hits_ask):
+
         results += (f'Found {len(hits_ask)} similar posts from Ask Extension Base.</br>')
         results += (f'Top 3 results:<br>')
 
@@ -510,13 +553,14 @@ async def _get_text(
             title       = source.get('ask_title'    )
             question    = source.get('ask_question' )
 
-            results += ('-----------------------------------------</br>')
-            results += (f'{i+1}) {title:>30} (score: {score:.2f})</br>'      )
-            results += (f'Title   : {title}</br>'             )
-            results += (f'Question: {question[:100]}</br>'    )
-            results += (f'URL     : {url}</br>'    )
-            results += ('-----------------------------------------</br>')
-    
+            results += _format_result(
+                index       = i         ,
+                score       = score     ,
+                url         = url       ,
+                title       = title     ,
+                question    = question
+            )
+
     if len(hits_ipm):
 
         results += (f'Found {len(hits_ipm)} articles from IPM sources</br>')
@@ -545,21 +589,19 @@ async def _get_text(
                 life_cycle      = source.get('life_cyclePestDiseaseItems'       )
                 damage          = source.get('damagePestDiseaseItems'           )
                 solutions       = source.get('solutionsPestDiseaseItems'        )
-                results += ('-----------------------------------------</br>')
-                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Pest Diseases)</br>'      )
-                if description:
-                    results += (f'Description     : {description[:100]}</br>'      )
-                if identification:
-                    results += (f'Identification  : {identification[:100]}</br>'   )
-                if life_cycle:
-                    results += (f'Life Cycle      : {life_cycle[:100]}</br>'       )
-                if damage:
-                    results += (f'Damage          : {damage[:100]}</br>'           )
-                if solutions:
-                    results += (f'Solutions       : {solutions[:100]}</br>'        )
-                results += (f'URL             : {url}\n')    
-                results += ('-----------------------------------------</br>')
-        
+
+                results += _format_result(
+                    index           = i             ,
+                    score           = score         ,
+                    url             = url           ,
+                    title           = name          ,
+                    description     = description   ,
+                    identification  = identification,
+                    life_cycle      = life_cycle    ,
+                    damage          = damage        ,
+                    solutions       = solutions
+                )
+                
             elif source['urlTurfPests'] != '': 
                 '''
                 Fields:
@@ -570,13 +612,13 @@ async def _get_text(
                 url             = source.get('urlTurfPests' )
                 name            = source.get('name'         )
                 description     = source.get('textTurfPests')
-                results += ('-----------------------------------------</br>')
-                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Turf Pests)</br>'      )
-                if description:
-                    results += (f'Description     : {description[:100]}</br>'      )
-                results += (f'URL             : {url}</br>')    
-                results += ('-----------------------------------------</br>')
 
+                results += _format_result(
+                    score           = score         ,
+                    url             = url           ,
+                    description     = description   ,
+                )
+                
             elif source['urlWeedItems'] != '':
                 '''
                 Fields:
@@ -587,13 +629,15 @@ async def _get_text(
                 url             = source.get('urlWeedItems'         )
                 name            = source.get('name'                 )
                 description     = source.get('descriptionWeedItems' )
-                results += ('----------------------------------------------------------------\n')
-                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Weed Items)\n'      )
-                if description:
-                    results += (f'Description     : {description[:100]}\n'      )
-                results += (f'URL             : {url}\n')    
-                results += ('----------------------------------------------------------------\n')
-            
+                
+                results += _format_result(
+                    index           = i             ,
+                    score           = score         ,
+                    url             = url           ,
+                    title           = name          ,
+                    description     = description   ,
+                )
+
             elif source['urlExoticPests'] != '':
                 '''
                 Fields:
@@ -614,22 +658,20 @@ async def _get_text(
                 life_cycle      = source.get('life_cycleExoticPests'        )
                 monitoring      = source.get('monitoringExoticPests'        )
                 management      = source.get('managementExoticPests'        )
-                results += ('----------------------------------------------------------------\n')
-                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Exotic Pests)\n'      )
-                if description:
-                    results += (f'Description     : {description[:100]}\n'      )
-                if damage:
-                    results += (f'Damage          : {damage[:100]}\n'           )
-                if identification:
-                    results += (f'Identification  : {identification[:100]}\n'   )
-                if life_cycle:
-                    results += (f'Life Cycle      : {life_cycle[:100]}\n'       )
-                if monitoring:
-                    results += (f'Monitoring      : {monitoring[:100]}\n'       )
-                if management:
-                    results += (f'Monitoring      : {management[:100]}\n'       )
-                results += (f'URL             : {url}\n')    
-                results += ('----------------------------------------------------------------\n')
+                
+                results += _format_result(
+                    index           = i             ,
+                    score           = score         ,
+                    url             = url           ,
+                    title           = name          ,
+                    description     = description   ,
+                    damage          = damage        ,
+                    identification  = identification,
+                    monitoring      = monitoring    ,
+                    life_cycle      = life_cycle    ,
+                    management      = management
+                )
+
             elif source['urlPestNote'] != '':
                 '''
                 Fields:
@@ -649,20 +691,18 @@ async def _get_text(
                 damage          = source.get('damagePestNote'            )
                 management      = source.get('managementPestNote'        )
                 quicktips       = source.get('contentQuickTipsPestNote'  )
-                results += ('----------------------------------------------------------------\n')
-                results += (f'{i+1}) {name:>30} (score: {score:.2f}, group: Pest Notes)\n'      )
-                if description:
-                    results += (f'Description     : {description[:100]}\n'      )
-                if life_cycle:
-                    results += (f'Life Cycle      : {life_cycle[:100]}\n'       )
-                if damage:
-                    results += (f'Damage          : {damage[:100]}\n'           )
-                if management:
-                    results += (f'Monitoring      : {management[:100]}\n'       )
-                if quicktips:
-                    results += (f'Quick tips      : {quicktips[:100]}\n'        )
-                results += (f'URL             : {url}\n')    
-                results += ('----------------------------------------------------------------\n')
+
+                results += _format_result(
+                    index           = i             ,
+                    score           = score         ,
+                    url             = url           ,
+                    title           = name          ,
+                    description     = description   ,
+                    life_cycle      = life_cycle    ,
+                    damage          = damage        ,
+                    management      = management    ,
+                    quicktips       = quicktips
+                )
 
     return results
 
@@ -690,18 +730,18 @@ async def submit(
         pest_damage
     )
 
-    hits_ask, hits_ipm = await _handle_es_result(
+    hits_ask, hits_ipm = _handle_es_result(
         es_ask_hits,
         es_name_hits,
         es_other_hits,
         es_damage_hits
     )
 
-    hits_ask, hits_ipm = await _weight_score(
+    hits_ask, hits_ipm = _weight_score(
         hits_ask, hits_ipm
     )
 
-    result_test = await _get_text(hits_ask, hits_ipm)
+    result_test = _get_text(hits_ask, hits_ipm)
     # _print_hits(hits_ask, 'Ask Extension'   )
     # _print_hits(hits_ipm, 'IPM Data'        )
     
