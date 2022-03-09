@@ -9,7 +9,7 @@ from actions.es import config
 
 logger = logging.getLogger(__name__)
 
-def _cos_sim_query(
+async def _cos_sim_query(
     source_query: dict,
     query_vector: np.ndarray,
     vector_name : str     ,
@@ -33,7 +33,7 @@ def _cos_sim_query(
         }
     }
 
-    response = config.es_client.search(
+    response = await config.es_client.search(
         index   = config.es_combined_index,
         query   = script_query,
         size    = 10,
@@ -113,7 +113,7 @@ async def _handle_es_query(
     # es_caption_hits = {}
     # es_video_hits   = {}
 
-    es_name_hits['name'] = _cos_sim_query(
+    es_name_hits['name'] = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'name_vector'
@@ -131,31 +131,31 @@ async def _handle_es_query(
 
     "imagesPestDiseaseItems"    : "caption_vector"
     '''
-    es_other_hits['pd_description']     = _cos_sim_query(
+    es_other_hits['pd_description']     = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'descriptionPestDiseaseItems_vector'
     )
 
-    es_other_hits['pd_identification']  = _cos_sim_query(
+    es_other_hits['pd_identification']  = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'identificationPestDiseaseItems_vector'
     )
 
-    es_other_hits['pd_life_cycle']      = _cos_sim_query(
+    es_other_hits['pd_life_cycle']      = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'life_cyclePestDiseaseItems_vector'
     )
 
-    es_damage_hits['pd_damage_hits'] = _cos_sim_query(
+    es_damage_hits['pd_damage_hits']    = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'damagePestDiseaseItems_vector'
     )
     
-    es_other_hits['pd_solutions']       = _cos_sim_query(
+    es_other_hits['pd_solutions']       = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'solutionsPestDiseaseItems_vector'
@@ -167,7 +167,7 @@ async def _handle_es_query(
     "textTurfPests_vector"
     "imagesTurfPests": "caption_vector"
     '''
-    es_other_hits['tp_text']            = _cos_sim_query(
+    es_other_hits['tp_text']            = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'textTurfPests_vector'
@@ -179,7 +179,7 @@ async def _handle_es_query(
     "descriptionWeedItems_vector"
     "imagesWeedItems": "caption_vector"
     '''
-    es_other_hits['wi_text']            = _cos_sim_query(
+    es_other_hits['wi_text']            = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'descriptionWeedItems_vector'
@@ -198,37 +198,37 @@ async def _handle_es_query(
     "related_linksExoticPests"  : "text_vector"
     "imagesExoticPests"         : "caption_vector"
     '''
-    es_other_hits['ep_description']     = _cos_sim_query(
+    es_other_hits['ep_description']     = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'descriptionExoticPests_vector'
     )
 
-    es_damage_hits['ep_damage']     = _cos_sim_query(
+    es_damage_hits['ep_damage']         = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'damageExoticPests_vector'
     )
     
-    es_other_hits['ep_identification']  = _cos_sim_query(
+    es_other_hits['ep_identification']  = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'identificationExoticPests_vector'
     )
 
-    es_other_hits['ep_life_cycle']      = _cos_sim_query(
+    es_other_hits['ep_life_cycle']      = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'life_cycleExoticPests_vector'
     )
 
-    es_other_hits['ep_monitoring']      = _cos_sim_query(
+    es_other_hits['ep_monitoring']      = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'monitoringExoticPests_vector'
     )
 
-    es_other_hits['ep_management']      = _cos_sim_query(
+    es_other_hits['ep_management']      = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'managementExoticPests_vector'
@@ -247,31 +247,31 @@ async def _handle_es_query(
     "imagePestNote"             : "caption_vector"
     "videoPestNote"             : "videoPestNote"
     '''
-    es_other_hits['pn_description']     = _cos_sim_query(
+    es_other_hits['pn_description']     = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'descriptionPestNote_vector'
     )
 
-    es_other_hits['pn_life_cycle']      = _cos_sim_query(
+    es_other_hits['pn_life_cycle']      = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'life_cyclePestNote_vector'
     )
 
-    es_damage_hits['pn_damage'] = _cos_sim_query(
+    es_damage_hits['pn_damage']         = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'damagePestNote_vector'
     )
 
-    es_other_hits['pn_management']      = _cos_sim_query(
+    es_other_hits['pn_management']      = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'managementPestNote_vector'
     )
 
-    es_other_hits['pn_content_tips']    = _cos_sim_query(
+    es_other_hits['pn_content_tips']    = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'contentQuickTipsPestNote_vector'
@@ -287,19 +287,19 @@ async def _handle_es_query(
     "ask_answer" : "response_vector"
     '''
 
-    es_ask_hits['ask_name_title']   = _cos_sim_query(
+    es_ask_hits['ask_name_title']   = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'ask_title_vector'
     )
 
-    es_ask_hits['ask_question'] = _cos_sim_query(
+    es_ask_hits['ask_question']     = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'ask_title_question_vector'
     )
 
-    es_ask_hits['ask_damage'] = _cos_sim_query(
+    es_ask_hits['ask_damage']       = await _cos_sim_query(
         source_query    = source_query,
         query_vector    = question_vector,
         vector_name     = 'ask_title_question_vector'
@@ -479,7 +479,6 @@ def _weight_score(
 
     # Do not filter on threshold. Leave this up to the caller
     return hits_ask, hits_ipm
-
 
 def _format_result(
     index           = None,
