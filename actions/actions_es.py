@@ -43,16 +43,10 @@ class ValidateESQueryForm(FormValidationAction):
         
 
         updated_slots = domain_slots.copy()
-        last_intent = tracker.active_form.get("trigger_message", {})\
-            .get("intent", {}).get("name", 'intent_help_question')
-
-        if last_intent == 'intent_help_pest':
-            if tracker.get_slot('pest_causes_damage') == 'no':
-                updated_slots.remove('pest_damage_description')
-        else: 
-            updated_slots.remove('pest_causes_damage')
+        
+        if tracker.get_slot('pest_causes_damage') == 'no':
             updated_slots.remove('pest_damage_description')
-
+        
         logger.info(f'validate_es_query_form - required slots - {updated_slots}')
         logger.info(f'validate_es_query_form - required slots - END')
 
@@ -64,7 +58,6 @@ class ActionSubmitESQueryForm(Action):
     def name(self) -> Text:
         return 'action_submit_es_query_form'
     
-
     def _create_text_for_pest(
         self,
         index   : int, 
@@ -207,26 +200,22 @@ class ActionSubmitESQueryForm(Action):
         
         
         if not config.es_imitate:
-            results = await submit(
+            res_ask, res_ipm = await submit(
                 problem_description,
                 pest_damage_description
             )
 
             buttons = [
-                {'title': 'Start over',              'payload': '/intent_greet'},
-                {'title': 'Connect me to expert',   'payload': '/intent_request_expert'}
+                {'title': 'Start over',             'payload': '/intent_greet'          },
+                {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
             ]
 
             
-            dispatcher.utter_message(text = results, buttons = buttons)
-            # logger.info('ASK results')
-            # logger.info(json.dumps(hits_ask, indent = 4))
-            # logger.info('IPM results')
-            # logger.info(json.dumps(hits_ipm, indent = 4))
+            dispatcher.utter_message(text = res_ipm['text'], json_message = res_ipm)
+            dispatcher.utter_message(text = res_ask['text'], json_message = res_ask, buttons = buttons)
+
         else:
             message = "Not doing an actual elastic search query."
             dispatcher.utter_message(message)
-            hits_ask = []
-            hits_ipm = []
 
-        return []
+        return [SlotSet('done_query', True)]

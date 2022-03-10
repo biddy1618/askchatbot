@@ -6,8 +6,8 @@ Instructions for linux-based machines.
 
 Launch the services up using `docker compose`:
 ```bash
-source env-dev.sh
-docker compose build # if you already built images, omit
+source env-dev.sh       # to 
+docker compose build    # if you already built images, omit
 docker compose up
 ```
 
@@ -34,6 +34,14 @@ curl -H "Content-Type: application/json" -X POST -d "{\"message\": \"Hi\", \"sen
 ```
 
 ## Basic front end
+
+### [Front-end](https://git.eduworks.us/ask-extension/askchatbot-widget)
+
+Copy the project, change `VUE_APP_API_URL` to `http://127.0.0.1:5005/webhooks/rest/webhook`, and run the docker while exposing 8081 port:
+```bash
+docker build -t front-end
+docker run -d -p 8081:8081 --name web-client front-end
+```
 
 ### [Rasa-Chat](https://www.npmjs.com/package/@rasahq/rasa-chat) and Socket IO channel
 

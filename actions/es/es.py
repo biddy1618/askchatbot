@@ -494,47 +494,55 @@ def _format_result(
     management      = None,
     solutions       = None,
     quicktips       = None
-    ) -> str:
+    ) -> dict:
 
-    f_text = ('-----------------------------------------</br>')
-    f_text += (f'{index+1}) <a href="{url}" target="_blank">{title:>30}</a> (score: {score:.2f})</br>')
+    res = {}
+    res['title'] = (f'<p>{index+1})<em><a href="{url}" target="_blank">{title}</a></em></br>(score: {score:.2f})</p>')
+    res['description'] = ''
     if question:
-        f_text += (f'Question          : {question[:100]}</br>'        )
+        res['description'] += (f'<p><strong>Question</strong>: {question[:100]}</p></br>'        )
     if description:
-        f_text += (f'Description       : {description[:100]}</br>'     )
+        res['description'] += (f'<p><strong>Description</strong>: {description[:100]}</p></br>'     )
     if damage:
-        f_text += (f'Damage            : {damage[:100]}</br>'          )
+        res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'          )
     if identification:
-        f_text += (f'Identification    : {identification[:100]}</br>'  )
+        res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'  )
     if life_cycle:
-        f_text += (f'Life Cycle        : {life_cycle[:100]}</br>'      )
+        res['description'] += (f'<p><strong>Life Cycle</strong>: {life_cycle[:100]}</p></br>'      )
     if monitoring:
-        f_text += (f'Monitoring        : {monitoring[:100]}</br>'      )
+        res['description'] += (f'<p><strong>Monitoring</strong>: {monitoring[:100]}</p></br>'      )
     if management:
-        f_text += (f'Monitoring        : {management[:100]}</br>'      )
+        res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'      )
     if solutions:
-        f_text += (f'Solutions         : {solutions[:100]}</br>'       )
+        res['description'] += (f'<p><strong>Solutions</strong>: {solutions[:100]}</p></br>'       )
     if quicktips:
-        f_text += (f'Quick Tips        : {quicktips[:100]}</br>'       )
-    f_text += ('-----------------------------------------</br></br>')
-
-    return f_text
+        res['description'] += (f'<p><strong>Quick Tips</strong>: {quicktips[:100]}</p></br>'       )
+    
+    return res
 
 def _get_text(
     hits_ask: dict, 
     hits_ipm: dict, 
-    ) -> None:
+    ) -> Tuple[dict, dict]:
     '''Print results.
 
     Args:
         hits_ask (dict): Results from Ask Extension base.
         hits_ipm (dict): Results from IPM data.
     '''    
-    results = ''
-    if len(hits_ask):
+    res_ask = {
+        'text'      : 'Top 3 results from Ask Extension Base:',
+        'payload'   : 'collapsible',
+        'data'      : []
+    }
 
-        results += (f'Found {len(hits_ask)} similar posts from Ask Extension Base.</br>')
-        results += (f'Top 3 results:<br>')
+    res_ipm = {
+        'text'      : 'Top 3 results from IPM Base:',
+        'payload'   : 'collapsible',
+        'data'      : []
+    }
+
+    if len(hits_ask):
 
         '''
         Fields:
@@ -552,18 +560,17 @@ def _get_text(
             title       = source.get('ask_title'    )
             question    = source.get('ask_question' )
 
-            results += _format_result(
-                index       = i         ,
-                score       = score     ,
-                url         = url       ,
-                title       = title     ,
-                question    = question
+            res_ask['data'].append(
+                _format_result(
+                    index       = i         ,
+                    score       = score     ,
+                    url         = url       ,
+                    title       = title     ,
+                    question    = question
+                )
             )
 
     if len(hits_ipm):
-
-        results += (f'Found {len(hits_ipm)} articles from IPM sources</br>')
-        results += (f'Top 3 results:</br>')
 
         for i, h in enumerate(hits_ipm[:3]):
             score   = h.get('_score_weighted', 0.0)
@@ -589,16 +596,18 @@ def _get_text(
                 damage          = source.get('damagePestDiseaseItems'           )
                 solutions       = source.get('solutionsPestDiseaseItems'        )
 
-                results += _format_result(
-                    index           = i             ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = name          ,
-                    description     = description   ,
-                    identification  = identification,
-                    life_cycle      = life_cycle    ,
-                    damage          = damage        ,
-                    solutions       = solutions
+                res_ipm['data'].append(
+                    _format_result(
+                        index           = i             ,
+                        score           = score         ,
+                        url             = url           ,
+                        title           = name          ,
+                        description     = description   ,
+                        identification  = identification,
+                        life_cycle      = life_cycle    ,
+                        damage          = damage        ,
+                        solutions       = solutions
+                    )
                 )
                 
             elif source['urlTurfPests'] != '': 
@@ -612,11 +621,16 @@ def _get_text(
                 name            = source.get('name'         )
                 description     = source.get('textTurfPests')
 
-                results += _format_result(
-                    score           = score         ,
-                    url             = url           ,
-                    description     = description   ,
+                res_ipm['data'].append(
+                    _format_result(
+                        index           = i             ,
+                        score           = score         ,
+                        url             = url           ,
+                        title           = name          ,
+                        description     = description
+                    )
                 )
+
                 
             elif source['urlWeedItems'] != '':
                 '''
@@ -629,12 +643,14 @@ def _get_text(
                 name            = source.get('name'                 )
                 description     = source.get('descriptionWeedItems' )
                 
-                results += _format_result(
-                    index           = i             ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = name          ,
-                    description     = description   ,
+                res_ipm['data'].append(
+                    _format_result(
+                        index           = i             ,
+                        score           = score         ,
+                        url             = url           ,
+                        title           = name          ,
+                        description     = description
+                    )
                 )
 
             elif source['urlExoticPests'] != '':
@@ -658,17 +674,19 @@ def _get_text(
                 monitoring      = source.get('monitoringExoticPests'        )
                 management      = source.get('managementExoticPests'        )
                 
-                results += _format_result(
-                    index           = i             ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = name          ,
-                    description     = description   ,
-                    damage          = damage        ,
-                    identification  = identification,
-                    monitoring      = monitoring    ,
-                    life_cycle      = life_cycle    ,
-                    management      = management
+                res_ipm['data'].append(
+                    _format_result(
+                        index           = i             ,
+                        score           = score         ,
+                        url             = url           ,
+                        title           = name          ,
+                        description     = description   ,
+                        damage          = damage        ,
+                        identification  = identification,
+                        monitoring      = monitoring    ,
+                        life_cycle      = life_cycle    ,
+                        management      = management
+                    )
                 )
 
             elif source['urlPestNote'] != '':
@@ -691,19 +709,21 @@ def _get_text(
                 management      = source.get('managementPestNote'        )
                 quicktips       = source.get('contentQuickTipsPestNote'  )
 
-                results += _format_result(
-                    index           = i             ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = name          ,
-                    description     = description   ,
-                    life_cycle      = life_cycle    ,
-                    damage          = damage        ,
-                    management      = management    ,
-                    quicktips       = quicktips
+                res_ipm['data'].append(
+                    _format_result(
+                        index           = i             ,
+                        score           = score         ,
+                        url             = url           ,
+                        title           = name          ,
+                        description     = description   ,
+                        life_cycle      = life_cycle    ,
+                        damage          = damage        ,
+                        management      = management    ,
+                        quicktips       = quicktips
+                    )
                 )
 
-    return results
+    return res_ask, res_ipm
 
 async def submit(
     question    : str,
@@ -740,8 +760,8 @@ async def submit(
         hits_ask, hits_ipm
     )
 
-    result_test = _get_text(hits_ask, hits_ipm)
+    res_ask, res_ipm = _get_text(hits_ask, hits_ipm)
     # _print_hits(hits_ask, 'Ask Extension'   )
     # _print_hits(hits_ipm, 'IPM Data'        )
     
-    return result_test
+    return res_ask, res_ipm

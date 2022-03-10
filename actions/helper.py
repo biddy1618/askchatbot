@@ -40,7 +40,7 @@ def _reset_slots(tracker: Tracker) -> List[Any]:
     for k, v in tracker.slots.items():
         if k in ['shown_greeting', 'shown_privacy_policy']: 
             events.append(SlotSet(k, True))
-        elif k == 'shown_explain_ipm':
+        elif k in ['shown_explain_ipm', 'done_query']:
             events.append(SlotSet(k, v))
         else: 
             events.append(SlotSet(k, None))

@@ -38,23 +38,24 @@ class ActionGreet(Action):
         logger.info('action_greet - START')
         shown_greeting          = tracker.get_slot('shown_greeting')
         shown_explain_ipm       = tracker.get_slot('shown_explain_ipm')
+        
+        done_query              = tracker.get_slot('done_query')
 
         if not shown_greeting:
             dispatcher.utter_message(response = 'utter_greet')
         
         buttons = [
             {'title': 'I would like to ask question.'       , 'payload': '/intent_help_question'},
-            {'title': 'I have a pest problem.'              , 'payload': '/intent_help_pest'},
             {'title': 'I would like to get help on image.'  , 'payload': '/intent_help_image'},
-            {'title': 'Connect me to askextension expert.'  , 'payload': '/intent_request_expert'},
+            
         ]
 
         if not shown_explain_ipm:
-            buttons.append({'title': 'I want to learn more about IPM', 'payload': '/intent_explain_ipm'})
+            buttons.append({'title': 'I want to learn more about IPM'       , 'payload': '/intent_explain_ipm'      })
 
-        if shown_greeting:
-            buttons.append({'title': 'Goodbye', 'payload': '/intent_goodbye'})
-
+        if done_query:
+            buttons.append({'title': 'Connect me to askextension expert.'   , 'payload': '/intent_request_expert'   })
+        
         dispatcher.utter_message(text = 'How can I help you?', buttons = buttons)
         events = helper._reset_slots(tracker)
 

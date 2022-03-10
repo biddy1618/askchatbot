@@ -6,9 +6,10 @@ intents:
 # base intents
 - intent_greet
 - intent_explain_ipm
-- intent_deny
-- intent_goodbye
 - intent_affirm
+- intent_deny
+- intent_not_clear
+- intent_goodbye
 - intent_bot_challenge
 # Main intents
 - intent_request_expert
@@ -39,6 +40,11 @@ slots:
     mappings:
     - type: custom
   shown_explain_ipm:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: custom
+  done_query:
     type: bool
     influence_conversation: false
     mappings:
@@ -113,6 +119,12 @@ slots:
         conditions:
         - active_loop: es_query_form
           requested_slot: pest_causes_damage
+      - type: from_intent
+        value: no
+        intent: intent_not_clear
+        conditions:
+        - active_loop: es_query_form
+          requested_slot: pest_causes_damage
   pest_damage_description:
     type: text
     influence_conversation: false
@@ -131,8 +143,6 @@ responses:
   - buttons:
     - payload: /intent_greet
       title: Main menu.
-    - payload: /intent_request_expert
-      title: Connect me to an expert.
     text: I'm sorry, I am still learning thanks to your inputs.
   utter_goodbye:
   - buttons:
@@ -152,7 +162,10 @@ responses:
       title: Main menu.
     text: You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.
   utter_explain_ipm:
-  - text: >
+  - buttons:
+    - payload: /intent_greet
+      title: Main menu.
+    text: >
       IPM is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, 
       habitat manipulation, modification of cultural practices, and use of resistant varieties. Pesticides are used only after monitoring indicates they are needed 
       according to established guidelines, and treatments are made with the goal of removing only the target organism. Pest control materials are selected and applied 
@@ -161,8 +174,6 @@ responses:
   - buttons:
     - payload: /intent_greet
       title: Main menu.
-    - payload: /intent_request_expert
-      title: Connect me to an expert.
     text: Not implemented. To be available soon.
   # Decision Tree responses
   # utter_submit_plant_problem_form:
@@ -183,6 +194,8 @@ responses:
       title: Yes
     - payload: /intent_deny
       title: No
+    - payload: /intent_not_clear
+      title: Don't know
     text: Do you see any traces of damage?
   utter_ask_pest_damage_description:
   - text: Please describe the damage.

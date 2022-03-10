@@ -1,385 +1,385 @@
-# version: "3.0"
+version: "3.0"
 
-# nlu:
+nlu:
 
-# - lookup: plant_name
-#   examples: |
-#     - alstroemeria
-#     - alyssum
-#     - asiatic lily
-#     - aster
-#     - barberton daisy
-#     - begonia
-#     - bulbous and rhizomatous iris
-#     - carnation
-#     - china aster
-#     - chrysanthemum
-#     - cosmos
-#     - daffodil
-#     - dahlia
-#     - dutch iris
-#     - easter lily
-#     - freesia
-#     - geranium
-#     - gerbera daisy
-#     - gladiolus
-#     - impatiens
-#     - iris
-#     - lily
-#     - marguerite daisy
-#     - marigold
-#     - myrtle
-#     - nasturtium
-#     - new guinea impatiens
-#     - oregon myrtle
-#     - oriental lily
-#     - pansy
-#     - peony
-#     - periwinkle
-#     - petunia
-#     - poppy
-#     - primrose
-#     - rose
-#     - snapdragon
-#     - sunflower
-#     - sweet alyssum
-#     - sweet pea
-#     - transvaal daisy
-#     - tulip
-#     - verbena
-#     - vinca
-#     - violet
-#     - zinnia
-#     - almond
-#     - apples
-#     - apricots
-#     - avocados
-#     - blackberries
-#     - caneberries
-#     - cherries
-#     - citrus
-#     - fig
-#     - grapes
-#     - nectarines
-#     - olive
-#     - peaches
-#     - pears
-#     - plums
-#     - pomegranate
-#     - prunes
-#     - raspberries
-#     - strawberries
-#     - walnut
-#     - abelia
-#     - abutilon
-#     - acacia
-#     - african fern pine
-#     - agave
-#     - albizia
-#     - alder
-#     - algerian ivy
-#     - andromeda
-#     - angelica
-#     - aralia
-#     - araucaria
-#     - arborvitae
-#     - artemisia
-#     - ash
-#     - aspen
-#     - aucuba
-#     - australian brush cherry
-#     - australian willow
-#     - azalea
-#     - baccharis
-#     - bamboo
-#     - barbados pride
-#     - barberry
-#     - bayberry
-#     - beech
-#     - beefwood
-#     - big tree
-#     - birch
-#     - bird of paradise
-#     - bird of paradise bush
-#     - black locust
-#     - black tea tree
-#     - bottlebrush
-#     - bougainvillea
-#     - box
-#     - box elder
-#     - boxwood
-#     - brazilian butterfly tree
-#     - broom
-#     - buckthorn
-#     - buckwheat
-#     - buddleja
-#     - bunya-bunya tree
-#     - bush anemone
-#     - bush morning glory
-#     - cactus
-#     - caesalpinia
-#     - california bay
-#     - california bay laurel
-#     - california buckeye
-#     - california hazel
-#     - california honeysuckle
-#     - california pepper tree
-#     - california wax myrtle
-#     - camellia
-#     - camphor tree
-#     - cape jasmine
-#     - carob
-#     - cassia
-#     - catalina ironwood
-#     - catalpa
-#     - ceanothus
-#     - cedar
-#     - chaste tree
-#     - chestnut
-#     - chilopsis
-#     - chinaberry
-#     - chinese bellflower
-#     - chinese flame tree
-#     - chinese lantern
-#     - chinese pistache
-#     - chinese tallow tree
-#     - choisya
-#     - christmas berry
-#     - cistus
-#     - clematis
-#     - coast beefwood
-#     - coast redwood
-#     - cocculus
-#     - coffee tree
-#     - coffeeberry
-#     - coral tree
-#     - corn plant
-#     - cotoneaster
-#     - cottonwood
-#     - coyote bush
-#     - crape myrtle
-#     - cryptomeria
-#     - currant
-#     - cycad
-#     - cypress
-#     - daphne
-#     - desert catalpa
-#     - desert willow
-#     - dodonaea
-#     - dogwood
-#     - douglas fir
-#     - dracaena
-#     - dragon tree
-#     - dwarf poinciana
-#     - elderberry
-#     - elm
-#     - english ivy
-#     - english laurel
-#     - escallonia
-#     - eucalyptus
-#     - eugenia
-#     - euonymus
-#     - false cypress
-#     - ficus
-#     - filbert
-#     - fir
-#     - flannel bush
-#     - flowering maple
-#     - forsythia
-#     - fuchsia
-#     - gardenia
-#     - giant bird of paradise
-#     - giant sequoia
-#     - ginkgo
-#     - gold flower
-#     - gold medallion tree
-#     - gold spot acuba
-#     - gold-dust plant
-#     - golden rain tree
-#     - golden-chain tree
-#     - gooseberry
-#     - granite bottlebrush
-#     - grecian laurel
-#     - grevillea
-#     - gum
-#     - hackberry
-#     - hawthorn
-#     - hazelnut
-#     - heath
-#     - heather
-#     - heavenly bamboo
-#     - hebe
-#     - hemlock
-#     - hibiscus
-#     - holly
-#     - honey locust
-#     - honeysuckle
-#     - hopbush
-#     - hopseed tree
-#     - hornbeam
-#     - horse chestnut
-#     - hydrangea
-#     - hypericum
-#     - incense cedar
-#     - india hawthorn
-#     - indian laurel
-#     - iron tree
-#     - ironwood
-#     - ivy
-#     - jacaranda
-#     - japanese aucuba
-#     - japanese pagoda tree
-#     - japanese tallow tree
-#     - japanese tree lilac
-#     - japanese zelkova
-#     - jasmine
-#     - juniper
-#     - katsura tree
-#     - kentucky coffee tree
-#     - kinnikinnick
-#     - lantana
-#     - larch
-#     - laurel
-#     - laurel fig
-#     - lemonade berry
-#     - lilac
-#     - linden
-#     - liquidambar
-#     - locust
-#     - lollipop tree
-#     - london plane tree
-#     - loquat
-#     - madrone
-#     - magnolia
-#     - mahonia
-#     - maidenhair tree
-#     - manzanita
-#     - maple
-#     - mayten
-#     - melaleuca
-#     - mesquite
-#     - metrosideros
-#     - mexican orange
-#     - mimosa
-#     - mock orange
-#     - monkey flower
-#     - monkey puzzle tree
-#     - mountain ash
-#     - mountain mahogany
-#     - mugwort
-#     - mulberry
-#     - myoporum
-#     - nandina
-#     - natal plum
-#     - new zealand christmas tree
-#     - norfolk island pine
-#     - oak
-#     - oleander
-#     - orchid tree
-#     - oregon grape
-#     - ornamental pear
-#     - palm
-#     - palo verde
-#     - paperbark
-#     - pepper tree
-#     - pepperwood
-#     - persimmon
-#     - photinia
-#     - pine
-#     - pittosporum
-#     - podocarpus
-#     - poplar
-#     - prickly-pear
-#     - privet
-#     - pyracantha
-#     - quince
-#     - redberry
-#     - redbud
-#     - redwood
-#     - rhamnus
-#     - rhaphiolepis
-#     - rhododendron
-#     - rhus
-#     - ribes
-#     - rock rose
-#     - rosemary
-#     - sacred bamboo
-#     - sage
-#     - sagebrush
-#     - sago palm
-#     - saguaro
-#     - saltbush
-#     - salvia
-#     - senna
-#     - sequoia
-#     - serviceberry
-#     - shadbush
-#     - she-oak
-#     - sierra redwood
-#     - silk oak
-#     - silk tree
-#     - silver bush
-#     - sour gum
-#     - spirea
-#     - spruce
-#     - st. johnswort
-#     - star jasmine
-#     - strawberry tree
-#     - sugarbush
-#     - sumac
-#     - sweet gum
-#     - sweetbay
-#     - sycamore
-#     - syringa
-#     - tamarisk
-#     - tan oak
-#     - tanbark oak
-#     - tanoak
-#     - tarragon
-#     - tea tree
-#     - texas umbrella tree
-#     - ti tree
-#     - tobira
-#     - toyon
-#     - tulip tree
-#     - tupelo
-#     - tupelo gum
-#     - viburnum
-#     - victorian box
-#     - wax myrtle
-#     - wax tree
-#     - weigela
-#     - western red cedar
-#     - wild lilac
-#     - willow
-#     - wisteria
-#     - wormwood
-#     - xylosma
-#     - yellow poplar
-#     - yew
-#     - yew pine
-#     - yucca
-#     - zelkova
-#     - artichokes
-#     - asparagus
-#     - beans
-#     - broccoli
-#     - brussels sprouts
-#     - cabbage
-#     - cantaloupe
-#     - carrots
-#     - cauliflower
-#     - corn
-#     - cucumbers
-#     - eggplants
-#     - garlic
-#     - lettuce
-#     - onions
-#     - peas
-#     - peppers
-#     - potatoes
-#     - pumpkins
-#     - spinach
-#     - squash
-#     - tomatoes
-#     - watermelon
+- lookup: plant_name
+  examples: |
+    - alstroemeria
+    - alyssum
+    - asiatic lily
+    - aster
+    - barberton daisy
+    - begonia
+    - bulbous and rhizomatous iris
+    - carnation
+    - china aster
+    - chrysanthemum
+    - cosmos
+    - daffodil
+    - dahlia
+    - dutch iris
+    - easter lily
+    - freesia
+    - geranium
+    - gerbera daisy
+    - gladiolus
+    - impatiens
+    - iris
+    - lily
+    - marguerite daisy
+    - marigold
+    - myrtle
+    - nasturtium
+    - new guinea impatiens
+    - oregon myrtle
+    - oriental lily
+    - pansy
+    - peony
+    - periwinkle
+    - petunia
+    - poppy
+    - primrose
+    - rose
+    - snapdragon
+    - sunflower
+    - sweet alyssum
+    - sweet pea
+    - transvaal daisy
+    - tulip
+    - verbena
+    - vinca
+    - violet
+    - zinnia
+    - almond
+    - apples
+    - apricots
+    - avocados
+    - blackberries
+    - caneberries
+    - cherries
+    - citrus
+    - fig
+    - grapes
+    - nectarines
+    - olive
+    - peaches
+    - pears
+    - plums
+    - pomegranate
+    - prunes
+    - raspberries
+    - strawberries
+    - walnut
+    - abelia
+    - abutilon
+    - acacia
+    - african fern pine
+    - agave
+    - albizia
+    - alder
+    - algerian ivy
+    - andromeda
+    - angelica
+    - aralia
+    - araucaria
+    - arborvitae
+    - artemisia
+    - ash
+    - aspen
+    - aucuba
+    - australian brush cherry
+    - australian willow
+    - azalea
+    - baccharis
+    - bamboo
+    - barbados pride
+    - barberry
+    - bayberry
+    - beech
+    - beefwood
+    - big tree
+    - birch
+    - bird of paradise
+    - bird of paradise bush
+    - black locust
+    - black tea tree
+    - bottlebrush
+    - bougainvillea
+    - box
+    - box elder
+    - boxwood
+    - brazilian butterfly tree
+    - broom
+    - buckthorn
+    - buckwheat
+    - buddleja
+    - bunya-bunya tree
+    - bush anemone
+    - bush morning glory
+    - cactus
+    - caesalpinia
+    - california bay
+    - california bay laurel
+    - california buckeye
+    - california hazel
+    - california honeysuckle
+    - california pepper tree
+    - california wax myrtle
+    - camellia
+    - camphor tree
+    - cape jasmine
+    - carob
+    - cassia
+    - catalina ironwood
+    - catalpa
+    - ceanothus
+    - cedar
+    - chaste tree
+    - chestnut
+    - chilopsis
+    - chinaberry
+    - chinese bellflower
+    - chinese flame tree
+    - chinese lantern
+    - chinese pistache
+    - chinese tallow tree
+    - choisya
+    - christmas berry
+    - cistus
+    - clematis
+    - coast beefwood
+    - coast redwood
+    - cocculus
+    - coffee tree
+    - coffeeberry
+    - coral tree
+    - corn plant
+    - cotoneaster
+    - cottonwood
+    - coyote bush
+    - crape myrtle
+    - cryptomeria
+    - currant
+    - cycad
+    - cypress
+    - daphne
+    - desert catalpa
+    - desert willow
+    - dodonaea
+    - dogwood
+    - douglas fir
+    - dracaena
+    - dragon tree
+    - dwarf poinciana
+    - elderberry
+    - elm
+    - english ivy
+    - english laurel
+    - escallonia
+    - eucalyptus
+    - eugenia
+    - euonymus
+    - false cypress
+    - ficus
+    - filbert
+    - fir
+    - flannel bush
+    - flowering maple
+    - forsythia
+    - fuchsia
+    - gardenia
+    - giant bird of paradise
+    - giant sequoia
+    - ginkgo
+    - gold flower
+    - gold medallion tree
+    - gold spot acuba
+    - gold-dust plant
+    - golden rain tree
+    - golden-chain tree
+    - gooseberry
+    - granite bottlebrush
+    - grecian laurel
+    - grevillea
+    - gum
+    - hackberry
+    - hawthorn
+    - hazelnut
+    - heath
+    - heather
+    - heavenly bamboo
+    - hebe
+    - hemlock
+    - hibiscus
+    - holly
+    - honey locust
+    - honeysuckle
+    - hopbush
+    - hopseed tree
+    - hornbeam
+    - horse chestnut
+    - hydrangea
+    - hypericum
+    - incense cedar
+    - india hawthorn
+    - indian laurel
+    - iron tree
+    - ironwood
+    - ivy
+    - jacaranda
+    - japanese aucuba
+    - japanese pagoda tree
+    - japanese tallow tree
+    - japanese tree lilac
+    - japanese zelkova
+    - jasmine
+    - juniper
+    - katsura tree
+    - kentucky coffee tree
+    - kinnikinnick
+    - lantana
+    - larch
+    - laurel
+    - laurel fig
+    - lemonade berry
+    - lilac
+    - linden
+    - liquidambar
+    - locust
+    - lollipop tree
+    - london plane tree
+    - loquat
+    - madrone
+    - magnolia
+    - mahonia
+    - maidenhair tree
+    - manzanita
+    - maple
+    - mayten
+    - melaleuca
+    - mesquite
+    - metrosideros
+    - mexican orange
+    - mimosa
+    - mock orange
+    - monkey flower
+    - monkey puzzle tree
+    - mountain ash
+    - mountain mahogany
+    - mugwort
+    - mulberry
+    - myoporum
+    - nandina
+    - natal plum
+    - new zealand christmas tree
+    - norfolk island pine
+    - oak
+    - oleander
+    - orchid tree
+    - oregon grape
+    - ornamental pear
+    - palm
+    - palo verde
+    - paperbark
+    - pepper tree
+    - pepperwood
+    - persimmon
+    - photinia
+    - pine
+    - pittosporum
+    - podocarpus
+    - poplar
+    - prickly-pear
+    - privet
+    - pyracantha
+    - quince
+    - redberry
+    - redbud
+    - redwood
+    - rhamnus
+    - rhaphiolepis
+    - rhododendron
+    - rhus
+    - ribes
+    - rock rose
+    - rosemary
+    - sacred bamboo
+    - sage
+    - sagebrush
+    - sago palm
+    - saguaro
+    - saltbush
+    - salvia
+    - senna
+    - sequoia
+    - serviceberry
+    - shadbush
+    - she-oak
+    - sierra redwood
+    - silk oak
+    - silk tree
+    - silver bush
+    - sour gum
+    - spirea
+    - spruce
+    - st. johnswort
+    - star jasmine
+    - strawberry tree
+    - sugarbush
+    - sumac
+    - sweet gum
+    - sweetbay
+    - sycamore
+    - syringa
+    - tamarisk
+    - tan oak
+    - tanbark oak
+    - tanoak
+    - tarragon
+    - tea tree
+    - texas umbrella tree
+    - ti tree
+    - tobira
+    - toyon
+    - tulip tree
+    - tupelo
+    - tupelo gum
+    - viburnum
+    - victorian box
+    - wax myrtle
+    - wax tree
+    - weigela
+    - western red cedar
+    - wild lilac
+    - willow
+    - wisteria
+    - wormwood
+    - xylosma
+    - yellow poplar
+    - yew
+    - yew pine
+    - yucca
+    - zelkova
+    - artichokes
+    - asparagus
+    - beans
+    - broccoli
+    - brussels sprouts
+    - cabbage
+    - cantaloupe
+    - carrots
+    - cauliflower
+    - corn
+    - cucumbers
+    - eggplants
+    - garlic
+    - lettuce
+    - onions
+    - peas
+    - peppers
+    - potatoes
+    - pumpkins
+    - spinach
+    - squash
+    - tomatoes
+    - watermelon
