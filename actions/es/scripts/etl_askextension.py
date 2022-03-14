@@ -40,16 +40,12 @@ def _merge_json(source_files):
     Combines the data files into one and returns it.
     '''
     
-    data = []
+    df = pd.DataFrame()
     for file in source_files:
+
+        df = df.append(pd.read_json(file))
     
-        with open(file) as f:
-            print(f)
-            data = json.load(f)
-        df = pd.read_json(StringIO(json.dumps(data)))
-    # return json.dumps(data)
-        print(df.shape)
-    # df = pd.read_json(data)
+    return df
     
 
 def _transform_answer(answer_dict):
@@ -97,14 +93,10 @@ def _merge_title_question(df):
 
     return tqs
 
-def _transform_save(data, path_save, min_word_count = 3, max_str_len = 300, state_filters = ['California']):
+def _transform_save(df, path_save, min_word_count = 3, max_str_len = 300, state_filters = ['California']):
     '''
-    Read json string data, transform and save.
+    Transform and save.
     '''
-    # Read all data
-    logger.info('Reading data into DataFrame')
-    df = pd.read_json(StringIO(data))
-    
     
     # Convert 'faq-id' to str type
     df['faq-id'] = df['faq-id'].astype(str)

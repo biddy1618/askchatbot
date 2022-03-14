@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 import json
 
-from elasticsearch import AsyncElasticsearch
+from elasticsearch import Elasticsearch
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -19,6 +19,8 @@ es_password             = os.getenv('ES_PASSWORD'           , 'changeme'        
 es_host                 = os.getenv('ES_HOST'               , 'http://localhost:9200/'                                  )
 es_askextension_index   = os.getenv('ES_ASKEXTENSION_INDEX' , 'askextension'                                            )
 es_combined_index       = os.getenv('ES_COMBINED_INDEX'     , 'combined'                                                )
+es_problem_index        = os.getenv('ES_PROBLEM_INDEX'      , 'problem'                                                 )
+es_information_index    = os.getenv('ES_INFORMATION_INDEX'  , 'information'                                             )
 es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                   )
 es_imitate              = es_imitate == 'true'
 
@@ -50,9 +52,11 @@ if stage == 'dev':
     # -------------------------------------------------------------
 
     # index mappings
-    ES_ASKEXTENSION_MAPPING     = json.load(open(f'{_PATH}/data/mappings/askextension_mapping.json'))
-    ES_COMBINED_VECTOR_MAPPING  = json.load(open(f'{_PATH}/data/mappings/combined_vector_mapping.json'))
-    ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
+    ES_ASKEXTENSION_MAPPING     = json.load(open(f'{_PATH}/data/mappings/askextension_mapping.json'     ))
+    ES_COMBINED_VECTOR_MAPPING  = json.load(open(f'{_PATH}/data/mappings/combined_vector_mapping.json'  ))
+    ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'         ))
+    ES_PROBLEM_MAPPING          = json.load(open(f'{_PATH}/data/mappings/problem_mapping.json'          ))
+    ES_INFORMATION_MAPPING      = json.load(open(f'{_PATH}/data/mappings/information_mapping.json'      ))
 
 if not es_imitate:
     
@@ -63,23 +67,25 @@ if not es_imitate:
     
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch configuration:')
-    logger.info(f'- host                     = {es_host         }')
-    logger.info(f'- username                 = {es_username     }')
-    logger.info(f'- password                 = {es_password     }')
-    logger.info(f'- tfhub_embedding_url      = {tf_embed_url    }')
-    logger.info(f'- tfhub_cache_dir          = {tfhub_cache_dir }')
+    logger.info(f'- host                    = {es_host         }')
+    logger.info(f'- username                = {es_username     }')
+    logger.info(f'- password                = {es_password     }')
+    logger.info(f'- tfhub_embedding_url     = {tf_embed_url    }')
+    logger.info(f'- tfhub_cache_dir         = {tfhub_cache_dir }')
     logger.info('----------------------------------------------')
 
 
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch indexes:')
-    logger.info(f'- askextension index       = {es_askextension_index}')
-    logger.info(f'- combined index           = {es_combined_index    }')
+    logger.info(f'- askextension index      = {es_askextension_index}')
+    logger.info(f'- combined index          = {es_combined_index    }')
+    logger.info(f'- problem index           = {es_problem_index     }')
+    logger.info(f'- information index       = {es_information_index }')
     logger.info('----------------------------------------------')
 
 
     logger.info('Initializing the Elasticsearch client')
-    es_client = AsyncElasticsearch([es_host], http_auth=(es_username, es_password))
+    es_client = Elasticsearch([es_host], http_auth=(es_username, es_password))
     logger.info('Done initiliazing ElasticSearch client')
 
     logger.info(f'Start loading embedding module {tf_embed_url}')
