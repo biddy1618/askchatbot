@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def _cos_sim_query(
+    index_name  : str,
     source_query: dict,
     query_vector: np.ndarray,
     vector_name : str     ,
@@ -40,9 +41,9 @@ def _cos_sim_query(
     }
 
     response = config.es_client.search(
-        index   = config.ES_COMBINED_INDEX,
-        query   = script_query,
-        size    = 10,
+        index   = index_name    ,
+        query   = script_query  ,
+        size    = 10            ,
         _source = source_query
     )
 
