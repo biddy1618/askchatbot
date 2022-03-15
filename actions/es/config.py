@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 import json
 
-from elasticsearch import Elasticsearch
+from elasticsearch import AsyncElasticsearch
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -85,7 +85,7 @@ if not es_imitate:
 
 
     logger.info('Initializing the Elasticsearch client')
-    es_client = Elasticsearch([es_host], http_auth=(es_username, es_password))
+    es_client = AsyncElasticsearch([es_host], http_auth=(es_username, es_password))
     logger.info('Done initiliazing ElasticSearch client')
 
     logger.info(f'Start loading embedding module {tf_embed_url}')
