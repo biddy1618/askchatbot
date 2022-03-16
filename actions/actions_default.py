@@ -46,8 +46,6 @@ class ActionGreet(Action):
         
         buttons = [
             {'title': 'I would like to ask question.'       , 'payload': '/intent_help_question'},
-            {'title': 'I would like to get help on image.'  , 'payload': '/intent_help_image'},
-            
         ]
 
         if not shown_explain_ipm:

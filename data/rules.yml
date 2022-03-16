@@ -18,11 +18,7 @@ rules:
   - intent: intent_greet
   - action: action_greet
 
-- rule: Image search temporary solution
-  steps:
-  - intent: intent_help_image
-  - action: utter_help_image
-
+# Main rules
 - rule: More about IPM
   steps:
   - intent: intent_explain_ipm
@@ -53,9 +49,7 @@ rules:
 # ES Query form rule
 - rule: Activate form for querying ES
   steps:
-  - or:
-    - intent: intent_help_pest
-    - intent: intent_help_question
+  - intent: intent_help_question
   - action: es_query_form
   - active_loop: es_query_form
 

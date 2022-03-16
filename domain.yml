@@ -5,21 +5,16 @@ session_config:
 intents:
 # base intents
 - intent_greet
-- intent_explain_ipm
 - intent_affirm
 - intent_deny
 - intent_not_clear
 - intent_goodbye
 - intent_bot_challenge
 # Main intents
+- intent_explain_ipm
 - intent_request_expert
-- intent_help_image
-# Decision Tree intents
-# - request_plant_problem
 # ES intents
-- intent_help_pest
 - intent_help_question
-- intent_inform
 # Tests
 - intent_test_images
 - intent_test_videos
@@ -27,12 +22,12 @@ intents:
 - intent_test_quick_replies
 - intent_test_collapsible
 - intent_test_carousel
-# entities:
-# - plant_damage
-# - plant_name
-# - plant_part
-# - plant_type
-# - pest_name
+entities:
+- plant_damage
+- plant_name
+- plant_part
+- plant_type
+- plant_pest
 slots:
   shown_greeting:
     type: bool
@@ -49,44 +44,7 @@ slots:
     influence_conversation: false
     mappings:
     - type: custom
-  # Decision Tree slots
-  # plant_type:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_entity
-  #     entity: plant_type
-  #     conditions:
-  #     - active_loop: plant_problem_form
-  #       requested_slot: plant_type
-  # plant_name:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_entity
-  #     entity: plant_name
-  #     conditions:
-  #     - active_loop: plant_problem_form
-  #       requested_slot: plant_name
-  # plant_part:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_entity
-  #     entity: plant_part
-  #     conditions:
-  #     - active_loop: plant_problem_form
-  #       requested_slot: plant_part
-  # plant_damages:
-  #   type: list
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_entity
-  #     entity: plant_damage
-  #     conditions:
-  #     - active_loop: plant_problem_form
-  #       requested_slot: plant_damages
-# Knowledge Base Query slots
+  # Knowledge Base Query slots
   problem_description:
     type: text
     influence_conversation: false
@@ -95,48 +53,34 @@ slots:
         conditions:
         - active_loop: es_query_form
           requested_slot: problem_description
-  # pest_problem_description:
-  #   type: text
-  #   influence_conversation: false
-  #   mappings:
-  #     - type: from_text
-  #       conditions:
-  #       - active_loop: es_query_form
-  #         requested_slot: pest_problem_description
-  pest_causes_damage:
-    type: text
-    influence_conversation: false
+  # Additional slots 
+  plant_name:
+    type: list
     mappings:
-      - type: from_intent
-        value: yes
-        intent: intent_affirm
-        conditions:
-        - active_loop: es_query_form
-          requested_slot: pest_causes_damage
-      - type: from_intent
-        value: no
-        intent: intent_deny
-        conditions:
-        - active_loop: es_query_form
-          requested_slot: pest_causes_damage
-      - type: from_intent
-        value: no
-        intent: intent_not_clear
-        conditions:
-        - active_loop: es_query_form
-          requested_slot: pest_causes_damage
-  pest_damage_description:
-    type: text
-    influence_conversation: false
+      - type: from_entity
+        entity: plant_name
+  plant_type:
+    type: list
     mappings:
-      - type: from_text
-        conditions:
-        - active_loop: es_query_form
-          requested_slot: pest_damage_description
-  pests_summaries:
-    type: text
+      - type: from_entity
+        entity: plant_type
+  plant_part:
+    type: list
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: plant_part
+  plant_damage:
+    type: list
+    mappings:
+      - type: from_entity
+        entity: plant_damage
+  plant_pest:
+    type: list
+    mappings:
+      - type: from_entity
+        entity: plant_pest
+
+
 responses:
   # Basic responses
   utter_default:
@@ -166,28 +110,15 @@ responses:
     - payload: /intent_greet
       title: Main menu.
     text: >
-      IPM is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, 
-      habitat manipulation, modification of cultural practices, and use of resistant varieties. Pesticides are used only after monitoring indicates they are needed 
-      according to established guidelines, and treatments are made with the goal of removing only the target organism. Pest control materials are selected and applied 
-      in a manner that minimizes risks to human health, beneficial and nontarget organisms, and the environment. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.
+      IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, 
+      habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.
   utter_help_image:
   - buttons:
     - payload: /intent_greet
       title: Main menu.
     text: Not implemented. To be available soon.
-  # Decision Tree responses
-  # utter_submit_plant_problem_form:
-  # - text: |-
-  #     I am going to run a plant problem search using the following parameters:
-  #      - plant_type: {plant_type}
-  #      - plant_name: {plant_name}
-  #      - plant_part: {plant_part}
-  #      - plant_damages: {plant_damages}
-  # ES questions responses
   utter_ask_problem_description:
   - text: Please describe your problem.
-  # utter_ask_pest_problem_description:
-  # - text: Please describe your pest problem.
   utter_ask_pest_causes_damage:
   - buttons:
     - payload: /intent_affirm
@@ -304,7 +235,4 @@ forms:
     # - request_generic_question
     # - request_expert
     required_slots:
-    # - question
     - problem_description
-    - pest_causes_damage
-    - pest_damage_description

@@ -1,14 +1,16 @@
 version: "3.0"
 
 nlu:
-- intent: intent_help_image
-  examples: |
-    - I have a picture and I would like to get help on that
-    - Picture
-    - I would like to upload a picture
 - intent: intent_request_expert
   examples: |
     - Connect me to expert
     - Expert
     - Please, connect me to agent
     - I would like to connect to expert
+- intent: intent_explain_ipm
+  examples: |
+    - Explain IPM
+    - IPM
+    - What is IPM?
+    - What IPM stand for?
+    - Tell me more about IPM
