@@ -197,12 +197,12 @@ class ActionSubmitESQueryForm(Action):
         
         if pest_causes_damage != "no":
             pest_damage_description = tracker.get_slot('pest_damage_description')
+            problem_description += '. ' + pest_damage_description
         
         
         if not config.es_imitate:
-            res_ask, res_ipm = await submit(
-                problem_description,
-                pest_damage_description
+            res_problems, res_information, res_ask = await submit(
+                problem_description
             )
 
             buttons = [
@@ -211,8 +211,9 @@ class ActionSubmitESQueryForm(Action):
             ]
 
             
-            dispatcher.utter_message(text = res_ipm['text'], json_message = res_ipm)
-            dispatcher.utter_message(text = res_ask['text'], json_message = res_ask, buttons = buttons)
+            dispatcher.utter_message(text = res_problems['text']    , json_message = res_problems               )
+            dispatcher.utter_message(text = res_information['text'] , json_message = res_information            )
+            dispatcher.utter_message(text = res_ask['text']         , json_message = res_ask, buttons = buttons )
 
         else:
             message = "Not doing an actual elastic search query."

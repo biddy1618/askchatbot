@@ -27,12 +27,12 @@ intents:
 - intent_test_quick_replies
 - intent_test_collapsible
 - intent_test_carousel
-entities:
-- plant_damage
-- plant_name
-- plant_part
-- plant_type
-- pest_name
+# entities:
+# - plant_damage
+# - plant_name
+# - plant_part
+# - plant_type
+# - pest_name
 slots:
   shown_greeting:
     type: bool

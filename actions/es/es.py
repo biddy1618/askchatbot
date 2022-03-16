@@ -10,441 +10,277 @@ from actions.es import config
 logger = logging.getLogger(__name__)
 
 async def _cos_sim_query(
-    source_query: dict,
-    query_vector: np.ndarray,
-    vector_name : str     ,
+    index           : str           ,
+    vector_name     : str           ,
+    query_vector    : np.ndarray    ,
+    source_query    : dict          ,
+    nested          : bool = False  ,
+    source_nested   : dict = None
     ) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
 
     Args:
-        source_query (dict)         : Fields to include in result hits. 
-        query_vector (np.ndarray)   : Query vector.
-        vector_name (str)           : Field vector to be compared against query vector.
+        index           (str)       : Name of the index.
+        vector_name     (str)       : Field vector to be compared against query vector.
+        query_vector    (np.ndarray): Query vector.
+        source_query    (dict)      : Fields to include in result hits.
+        nested          (bool)      : Indication if the query involves nested fields.
+        source_nested   (dict)      : Fields to include in 
 
     Returns:
         dict: Return hits.
     '''    
     cos = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
+    script =  {"source": cos, "params": {"query_vector": query_vector}}
 
-    script_query = {
-        "script_score": {
-            "query" : {"match_all": {}},
-            "script": {"source": cos, "params": {"query_vector": query_vector}}
+
+    
+    # Query script for single field (without nesting).
+    query = {"script_score": {"query" : {"match_all": {}}, "script" : script}}
+    
+    # Query script for nested fields (path indicates the nested field).
+    path = vector_name.split('.')[0]
+    query_nested = {
+        "nested": {
+            "score_mode": "max" ,
+            "path"      : path  ,
+            "inner_hits": {"size": 1, "name": "nested", "_source": source_nested},
+            "query"     : {"function_score": {"script_score": {"script": script}}}
         }
     }
 
-    response = await config.es_client.search(
-        index   = config.es_combined_index,
-        query   = script_query,
-        size    = 10,
-        _source = source_query
-    )
+    if not nested:
+        response = await config.es_client.search(
+            index   = index         ,
+            query   = query         ,
+            size    = 100            ,
+            _source = source_query
+        )
+    else:
+        response = await config.es_client.search(
+            index   = index         ,
+            query   = query_nested  ,
+            size    = 100           ,
+            _source = source_query
+        )
 
     hits = response['hits']['hits']
-
+    
+    # Add max. scored nested field as a field to main item.
+    if nested:
+        for item in hits:
+            nested = item['inner_hits']['nested']['hits']['hits'][0]['_source']
+            item['_source'][path] = item['inner_hits']['nested']['hits']['hits'][0]['_source']  
+    
     return hits
 
 async def _handle_es_query(
-    question    : str,
-    pest_damage : str
-    ) -> Tuple[dict, dict, dict, dict]:
+    question    : str
+    ) -> Tuple[dict, dict, dict]:
     '''Perform search in ES base.
 
     Args:
-        question (str)      : Question.
-        pest_damage (str)   : Pest damage description.
+        question    (str) : Question.
 
     Returns:
-        Tuple[dict, dict, dict, dict]: return tuples for AE data matches, name matches, other sources matches, and damage matches. 
+        Tuple[dict, dict, dict]: return tuples for problems, information and askextension matches. 
     '''    
     
-    if pest_damage:
-        question = '. '.join([question, pest_damage])    
-    
-    question_vector = config.embed([question]).numpy()[0]
+    query_vector = config.embed([question]).numpy()[0]
    
+    problem_hits        = {}
+    information_hits    = {}
+    ask_hits            = {}
     
-    source_query = {
-        "includes": [
-            "doc_id"    ,
-            "name"      ,
+    # ----------------------------------------------- Problem index
+    index_config = {
+        "index" : "problem",
+        "sq"    : {"includes": ["source", "url", "name", "description", "identification", "development", "damage", "management"]},
+        "cols"  : ['name', 'description', 'identification', 'development', 'damage', 'management'],
+        "nested": [{"name": "links.title", "sq_nested": ['links.type', 'links.title', 'links.src']}]
+    }
 
-            "urlPestDiseaseItems"           ,
-            "descriptionPestDiseaseItems"   ,
-            "identificationPestDiseaseItems",
-            "life_cyclePestDiseaseItems"    ,
-            "damagePestDiseaseItems"        ,
-            "solutionsPestDiseaseItems"     ,
+    for c in index_config['cols']:
+        problem_hits[c] = await _cos_sim_query(
+            index           = index_config['index']     ,
+            vector_name     = c + '_vector'             ,
+            query_vector    = query_vector              ,
+            source_query    = index_config['sq']
+        )
+    
+    for nested in index_config['nested']:
+        problem_hits[nested['name']] = await _cos_sim_query(
+            index           = index_config['index']     ,
+            vector_name     = nested['name'] + '_vector',   
+            query_vector    = query_vector              , 
+            source_query    = index_config['sq']        ,
+            nested          = True                      ,
+            source_nested   = nested['sq_nested']
+        )
 
-            "urlTurfPests"                  ,
-            "textTurfPests"                 ,
-
-            "urlWeedItems"                  ,
-            "descriptionWeedItems"          ,
-            
-            "urlExoticPests"                ,
-            "descriptionExoticPests"        ,
-            "damageExoticPests"             ,
-            "identificationExoticPests"     ,
-            "life_cycleExoticPests"         ,
-            "monitoringExoticPests"         ,
-            "managementExoticPests"         ,
-
-            "urlPestNote"                   ,
-            "urlQuickTipPestNote"           ,
-            "descriptionPestNote"           ,
-            "life_cyclePestNote"            ,
-            "damagePestNote"                ,
-            "managementPestNote"            ,
-            "contentQuickTipsPestNote"      ,
-
-            "ask_url"                       ,
-            "ask_faq_id"                    ,
-            "ask_title"                     ,
-            "ask_title_question"            ,
-            "ask_question"
+    # ----------------------------------------------- Information index
+    index_config = {
+        "index" : "information",
+        "sq"    : {"includes": ["source", "url", "name", "description", "management"]},
+        "cols"  : ['name', 'description', 'management'],
+        "nested": [
+            {"name": "links.title"      , "sq_nested": ['links.type', 'links.title', 'links.src']},
+            {"name": "problems.title"   , "sq_nested": ['problems.title', 'problems.src'        ]},
         ]
     }
 
-    es_ask_hits     = {}
-    es_name_hits    = {}
-    es_other_hits   = {}
-    es_damage_hits  = {}
-    # es_caption_hits = {}
-    # es_video_hits   = {}
-
-    es_name_hits['name'] = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'name_vector'
-    )
-
+    for c in index_config['cols']:
+        information_hits[c] = await _cos_sim_query(
+            index           = index_config['index']     ,
+            vector_name     = c + '_vector'             ,
+            query_vector    = query_vector              ,
+            source_query    = index_config['sq']
+        )
     
-    '''
-    Pest Diseases Items
+    for nested in index_config['nested']:
+        information_hits[nested['name']] = await _cos_sim_query(
+            index           = index_config['index']     ,
+            vector_name     = nested['name'] + '_vector',   
+            query_vector    = query_vector              , 
+            source_query    = index_config['sq']        ,
+            nested          = True                      ,
+            source_nested   = nested['sq_nested']
+        )
 
-    "descriptionPestDiseaseItems_vector"
-    "identificationPestDiseaseItems_vector"
-    "life_cyclePestDiseaseItems_vector"
-    "damagePestDiseaseItems_vector"
-    "solutionsPestDiseaseItems_vector"
-
-    "imagesPestDiseaseItems"    : "caption_vector"
-    '''
-    es_other_hits['pd_description']     = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'descriptionPestDiseaseItems_vector'
-    )
-
-    es_other_hits['pd_identification']  = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'identificationPestDiseaseItems_vector'
-    )
-
-    es_other_hits['pd_life_cycle']      = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'life_cyclePestDiseaseItems_vector'
-    )
-
-    es_damage_hits['pd_damage_hits']    = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'damagePestDiseaseItems_vector'
-    )
+    # ----------------------------------------------- AskExtension index
+    index_config = {
+        "index" : "askextension",
+        "sq"    : {"includes": ["ticket_no", "url", "created", "title", "question"]},
+        "cols"  : ['title_question'],
+        "nested": [
+            {"name": "tags.tag"         , "sq_nested": ['tags.tag'          ]},
+            {"name": "answer.response"  , "sq_nested": ['answer.response'   ]},
+        ]
+    }
+    for c in index_config['cols']:
+        ask_hits[c] = await _cos_sim_query(
+            index           = index_config['index']     ,
+            vector_name     = c + '_vector'             ,
+            query_vector    = query_vector              ,
+            source_query    = index_config['sq']
+        )
     
-    es_other_hits['pd_solutions']       = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'solutionsPestDiseaseItems_vector'
-    )
-
-    '''
-    Turf Pests
-
-    "textTurfPests_vector"
-    "imagesTurfPests": "caption_vector"
-    '''
-    es_other_hits['tp_text']            = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'textTurfPests_vector'
-    )
-
-    '''
-    Weed Items
-
-    "descriptionWeedItems_vector"
-    "imagesWeedItems": "caption_vector"
-    '''
-    es_other_hits['wi_text']            = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'descriptionWeedItems_vector'
-    )
-
-    '''
-    Exotic Pests
-
-    "descriptionExoticPests_vector"
-    "damageExoticPests_vector"
-    "identificationExoticPests_vector"
-    "life_cycleExoticPests_vector"
-    "monitoringExoticPests_vector"
-    "managementExoticPests_vector"
-
-    "related_linksExoticPests"  : "text_vector"
-    "imagesExoticPests"         : "caption_vector"
-    '''
-    es_other_hits['ep_description']     = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'descriptionExoticPests_vector'
-    )
-
-    es_damage_hits['ep_damage']         = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'damageExoticPests_vector'
-    )
+    for nested in index_config['nested']:
+        ask_hits[nested['name']] = await _cos_sim_query(
+            index           = index_config['index']     ,
+            vector_name     = nested['name'] + '_vector',   
+            query_vector    = query_vector              , 
+            source_query    = index_config['sq']        ,
+            nested          = True                      ,
+            source_nested   = nested['sq_nested']
+        )
     
-    es_other_hits['ep_identification']  = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'identificationExoticPests_vector'
-    )
+    return (problem_hits, information_hits, ask_hits)
 
-    es_other_hits['ep_life_cycle']      = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'life_cycleExoticPests_vector'
-    )
-
-    es_other_hits['ep_monitoring']      = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'monitoringExoticPests_vector'
-    )
-
-    es_other_hits['ep_management']      = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'managementExoticPests_vector'
-    )
-
-    '''
-    IPM Data
-
-    "descriptionPestNote_vector"
-    "life_cyclePestNote_vector"
-    "damagePestNote_vector"
-    "managementPestNote_vector"
-    "contentQuickTipsPestNote_vector"
-
-    "imageQuickTipsPestNote"    : "caption_vector"
-    "imagePestNote"             : "caption_vector"
-    "videoPestNote"             : "videoPestNote"
-    '''
-    es_other_hits['pn_description']     = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'descriptionPestNote_vector'
-    )
-
-    es_other_hits['pn_life_cycle']      = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'life_cyclePestNote_vector'
-    )
-
-    es_damage_hits['pn_damage']         = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'damagePestNote_vector'
-    )
-
-    es_other_hits['pn_management']      = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'managementPestNote_vector'
-    )
-
-    es_other_hits['pn_content_tips']    = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'contentQuickTipsPestNote_vector'
-    )
-
-    '''
-    AskExtension data
-    
-    "ask_title_vector"
-    "ask_title_question_vector"
-    "ask_question_vector"
-
-    "ask_answer" : "response_vector"
-    '''
-
-    es_ask_hits['ask_name_title']   = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'ask_title_vector'
-    )
-
-    es_ask_hits['ask_question']     = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'ask_title_question_vector'
-    )
-
-    es_ask_hits['ask_damage']       = await _cos_sim_query(
-        source_query    = source_query,
-        query_vector    = question_vector,
-        vector_name     = 'ask_title_question_vector'
-    )
-
-    return (es_ask_hits, es_name_hits, es_other_hits, es_damage_hits)
 
 def _handle_es_result(
-    es_ask_hits     : dict,
-    es_name_hits    : dict,
-    es_other_hits   : dict,
-    es_damage_hits  : dict
+    problem_hits    : dict,
+    information_hits: dict,
+    ask_hits        : dict
     ) -> Tuple[dict, dict]:
     '''Merge different sources into single source.
 
     Args:
-        es_ask_hits (dict)      : Results from Ask Extension data.
-        es_name_hits (dict)     : Results from name vector comparison.
-        es_other_hits (dict)    : Results from other fields.
-        es_damage_hits (dict)   : Results from damage-related fields.
+        problem_hits        (dict): Results from problems data.
+        information_hits    (dict): Results from information data.
+        ask_hits            (dict): Results from ask extension data.
 
     Returns:
-        Tuple[dict, dict]: Two dictionaries, for Ask Extension results and IPM data results.
+        Tuple[dict, dict, dict]: Three dictionaries, for problem, 
+        information and ask extension results correspondingly.
     '''
 
-    '''
-    ask extension data
-    
-    es_ask_hits has following keys: ['ask_name_title', 'ask_question', 'ask_damage']
-    '''
+    # --------------------------------------- Problem results
     hits = []
+    
+    cols = ['name', 'description', 'identification', 'development', 'damage', 'management']
+    for col in cols:
+        for h1 in problem_hits[col]:
 
-    for h1 in (es_ask_hits['ask_name_title'] + es_ask_hits['ask_question'] + es_ask_hits['ask_damage']):
-        
-        h1['_score_max'] = h1.get('_score', 0.0)
-        duplicate = False
-        
-        for h2 in hits:
-            if h1['_source']['doc_id'] == h2['_source']['doc_id']:
-                h2['_score_max'] = max(h2.get('_score_max', 0.0), h1['_score'])
-                duplicate = True
-        
-        if not duplicate:
-            hits.append(h1)
+            h1['_score_max'] = h1.get('_score', 0.0)
+            duplicate = False
+            
+            for h2 in hits:
+                if h1['_id'] == h2['_id']:
+                    h2['_score_max'] = max(h2.get('_score_max', 0.0), h1['_score'])
+
+                    duplicate = True
+            
+            if not duplicate:
+                hits.append(h1)
 
     if len(hits):
         hits = sorted(hits, key = lambda h: h['_score_max'], reverse = True)
 
-    # new field - _score_max
-    hits_ask = hits
+    hits_problem = hits
 
-    '''
-    ipm data - es_name_hits
+    # --------------------------------------- Information results
+    hits = []
     
-    es_name_hits has following keys: ['name']
-    '''
-    hits = es_name_hits['name']
+    cols = ['name', 'description', 'management']
+    for col in cols:
+        for h1 in information_hits[col]:
 
-    for h1 in hits:
-        h1['_score_name']   = h1.get('_score', 0.0)
+            h1['_score_max'] = h1.get('_score', 0.0)
+            duplicate = False
+            
+            for h2 in hits:
+                if h1['_id'] == h2['_id']:
+                    h2['_score_max'] = max(h2.get('_score_max', 0.0), h1['_score'])
 
-    
-    '''
-    ipm data - es_other_hits
-
-    es_other_hits has following keys: 
-        # pest diseases - ['pd_description', 'pd_identification', 'pd_life_cycle', 'pd_solutions'   ]
-        # turf pests    - ['tp_text']
-        # weed items    - ['wi_text']
-        # exotic pests  - ['ep_description', 'ep_identification', 'ep_life_cycle', 'ep_monitoring'  , 'ep_management']
-        # pest notes    - ['pn_description', 'pn_life_cycle'    , 'pn_management', 'pn_content_tips']
-    
-    '''
-    for h1 in (
-        es_other_hits['pd_description'      ] +
-        es_other_hits['pd_identification'   ] +
-        es_other_hits['pd_life_cycle'       ] +
-        es_other_hits['pd_solutions'        ] + 
-        es_other_hits['tp_text'             ] + 
-        es_other_hits['wi_text'             ] +
-        es_other_hits['ep_description'      ] +
-        es_other_hits['ep_identification'   ] +
-        es_other_hits['ep_life_cycle'       ] +
-        es_other_hits['ep_monitoring'       ] +
-        es_other_hits['ep_management'       ] +
-        es_other_hits['pn_description'      ] +
-        es_other_hits['pn_life_cycle'       ] +
-        es_other_hits['pn_management'       ] +
-        es_other_hits['pn_content_tips'     ]
-        ):
-        
-        h1['_score_other'] = h1.get('_score', 0.0)
-        duplicate = False
-
-        for h2 in hits:
-            if h1['_source']['doc_id'] == h2['_source']['doc_id']:
-                h2['_score_other'] = max(h2.get('_score_other', 0.0), h1['_score'])
-                duplicate = True
-        
-        if not duplicate:
-            hits.append(h1)
-
-    '''
-    ipm data - es_damage_hits
-    es_damage_hits has following keys: ['pd_damage_hits', 'ep_damage', 'pn_damage']
-    '''
-    
-    for h1 in (
-        es_damage_hits['pd_damage_hits' ] +
-        es_damage_hits['ep_damage'      ] +
-        es_damage_hits['pn_damage'      ]
-        ):
-
-        h1['_score_damage'] = h1.get('_score', 0.0)
-        
-        for h2 in hits:
-            if h1['_source']['doc_id'] == h2['_source']['doc_id']:
-                h2['_score_damage'] = max(h2.get('_score_damage', 0.0), h1['_score'])
-                duplicate = True
-        
-        if not duplicate:
-            hits.append(h1)
-    
-    for h in hits:
-        h['_score_name'     ] = h.get('_score_name'   , 0.0)
-        h['_score_other'    ] = h.get('_score_other'  , 0.0)
-        h['_score_damage'   ] = h.get('_score_damage' , 0.0)
+                    duplicate = True
+            
+            if not duplicate:
+                hits.append(h1)
 
     if len(hits):
-        hits = sorted(hits, key = lambda h: h['_score'], reverse = True)
+        hits = sorted(hits, key = lambda h: h['_score_max'], reverse = True)
+    
+    hits_information = hits
 
-    # new fields - _score_name, _score_other, _score_damage
-    hits_ipm = hits
+    # --------------------------------------- Ask Extension results
+    hits = []
+    
+    cols = ['title_question']
+    for col in cols:
+        for h1 in ask_hits[col]:
 
-    return hits_ask, hits_ipm
+            h1['_score_max'] = h1.get('_score', 0.0)
+            duplicate = False
+            
+            for h2 in hits:
+                if h1['_id'] == h2['_id']:
+                    h2['_score_max'] = max(h2.get('_score_max', 0.0), h1['_score'])
+
+                    duplicate = True
+            
+            if not duplicate:
+                hits.append(h1)
+
+    if len(hits):
+        hits = sorted(hits, key = lambda h: h['_score_max'], reverse = True)
+    
+    hits_ask = hits
+
+    return hits_problem, hits_information, hits_ask
+
 
 def _weight_score(
-    hits_ask: dict, 
-    hits_ipm: dict
-    ) -> Tuple[dict, dict]:
+    problem_hits    : dict, 
+    information_hits: dict,
+    ask_hits        : dict
+    ) -> Tuple[dict, dict, dict]:
     '''Weight and merge scores.
 
     Args:
-        hits_ask (dict): Results for Ask Extension data.
-        hits_ipm (dict): Results for IPM data.
+        problem_hits        (dict): Sorted problems data.
+        information_hits    (dict): Sorted from information data.
+        ask_hits            (dict): Sorted from ask extension data.
 
     Returns:
         Tuple[dict, dict]: Sorted data with new scores.
@@ -453,281 +289,198 @@ def _weight_score(
     ########################################################################
     # For searches in the askextension data, we do not weigh. Already maxed.
 
-    if len(hits_ask) > 0:
-        hits_ask = sorted(hits_ask, key=lambda h: h['_score_max'], reverse=True)
+    # if len(hits_ask) > 0:
+    #     hits_ask = sorted(hits_ask, key=lambda h: h['_score_max'], reverse=True)
 
-    #######################################################################
-    if len(hits_ipm) > 0:
-        for hit in hits_ipm:
-            score_name      = hit.get('_score_name'     , 0.0)
-            score_other     = hit.get('_score_other'    , 0.0)
-            score_damage    = hit.get('_score_damage'   , 0.0)
+    # #######################################################################
+    # if len(hits_ipm) > 0:
+    #     for hit in hits_ipm:
+    #         score_name      = hit.get('_score_name'     , 0.0)
+    #         score_other     = hit.get('_score_other'    , 0.0)
+    #         score_damage    = hit.get('_score_damage'   , 0.0)
 
-            w = [0.8, 0.05, 0.05]
+    #         w = [0.8, 0.05, 0.05]
 
-            if score_damage < 1.0:
-                w[0] += 0.5 * w[2]
-                w[1] += 0.5 * w[2]
-                w[2] = 0.0
+    #         if score_damage < 1.0:
+    #             w[0] += 0.5 * w[2]
+    #             w[1] += 0.5 * w[2]
+    #             w[2] = 0.0
 
-            hit['_score_weighted'] = (
-                w[0] * score_name + w[1] * score_other + w[2] * score_damage
-            )
+    #         hit['_score_weighted'] = (
+    #             w[0] * score_name + w[1] * score_other + w[2] * score_damage
+    #         )
 
-        # Sort to weighted score
-        hits_ipm = sorted(hits_ipm, key=lambda h: h['_score_weighted'], reverse=True)
+    #     # Sort to weighted score
+    #     hits_ipm = sorted(hits_ipm, key=lambda h: h['_score_weighted'], reverse=True)
 
     # Do not filter on threshold. Leave this up to the caller
-    return hits_ask, hits_ipm
+    return problem_hits, information_hits, ask_hits
 
 def _format_result(
     index           = None,
     score           = None,
     url             = None,
     title           = None,
-    question        = None,
     description     = None,
     damage          = None,
     identification  = None,
-    life_cycle      = None,
-    monitoring      = None,
+    development     = None,
     management      = None,
-    solutions       = None,
-    quicktips       = None
     ) -> dict:
 
     res = {}
     res['title'] = (f'<p>{index+1})<em><a href="{url}" target="_blank">{title}</a></em></br>(score: {score:.2f})</p>')
     res['description'] = ''
-    if question:
-        res['description'] += (f'<p><strong>Question</strong>: {question[:100]}</p></br>'        )
     if description:
-        res['description'] += (f'<p><strong>Description</strong>: {description[:100]}</p></br>'     )
+        res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'     )
     if damage:
         res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'          )
     if identification:
         res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'  )
-    if life_cycle:
-        res['description'] += (f'<p><strong>Life Cycle</strong>: {life_cycle[:100]}</p></br>'      )
-    if monitoring:
-        res['description'] += (f'<p><strong>Monitoring</strong>: {monitoring[:100]}</p></br>'      )
+    if development:
+        res['description'] += (f'<p><strong>Development</strong>: {development[:100]}</p></br>'      )
     if management:
         res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'      )
-    if solutions:
-        res['description'] += (f'<p><strong>Solutions</strong>: {solutions[:100]}</p></br>'       )
-    if quicktips:
-        res['description'] += (f'<p><strong>Quick Tips</strong>: {quicktips[:100]}</p></br>'       )
     
     return res
 
 def _get_text(
-    hits_ask: dict, 
-    hits_ipm: dict, 
-    ) -> Tuple[dict, dict]:
+    problem_hits    : dict,
+    information_hits: dict,
+    ask_hits        : dict
+    ) -> Tuple[dict, dict, dict]:
     '''Print results.
 
     Args:
-        hits_ask (dict): Results from Ask Extension base.
-        hits_ipm (dict): Results from IPM data.
+        problem_hits        (dict): Sorted results from problems index.
+        information_hits    (dict): Sorted results from information index.
+        ask_hits            (dict): Sorted results from ask extension index.
+    
+    Returns:
+        Tuple[dict, dict, dict]: Sorted data with new scores.
     '''    
-    res_ask = {
+    res_problems    = {
+        'text'      : 'Top 3 results from IPM problem sources:',
+        'payload'   : 'collapsible',
+        'data'      : []
+    }
+
+    res_information = {
+        'text'      : 'Top 3 results from IPM information sources:',
+        'payload'   : 'collapsible',
+        'data'      : []
+    }
+
+    res_ask         = {
         'text'      : 'Top 3 results from Ask Extension Base:',
         'payload'   : 'collapsible',
         'data'      : []
     }
 
-    res_ipm = {
-        'text'      : 'Top 3 results from IPM Base:',
-        'payload'   : 'collapsible',
-        'data'      : []
-    }
-
-    if len(hits_ask):
-
+    if len(problem_hits):
         '''
         Fields:
-        "ask_url"
-        "ask_faq_id"
-        "ask_title"
-        "ask_title_question"
-        "ask_question"
+        "source"
+        "url"
+        "name"
+        "description"
+        "identification"
+        "development"
+        "damage"
+        "management"
         '''
-        for i, h in enumerate(hits_ask[:3]):
-            score   = h.get('_score_max', 0.0)
-            source  = h.get('_source')
+            
+        for i, h in enumerate(problem_hits[:3]):
+            score   = h.get('_score_max', 0.0   )
+            source  = h.get('_source'           )
 
-            url         = source.get('ask_url'      )
-            title       = source.get('ask_title'    )
-            question    = source.get('ask_question' )
+            # group           = source.get("source"           )
+            url             = source.get("url"              )
+            name            = source.get("name"             )
+            description     = source.get("description"      )
+            identification  = source.get("identification"   )
+            development     = source.get("development"      )
+            damage          = source.get("damage"           )
+            management      = source.get("management"       )
 
-            res_ask['data'].append(
+            res_problems['data'].append(
                 _format_result(
-                    index       = i         ,
-                    score       = score     ,
-                    url         = url       ,
-                    title       = title     ,
-                    question    = question
+                    index           = i             ,
+                    score           = score         ,
+                    url             = url           ,
+                    title           = name          ,
+                    description     = description   ,
+                    identification  = identification,
+                    development     = development   ,
+                    damage          = damage        ,
+                    management      = management
                 )
             )
 
-    if len(hits_ipm):
-
-        for i, h in enumerate(hits_ipm[:3]):
-            score   = h.get('_score_weighted', 0.0)
+    if len(information_hits):
+        '''
+        Fields:
+        "source"
+        "url"
+        "name"
+        "description"
+        "management"
+        '''            
+        for i, h in enumerate(information_hits[:3]):
+            
+            score   = h.get('_score_max', 0.0)
             source  = h.get('_source')
 
-            if source['urlPestDiseaseItems'] != '':
-                
-                '''
-                Fields:
-                "name"
-                "urlPestDiseaseItems"   
-                "descriptionPestDiseaseItems"
-                "identificationPestDiseaseItems"
-                "life_cyclePestDiseaseItems"
-                "damagePestDiseaseItems"
-                "solutionsPestDiseaseItems"
-                '''
-                url             = source.get('urlPestDiseaseItems'              )
-                name            = source.get('name'                             )
-                description     = source.get('descriptionPestDiseaseItems'      )
-                identification  = source.get('identificationPestDiseaseItems'   )
-                life_cycle      = source.get('life_cyclePestDiseaseItems'       )
-                damage          = source.get('damagePestDiseaseItems'           )
-                solutions       = source.get('solutionsPestDiseaseItems'        )
+            # group           = source.get("source")
+            url             = source.get("url")
+            name            = source.get("name")
+            description     = source.get("description")
+            management      = source.get("management")
 
-                res_ipm['data'].append(
-                    _format_result(
-                        index           = i             ,
-                        score           = score         ,
-                        url             = url           ,
-                        title           = name          ,
-                        description     = description   ,
-                        identification  = identification,
-                        life_cycle      = life_cycle    ,
-                        damage          = damage        ,
-                        solutions       = solutions
-                    )
+            res_information['data'].append(
+                _format_result(
+                    index           = i             ,
+                    score           = score         ,
+                    url             = url           ,
+                    title           = name          ,
+                    description     = description   ,
+                    management      = management
                 )
-                
-            elif source['urlTurfPests'] != '': 
-                '''
-                Fields:
-                "name"
-                "urlTurfPests"
-                "textTurfPests"
-                '''
-                url             = source.get('urlTurfPests' )
-                name            = source.get('name'         )
-                description     = source.get('textTurfPests')
+            )
 
-                res_ipm['data'].append(
-                    _format_result(
-                        index           = i             ,
-                        score           = score         ,
-                        url             = url           ,
-                        title           = name          ,
-                        description     = description
-                    )
+    if len(ask_hits):
+        '''
+        Fields:
+        "ticket_no"
+        "url""
+        "created"
+        "title"
+        "question"
+        '''
+            
+        for i, h in enumerate(ask_hits[:3]):
+            score   = h.get('_score_max', 0.0)
+            source  = h.get('_source')
+
+            # ticket_no       = source.get("ticket_no")
+            url             = source.get("url")
+            # created         = source.get("created")
+            title           = source.get("title")
+            question        = source.get("question")
+
+            res_ask['data'].append(
+                _format_result(
+                    index           = i             ,
+                    score           = score         ,
+                    url             = url           ,
+                    title           = title         ,
+                    description     = question      ,
                 )
-
-                
-            elif source['urlWeedItems'] != '':
-                '''
-                Fields:
-                "name"
-                "urlWeedItems"
-                "descriptionWeedItems"
-                '''
-                url             = source.get('urlWeedItems'         )
-                name            = source.get('name'                 )
-                description     = source.get('descriptionWeedItems' )
-                
-                res_ipm['data'].append(
-                    _format_result(
-                        index           = i             ,
-                        score           = score         ,
-                        url             = url           ,
-                        title           = name          ,
-                        description     = description
-                    )
-                )
-
-            elif source['urlExoticPests'] != '':
-                '''
-                Fields:
-                "name"
-                "urlExoticPests"
-                "descriptionExoticPests"
-                "damageExoticPests"
-                "identificationExoticPests"
-                "life_cycleExoticPests"
-                "monitoringExoticPests"
-                "managementExoticPests"
-                '''
-                url             = source.get('urlExoticPests'               )
-                name            = source.get('name'                         )
-                description     = source.get('descriptionExoticPests'       )
-                damage          = source.get('damageExoticPests'            )
-                identification  = source.get('identificationExoticPests'    )
-                life_cycle      = source.get('life_cycleExoticPests'        )
-                monitoring      = source.get('monitoringExoticPests'        )
-                management      = source.get('managementExoticPests'        )
-                
-                res_ipm['data'].append(
-                    _format_result(
-                        index           = i             ,
-                        score           = score         ,
-                        url             = url           ,
-                        title           = name          ,
-                        description     = description   ,
-                        damage          = damage        ,
-                        identification  = identification,
-                        monitoring      = monitoring    ,
-                        life_cycle      = life_cycle    ,
-                        management      = management
-                    )
-                )
-
-            elif source['urlPestNote'] != '':
-                '''
-                Fields:
-                "name"
-                "urlPestNote"
-                "urlQuickTipPestNote"
-                "descriptionPestNote"
-                "life_cyclePestNote"
-                "damagePestNote"
-                "managementPestNote"
-                "contentQuickTipsPestNote"
-                '''
-                url             = source.get('urlPestNote'               )
-                name            = source.get('name'                      )
-                description     = source.get('descriptionPestNote'       )
-                life_cycle      = source.get('life_cyclePestNote'        )
-                damage          = source.get('damagePestNote'            )
-                management      = source.get('managementPestNote'        )
-                quicktips       = source.get('contentQuickTipsPestNote'  )
-
-                res_ipm['data'].append(
-                    _format_result(
-                        index           = i             ,
-                        score           = score         ,
-                        url             = url           ,
-                        title           = name          ,
-                        description     = description   ,
-                        life_cycle      = life_cycle    ,
-                        damage          = damage        ,
-                        management      = management    ,
-                        quicktips       = quicktips
-                    )
-                )
-
-    return res_ask, res_ipm
+            )
+    return res_problems, res_information, res_ask
 
 async def submit(
     question    : str,
-    pest_damage : str
     ) -> Tuple[dict, dict]:
     
     '''Perform ES query, transform results, print them, and return results.
@@ -740,28 +493,40 @@ async def submit(
         Tuple[dict, dict]: Sorted data with new scores.
     '''   
     (
-        es_ask_hits,
-        es_name_hits,
-        es_other_hits,
-        es_damage_hits
+        hits_damage     ,
+        hits_information,
+        hits_ask
     ) = await _handle_es_query(
-        question,
-        pest_damage
+        question
     )
 
-    hits_ask, hits_ipm = _handle_es_result(
-        es_ask_hits,
-        es_name_hits,
-        es_other_hits,
-        es_damage_hits
+    (
+        hits_damage     ,
+        hits_information,
+        hits_ask
+    ) = _handle_es_result(
+        hits_damage     ,
+        hits_information,
+        hits_ask
     )
 
-    hits_ask, hits_ipm = _weight_score(
-        hits_ask, hits_ipm
+    (
+        hits_damage     ,
+        hits_information,
+        hits_ask
+    ) = _weight_score(
+        hits_damage     ,
+        hits_information,
+        hits_ask
     )
 
-    res_ask, res_ipm = _get_text(hits_ask, hits_ipm)
+    res_problems, res_information, res_ask = _get_text(
+        hits_damage     ,
+        hits_information,
+        hits_ask
+    )
+    
     # _print_hits(hits_ask, 'Ask Extension'   )
     # _print_hits(hits_ipm, 'IPM Data'        )
     
-    return res_ask, res_ipm
+    return res_problems, res_information, res_ask
