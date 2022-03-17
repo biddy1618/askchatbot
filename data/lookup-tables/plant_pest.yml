@@ -22,6 +22,7 @@ nlu:
     - coyotes
     - dandelions
     - deer
+    - disease
     - dodder
     - drosophilas
     - earwigs
@@ -65,7 +66,6 @@ nlu:
     - pepperweeds
     - pigs
     - plantains
-    - plants
     - psyllids
     - purslane
     - rabbits

@@ -53,14 +53,14 @@ async def _cos_sim_query(
         response = await config.es_client.search(
             index   = index         ,
             query   = query         ,
-            size    = 100            ,
+            size    = 10            ,
             _source = source_query
         )
     else:
         response = await config.es_client.search(
             index   = index         ,
             query   = query_nested  ,
-            size    = 100           ,
+            size    = 10           ,
             _source = source_query
         )
 

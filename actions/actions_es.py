@@ -27,27 +27,32 @@ class ValidateESQueryForm(FormValidationAction):
     def name(self) -> Text:
         return 'validate_es_query_form'
 
-    # async def required_slots(
-    #     self,
-    #     domain_slots: List[Text],
-    #     dispatcher  : CollectingDispatcher,
-    #     tracker     : Tracker,
-    #     domain      : Dict[Text, Any],
-    #     ) -> List[Text]:
-    #     '''A list of required slots that the form has to fill.'''
+    async def required_slots(
+        self,
+        domain_slots: List[Text],
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any],
+        ) -> List[Text]:
+        '''A list of required slots that the form has to fill.'''
 
-    #     logger.info('validate_es_query_form - required slots - START')
-        
+        logger.info('validate_es_query_form - required slots - START')
 
-    #     updated_slots = domain_slots.copy()
-        
-    #     if tracker.get_slot('pest_causes_damage') == 'no':
-    #         updated_slots.remove('pest_damage_description')
-        
-    #     logger.info(f'validate_es_query_form - required slots - {updated_slots}')
-    #     logger.info(f'validate_es_query_form - required slots - END')
+        updated_slots = domain_slots.copy()
+        logger.info(f'validate_es_query_form - tracker - {tracker.get_slot("requested_slot")}')
+        logger.info(f'validate_es_query_form - required slots - {updated_slots}')
+        # logger.info(f'validate_es_query_form - problem_description - {tracker.get_slot("problem_description")}')
+        logger.info(f'validate_es_query_form - slots_to_validate - {tracker.slots_to_validate()}')
 
-    #     return updated_slots
+        if tracker.get_slot("problem_description") is not None:
+            for slot in domain_slots:
+                logger.info(f'validate_es_query_form - slot - {slot}')        
+                if slot not in tracker.slots_to_validate(): updated_slots.remove(slot)
+        
+        logger.info(f'validate_es_query_form - required slots - {updated_slots}')
+        logger.info(f'validate_es_query_form - required slots - END')
+
+        return updated_slots
 
     # def validate_plant_type(
     #     self,
@@ -70,28 +75,28 @@ class ValidateESQueryForm(FormValidationAction):
         
     #     logger.info('validate_plant_problem_form - validate_plant_type - END')
     #     return {'plant_type': plant_type}
-    def validate_problem_description(
-        self,
-        value       : Text,
-        dispatcher  : CollectingDispatcher,
-        tracker     : Tracker,
-        domain      : Dict[Text, Any],
-    ) -> Dict[Text, Any]:
+    # def validate_problem_description(
+    #     self,
+    #     value       : Text,
+    #     dispatcher  : CollectingDispatcher,
+    #     tracker     : Tracker,
+    #     domain      : Dict[Text, Any],
+    # ) -> Dict[Text, Any]:
 
-        plant_name          = next(tracker.get_latest_entity_values('plant_damage'       ), None)
-        plant_type          = next(tracker.get_latest_entity_values('plant_type'         ), None)
-        plant_part          = next(tracker.get_latest_entity_values('plant_part'         ), None)
-        plant_damage        = next(tracker.get_latest_entity_values('plant_damage'       ), None)
-        plant_pest          = next(tracker.get_latest_entity_values('plant_pest'         ), None)
-        logger.info(f'action_submit_es_query_form - required problem_description slot value - {value}')
-        logger.info(f'action_submit_es_query_form - optional plant_name slot value - {plant_name}'                  )
-        logger.info(f'action_submit_es_query_form - optional plant_type slot value - {plant_type}'                  )
-        logger.info(f'action_submit_es_query_form - optional plant_part slot value - {plant_part}'                  )
-        logger.info(f'action_submit_es_query_form - optional plant_damage slot value - {plant_damage}'              )
-        logger.info(f'action_submit_es_query_form - optional plant_pest slot value - {plant_pest}'                  )
+    #     plant_name          = list(tracker.get_latest_entity_values('plant_damage'       ))
+    #     plant_type          = list(tracker.get_latest_entity_values('plant_type'         ))
+    #     plant_part          = list(tracker.get_latest_entity_values('plant_part'         ))
+    #     plant_damage        = list(tracker.get_latest_entity_values('plant_damage'       ))
+    #     plant_pest          = list(tracker.get_latest_entity_values('plant_pest'         ))
+    #     logger.info(f'validate_es_query_form - required problem_description slot value - {value}')
+    #     logger.info(f'validate_es_query_form - optional plant_name slot value - {plant_name}'                  )
+    #     logger.info(f'validate_es_query_form - optional plant_type slot value - {plant_type}'                  )
+    #     logger.info(f'validate_es_query_form - optional plant_part slot value - {plant_part}'                  )
+    #     logger.info(f'validate_es_query_form - optional plant_damage slot value - {plant_damage}'              )
+    #     logger.info(f'validate_es_query_form - optional plant_pest slot value - {plant_pest}'                  )
 
     
-        return [SlotSet('problem_description', value)]
+    #     return {}
 
 
 

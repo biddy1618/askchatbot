@@ -208,31 +208,16 @@ responses:
 actions:
 - action_explain_ipm
 - action_greet
-# Decision Tree actions
-# - action_ask_plant_type
-# - action_ask_plant_name
-# - action_ask_plant_part
-# - action_ask_plant_damages
-# - validate_plant_problem_form
-# - action_submit_plant_problem_form
 # Knowledge Base Query actions
 - validate_es_query_form
-# - action_ask_question
 - action_submit_es_query_form
 forms:
-  # Decision Tree form
-  # plant_problem_form:
-  #   required_slots:
-  #   - plant_type
-  #   - plant_name
-  #   - plant_part
-  #   - plant_damages
   # ES forms
   es_query_form:
-    # ignored_intents: 
-    # - request_plant_problem
-    # - request_plant_picture
-    # - request_generic_question
-    # - request_expert
     required_slots:
     - problem_description
+    - plant_name
+    - plant_type
+    - plant_part
+    - plant_damage
+    - plant_pest

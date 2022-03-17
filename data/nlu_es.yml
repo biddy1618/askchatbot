@@ -31,32 +31,32 @@ nlu:
     - I have [ants](plant_pest)
     - I have [fire ants](plant_pest)
     - It is a small [insect](plant_pest)
-    - I have [cockroaches](plant_pest) near my [sink](plant_name)
+    - I have [cockroaches](plant_pest) near my sink
     - i have [bugs](plant_pest) on my [tomato plants](plant_name)
     - There is a hole in the trim on the wall
     - Affected branches are dying
     - Black spots on the ripe [tomatoes](plant_name).
-    - [Cockroaches](plant_pest) are invading my [house](plant_name)
+    - [Cockroaches](plant_pest) are invading my house
     - Eating leaves
     - Eating plant
     - How do I kill [cockroaches](plant_pest)?
     - How to manage pest in my farm
-    - I found dirt tunnels in my [basement](plant_name). When I broke up the dirt, I found little [bugs](plant_pest) and larve inside.
+    - I found dirt tunnels in my basement. When I broke up the dirt, I found little [bugs](plant_pest) and larve inside.
     - I have a [pest](plant_pest) in [collton planr](plant_name)
     - I have a [pest](plant_pest) in [cotton plant](plant_name)
     - I have a [pest](plant_pest) in [mango tree](plant_name)
-    - I have [ants](plant_pest) in my [kitchen](plant_name)
-    - I have [ants](plant_pest) in my [lawn](plant_name)
+    - I have [ants](plant_pest) in my kitchen
+    - I have [ants](plant_pest) in my lawn
     - I have black [bugs](plant_pest) in [begonias](plant_name)
-    - I have [cockroaches](plant_pest) near my [sink](plant_name)
-    - I have [dandelions](plant_pest) in my [lawn](plant_name)
-    - I have [flies](plant_pest) in the [house](plant_name)
-    - I have large black [bugs](plant_pest) running around on my [patio](plant_name) at night
+    - I have [cockroaches](plant_pest) near my sink
+    - I have [dandelions](plant_pest) in my lawn
+    - I have [flies](plant_pest) in the house
+    - I have large black [bugs](plant_pest) running around on my patio at night
     - I have spots on my [roses](plant_name)
     - I have what looks like clear gel coming out of my [peaches](plant_name).
-    - I think I may have [termites](plant_pest) in my [basement](plant_name). Who should I call?
+    - I think I may have [termites](plant_pest) in my basement. Who should I call?
     - I think i have spotted [lanternfly](plant_pest)
-    - Is roundup safe to use in my [garden](plant_name)?
+    - Is roundup safe to use in my garden?
     - [Late blight](plant_pest)
     - Leaves curling
     - My [bean](plant_name) seeds didn't germinate.
@@ -107,12 +107,12 @@ nlu:
     - some of large [beetle](plant_pest) eating my [willow tree](plant_name)
     - the [beetles](plant_pest) are eating holes in the trunk of the [tree](plant_name)
     - their bites are painful
-    - tiny [ants](plant_pest) in the [kitchen](plant_name)
+    - tiny [ants](plant_pest) in the kitchen
     - white fuzz on [apple tree](plant_name) leaves
     - I think i have spotted [lantern fly](plant_pest)
     - They look like [lantern flies](plant_pest)
     - [lanternflies](plant_pest)
-    - I have small green [grubs](plant_pest) in my [lawn](plant_name).
+    - I have small green [grubs](plant_pest) in my lawn.
     - [Downy mildew](plant_pest) of [roses](plant_name)
     ###### Examples from decision tree path
     - [flowers](plant_type)
