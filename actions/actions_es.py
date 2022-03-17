@@ -39,18 +39,17 @@ class ValidateESQueryForm(FormValidationAction):
         logger.info('validate_es_query_form - required slots - START')
 
         updated_slots = domain_slots.copy()
-        logger.info(f'validate_es_query_form - tracker - {tracker.get_slot("requested_slot")}')
-        logger.info(f'validate_es_query_form - required slots - {updated_slots}')
-        # logger.info(f'validate_es_query_form - problem_description - {tracker.get_slot("problem_description")}')
-        logger.info(f'validate_es_query_form - slots_to_validate - {tracker.slots_to_validate()}')
+        logger.info(f'validate_es_query_form - required_slots   - {updated_slots                }')
+        logger.info(f'validate_es_query_form - slots recognized - {tracker.slots_to_validate()  }')
 
         if tracker.get_slot("problem_description") is not None:
             for slot in domain_slots:
-                logger.info(f'validate_es_query_form - slot - {slot}')        
-                if slot not in tracker.slots_to_validate(): updated_slots.remove(slot)
+                if slot not in tracker.slots_to_validate(): 
+                    logger.info(f'validate_es_query_form - removing slot - {slot}')        
+                    updated_slots.remove(slot)
         
-        logger.info(f'validate_es_query_form - required slots - {updated_slots}')
-        logger.info(f'validate_es_query_form - required slots - END')
+        logger.info(f'validate_es_query_form - updated slots    - {updated_slots}')
+        logger.info(f'validate_es_query_form - required slots   - END')
 
         return updated_slots
 
@@ -116,25 +115,31 @@ class ActionSubmitESQueryForm(Action):
 
         logger.info(f'action_submit_es_query_form - run - START')
 
-        problem_description = tracker.get_slot('problem_description')
-        plant_name          = tracker.get_slot('plant_damage'       )
-        plant_type          = tracker.get_slot('plant_type'         )
-        plant_part          = tracker.get_slot('plant_part'         )
-        plant_damage        = tracker.get_slot('plant_damage'       )
-        plant_pest          = tracker.get_slot('plant_pest'         )
+        slots = {
+            'problem_description' : tracker.get_slot('problem_description'),
+            'plant_name'          : tracker.get_slot('plant_name'           ),
+            'plant_type'          : tracker.get_slot('plant_type'         ),
+            'plant_part'          : tracker.get_slot('plant_part'         ),
+            'plant_damage'        : tracker.get_slot('plant_damage'       ),
+            'plant_pest'          : tracker.get_slot('plant_pest'         )
+        }
 
-        logger.info(f'action_submit_es_query_form - required problem_description slot value - {problem_description}')
-        logger.info(f'action_submit_es_query_form - optional plant_name slot value - {plant_name}'                  )
-        logger.info(f'action_submit_es_query_form - optional plant_type slot value - {plant_type}'                  )
-        logger.info(f'action_submit_es_query_form - optional plant_part slot value - {plant_part}'                  )
-        logger.info(f'action_submit_es_query_form - optional plant_damage slot value - {plant_damage}'              )
-        logger.info(f'action_submit_es_query_form - optional plant_pest slot value - {plant_pest}'                  )
+        logger.info(f'action_submit_es_query_form - required problem_description    slot value - {slots["problem_description"   ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_name             slot value - {slots["plant_name"            ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_type             slot value - {slots["plant_type"            ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_part             slot value - {slots["plant_part"            ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_damage           slot value - {slots["plant_damage"          ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_pest             slot value - {slots["plant_pest"            ]}')
 
-        logger.info(f'action_submit_es_query_form - run - START')
+        slots_extracted = {s: slots[s] for s in slots if slots[s] is not None and s != 'problem_description'}
+        slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
+        
+        if config.debug:
+            dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance)
         
         if not config.es_imitate:
             res_problems, res_information, res_ask = await submit(
-                problem_description
+                slots['problem_description']
             )
 
             buttons = [
@@ -142,7 +147,6 @@ class ActionSubmitESQueryForm(Action):
                 {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
             ]
 
-            
             dispatcher.utter_message(text = res_problems['text']    , json_message = res_problems               )
             dispatcher.utter_message(text = res_information['text'] , json_message = res_information            )
             dispatcher.utter_message(text = res_ask['text']         , json_message = res_ask, buttons = buttons )
@@ -152,3 +156,17 @@ class ActionSubmitESQueryForm(Action):
             dispatcher.utter_message(message)
 
         return [SlotSet('done_query', True)]
+
+'''
+i)      add additional slot - location
+ii)     remove block of triplet and instead provide 1, and ask for the feedback
+iii)    sequential search - based on the query text (filter out)
+iv)     try asking additional details on the slots - proactive slot filling
+v)      implement the search based on decision tree
+vi)     implement out of the scope intent
+vii)    
+    *)  don't use curse words on me, please
+    *)  cut off score for the...
+    *)  make the cut off score configurable...
+    *)  
+'''

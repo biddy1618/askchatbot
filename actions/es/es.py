@@ -51,16 +51,16 @@ async def _cos_sim_query(
 
     if not nested:
         response = await config.es_client.search(
-            index   = index         ,
-            query   = query         ,
-            size    = 10            ,
+            index   = index                 ,
+            query   = query                 ,
+            size    = config.es_search_size ,
             _source = source_query
         )
     else:
         response = await config.es_client.search(
-            index   = index         ,
-            query   = query_nested  ,
-            size    = 10           ,
+            index   = index                 ,
+            query   = query_nested          ,
+            size    = config.es_search_size ,
             _source = source_query
         )
 

@@ -24,10 +24,16 @@ es_information_index    = os.getenv('ES_INFORMATION_INDEX'  , 'information'     
 es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                   )
 es_imitate              = es_imitate == 'true'
 
+debug                   = os.getenv('DEBUG'         , 'false'   )
+debug                   = debug == 'true'
+es_search_size          = os.getenv('ES_SEARCH_SIZE', '10'      )
+es_search_size          = int(es_search_size) if es_search_size.isdigit() else 10
+
 if stage == 'dev':
 
     logger.info('----------------------------------------------')
     logger.info('Environment variables are for DEV environment')
+    logger.info(f'- debug                   = {debug            }')
     logger.info('----------------------------------------------')
     
     
@@ -58,6 +64,8 @@ if stage == 'dev':
     ES_PROBLEM_MAPPING          = json.load(open(f'{_PATH}/data/mappings/problem_mapping.json'          ))
     ES_INFORMATION_MAPPING      = json.load(open(f'{_PATH}/data/mappings/information_mapping.json'      ))
 
+
+
 if not es_imitate:
     
     os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
@@ -67,11 +75,12 @@ if not es_imitate:
     
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch configuration:')
-    logger.info(f'- host                    = {es_host         }')
-    logger.info(f'- username                = {es_username     }')
-    logger.info(f'- password                = {es_password     }')
-    logger.info(f'- tfhub_embedding_url     = {tf_embed_url    }')
-    logger.info(f'- tfhub_cache_dir         = {tfhub_cache_dir }')
+    logger.info(f'- host                    = {es_host          }')
+    logger.info(f'- username                = {es_username      }')
+    logger.info(f'- password                = {es_password      }')
+    logger.info(f'- tfhub_embedding_url     = {tf_embed_url     }')
+    logger.info(f'- tfhub_cache_dir         = {tfhub_cache_dir  }')
+    logger.info(f'- es_search_size          = {es_search_size   }')
     logger.info('----------------------------------------------')
 
 
