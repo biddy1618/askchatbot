@@ -74,6 +74,7 @@ async def _cos_sim_query(
     
     return hits
 
+
 async def _handle_es_query(
     question    : str
     ) -> Tuple[dict, dict, dict]:
@@ -182,7 +183,7 @@ def _handle_es_result(
     problem_hits    : dict,
     information_hits: dict,
     ask_hits        : dict
-    ) -> Tuple[dict, dict]:
+    ) -> dict:
     '''Merge different sources into single source.
 
     Args:
@@ -191,8 +192,7 @@ def _handle_es_result(
         ask_hits            (dict): Results from ask extension data.
 
     Returns:
-        Tuple[dict, dict, dict]: Three dictionaries, for problem, 
-        information and ask extension results correspondingly.
+        dict: Merged and cut off results.
     '''
 
     # --------------------------------------- Problem results
@@ -267,57 +267,41 @@ def _handle_es_result(
     
     hits_ask = hits
 
-    return hits_problem, hits_information, hits_ask
+    # --------------------------------------- Score cut off filter and merge
+    hits = []
+
+    for h in hits_problem + hits_information + hits_ask:
+        if h['_score_max'] > config.es_cut_off + 1:
+            hits.append(h)
+
+    if len(hits):
+        hits = sorted(hits, key = lambda h: h['_score_max'], reverse = True)
+
+    return hits
 
 
 def _weight_score(
-    problem_hits    : dict, 
-    information_hits: dict,
-    ask_hits        : dict
-    ) -> Tuple[dict, dict, dict]:
+    hits: dict
+    ) -> dict:
     '''Weight and merge scores.
 
     Args:
-        problem_hits        (dict): Sorted problems data.
-        information_hits    (dict): Sorted from information data.
-        ask_hits            (dict): Sorted from ask extension data.
-
+        hits (dict): Sorted results.
+        
     Returns:
-        Tuple[dict, dict]: Sorted data with new scores.
+        dict: Sorted data with new scores.
     '''    
 
-    ########################################################################
-    # For searches in the askextension data, we do not weigh. Already maxed.
+    '''
+    TO BE IMPLEMENTED
+    '''
 
-    # if len(hits_ask) > 0:
-    #     hits_ask = sorted(hits_ask, key=lambda h: h['_score_max'], reverse=True)
+    return hits
 
-    # #######################################################################
-    # if len(hits_ipm) > 0:
-    #     for hit in hits_ipm:
-    #         score_name      = hit.get('_score_name'     , 0.0)
-    #         score_other     = hit.get('_score_other'    , 0.0)
-    #         score_damage    = hit.get('_score_damage'   , 0.0)
-
-    #         w = [0.8, 0.05, 0.05]
-
-    #         if score_damage < 1.0:
-    #             w[0] += 0.5 * w[2]
-    #             w[1] += 0.5 * w[2]
-    #             w[2] = 0.0
-
-    #         hit['_score_weighted'] = (
-    #             w[0] * score_name + w[1] * score_other + w[2] * score_damage
-    #         )
-
-    #     # Sort to weighted score
-    #     hits_ipm = sorted(hits_ipm, key=lambda h: h['_score_weighted'], reverse=True)
-
-    # Do not filter on threshold. Leave this up to the caller
-    return problem_hits, information_hits, ask_hits
 
 def _format_result(
     index           = None,
+    group           = None,
     score           = None,
     url             = None,
     title           = None,
@@ -329,7 +313,10 @@ def _format_result(
     ) -> dict:
 
     res = {}
-    res['title'] = (f'<p>{index+1})<em><a href="{url}" target="_blank">{title}</a></em></br>(score: {score:.2f})</p>')
+    res['title'] = (
+        f'<p>{index+1})<em>{title}</a></em></br>'
+        f'source: <a href="{url}" target="_blank">{group}</a> index</br>'
+        f'(score: {score-1:.2f})</br></p>')
     res['description'] = ''
     if description:
         res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'     )
@@ -345,39 +332,28 @@ def _format_result(
     return res
 
 def _get_text(
-    problem_hits    : dict,
-    information_hits: dict,
-    ask_hits        : dict
-    ) -> Tuple[dict, dict, dict]:
+    hits    : dict
+    ) -> dict:
     '''Print results.
 
     Args:
-        problem_hits        (dict): Sorted results from problems index.
-        information_hits    (dict): Sorted results from information index.
-        ask_hits            (dict): Sorted results from ask extension index.
-    
+        hits (dict): Sorted results from ES query.
+        
     Returns:
-        Tuple[dict, dict, dict]: Sorted data with new scores.
-    '''    
-    res_problems    = {
-        'text'      : 'Top 3 results from IPM problem sources:',
+        dict: Data for chatbot to return.
+    '''
+
+    top_n = int(config.es_top_n)
+    if len(hits) < config.es_top_n:
+        top_n = len(hits)
+
+    res = {
+        'text'      : f'Top {top_n} results from data sources:',
         'payload'   : 'collapsible',
         'data'      : []
     }
 
-    res_information = {
-        'text'      : 'Top 3 results from IPM information sources:',
-        'payload'   : 'collapsible',
-        'data'      : []
-    }
-
-    res_ask         = {
-        'text'      : 'Top 3 results from Ask Extension Base:',
-        'payload'   : 'collapsible',
-        'data'      : []
-    }
-
-    if len(problem_hits):
+    if len(hits):
         '''
         Fields:
         "source"
@@ -388,24 +364,37 @@ def _get_text(
         "development"
         "damage"
         "management"
+        "ticket_no"
+        "url""
+        "created"
+        "title"
+        "question"
+        
         '''
             
-        for i, h in enumerate(problem_hits[:3]):
+        for i, h in enumerate(hits[:top_n]):
             score   = h.get('_score_max', 0.0   )
+            group   = h.get('_index'    , None  )
             source  = h.get('_source'           )
 
-            # group           = source.get("source"           )
-            url             = source.get("url"              )
-            name            = source.get("name"             )
-            description     = source.get("description"      )
-            identification  = source.get("identification"   )
-            development     = source.get("development"      )
-            damage          = source.get("damage"           )
-            management      = source.get("management"       )
+            url             = source.get('url'              , None)
+            name            = source.get('name'             , None)
+            description     = source.get('description'      , None)
+            identification  = source.get('identification'   , None)
+            development     = source.get('development'      , None)
+            damage          = source.get('damage'           , None)
+            management      = source.get('management'       , None)
+        
+            # ticket_no       = source.get("ticket_no")
+            # created         = source.get("created")
+            if source.get('title', None):
+                name        = source.get('title'            , None)
+                description = source.get('question'         , None)
 
-            res_problems['data'].append(
+            res['data'].append(
                 _format_result(
                     index           = i             ,
+                    group           = group         ,
                     score           = score         ,
                     url             = url           ,
                     title           = name          ,
@@ -415,69 +404,8 @@ def _get_text(
                     damage          = damage        ,
                     management      = management
                 )
-            )
-
-    if len(information_hits):
-        '''
-        Fields:
-        "source"
-        "url"
-        "name"
-        "description"
-        "management"
-        '''            
-        for i, h in enumerate(information_hits[:3]):
-            
-            score   = h.get('_score_max', 0.0)
-            source  = h.get('_source')
-
-            # group           = source.get("source")
-            url             = source.get("url")
-            name            = source.get("name")
-            description     = source.get("description")
-            management      = source.get("management")
-
-            res_information['data'].append(
-                _format_result(
-                    index           = i             ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = name          ,
-                    description     = description   ,
-                    management      = management
-                )
-            )
-
-    if len(ask_hits):
-        '''
-        Fields:
-        "ticket_no"
-        "url""
-        "created"
-        "title"
-        "question"
-        '''
-            
-        for i, h in enumerate(ask_hits[:3]):
-            score   = h.get('_score_max', 0.0)
-            source  = h.get('_source')
-
-            # ticket_no       = source.get("ticket_no")
-            url             = source.get("url")
-            # created         = source.get("created")
-            title           = source.get("title")
-            question        = source.get("question")
-
-            res_ask['data'].append(
-                _format_result(
-                    index           = i             ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = title         ,
-                    description     = question      ,
-                )
-            )
-    return res_problems, res_information, res_ask
+            )   
+    return res
 
 async def submit(
     question    : str,
@@ -500,33 +428,17 @@ async def submit(
         question
     )
 
-    (
-        hits_damage     ,
-        hits_information,
-        hits_ask
-    ) = _handle_es_result(
+    hits = _handle_es_result(
         hits_damage     ,
         hits_information,
         hits_ask
     )
 
-    (
-        hits_damage     ,
-        hits_information,
-        hits_ask
-    ) = _weight_score(
-        hits_damage     ,
-        hits_information,
-        hits_ask
-    )
+    # hits = _weight_score(hits)
 
-    res_problems, res_information, res_ask = _get_text(
-        hits_damage     ,
-        hits_information,
-        hits_ask
-    )
+    res = _get_text(hits)
     
     # _print_hits(hits_ask, 'Ask Extension'   )
     # _print_hits(hits_ipm, 'IPM Data'        )
     
-    return res_problems, res_information, res_ask
+    return res

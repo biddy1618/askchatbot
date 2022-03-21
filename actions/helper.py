@@ -30,7 +30,7 @@ except:
     logger.error('  error loading static files')
 logger.info('----------------------------------------------')
 
-params = ['es_cut_off', 'es_search_size']
+params = ['es_cut_off', 'es_search_size', 'es_top_n']
     
 def _reset_slots(tracker: Tracker) -> List[Any]:
     '''Clean up slots from all previous forms.'''
@@ -137,7 +137,7 @@ def _jaccard_coef(s1: set, s2: set) -> float:
 def _parse_config_message(text: str) -> Tuple[str, str]:
     parameter, value = None, None
     try:
-        _, parameter, value    = [t.strip() for t in text.split(' ')]
+        _, parameter, value = [t.strip() for t in text.split(' ')]
         value               = float(value)
 
         if parameter not in params: raise Exception
@@ -150,11 +150,12 @@ def _get_config_message(config):
     message = (
         'Bot Configuration:</br>'
         f'Debug: {config.debug}</br>'
-        f'es_search_size: {config.es_search_size}</br>'
-        f'es_cut_off: {config.es_cut_off}</br></br>'
+        f'<strong>es_search_size <i>{config.es_search_size}</i></strong></br>'
+        f'<strong>es_cut_off <i>{config.es_cut_off}</i></strong></br>'
+        f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br></br>'
         'To change the configuration parameters, use following schema:</br>'
         'parameter <i>param_name value</i></br>'
-        '(i.e. <strong>parameter es_cut_off 0.5</strong>)'
+        '(i.e. <strong>parameter es_cut_off <i>0.5</i></strong>)'
     )
 
     return message

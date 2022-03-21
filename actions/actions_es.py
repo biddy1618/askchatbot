@@ -132,23 +132,22 @@ class ActionSubmitESQueryForm(Action):
         slots_extracted = {s: slots[s] for s in slots if slots[s] is not None and s != 'problem_description'}
         slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
         
+        dispatcher.utter_message(text = 'Working on your request...')
+        
         if config.debug:
-            dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance)
+            dispatcher.utter_message(text = 'Problem statement:</br>'   + slots['problem_description']  )
+            dispatcher.utter_message(text = 'Extracted slots:</br>'     + slots_utterance               )
         
         if not config.es_imitate:
-            res_problems, res_information, res_ask = await submit(
-                slots['problem_description']
-            )
+            
+            res = await submit(slots['problem_description'])
 
             buttons = [
                 {'title': 'Start over',             'payload': '/intent_greet'          },
                 {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
             ]
 
-            dispatcher.utter_message(text = res_problems['text']    , json_message = res_problems               )
-            dispatcher.utter_message(text = res_information['text'] , json_message = res_information            )
-            dispatcher.utter_message(text = res_ask['text']         , json_message = res_ask, buttons = buttons )
-
+            dispatcher.utter_message(text = res['text'], json_message = res, buttons = buttons)
         else:
             message = "Not doing an actual elastic search query."
             dispatcher.utter_message(message)

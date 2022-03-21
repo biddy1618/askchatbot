@@ -38,6 +38,11 @@ try: es_cut_off         = float(es_cut_off)
 except ValueError:
     logger.warning('ES_CUT_OFF variable should be float, using default value - 0.4'     )
     es_cut_off = 0.4
+es_top_n                = os.getenv('ES_TOP_N'      , '3'       )
+try: es_top_n           = int(es_top_n)
+except ValueError:
+    logger.warning('ES_TOP_N variable should be integer, using default value - 3'       )
+    es_cut_off = 3
 
 
 if stage == 'dev':
@@ -47,6 +52,7 @@ if stage == 'dev':
     logger.info(f'- debug           = {debug}'                  )
     logger.info(f'- es_search_size  = {es_search_size}'         )
     logger.info(f'- es_cut_off      = {es_cut_off}'             )
+    logger.info(f'- es_top_n        = {es_top_n}'               )
     logger.info('----------------------------------------------')
     
     
