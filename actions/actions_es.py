@@ -1,13 +1,11 @@
-from re import A
-from typing import Dict, Text, Any, List, Union, Optional
+from typing import Dict, Text, Any, List
 
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormValidationAction, ValidationAction
+from rasa_sdk.forms import FormValidationAction
 from rasa_sdk.events import (
     SlotSet,
-    EventType
 )
 
 import json

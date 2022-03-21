@@ -41,7 +41,7 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 300
+    epochs: 100
     constrain_similarities: true
   - name: SpacyEntityExtractor
   - name: RegexEntityExtractor
@@ -51,7 +51,6 @@ pipeline:
   - name: EntitySynonymMapper
   - name: FallbackClassifier
     threshold: 0.3
-    ambiguity_threshold: 0.1
 
 
 # Configuration for Rasa Core.
@@ -66,6 +65,10 @@ policies:
 # Follows rules definded in rules
 # https://rasa.com/docs/rasa/policies/#rule-policy
   - name: RulePolicy
+    core_fallback_threshold: 0.2
+    core_fallback_action_name: action_default_fallback
+    enable_fallback_prediction: True
+    check_for_contradictions: True
   # - name: UnexpecTEDIntentPolicy
   #   max_history: 5
   #   epochs: 100

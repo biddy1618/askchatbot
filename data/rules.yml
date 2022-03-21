@@ -2,6 +2,14 @@ version: "3.0"
 
 rules:
 
+# Debug rules
+- rule: Set the ES configuration parameter
+  steps:
+  - intent: intent_set_parameter
+  - action: action_set_parameter
+  - action: action_greet
+  - action: action_listen
+
 # Base rules
 - rule: Say goodbye anytime the user says goodbye
   steps:
@@ -17,6 +25,11 @@ rules:
   steps:
   - intent: intent_greet
   - action: action_greet
+
+- rule: Fallback rule
+  steps:
+  - intent: nlu_fallback
+  - action: action_default_fallback
 
 # Main rules
 - rule: More about IPM

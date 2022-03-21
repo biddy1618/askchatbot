@@ -13,13 +13,15 @@ from rasa_sdk.forms import FormValidationAction
 from rasa_sdk.events import (
     SlotSet,
     FollowupAction,
-    EventType
+    EventType,
+    UserUtteranceReverted
 )
 
 import logging
 logger = logging.getLogger(__name__)
 
 from actions import helper
+from actions.es import config
 
 
 class ActionGreet(Action):
@@ -42,6 +44,7 @@ class ActionGreet(Action):
         done_query              = tracker.get_slot('done_query')
 
         if not shown_greeting:
+            if config.debug: dispatcher.utter_message(text = helper._get_config_message(config))    
             dispatcher.utter_message(response = 'utter_greet')
         
         buttons = [
@@ -59,7 +62,6 @@ class ActionGreet(Action):
 
         logger.info('action_greet - END')
         return events
-
 
 
 class ActionExplainIPM(Action):
@@ -81,3 +83,28 @@ class ActionExplainIPM(Action):
         
         logger.info('action_explain_ipm - END')
         return [SlotSet('shown_explain_ipm', True), FollowupAction('action_greet')]
+
+
+
+class ActionDefaultFallback(Action):
+    '''Action for default fallback.'''
+
+    def name(self) -> Text:
+        return 'action_default_fallback'
+    
+    def run(
+        self,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any]
+        ) -> List[EventType]:
+        
+        logger.info('action_default_fallback - START')
+        
+        buttons = [{'title': 'Main menu.', 'payload': '/intent_greet'}]
+        dispatcher.utter_message(
+            text    = "I'm sorry, I am still learning thanks to your inputs.",
+            buttons = buttons)
+
+        logger.info('action_default_fallback - END')
+        return [UserUtteranceReverted()]

@@ -26,14 +26,27 @@ es_imitate              = es_imitate == 'true'
 
 debug                   = os.getenv('DEBUG'         , 'false'   )
 debug                   = debug == 'true'
+
 es_search_size          = os.getenv('ES_SEARCH_SIZE', '10'      )
 es_search_size          = int(es_search_size) if es_search_size.isdigit() else 10
+try: es_search_size     = int(es_search_size)
+except ValueError:
+    logger.warning('ES_SEARCH_SIZE variable should be integer, using default value - 10')
+    es_search_size = 10
+es_cut_off              = os.getenv('ES_CUT_OFF'    , '0.4'     )
+try: es_cut_off         = float(es_cut_off)
+except ValueError:
+    logger.warning('ES_CUT_OFF variable should be float, using default value - 0.4'     )
+    es_cut_off = 0.4
+
 
 if stage == 'dev':
 
     logger.info('----------------------------------------------')
-    logger.info('Environment variables are for DEV environment')
-    logger.info(f'- debug                   = {debug            }')
+    logger.info('Environment variables for DEV environment' )
+    logger.info(f'- debug           = {debug}'                  )
+    logger.info(f'- es_search_size  = {es_search_size}'         )
+    logger.info(f'- es_cut_off      = {es_cut_off}'             )
     logger.info('----------------------------------------------')
     
     
@@ -80,7 +93,6 @@ if not es_imitate:
     logger.info(f'- password                = {es_password      }')
     logger.info(f'- tfhub_embedding_url     = {tf_embed_url     }')
     logger.info(f'- tfhub_cache_dir         = {tfhub_cache_dir  }')
-    logger.info(f'- es_search_size          = {es_search_size   }')
     logger.info('----------------------------------------------')
 
 

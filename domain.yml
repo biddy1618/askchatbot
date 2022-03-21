@@ -3,7 +3,9 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-# base intents
+# Debug intents
+- intent_set_parameter
+# Base intents
 - intent_greet
 - intent_affirm
 - intent_deny
@@ -29,6 +31,22 @@ entities:
 - plant_type
 - plant_pest
 slots:
+  # Debug slots
+  # es_search_size:
+  #   type: float
+  #   min_value: 1
+  #   max_value: 100
+  #   initial_value: 10
+  #   mappings:
+  #   - type: custom
+  # es_cut_off:
+  #   type: float
+  #   min_value: 0.0
+  #   max_value: 1.0
+  #   initial_value: 0.4
+  #   mappings:
+  #   - type: custom
+  # Basic slots
   shown_greeting:
     type: bool
     influence_conversation: false
@@ -83,11 +101,6 @@ slots:
 
 responses:
   # Basic responses
-  utter_default:
-  - buttons:
-    - payload: /intent_greet
-      title: Main menu.
-    text: I'm sorry, I am still learning thanks to your inputs.
   utter_goodbye:
   - buttons:
     - payload: /intent_greet
@@ -206,8 +219,12 @@ responses:
           title: pqr
 
 actions:
+# Debug actions
+- action_set_parameter
+# Base actions
 - action_explain_ipm
 - action_greet
+- action_default_fallback
 # Knowledge Base Query actions
 - validate_es_query_form
 - action_submit_es_query_form

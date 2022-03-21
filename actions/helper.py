@@ -1,7 +1,6 @@
 from typing import Dict, Text, Any, List, Tuple
 
 import pandas as pd
-from difflib import get_close_matches
 
 from rasa_sdk import Tracker
 from rasa_sdk.events import (
@@ -30,8 +29,9 @@ try:
 except:
     logger.error('  error loading static files')
 logger.info('----------------------------------------------')
-    
 
+params = ['es_cut_off', 'es_search_size']
+    
 def _reset_slots(tracker: Tracker) -> List[Any]:
     '''Clean up slots from all previous forms.'''
     
@@ -56,7 +56,6 @@ def _next_intent(next_intent: Text) -> List[Dict]:
             {'intent': {'name': next_intent, 'confidence': 1.0}, 'entities': {}},
         )
     ]
-
 
 def _get_plant_names(
     plant_type      : Text          = 'other',
@@ -132,6 +131,30 @@ def _get_problem_links(
 
     return res
 
-
-def _jaccard_coef(s1, s2):  
+def _jaccard_coef(s1: set, s2: set) -> float:  
     return len(s1.intersection(s2)) / len(s1.union(s2))
+
+def _parse_config_message(text: str) -> Tuple[str, str]:
+    parameter, value = None, None
+    try:
+        _, parameter, value    = [t.strip() for t in text.split(' ')]
+        value               = float(value)
+
+        if parameter not in params: raise Exception
+    except Exception:
+        parameter, value = None, None
+    return parameter, value
+
+def _get_config_message(config):
+    
+    message = (
+        'Bot Configuration:</br>'
+        f'Debug: {config.debug}</br>'
+        f'es_search_size: {config.es_search_size}</br>'
+        f'es_cut_off: {config.es_cut_off}</br></br>'
+        'To change the configuration parameters, use following schema:</br>'
+        'parameter <i>param_name value</i></br>'
+        '(i.e. <strong>parameter es_cut_off 0.5</strong>)'
+    )
+
+    return message
