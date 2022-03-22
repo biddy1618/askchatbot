@@ -24,8 +24,8 @@ async def _cos_sim_query(
         vector_name     (str)       : Field vector to be compared against query vector.
         query_vector    (np.ndarray): Query vector.
         source_query    (dict)      : Fields to include in result hits.
-        nested          (bool)      : Indication if the query involves nested fields.
-        source_nested   (dict)      : Fields to include in 
+        nested          (bool)      : Indication if the query involves nested fields. Defaults to False.
+        source_nested   (dict)      : Fields to include in results. Defaults to None.
 
     Returns:
         dict: Return hits.
@@ -442,3 +442,16 @@ async def submit(
     # _print_hits(hits_ipm, 'IPM Data'        )
     
     return res
+
+'''
+https://ask2.extension.org/kb/faq.php?id=760279
+
+We have small (5mm) reddish brown beetles (species unknown) eating our salvia and basil leaves at night. Is there a safe control such as a powder, spray or oil that is effective at discouraging this pest?
+
+search for the text
+search for the slots concatenated
+intersect
+
+dealing with out-of-scope text
+
+'''

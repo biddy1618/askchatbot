@@ -1,0 +1,35 @@
+{
+    "settings": {"number_of_shards": 1, "number_of_replicas": 1},
+    "mappings": {
+        "dynamic"   : "false",
+        "_source"   : {"enabled": "true"},
+        "properties": {
+            "source"        : {"type": "text"},
+            "url"           : {"type": "text"},
+
+            "name"          : {"type": "text"},
+            "description"   : {"type": "text"},
+            "identification": {"type": "text"},
+            "development"   : {"type": "text"},
+            "damage"        : {"type": "text"},
+            "management"    : {"type": "text"},
+            "name_vector"           : {"type": "dense_vector", "dims": 512},
+            "description_vector"    : {"type": "dense_vector", "dims": 512},
+            "identification_vector" : {"type": "dense_vector", "dims": 512},
+            "development_vector"    : {"type": "dense_vector", "dims": 512},
+            "damage_vector"         : {"type": "dense_vector", "dims": 512},
+            "management_vector"     : {"type": "dense_vector", "dims": 512},
+
+            "links"         : {
+                "type"      : "nested",
+                "properties": {
+                    "type"  : {"type": "text"},
+                    "src"   : {"type": "text"},
+                    "link"  : {"type": "text"},
+                    "title" : {"type": "text"},
+                    "title_vector"  : {"type": "dense_vector", "dims": 512}
+                }
+            }
+        }
+    }
+}

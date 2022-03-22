@@ -1,0 +1,31 @@
+{
+    "settings": {"number_of_shards": 1, "number_of_replicas": 1},
+    "mappings": {
+        "dynamic"   : "false",
+        "_source"   : {"enabled": "true"},
+        "properties": {
+            "ticket_no" : {"type": "text"},
+            "url"       : {"type": "text"},
+            "created"   : {"type": "text"},
+            "tags"      : {
+                "type"      : "nested",
+                "properties": {
+                    "tag"       : {"type": "text"},
+                    "tag_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+            "title"     : {"type": "text"},
+            "question"  : {"type": "text"},
+            "title_question"        : {"type": "text"},
+            "title_question_vector" : {"type": "dense_vector", "dims": 512},
+            "answer"    : {
+                "type"      : "nested",
+                "properties": {
+                    "response"  : {"type": "text"},
+                    "author"    : {"type": "text"},
+                    "response_vector"   : {"type": "dense_vector", "dims": 512}
+                }
+            }
+        }
+    }
+}

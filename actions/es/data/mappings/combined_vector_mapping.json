@@ -1,0 +1,169 @@
+{
+    "settings": {"number_of_shards": 2, "number_of_replicas": 1},
+    "mappings": {
+        "dynamic"   : "true",
+        "_source"   : {"enabled": "true"},
+        "properties": {
+            "doc_id"                            : {"type": "text"},
+
+            "name"                              : {"type": "text"},
+            "name_vector"                       : {"type": "dense_vector", "dims": 512},
+            
+
+            "urlPestDiseaseItems"               : {"type": "text"},
+            
+            "descriptionPestDiseaseItems"       : {"type": "text"},
+            "identificationPestDiseaseItems"    : {"type": "text"},
+            "life_cyclePestDiseaseItems"        : {"type": "text"},
+            "damagePestDiseaseItems"            : {"type": "text"},
+            "solutionsPestDiseaseItems"         : {"type": "text"},
+            "descriptionPestDiseaseItems_vector"    : {"type": "dense_vector", "dims": 512},
+            "identificationPestDiseaseItems_vector" : {"type": "dense_vector", "dims": 512},
+            "life_cyclePestDiseaseItems_vector"     : {"type": "dense_vector", "dims": 512},
+            "damagePestDiseaseItems_vector"         : {"type": "dense_vector", "dims": 512},
+            "solutionsPestDiseaseItems_vector"      : {"type": "dense_vector", "dims": 512},
+
+            "imagesPestDiseaseItems"            : {
+                "type"      : "nested",
+                "properties": {
+                    "caption"       : {"type": "text"},
+                    "link"          : {"type": "text"},
+                    "src"           : {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+
+
+            "urlTurfPests"                      : {"type": "text"},
+
+            "textTurfPests"                     : {"type": "text"},
+            "textTurfPests_vector"              : {"type": "dense_vector", "dims": 512},
+
+            "imagesTurfPests"                   : {
+                "type"      : "nested",
+                "properties": {
+                    "caption"       : {"type": "text"},
+                    "link"          : {"type": "text"},
+                    "src"           : {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+
+
+            "urlWeedItems"                      : {"type": "text"},
+
+            "descriptionWeedItems"              : {"type": "text"},
+            "descriptionWeedItems_vector"       : {"type": "dense_vector", "dims": 512},
+
+            "imagesWeedItems"                   : {
+                "type"      : "nested",
+                "properties": {
+                    "caption"       : {"type": "text"},
+                    "link"          : {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+
+
+            "urlExoticPests"                    : {"type": "text"},
+
+            "descriptionExoticPests"            : {"type": "text"},
+            "damageExoticPests"                 : {"type": "text"},
+            "identificationExoticPests"         : {"type": "text"},
+            "life_cycleExoticPests"             : {"type": "text"},
+            "monitoringExoticPests"             : {"type": "text"},
+            "managementExoticPests"             : {"type": "text"},
+            "descriptionExoticPests_vector"     : {"type": "dense_vector", "dims": 512},
+            "damageExoticPests_vector"          : {"type": "dense_vector", "dims": 512},
+            "identificationExoticPests_vector"  : {"type": "dense_vector", "dims": 512},
+            "life_cycleExoticPests_vector"      : {"type": "dense_vector", "dims": 512},
+            "monitoringExoticPests_vector"      : {"type": "dense_vector", "dims": 512},
+            "managementExoticPests_vector"      : {"type": "dense_vector", "dims": 512},
+
+            "related_linksExoticPests"          : {
+                "type"      : "nested",
+                "properties": {
+                    "text"          : {"type": "text"},
+                    "link"          : {"type": "text"},
+                    "text_vector"   : {"type": "dense_vector", "dims": 512}
+                }
+            },
+            "imagesExoticPests"                 : {
+                "type"      : "nested",
+                "properties": {
+                    "caption"       : {"type": "text"},
+                    "link"          : {"type": "text"},
+                    "src"           : {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+
+
+            "urlPestNote"                       : {"type": "text"},
+            "urlQuickTipPestNote"               : {"type": "text"},
+            
+            "descriptionPestNote"               : {"type": "text"},
+            "life_cyclePestNote"                : {"type": "text"},
+            "damagePestNote"                    : {"type": "text"},
+            "managementPestNote"                : {"type": "text"},
+            "contentQuickTipsPestNote"          : {"type": "text"},
+            "descriptionPestNote_vector"        : {"type": "dense_vector", "dims": 512},
+            "life_cyclePestNote_vector"         : {"type": "dense_vector", "dims": 512},
+            "damagePestNote_vector"             : {"type": "dense_vector", "dims": 512},
+            "managementPestNote_vector"         : {"type": "dense_vector", "dims": 512},
+            "contentQuickTipsPestNote_vector"   : {"type": "dense_vector", "dims": 512},
+
+            "imageQuickTipsPestNote"            : {
+                "type"      : "nested",
+                "properties": {
+                    "caption"       : {"type": "text"},
+                    "link"          : {"type": "text"},
+                    "src"           : {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+            "imagePestNote"                     : {
+                "type"      : "nested",
+                "properties": {
+                    "caption"       : {"type": "text"},
+                    "link"          : {"type": "text"},
+                    "src"           : {"type": "text"},
+                    "caption_vector": {"type": "dense_vector", "dims": 512}
+                }
+            },
+            "videoPestNote": {
+                "type"      : "nested",
+                "properties": {
+                    "videoTitle"        : {"type": "text"},
+                    "videoLink"         : {"type": "text"},
+                    "videoTitle_vector" : {"type": "dense_vector", "dims": 512}
+                }
+            },
+
+
+            "ask_faq_id"                        : {"type": "text"},
+            "ask_ticket_no"                     : {"type": "text"},
+            "ask_url"                           : {"type": "text"},
+            "ask_created"                       : {"type": "text"},
+            "ask_updated"                       : {"type": "text"},
+            "ask_state"                         : {"type": "text"},
+            "ask_county"                        : {"type": "text"},
+            
+            "ask_title"                         : {"type": "text"},
+            "ask_title_question"                : {"type": "text"},
+            "ask_question"                      : {"type": "text"},
+            "ask_title_vector"                  : {"type": "dense_vector", "dims": 512},
+            "ask_title_question_vector"         : {"type": "dense_vector", "dims": 512},
+            "ask_question_vector"               : {"type": "dense_vector", "dims": 512},
+
+            "ask_answer"                        : {
+                "type"      : "nested",
+                "properties": {
+                    "response"          : {"type": "text"},
+                    "author"            : {"type": "text"},
+                    "response_vector"   : {"type": "dense_vector", "dims": 512}
+                }
+            }
+        } 
+    }
+}
