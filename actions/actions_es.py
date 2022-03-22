@@ -9,6 +9,7 @@ from rasa_sdk.events import (
 )
 
 import json
+from actions import helper
 
 from actions.es import config
 from actions.es.es import submit
@@ -113,46 +114,69 @@ class ActionSubmitESQueryForm(Action):
 
         logger.info(f'action_submit_es_query_form - run - START')
 
+        query = tracker.get_slot('problem_description')
         slots = {
-            'problem_description' : tracker.get_slot('problem_description'),
-            'plant_name'          : tracker.get_slot('plant_name'           ),
+            'plant_name'          : tracker.get_slot('plant_name'         ),
             'plant_type'          : tracker.get_slot('plant_type'         ),
             'plant_part'          : tracker.get_slot('plant_part'         ),
             'plant_damage'        : tracker.get_slot('plant_damage'       ),
             'plant_pest'          : tracker.get_slot('plant_pest'         )
         }
 
-        logger.info(f'action_submit_es_query_form - required problem_description    slot value - {slots["problem_description"   ]}')
+        logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
         logger.info(f'action_submit_es_query_form - optional plant_name             slot value - {slots["plant_name"            ]}')
         logger.info(f'action_submit_es_query_form - optional plant_type             slot value - {slots["plant_type"            ]}')
         logger.info(f'action_submit_es_query_form - optional plant_part             slot value - {slots["plant_part"            ]}')
         logger.info(f'action_submit_es_query_form - optional plant_damage           slot value - {slots["plant_damage"          ]}')
         logger.info(f'action_submit_es_query_form - optional plant_pest             slot value - {slots["plant_pest"            ]}')
 
-        slots_extracted = {s: slots[s] for s in slots if slots[s] is not None and s != 'problem_description'}
+        slots_extracted = {s: slots[s] for s in slots if slots[s] is not None}
         slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
-        
+        slots_query     = ' '.join(set(sum(slots_extracted.values(), [])))        
+
         dispatcher.utter_message(text = 'Working on your request...')
         
         if config.debug:
-            dispatcher.utter_message(text = 'Problem statement:</br>'   + slots['problem_description']  )
-            dispatcher.utter_message(text = 'Extracted slots:</br>'     + slots_utterance               )
+            dispatcher.utter_message(text = 'Extracted slots:</br>'     + slots_utterance   )
         
         if not config.es_imitate:
             
-            res = await submit(slots['problem_description'])
+            res, res_slots = await submit(query, slots_query)
 
             buttons = [
                 {'title': 'Start over',             'payload': '/intent_greet'          },
                 {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
             ]
 
-            dispatcher.utter_message(text = res['text'], json_message = res, buttons = buttons)
+            if config.debug:
+                if slots_query:
+                    dispatcher.utter_message(
+                        text            = f'Results without slots improvement... Top {config.es_top_n} results' , 
+                        json_message    = res)
+                    dispatcher.utter_message(
+                        text            = f'Results with slots improvement... Top {config.es_top_n} results'    ,
+                        json_message    = res_slots, 
+                        buttons         = buttons)
+                else:
+                    dispatcher.utter_message(
+                        text            = 'No slots were extracted, results based on plain query...  Top {config.es_top_n} results', 
+                        json_message    = res, 
+                        buttons         = buttons)
+            else:
+                if slots_query:
+                    res = res_slots
+                dispatcher.utter_message(text = res['text'], json_message = res, buttons = buttons)
+                
         else:
+            logger.info(f'action_submit_es_query_form - run - not doing actual ES query')
             message = "Not doing an actual elastic search query."
             dispatcher.utter_message(message)
 
-        return [SlotSet('done_query', True)]
+        events = helper._reset_slots(tracker)
+        events.append(SlotSet('done_query', True))
+
+        logger.info(f'action_submit_es_query_form - run - END')
+        return events
 
 '''
 i)      add additional slot - location

@@ -17,10 +17,7 @@ tfhub_cache_dir         = os.getenv('TFHUB_CACHE_DIR'       , '/var/tmp/tfhub_mo
 es_username             = os.getenv('ES_USERNAME'           , 'elastic'                                                 )
 es_password             = os.getenv('ES_PASSWORD'           , 'changeme'                                                )
 es_host                 = os.getenv('ES_HOST'               , 'http://localhost:9200/'                                  )
-es_askextension_index   = os.getenv('ES_ASKEXTENSION_INDEX' , 'askextension'                                            )
 es_combined_index       = os.getenv('ES_COMBINED_INDEX'     , 'combined'                                                )
-es_problem_index        = os.getenv('ES_PROBLEM_INDEX'      , 'problem'                                                 )
-es_information_index    = os.getenv('ES_INFORMATION_INDEX'  , 'information'                                             )
 es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                   )
 es_imitate              = es_imitate == 'true'
 
@@ -60,29 +57,19 @@ if stage == 'dev':
 
     # -------------------------------------------------------------
     # Define paths where data stored  
-    PATH_DATA_ASKEXTENSION  = f'{_PATH}/data/askextension/2020-08-20/'
-    PATH_DATA_UCIPM         = f'{_PATH}/data/uc-ipm/updated/'
-    PATH_DATA_RESULTS       = f'{_PATH}/data/transformed/'
-
-    if not os.path.exists(PATH_DATA_RESULTS):
-        os.makedirs(PATH_DATA_RESULTS)
-
+    PATH_DATA_ASKEXTENSION      = f'{_PATH}/data/askextension/2020-08-20/'
+    PATH_DATA_UCIPM             = f'{_PATH}/data/uc-ipm/updated/'
+    
     # Askexntension data
-    ASKEXTENSION_FILE_NAMES     = [f'{PATH_DATA_ASKEXTENSION}{f}' for f in os.listdir(PATH_DATA_ASKEXTENSION)]
-    ASKEXTENSION_FILE_RESULT    = PATH_DATA_RESULTS + 'askextension_transformed.json'
     ASKEXTENSION_QUESTION_URL   = 'https://ask2.extension.org/kb/faq.php?id='
+    ASKEXTENSION_FILE_NAMES     = [f'{PATH_DATA_ASKEXTENSION}{f}'   for f in os.listdir(PATH_DATA_ASKEXTENSION  )]
 
     # UC IPM data
-    UCIPM_FILE_NAMES        = [f'{PATH_DATA_UCIPM}{f}' for f in os.listdir(PATH_DATA_UCIPM)]
+    UCIPM_FILE_NAMES            = [f'{PATH_DATA_UCIPM}{f}'          for f in os.listdir(PATH_DATA_UCIPM         )]
     # -------------------------------------------------------------
 
     # index mappings
-    ES_ASKEXTENSION_MAPPING     = json.load(open(f'{_PATH}/data/mappings/askextension_mapping.json'     ))
-    ES_COMBINED_VECTOR_MAPPING  = json.load(open(f'{_PATH}/data/mappings/combined_vector_mapping.json'  ))
-    ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'         ))
-    ES_PROBLEM_MAPPING          = json.load(open(f'{_PATH}/data/mappings/problem_mapping.json'          ))
-    ES_INFORMATION_MAPPING      = json.load(open(f'{_PATH}/data/mappings/information_mapping.json'      ))
-
+    ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
 
 
 if not es_imitate:
@@ -104,10 +91,7 @@ if not es_imitate:
 
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch indexes:')
-    logger.info(f'- askextension index      = {es_askextension_index}')
     logger.info(f'- combined index          = {es_combined_index    }')
-    logger.info(f'- problem index           = {es_problem_index     }')
-    logger.info(f'- information index       = {es_information_index }')
     logger.info('----------------------------------------------')
 
 
