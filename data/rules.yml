@@ -62,7 +62,9 @@ rules:
 # ES Query form rule
 - rule: Activate form for querying ES
   steps:
-  - intent: intent_help_question
+  - or: 
+    - intent: intent_help_question
+    - intent: intent_problem_description
   - action: es_query_form
   - active_loop: es_query_form
 

@@ -30,7 +30,7 @@ except:
     logger.error('  error loading static files')
 logger.info('----------------------------------------------')
 
-params = ['es_cut_off', 'es_search_size', 'es_top_n']
+params = ['es_cut_off', 'es_search_size', 'es_top_n', 'es_ask_weight']
     
 def _reset_slots(tracker: Tracker) -> List[Any]:
     '''Clean up slots from all previous forms.'''
@@ -152,7 +152,8 @@ def _get_config_message(config):
         f'Debug: {config.debug}</br>'
         f'<strong>es_search_size <i>{config.es_search_size}</i></strong></br>'
         f'<strong>es_cut_off <i>{config.es_cut_off}</i></strong></br>'
-        f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br></br>'
+        f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br>'
+        f'<strong>es_ask_weight <i>{config.es_ask_weight}</i></strong></br></br>'
         'To change the configuration parameters, use following schema:</br>'
         'parameter <i>param_name value</i></br>'
         '(i.e. <strong>parameter es_cut_off <i>0.5</i></strong>)'

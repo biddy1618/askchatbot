@@ -17,6 +17,7 @@ intents:
 - intent_request_expert
 # ES intents
 - intent_help_question
+- intent_problem_description
 # Tests
 - intent_test_images
 - intent_test_videos
@@ -68,9 +69,10 @@ slots:
     influence_conversation: false
     mappings:
       - type: from_text
-        conditions:
-        - active_loop: es_query_form
-          requested_slot: problem_description
+        intent: intent_help_question
+        # conditions:
+        # - active_loop: es_query_form
+        #   requested_slot: problem_description
   # Additional slots 
   plant_name:
     type: list
@@ -225,6 +227,7 @@ actions:
 - action_explain_ipm
 - action_greet
 - action_default_fallback
+# - action_validate_slot_mappings
 # Knowledge Base Query actions
 - validate_es_query_form
 - action_submit_es_query_form

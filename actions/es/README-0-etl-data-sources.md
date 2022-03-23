@@ -1,3 +1,71 @@
+# UC IPM Data
+
+## Data retrieval
+
+Data can be obtained through DVC ([installation guide](https://wiki.eduworks.com/Information_Technology/MLOps/DATA-Installing-DVC)). Clone the [repository](https://git.eduworks.us/data/ask-extension/uc-ipm-web-scrape) for scraped data, install Google Cloud Client - `gcloud` (more in installation guide), authenticate, and pull the data through dvc. Please, contact admin for access rights.
+
+
+### ETL and EDA
+
+More information can be found in `./scripts/es_etl.ipynb` notebook.
+
+### Final mappings
+
+`Problem` source:
+```json
+{
+    "source"        : "pestsIPM/pestsDiseases/pestsTurf/pestsExotic/damagesEnvironment/damagesWeed",
+    "name"          : "text",
+    "url"           : "url",
+    "description"   : "text",
+    "identification": "text",
+    "development"   : "text",
+    "damage"        : "text",
+    "management"    : "text",
+    "links": [
+        {
+            "type"      : "images/video/page",
+            "caption"   : "...",
+            "src"       : "urlSource",
+            "link"      : "urlAdditional"
+        },
+        ...
+    ],
+}
+```
+
+`Information` source:
+```json
+{
+    "source"        : "infoFruits/infoVeggies/infoFlowers",
+    "name"          : "text",
+    "url"           : "url",
+    "description"   : "text",
+    "identification": "text",
+    "development"   : "text",
+    "damage"        : "text",
+    "management"    : "text",
+    "links": [
+        {
+            "type"      : "tips/images/problem",
+            "caption"   : "...",
+            "src"       : "urlSource",
+            "link"      : "urlAdditional"
+        },
+        ...
+    ],
+}
+```
+## Universal Sentence Encoder
+
+Original [paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/46808.pdf) about universal sentence encoder.
+
+## Notes
+
+* [Single vector field](https://stackoverflow.com/questions/61376317/dense-vector-array-and-cosine-similarity) as mapping and corresponding query for that.
+
+
+
 # AskExtension Knowledge Base data
 
 ## API for retrieving data
@@ -44,6 +112,10 @@ It is a list of dictionary objects with following fields:
 - `county` - county ticket was created in
 - `question` - question that has been posted
 - `answer` - responselists presented in numbered dictionary data type
+
+### ETL and EDA
+
+More information can be found in `./scripts/es_etl.ipynb` notebook.
 
 
 ## Person of contact

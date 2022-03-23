@@ -14,3 +14,10 @@ nlu:
     - What is IPM?
     - What IPM stand for?
     - Tell me more about IPM
+- intent: intent_help_question
+  examples: |     
+    - I have a question
+    - question
+    - I just want to ask something
+    - wanna ask you something
+    - I would like to ask question

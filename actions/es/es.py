@@ -10,22 +10,28 @@ from actions.es import config
 logger = logging.getLogger(__name__)
 
 async def _cos_sim_query(
-    index           : str           ,
-    vector_name     : str           ,
-    query_vector    : np.ndarray    ,
-    filter_ids      : List[str] = None
+    index           : str               ,
+    query_vector    : np.ndarray        ,
+    query_links     : bool      = False ,           
+    filter_ids      : List[str] = None  ,
     ) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
 
     Args:
         index           (str)       : Name of the index.
-        vector_name     (str)       : Field vector to be compared against query vector.
         query_vector    (np.ndarray): Query vector.
-        filter_ids      (list[str]) : Filter results based on the IDs given. Defaults to None.
+        query_link      (bool)      : True if querying against links. Defaults to False.
+        filter_ids      (List[str]) : Filter results based on the IDs given. Defaults to None.
 
     Returns:
         dict: Return hits.
-    '''    
+    '''
+    vector_name     = 'vectors.vector'
+    source_nested   = ['vectors.name']
+    if query_links:
+        vector_name = 'vectors_links.vector'
+        source_nested   = ['vectors_links.order']
+        
     cos     = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
     script  = {"source": cos, "params": {"query_vector": query_vector}}
     
@@ -33,20 +39,21 @@ async def _cos_sim_query(
         'source', 'url', 'name', 'description', 'identification', 
         'development', 'damage', 'management', 'links'
     ]}
-    source_nested = ['vectors.name']
-    if vector_name == 'vectors_links.vector': 
-        source_nested = ['vectors_links.name']
 
     path = vector_name.split('.')[0]
-    query = {"bool": {"must": {"nested": {
+    query = {"bool": {
+        "must": {"nested": {
                     "score_mode": "max" ,
                     "path"      : path  ,
                     "inner_hits": {"size": 3, "name": "nested", "_source": source_nested},
-                    "query"     : {"function_score": {"script_score": {"script": script}}}}}
+                    "query"     : {"function_score": {"script_score": {"script": script}}}}
+        },
+        "filter"    : [],
+        "must_not"  : []
     }}
 
-    if filter_ids:
-        query['bool']['filter'] = {'ids': {'values': filter_ids}}
+    if filter_ids is not None:
+        query['bool']['filter'  ].append({'ids'     : {'values': filter_ids     }})
 
     response = await config.es_client.search(
         index   = index                 ,
@@ -59,11 +66,14 @@ async def _cos_sim_query(
 
     for h1 in response['hits']['hits']:
         top_scores = []
+
         for h2 in h1['inner_hits']['nested']['hits']['hits']:
-            top_scores.append({'score': h2['_score'], 'source': h2['_source']})
-        h1['_source']['top_scores'] = top_scores
-        h1['_source']['_id']        = h1['_id']
-        h1['_source']['_score']     = h1['_score']
+            top_scores.append({'score': h2['_score'] - 1, 'source': h2['_source']})
+        
+        h1['_source']['top_scores'  ] = top_scores
+        h1['_source']['_id'         ] = h1['_id'    ]
+        h1['_source']['_score'      ] = h1['_score' ] - 1
+        
         hits.append(h1['_source'])
 
     return hits
@@ -89,58 +99,33 @@ async def _handle_es_query(
     hits_slots  = []
 
     hits = await _cos_sim_query(
-        index           = config.es_combined_index,
-        vector_name     = 'vectors.vector'          ,
-        query_vector    = query_vector
+        index           = config.es_combined_index  ,
+        query_vector    = query_vector              ,
     )
 
+    for h in hits: 
+        if h['source'] == 'askExtension': 
+            h['_score'] *= config.es_ask_weight
+            
+    hits = [h for h in hits if h['_score'] > config.es_cut_off]
+ 
     if slots:
         slots_vector = config.embed([slots]).numpy()[0]
-        filter_ids = [h['_id'] for h in hits if h['_score'] > config.es_cut_off]
+        filter_ids = [h['_id'] for h in hits]
+
         hits_slots = await _cos_sim_query(
-            index           = config.es_combined_index,
-            vector_name     = 'vectors.vector'          ,
-            query_vector    = slots_vector            ,
+            index           = config.es_combined_index  ,
+            query_vector    = slots_vector              ,
             filter_ids      = filter_ids
     )
+
 
     return hits, hits_slots
 
 
-def _handle_es_result(hits: dict) -> dict:
-    '''Processing of the results.
-
-    Args:
-        hits (dict): Results from query data.
-        
-    Returns:
-        dict: Processed results.
-    '''
-    '''
-    TO BE IMPLEMENTED
-    '''
-    return hits
-
-
-def _weight_score(hits: dict) -> dict:
-    '''Weight and merge scores.
-
-    Args:
-        hits (dict): Sorted results.
-        
-    Returns:
-        dict: Sorted data with new scores.
-    '''
-
-    '''
-    TO BE IMPLEMENTED
-    '''
-    return hits
-
-
 def _format_result(
     index           = None,
-    source           = None,
+    source          = None,
     score           = None,
     url             = None,
     name            = None,
@@ -247,10 +232,6 @@ async def submit(
     '''   
     hits, hits_slots = await _handle_es_query(question, slots = slots)
     
-    # hits = _handle_es_result(hits)
-
-    # hits = _weight_score(hits)
-
     res         = _get_text(hits)
     res_slots   = None
     if slots:

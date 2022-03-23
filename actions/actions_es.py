@@ -1,7 +1,7 @@
 from typing import Dict, Text, Any, List
 
 
-from rasa_sdk import Action, Tracker
+from rasa_sdk import Action, Tracker, ValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
 from rasa_sdk.events import (
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 import inflect
 inflecter = inflect.engine()
-    
+
 class ValidateESQueryForm(FormValidationAction):
     '''Query the ES Knowledge Base.'''
 
@@ -35,6 +35,7 @@ class ValidateESQueryForm(FormValidationAction):
         ) -> List[Text]:
         '''A list of required slots that the form has to fill.'''
 
+        tracker.latest_message.get('text')
         logger.info('validate_es_query_form - required slots - START')
 
         updated_slots = domain_slots.copy()
@@ -51,50 +52,6 @@ class ValidateESQueryForm(FormValidationAction):
         logger.info(f'validate_es_query_form - required slots   - END')
 
         return updated_slots
-
-    # def validate_plant_type(
-    #     self,
-    #     value       : Text,
-    #     dispatcher  : CollectingDispatcher,
-    #     tracker     : Tracker,
-    #     domain      : Dict[Text, Any],
-    # ) -> Dict[Text, Any]:
-    #     '''Validate slot plant_type.'''
-
-    #     logger.info('validate_plant_problem_form - validate_plant_type - START')
-    #     logger.info(f'validate_plant_problem_form - validate_plant_type - SLOT VALUE: {value}')
-
-    #     plant_type = None
-    #     if value: plant_type = value
-    #     else: dispatcher.utter_message(
-    #         text = 'This kind of plant type is not recognized. '\
-    #             'Press button "I don\'t know" if you don\'t know '\
-    #             'the plant type.')
-        
-    #     logger.info('validate_plant_problem_form - validate_plant_type - END')
-    #     return {'plant_type': plant_type}
-    # def validate_problem_description(
-    #     self,
-    #     value       : Text,
-    #     dispatcher  : CollectingDispatcher,
-    #     tracker     : Tracker,
-    #     domain      : Dict[Text, Any],
-    # ) -> Dict[Text, Any]:
-
-    #     plant_name          = list(tracker.get_latest_entity_values('plant_damage'       ))
-    #     plant_type          = list(tracker.get_latest_entity_values('plant_type'         ))
-    #     plant_part          = list(tracker.get_latest_entity_values('plant_part'         ))
-    #     plant_damage        = list(tracker.get_latest_entity_values('plant_damage'       ))
-    #     plant_pest          = list(tracker.get_latest_entity_values('plant_pest'         ))
-    #     logger.info(f'validate_es_query_form - required problem_description slot value - {value}')
-    #     logger.info(f'validate_es_query_form - optional plant_name slot value - {plant_name}'                  )
-    #     logger.info(f'validate_es_query_form - optional plant_type slot value - {plant_type}'                  )
-    #     logger.info(f'validate_es_query_form - optional plant_part slot value - {plant_part}'                  )
-    #     logger.info(f'validate_es_query_form - optional plant_damage slot value - {plant_damage}'              )
-    #     logger.info(f'validate_es_query_form - optional plant_pest slot value - {plant_pest}'                  )
-
-    
-    #     return {}
 
 
 
@@ -124,11 +81,12 @@ class ActionSubmitESQueryForm(Action):
         }
 
         logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
-        logger.info(f'action_submit_es_query_form - optional plant_name             slot value - {slots["plant_name"            ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_type             slot value - {slots["plant_type"            ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_part             slot value - {slots["plant_part"            ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_damage           slot value - {slots["plant_damage"          ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_pest             slot value - {slots["plant_pest"            ]}')
+        
+        logger.info(f'action_submit_es_query_form - optional plant_name     slot value - {slots["plant_name"    ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_type     slot value - {slots["plant_type"    ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_part     slot value - {slots["plant_part"    ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_damage   slot value - {slots["plant_damage"  ]}')
+        logger.info(f'action_submit_es_query_form - optional plant_pest     slot value - {slots["plant_pest"    ]}')
 
         slots_extracted = {s: slots[s] for s in slots if slots[s] is not None}
         slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
@@ -143,6 +101,10 @@ class ActionSubmitESQueryForm(Action):
             
             res, res_slots = await submit(query, slots_query)
 
+            top_n = config.es_top_n
+            if len(res['data']) < config.es_top_n:
+                top_n = len(res['data'])
+
             buttons = [
                 {'title': 'Start over',             'payload': '/intent_greet'          },
                 {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
@@ -150,22 +112,29 @@ class ActionSubmitESQueryForm(Action):
 
             if config.debug:
                 if slots_query:
-                    dispatcher.utter_message(
-                        text            = f'Results without slots improvement... Top {config.es_top_n} results' , 
-                        json_message    = res)
-                    dispatcher.utter_message(
-                        text            = f'Results with slots improvement... Top {config.es_top_n} results'    ,
-                        json_message    = res_slots, 
-                        buttons         = buttons)
+                    if top_n == 0:
+                        dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing es_cut_off parameter.', buttons = buttons)
+                    else:
+                        dispatcher.utter_message(
+                            text            = f'Results without slots improvement... Top {config.es_top_n} results' , 
+                            json_message    = res)
+                        dispatcher.utter_message(
+                            text            = f'Results with slots improvement... Top {config.es_top_n} results'    ,
+                            json_message    = res_slots, 
+                            buttons         = buttons)
                 else:
-                    dispatcher.utter_message(
-                        text            = 'No slots were extracted, results based on plain query...  Top {config.es_top_n} results', 
-                        json_message    = res, 
-                        buttons         = buttons)
+                    if top_n == 0:
+                        dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing es_cut_off parameter.', buttons = buttons)
+                    else:
+                        dispatcher.utter_message(
+                            text            = f'No slots were extracted, results based on plain query...  Top {config.es_top_n} results', 
+                            json_message    = res, 
+                            buttons         = buttons)
             else:
                 if slots_query:
                     res = res_slots
-                dispatcher.utter_message(text = res['text'], json_message = res, buttons = buttons)
+                if top_n == 0:  dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you...', buttons = buttons)
+                else:           dispatcher.utter_message(text = res['text'], json_message = res,                                    buttons = buttons)
                 
         else:
             logger.info(f'action_submit_es_query_form - run - not doing actual ES query')

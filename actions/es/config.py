@@ -40,6 +40,11 @@ try: es_top_n           = int(es_top_n)
 except ValueError:
     logger.warning('ES_TOP_N variable should be integer, using default value - 3'       )
     es_cut_off = 3
+es_ask_weight           = os.getenv('ES_ASK_WEIGHT' , '0.8'     )
+try: es_ask_weight      = float(es_ask_weight)
+except ValueError:
+    logger.warning('ES_ASK_WEIGHT variable should be float, using default value - 0.8'  )
+    es_ask_weight = 0.8
 
 
 if stage == 'dev':
@@ -50,6 +55,7 @@ if stage == 'dev':
     logger.info(f'- es_search_size  = {es_search_size}'         )
     logger.info(f'- es_cut_off      = {es_cut_off}'             )
     logger.info(f'- es_top_n        = {es_top_n}'               )
+    logger.info(f'- es_ask_weight   = {es_ask_weight}'          )
     logger.info('----------------------------------------------')
     
     

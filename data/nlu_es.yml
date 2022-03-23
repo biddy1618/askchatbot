@@ -1,12 +1,8 @@
 version: "3.0"
 
 nlu:
-- intent: intent_help_question
+- intent: intent_problem_description
   examples: |
-    - I have a question
-    - question
-    - I just want to ask something
-    - wanna ask you something
     ###### Examples from legacy project
     - [Springtails](plant_pest)
     - [Skunks](plant_pest)

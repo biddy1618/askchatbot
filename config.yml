@@ -50,7 +50,7 @@ pipeline:
     use_regexes: True
   - name: EntitySynonymMapper
   - name: FallbackClassifier
-    threshold: 0.3
+    threshold: 0.6
 
 
 # Configuration for Rasa Core.
@@ -65,7 +65,7 @@ policies:
 # Follows rules definded in rules
 # https://rasa.com/docs/rasa/policies/#rule-policy
   - name: RulePolicy
-    core_fallback_threshold: 0.2
+    core_fallback_threshold: 0.6
     core_fallback_action_name: action_default_fallback
     enable_fallback_prediction: True
     check_for_contradictions: True
