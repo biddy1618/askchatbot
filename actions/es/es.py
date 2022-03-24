@@ -140,7 +140,7 @@ def _format_result(
     res['title'] = (
         f'<p>{index+1})<em>{name}</a></em>'
         f'</br>(score: {score:.2f})</br>'
-        f'(source: <a href="{url}" target="_blank">{source}</a></p>')
+        f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     res['description'] = ''
     if description:
         res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
@@ -170,7 +170,7 @@ def _get_text(hits: dict) -> dict:
         top_n = len(hits)
 
     res = {
-        'text'      : f'Top {top_n} results from data sources:',
+        'text'      : 'Check these resources that could help you out on your request...',
         'payload'   : 'collapsible',
         'data'      : []
     }
@@ -238,16 +238,4 @@ async def submit(
         res_slots = _get_text(hits_slots)
     
     return res, res_slots
-
-'''
-https://ask2.extension.org/kb/faq.php?id=760279
-
-We have small (5mm) reddish brown beetles (species unknown) eating our salvia and basil leaves at night. Is there a safe control such as a powder, spray or oil that is effective at discouraging this pest?
-
-search for the text
-search for the slots concatenated
-intersect
-
-dealing with out-of-scope text
-
-'''
+    

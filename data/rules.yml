@@ -31,6 +31,11 @@ rules:
   - intent: nlu_fallback
   - action: action_default_fallback
 
+- rule: Out of scope messages
+  steps:
+  - intent: intent_out_of_score
+  - action: utter_out_of_scope
+
 # Main rules
 - rule: More about IPM
   steps:

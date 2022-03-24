@@ -1,0 +1,15 @@
+version: "3.0"
+
+nlu:
+- intent: intent_out_of_score
+  examples: |
+    - I want to order food
+    - What is 2 + 2?
+    - Who's the US President?
+    - Can I upload image?
+    - Do you speak Chinese?
+    - translate this to english
+    - I want to apply for a job at Rasa
+    - I have an image with pests, can you help me with that?
+    - can you swear?
+    - Fuck off

@@ -15,7 +15,6 @@ nlu:
     - blisters
     - blotches
     - bolting
-    - boring
     - break
     - bumps
     - bushy
@@ -40,9 +39,10 @@ nlu:
     - defoliate
     - defoliated
     - deformed
-    - develop too fast
+    - develop fast
+    - develop slow
     - dieback
-    - dimpled areas
+    - dimpled
     - discoloration
     - discolored
     - distorted
@@ -69,6 +69,7 @@ nlu:
     - fungal
     - fused
     - galls
+    - gel
     - girdled
     - gouges
     - gumming
@@ -99,8 +100,6 @@ nlu:
     - mushrooms
     - mushy
     - mycelia
-    - mycelial growth
-    - neck rot
     - necrosis
     - necrotic
     - nests
@@ -117,7 +116,7 @@ nlu:
     - pustules
     - ragged
     - rolled
-    - root dieback
+    - dieback
     - rot
     - rots
     - rotted
@@ -136,7 +135,6 @@ nlu:
     - skeletonize
     - slimy
     - slow growth
-    - small
     - smoulder
     - smut
     - soft
@@ -175,7 +173,7 @@ nlu:
     - warty
     - water-soaked
     - watery
-    - watery rot
+    - watery
     - waxy
     - weak
     - webbing

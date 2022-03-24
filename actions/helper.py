@@ -30,8 +30,13 @@ except:
     logger.error('  error loading static files')
 logger.info('----------------------------------------------')
 
-params = ['es_cut_off', 'es_search_size', 'es_top_n', 'es_ask_weight']
-    
+params = {
+    'es_search_size': int,
+    'es_top_n'      : int,
+    'es_cut_off'    : float,
+    'es_ask_weight' : float
+}   
+
 def _reset_slots(tracker: Tracker) -> List[Any]:
     '''Clean up slots from all previous forms.'''
     
@@ -138,9 +143,8 @@ def _parse_config_message(text: str) -> Tuple[str, str]:
     parameter, value = None, None
     try:
         _, parameter, value = [t.strip() for t in text.split(' ')]
-        value               = float(value)
-
-        if parameter not in params: raise Exception
+        if parameter in params  : value = params[parameter](value)
+        else                    : raise Exception  
     except Exception:
         parameter, value = None, None
     return parameter, value

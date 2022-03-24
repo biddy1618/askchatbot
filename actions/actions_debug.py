@@ -33,10 +33,10 @@ class ActionSetParameter(Action):
         parameter, value = helper._parse_config_message(message)
         
         if parameter: 
-            dispatcher.utter_message(text = f'Setting parameter {parameter} to {value:.2f}')
+            dispatcher.utter_message(text = f'Setting parameter {parameter} to {value}')
             setattr(config, parameter, value)
             
-            logger.info(f'action_set_parameter - setting parameter {parameter} to {value:.2f}')
+            logger.info(f'action_set_parameter - setting parameter {parameter} to {value}')
 
         else: 
             dispatcher.utter_message(
@@ -45,7 +45,7 @@ class ActionSetParameter(Action):
                     'Please, use explicit parameter names</br>'                 +
                     '(i.e. <strong>parameter es_cut_off 0.5</strong>).'         +
                     '</br>Available parameters: <i>'                            +
-                    ', '.join(helper.params)                                    +
+                    ', '.join(helper.params.keys())                                    +
                     '</i>.')
             )
             logger.info(f'action_set_parameter - parameter parsing error - {None}')

@@ -73,11 +73,12 @@ class ActionSubmitESQueryForm(Action):
 
         query = tracker.get_slot('problem_description')
         slots = {
-            'plant_name'          : tracker.get_slot('plant_name'         ),
-            'plant_type'          : tracker.get_slot('plant_type'         ),
-            'plant_part'          : tracker.get_slot('plant_part'         ),
-            'plant_damage'        : tracker.get_slot('plant_damage'       ),
-            'plant_pest'          : tracker.get_slot('plant_pest'         )
+            'plant_name'    : tracker.get_slot('plant_name'   ),
+            'plant_type'    : tracker.get_slot('plant_type'   ),
+            'plant_part'    : tracker.get_slot('plant_part'   ),
+            'plant_damage'  : tracker.get_slot('plant_damage' ),
+            'plant_pest'    : tracker.get_slot('plant_pest'   ),
+            'pest_target'  : tracker.get_slot('pest_target' )
         }
 
         logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
@@ -87,6 +88,7 @@ class ActionSubmitESQueryForm(Action):
         logger.info(f'action_submit_es_query_form - optional plant_part     slot value - {slots["plant_part"    ]}')
         logger.info(f'action_submit_es_query_form - optional plant_damage   slot value - {slots["plant_damage"  ]}')
         logger.info(f'action_submit_es_query_form - optional plant_pest     slot value - {slots["plant_pest"    ]}')
+        logger.info(f'action_submit_es_query_form - optional pest_target   slot value - {slots["pest_target"  ]}')
 
         slots_extracted = {s: slots[s] for s in slots if slots[s] is not None}
         slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
@@ -148,15 +150,15 @@ class ActionSubmitESQueryForm(Action):
         return events
 
 '''
-i)      add additional slot - location
-ii)     remove block of triplet and instead provide 1, and ask for the feedback
-iii)    sequential search - based on the query text (filter out)
+i)      DONE    add additional slot - location
+ii)      remove block of triplet and instead provide 1, and ask for the feedback
+iii)    DONE    sequential search - based on the query text (filter out)
 iv)     try asking additional details on the slots - proactive slot filling
 v)      implement the search based on decision tree
 vi)     implement out of the scope intent
-vii)    
     *)  don't use curse words on me, please
-    *)  cut off score for the...
-    *)  make the cut off score configurable...
+vii)    DONE    cut off score for the...
+viii)   DONE    make the cut off score configurable...
     *)  
+iv)     follow-up question
 '''

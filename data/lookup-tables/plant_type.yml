@@ -7,6 +7,7 @@ nlu:
     - flowers
     - non-woody
     - vegetables
+    - vegetable
     - melons
     - herbs
     - fruits
@@ -19,7 +20,6 @@ nlu:
     - trees
     - shrubs
     - roses
-    - vegetable
     - melons
     - woody
     - bush

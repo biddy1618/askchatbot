@@ -101,9 +101,13 @@ class ActionDefaultFallback(Action):
         
         logger.info('action_default_fallback - START')
         
-        buttons = [{'title': 'Main menu.', 'payload': '/intent_greet'}]
+        buttons = [
+            {'title': 'Main menu.', 'payload': '/intent_greet'},
+            {'title': 'Connect me to askextension expert.', 'payload': '/intent_request_expert'}
+        ]
+
         dispatcher.utter_message(
-            text    = "I'm sorry, I am still learning thanks to your inputs.",
+            text    = "I'm sorry, I am still learning. Can you rephrase?",
             buttons = buttons)
 
         logger.info('action_default_fallback - END')
