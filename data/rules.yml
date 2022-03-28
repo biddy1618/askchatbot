@@ -64,7 +64,7 @@ rules:
 #     - requested_slot: null
 #   - action: action_submit_plant_problem_form
 
-# ES Query form rule
+# ES query form rule
 - rule: Activate form for querying ES
   steps:
   - or: 
@@ -82,6 +82,17 @@ rules:
   - slot_was_set:
     - requested_slot: null
   - action: action_submit_es_query_form
+
+# ES result form rule
+- rule: Submit form for additional querying ES
+  condition:
+  - active_loop: es_result_form
+  steps:
+  - action: es_result_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_submit_es_result_form
 
 # Test rules
 - rule: Test images

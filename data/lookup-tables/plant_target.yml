@@ -23,6 +23,7 @@ nlu:
     - fabric
     - attic
     - deck
+    - sod
     - cabinet
     - bed
     - room

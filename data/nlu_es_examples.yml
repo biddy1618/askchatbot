@@ -105,3 +105,4 @@ nlu:
     - How to treat the [curved leaf disease](plant_pest) for the [fruit tree](plant_name)?
     - Last year, my [apple tree](plant_name) was infected with some kinds of [infects](plant_pest) who [invade](plant_damage) into the [apple](plant_name), and the [apple](plant_name) finally could not mature. Please tell us how and when to prevent it?
     - I have a 100 year old [maple](plant_name) in my [back yard](pest_target). On one [branch](plant_part) [leaves](plant_part) are [turning yellow](plant_damage) then brown. I have two more high [branches](plant_part) with brown [leaves](plant_part). The [branch](plant_part) near the ground has [seeds](plant_part) set on it. I'm seeing this in less than 1% of the [crown](plant_part). What might be causing this? And what action should I take?
+    - what are the [white spots](plant_damage) and what should be done to resolve. will these [infect](plant_damage) other [house](pest_target) plants?
