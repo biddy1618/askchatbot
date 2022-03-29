@@ -4,18 +4,15 @@ nlu:
 
 - lookup: plant_type
   examples: |
-    - flowers
     - non-woody
     - vegetables
     - vegetable
     - melons
     - herbs
-    - fruits
-    - fruit
-    - nuts
     - berry
     - berries
     - grapevines
+    - plant
     - tree
     - trees
     - shrubs

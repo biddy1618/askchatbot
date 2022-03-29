@@ -8,7 +8,6 @@ nlu:
     - bedstraw
     - beetles
     - birds
-    - blackberries
     - borers
     - brooms
     - bugs
@@ -40,6 +39,8 @@ nlu:
     - insects
     - invaders
     - kyllinga
+    - larva
+    - larvae
     - leafminers
     - leafrollers
     - lice
@@ -59,7 +60,7 @@ nlu:
     - nematodes
     - nettles
     - nutsedges
-    - oak Borer
+    - borer
     - oakworms
     - opossums
     - parasites
@@ -71,8 +72,6 @@ nlu:
     - rabbits
     - raccoons
     - rats
-    - roses
-    - rot
     - scales
     - scorpions
     - sharpshooters

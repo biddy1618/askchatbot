@@ -4,6 +4,7 @@
 .rasa/
 models/
 story_graph.dot
+results/*
 
 # python byte code
 __pycache__/
@@ -14,6 +15,9 @@ __pycache__/
 # ES data and scraped data
 actions/es/data/**/*.json
 !actions/es/data/mappings/*
+
+# Some test data
+actions/es/scripts/test/*
 
 # Development environment variables
 env-dev.sh

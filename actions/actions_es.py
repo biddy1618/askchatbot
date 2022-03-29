@@ -207,7 +207,15 @@ class ValidateESResultForm(FormValidationAction):
 
         query_more = tracker.get_slot('query_more')
         if query_more is not None and query_more == 'no':
-            updated_slots.remove('problem_description_add')
+            for slot in domain_slots:
+                if slot != 'query_more': 
+                    logger.info(f'validate_es_result_form - removing slot - {slot}')        
+                    updated_slots.remove(slot)
+        elif tracker.get_slot("problem_description_add") is not None:
+            for slot in domain_slots:
+                if slot not in tracker.slots_to_validate(): 
+                    logger.info(f'validate_es_result_form - removing slot - {slot}')        
+                    updated_slots.remove(slot)
         
         logger.info(f'validate_es_result_form - updated slots    - {updated_slots}')
         logger.info(f'validate_es_result_form - required slots   - END')
@@ -230,35 +238,37 @@ class ActionSubmitESResultForm(Action):
 
         logger.info(f'action_submit_es_result_form - run - START')
 
-        query_more    = tracker.get_slot('query_more')
-        query = None
+        query_more  = tracker.get_slot('query_more')
+        query       = None
+        logger.info(f'action_submit_es_result_form - required query_more                slot value - {query_more  }')
+
         if query_more == 'yes':
-            query           = tracker.get_slot('problem_description_add')
-        slots = {
-            'plant_name'    : tracker.get_slot('plant_name'     ),
-            'plant_type'    : tracker.get_slot('plant_type'     ),
-            'plant_part'    : tracker.get_slot('plant_part'     ),
-            'plant_damage'  : tracker.get_slot('plant_damage'   ),
-            'plant_pest'    : tracker.get_slot('plant_pest'     ),
-            'pest_target'   : tracker.get_slot('pest_target'    )
-        }
-
-        logger.info(f'action_submit_es_result_form - required problem_description_add   slot value - {query         }')
-        logger.info(f'action_submit_es_result_form - required query_more              slot value - {query_more  }')
-        
-        logger.info(f'action_submit_es_result_form - optional plant_name     slot value - {slots["plant_name"    ]}')
-        logger.info(f'action_submit_es_result_form - optional plant_type     slot value - {slots["plant_type"    ]}')
-        logger.info(f'action_submit_es_result_form - optional plant_part     slot value - {slots["plant_part"    ]}')
-        logger.info(f'action_submit_es_result_form - optional plant_damage   slot value - {slots["plant_damage"  ]}')
-        logger.info(f'action_submit_es_result_form - optional plant_pest     slot value - {slots["plant_pest"    ]}')
-        logger.info(f'action_submit_es_result_form - optional pest_target    slot value - {slots["pest_target"   ]}')
-
-
-        slots_extracted = {s: slots[s] for s in slots if slots[s] is not None}
-        slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
-        slots_query     = ' '.join(set(sum(slots_extracted.values(), [])))        
+            query = tracker.get_slot('problem_description_add')
         
         if query_more == 'yes':
+            slots = {
+                'plant_name'    : tracker.get_slot('plant_name'     ),
+                'plant_type'    : tracker.get_slot('plant_type'     ),
+                'plant_part'    : tracker.get_slot('plant_part'     ),
+                'plant_damage'  : tracker.get_slot('plant_damage'   ),
+                'plant_pest'    : tracker.get_slot('plant_pest'     ),
+                'pest_target'   : tracker.get_slot('pest_target'    )
+            }
+
+            logger.info(f'action_submit_es_result_form - required problem_description_add   slot value - {query         }')
+            
+            logger.info(f'action_submit_es_result_form - optional plant_name     slot value - {slots["plant_name"    ]}')
+            logger.info(f'action_submit_es_result_form - optional plant_type     slot value - {slots["plant_type"    ]}')
+            logger.info(f'action_submit_es_result_form - optional plant_part     slot value - {slots["plant_part"    ]}')
+            logger.info(f'action_submit_es_result_form - optional plant_damage   slot value - {slots["plant_damage"  ]}')
+            logger.info(f'action_submit_es_result_form - optional plant_pest     slot value - {slots["plant_pest"    ]}')
+            logger.info(f'action_submit_es_result_form - optional pest_target    slot value - {slots["pest_target"   ]}')
+
+
+            slots_extracted = {s: slots[s] for s in slots if slots[s] is not None}
+            slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
+            slots_query     = ' '.join(set(sum(slots_extracted.values(), [])))        
+            
             dispatcher.utter_message(text = 'Working on your request...')
             if config.debug:
                 dispatcher.utter_message(text = 'Extracted slots:</br>'     + slots_utterance   )

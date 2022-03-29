@@ -35,6 +35,11 @@ pipeline:
   - name: SpacyFeaturizer
     pooling: mean
   - name: LexicalSyntacticFeaturizer
+    features: [
+    ["low", "title", "upper"],
+    ["BOS", "EOS", "low", "upper", "title", "digit", "pos"],
+    ["low", "title", "upper"],
+    ]
   - name: CountVectorsFeaturizer
   - name: CountVectorsFeaturizer
     analyzer: "char_wb"

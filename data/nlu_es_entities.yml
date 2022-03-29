@@ -3,15 +3,11 @@ version: "3.0"
 nlu:
 - intent: intent_problem_description
   examples: |
-    - [flowers](plant_type)
     - [non-woody](plant_type)
     - [vegetables](plant_type)
     - [vegetable](plant_type)
     - [melons](plant_type)
     - [herbs](plant_type)
-    - [fruits](plant_type)
-    - [fruit](plant_type)
-    - [nuts](plant_type)
     - [berry](plant_type)
     - [berries](plant_type)
     - [grapevines](plant_type)
@@ -85,7 +81,6 @@ nlu:
     - [box](plant_name)
     - [boxwood](plant_name)
     - [broccoli](plant_name)
-    - [broom](plant_name)
     - [buckthorn](plant_name)
     - [buckwheat](plant_name)
     - [buddleja](plant_name)
@@ -158,7 +153,6 @@ nlu:
     - [heath](plant_name)
     - [heather](plant_name)
     - [hebe](plant_name)
-    - [hemlock](plant_name)
     - [hibiscus](plant_name)
     - [holly](plant_name)
     - [honeysuckle](plant_name)
@@ -290,38 +284,36 @@ nlu:
     - [yucca](plant_name)
     - [zelkova](plant_name)
     - [zinnia](plant_name)
-    - (pantry)[pest_target]
-    - (house)[pest_target]
-    - (kitchen)[pest_target]
-    - (wall)[pest_target]
-    - (grain)[pest_target]
-    - (wood)[pest_target]
-    - (rice)[pest_target]
-    - (floor)[pest_target]
-    - (bread)[pest_target]
-    - (carpet)[pest_target]
-    - (food)[pest_target]
-    - (furniture)[pest_target]
-    - (silo)[pest_target]
-    - (sofa)[pest_target]
-    - (fruit)[pest_target]
-    - (clothes)[pest_target]
-    - (fabric)[pest_target]
-    - (attic)[pest_target]
-    - (deck)[pest_target]
-    - (cabinet)[pest_target]
-    - (bed)[pest_target]
-    - (room)[pest_target]
-    - (couch)[pest_target]
-    - (cupboard)[pest_target]
-    - (counter)[pest_target]
-    - (lawn)[pest_target]
-    - (yard)[pest_target]
+    - [pantry](pest_target)
+    - [house](pest_target)
+    - [kitchen](pest_target)
+    - [wall](pest_target)
+    - [grain](pest_target)
+    - [wood](pest_target)
+    - [rice](pest_target)
+    - [floor](pest_target)
+    - [bread](pest_target)
+    - [carpet](pest_target)
+    - [food](pest_target)
+    - [furniture](pest_target)
+    - [silo](pest_target)
+    - [sofa](pest_target)
+    - [clothes](pest_target)
+    - [fabric](pest_target)
+    - [attic](pest_target)
+    - [deck](pest_target)
+    - [cabinet](pest_target)
+    - [bed](pest_target)
+    - [room](pest_target)
+    - [couch](pest_target)
+    - [cupboard](pest_target)
+    - [counter](pest_target)
+    - [lawn](pest_target)
+    - [yard](pest_target)
     - [bats](plant_pest)
     - [bedstraw](plant_pest)
     - [beetles](plant_pest)
     - [birds](plant_pest)
-    - [blackberries](plant_pest)
     - [borers](plant_pest)
     - [brooms](plant_pest)
     - [bugs](plant_pest)
@@ -372,7 +364,7 @@ nlu:
     - [nematodes](plant_pest)
     - [nettles](plant_pest)
     - [nutsedges](plant_pest)
-    - [oak](plant_pest) Borer
+    - [oak](plant_name) [borer](plant_pest)
     - [oakworms](plant_pest)
     - [opossums](plant_pest)
     - [parasites](plant_pest)
@@ -384,8 +376,6 @@ nlu:
     - [rabbits](plant_pest)
     - [raccoons](plant_pest)
     - [rats](plant_pest)
-    - [roses](plant_pest)
-    - [rot](plant_pest)
     - [scales](plant_pest)
     - [scorpions](plant_pest)
     - [sharpshooters](plant_pest)
@@ -423,13 +413,13 @@ nlu:
     - [discolored](plant_damage), [necrosis](plant_damage), [chlorosis](plant_damage)
     - [distorted](plant_damage) and [dwarfed](plant_damage)
     - [don't develop](plant_damage)
-    - [drop](plant_damage), [cling to branches](plant_damage)
+    - [drop](plant_damage), [cling](plant_damage) to [branches](plant_part)
     - [galls](plant_damage), [swell](plant_damage), [rough](plant_damage)
     - [gumming](plant_damage)
     - [holes](plant_damage), [notching](plant_damage), [scalloped](plant_damage), [circular](plant_damage) and [irregular](plant_damage)
     - [holes](plant_damage), [ragged](plant_damage)
     - [mines](plant_damage), [trails](plant_damage)
-    - [not emerged or developed](plant_damage)
+    - [not emerged](plant_damage) or [developed](plant_damage)
     - [shrivel](plant_damage), [droop](plant_damage), [withered](plant_damage), [wilted](plant_damage)
     - [specks](plant_damage), [flecks](plant_damage), [dots](plant_damage) and [stippled](plant_damage)
     - [spots](plant_damage), [blotches](plant_damage), [lesions](plant_damage), [mottled](plant_damage)
@@ -445,25 +435,23 @@ nlu:
     - [drop](plant_damage)
     - [galls](plant_damage), [swellings](plant_damage)
     - [galls](plant_damage), [tumors](plant_damage)
-    - [powdery](plant_damage), [cottony growth](plant_damage)
+    - [powdery](plant_damage), [cottony](plant_damage) growth
     - [rotted](plant_damage)
     - [spores](plant_damage), [pustules](plant_damage), [blisters](plant_damage)
     - [chewed](plant_damage), [tunneling](plant_damage)
     - [distorted](plant_damage), [girdled](plant_damage)
     - [don't open](plant_damage)
-    - [feeding damage](plant_damage)
     - [rotted](plant_damage), [watery](plant_damage), [soft](plant_damage)
     - [curled](plant_damage)
-    - [dieback of tips](plant_damage), [margins](plant_damage)
+    - [dieback](plant_damage) of tips, [margins](plant_damage)
     - [thin](plant_damage), [defoliated](plant_damage)
     - [wilted](plant_damage)
-    - [cankers](plant_damage)
+    - [cankers](plant_pest)
     - [decayed](plant_damage), [soft](plant_damage), [mushy](plant_damage)
     - [ragged](plant_damage), [tattered](plant_damage), [crinkled](plant_damage), [leathery](plant_damage)
     - [spots](plant_damage), [streaks](plant_damage), [lesions](plant_damage)
-    - [mushrooms](plant_damage)
     - [mycelia](plant_damage)
-    - [mycelia](plant_damage), [branch structures](plant_damage)
+    - [mycelia](plant_damage), [branch](plant_part) structures
     - [galls](plant_damage), [swollen](plant_damage)
     - [spots](plant_damage), [lesions](plant_damage)
     - [bumps](plant_damage), [warty](plant_damage), [rough](plant_damage), [leathery](plant_damage)
@@ -471,16 +459,16 @@ nlu:
     - [feeding](plant_damage), [chewed](plant_damage), and [holes](plant_damage)
     - [waxy](plant_damage), [chalky](plant_damage)
     - [soft](plant_damage), [mushy](plant_damage), [rotted](plant_damage), [wilted](plant_damage)
-    - [cankers](plant_damage), [wounds](plant_damage)
-    - [cankers](plant_damage), [wounds](plant_damage), [stains](plant_damage)
+    - [cankers](plant_pest), [wounds](plant_damage)
+    - [cankers](plant_pest), [wounds](plant_damage), [stains](plant_damage)
     - [chewed](plant_damage), [holes](plant_damage), [tunnels](plant_damage), [mines](plant_damage), [frass](plant_damage), [sawdust](plant_damage)
-    - [cottony growth](plant_damage), [spores](plant_damage)
+    - [cottony](plant_damage) growth, [spores](plant_damage)
     - [cracked](plant_damage)
     - [cracked](plant_damage), [creases](plant_damage), [bands](plant_damage)
     - [deformed](plant_damage), [flat](plant_damage)
     - [dieback](plant_damage), [flagged](plant_damage)
     - [dieback](plant_damage), [shriveled](plant_damage)
-    - [discolored beneath bark](plant_damage)
+    - [discolored](plant_damage) beneath [bark](pest_target)
     - [discolored](plant_damage), [flagging](plant_damage)
     - [discolored](plant_damage), [necrosis](plant_damage)
     - [drop](plant_damage), [weak](plant_damage), [break](plant_damage), [dieback](plant_damage), [decay](plant_damage)
@@ -492,7 +480,7 @@ nlu:
     - [holes](plant_damage), [tunnels](plant_damage), [mining](plant_damage)
     - [lack of fruit](plant_damage)
     - [lesions](plant_damage), [spots](plant_damage), [stains](plant_damage), [streaks](plant_damage)
-    - [mushrooms](plant_damage), [suckers](plant_damage)
+    - [mushrooms](plant_pest), [suckers](plant_damage)
     - [powdery](plant_damage), [spores](plant_damage)
     - [rotted](plant_damage), [shriveled](plant_damage), [decay](plant_damage), [soft](plant_damage), [drop](plant_damage)
     - [rough](plant_damage), and [scabs](plant_damage)
@@ -519,7 +507,7 @@ nlu:
     - [lesions](plant_damage), [spots](plant_damage), [spores](plant_damage)
     - [weak](plant_damage), [wilted](plant_damage)
     - [fused](plant_damage)
-    - [stiff](plant_damage), [forms rosette](plant_damage), [bolting](plant_damage)
+    - [stiff](plant_damage), forms [rosette](plant_damage), [bolting](plant_damage)
     - [flaky](plant_damage)
     - [lesions](plant_damage), [spots](plant_damage)
     - [stippled](plant_damage)
@@ -527,19 +515,17 @@ nlu:
     - [shriveled](plant_damage)
     - [shriveled](plant_damage), [moldy](plant_damage), [spores](plant_damage)
     - [spots](plant_damage), [stains](plant_damage), [discolored](plant_damage)
-    - [frothy](plant_damage), [waxy](plant_damage), [pitch masses](plant_damage)
+    - [frothy](plant_damage), [waxy](plant_damage), [pitch](plant_damage) masses
     - [notched](plant_damage), [chewed](plant_damage)
     - [stunted](plant_damage)
     - [honeydew](plant_damage), [soot](plant_damage)
     - [drippy](plant_damage)
-    - [discolored tissue hanging](plant_damage)
-    - [hanging tissue](plant_damage)
     - [cottony](plant_damage), [webbing](plant_damage)
     - [pitch](plant_damage)
     - [swollen](plant_damage), [galls](plant_damage)
-    - [waxy](plant_damage), [frothy](plant_damage), [pitch masses](plant_damage)
+    - [waxy](plant_damage), [frothy](plant_damage), [pitch](plant_damage) masses
     - [wounds](plant_damage)
-    - [fungal growth](plant_damage)
+    - [fungal](plant_damage) growth
     - [wilted](plant_damage), [withered](plant_damage)
     - [spots](plant_damage), [pustules](plant_damage)
     - [stains](plant_damage), [scars](plant_damage)
@@ -553,6 +539,6 @@ nlu:
     - [distorted](plant_damage), [twisted](plant_damage), [misshapen](plant_damage)
     - [not developed](plant_damage)
     - [rotted](plant_damage), [foamy](plant_damage)
-    - [fungal growth](plant_damage), [powdery](plant_damage), [spores](plant_damage)
+    - [fungal](plant_damage) growth, [powdery](plant_damage), [spores](plant_damage)
     - [cracked](plant_damage), [tough](plant_damage), [chalky](plant_damage)
     - [rotted](plant_damage), [soft](plant_damage), [decayed](plant_damage), [slimy](plant_damage)

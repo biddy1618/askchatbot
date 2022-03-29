@@ -5,25 +5,25 @@ nlu:
   examples: |
     - I think there is something wrong with my [plant](plant_type)
     - Problem with the [plant](plant_type)
-    - Plant seems [unhealthy](plant_damage)
-    - My [plant](plant_type) is [slowly dying](plant_damage)
+    - [Plant](plant_type) seems [unhealthy](plant_damage)
+    - My [plant](plant_type) is [slowly](plant_damage) [dying](plant_damage)
     - Problem with [plant](plant_type)
     - Problem with my [tree](plant_type)
     - My [tree](plant_type) is not well 
     - I have problem with my [plant](plant_type)
     - My plant is of [herbs](plant_type)
-    - There is some prolem with my [fruits](plant_type)
+    - There is some prolem with my [fruits](plant_part)
     - [Grapes](plant_name) are developing well
     - It feels like my [violets](plant_name) have some problem
     - My plant's [flowers](plant_part) have some problem
     - [Seedlings](plant_part) are [underdeveloped](plant_damage)
     - I have [citrus](plant_name) at [home](pest_target) and the [crown](plant_part) is [scarred](plant_damage)
-    - I have [boxelder bugs](plant_pest)
+    - I have [boxelder](plant_name) [bugs](plant_pest)
     - I have [ants](plant_pest)
     - I have [fire ants](plant_pest)
     - It is a small [insect](plant_pest)
     - I have [cockroaches](plant_pest) near my [sink](pest_target)
-    - i have [bugs](plant_pest) on my [tomato plants](plant_name)
+    - i have [bugs](plant_pest) on my [tomato](plant_name) [plants](plant_type)
     - There is a [hole](plant_damage) in the trim on the [wall](pest_target)
     - Affected [branches](plant_part) are [dying](plant_damage)
     - [Black spots](plant_damage) on the ripe [tomatoes](plant_name).
@@ -32,7 +32,7 @@ nlu:
     - [Eating](plant_damage) [plant](plant_type)
     - How do I kill [cockroaches](plant_pest)?
     - How to manage [pest](plant_pest) in my [farm](pest_target)?
-    - I found [dirt tunnels](plant_damage) in my [basement](pest_target). When I broke up the dirt, I found [little bugs](plant_pest) and [larve](plant_pest) inside.
+    - I found [dirt tunnels](plant_damage) in my [basement](pest_target). When I broke up the dirt, I found [little bugs](plant_pest) and [larvae](plant_pest) inside.
     - I have a [pest](plant_pest) in [cotton plant](plant_name)
     - I have a [pest](plant_pest) in [mango tree](plant_name)
     - I have [ants](plant_pest) in my [kitchen](pest_target)
@@ -74,14 +74,14 @@ nlu:
     - [black spots](plant_damage) on [tomato](plant_name)
     - brown [leaves](plant_part)
     - brown [leaves](plant_part) on [tomato plant](plant_name)
-    - brown [leaves](plant_part) on [tomato plants](plant_name)
-    - [brown spots](plant_damage) and [dying](plant_damage) [flowers](plant_type)
+    - brown [leaves](plant_part) on [tomato](plant_name) [plants](plant_type)
+    - [brown spots](plant_damage) and [dying](plant_damage) [flowers](plant_part)
     - dead or [brown patches](plant_damage) of [grass](plant_pest)
     - [eating](plant_damage) the (leaves)(plant_type)
     - [holes](plant_damage) in [leaves](plant_part)
-    - [holes](plant_damage) in the [flowers](plant_type)
+    - [holes](plant_damage) in the [flowers](plant_part)
     - how to prevent [tomato](plant_name) [hornworm](plant_pest)
-    - i have [bugs](plant_pest) on my [tomato plants](plant_name)
+    - i have [bugs](plant_pest) on my [tomato](plant_name) [plants](plant_type)
     - i have [dead spots](plant_damage) in my [lawn](plant_name)
     - i have [fire ants](plant_pest)
     - i have [spots](plant_damage) on my [roses](plant_name)
@@ -103,6 +103,6 @@ nlu:
     - We have small (5mm) [reddish brown beetles](plant_pest) (species unknown) [eating](plant_damage) our [salvia](plant_name) and [basil](plant_name) [leaves](plant_part) at night. Is there a safe control such as a powder, spray or oil that is effective at discouraging this (pest)(plant_pest)?
     - In spite of putting tape around our screen, we had hundreds of these [small black bugs](plant_pest) swarm our [bedroom](pest_target) last night while we were reading. They came from outside (they were on the screen) and were attracted to the light. They are completely squishable, can hop AND fly, and are about 1/8". They don't bite. We think they may be in the [trees](plant_type) or on the [roof](pest_target) directly above our upper level bedroom, as there weren't any in our den during the evening, which is a level down and directly below our room, with even bigger windows.
     - How to treat the [curved leaf disease](plant_pest) for the [fruit tree](plant_name)?
-    - Last year, my [apple tree](plant_name) was infected with some kinds of [infects](plant_pest) who [invade](plant_damage) into the [apple](plant_name), and the [apple](plant_name) finally could not mature. Please tell us how and when to prevent it?
+    - Last year, my [apple tree](plant_name) was [infected](plant_damage) with some kinds of [infects](plant_pest) who [invade](plant_damage) into the [apple](plant_name), and the [apple](plant_name) finally could not mature. Please tell us how and when to prevent it?
     - I have a 100 year old [maple](plant_name) in my [back yard](pest_target). On one [branch](plant_part) [leaves](plant_part) are [turning yellow](plant_damage) then brown. I have two more high [branches](plant_part) with brown [leaves](plant_part). The [branch](plant_part) near the ground has [seeds](plant_part) set on it. I'm seeing this in less than 1% of the [crown](plant_part). What might be causing this? And what action should I take?
     - what are the [white spots](plant_damage) and what should be done to resolve. will these [infect](plant_damage) other [house](pest_target) plants?

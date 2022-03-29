@@ -262,3 +262,9 @@ forms:
     required_slots:
     - query_more
     - problem_description_add
+    - plant_name
+    - plant_type
+    - plant_part
+    - plant_damage
+    - plant_pest
+    - pest_target
