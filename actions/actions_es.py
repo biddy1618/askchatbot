@@ -111,70 +111,75 @@ class ActionSubmitESQueryForm(Action):
         slots_extracted = {s: list(set(slots[s])) for s in slots if slots[s] is not None}
         slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(v) for k, v in slots_extracted.items()])
         slots_query     = ' '.join(sum(slots_extracted.values(), []))
+        slots_query     = None if slots_query == '' else slots_query
+        buttons         = [
+            {'title': 'Start over',             'payload': '/intent_greet'          },
+            {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
+        ]
+
+        results     = False
+        filter_ids  = []
+        events      = []
+        es_data     = {'slots': slots_extracted, 'filter_ids': filter_ids}
 
         logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
         for k, v in slots_extracted.items():
             logger.info(f'action_submit_es_query_form - optional {k:<16} slot value - {v}')
         
-        results = False
-        events  = []
-        dispatcher.utter_message(text = 'Working on your request...')
-        
-        if config.debug:
-            dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
-        
-        if not config.es_imitate:
-            
-            res, res_slots = await submit(query, slots_query)
 
-            top_n = config.es_top_n
-            if len(res['data']) < config.es_top_n:
-                top_n = len(res['data'])
-
-            buttons = [
-                {'title': 'Start over',             'payload': '/intent_greet'          },
-                {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
-            ]
-
-            if config.debug:
-                if slots_query:
-                    if top_n == 0:
-                        dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing es_cut_off parameter.', buttons = buttons)
-                    else:
-                        dispatcher.utter_message(
-                            text            = f'Results without slots improvement... Top {config.es_top_n} results' , 
-                            json_message    = res)
-                        dispatcher.utter_message(
-                            text            = f'Results with slots improvement... Top {config.es_top_n} results'    ,
-                            json_message    = res_slots)
-                        results = True
+        if not config.es_imitate:            
+            if config.debug:            
+                dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
+                
+                res, filter_ids = await submit(query)
+                top_n = config.es_top_n
+                if len(res['data']) < config.es_top_n:
+                    top_n = len(res['data'])
+                
+                if top_n == 0:
+                    dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
                 else:
-                    if top_n == 0:
-                        dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing es_cut_off parameter.', buttons = buttons)
+                    dispatcher.utter_message(text = f'Results without slots improvement... Top {top_n} results.' , json_message = res)
+                    results = True
+
+                    if slots_query:
+                        res_slots, _ = await submit(slots_query, filter_ids = filter_ids)
+                    
+                        top_n = config.es_top_n
+                        if len(res_slots['data']) < config.es_top_n:
+                            top_n = len(res_slots['data'])
+                        
+                        if top_n == 0:
+                            dispatcher.utter_message(text = 'Unfortunately, could not find any results for <strong>slots</strong> that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
+                        else:
+                            dispatcher.utter_message(text = f'Results with slots improvement... Top {top_n} results', json_message = res_slots)
+                    
                     else:
-                        dispatcher.utter_message(
-                            text            = f'No slots were extracted, results based on plain query...  Top {config.es_top_n} results', 
-                            json_message    = res)
-                        results = True
+                        dispatcher.utter_message(text = f'No slots were extracted... No results for slots.')
             else:
-                if slots_query:
-                    res = res_slots
-                if top_n == 0:  dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you...', buttons = buttons)
+                res, filter_ids = await submit(query, slots = slots_query)
+                
+                top_n = config.es_top_n
+                if len(res['data']) < config.es_top_n:
+                    top_n = len(res['data'])
+                
+                if top_n == 0:  dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try to reformulate your problem description, please.')
                 else:
                     dispatcher.utter_message(text = res['text'], json_message = res)
                     results = True
                 
+            if results:
+                es_data['filter_ids'] = filter_ids
+                events.append(SlotSet('es_data', es_data))
+                events.append(FollowupAction('es_result_form'))
+            else:
+                events = helper._reset_slots(tracker)
+                events.append(SlotSet('done_query', True))
+                dispatcher.utter_message(text = 'Anything else I can help with?', buttons = buttons)
+        
         else:
             logger.info(f'action_submit_es_query_form - run - not doing actual ES query')
-            message = "Not doing an actual elastic search query."
-            dispatcher.utter_message(message)
-
-        if results:
-            events.append(SlotSet('es_slots', slots_extracted))
-            events.append(FollowupAction('es_result_form'))
-        else:
-            events = helper._reset_slots(tracker)
-            events.append(SlotSet('done_query', True))
+            dispatcher.utter_message(text = 'Not doing an actual elastic search query.', buttons = buttons)
 
 
         logger.info(f'action_submit_es_query_form - run - END')
@@ -241,90 +246,86 @@ class ActionSubmitESResultForm(Action):
         logger.info(f'action_submit_es_result_form - required query_more                slot value - {query_more  }')
 
         if query_more == 'yes':
-            query           = tracker.get_slot('problem_description_add')
-            slots_extracted = tracker.get_slot('es_slots'               )
-            print(slots_extracted)
-
+            query   = tracker.get_slot('problem_description_add')
+            es_data = tracker.get_slot('es_data'               )
+            
             slots = {
-                'plant_name'    : tracker.get_slot('plant_name'     ),
-                'plant_type'    : tracker.get_slot('plant_type'     ),
-                'plant_part'    : tracker.get_slot('plant_part'     ),
-                'plant_damage'  : tracker.get_slot('plant_damage'   ),
-                'plant_pest'    : tracker.get_slot('plant_pest'     ),
-                'pest_target'   : tracker.get_slot('pest_target'    )
+                'plant_name'    : tracker.get_slot('plant_name'   ),
+                'plant_type'    : tracker.get_slot('plant_type'   ),
+                'plant_part'    : tracker.get_slot('plant_part'   ),
+                'plant_damage'  : tracker.get_slot('plant_damage' ),
+                'plant_pest'    : tracker.get_slot('plant_pest'   ),
+                'pest_target'   : tracker.get_slot('pest_target' )
             }
-
-            for k, v in slots.items():
-                if v is not None:
-                    if k in slots_extracted:
-                        slots_extracted[k].extend(list(set(v)))
-                        slots_extracted[k] = list(set(slots_extracted[k]))
-                    else:
-                        slots_extracted[k] = list(set(v))
-
+            slots_extracted = {s: list(set(slots[s])) for s in slots if slots[s] is not None}
             slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(v) for k, v in slots_extracted.items()])
-            slots_query     = ' '.join(sum(slots_extracted.values(), []))        
-
-            logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
             for k, v in slots_extracted.items():
-                logger.info(f'action_submit_es_query_form - optional {k:<16} slot value - {v}')
-
-            
-            dispatcher.utter_message(text = 'Working on your request...')
-            if config.debug:
-                dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
-            
-            if not config.es_imitate:
-                
-                res, res_slots = await submit(query, slots_query)
-
-                top_n = config.es_top_n
-                if len(res['data']) < config.es_top_n:
-                    top_n = len(res['data'])
-
-                buttons = [
-                    {'title': 'Start over',             'payload': '/intent_greet'          },
-                    {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
-                ]
-
-                if config.debug:
-                    if slots_query:
-                        if top_n == 0:
-                            dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing es_cut_off parameter.', buttons = buttons)
-                        else:
-                            dispatcher.utter_message(
-                                text            = f'Results without slots improvement... Top {config.es_top_n} results' , 
-                                json_message    = res)
-                            dispatcher.utter_message(
-                                text            = f'Results with slots improvement... Top {config.es_top_n} results'    ,
-                                json_message    = res_slots, 
-                                buttons         = buttons)
-                    else:
-                        if top_n == 0:
-                            dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing es_cut_off parameter.', buttons = buttons)
-                        else:
-                            dispatcher.utter_message(
-                                text            = f'No slots were extracted, results based on plain query...  Top {config.es_top_n} results', 
-                                json_message    = res, 
-                                buttons         = buttons)
+                if k in es_data['slots']:
+                    es_data['slots'][k].extend(v)
+                    es_data['slots'][k] = list(set(es_data['slots'][k]))
                 else:
-                    if slots_query:
-                        res = res_slots
-                    if top_n == 0:  dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you...', buttons = buttons)
-                    else:           dispatcher.utter_message(text = res['text'], json_message = res,                                    buttons = buttons)
-                    
-            else:
-                logger.info(f'action_submit_es_result_form - run - not doing actual ES query')
-                message = "Not doing an actual elastic search query."
-                dispatcher.utter_message(message)
-        else:
-            buttons = [
+                    es_data['slots'][k] = v
+            slots_extracted = es_data['slots']
+            slots_query     = ' '.join(sum(slots_extracted.values(), []))
+            slots_query     = None if slots_query == '' else slots_query
+            buttons         = [
                 {'title': 'Start over',             'payload': '/intent_greet'          },
                 {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
             ]
-            message = 'Anything else I can help with?'
-            dispatcher.utter_message(text = message, buttons = buttons)
+            
+            filter_ids  = es_data['filter_ids']            
+            events      = []
+            
 
+            logger.info(f'action_submit_es_result_form - required problem_description    slot value - {query}')
+            for k, v in slots_extracted.items():
+                logger.info(f'action_submit_es_result_form - optional {k:<16} slot value - {v}')
+
+
+            dispatcher.utter_message(text = 'Working on your request...')
+                        
+            if not config.es_imitate:    
+                if config.debug:            
+                    dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
+                    res, _ = await submit(query, filter_ids = filter_ids)
+                    top_n = config.es_top_n
+                    if len(res['data']) < config.es_top_n:
+                        top_n = len(res['data'])
+                    
+                    if top_n == 0:
+                        dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
+                    else:
+                        dispatcher.utter_message(text = f'Results without slots improvement... Top {top_n} results.' , json_message = res)
+
+                        if slots_query:
+                            res_slots, _ = await submit(slots_query, filter_ids = filter_ids)
+                        
+                            top_n = config.es_top_n
+                            if len(res_slots['data']) < config.es_top_n:
+                                top_n = len(res_slots['data'])
+                            
+                            if top_n == 0:
+                                dispatcher.utter_message(text = 'Unfortunately, could not find any results for <strong>slots</strong> that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
+                            else:
+                                dispatcher.utter_message(text = f'Results with slots improvement... Top {top_n} results', json_message = res_slots)
+                        
+                        else:
+                            dispatcher.utter_message(text = f'No slots were extracted... No results for slots.')
+                else:
+                    res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
+                    
+                    top_n = config.es_top_n
+                    if len(res['data']) < config.es_top_n:
+                        top_n = len(res['data'])
+                    
+                    if top_n == 0:  dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you...')
+                    else:
+                        dispatcher.utter_message(text = res['text'], json_message = res)
+            else:
+                logger.info(f'action_submit_es_result_form - run - not doing actual ES query')
+                dispatcher.utter_message(text = 'Not doing an actual elastic search query.')
+
+        dispatcher.utter_message(text = 'Anything else I can help with?', buttons = buttons)
         events = helper._reset_slots(tracker)
         events.append(SlotSet('done_query', True))
 

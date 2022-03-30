@@ -51,7 +51,7 @@ slots:
     mappings:
     - type: custom
   # ES query form slots
-  es_slots:
+  es_data:
     type: any
     mappings:
     - type: custom

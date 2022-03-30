@@ -80,48 +80,50 @@ async def _cos_sim_query(
 
 
 async def _handle_es_query(
-    question: str       ,
-    slots   : str = None,
-    ) -> dict:
+    query       : str               ,
+    filter_ids  : List[str] = None  ,
+    ) -> list:
     '''Perform search in ES base.
 
     Args:
-        question (str)  : Query statement.
-        slots    (str)  : Extracted slots. Defaults to None.
+        query       (str)       : Query statement.
+        filter_ids  (List[str]) : IDs of docs that should be considered. Defaults to None.
 
     Returns:
-        dict    : return tuples for problems, information and askextension matches. 
+        list: return list of hits. 
     '''    
     
-    query_vector = config.embed([question]).numpy()[0]
+    query_vector = config.embed([query]).numpy()[0]
     
-    hits        = []
-    hits_slots  = []
-
     hits = await _cos_sim_query(
         index           = config.es_combined_index  ,
         query_vector    = query_vector              ,
+        filter_ids      = filter_ids
     )
+
+    return hits
+
+def _handle_es_result(hits: list, filter: bool = True) -> Tuple[list, list]:
+    '''Process the ES query results (like filtering, reweighting, etc).
+
+    Args:
+        hits (list): Results from ES query.
+
+    Returns:
+        Tuple[list, list]: filtered and processed ES query results
+    '''
 
     for h in hits: 
         if h['source'] == 'askExtension': 
             h['_score'] *= config.es_ask_weight
-            
-    hits = [h for h in hits if h['_score'] > config.es_cut_off]
- 
-    if slots:
-        slots_vector = config.embed([slots]).numpy()[0]
-        filter_ids = [h['_id'] for h in hits]
+    
+    if filter:
+        hits = [h for h in hits if h['_score'] > config.es_cut_off]
+    
+    filter_ids = [h['_id'] for h in hits]
+    hits = sorted(hits, key = lambda h: h['_score'], reverse = True)
 
-        hits_slots = await _cos_sim_query(
-            index           = config.es_combined_index  ,
-            query_vector    = slots_vector              ,
-            filter_ids      = filter_ids
-    )
-
-
-    return hits, hits_slots
-
+    return hits, filter_ids
 
 def _format_result(
     index           = None,
@@ -217,25 +219,30 @@ def _get_text(hits: dict) -> dict:
     return res
 
 async def submit(
-    question: str       ,
-    slots   : str = None
+    question    : str               ,
+    slots       : str       = None  ,
+    filter_ids  : List[str] = None
+
     ) -> Tuple[dict, dict]:
     
     '''Perform ES query, transform results, print them, and return results.
 
     Args:
-        question    (str): Question that is asked.
-        slots       (str): Pest damage description. Defaults to None.
+        question    (str)       : Question that is asked.
+        slots       (str)       : Pest damage description. Defaults to None.
+        filter_ids  (List[str]) : IDs of docs that should be considered. Defaults to None.
     
     Returns:
         Tuple[dict, dict]: Results from ES query. If slots were provided, then results with slots refinement.
     '''   
-    hits, hits_slots = await _handle_es_query(question, slots = slots)
+    hits = await _handle_es_query(question, filter_ids = filter_ids)
+    hits, filter_ids = _handle_es_result(hits)
     
-    res         = _get_text(hits)
-    res_slots   = None
     if slots:
-        res_slots = _get_text(hits_slots)
+        hits = await _handle_es_query(slots, filter_ids = filter_ids)
+        hits, _ = _handle_es_result(hits, filter = False)
+
+    res = _get_text(hits)
     
-    return res, res_slots
+    return res, filter_ids
     
