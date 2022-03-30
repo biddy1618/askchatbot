@@ -51,13 +51,17 @@ slots:
     mappings:
     - type: custom
   # ES query form slots
+  es_slots:
+    type: any
+    mappings:
+    - type: custom
   problem_description:
     type: text
     influence_conversation: false
     mappings:
       - type: custom
         action: action_validate_problem_description
-  # Additional slots 
+  # Additional slots
   plant_name:
     type: list
     mappings:

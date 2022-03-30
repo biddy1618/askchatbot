@@ -108,24 +108,20 @@ class ActionSubmitESQueryForm(Action):
             'pest_target'   : tracker.get_slot('pest_target' )
         }
 
+        slots_extracted = {s: list(set(slots[s])) for s in slots if slots[s] is not None}
+        slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(v) for k, v in slots_extracted.items()])
+        slots_query     = ' '.join(sum(slots_extracted.values(), []))
+
         logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
+        for k, v in slots_extracted.items():
+            logger.info(f'action_submit_es_query_form - optional {k:<16} slot value - {v}')
         
-        logger.info(f'action_submit_es_query_form - optional plant_name     slot value - {slots["plant_name"    ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_type     slot value - {slots["plant_type"    ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_part     slot value - {slots["plant_part"    ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_damage   slot value - {slots["plant_damage"  ]}')
-        logger.info(f'action_submit_es_query_form - optional plant_pest     slot value - {slots["plant_pest"    ]}')
-        logger.info(f'action_submit_es_query_form - optional pest_target   slot value - {slots["pest_target"  ]}')
-
-        slots_extracted = {s: slots[s] for s in slots if slots[s] is not None}
-        slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
-        slots_query     = ' '.join(set(sum(slots_extracted.values(), [])))
-
         results = False
+        events  = []
         dispatcher.utter_message(text = 'Working on your request...')
         
         if config.debug:
-            dispatcher.utter_message(text = 'Extracted slots:</br>'     + slots_utterance   )
+            dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
         
         if not config.es_imitate:
             
@@ -174,7 +170,8 @@ class ActionSubmitESQueryForm(Action):
             dispatcher.utter_message(message)
 
         if results:
-            events = [FollowupAction('es_result_form')]
+            events.append(SlotSet('es_slots', slots_extracted))
+            events.append(FollowupAction('es_result_form'))
         else:
             events = helper._reset_slots(tracker)
             events.append(SlotSet('done_query', True))
@@ -204,6 +201,7 @@ class ValidateESResultForm(FormValidationAction):
         updated_slots = domain_slots.copy()
         logger.info(f'validate_es_result_form - required_slots   - {updated_slots                }')
         logger.info(f'validate_es_result_form - slots recognized - {tracker.slots_to_validate()  }')
+
 
         query_more = tracker.get_slot('query_more')
         if query_more is not None and query_more == 'no':
@@ -243,9 +241,10 @@ class ActionSubmitESResultForm(Action):
         logger.info(f'action_submit_es_result_form - required query_more                slot value - {query_more  }')
 
         if query_more == 'yes':
-            query = tracker.get_slot('problem_description_add')
-        
-        if query_more == 'yes':
+            query           = tracker.get_slot('problem_description_add')
+            slots_extracted = tracker.get_slot('es_slots'               )
+            print(slots_extracted)
+
             slots = {
                 'plant_name'    : tracker.get_slot('plant_name'     ),
                 'plant_type'    : tracker.get_slot('plant_type'     ),
@@ -255,23 +254,25 @@ class ActionSubmitESResultForm(Action):
                 'pest_target'   : tracker.get_slot('pest_target'    )
             }
 
-            logger.info(f'action_submit_es_result_form - required problem_description_add   slot value - {query         }')
-            
-            logger.info(f'action_submit_es_result_form - optional plant_name     slot value - {slots["plant_name"    ]}')
-            logger.info(f'action_submit_es_result_form - optional plant_type     slot value - {slots["plant_type"    ]}')
-            logger.info(f'action_submit_es_result_form - optional plant_part     slot value - {slots["plant_part"    ]}')
-            logger.info(f'action_submit_es_result_form - optional plant_damage   slot value - {slots["plant_damage"  ]}')
-            logger.info(f'action_submit_es_result_form - optional plant_pest     slot value - {slots["plant_pest"    ]}')
-            logger.info(f'action_submit_es_result_form - optional pest_target    slot value - {slots["pest_target"   ]}')
+            for k, v in slots.items():
+                if v is not None:
+                    if k in slots_extracted:
+                        slots_extracted[k].extend(list(set(v)))
+                        slots_extracted[k] = list(set(slots_extracted[k]))
+                    else:
+                        slots_extracted[k] = list(set(v))
 
+            slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(v) for k, v in slots_extracted.items()])
+            slots_query     = ' '.join(sum(slots_extracted.values(), []))        
 
-            slots_extracted = {s: slots[s] for s in slots if slots[s] is not None}
-            slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(list(set(v))) for k, v in slots_extracted.items()])
-            slots_query     = ' '.join(set(sum(slots_extracted.values(), [])))        
+            logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
+            for k, v in slots_extracted.items():
+                logger.info(f'action_submit_es_query_form - optional {k:<16} slot value - {v}')
+
             
             dispatcher.utter_message(text = 'Working on your request...')
             if config.debug:
-                dispatcher.utter_message(text = 'Extracted slots:</br>'     + slots_utterance   )
+                dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
             
             if not config.es_imitate:
                 
@@ -341,7 +342,7 @@ vi)     DONE    implement out of the scope intent
 vii)    DONE    cut off score for the...
 viii)   DONE    make the cut off score configurable...
     *)  
-iv)     follow-up question
+iv)     DONE    follow-up question
 
 For presentation:
 Prepare for demo:
