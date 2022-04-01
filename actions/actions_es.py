@@ -131,7 +131,7 @@ class ActionSubmitESQueryForm(Action):
             if config.debug:            
                 dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
                 
-                res, filter_ids = await submit(query)
+                res, _ = await submit(query)
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
@@ -143,7 +143,7 @@ class ActionSubmitESQueryForm(Action):
                     results = True
 
                     if slots_query:
-                        res_slots, _ = await submit(slots_query, filter_ids = filter_ids)
+                        res_slots, filter_ids = await submit(query, slots = slots_query)
                     
                         top_n = config.es_top_n
                         if len(res_slots['data']) < config.es_top_n:
@@ -207,14 +207,13 @@ class ValidateESResultForm(FormValidationAction):
         logger.info(f'validate_es_result_form - required_slots   - {updated_slots                }')
         logger.info(f'validate_es_result_form - slots recognized - {tracker.slots_to_validate()  }')
 
-
-        query_more = tracker.get_slot('query_more')
-        if query_more is not None and query_more == 'no':
+        problem_desc_add = tracker.get_slot('problem_description_add')
+        if problem_desc_add is not None and problem_desc_add == 'yes':
             for slot in domain_slots:
-                if slot != 'query_more': 
+                if slot != 'problem_description_add': 
                     logger.info(f'validate_es_result_form - removing slot - {slot}')        
                     updated_slots.remove(slot)
-        elif tracker.get_slot("problem_description_add") is not None:
+        elif problem_desc_add is not None and problem_desc_add != 'no':
             for slot in domain_slots:
                 if slot not in tracker.slots_to_validate(): 
                     logger.info(f'validate_es_result_form - removing slot - {slot}')        
@@ -268,10 +267,6 @@ class ActionSubmitESResultForm(Action):
             slots_extracted = es_data['slots']
             slots_query     = ' '.join(sum(slots_extracted.values(), []))
             slots_query     = None if slots_query == '' else slots_query
-            buttons         = [
-                {'title': 'Start over',             'payload': '/intent_greet'          },
-                {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
-            ]
             
             filter_ids  = es_data['filter_ids']            
             events      = []
@@ -298,7 +293,7 @@ class ActionSubmitESResultForm(Action):
                         dispatcher.utter_message(text = f'Results without slots improvement... Top {top_n} results.' , json_message = res)
 
                         if slots_query:
-                            res_slots, _ = await submit(slots_query, filter_ids = filter_ids)
+                            res_slots, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
                         
                             top_n = config.es_top_n
                             if len(res_slots['data']) < config.es_top_n:
@@ -324,7 +319,11 @@ class ActionSubmitESResultForm(Action):
             else:
                 logger.info(f'action_submit_es_result_form - run - not doing actual ES query')
                 dispatcher.utter_message(text = 'Not doing an actual elastic search query.')
-
+        
+        buttons         = [
+            {'title': 'Start over',             'payload': '/intent_greet'          },
+            {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
+        ]
         dispatcher.utter_message(text = 'Anything else I can help with?', buttons = buttons)
         events = helper._reset_slots(tracker)
         events.append(SlotSet('done_query', True))
@@ -356,4 +355,8 @@ The words in the questions
 Synonyms - lady beetle
 Common names
 Return query that is most close without any real examples.
+
+
+Introdu
+
 '''

@@ -139,10 +139,16 @@ def _format_result(
     ) -> dict:
 
     res = {}
-    res['title'] = (
-        f'<p>{index+1})<em>{name}</a></em>'
-        f'</br>(score: {score:.2f})</br>'
-        f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
+    if config.debug:
+        res['title'] = (
+            f'<p>{index+1})<em>{name}</a></em>'
+            f'</br>(score: {score:.2f})</br>'
+            f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
+    else:
+        res['title'] = (
+            f'<p>{index+1})<em>{name}</a></em>'
+            f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
+    
     res['description'] = ''
     if description:
         res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
@@ -234,14 +240,15 @@ async def submit(
     
     Returns:
         Tuple[dict, dict]: Results from ES query. If slots were provided, then results with slots refinement.
-    '''   
-    hits = await _handle_es_query(question, filter_ids = filter_ids)
-    hits, filter_ids = _handle_es_result(hits)
-    
+    '''
+
     if slots:
         hits = await _handle_es_query(slots, filter_ids = filter_ids)
-        hits, _ = _handle_es_result(hits, filter = False)
-
+        hits, filter_ids = _handle_es_result(hits)
+    
+    hits = await _handle_es_query(question, filter_ids = filter_ids)
+    hits, filter_ids = _handle_es_result(hits, filter = False)
+    
     res = _get_text(hits)
     
     return res, filter_ids

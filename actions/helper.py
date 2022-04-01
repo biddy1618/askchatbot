@@ -154,6 +154,7 @@ def _get_config_message(config):
     message = (
         'Bot Configuration:</br>'
         f'Debug: {config.debug}</br>'
+        f'Version: {config.version}</br>'
         f'<strong>es_search_size <i>{config.es_search_size}</i></strong></br>'
         f'<strong>es_cut_off <i>{config.es_cut_off}</i></strong></br>'
         f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br>'

@@ -4,15 +4,15 @@
         "dynamic"   : "false",
         "_source"   : {"enabled": "true"},
         "properties": {
-            "source"        : {"type": "keyword", "index": true},
-            "url"           : {"type": "keyword", "index": false},
+            "source"        : {"type": "keyword", "index": "true"},
+            "url"           : {"type": "keyword", "index": "false"},
 
-            "name"          : {"type": "keyword", "index": false},
-            "description"   : {"type": "keyword", "index": false},
-            "identification": {"type": "keyword", "index": false},
-            "development"   : {"type": "keyword", "index": false},
-            "damage"        : {"type": "keyword", "index": false},
-            "management"    : {"type": "keyword", "index": false},
+            "name"          : {"type": "keyword", "index": "false"},
+            "description"   : {"type": "keyword", "index": "false"},
+            "identification": {"type": "keyword", "index": "false"},
+            "development"   : {"type": "keyword", "index": "false"},
+            "damage"        : {"type": "keyword", "index": "false"},
+            "management"    : {"type": "keyword", "index": "false"},
             "vectors"       : {
                 "type"      : "nested",
                 "properties": {
@@ -20,17 +20,17 @@
                         "type": "dense_vector", 
                         "dims": 512
                     },
-                    "name"  : {"type": "keyword", "index": false}
+                    "name"  : {"type": "keyword", "index": "false"}
                 }
             },
             
             "links"         : {
                 "type"      : "nested",
                 "properties": {
-                    "type"  : {"type": "keyword", "index": false},
-                    "src"   : {"type": "keyword", "index": false},
-                    "link"  : {"type": "keyword", "index": false},
-                    "title" : {"type": "keyword", "index": false}
+                    "type"  : {"type": "keyword", "index": "false"},
+                    "src"   : {"type": "keyword", "index": "false"},
+                    "link"  : {"type": "keyword", "index": "false"},
+                    "title" : {"type": "keyword", "index": "false"}
                 }
             },
             "vectors_links" : {
@@ -40,7 +40,7 @@
                         "type": "dense_vector", 
                         "dims": 512
                     },
-                    "order"  : {"type": "keyword", "index": false}
+                    "order"  : {"type": "keyword", "index": "false"}
                 }
             }
         }

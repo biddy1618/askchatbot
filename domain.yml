@@ -93,27 +93,33 @@ slots:
       - type: from_entity
         entity: pest_target
   # ES query result slots
-  query_more:
-    type: text
-    mappings:
-      - type: from_intent
-        value: yes
-        intent: intent_affirm
-        conditions:
-        - active_loop: es_result_form
-          requested_slot: query_more
-      - type: from_intent
-        value: no
-        intent: intent_deny
-        conditions:
-        - active_loop: es_result_form
-          requested_slot: query_more
+  # query_more:
+  #   type: text
+  #   mappings:
+  #     - type: from_intent
+  #       value: yes
+  #       intent: intent_affirm
+  #       conditions:
+  #       - active_loop: es_result_form
+  #         requested_slot: query_more
+  #     - type: from_intent
+  #       value: no
+  #       intent: intent_deny
+  #       conditions:
+  #       - active_loop: es_result_form
+  #         requested_slot: query_more
   problem_description_add:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
         intent: intent_problem_description
+        conditions:
+        - active_loop: es_result_form
+          requested_slot: problem_description_add
+      - type: from_intent
+        value: yes
+        intent: intent_affirm
         conditions:
         - active_loop: es_result_form
           requested_slot: problem_description_add
@@ -128,7 +134,7 @@ responses:
   - buttons:
     - payload: /intent_greet
       title: Main menu.
-    text: I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a>.    
+    text: I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a> platform. I can help you with the pest-related issues and questions. If you have one, please, describe your problem :D
   utter_greet:
   - text: Hi, I'm AskExtension Assistant!
   utter_connect_expert:
@@ -161,15 +167,18 @@ responses:
   utter_ask_problem_description:
   - text: Please describe your problem.
   # ES result form slots questions
-  utter_ask_query_more:
+  # utter_ask_query_more:
+  # - buttons:
+  #   - payload: /intent_affirm
+  #     title: Yes.
+  #   - payload: /intent_deny
+  #     title: No.
+  #   text: Do you have any additional details to give you a better help?
+  utter_ask_problem_description_add:
   - buttons:
     - payload: /intent_affirm
-      title: Yes.
-    - payload: /intent_deny
-      title: No.
-    text: Do you have any additional details to give you a better help?
-  utter_ask_problem_description_add:
-  - text: Please, provide more details to your problem (specifically indicating pest description, damage description, or details of plant).
+      title: Yes, it helped.
+    text: Did that answer your question? If not, can you give me some more information about where you saw this?
   # Testing utterances
   utter_test_images:
   - text: "Here is something to cheer you up 😉 "
@@ -264,7 +273,6 @@ forms:
     - pest_target
   es_result_form:
     required_slots:
-    - query_more
     - problem_description_add
     - plant_name
     - plant_type
