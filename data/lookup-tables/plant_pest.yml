@@ -4,6 +4,7 @@ nlu:
 
 - lookup: plant_pest
   examples: |
+    - aphids
     - bats
     - bedstraw
     - beetles

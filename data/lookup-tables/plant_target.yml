@@ -2,7 +2,7 @@ version: "3.0"
 
 nlu:
 
-- lookup: pest_target
+- lookup: pest_location
   examples: |
     - pantry
     - house

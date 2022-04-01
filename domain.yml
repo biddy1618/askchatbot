@@ -32,7 +32,7 @@ entities:
 - plant_part
 - plant_type
 - plant_pest
-- pest_target
+- pest_location
 slots:
   # Basic slots
   shown_greeting:
@@ -87,11 +87,11 @@ slots:
     mappings:
       - type: from_entity
         entity: plant_pest
-  pest_target:
+  pest_location:
     type: list
     mappings:
       - type: from_entity
-        entity: pest_target
+        entity: pest_location
   # ES query result slots
   # query_more:
   #   type: text
@@ -136,7 +136,7 @@ responses:
       title: Main menu.
     text: I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a> platform. I can help you with the pest-related issues and questions. If you have one, please, describe your problem :D
   utter_greet:
-  - text: Hi, I'm AskExtension Assistant!
+  - text: Hi, I'm the AskExtension Assistant!
   utter_connect_expert:
   - buttons:
     - payload: /intent_greet
@@ -174,11 +174,11 @@ responses:
   #   - payload: /intent_deny
   #     title: No.
   #   text: Do you have any additional details to give you a better help?
-  utter_ask_problem_description_add:
-  - buttons:
-    - payload: /intent_affirm
-      title: Yes, it helped.
-    text: Did that answer your question? If not, can you give me some more information about where you saw this?
+  # utter_ask_problem_description_add:
+  # - buttons:
+  #   - payload: /intent_affirm
+  #     title: Yes, it helped.
+  #   text: Did that answer your question? If not, can you give me some more information about where you saw this?
   # Testing utterances
   utter_test_images:
   - text: "Here is something to cheer you up 😉 "
@@ -260,6 +260,7 @@ actions:
 # ES result form actions
 - validate_es_result_form
 - action_submit_es_result_form
+- action_ask_problem_description_add
 forms:
   # ES forms
   es_query_form:
@@ -270,7 +271,7 @@ forms:
     - plant_part
     - plant_damage
     - plant_pest
-    - pest_target
+    - pest_location
   es_result_form:
     required_slots:
     - problem_description_add
@@ -279,4 +280,4 @@ forms:
     - plant_part
     - plant_damage
     - plant_pest
-    - pest_target
+    - pest_location

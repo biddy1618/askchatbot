@@ -81,6 +81,7 @@ async def _cos_sim_query(
 
 async def _handle_es_query(
     query       : str               ,
+    slots       : str       = None  ,
     filter_ids  : List[str] = None  ,
     ) -> list:
     '''Perform search in ES base.
@@ -94,6 +95,9 @@ async def _handle_es_query(
     '''    
     
     query_vector = config.embed([query]).numpy()[0]
+    if slots:
+        slots_vector = config.embed([slots]).numpy()[0]
+        query_vector = np.average([query_vector, slots_vector], axis = 0)
     
     hits = await _cos_sim_query(
         index           = config.es_combined_index  ,
@@ -242,12 +246,9 @@ async def submit(
         Tuple[dict, dict]: Results from ES query. If slots were provided, then results with slots refinement.
     '''
 
-    if slots:
-        hits = await _handle_es_query(slots, filter_ids = filter_ids)
-        hits, filter_ids = _handle_es_result(hits)
+    hits = await _handle_es_query(question, slots = slots, filter_ids = filter_ids)
     
-    hits = await _handle_es_query(question, filter_ids = filter_ids)
-    hits, filter_ids = _handle_es_result(hits, filter = False)
+    hits, filter_ids = _handle_es_result(hits)    
     
     res = _get_text(hits)
     

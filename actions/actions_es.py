@@ -105,7 +105,7 @@ class ActionSubmitESQueryForm(Action):
             'plant_part'    : tracker.get_slot('plant_part'   ),
             'plant_damage'  : tracker.get_slot('plant_damage' ),
             'plant_pest'    : tracker.get_slot('plant_pest'   ),
-            'pest_target'   : tracker.get_slot('pest_target' )
+            'pest_location' : tracker.get_slot('pest_location')
         }
 
         slots_extracted = {s: list(set(slots[s])) for s in slots if slots[s] is not None}
@@ -131,7 +131,7 @@ class ActionSubmitESQueryForm(Action):
             if config.debug:            
                 dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
                 
-                res, _ = await submit(query)
+                res, filter_ids = await submit(query, slots = slots_query)
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
@@ -139,23 +139,12 @@ class ActionSubmitESQueryForm(Action):
                 if top_n == 0:
                     dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
                 else:
-                    dispatcher.utter_message(text = f'Results without slots improvement... Top {top_n} results.' , json_message = res)
+                    message = f'Top {top_n} results.'
+                    if slots_query:
+                        message = f'Results with slots improvement... Top {top_n} results.'
+                        dispatcher.utter_message(text = message , json_message = res)
                     results = True
 
-                    if slots_query:
-                        res_slots, filter_ids = await submit(query, slots = slots_query)
-                    
-                        top_n = config.es_top_n
-                        if len(res_slots['data']) < config.es_top_n:
-                            top_n = len(res_slots['data'])
-                        
-                        if top_n == 0:
-                            dispatcher.utter_message(text = 'Unfortunately, could not find any results for <strong>slots</strong> that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
-                        else:
-                            dispatcher.utter_message(text = f'Results with slots improvement... Top {top_n} results', json_message = res_slots)
-                    
-                    else:
-                        dispatcher.utter_message(text = f'No slots were extracted... No results for slots.')
             else:
                 res, filter_ids = await submit(query, slots = slots_query)
                 
@@ -185,6 +174,51 @@ class ActionSubmitESQueryForm(Action):
         logger.info(f'action_submit_es_query_form - run - END')
         return events
 
+class ActionAskForProblemDescriptionAdd(Action):
+    '''Custom action for slot validation - plant_name.'''
+    
+    def name(self) -> Text:
+        return 'action_ask_problem_description_add'
+    
+    def run(
+        self,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any]
+        ) -> List[EventType]:
+
+        logger.info('action_ask_problem_description_add - START')
+        es_data = tracker.get_slot('es_data')
+        
+        required_utterances = {
+            'plant_name'    : 'plant name'              ,
+            'plant_type'    : 'plant type'              ,
+            'plant_part'    : 'plant part'              ,
+            'plant_damage'  : 'damage caused to plant'  ,
+            'plant_pest'    : 'pest name or description',
+            'pest_location' : 'location of pest'
+        }
+
+
+
+        message = 'Did that answer your question? If not, can you give me some more information'
+
+        add_detail = False
+        for s in required_utterances.keys():
+            if s not in es_data['slots'].keys():
+                if not add_detail:  message += ' (like ' + required_utterances[s]
+                else:               message += ', ' + required_utterances[s]
+                add_detail = True
+        
+        if add_detail:  message += ').'
+        else:           message += '.'
+
+        buttons = [{'title': 'Yes, it helped, thanks.', 'payload': '/intent_affirm'}]
+        
+        dispatcher.utter_message(text = message, buttons = buttons)
+
+        logger.info('action_ask_problem_description_add - END')
+        return []
 
 class ValidateESResultForm(FormValidationAction):
     '''Validating ES result form.'''
@@ -240,13 +274,11 @@ class ActionSubmitESResultForm(Action):
 
         logger.info(f'action_submit_es_result_form - run - START')
 
-        query_more  = tracker.get_slot('query_more')
-        query       = None
-        logger.info(f'action_submit_es_result_form - required query_more                slot value - {query_more  }')
+        query   = tracker.get_slot('problem_description_add')
+        logger.info(f'action_submit_es_result_form - required problem_description_add slot value - {query}')
 
-        if query_more == 'yes':
-            query   = tracker.get_slot('problem_description_add')
-            es_data = tracker.get_slot('es_data'               )
+        if query != 'yes':
+            es_data = tracker.get_slot('es_data')
             
             slots = {
                 'plant_name'    : tracker.get_slot('plant_name'   ),
@@ -254,7 +286,7 @@ class ActionSubmitESResultForm(Action):
                 'plant_part'    : tracker.get_slot('plant_part'   ),
                 'plant_damage'  : tracker.get_slot('plant_damage' ),
                 'plant_pest'    : tracker.get_slot('plant_pest'   ),
-                'pest_target'   : tracker.get_slot('pest_target' )
+                'pest_location' : tracker.get_slot('pest_location' )
             }
             slots_extracted = {s: list(set(slots[s])) for s in slots if slots[s] is not None}
             slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(v) for k, v in slots_extracted.items()])
@@ -271,8 +303,6 @@ class ActionSubmitESResultForm(Action):
             filter_ids  = es_data['filter_ids']            
             events      = []
             
-
-            logger.info(f'action_submit_es_result_form - required problem_description    slot value - {query}')
             for k, v in slots_extracted.items():
                 logger.info(f'action_submit_es_result_form - optional {k:<16} slot value - {v}')
 
@@ -282,7 +312,8 @@ class ActionSubmitESResultForm(Action):
             if not config.es_imitate:    
                 if config.debug:            
                     dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
-                    res, _ = await submit(query, filter_ids = filter_ids)
+                    
+                    res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
                     top_n = config.es_top_n
                     if len(res['data']) < config.es_top_n:
                         top_n = len(res['data'])
@@ -290,22 +321,11 @@ class ActionSubmitESResultForm(Action):
                     if top_n == 0:
                         dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
                     else:
-                        dispatcher.utter_message(text = f'Results without slots improvement... Top {top_n} results.' , json_message = res)
-
+                        message = f'Top {top_n} results.'
                         if slots_query:
-                            res_slots, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
-                        
-                            top_n = config.es_top_n
-                            if len(res_slots['data']) < config.es_top_n:
-                                top_n = len(res_slots['data'])
-                            
-                            if top_n == 0:
-                                dispatcher.utter_message(text = 'Unfortunately, could not find any results for <strong>slots</strong> that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
-                            else:
-                                dispatcher.utter_message(text = f'Results with slots improvement... Top {top_n} results', json_message = res_slots)
-                        
-                        else:
-                            dispatcher.utter_message(text = f'No slots were extracted... No results for slots.')
+                            message = f'Results with slots improvement... Top {top_n} results.'
+                            dispatcher.utter_message(text = message , json_message = res)
+
                 else:
                     res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
                     
@@ -320,7 +340,7 @@ class ActionSubmitESResultForm(Action):
                 logger.info(f'action_submit_es_result_form - run - not doing actual ES query')
                 dispatcher.utter_message(text = 'Not doing an actual elastic search query.')
         
-        buttons         = [
+        buttons = [
             {'title': 'Start over',             'payload': '/intent_greet'          },
             {'title': 'Connect me to expert',   'payload': '/intent_request_expert' }
         ]
@@ -330,33 +350,3 @@ class ActionSubmitESResultForm(Action):
 
         logger.info(f'action_submit_es_result_form - run - END')
         return events
-
-'''
-i)      DONE    add additional slot - location
-ii)     DONE    remove block of triplet and instead provide 1, and ask for the feedback
-iii)    DONE    sequential search - based on the query text (filter out)
-iv)     try asking additional details on the slots - proactive slot filling
-v)      implement the search based on decision tree
-vi)     DONE    implement out of the scope intent
-    *)  don't use curse words on me, please
-vii)    DONE    cut off score for the...
-viii)   DONE    make the cut off score configurable...
-    *)  
-iv)     DONE    follow-up question
-
-For presentation:
-Prepare for demo:
-    Prepare set of questions
-    Show capabilities
-    Out-of-scope
-    Success
-
-The words in the questions
-Synonyms - lady beetle
-Common names
-Return query that is most close without any real examples.
-
-
-Introdu
-
-'''

@@ -48,7 +48,7 @@ class ActionGreet(Action):
             dispatcher.utter_message(response = 'utter_greet')
         
         buttons = [
-            {'title': 'I would like to ask question.'       , 'payload': '/intent_help_question'},
+            {'title': 'I would like to ask a pest related question.'       , 'payload': '/intent_help_question'},
         ]
 
         if not shown_explain_ipm:
