@@ -28,5 +28,8 @@ web-client/
 # ES data and scraped data
 es/data/**/*.json
 
+# ES scripts for playground
+es/scripts/
+
 # simple front-end
 web-client/

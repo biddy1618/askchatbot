@@ -29,6 +29,9 @@ Specific examples:
 - How can I attract and retain ladybugs?
     - [Aphids](http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt)
 
+- I want to release lady bugs in my garden with the goal of keeping the aphid population to a minimum. Some guidance regarding purchase and implementation of the bugs.
+    - Top results should be "Lady beetles" or "Aphids"
+
 - What can I use to get rid of aphids on my tomato plants?
 	- [Aphids](http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt)
 
@@ -37,6 +40,8 @@ Specific examples:
 
 - We have small caterpillars that have defoliated our small oak tree in one day. What are these and how can I get rid of them? 
     - [Tent caterpillars](http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt) (should oakworm)
+
+
 
 Limitations:
 
@@ -66,3 +71,11 @@ Not showing:
 ------------------------------------------------------------------------------------------
 
 - remove secondary results
+
+- slots weighting (host_plant)
+
+- location of the pest - 
+
+- privacy 
+
+- 

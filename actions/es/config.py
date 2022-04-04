@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 stage                   = os.getenv('STAGE'                 , 'dev'                                                     )
-version                 = os.getenv('VERSION'               , 'UNDEFINED'                                               ) 
+version                 = os.getenv('DEPLOYMENT_VERSION'    , 'UNDEFINED'                                               ) 
 tf_cpp_min_log_level    = os.getenv('TF_CPP_MIN_LOG_LEVEL'  , '3'                                                       )
 tf_embed_url            = os.getenv('TFHUB_EMBEDDING_URL'   , 'https://tfhub.dev/google/universal-sentence-encoder/4'   )
 tfhub_cache_dir         = os.getenv('TFHUB_CACHE_DIR'       , '/var/tmp/tfhub_modules'                                  )
@@ -50,7 +50,7 @@ except ValueError:
 if stage == 'dev':
 
     logger.info('----------------------------------------------')
-    logger.info('Environment variables for DEV environment' )
+    logger.info('Environment variables for DEV environment'     )
     logger.info(f'- debug           = {debug}'                  )
     logger.info(f'- es_search_size  = {es_search_size}'         )
     logger.info(f'- es_cut_off      = {es_cut_off}'             )
