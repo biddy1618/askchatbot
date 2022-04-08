@@ -38,7 +38,7 @@ Specific examples:
 - How can we control the fruit flies we have in our raspberries and strawberries in our garden patch? We have set out cider vinegar traps and already have a large amount caught in them.
     - [fruit flies](http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/fruitflies.html?src=exchbt)
 
-- We have small caterpillars that have defoliated our small oak tree in one day. What are these and how can I get rid of them? 
+- We have small caterpillars that have defoliated our small oak tree in one day. What are these and how can I get rid of them?
     - [Tent caterpillars](http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/tentcater.html?src=exchbt) (should oakworm)
 
 
@@ -51,7 +51,7 @@ Limitations:
 - My milkweed have already bloomed, but now there are strange "caterpillars" on the leaves. They are about 3/4 inch long, have black bodies with orange either on the top or bottom.  The insects are fuzzy and I think they are eating the leaves.  Should I try to kill them and if so, how?
     - Top result should be "Tussock moth"
 
-- I found a very large white grub inthe firewood we were splitting. What was it and how to deal with it? 
+- I found a very large white grub inthe firewood we were splitting. What was it and how to deal with it?
     - Top result should be "root borer" or "longhorned beetle"
 
 - I found a green worm crawling out of my partially eaten green tomato. Please, what is this pest? How do I control it? Will this entire plant be infected? In the past few days, I have noticed something eating holes in the leaves of this same tomato. They range from pin head to pea size, and the few of the older leaves are 60-70% eaten.
@@ -78,4 +78,12 @@ Not showing:
 
 - privacy 
 
-- 
+- intent_deny handling after first question
+
+- work on score handling and 
+
+- associate scientific language to simple layman terms
+
+- pest terms
+
+- two models - converting layman terms into scientific terms, and embedding model for scientific sources

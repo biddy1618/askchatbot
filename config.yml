@@ -28,32 +28,98 @@ pipeline:
 #   - name: FallbackClassifier
 #     threshold: 0.3
 #     ambiguity_threshold: 0.1
+  # 
   - name: SpacyNLP
     model: en_core_web_trf
     case_sensitive: False
+  # Creates tokens using spaCy tokenizer
+  ## requires: SpacyNLP
+  ## outputs: tokens
   - name: SpacyTokenizer
+  # Creates a vector representation of user message and response.
+  # Creates features for entity extraction, intent classification, and 
+  # response classification.
+  ## requires: SpacyNLP
+  ## outputs: dense_features of user messages and responses
   - name: SpacyFeaturizer
     pooling: mean
+  # Creates lexixal and syntactic features for a user message to support entity extraction.
+  # Moves with a sliding window over every token int hte user message and creaets features
+  # according to the configuration.
+  ## requires: tokens
+  ## outputs: sparse_features for user messages 
   - name: LexicalSyntacticFeaturizer
     features: [
     ["low", "title", "upper"],
     ["BOS", "EOS", "low", "upper", "title", "digit", "pos"],
     ["low", "title", "upper"],
     ]
+  # Creates bag-of-words representation of user messages, intents, and responses.
+  # Used for intent classification and response selection.
+  ## requires: tokens
+  ## outputs: sparse_features for user messages, intents, and responses.
   - name: CountVectorsFeaturizer
+  # this one for word-ngram features
   - name: CountVectorsFeaturizer
     analyzer: "char_wb"
     min_ngram: 1
     max_ngram: 4
+  # Dual Intent Entity Transformer used for intent classification adn entity recognition.
+  ## requires: desnse_features and/or sparse_features for user messages and optionally intent.
+  ## outputs: entities, intent, and intent_ranking
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
+  # spaCy entity extraction
+  ## requires: SpacyNLP
+  ## outputs: entities
   - name: SpacyEntityExtractor
   - name: RegexEntityExtractor
     case_sensitive: False
     use_look_up_tables: True
     use_regexes: True
+  # Conditional random field (CRF) entity extraction.
+  ## requires: tokens and dense_features (optional)
+  ## outputs: entities
+  - name: CRFEntityExtractor
+    # BILOU_flag determines whether to use BILOU tagging or not.
+    BILOU_flag: True
+    # features to extract in the sliding window
+    features: [
+      ["low", "title", "upper"],
+      [
+        "bias",
+        "low",
+        "prefix5",
+        "prefix2",
+        "suffix5",
+        "suffix3",
+        "suffix2",
+        "upper",
+        "title",
+        "pos",
+        "digit",
+        "pattern",
+        "text_dense_features"
+      ],
+      ["low", "title", "upper"],
+    ]
+    # The maximum number of iterations for optimization algorithms.
+    max_iterations: 50
+    # weight of the L1 regularization
+    L1_c: 0.1
+    # weight of the L2 regularization
+    L2_c: 0.1
+    # Name of dense featurizers to use.
+    # If list is empty all available dense features are used.
+    featurizers: []
+  # Maps synonymous entity values to the same value
+  ## requires: extractor from Entity Extractors
+  ## outputs: modifies existing entities that previous entity extraction components found.
   - name: EntitySynonymMapper
+  # Classifies a message with the intent nlu_fallback if the NLU intent classification scores are ambigious.
+  ## requires: intent and intent_ranking
+  ## outputs: entities, intent, and intent_ranking
   - name: FallbackClassifier
     threshold: 0.7
 

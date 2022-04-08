@@ -3,8 +3,6 @@ from typing import Dict, Text, Any, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
-    SlotSet,
-    FollowupAction,
     EventType
 )
 
@@ -41,11 +39,11 @@ class ActionSetParameter(Action):
         else: 
             dispatcher.utter_message(
                 text    = (
-                    f'Error parsing config message: </br>'                      +
-                    'Please, use explicit parameter names</br>'                 +
-                    '(i.e. <strong>parameter es_cut_off 0.5</strong>).'         +
-                    '</br>Available parameters: <i>'                            +
-                    ', '.join(helper.params.keys())                                    +
+                    f'Error parsing config message: </br>'              +
+                    'Please, use explicit parameter names</br>'         +
+                    '(i.e. <strong>parameter es_cut_off 0.5</strong>).' +
+                    '</br>Available parameters: <i>'                    +
+                    ', '.join(helper.params.keys())                     +
                     '</i>.')
             )
             logger.info(f'action_set_parameter - parameter parsing error - {None}')

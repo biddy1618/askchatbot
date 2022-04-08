@@ -11,20 +11,20 @@ rules:
   - action: action_listen
 
 # Base rules
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: intent_goodbye
-  - action: utter_goodbye
-
-- rule: Say 'I am a bot' anytime the user challenges
-  steps:
-  - intent: intent_bot_challenge
-  - action: utter_iamabot
-
 - rule: Introduction message with available options to choose from
   steps:
   - intent: intent_greet
   - action: action_greet
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: intent_goodbye
+  - action: action_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: intent_bot_challenge
+  - action: action_iambot
 
 - rule: Fallback rule
   steps:
@@ -34,18 +34,19 @@ rules:
 - rule: Out of scope messages
   steps:
   - intent: intent_out_of_score
-  - action: utter_out_of_scope
+  - action: action_out_of_scope
 
 # Main rules
 - rule: More about IPM
   steps:
   - intent: intent_explain_ipm
-  - action: utter_explain_ipm
+  - action: action_explain_ipm
+  - action: action_greet
 
 - rule: Connect to expert
   steps:
   - intent: intent_request_expert
-  - action: utter_connect_expert
+  - action: action_connect_expert
 
 # Decision Tree form rule
 # - rule: Activate form for plant problem description

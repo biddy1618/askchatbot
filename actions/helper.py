@@ -35,7 +35,63 @@ params = {
     'es_top_n'      : int,
     'es_cut_off'    : float,
     'es_ask_weight' : float
-}   
+}
+
+utterances = {
+    'greet'             : "Hi, I'm the AskExtension Assistant!",
+    'goodbye'           : 'Bye!',
+    'help'              : 'How can I help you?',
+    'ipm'               : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
+    'fallback'          : "I'm sorry, I am still learning. Can you rephrase?",
+    'out_of_scope'      : "Sorry, I can't handle that request. For now, I can handle pest related requests. Try me.",
+    'connect_expert'    : 'You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.',
+    'ask_problem_desc'  : 'Please, describe your problem.',
+    'no_results'        : 'Unfortunately, could not find any results that might help you... Try to reformulate your problem description, please.',
+    'add_help'          : 'Anything else I can help with?',
+    'more_details'      : 'Please, give more more information',
+    'ask_more_details'  : 'Did that answer your question? If not, can you give me some more information',
+    'debug_slots'       : 'Extracted slots:</br>',
+    'debug_no_results'  : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
+    'debug_results'     : 'Top {0} results.',
+    'debug_slot_results': 'Results with slots improvement... Top {0} results.',
+    'debug_no_es'       : 'Not doing an actual elastic search query.',
+}
+
+buttons = {
+    'ask_question'  : {
+        'title'     : 'I would like to ask a pest related question.', 
+        'payload'   : '/intent_help_question'
+    },
+    'learn_ipm'     : {
+        'title'     : 'I want to learn more about IPM.', 
+        'payload'   : '/intent_explain_ipm'
+    },
+    'request_expert': {
+        'title'     : 'Connect me to an expert.', 
+        'payload'   : '/intent_request_expert'
+    },
+    'start_over'    : {
+        'title'     : 'Start over.',
+        'payload'   : '/intent_greet'
+    },
+    'affirm_thanks' : {
+        'title'     : 'Yes, thank you!', 
+        'payload'   : '/intent_affirm'
+    },
+    'deny_details'  : {
+        'title'     : "No. I’d like to provide additional details.",
+        'payload'   : '/intent_deny'
+    },
+    'deny_question' : {
+        'title'     : "No. I’d like to ask different question.", 
+        'payload'   : '/intent_affirm'
+    },
+    'deny_expert'   : {
+        'title'     : "No, I'd like to speak to an expert.",
+        'payload'   : '/intent_request_expert'
+    }
+}
+
 
 def _reset_slots(tracker: Tracker) -> List[Any]:
     '''Clean up slots from all previous forms.'''
@@ -52,6 +108,7 @@ def _reset_slots(tracker: Tracker) -> List[Any]:
 
     return events
 
+
 def _next_intent(next_intent: Text) -> List[Dict]:
     '''Add next intent events, mimicking a prediction by NLU.'''
     return [
@@ -61,6 +118,7 @@ def _next_intent(next_intent: Text) -> List[Dict]:
             {'intent': {'name': next_intent, 'confidence': 1.0}, 'entities': {}},
         )
     ]
+
 
 def _get_plant_names(
     plant_type      : Text          = 'other',
@@ -75,6 +133,7 @@ def _get_plant_names(
         pn = pn.sample(n)
     
     return pn.tolist()
+
 
 def _get_plant_parts(
     plant_type      : Text          = 'other',
@@ -92,6 +151,7 @@ def _get_plant_parts(
         pp = pp.sample(n)
 
     return pp.tolist()
+
 
 def _get_plant_damages(
     plant_type      : Text          = 'other',
@@ -111,6 +171,11 @@ def _get_plant_damages(
         pd = pd.sample(10)
     
     return pd.tolist()
+
+
+def _jaccard_coef(s1: set, s2: set) -> float:  
+    return len(s1.intersection(s2)) / len(s1.union(s2))
+
 
 def _get_problem_links(
     plant_type      : Text = 'other',
@@ -136,8 +201,6 @@ def _get_problem_links(
 
     return res
 
-def _jaccard_coef(s1: set, s2: set) -> float:  
-    return len(s1.intersection(s2)) / len(s1.union(s2))
 
 def _parse_config_message(text: str) -> Tuple[str, str]:
     parameter, value = None, None
@@ -148,6 +211,7 @@ def _parse_config_message(text: str) -> Tuple[str, str]:
     except Exception:
         parameter, value = None, None
     return parameter, value
+
 
 def _get_config_message(config):
     

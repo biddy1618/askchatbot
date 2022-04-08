@@ -182,7 +182,7 @@ def _get_text(hits: dict) -> dict:
         top_n = len(hits)
 
     res = {
-        'text'      : 'Check these resources that could help you out on your request...',
+        'text'      : 'Here are my top results:',
         'payload'   : 'collapsible',
         'data'      : []
     }
