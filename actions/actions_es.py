@@ -38,6 +38,7 @@ class ActionAskForProblemDescription(Action):
         logger.info('action_ask_problem_description - END')
         return []
 
+
 class ValidateProblemDescriptionSlot(Action):
     '''Validating problemdescription slot.'''
     
@@ -64,6 +65,7 @@ class ValidateProblemDescriptionSlot(Action):
         
         logger.info('action_validate_problem_description - END')
         return events
+
 
 class ValidateESQueryForm(FormValidationAction):
     '''Validating the ES query form.'''
@@ -96,7 +98,6 @@ class ValidateESQueryForm(FormValidationAction):
         logger.info(f'validate_es_query_form - required slots   - END')
 
         return updated_slots
-
 
 
 class ActionSubmitESQueryForm(Action):

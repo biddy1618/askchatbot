@@ -1,34 +1,47 @@
-# Design document
+# The Extension Bot
 
-## Initial scetches
+Repo for the Ask Extension chatbot component demonstration.
+## Things you can ask the bot
 
-For the first iteration, we are going to address the following parts:
+The bot can:
 
-- Cultural tips. Entities: `plant_type`, `plant_name`, `tip_formulation`
-    - Question
-- Plant problem. Entities: `plant_type`, `plant_name`, `problem_description`, `plant_damage`, `general_question`, `pest_name`, `problem_name`
-    - Pest problem
-    - Disease problem
-    - Description
-- 
+1. Find information based on pest-related question or request.
+    1. Examples of requests:
+    ```
+    - Something is creating tunnels on my tomato plants. When I cut them open, I see yellowish worms or larvae with red or purple areas.
+    ```
 
+    ```
+    - There are tiny flies hovering all over my fruit basket. How do I get rid of them?
+    ```
 
-1. Plant problem
-2. Disease and pests
+    ```
+    - I want to release lady bugs in my garden with the goal of keeping the aphid population to a minimum. Some guidance regarding purchase and implementation of the bugs.
+    ```
+2. Explain `Intergrated Pest Management`.
+3. Connect to expert by showing the link to reach the expert.
 
-In order to accomplish that we need to build some form of possible tree to address the issues of the user. THE MOST FUNDAMENTAL PART in my opinion is the plant itself in resolving this question. Since pests and diseases can be subject to plant type, the foremost question that we need to ask is the plant type and name.
+## Details of implementation
 
-1. What kind of plant do you have?
-2. If you are aware the plant name, can you type it?
-3. Part of the plant that is damaged?
-4. Description of the damage.
+The bot is able to retrieve entities related to pest management like following:
+1. Pest name
+2. Plant name
+3. Plant type
+4. Plant part
+5. Plant damage
+6. Pest location
 
-Other questions to ask:
-* Did you find bug and send the image?
-* Is there something wrong with plant?
-* Part of the plant?
+It uses the recognized entities to adjust the results of the search result.
 
+Querying the data sources happens through vector-similiraties of embedded vectors of the query against the knowledge database.
 
-Things to do:
+* Embedding is achieving through [Universal Sentence Encoder model by Google](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/46808.pdf)
+* The distance metric is [cosine similary distance](https://en.wikipedia.org/wiki/Cosine_similarity)
 
-1. Parse the docs using Python to retrive the families of the plants, names of the plants, parts damaged, description, and for the second document retrieve the matrix of the damages and possible pests that might be causing it.
+## Development server
+
+The chatbot is available through `https://dev.chat.ask.eduworks.com/`.
+
+## Front-end
+
+[Repository](https://git.eduworks.us/ask-extension/askchatbot-widget) for the front-end.
