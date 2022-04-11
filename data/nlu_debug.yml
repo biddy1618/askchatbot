@@ -1,0 +1,15 @@
+version: "3.0"
+
+nlu:
+- intent: intent_set_parameter
+  examples: |
+    - parameter es_cut_off 0.85
+    - parameter es_cut_off 0.34
+    - parameter es_search_size 100
+    - parameter es_search_size 8
+    - parameter es_top_n 10
+    - parameter es_top_n 2
+    - parameter es_ask_weight 0.2
+    - parameter es_ask_weight 0.9
+    - parameter
+    - set parameter

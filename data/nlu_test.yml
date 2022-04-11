@@ -1,0 +1,51 @@
+version: "3.0"
+
+nlu:
+- intent: intent_test_images
+  examples: |
+    - test images
+    - images
+    - I would like to test images
+    - Let's test images
+    - Show me images
+    - image test
+- intent: intent_test_videos
+  examples: |
+    - test videos
+    - videos
+    - I would like to test videos
+    - Let's test videos
+    - Show me videos
+    - video test
+- intent: intent_test_dropdows
+  examples: |
+    - test dropdowns
+    - dropdowns
+    - I would like to test dropdowns
+    - Let's test dropdowns
+    - Show me dropdowns
+    - dropdowns test
+- intent: intent_test_quick_replies
+  examples: |
+    - test replies
+    - replies
+    - I would like to test replies
+    - Let's test replies
+    - Show me replies
+    - replies test
+- intent: intent_test_collapsible
+  examples: |
+    - test collapsible
+    - collapsible
+    - I would like to test collapsible
+    - Let's test collapsible
+    - Show me collapsible
+    - collapsible test
+- intent: intent_test_carousel
+  examples: |
+    - test carousel
+    - carousel
+    - I would like to test carousel
+    - Let's test carousel
+    - Show me carousel
+    - carousel test

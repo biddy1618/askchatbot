@@ -1,0 +1,35 @@
+version: "3.0"
+
+nlu:
+
+- lookup: pest_location
+  examples: |
+    - pantry
+    - house
+    - kitchen
+    - wall
+    - grain
+    - wood
+    - rice
+    - floor
+    - bread
+    - carpet
+    - food
+    - furniture
+    - silo
+    - sofa
+    - clothes
+    - fabric
+    - attic
+    - deck
+    - sod
+    - cabinet
+    - bed
+    - room
+    - couch
+    - cupboard
+    - counter
+    - lawn
+    - yard
+    - garbage
+    - trash cans

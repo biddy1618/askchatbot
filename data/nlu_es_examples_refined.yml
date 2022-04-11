@@ -1,0 +1,16 @@
+examples: |
+  - Something is [creating](pest_action, role: descrip, group: 1) [tunnels](damage, gro) on my [tomato](pest_target) [plants](plant). When I cut them open, I see [yellowish](pest_desc) [worms](pest) or [larvae](pest) with red or purple areas.
+  - There are [tiny](pest_desc) [flies](pest) hovering all over my [fruit basket](pest_target). How do I get rid of them?
+  - There is [white](pest_desc) [fungus](pest) growing on my [lettuce](plant), what is that?
+  - How can I [attract](pest_action) and [retain](pest_action) [ladybugs](pest)?
+  - I want to [release](pest_action) [lady bugs](pest) in my [garden](pest_target) with the goal of [keeping](pest_action) the [aphid](pest) population to a [minimum](pest_action). Some guidance regarding [purchase](pest_action) and [implementation](pest_action) of the [bugs](pest).
+  - What can I use to [get rid](pest_action) of [aphids](pest) on my [tomato](plant) [plants](plant)?
+  - How can we [control](pest_action) the [fruit flies](pest) we have in our [raspberries](plant) and [strawberries](plant) in our [garden](pest_target) patch? We have set out cider vinegar traps and already have a large amount caught in them.
+  - We have [small](pest_desc) [caterpillars](pest) that have [defoliated](pest_action) our small [oak tree](plant) in one day. What are these and how can I get rid of them?
+  - I have an [artichoke](plant) [plant](plant) and it has all these [little](pest_desc) [black](pest_desc) [specks](damage) on it! There was a [ladybug](pest) on [topside](pest_target] of [leaf](plant). What are they?
+  - My [milkweed](plant) have already [bloomed](plant_desc), but now there are strange "[caterpillars](pest)" on the (leaves)(pest_target). They are about 3/4 inch long, have [black bodies](pest_desc) with [orange](pest_desc) either on the top or bottom.  The [insects] are [fuzzy](pest_desc) and I think they are [eating](pest_action) the [leaves](pest_target).  Should I try to kill them and if so, how?
+  - I found a very [large](pest_desc) [white](pest_desc] [grub](damage) inthe [firewood](pest_target) we were splitting. What was it and how to deal with it?
+  - I found a [green](pest_desc) [worm](pest) [crawling](pest_action) out of my partially [eaten](plant_desc) [green](plant_desc) [tomato](plant). Please, what is this pest? How do I control it? Will this entire plant be infected? In the past few days, I have noticed something eating holes in the leaves of this same tomato. They range from pin head to pea size, and the few of the older leaves are 60-70% eaten.
+  - I have flying bugs, like over-sized fruit flies, black bodies, translucent wings. They behave a lot like fruit flies, too, except they don't seem interested in fruit - and it's the middle of the winter! They mostly hang around my kitchen sink but they have spread to other rooms of the house, even my upstairs bathroom.
+  - I have owned an indoor plant (and do not know what it is) for about one year. A white powder-like substance is appearing at the ends of many stalks, and sometimes on the edges of leaves. What is this substance, and how can I rid my plant of this problem? 
+  - We have an almond tree that is producing almonds. Come to find out the almonds are full of worms. Can you help with a what type of worm it is and possibly a plan of action?

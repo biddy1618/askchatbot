@@ -1,91 +1,47 @@
 # The Extension Bot
 
-Repo for the Ask Extension chatbot component demonstration completed in the 2019-2020 funding cycle.
-
+Repo for the Ask Extension chatbot component demonstration.
 ## Things you can ask the bot
 
 The bot can:
-1. Find  information based on an open question, for example:
 
-   ```bash
-   - when I import a christmas tree from Michigan to california, is there a tax I need to pay?
-   ```
+1. Find information based on pest-related question or request.
+    1. Examples of requests:
+    ```
+    - Something is creating tunnels on my tomato plants. When I cut them open, I see yellowish worms or larvae with red or purple areas.
+    ```
 
-   ```bash
-   - Should I desprout potatoes when I store them in the winter?
-   ```
+    ```
+    - There are tiny flies hovering all over my fruit basket. How do I get rid of them?
+    ```
 
-   ```bash
-   - I have ants in my kitchen and want to know how to get rid of them
-   ```
+    ```
+    - I want to release lady bugs in my garden with the goal of keeping the aphid population to a minimum. Some guidance regarding purchase and implementation of the bugs.
+    ```
+2. Explain `Intergrated Pest Management`.
+3. Connect to expert by showing the link to reach the expert.
 
-   ```bash
-   - I think I have lanternflies
-   ```
+## Details of implementation
 
-   ```bash
-   - My tomatoes have black spots, any idea what it could be?
-   ```
+The bot is able to retrieve entities related to pest management like following:
+1. Pest name
+2. Plant name
+3. Plant type
+4. Plant part
+5. Plant damage
+6. Pest location
 
-   
+It uses the recognized entities to adjust the results of the search result.
 
-2. Find information based on a `pest problem description` & an optional `damage description`, for example:
+Querying the data sources happens through vector-similiraties of embedded vectors of the query against the knowledge database.
 
-   ```bash
-   - pest problem description: I have ants in the house 
-   -       damage description: They create holes in my wall
-   ```
+* Embedding is achieving through [Universal Sentence Encoder model by Google](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/46808.pdf)
+* The distance metric is [cosine similary distance](https://en.wikipedia.org/wiki/Cosine_similarity)
 
-   ```bash
-   - pest problem description: There are a lot of bees in my back yard
-   -       damage description: They burrow into the wood piles
-   ```
+## Development server
 
-   ```bash
-   - pest problem description: I got grubs in my lawn 
-   -       damage description: The grass is completely dead in certain spots
-   ```
+The chatbot is available through `https://dev.chat.ask.eduworks.com/`.
 
-   
+## Front-end
 
-3. If the chatbot cannot find anything, or if the user indicates that the provided information is not helpful, the bot will ask the user if they would like to ask an expert. If yes, a link will be provided where the user can ask their question to an expert.
-
-4. Explain `Integrated Pest Management (IPM)`
-
-
-
-## Hardware requirements
-
-The bot was developed & deployed on an EC2 of **c5.2xlarge**:
-
-- 8 vCPU
-- 16 Gb RAM   (Recommended to increase to 32 Gb)
-- 100 Gb disk  (Recommended to increase to 200 Gb)
-
-## Data sources
-
-The bot uses data that was scraped from these websites:
-
-- [ipm data](http://ipm.ucanr.edu/)
-- [askextension ostickets](https://osticket.eduworks.com/kb/faq.php?id=675271) (Only questions from the State of California are included)
-
-
-
-## Developer resources
-
-- The bot is deployed at http://34.219.35.63:8000/
-- [Architecture Diagram](https://docs.google.com/drawings/d/1h_DHiiTr2km3OKpcsoGScElEtyXSR3jL6PHumcRPwQI/edit)
-- [Rasa X HTTP API](https://rasa.com/docs/rasa-x/api/rasa-x-http-api/)
-- See [Jira AE-314](https://jira.eduworks.us/browse/AE-314) for Rasa X to Gitlab connection.
-
-
-
-## Front ends & widgets
-
-- [Messaging and Voice Channels](https://rasa.com/docs/rasa/user-guide/connectors/custom-connectors/#id1)
-
-- [botfront: rasa-webchat *(very popular web widget)*](https://github.com/botfront/rasa-webchat)
-
-- [Custom connectors](https://rasa.com/docs/rasa/user-guide/connectors/custom-connectors)
-
-  
+[Repository](https://git.eduworks.us/ask-extension/askchatbot-widget) for the front-end.

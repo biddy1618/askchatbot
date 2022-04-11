@@ -1,0 +1,22 @@
+version: "3.0"
+
+nlu:
+
+- lookup: plant_type
+  examples: |
+    - non-woody
+    - vegetables
+    - vegetable
+    - melons
+    - herbs
+    - berry
+    - berries
+    - grapevines
+    - plant
+    - tree
+    - trees
+    - shrubs
+    - roses
+    - melons
+    - woody
+    - bush

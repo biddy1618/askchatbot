@@ -1,2 +1,0 @@
-# keep this in sync with the requirements for the action code
--r ../../../actions/requirements-actions.txt

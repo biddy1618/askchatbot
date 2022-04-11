@@ -1,0 +1,5 @@
+# tiny dependency resolver
+pipdeptree==2.2.1
+
+# for local fast embedding vectorization
+tensorflow-gpu==2.6.1

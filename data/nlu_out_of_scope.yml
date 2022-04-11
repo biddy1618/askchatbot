@@ -1,0 +1,101 @@
+version: "3.0"
+
+nlu:
+- intent: intent_out_of_score
+  examples: |
+    - I want to order food
+    - What is 2 + 2?
+    - Who's the US President?
+    - Can I upload image?
+    - Do you speak Chinese?
+    - translate this to english
+    - I want to apply for a job at Rasa
+    - I have an image with pests, can you help me with that?
+    - can you swear?
+    - how much has the dow changed today
+    - how many prime numbers are there between 0 and 100
+    - can you tell me how to solve simple algebraic equations with one variable
+    - can you dim the brightness of my screen
+    - what is the account number to the internet service i have
+    - can you see a hdmi cord
+    - can you put the car in fuel efficient mode
+    - at what age can someone get a card
+    - please find today's most read stories from the new york times today
+    - can you tell me who sells dixie paper plates
+    - who invented the internet
+    - what big news happened over the weekend
+    - what is happening in politicsu
+    - how is my driving
+    - is the earth flat
+    - please tell me the status of the government shutdown
+    - what oil is best for chicken
+    - what is today's big article in the washington post
+    - has there been anything breaking this afternoon
+    - what are yahoo's top stories right now
+    - what's at movies
+    - what is the amount of blood needed to stay alive
+    - can you add a bag to my reservation
+    - can you auto-pilot the car
+    - wash windshield
+    - can you tell me what credit cards i have open
+    - did the stock market finish up for the day
+    - what is the population of south africa
+    - watch the fbi
+    - can you find the answer to number 26 in this algebra two textbook
+    - how to remove a stripped bolt
+    - which stocks have lost the least today
+    - what are some things i can do on the way to work
+    - how many steps have i taken today
+    - can you fill in my credit card number on the screen
+    - who won the patriots game last nightu
+    - is anything being newscasted about the threat of famine in chadu
+    - what are the different types of tvs
+    - do laundry
+    - what did trump do todayu
+    - how many miles does my car currently have
+    - close all internet tabs
+    - can you sell stocks for me
+    - how do you treat an iron skillet
+    - how much has microsoft's stock changed over the last year
+    - what is the best product for removing soap scum
+    - read text
+    - park the car
+    - show me a list of top rated airlines
+    - may i finish washing then i give you please
+    - do i have overdraft protection
+    - can you delete my saved credit card
+    - can you give me the most current market news
+    - did the supreme court nominee get approved
+    - which company has gone up the most today
+    - who were the superbowl 23 champions
+    - can you tell me how to clean a fish tank
+    - open cnn website
+    - how do i make my android phone more secure
+    - i need to update my address
+    - what is that crunchy stuff on creme brulee
+    - which airports do southwest service around the greater new york city area
+    - can you retrieve client d's file please
+    - can you list all channels of a certain category
+    - where does jelly come from
+    - can you tell me the s&p average
+    - how would you rate the airport i am traveling to
+    - am i too old to be a sugar babyo
+    - what was the closing number of the nasdaq today
+    - has ko gone up or down
+    - how many cars average are on the road daily
+    - what does the plus sign mean on my dashboard
+    - how is ford's stock doing
+    - what is my checking account number
+    - when should i remove my snow tires
+    - which stocks gained the most today
+    - what is the fee for a cash advance
+    - tell me about the earthquake in california that happened this morning
+    - change color contrast
+    - what is the golden ratio's number
+    - is the bank open on mlk day
+    - can i deposit a check
+    - from the second of the left ,the pink one
+    - go and check the fridge
+    - can you tell me the score of the heat game
+    - please find the capital of pakistan and its population
+    - what's the best price on super smash bros ultimate right now
