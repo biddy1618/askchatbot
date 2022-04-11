@@ -89,9 +89,15 @@ class ValidateESQueryForm(FormValidationAction):
         logger.info(f'validate_es_query_form - slots recognized - {tracker.slots_to_validate()  }')
 
         if tracker.get_slot("problem_description") is not None:
+            for entity in tracker.latest_message['entities']:
+                print(f'Entity: "{entity["entity"]}"', end = '')
+                if 'role'   in entity: print(f', role: "{entity["role"]}"', end = '')
+                if 'group'  in entity: print(f', group: "{entity["group"]}"', end = '')
+                if 'value'  in entity: print(f', VALUE: "{entity["value"]}"', end = '')
+                print('\n')
             for slot in domain_slots:
                 if slot not in tracker.slots_to_validate(): 
-                    logger.info(f'validate_es_query_form - removing slot - {slot}')        
+                    logger.info(f'validate_es_query_form - removing slot - {slot}')
                     updated_slots.remove(slot)
         
         logger.info(f'validate_es_query_form - updated slots    - {updated_slots}')
@@ -134,6 +140,32 @@ class ActionSubmitESQueryForm(Action):
             helper.buttons['start_over'     ],
             helper.buttons['request_expert' ]
         ]
+        slots_utterance = ''
+        entities = []
+        for entity in tracker.latest_message['entities']:
+            if entity["entity"] in ['action', 'descr', 'location', 'name', 'part', 'type']:
+                en_dict = {}
+                en_dict['entity'] = entity["entity"]
+                if 'value'  in entity: 
+                    en_dict['value'] = entity["value"]
+                if 'role'   in entity: 
+                    en_dict['role'] = entity["role"]
+                if 'group'  in entity: 
+                    en_dict['group'] = entity["group"]
+                found = False
+                for d in entities:
+                    if d == en_dict:
+                        found = True
+                if not found:
+                    slots_utterance += f'Entity: "{entity["entity"]}"</br>'
+                    if 'value'  in entity: 
+                        slots_utterance += f', value: "{entity["value"]}"</br>'
+                    if 'role'   in entity: 
+                        slots_utterance += f', role: "{entity["role"]}"</br>'
+                    if 'group'  in entity: 
+                        slots_utterance += f', group: "{entity["group"]}"</br>'
+                    slots_utterance += '</br></br>'
+                    entities.append(en_dict)
 
         results     = False
         filter_ids  = []
@@ -161,6 +193,7 @@ class ActionSubmitESQueryForm(Action):
                 else:
                     # message = f'Top {top_n} results.'
                     message = helper.utterances['debug_results'].format(str(top_n))
+                    slots_query = None
                     if slots_query:
                         # message = f'Results with slots improvement... Top {top_n} results.'
                         message = helper.utterances['debug_slot_results'].format(str(top_n))
@@ -184,7 +217,7 @@ class ActionSubmitESQueryForm(Action):
             if results:
                 es_data['filter_ids'] = filter_ids
                 events.append(SlotSet('es_data', es_data))
-                events.append(FollowupAction('es_result_form'))
+                # events.append(FollowupAction('es_result_form'))
             else:
                 events = helper._reset_slots(tracker)
                 events.append(SlotSet('done_query', True))

@@ -9,7 +9,6 @@ intents:
 - intent_greet
 - intent_affirm
 - intent_deny
-- intent_not_clear
 - intent_goodbye
 - intent_bot_challenge
 - intent_out_of_score
@@ -27,12 +26,12 @@ intents:
 - intent_test_collapsible
 - intent_test_carousel
 entities:
-- plant_damage
-- plant_name
-- plant_part
-- plant_type
-- plant_pest
-- pest_location
+- action
+- descr
+- location
+- name
+- part
+- type
 slots:
   # Basic slots
   shown_greeting:
@@ -58,36 +57,36 @@ slots:
       - type: custom
         action: action_validate_problem_description
   # Additional slots
-  plant_name:
+  action:
     type: list
     mappings:
       - type: from_entity
-        entity: plant_name
-  plant_type:
+        entity: action
+  descr:
     type: list
     mappings:
       - type: from_entity
-        entity: plant_type
-  plant_part:
+        entity: descr
+  location:
     type: list
     mappings:
       - type: from_entity
-        entity: plant_part
-  plant_damage:
+        entity: location
+  name:
     type: list
     mappings:
       - type: from_entity
-        entity: plant_damage
-  plant_pest:
+        entity: name
+  part:
     type: list
     mappings:
       - type: from_entity
-        entity: plant_pest
-  pest_location:
+        entity: part
+  type:
     type: list
     mappings:
       - type: from_entity
-        entity: pest_location
+        entity: type
   # ES query result slots
   problem_description_add:
     type: text
@@ -258,18 +257,18 @@ forms:
   es_query_form:
     required_slots:
     - problem_description
-    - plant_name
-    - plant_type
-    - plant_part
-    - plant_damage
-    - plant_pest
-    - pest_location
+    - name
+    - descr
+    - action
+    - location
+    - part
+    - type
   es_result_form:
     required_slots:
     - problem_description_add
-    - plant_name
-    - plant_type
-    - plant_part
-    - plant_damage
-    - plant_pest
-    - pest_location
+    - name
+    - descr
+    - action
+    - location
+    - part
+    - type

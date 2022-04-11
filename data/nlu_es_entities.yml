@@ -3,542 +3,417 @@ version: "3.0"
 nlu:
 - intent: intent_problem_description
   examples: |
-    - [non-woody](plant_type)
-    - [vegetables](plant_type)
-    - [vegetable](plant_type)
-    - [melons](plant_type)
-    - [herbs](plant_type)
-    - [berry](plant_type)
-    - [berries](plant_type)
-    - [grapevines](plant_type)
-    - [tree](plant_type)
-    - [trees](plant_type)
-    - [shrubs](plant_type)
-    - [roses](plant_type)
-    - [melons](plant_type)
-    - [woody](plant_type)
-    - [bush](plant_type)
-    - [blossoms](plant_part)
-    - [branches](plant_part)
-    - [buds](plant_part)
-    - [bulbs](plant_part)
-    - [canes](plant_part)
-    - [crown](plant_part)
-    - [ferns](plant_part)
-    - [flowers](plant_part)
-    - [fruit](plant_part)
-    - [kernels](plant_part)
-    - [leaves](plant_part)
-    - [needles](plant_part)
-    - [nuts](plant_part)
-    - [overall](plant_part)
-    - [pods](plant_part)
-    - [roots](plant_part)
-    - [seedlings](plant_part)
-    - [shoots](plant_part)
-    - [spears](plant_part)
-    - [stems](plant_part)
-    - [trunk](plant_part)
-    - [tubers](plant_part)
-    - [twigs](plant_part)
-    - [abelia](plant_name)
-    - [abutilon](plant_name)
-    - [acacia](plant_name)
-    - [agave](plant_name)
-    - [albizia](plant_name)
-    - [alder](plant_name)
-    - [almond](plant_name)
-    - [alstroemeria](plant_name)
-    - [alyssum](plant_name)
-    - [andromeda](plant_name)
-    - [angelica](plant_name)
-    - [apples](plant_name)
-    - [apricots](plant_name)
-    - [aralia](plant_name)
-    - [araucaria](plant_name)
-    - [arborvitae](plant_name)
-    - [artemisia](plant_name)
-    - [artichokes](plant_name)
-    - [ash](plant_name)
-    - [asparagus](plant_name)
-    - [aspen](plant_name)
-    - [aster](plant_name)
-    - [aucuba](plant_name)
-    - [avocados](plant_name)
-    - [azalea](plant_name)
-    - [baccharis](plant_name)
-    - [bamboo](plant_name)
-    - [barberry](plant_name)
-    - [bayberry](plant_name)
-    - [beans](plant_name)
-    - [beech](plant_name)
-    - [beefwood](plant_name)
-    - [begonia](plant_name)
-    - [birch](plant_name)
-    - [blackberries](plant_name)
-    - [bottlebrush](plant_name)
-    - [bougainvillea](plant_name)
-    - [box](plant_name)
-    - [boxwood](plant_name)
-    - [broccoli](plant_name)
-    - [buckthorn](plant_name)
-    - [buckwheat](plant_name)
-    - [buddleja](plant_name)
-    - [cabbage](plant_name)
-    - [cactus](plant_name)
-    - [caesalpinia](plant_name)
-    - [camellia](plant_name)
-    - [caneberries](plant_name)
-    - [cantaloupe](plant_name)
-    - [carnation](plant_name)
-    - [carob](plant_name)
-    - [carrots](plant_name)
-    - [cassia](plant_name)
-    - [catalpa](plant_name)
-    - [cauliflower](plant_name)
-    - [ceanothus](plant_name)
-    - [cedar](plant_name)
-    - [cherries](plant_name)
-    - [chestnut](plant_name)
-    - [chilopsis](plant_name)
-    - [chinaberry](plant_name)
-    - [choisya](plant_name)
-    - [chrysanthemum](plant_name)
-    - [cistus](plant_name)
-    - [citrus](plant_name)
-    - [clematis](plant_name)
-    - [cocculus](plant_name)
-    - [coffeeberry](plant_name)
-    - [corn](plant_name)
-    - [cosmos](plant_name)
-    - [cotoneaster](plant_name)
-    - [cottonwood](plant_name)
-    - [cryptomeria](plant_name)
-    - [cucumbers](plant_name)
-    - [currant](plant_name)
-    - [cycad](plant_name)
-    - [cypress](plant_name)
-    - [daffodil](plant_name)
-    - [dahlia](plant_name)
-    - [daphne](plant_name)
-    - [dodonaea](plant_name)
-    - [dogwood](plant_name)
-    - [dracaena](plant_name)
-    - [eggplants](plant_name)
-    - [elderberry](plant_name)
-    - [elm](plant_name)
-    - [escallonia](plant_name)
-    - [eucalyptus](plant_name)
-    - [eugenia](plant_name)
-    - [euonymus](plant_name)
-    - [ficus](plant_name)
-    - [fig](plant_name)
-    - [filbert](plant_name)
-    - [fir](plant_name)
-    - [forsythia](plant_name)
-    - [freesia](plant_name)
-    - [fuchsia](plant_name)
-    - [gardenia](plant_name)
-    - [garlic](plant_name)
-    - [geranium](plant_name)
-    - [ginkgo](plant_name)
-    - [gladiolus](plant_name)
-    - [gooseberry](plant_name)
-    - [grapes](plant_name)
-    - [grevillea](plant_name)
-    - [gum](plant_name)
-    - [hackberry](plant_name)
-    - [hawthorn](plant_name)
-    - [hazelnut](plant_name)
-    - [heath](plant_name)
-    - [heather](plant_name)
-    - [hebe](plant_name)
-    - [hibiscus](plant_name)
-    - [holly](plant_name)
-    - [honeysuckle](plant_name)
-    - [hopbush](plant_name)
-    - [hornbeam](plant_name)
-    - [hydrangea](plant_name)
-    - [hypericum](plant_name)
-    - [impatiens](plant_name)
-    - [iris](plant_name)
-    - [ironwood](plant_name)
-    - [ivy](plant_name)
-    - [jacaranda](plant_name)
-    - [jasmine](plant_name)
-    - [juniper](plant_name)
-    - [kinnikinnick](plant_name)
-    - [lantana](plant_name)
-    - [larch](plant_name)
-    - [laurel](plant_name)
-    - [lettuce](plant_name)
-    - [lilac](plant_name)
-    - [lily](plant_name)
-    - [linden](plant_name)
-    - [liquidambar](plant_name)
-    - [locust](plant_name)
-    - [loquat](plant_name)
-    - [madrone](plant_name)
-    - [magnolia](plant_name)
-    - [mahonia](plant_name)
-    - [manzanita](plant_name)
-    - [maple](plant_name)
-    - [marigold](plant_name)
-    - [mayten](plant_name)
-    - [melaleuca](plant_name)
-    - [mesquite](plant_name)
-    - [metrosideros](plant_name)
-    - [mimosa](plant_name)
-    - [mugwort](plant_name)
-    - [mulberry](plant_name)
-    - [myoporum](plant_name)
-    - [myrtle](plant_name)
-    - [nandina](plant_name)
-    - [nasturtium](plant_name)
-    - [nectarines](plant_name)
-    - [oak](plant_name)
-    - [oleander](plant_name)
-    - [olive](plant_name)
-    - [onions](plant_name)
-    - [palm](plant_name)
-    - [pansy](plant_name)
-    - [paperbark](plant_name)
-    - [peaches](plant_name)
-    - [pears](plant_name)
-    - [peas](plant_name)
-    - [peony](plant_name)
-    - [peppers](plant_name)
-    - [pepperwood](plant_name)
-    - [periwinkle](plant_name)
-    - [persimmon](plant_name)
-    - [petunia](plant_name)
-    - [photinia](plant_name)
-    - [pine](plant_name)
-    - [pittosporum](plant_name)
-    - [plums](plant_name)
-    - [podocarpus](plant_name)
-    - [pomegranate](plant_name)
-    - [poplar](plant_name)
-    - [poppy](plant_name)
-    - [potatoes](plant_name)
-    - [prickly-pear](plant_name)
-    - [primrose](plant_name)
-    - [privet](plant_name)
-    - [prunes](plant_name)
-    - [pumpkins](plant_name)
-    - [pyracantha](plant_name)
-    - [quince](plant_name)
-    - [raspberries](plant_name)
-    - [redberry](plant_name)
-    - [redbud](plant_name)
-    - [redwood](plant_name)
-    - [rhamnus](plant_name)
-    - [rhaphiolepis](plant_name)
-    - [rhododendron](plant_name)
-    - [rhus](plant_name)
-    - [ribes](plant_name)
-    - [rose](plant_name)
-    - [rosemary](plant_name)
-    - [sage](plant_name)
-    - [sagebrush](plant_name)
-    - [saguaro](plant_name)
-    - [saltbush](plant_name)
-    - [salvia](plant_name)
-    - [senna](plant_name)
-    - [sequoia](plant_name)
-    - [serviceberry](plant_name)
-    - [shadbush](plant_name)
-    - [she-oak](plant_name)
-    - [snapdragon](plant_name)
-    - [spinach](plant_name)
-    - [spirea](plant_name)
-    - [spruce](plant_name)
-    - [squash](plant_name)
-    - [strawberries](plant_name)
-    - [sugarbush](plant_name)
-    - [sumac](plant_name)
-    - [sunflower](plant_name)
-    - [sweetbay](plant_name)
-    - [sycamore](plant_name)
-    - [syringa](plant_name)
-    - [tamarisk](plant_name)
-    - [tanoak](plant_name)
-    - [tarragon](plant_name)
-    - [tobira](plant_name)
-    - [tomatoes](plant_name)
-    - [toyon](plant_name)
-    - [tulip](plant_name)
-    - [tupelo](plant_name)
-    - [verbena](plant_name)
-    - [viburnum](plant_name)
-    - [vinca](plant_name)
-    - [violet](plant_name)
-    - [walnut](plant_name)
-    - [watermelon](plant_name)
-    - [weigela](plant_name)
-    - [willow](plant_name)
-    - [wisteria](plant_name)
-    - [wormwood](plant_name)
-    - [xylosma](plant_name)
-    - [yew](plant_name)
-    - [yucca](plant_name)
-    - [zelkova](plant_name)
-    - [zinnia](plant_name)
-    - [pantry](pest_location)
-    - [house](pest_location)
-    - [kitchen](pest_location)
-    - [wall](pest_location)
-    - [grain](pest_location)
-    - [wood](pest_location)
-    - [rice](pest_location)
-    - [floor](pest_location)
-    - [bread](pest_location)
-    - [carpet](pest_location)
-    - [food](pest_location)
-    - [furniture](pest_location)
-    - [silo](pest_location)
-    - [sofa](pest_location)
-    - [clothes](pest_location)
-    - [fabric](pest_location)
-    - [attic](pest_location)
-    - [deck](pest_location)
-    - [cabinet](pest_location)
-    - [bed](pest_location)
-    - [room](pest_location)
-    - [couch](pest_location)
-    - [cupboard](pest_location)
-    - [counter](pest_location)
-    - [lawn](pest_location)
-    - [yard](pest_location)
-    - [bats](plant_pest)
-    - [bedstraw](plant_pest)
-    - [beetles](plant_pest)
-    - [birds](plant_pest)
-    - [borers](plant_pest)
-    - [brooms](plant_pest)
-    - [bugs](plant_pest)
-    - [buttercup](plant_pest)
-    - [canker](plant_pest)
-    - [caterpillars](plant_pest)
-    - [centipedes](plant_pest)
-    - [chickweeds](plant_pest)
-    - [clovers](plant_pest)
-    - [cockroaches](plant_pest)
-    - [coyotes](plant_pest)
-    - [dandelions](plant_pest)
-    - [deer](plant_pest)
-    - [disease](plant_pest)
-    - [dodder](plant_pest)
-    - [drosophilas](plant_pest)
-    - [earwigs](plant_pest)
-    - [firebrats](plant_pest)
-    - [fleas](plant_pest)
-    - [flies](plant_pest)
-    - [fungi](plant_pest)
-    - [gnats](plant_pest)
-    - [gophers](plant_pest)
-    - [grass](plant_pest)
-    - [grasshoppers](plant_pest)
-    - [groundsel](plant_pest)
-    - [hemlocks](plant_pest)
-    - [horntails](plant_pest)
-    - [insects](plant_pest)
-    - [invaders](plant_pest)
-    - [kyllinga](plant_pest)
-    - [leafminers](plant_pest)
-    - [leafrollers](plant_pest)
-    - [lice](plant_pest)
-    - [lizards](plant_pest)
-    - [mallows](plant_pest)
-    - [mealybugs](plant_pest)
-    - [mice](plant_pest)
-    - [mildew](plant_pest)
-    - [millipedes](plant_pest)
-    - [mistletoes](plant_pest)
-    - [mites](plant_pest)
-    - [mold](plant_pest)
-    - [moles](plant_pest)
-    - [mosquitoes](plant_pest)
-    - [moths](plant_pest)
-    - [mushrooms](plant_pest)
-    - [nematodes](plant_pest)
-    - [nettles](plant_pest)
-    - [nutsedges](plant_pest)
-    - [oak](plant_name) [borer](plant_pest)
-    - [oakworms](plant_pest)
-    - [opossums](plant_pest)
-    - [parasites](plant_pest)
-    - [pepperweeds](plant_pest)
-    - [pigs](plant_pest)
-    - [plantains](plant_pest)
-    - [psyllids](plant_pest)
-    - [purslane](plant_pest)
-    - [rabbits](plant_pest)
-    - [raccoons](plant_pest)
-    - [rats](plant_pest)
-    - [scales](plant_pest)
-    - [scorpions](plant_pest)
-    - [sharpshooters](plant_pest)
-    - [silverfish](plant_pest)
-    - [skunks](plant_pest)
-    - [slugs](plant_pest)
-    - [snails](plant_pest)
-    - [snakes](plant_pest)
-    - [springtails](plant_pest)
-    - [spurges](plant_pest) 
-    - [squirrels](plant_pest)
-    - [starthistles](plant_pest)
-    - [sticks](plant_pest)
-    - [swallows](plant_pest)
-    - [termites](plant_pest)
-    - [thistles](plant_pest)
-    - [thrips](plant_pest)
-    - [vines](plant_pest)
-    - [voles](plant_pest)
-    - [wasps](plant_pest)
-    - [weeds](plant_pest)
-    - [woad](plant_pest)
-    - [woodpeckers](plant_pest)
-    - [woodsorrel](plant_pest)
-    - [worms](plant_pest)
-    - [yellowjackets](plant_pest)
-    - [spores](plant_damage)
-    - [chewed](plant_damage)
-    - [curled](plant_damage), [cupped](plant_damage), [folded](plant_damage), [rolled](plant_damage) and [twisted](plant_damage)
-    - [decayed](plant_damage), [hollow](plant_damage), [water-soaked](plant_damage) and [soft](plant_damage)
-    - [decayed](plant_damage), [soft](plant_damage) and [rot](plant_damage)
-    - [deformed](plant_damage), [distorted](plant_damage) and [dwarfed](plant_damage)
-    - [discolored](plant_damage)
-    - [discolored](plant_damage), [bleached](plant_damage), [darkened](plant_damage)
-    - [discolored](plant_damage), [necrosis](plant_damage), [chlorosis](plant_damage)
-    - [distorted](plant_damage) and [dwarfed](plant_damage)
-    - [don't develop](plant_damage)
-    - [drop](plant_damage), [cling](plant_damage) to [branches](plant_part)
-    - [galls](plant_damage), [swell](plant_damage), [rough](plant_damage)
-    - [gumming](plant_damage)
-    - [holes](plant_damage), [notching](plant_damage), [scalloped](plant_damage), [circular](plant_damage) and [irregular](plant_damage)
-    - [holes](plant_damage), [ragged](plant_damage)
-    - [mines](plant_damage), [trails](plant_damage)
-    - [not emerged](plant_damage) or [developed](plant_damage)
-    - [shrivel](plant_damage), [droop](plant_damage), [withered](plant_damage), [wilted](plant_damage)
-    - [specks](plant_damage), [flecks](plant_damage), [dots](plant_damage) and [stippled](plant_damage)
-    - [spots](plant_damage), [blotches](plant_damage), [lesions](plant_damage), [mottled](plant_damage)
-    - [spots](plant_damage), [lesions](plant_damage), [stippled](plant_damage)
-    - [sticky](plant_damage), [sooty](plant_damage)
-    - [stunted](plant_damage), [slow growth](plant_damage)
-    - [weak](plant_damage), [wilted](plant_damage), [collapsed](plant_damage)
-    - [webbing](plant_damage), [nests](plant_damage)
-    - [defoliate](plant_damage), [skeletonize](plant_damage)
-    - [deformed](plant_damage)
-    - [distorted](plant_damage)
-    - [distorted](plant_damage), [stunted](plant_damage), [bushy](plant_damage)
-    - [drop](plant_damage)
-    - [galls](plant_damage), [swellings](plant_damage)
-    - [galls](plant_damage), [tumors](plant_damage)
-    - [powdery](plant_damage), [cottony](plant_damage) growth
-    - [rotted](plant_damage)
-    - [spores](plant_damage), [pustules](plant_damage), [blisters](plant_damage)
-    - [chewed](plant_damage), [tunneling](plant_damage)
-    - [distorted](plant_damage), [girdled](plant_damage)
-    - [don't open](plant_damage)
-    - [rotted](plant_damage), [watery](plant_damage), [soft](plant_damage)
-    - [curled](plant_damage)
-    - [dieback](plant_damage) of tips, [margins](plant_damage)
-    - [thin](plant_damage), [defoliated](plant_damage)
-    - [wilted](plant_damage)
-    - [cankers](plant_pest)
-    - [decayed](plant_damage), [soft](plant_damage), [mushy](plant_damage)
-    - [ragged](plant_damage), [tattered](plant_damage), [crinkled](plant_damage), [leathery](plant_damage)
-    - [spots](plant_damage), [streaks](plant_damage), [lesions](plant_damage)
-    - [mycelia](plant_damage)
-    - [mycelia](plant_damage), [branch](plant_part) structures
-    - [galls](plant_damage), [swollen](plant_damage)
-    - [spots](plant_damage), [lesions](plant_damage)
-    - [bumps](plant_damage), [warty](plant_damage), [rough](plant_damage), [leathery](plant_damage)
-    - [foamy](plant_damage), [moldy](plant_damage), [mycelia](plant_damage)
-    - [feeding](plant_damage), [chewed](plant_damage), and [holes](plant_damage)
-    - [waxy](plant_damage), [chalky](plant_damage)
-    - [soft](plant_damage), [mushy](plant_damage), [rotted](plant_damage), [wilted](plant_damage)
-    - [cankers](plant_pest), [wounds](plant_damage)
-    - [cankers](plant_pest), [wounds](plant_damage), [stains](plant_damage)
-    - [chewed](plant_damage), [holes](plant_damage), [tunnels](plant_damage), [mines](plant_damage), [frass](plant_damage), [sawdust](plant_damage)
-    - [cottony](plant_damage) growth, [spores](plant_damage)
-    - [cracked](plant_damage)
-    - [cracked](plant_damage), [creases](plant_damage), [bands](plant_damage)
-    - [deformed](plant_damage), [flat](plant_damage)
-    - [dieback](plant_damage), [flagged](plant_damage)
-    - [dieback](plant_damage), [shriveled](plant_damage)
-    - [discolored](plant_damage) beneath [bark](pest_location)
-    - [discolored](plant_damage), [flagging](plant_damage)
-    - [discolored](plant_damage), [necrosis](plant_damage)
-    - [drop](plant_damage), [weak](plant_damage), [break](plant_damage), [dieback](plant_damage), [decay](plant_damage)
-    - [girdled](plant_damage)
-    - [gouges](plant_damage), [holes](plant_damage), [bites](plant_damage), [frass](plant_damage)
-    - [growths](plant_damage), [galls](plant_damage), [swellings](plant_damage)
-    - [gummy](plant_damage)
-    - [holes](plant_damage), [tunnels](plant_damage)
-    - [holes](plant_damage), [tunnels](plant_damage), [mining](plant_damage)
-    - [lack of fruit](plant_damage)
-    - [lesions](plant_damage), [spots](plant_damage), [stains](plant_damage), [streaks](plant_damage)
-    - [mushrooms](plant_pest), [suckers](plant_damage)
-    - [powdery](plant_damage), [spores](plant_damage)
-    - [rotted](plant_damage), [shriveled](plant_damage), [decay](plant_damage), [soft](plant_damage), [drop](plant_damage)
-    - [rough](plant_damage), and [scabs](plant_damage)
-    - [sap](plant_damage), [oozing liquid](plant_damage)
-    - [sap](plant_damage), [oozing](plant_damage), [bleeding](plant_damage)
-    - [split](plant_damage), [cracked](plant_damage), [creased](plant_damage)
-    - [spots](plant_damage), [lesions](plant_damage), [streaked](plant_damage)
-    - [spotted](plant_damage), [lesions](plant_damage), [streaks](plant_damage), [scabs](plant_damage)
-    - [vascular discoloration](plant_damage)
-    - [webbing](plant_damage)
-    - [webbing](plant_damage), [excrement](plant_damage)
-    - [cottony](plant_damage), [spores](plant_damage)
-    - [decay](plant_damage)
-    - [feeding](plant_damage), [frass](plant_damage)
-    - [flaky](plant_damage), [papery](plant_damage)
-    - [galls](plant_damage)
-    - [hard](plant_damage), [pithy](plant_damage), [dry](plant_damage)
-    - [russetted](plant_damage), [scarred](plant_damage)
-    - [stings](plant_damage), [punctured](plant_damage)
-    - [wilted](plant_damage), [shriveled](plant_damage), [collapsed](plant_damage), [girdled](plant_damage)
-    - [sour](plant_damage), [bitter](plant_damage)
-    - [dieback](plant_damage)
-    - [girdled](plant_damage), [distorted](plant_damage)
-    - [lesions](plant_damage), [spots](plant_damage), [spores](plant_damage)
-    - [weak](plant_damage), [wilted](plant_damage)
-    - [fused](plant_damage)
-    - [stiff](plant_damage), forms [rosette](plant_damage), [bolting](plant_damage)
-    - [flaky](plant_damage)
-    - [lesions](plant_damage), [spots](plant_damage)
-    - [stippled](plant_damage)
-    - [dry](plant_damage)
-    - [shriveled](plant_damage)
-    - [shriveled](plant_damage), [moldy](plant_damage), [spores](plant_damage)
-    - [spots](plant_damage), [stains](plant_damage), [discolored](plant_damage)
-    - [frothy](plant_damage), [waxy](plant_damage), [pitch](plant_damage) masses
-    - [notched](plant_damage), [chewed](plant_damage)
-    - [stunted](plant_damage)
-    - [honeydew](plant_damage), [soot](plant_damage)
-    - [drippy](plant_damage)
-    - [cottony](plant_damage), [webbing](plant_damage)
-    - [pitch](plant_damage)
-    - [swollen](plant_damage), [galls](plant_damage)
-    - [waxy](plant_damage), [frothy](plant_damage), [pitch](plant_damage) masses
-    - [wounds](plant_damage)
-    - [fungal](plant_damage) growth
-    - [wilted](plant_damage), [withered](plant_damage)
-    - [spots](plant_damage), [pustules](plant_damage)
-    - [stains](plant_damage), [scars](plant_damage)
-    - [thin](plant_damage), [weak](plant_damage)
-    - [chewed](plant_damage), [holes](plant_damage)
-    - [discolored](plant_damage), [spots](plant_damage), [blotches](plant_damage)
-    - [lesions](plant_damage)
-    - [misshapen](plant_damage)
-    - [bumps](plant_damage), [knobby](plant_damage), [malformed](plant_damage)
-    - [tiny holes](plant_damage)
-    - [distorted](plant_damage), [twisted](plant_damage), [misshapen](plant_damage)
-    - [not developed](plant_damage)
-    - [rotted](plant_damage), [foamy](plant_damage)
-    - [fungal](plant_damage) growth, [powdery](plant_damage), [spores](plant_damage)
-    - [cracked](plant_damage), [tough](plant_damage), [chalky](plant_damage)
-    - [rotted](plant_damage), [soft](plant_damage), [decayed](plant_damage), [slimy](plant_damage)
+    - [non-woody]{"entity": "type", "role": "plant", "group": "1"}
+    - [vegetables]{"entity": "type", "role": "plant", "group": "1"}
+    - [vegetable]{"entity": "type", "role": "plant", "group": "1"}
+    - [melons]{"entity": "type", "role": "plant", "group": "1"}
+    - [herbs]{"entity": "type", "role": "plant", "group": "1"}
+    - [berry]{"entity": "type", "role": "plant", "group": "1"}
+    - [berries]{"entity": "type", "role": "plant", "group": "1"}
+    - [grapevines]{"entity": "type", "role": "plant", "group": "1"}
+    - [tree]{"entity": "type", "role": "plant", "group": "1"}
+    - [trees]{"entity": "type", "role": "plant", "group": "1"}
+    - [shrubs]{"entity": "type", "role": "plant", "group": "1"}
+    - [roses]{"entity": "type", "role": "plant", "group": "1"}
+    - [melons]{"entity": "type", "role": "plant", "group": "1"}
+    - [woody]{"entity": "type", "role": "plant", "group": "1"}
+    - [bush]{"entity": "type", "role": "plant", "group": "1"}
+    - [blossoms]{"entity": "part", "role": "plant", "group": "1"}
+    - [branches]{"entity": "part", "role": "plant", "group": "1"}
+    - [buds]{"entity": "part", "role": "plant", "group": "1"}
+    - [bulbs]{"entity": "part", "role": "plant", "group": "1"}
+    - [canes]{"entity": "part", "role": "plant", "group": "1"}
+    - [crown]{"entity": "part", "role": "plant", "group": "1"}
+    - [ferns]{"entity": "part", "role": "plant", "group": "1"}
+    - [flowers]{"entity": "part", "role": "plant", "group": "1"}
+    - [fruit]{"entity": "part", "role": "plant", "group": "1"}
+    - [kernels]{"entity": "part", "role": "plant", "group": "1"}
+    - [leaves]{"entity": "part", "role": "plant", "group": "1"}
+    - [needles]{"entity": "part", "role": "plant", "group": "1"}
+    - [nuts]{"entity": "part", "role": "plant", "group": "1"}
+    - [overall]{"entity": "part", "role": "plant", "group": "1"}
+    - [pods]{"entity": "part", "role": "plant", "group": "1"}
+    - [roots]{"entity": "part", "role": "plant", "group": "1"}
+    - [seedlings]{"entity": "part", "role": "plant", "group": "1"}
+    - [shoots]{"entity": "part", "role": "plant", "group": "1"}
+    - [spears]{"entity": "part", "role": "plant", "group": "1"}
+    - [stems]{"entity": "part", "role": "plant", "group": "1"}
+    - [trunk]{"entity": "part", "role": "plant", "group": "1"}
+    - [tubers]{"entity": "part", "role": "plant", "group": "1"}
+    - [twigs]{"entity": "part", "role": "plant", "group": "1"}
+    - [abelia]{"entity": "name", "role": "plant", "group": "1"}
+    - [abutilon]{"entity": "name", "role": "plant", "group": "1"}
+    - [acacia]{"entity": "name", "role": "plant", "group": "1"}
+    - [agave]{"entity": "name", "role": "plant", "group": "1"}
+    - [albizia]{"entity": "name", "role": "plant", "group": "1"}
+    - [alder]{"entity": "name", "role": "plant", "group": "1"}
+    - [almond]{"entity": "name", "role": "plant", "group": "1"}
+    - [alstroemeria]{"entity": "name", "role": "plant", "group": "1"}
+    - [alyssum]{"entity": "name", "role": "plant", "group": "1"}
+    - [andromeda]{"entity": "name", "role": "plant", "group": "1"}
+    - [angelica]{"entity": "name", "role": "plant", "group": "1"}
+    - [apples]{"entity": "name", "role": "plant", "group": "1"}
+    - [apricots]{"entity": "name", "role": "plant", "group": "1"}
+    - [aralia]{"entity": "name", "role": "plant", "group": "1"}
+    - [araucaria]{"entity": "name", "role": "plant", "group": "1"}
+    - [arborvitae]{"entity": "name", "role": "plant", "group": "1"}
+    - [artemisia]{"entity": "name", "role": "plant", "group": "1"}
+    - [artichokes]{"entity": "name", "role": "plant", "group": "1"}
+    - [ash]{"entity": "name", "role": "plant", "group": "1"}
+    - [asparagus]{"entity": "name", "role": "plant", "group": "1"}
+    - [aspen]{"entity": "name", "role": "plant", "group": "1"}
+    - [aster]{"entity": "name", "role": "plant", "group": "1"}
+    - [aucuba]{"entity": "name", "role": "plant", "group": "1"}
+    - [avocados]{"entity": "name", "role": "plant", "group": "1"}
+    - [azalea]{"entity": "name", "role": "plant", "group": "1"}
+    - [baccharis]{"entity": "name", "role": "plant", "group": "1"}
+    - [bamboo]{"entity": "name", "role": "plant", "group": "1"}
+    - [barberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [bayberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [beans]{"entity": "name", "role": "plant", "group": "1"}
+    - [beech]{"entity": "name", "role": "plant", "group": "1"}
+    - [beefwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [begonia]{"entity": "name", "role": "plant", "group": "1"}
+    - [birch]{"entity": "name", "role": "plant", "group": "1"}
+    - [blackberries]{"entity": "name", "role": "plant", "group": "1"}
+    - [bottlebrush]{"entity": "name", "role": "plant", "group": "1"}
+    - [bougainvillea]{"entity": "name", "role": "plant", "group": "1"}
+    - [box]{"entity": "name", "role": "plant", "group": "1"}
+    - [boxwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [broccoli]{"entity": "name", "role": "plant", "group": "1"}
+    - [buckthorn]{"entity": "name", "role": "plant", "group": "1"}
+    - [buckwheat]{"entity": "name", "role": "plant", "group": "1"}
+    - [buddleja]{"entity": "name", "role": "plant", "group": "1"}
+    - [cabbage]{"entity": "name", "role": "plant", "group": "1"}
+    - [cactus]{"entity": "name", "role": "plant", "group": "1"}
+    - [caesalpinia]{"entity": "name", "role": "plant", "group": "1"}
+    - [camellia]{"entity": "name", "role": "plant", "group": "1"}
+    - [caneberries]{"entity": "name", "role": "plant", "group": "1"}
+    - [cantaloupe]{"entity": "name", "role": "plant", "group": "1"}
+    - [carnation]{"entity": "name", "role": "plant", "group": "1"}
+    - [carob]{"entity": "name", "role": "plant", "group": "1"}
+    - [carrots]{"entity": "name", "role": "plant", "group": "1"}
+    - [cassia]{"entity": "name", "role": "plant", "group": "1"}
+    - [catalpa]{"entity": "name", "role": "plant", "group": "1"}
+    - [cauliflower]{"entity": "name", "role": "plant", "group": "1"}
+    - [ceanothus]{"entity": "name", "role": "plant", "group": "1"}
+    - [cedar]{"entity": "name", "role": "plant", "group": "1"}
+    - [cherries]{"entity": "name", "role": "plant", "group": "1"}
+    - [chestnut]{"entity": "name", "role": "plant", "group": "1"}
+    - [chilopsis]{"entity": "name", "role": "plant", "group": "1"}
+    - [chinaberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [choisya]{"entity": "name", "role": "plant", "group": "1"}
+    - [chrysanthemum]{"entity": "name", "role": "plant", "group": "1"}
+    - [cistus]{"entity": "name", "role": "plant", "group": "1"}
+    - [citrus]{"entity": "name", "role": "plant", "group": "1"}
+    - [clematis]{"entity": "name", "role": "plant", "group": "1"}
+    - [cocculus]{"entity": "name", "role": "plant", "group": "1"}
+    - [coffeeberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [corn]{"entity": "name", "role": "plant", "group": "1"}
+    - [cosmos]{"entity": "name", "role": "plant", "group": "1"}
+    - [cotoneaster]{"entity": "name", "role": "plant", "group": "1"}
+    - [cottonwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [cryptomeria]{"entity": "name", "role": "plant", "group": "1"}
+    - [cucumbers]{"entity": "name", "role": "plant", "group": "1"}
+    - [currant]{"entity": "name", "role": "plant", "group": "1"}
+    - [cycad]{"entity": "name", "role": "plant", "group": "1"}
+    - [cypress]{"entity": "name", "role": "plant", "group": "1"}
+    - [daffodil]{"entity": "name", "role": "plant", "group": "1"}
+    - [dahlia]{"entity": "name", "role": "plant", "group": "1"}
+    - [daphne]{"entity": "name", "role": "plant", "group": "1"}
+    - [dodonaea]{"entity": "name", "role": "plant", "group": "1"}
+    - [dogwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [dracaena]{"entity": "name", "role": "plant", "group": "1"}
+    - [eggplants]{"entity": "name", "role": "plant", "group": "1"}
+    - [elderberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [elm]{"entity": "name", "role": "plant", "group": "1"}
+    - [escallonia]{"entity": "name", "role": "plant", "group": "1"}
+    - [eucalyptus]{"entity": "name", "role": "plant", "group": "1"}
+    - [eugenia]{"entity": "name", "role": "plant", "group": "1"}
+    - [euonymus]{"entity": "name", "role": "plant", "group": "1"}
+    - [ficus]{"entity": "name", "role": "plant", "group": "1"}
+    - [fig]{"entity": "name", "role": "plant", "group": "1"}
+    - [filbert]{"entity": "name", "role": "plant", "group": "1"}
+    - [fir]{"entity": "name", "role": "plant", "group": "1"}
+    - [forsythia]{"entity": "name", "role": "plant", "group": "1"}
+    - [freesia]{"entity": "name", "role": "plant", "group": "1"}
+    - [fuchsia]{"entity": "name", "role": "plant", "group": "1"}
+    - [gardenia]{"entity": "name", "role": "plant", "group": "1"}
+    - [garlic]{"entity": "name", "role": "plant", "group": "1"}
+    - [geranium]{"entity": "name", "role": "plant", "group": "1"}
+    - [ginkgo]{"entity": "name", "role": "plant", "group": "1"}
+    - [gladiolus]{"entity": "name", "role": "plant", "group": "1"}
+    - [gooseberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [grapes]{"entity": "name", "role": "plant", "group": "1"}
+    - [grevillea]{"entity": "name", "role": "plant", "group": "1"}
+    - [gum]{"entity": "name", "role": "plant", "group": "1"}
+    - [hackberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [hawthorn]{"entity": "name", "role": "plant", "group": "1"}
+    - [hazelnut]{"entity": "name", "role": "plant", "group": "1"}
+    - [heath]{"entity": "name", "role": "plant", "group": "1"}
+    - [heather]{"entity": "name", "role": "plant", "group": "1"}
+    - [hebe]{"entity": "name", "role": "plant", "group": "1"}
+    - [hibiscus]{"entity": "name", "role": "plant", "group": "1"}
+    - [holly]{"entity": "name", "role": "plant", "group": "1"}
+    - [honeysuckle]{"entity": "name", "role": "plant", "group": "1"}
+    - [hopbush]{"entity": "name", "role": "plant", "group": "1"}
+    - [hornbeam]{"entity": "name", "role": "plant", "group": "1"}
+    - [hydrangea]{"entity": "name", "role": "plant", "group": "1"}
+    - [hypericum]{"entity": "name", "role": "plant", "group": "1"}
+    - [impatiens]{"entity": "name", "role": "plant", "group": "1"}
+    - [iris]{"entity": "name", "role": "plant", "group": "1"}
+    - [ironwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [ivy]{"entity": "name", "role": "plant", "group": "1"}
+    - [jacaranda]{"entity": "name", "role": "plant", "group": "1"}
+    - [jasmine]{"entity": "name", "role": "plant", "group": "1"}
+    - [juniper]{"entity": "name", "role": "plant", "group": "1"}
+    - [kinnikinnick]{"entity": "name", "role": "plant", "group": "1"}
+    - [lantana]{"entity": "name", "role": "plant", "group": "1"}
+    - [larch]{"entity": "name", "role": "plant", "group": "1"}
+    - [laurel]{"entity": "name", "role": "plant", "group": "1"}
+    - [lettuce]{"entity": "name", "role": "plant", "group": "1"}
+    - [lilac]{"entity": "name", "role": "plant", "group": "1"}
+    - [lily]{"entity": "name", "role": "plant", "group": "1"}
+    - [linden]{"entity": "name", "role": "plant", "group": "1"}
+    - [liquidambar]{"entity": "name", "role": "plant", "group": "1"}
+    - [locust]{"entity": "name", "role": "plant", "group": "1"}
+    - [loquat]{"entity": "name", "role": "plant", "group": "1"}
+    - [madrone]{"entity": "name", "role": "plant", "group": "1"}
+    - [magnolia]{"entity": "name", "role": "plant", "group": "1"}
+    - [mahonia]{"entity": "name", "role": "plant", "group": "1"}
+    - [manzanita]{"entity": "name", "role": "plant", "group": "1"}
+    - [maple]{"entity": "name", "role": "plant", "group": "1"}
+    - [marigold]{"entity": "name", "role": "plant", "group": "1"}
+    - [mayten]{"entity": "name", "role": "plant", "group": "1"}
+    - [melaleuca]{"entity": "name", "role": "plant", "group": "1"}
+    - [mesquite]{"entity": "name", "role": "plant", "group": "1"}
+    - [metrosideros]{"entity": "name", "role": "plant", "group": "1"}
+    - [mimosa]{"entity": "name", "role": "plant", "group": "1"}
+    - [mugwort]{"entity": "name", "role": "plant", "group": "1"}
+    - [mulberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [myoporum]{"entity": "name", "role": "plant", "group": "1"}
+    - [myrtle]{"entity": "name", "role": "plant", "group": "1"}
+    - [nandina]{"entity": "name", "role": "plant", "group": "1"}
+    - [nasturtium]{"entity": "name", "role": "plant", "group": "1"}
+    - [nectarines]{"entity": "name", "role": "plant", "group": "1"}
+    - [oak]{"entity": "name", "role": "plant", "group": "1"}
+    - [oleander]{"entity": "name", "role": "plant", "group": "1"}
+    - [olive]{"entity": "name", "role": "plant", "group": "1"}
+    - [onions]{"entity": "name", "role": "plant", "group": "1"}
+    - [palm]{"entity": "name", "role": "plant", "group": "1"}
+    - [pansy]{"entity": "name", "role": "plant", "group": "1"}
+    - [paperbark]{"entity": "name", "role": "plant", "group": "1"}
+    - [peaches]{"entity": "name", "role": "plant", "group": "1"}
+    - [pears]{"entity": "name", "role": "plant", "group": "1"}
+    - [peas]{"entity": "name", "role": "plant", "group": "1"}
+    - [peony]{"entity": "name", "role": "plant", "group": "1"}
+    - [peppers]{"entity": "name", "role": "plant", "group": "1"}
+    - [pepperwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [periwinkle]{"entity": "name", "role": "plant", "group": "1"}
+    - [persimmon]{"entity": "name", "role": "plant", "group": "1"}
+    - [petunia]{"entity": "name", "role": "plant", "group": "1"}
+    - [photinia]{"entity": "name", "role": "plant", "group": "1"}
+    - [pine]{"entity": "name", "role": "plant", "group": "1"}
+    - [pittosporum]{"entity": "name", "role": "plant", "group": "1"}
+    - [plums]{"entity": "name", "role": "plant", "group": "1"}
+    - [podocarpus]{"entity": "name", "role": "plant", "group": "1"}
+    - [pomegranate]{"entity": "name", "role": "plant", "group": "1"}
+    - [poplar]{"entity": "name", "role": "plant", "group": "1"}
+    - [poppy]{"entity": "name", "role": "plant", "group": "1"}
+    - [potatoes]{"entity": "name", "role": "plant", "group": "1"}
+    - [prickly-pear]{"entity": "name", "role": "plant", "group": "1"}
+    - [primrose]{"entity": "name", "role": "plant", "group": "1"}
+    - [privet]{"entity": "name", "role": "plant", "group": "1"}
+    - [prunes]{"entity": "name", "role": "plant", "group": "1"}
+    - [pumpkins]{"entity": "name", "role": "plant", "group": "1"}
+    - [pyracantha]{"entity": "name", "role": "plant", "group": "1"}
+    - [quince]{"entity": "name", "role": "plant", "group": "1"}
+    - [raspberries]{"entity": "name", "role": "plant", "group": "1"}
+    - [redberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [redbud]{"entity": "name", "role": "plant", "group": "1"}
+    - [redwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [rhamnus]{"entity": "name", "role": "plant", "group": "1"}
+    - [rhaphiolepis]{"entity": "name", "role": "plant", "group": "1"}
+    - [rhododendron]{"entity": "name", "role": "plant", "group": "1"}
+    - [rhus]{"entity": "name", "role": "plant", "group": "1"}
+    - [ribes]{"entity": "name", "role": "plant", "group": "1"}
+    - [rose]{"entity": "name", "role": "plant", "group": "1"}
+    - [rosemary]{"entity": "name", "role": "plant", "group": "1"}
+    - [sage]{"entity": "name", "role": "plant", "group": "1"}
+    - [sagebrush]{"entity": "name", "role": "plant", "group": "1"}
+    - [saguaro]{"entity": "name", "role": "plant", "group": "1"}
+    - [saltbush]{"entity": "name", "role": "plant", "group": "1"}
+    - [salvia]{"entity": "name", "role": "plant", "group": "1"}
+    - [senna]{"entity": "name", "role": "plant", "group": "1"}
+    - [sequoia]{"entity": "name", "role": "plant", "group": "1"}
+    - [serviceberry]{"entity": "name", "role": "plant", "group": "1"}
+    - [shadbush]{"entity": "name", "role": "plant", "group": "1"}
+    - [she-oak]{"entity": "name", "role": "plant", "group": "1"}
+    - [snapdragon]{"entity": "name", "role": "plant", "group": "1"}
+    - [spinach]{"entity": "name", "role": "plant", "group": "1"}
+    - [spirea]{"entity": "name", "role": "plant", "group": "1"}
+    - [spruce]{"entity": "name", "role": "plant", "group": "1"}
+    - [squash]{"entity": "name", "role": "plant", "group": "1"}
+    - [strawberries]{"entity": "name", "role": "plant", "group": "1"}
+    - [sugarbush]{"entity": "name", "role": "plant", "group": "1"}
+    - [sumac]{"entity": "name", "role": "plant", "group": "1"}
+    - [sunflower]{"entity": "name", "role": "plant", "group": "1"}
+    - [sweetbay]{"entity": "name", "role": "plant", "group": "1"}
+    - [sycamore]{"entity": "name", "role": "plant", "group": "1"}
+    - [syringa]{"entity": "name", "role": "plant", "group": "1"}
+    - [tamarisk]{"entity": "name", "role": "plant", "group": "1"}
+    - [tanoak]{"entity": "name", "role": "plant", "group": "1"}
+    - [tarragon]{"entity": "name", "role": "plant", "group": "1"}
+    - [tobira]{"entity": "name", "role": "plant", "group": "1"}
+    - [tomatoes]{"entity": "name", "role": "plant", "group": "1"}
+    - [toyon]{"entity": "name", "role": "plant", "group": "1"}
+    - [tulip]{"entity": "name", "role": "plant", "group": "1"}
+    - [tupelo]{"entity": "name", "role": "plant", "group": "1"}
+    - [verbena]{"entity": "name", "role": "plant", "group": "1"}
+    - [viburnum]{"entity": "name", "role": "plant", "group": "1"}
+    - [vinca]{"entity": "name", "role": "plant", "group": "1"}
+    - [violet]{"entity": "name", "role": "plant", "group": "1"}
+    - [walnut]{"entity": "name", "role": "plant", "group": "1"}
+    - [watermelon]{"entity": "name", "role": "plant", "group": "1"}
+    - [weigela]{"entity": "name", "role": "plant", "group": "1"}
+    - [willow]{"entity": "name", "role": "plant", "group": "1"}
+    - [wisteria]{"entity": "name", "role": "plant", "group": "1"}
+    - [wormwood]{"entity": "name", "role": "plant", "group": "1"}
+    - [xylosma]{"entity": "name", "role": "plant", "group": "1"}
+    - [yew]{"entity": "name", "role": "plant", "group": "1"}
+    - [yucca]{"entity": "name", "role": "plant", "group": "1"}
+    - [zelkova]{"entity": "name", "role": "plant", "group": "1"}
+    - [zinnia]{"entity": "name", "role": "plant", "group": "1"}
+    - [pantry]{"entity": "location", "role": "pest", "group": "1"}
+    - [house]{"entity": "location", "role": "pest", "group": "1"}
+    - [kitchen]{"entity": "location", "role": "pest", "group": "1"}
+    - [wall]{"entity": "location", "role": "pest", "group": "1"}
+    - [grain]{"entity": "location", "role": "pest", "group": "1"}
+    - [wood]{"entity": "location", "role": "pest", "group": "1"}
+    - [rice]{"entity": "location", "role": "pest", "group": "1"}
+    - [floor]{"entity": "location", "role": "pest", "group": "1"}
+    - [bread]{"entity": "location", "role": "pest", "group": "1"}
+    - [carpet]{"entity": "location", "role": "pest", "group": "1"}
+    - [food]{"entity": "location", "role": "pest", "group": "1"}
+    - [furniture]{"entity": "location", "role": "pest", "group": "1"}
+    - [silo]{"entity": "location", "role": "pest", "group": "1"}
+    - [sofa]{"entity": "location", "role": "pest", "group": "1"}
+    - [clothes]{"entity": "location", "role": "pest", "group": "1"}
+    - [fabric]{"entity": "location", "role": "pest", "group": "1"}
+    - [attic]{"entity": "location", "role": "pest", "group": "1"}
+    - [deck]{"entity": "location", "role": "pest", "group": "1"}
+    - [cabinet]{"entity": "location", "role": "pest", "group": "1"}
+    - [bed]{"entity": "location", "role": "pest", "group": "1"}
+    - [room]{"entity": "location", "role": "pest", "group": "1"}
+    - [couch]{"entity": "location", "role": "pest", "group": "1"}
+    - [cupboard]{"entity": "location", "role": "pest", "group": "1"}
+    - [counter]{"entity": "location", "role": "pest", "group": "1"}
+    - [lawn]{"entity": "location", "role": "pest", "group": "1"}
+    - [yard]{"entity": "location", "role": "pest", "group": "1"}
+    - [bats]{"entity": "name", "role": "pest", "group": "1"}
+    - [bedstraw]{"entity": "name", "role": "pest", "group": "1"}
+    - [beetles]{"entity": "name", "role": "pest", "group": "1"}
+    - [birds]{"entity": "name", "role": "pest", "group": "1"}
+    - [borers]{"entity": "name", "role": "pest", "group": "1"}
+    - [brooms]{"entity": "name", "role": "pest", "group": "1"}
+    - [bugs]{"entity": "name", "role": "pest", "group": "1"}
+    - [buttercup]{"entity": "name", "role": "pest", "group": "1"}
+    - [canker]{"entity": "name", "role": "pest", "group": "1"}
+    - [caterpillars]{"entity": "name", "role": "pest", "group": "1"}
+    - [centipedes]{"entity": "name", "role": "pest", "group": "1"}
+    - [chickweeds]{"entity": "name", "role": "pest", "group": "1"}
+    - [clovers]{"entity": "name", "role": "pest", "group": "1"}
+    - [cockroaches]{"entity": "name", "role": "pest", "group": "1"}
+    - [coyotes]{"entity": "name", "role": "pest", "group": "1"}
+    - [dandelions]{"entity": "name", "role": "pest", "group": "1"}
+    - [deer]{"entity": "name", "role": "pest", "group": "1"}
+    - [disease]{"entity": "name", "role": "pest", "group": "1"}
+    - [dodder]{"entity": "name", "role": "pest", "group": "1"}
+    - [drosophilas]{"entity": "name", "role": "pest", "group": "1"}
+    - [earwigs]{"entity": "name", "role": "pest", "group": "1"}
+    - [firebrats]{"entity": "name", "role": "pest", "group": "1"}
+    - [fleas]{"entity": "name", "role": "pest", "group": "1"}
+    - [flies]{"entity": "name", "role": "pest", "group": "1"}
+    - [fungi]{"entity": "name", "role": "pest", "group": "1"}
+    - [gnats]{"entity": "name", "role": "pest", "group": "1"}
+    - [gophers]{"entity": "name", "role": "pest", "group": "1"}
+    - [grass]{"entity": "name", "role": "pest", "group": "1"}
+    - [grasshoppers]{"entity": "name", "role": "pest", "group": "1"}
+    - [groundsel]{"entity": "name", "role": "pest", "group": "1"}
+    - [hemlocks]{"entity": "name", "role": "pest", "group": "1"}
+    - [horntails]{"entity": "name", "role": "pest", "group": "1"}
+    - [insects]{"entity": "name", "role": "pest", "group": "1"}
+    - [invaders]{"entity": "name", "role": "pest", "group": "1"}
+    - [kyllinga]{"entity": "name", "role": "pest", "group": "1"}
+    - [leafminers]{"entity": "name", "role": "pest", "group": "1"}
+    - [leafrollers]{"entity": "name", "role": "pest", "group": "1"}
+    - [lice]{"entity": "name", "role": "pest", "group": "1"}
+    - [lizards]{"entity": "name", "role": "pest", "group": "1"}
+    - [mallows]{"entity": "name", "role": "pest", "group": "1"}
+    - [mealybugs]{"entity": "name", "role": "pest", "group": "1"}
+    - [mice]{"entity": "name", "role": "pest", "group": "1"}
+    - [mildew]{"entity": "name", "role": "pest", "group": "1"}
+    - [millipedes]{"entity": "name", "role": "pest", "group": "1"}
+    - [mistletoes]{"entity": "name", "role": "pest", "group": "1"}
+    - [mites]{"entity": "name", "role": "pest", "group": "1"}
+    - [mold]{"entity": "name", "role": "pest", "group": "1"}
+    - [moles]{"entity": "name", "role": "pest", "group": "1"}
+    - [mosquitoes]{"entity": "name", "role": "pest", "group": "1"}
+    - [moths]{"entity": "name", "role": "pest", "group": "1"}
+    - [mushrooms]{"entity": "name", "role": "pest", "group": "1"}
+    - [nematodes]{"entity": "name", "role": "pest", "group": "1"}
+    - [nettles]{"entity": "name", "role": "pest", "group": "1"}
+    - [nutsedges]{"entity": "name", "role": "pest", "group": "1"}
+    - [oak]{"entity": "name", "role": "plant", "group": "1"} [borer]{"entity": "name", "role": "pest", "group": "1"}
+    - [oakworms]{"entity": "name", "role": "pest", "group": "1"}
+    - [opossums]{"entity": "name", "role": "pest", "group": "1"}
+    - [parasites]{"entity": "name", "role": "pest", "group": "1"}
+    - [pepperweeds]{"entity": "name", "role": "pest", "group": "1"}
+    - [pigs]{"entity": "name", "role": "pest", "group": "1"}
+    - [plantains]{"entity": "name", "role": "pest", "group": "1"}
+    - [psyllids]{"entity": "name", "role": "pest", "group": "1"}
+    - [purslane]{"entity": "name", "role": "pest", "group": "1"}
+    - [rabbits]{"entity": "name", "role": "pest", "group": "1"}
+    - [raccoons]{"entity": "name", "role": "pest", "group": "1"}
+    - [rats]{"entity": "name", "role": "pest", "group": "1"}
+    - [scales]{"entity": "name", "role": "pest", "group": "1"}
+    - [scorpions]{"entity": "name", "role": "pest", "group": "1"}
+    - [sharpshooters]{"entity": "name", "role": "pest", "group": "1"}
+    - [silverfish]{"entity": "name", "role": "pest", "group": "1"}
+    - [skunks]{"entity": "name", "role": "pest", "group": "1"}
+    - [slugs]{"entity": "name", "role": "pest", "group": "1"}
+    - [snails]{"entity": "name", "role": "pest", "group": "1"}
+    - [snakes]{"entity": "name", "role": "pest", "group": "1"}
+    - [springtails]{"entity": "name", "role": "pest", "group": "1"}
+    - [spurges]{"entity": "name", "role": "pest", "group": "1"} 
+    - [squirrels]{"entity": "name", "role": "pest", "group": "1"}
+    - [starthistles]{"entity": "name", "role": "pest", "group": "1"}
+    - [sticks]{"entity": "name", "role": "pest", "group": "1"}
+    - [swallows]{"entity": "name", "role": "pest", "group": "1"}
+    - [termites]{"entity": "name", "role": "pest", "group": "1"}
+    - [thistles]{"entity": "name", "role": "pest", "group": "1"}
+    - [thrips]{"entity": "name", "role": "pest", "group": "1"}
+    - [vines]{"entity": "name", "role": "pest", "group": "1"}
+    - [voles]{"entity": "name", "role": "pest", "group": "1"}
+    - [wasps]{"entity": "name", "role": "pest", "group": "1"}
+    - [weeds]{"entity": "name", "role": "pest", "group": "1"}
+    - [woad]{"entity": "name", "role": "pest", "group": "1"}
+    - [woodpeckers]{"entity": "name", "role": "pest", "group": "1"}
+    - [woodsorrel]{"entity": "name", "role": "pest", "group": "1"}
+    - [worms]{"entity": "name", "role": "pest", "group": "1"}
+    - [yellowjackets]{"entity": "name", "role": "pest", "group": "1"}
+    - [spores]{"entity": "name", "role": "damage", "group": "1"}
+    - [chewed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [curled]{"entity": "descr", "role": "plant", "group": "1"}, [cupped]{"entity": "descr", "role": "plant", "group": "1"}, [folded]{"entity": "descr", "role": "plant", "group": "1"}, [rolled]{"entity": "descr", "role": "plant", "group": "1"} and [twisted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [decayed]{"entity": "descr", "role": "plant", "group": "1"}, [hollow]{"entity": "descr", "role": "plant", "group": "1"}, [water-soaked]{"entity": "descr", "role": "plant", "group": "1"} and [soft]{"entity": "descr", "role": "plant", "group": "1"}
+    - [decayed]{"entity": "descr", "role": "plant", "group": "1"}, [soft]{"entity": "descr", "role": "plant", "group": "1"} and [rot]{"entity": "name", "role": "damage", "group": "1"}
+    - [deformed]{"entity": "descr", "role": "plant", "group": "1"}, [distorted]{"entity": "descr", "role": "plant", "group": "1"} and [dwarfed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [discolored]{"entity": "descr", "role": "plant", "group": "1"}
+    - [discolored]{"entity": "descr", "role": "plant", "group": "1"}, [bleached]{"entity": "descr", "role": "plant", "group": "1"}, [darkened]{"entity": "descr", "role": "plant", "group": "1"}
+    - [discolored]{"entity": "descr", "role": "plant", "group": "1"}, [necrosis]{"entity": "name", "role": "damage", "group": "1"}, [chlorosis]{"entity": "name", "role": "damage", "group": "1"}
+    - [distorted]{"entity": "descr", "role": "plant", "group": "1"} and [dwarfed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [don't develop]{"entity": "action", "role": "plant", "group": "1"}
+    - [drop]{"entity": "action", "role": "plant", "group": "1"}, [cling]{"entity": "action", "role": "plant", "group": "1"} to [branches]{"entity": "part", "role": "plant", "group": "1"}
+    - [galls]{"entity": "name", "role": "damage", "group": "1"}, [swell]{"entity": "descr", "role": "plant", "group": "1"}, [rough]{"entity": "descr", "role": "plant", "group": "1"}
+    - [gumming]{"entity": "descr", "role": "plant", "group": "1"}
+    - [holes]{"entity": "name", "role": "damage", "group": "1"}, [notching]{"entity": "descr", "role": "plant", "group": "1"}, [scalloped]{"entity": "descr", "role": "plant", "group": "1"}, [circular]{"entity": "descr", "role": "plant", "group": "1"} and [irregular]{"entity": "descr", "role": "plant", "group": "1"}

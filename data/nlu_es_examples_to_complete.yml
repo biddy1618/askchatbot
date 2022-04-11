@@ -1,0 +1,171 @@
+# Regular expession for highlighting entities: \{[^{]*\}
+examples: |
+    - I think there is something wrong with my [plant](plant_type)
+    - Problem with the [plant](plant_type)
+    - [Plant](plant_type) seems [unhealthy](plant_damage)
+    - My [plant](plant_type) is [slowly](plant_damage) [dying](plant_damage)
+    - Problem with [plant](plant_type)
+    - Problem with my [tree](plant_type)
+    - My [tree](plant_type) is not well 
+    - I have problem with my [plant](plant_type)
+    - My plant is of [herbs](plant_type)
+    - There is some prolem with my [fruits](plant_part)
+    - [Grapes](plant_name) are developing well
+    - It feels like my [violets](plant_name) have some problem
+    - My plant's [flowers](plant_part) have some problem
+    - [Seedlings](plant_part) are [underdeveloped](plant_damage)
+    - I have [citrus](plant_name) at [home](pest_location) and the [crown](plant_part) is [scarred](plant_damage)
+    - I have [boxelder](plant_name) [bugs](plant_pest)
+    - I have [ants](plant_pest)
+    - I have [fire ants](plant_pest)
+    - It is a small [insect](plant_pest)
+    - I have [cockroaches](plant_pest) near my [sink](pest_location)
+    - i have [bugs](plant_pest) on my [tomato](plant_name) [plants](plant_type)
+    - There is a [hole](plant_damage) in the trim on the [wall](pest_location)
+    - Affected [branches](plant_part) are [dying](plant_damage)
+    - [Black spots](plant_damage) on the ripe [tomatoes](plant_name).
+    - [Cockroaches](plant_pest) are invading my [house](pest_location)
+    - [Eating](plant_damage) [leaves](plant_part)
+    - [Eating](plant_damage) [plant](plant_type)
+    - How do I kill [cockroaches](plant_pest)?
+    - How to manage [pest](plant_pest) in my [farm](pest_location)?
+    - I found [dirt tunnels](plant_damage) in my [basement](pest_location). When I broke up the dirt, I found [little bugs](plant_pest) and [larvae](plant_pest) inside.
+    - I have a [pest](plant_pest) in [cotton plant](plant_name)
+    - I have a [pest](plant_pest) in [mango tree](plant_name)
+    - I have [ants](plant_pest) in my [kitchen](pest_location)
+    - I have [ants](plant_pest) in my [lawn](pest_location)
+    - I have black [bugs](plant_pest) in [begonias](plant_name)
+    - I have [cockroaches](plant_pest) near my [sink](pest_location)
+    - I have [dandelions](plant_pest) in my [lawn](pest_location)
+    - I have [flies](plant_pest) in the [house](pest_location)
+    - I have [large black bugs](plant_pest) running around on my [patio](pest_location) at night
+    - I have [spots](plant_damage) on my [roses](plant_name)
+    - I have what looks like clear [gel](plant_damage) coming out of my [peaches](plant_name).
+    - I think I may have [termites](plant_pest) in my [basement](pest_location). Who should I call?
+    - I think i have spotted [lanternfly](plant_pest)
+    - Is roundup safe to use in my [garden](pest_location)?
+    - [holes]{"entity": "name", "role": "damage", "group": "1"}, [ragged]{"entity": "descr", "role": "plant", "group": "1"}
+    - [mines]{"entity": "descr", "role": "plant", "group": "1"}, [trails]{"entity": "descr", "role": "plant", "group": "1"}
+    - [not emerged]{"entity": "descr", "role": "plant", "group": "1"} or [developed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [shrivel]{"entity": "descr", "role": "plant", "group": "1"}, [droop]{"entity": "descr", "role": "plant", "group": "1"}, [withered]{"entity": "descr", "role": "plant", "group": "1"}, [wilted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [specks]{"entity": "descr", "role": "plant", "group": "1"}, [flecks]{"entity": "descr", "role": "plant", "group": "1"}, [dots]{"entity": "descr", "role": "plant", "group": "1"} and [stippled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spots]{"entity": "descr", "role": "plant", "group": "1"}, [blotches]{"entity": "descr", "role": "plant", "group": "1"}, [lesions]{"entity": "descr", "role": "plant", "group": "1"}, [mottled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spots]{"entity": "descr", "role": "plant", "group": "1"}, [lesions]{"entity": "descr", "role": "plant", "group": "1"}, [stippled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [sticky]{"entity": "descr", "role": "plant", "group": "1"}, [sooty]{"entity": "descr", "role": "plant", "group": "1"}
+    - [stunted]{"entity": "descr", "role": "plant", "group": "1"}, [slow growth]{"entity": "descr", "role": "plant", "group": "1"}
+    - [weak]{"entity": "descr", "role": "plant", "group": "1"}, [wilted]{"entity": "descr", "role": "plant", "group": "1"}, [collapsed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [webbing]{"entity": "descr", "role": "plant", "group": "1"}, [nests]{"entity": "descr", "role": "plant", "group": "1"}
+    - [defoliate]{"entity": "descr", "role": "plant", "group": "1"}, [skeletonize]{"entity": "descr", "role": "plant", "group": "1"}
+    - [deformed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [distorted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [distorted]{"entity": "descr", "role": "plant", "group": "1"}, [stunted]{"entity": "descr", "role": "plant", "group": "1"}, [bushy]{"entity": "descr", "role": "plant", "group": "1"}
+    - [drop]{"entity": "descr", "role": "plant", "group": "1"}
+    - [galls]{"entity": "descr", "role": "plant", "group": "1"}, [swellings]{"entity": "descr", "role": "plant", "group": "1"}
+    - [galls]{"entity": "descr", "role": "plant", "group": "1"}, [tumors]{"entity": "descr", "role": "plant", "group": "1"}
+    - [powdery]{"entity": "descr", "role": "plant", "group": "1"}, [cottony]{"entity": "descr", "role": "plant", "group": "1"} growth
+    - [rotted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spores]{"entity": "descr", "role": "plant", "group": "1"}, [pustules]{"entity": "descr", "role": "plant", "group": "1"}, [blisters]{"entity": "descr", "role": "plant", "group": "1"}
+    - [chewed]{"entity": "descr", "role": "plant", "group": "1"}, [tunneling]{"entity": "descr", "role": "plant", "group": "1"}
+    - [distorted]{"entity": "descr", "role": "plant", "group": "1"}, [girdled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [don't open]{"entity": "descr", "role": "plant", "group": "1"}
+    - [rotted]{"entity": "descr", "role": "plant", "group": "1"}, [watery]{"entity": "descr", "role": "plant", "group": "1"}, [soft]{"entity": "descr", "role": "plant", "group": "1"}
+    - [curled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [dieback]{"entity": "descr", "role": "plant", "group": "1"} of tips, [margins]{"entity": "descr", "role": "plant", "group": "1"}
+    - [thin]{"entity": "descr", "role": "plant", "group": "1"}, [defoliated]{"entity": "descr", "role": "plant", "group": "1"}
+    - [wilted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cankers]{"entity": "name", "role": "pest", "group": "1"}
+    - [decayed]{"entity": "descr", "role": "plant", "group": "1"}, [soft]{"entity": "descr", "role": "plant", "group": "1"}, [mushy]{"entity": "descr", "role": "plant", "group": "1"}
+    - [ragged]{"entity": "descr", "role": "plant", "group": "1"}, [tattered]{"entity": "descr", "role": "plant", "group": "1"}, [crinkled]{"entity": "descr", "role": "plant", "group": "1"}, [leathery]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spots]{"entity": "descr", "role": "plant", "group": "1"}, [streaks]{"entity": "descr", "role": "plant", "group": "1"}, [lesions]{"entity": "descr", "role": "plant", "group": "1"}
+    - [mycelia]{"entity": "descr", "role": "plant", "group": "1"}
+    - [mycelia]{"entity": "descr", "role": "plant", "group": "1"}, [branch]{"entity": "part", "role": "plant", "group": "1"} structures
+    - [galls]{"entity": "descr", "role": "plant", "group": "1"}, [swollen]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spots]{"entity": "descr", "role": "plant", "group": "1"}, [lesions]{"entity": "descr", "role": "plant", "group": "1"}
+    - [bumps]{"entity": "descr", "role": "plant", "group": "1"}, [warty]{"entity": "descr", "role": "plant", "group": "1"}, [rough]{"entity": "descr", "role": "plant", "group": "1"}, [leathery]{"entity": "descr", "role": "plant", "group": "1"}
+    - [foamy]{"entity": "descr", "role": "plant", "group": "1"}, [moldy]{"entity": "descr", "role": "plant", "group": "1"}, [mycelia]{"entity": "descr", "role": "plant", "group": "1"}
+    - [feeding]{"entity": "descr", "role": "plant", "group": "1"}, [chewed]{"entity": "descr", "role": "plant", "group": "1"}, and [holes]{"entity": "descr", "role": "plant", "group": "1"}
+    - [waxy]{"entity": "descr", "role": "plant", "group": "1"}, [chalky]{"entity": "descr", "role": "plant", "group": "1"}
+    - [soft]{"entity": "descr", "role": "plant", "group": "1"}, [mushy]{"entity": "descr", "role": "plant", "group": "1"}, [rotted]{"entity": "descr", "role": "plant", "group": "1"}, [wilted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cankers]{"entity": "name", "role": "pest", "group": "1"}, [wounds]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cankers]{"entity": "name", "role": "pest", "group": "1"}, [wounds]{"entity": "descr", "role": "plant", "group": "1"}, [stains]{"entity": "descr", "role": "plant", "group": "1"}
+    - [chewed]{"entity": "descr", "role": "plant", "group": "1"}, [holes]{"entity": "descr", "role": "plant", "group": "1"}, [tunnels]{"entity": "descr", "role": "plant", "group": "1"}, [mines]{"entity": "descr", "role": "plant", "group": "1"}, [frass]{"entity": "descr", "role": "plant", "group": "1"}, [sawdust]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cottony]{"entity": "descr", "role": "plant", "group": "1"} growth, [spores]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cracked]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cracked]{"entity": "descr", "role": "plant", "group": "1"}, [creases]{"entity": "descr", "role": "plant", "group": "1"}, [bands]{"entity": "descr", "role": "plant", "group": "1"}
+    - [deformed]{"entity": "descr", "role": "plant", "group": "1"}, [flat]{"entity": "descr", "role": "plant", "group": "1"}
+    - [dieback]{"entity": "descr", "role": "plant", "group": "1"}, [flagged]{"entity": "descr", "role": "plant", "group": "1"}
+    - [dieback]{"entity": "descr", "role": "plant", "group": "1"}, [shriveled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [discolored]{"entity": "descr", "role": "plant", "group": "1"} beneath [bark]{"entity": "location", "role": "pest", "group": "1"}
+    - [discolored]{"entity": "descr", "role": "plant", "group": "1"}, [flagging]{"entity": "descr", "role": "plant", "group": "1"}
+    - [discolored]{"entity": "descr", "role": "plant", "group": "1"}, [necrosis]{"entity": "descr", "role": "plant", "group": "1"}
+    - [drop]{"entity": "descr", "role": "plant", "group": "1"}, [weak]{"entity": "descr", "role": "plant", "group": "1"}, [break]{"entity": "descr", "role": "plant", "group": "1"}, [dieback]{"entity": "descr", "role": "plant", "group": "1"}, [decay]{"entity": "descr", "role": "plant", "group": "1"}
+    - [girdled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [gouges]{"entity": "descr", "role": "plant", "group": "1"}, [holes]{"entity": "descr", "role": "plant", "group": "1"}, [bites]{"entity": "descr", "role": "plant", "group": "1"}, [frass]{"entity": "descr", "role": "plant", "group": "1"}
+    - [growths]{"entity": "descr", "role": "plant", "group": "1"}, [galls]{"entity": "descr", "role": "plant", "group": "1"}, [swellings]{"entity": "descr", "role": "plant", "group": "1"}
+    - [gummy]{"entity": "descr", "role": "plant", "group": "1"}
+    - [holes]{"entity": "descr", "role": "plant", "group": "1"}, [tunnels]{"entity": "descr", "role": "plant", "group": "1"}
+    - [holes]{"entity": "descr", "role": "plant", "group": "1"}, [tunnels]{"entity": "descr", "role": "plant", "group": "1"}, [mining]{"entity": "descr", "role": "plant", "group": "1"}
+    - [lack of fruit]{"entity": "descr", "role": "plant", "group": "1"}
+    - [lesions]{"entity": "descr", "role": "plant", "group": "1"}, [spots]{"entity": "descr", "role": "plant", "group": "1"}, [stains]{"entity": "descr", "role": "plant", "group": "1"}, [streaks]{"entity": "descr", "role": "plant", "group": "1"}
+    - [mushrooms]{"entity": "name", "role": "pest", "group": "1"}, [suckers]{"entity": "descr", "role": "plant", "group": "1"}
+    - [powdery]{"entity": "descr", "role": "plant", "group": "1"}, [spores]{"entity": "descr", "role": "plant", "group": "1"}
+    - [rotted]{"entity": "descr", "role": "plant", "group": "1"}, [shriveled]{"entity": "descr", "role": "plant", "group": "1"}, [decay]{"entity": "descr", "role": "plant", "group": "1"}, [soft]{"entity": "descr", "role": "plant", "group": "1"}, [drop]{"entity": "descr", "role": "plant", "group": "1"}
+    - [rough]{"entity": "descr", "role": "plant", "group": "1"}, and [scabs]{"entity": "descr", "role": "plant", "group": "1"}
+    - [sap]{"entity": "descr", "role": "plant", "group": "1"}, [oozing liquid]{"entity": "descr", "role": "plant", "group": "1"}
+    - [sap]{"entity": "descr", "role": "plant", "group": "1"}, [oozing]{"entity": "descr", "role": "plant", "group": "1"}, [bleeding]{"entity": "descr", "role": "plant", "group": "1"}
+    - [split]{"entity": "descr", "role": "plant", "group": "1"}, [cracked]{"entity": "descr", "role": "plant", "group": "1"}, [creased]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spots]{"entity": "descr", "role": "plant", "group": "1"}, [lesions]{"entity": "descr", "role": "plant", "group": "1"}, [streaked]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spotted]{"entity": "descr", "role": "plant", "group": "1"}, [lesions]{"entity": "descr", "role": "plant", "group": "1"}, [streaks]{"entity": "descr", "role": "plant", "group": "1"}, [scabs]{"entity": "descr", "role": "plant", "group": "1"}
+    - [vascular discoloration]{"entity": "descr", "role": "plant", "group": "1"}
+    - [webbing]{"entity": "descr", "role": "plant", "group": "1"}
+    - [webbing]{"entity": "descr", "role": "plant", "group": "1"}, [excrement]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cottony]{"entity": "descr", "role": "plant", "group": "1"}, [spores]{"entity": "descr", "role": "plant", "group": "1"}
+    - [decay]{"entity": "descr", "role": "plant", "group": "1"}
+    - [feeding]{"entity": "descr", "role": "plant", "group": "1"}, [frass]{"entity": "descr", "role": "plant", "group": "1"}
+    - [flaky]{"entity": "descr", "role": "plant", "group": "1"}, [papery]{"entity": "descr", "role": "plant", "group": "1"}
+    - [galls]{"entity": "descr", "role": "plant", "group": "1"}
+    - [hard]{"entity": "descr", "role": "plant", "group": "1"}, [pithy]{"entity": "descr", "role": "plant", "group": "1"}, [dry]{"entity": "descr", "role": "plant", "group": "1"}
+    - [russetted]{"entity": "descr", "role": "plant", "group": "1"}, [scarred]{"entity": "descr", "role": "plant", "group": "1"}
+    - [stings]{"entity": "descr", "role": "plant", "group": "1"}, [punctured]{"entity": "descr", "role": "plant", "group": "1"}
+    - [wilted]{"entity": "descr", "role": "plant", "group": "1"}, [shriveled]{"entity": "descr", "role": "plant", "group": "1"}, [collapsed]{"entity": "descr", "role": "plant", "group": "1"}, [girdled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [sour]{"entity": "descr", "role": "plant", "group": "1"}, [bitter]{"entity": "descr", "role": "plant", "group": "1"}
+    - [dieback]{"entity": "descr", "role": "plant", "group": "1"}
+    - [girdled]{"entity": "descr", "role": "plant", "group": "1"}, [distorted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [lesions]{"entity": "descr", "role": "plant", "group": "1"}, [spots]{"entity": "descr", "role": "plant", "group": "1"}, [spores]{"entity": "descr", "role": "plant", "group": "1"}
+    - [weak]{"entity": "descr", "role": "plant", "group": "1"}, [wilted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [fused]{"entity": "descr", "role": "plant", "group": "1"}
+    - [stiff]{"entity": "descr", "role": "plant", "group": "1"}, forms [rosette]{"entity": "descr", "role": "plant", "group": "1"}, [bolting]{"entity": "descr", "role": "plant", "group": "1"}
+    - [flaky]{"entity": "descr", "role": "plant", "group": "1"}
+    - [lesions]{"entity": "descr", "role": "plant", "group": "1"}, [spots]{"entity": "descr", "role": "plant", "group": "1"}
+    - [stippled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [dry]{"entity": "descr", "role": "plant", "group": "1"}
+    - [shriveled]{"entity": "descr", "role": "plant", "group": "1"}
+    - [shriveled]{"entity": "descr", "role": "plant", "group": "1"}, [moldy]{"entity": "descr", "role": "plant", "group": "1"}, [spores]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spots]{"entity": "descr", "role": "plant", "group": "1"}, [stains]{"entity": "descr", "role": "plant", "group": "1"}, [discolored]{"entity": "descr", "role": "plant", "group": "1"}
+    - [frothy]{"entity": "descr", "role": "plant", "group": "1"}, [waxy]{"entity": "descr", "role": "plant", "group": "1"}, [pitch]{"entity": "descr", "role": "plant", "group": "1"} masses
+    - [notched]{"entity": "descr", "role": "plant", "group": "1"}, [chewed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [stunted]{"entity": "descr", "role": "plant", "group": "1"}
+    - [honeydew]{"entity": "descr", "role": "plant", "group": "1"}, [soot]{"entity": "descr", "role": "plant", "group": "1"}
+    - [drippy]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cottony]{"entity": "descr", "role": "plant", "group": "1"}, [webbing]{"entity": "descr", "role": "plant", "group": "1"}
+    - [pitch]{"entity": "descr", "role": "plant", "group": "1"}
+    - [swollen]{"entity": "descr", "role": "plant", "group": "1"}, [galls]{"entity": "descr", "role": "plant", "group": "1"}
+    - [waxy]{"entity": "descr", "role": "plant", "group": "1"}, [frothy]{"entity": "descr", "role": "plant", "group": "1"}, [pitch]{"entity": "descr", "role": "plant", "group": "1"} masses
+    - [wounds]{"entity": "descr", "role": "plant", "group": "1"}
+    - [fungal]{"entity": "descr", "role": "plant", "group": "1"} growth
+    - [wilted]{"entity": "descr", "role": "plant", "group": "1"}, [withered]{"entity": "descr", "role": "plant", "group": "1"}
+    - [spots]{"entity": "descr", "role": "plant", "group": "1"}, [pustules]{"entity": "descr", "role": "plant", "group": "1"}
+    - [stains]{"entity": "descr", "role": "plant", "group": "1"}, [scars]{"entity": "descr", "role": "plant", "group": "1"}
+    - [thin]{"entity": "descr", "role": "plant", "group": "1"}, [weak]{"entity": "descr", "role": "plant", "group": "1"}
+    - [chewed]{"entity": "descr", "role": "plant", "group": "1"}, [holes]{"entity": "descr", "role": "plant", "group": "1"}
+    - [discolored]{"entity": "descr", "role": "plant", "group": "1"}, [spots]{"entity": "descr", "role": "plant", "group": "1"}, [blotches]{"entity": "descr", "role": "plant", "group": "1"}
+    - [lesions]{"entity": "descr", "role": "plant", "group": "1"}
+    - [misshapen]{"entity": "descr", "role": "plant", "group": "1"}
+    - [bumps]{"entity": "descr", "role": "plant", "group": "1"}, [knobby]{"entity": "descr", "role": "plant", "group": "1"}, [malformed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [tiny holes]{"entity": "descr", "role": "plant", "group": "1"}
+    - [distorted]{"entity": "descr", "role": "plant", "group": "1"}, [twisted]{"entity": "descr", "role": "plant", "group": "1"}, [misshapen]{"entity": "descr", "role": "plant", "group": "1"}
+    - [not developed]{"entity": "descr", "role": "plant", "group": "1"}
+    - [rotted]{"entity": "descr", "role": "plant", "group": "1"}, [foamy]{"entity": "descr", "role": "plant", "group": "1"}
+    - [fungal]{"entity": "descr", "role": "plant", "group": "1"} growth, [powdery]{"entity": "descr", "role": "plant", "group": "1"}, [spores]{"entity": "descr", "role": "plant", "group": "1"}
+    - [cracked]{"entity": "descr", "role": "plant", "group": "1"}, [tough]{"entity": "descr", "role": "plant", "group": "1"}, [chalky]{"entity": "descr", "role": "plant", "group": "1"}
+    - [rotted]{"entity": "descr", "role": "plant", "group": "1"}, [soft]{"entity": "descr", "role": "plant", "group": "1"}, [decayed]{"entity": "descr", "role": "plant", "group": "1"}, [slimy]{"entity": "descr", "role": "plant", "group": "1"}

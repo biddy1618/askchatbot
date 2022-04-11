@@ -1,0 +1,36 @@
+version: "3.0"
+
+nlu:
+
+- lookup: action
+  examples: |
+    - break
+    - cling
+    - defoliate
+    - develop fast
+    - develop slow
+    - dieback
+    - don't develop
+    - don't open
+    - don't emerge
+    - droop
+    - drop
+    - grow
+    - don't grow
+    - emerge
+    - notch
+    - ooze
+    - rag
+    - roll
+    - rot
+    - scallop
+    - shrivel
+    - skeletonize
+    - slowly grow
+    - sour
+    - split
+    - soak
+    - suck
+    - swell
+    - tunnel
+    - twist

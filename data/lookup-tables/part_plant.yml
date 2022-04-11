@@ -2,7 +2,7 @@ version: "3.0"
 
 nlu:
 
-- lookup: plant_part
+- lookup: part
   examples: |
     - blossoms
     - branches
