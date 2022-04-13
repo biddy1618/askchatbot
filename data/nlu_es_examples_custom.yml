@@ -5,49 +5,79 @@ nlu:
 - intent: intent_problem_description
   examples: |
     - [Leaves]{"entity": "part", "role": "plant", "group": "1"} [curling]{"entity": "descr", "role": "plant", "group": "1"}
-    - My [bean]{"entity": "name", "role": "plant", "group": "1"} [seeds]{"entity": "part", "role": "plant", "group": "1"} [didn't germinate]{"entity": "action", "role": "plant", "group": "1"}.
+    - My [bean]{"entity": "name", "role": "plant", "group": "1"} [seeds]{"entity": "part", "role": "plant", "group": "1"} didn't [germinate]{"entity": "action", "role": "plant", "group": "1"}.
     - My [roses]{"entity": "name", "role": "plant", "group": "1"} are [wilting]{"entity": "descr", "role": "plant", "group": "1"}
     - My [tomatoes]{"entity": "name", "role": "plant", "group": "1"} have [black]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} on them.
     - No [seedlings]{"entity": "part", "role": "plant", "group": "1"}
-    - ["role": "pest"]{"entity": "name", "role": "pest", "group": "1"} is [eating]{"entity": "action", "role": "pest", "group": "1"} my [cotton plant]{"entity": "name", "role": "plant"}
-    - [Plants]{"entity": "type", "role": "plant", "group": "1"} are [turning]{"entity": "descr", "role": "plant", "group": "1"} [yellow]{"entity": "descr", "role": "plant", "group": "1"}
+    - [pest]{"entity": "type", "role": "pest", "group": "1"} is [eating]{"entity": "action", "role": "pest", "group": "1"} my [cotton plant]{"entity": "name", "role": "plant", "group": "1"}
+    - [Plants]{"entity": "type", "role": "plant", "group": "1"} are [turning]{"entity": "action", "role": "plant", "group": "1"} [yellow]{"entity": "descr", "role": "plant", "group": "1"}
     - [Powdery mildew]{"entity": "name", "role": "pest", "group": "1"} on [apple]{"entity": "name", "role": "plant", "group": "1"}
-    - Some weird [bug]{"entity": "type", "role": "pest", "group": "1"} on my [tomatos]{"entity": "name", "role": "plant", "group": "1"} is [eating]{"entity": "action", "role": "pest", "group": "1"} the [leaves]{"entity": "part", "role": "plant", "group": "1"}
+    - Some weird [bug]{"entity": "type", "role": "pest", "group": "1"} on my [redwood]{"entity": "name", "role": "plant", "group": "1"} is [breaking]{"entity": "action", "role": "pest", "group": "1"} the [branches]{"entity": "part", "role": "plant", "group": "1"}
     - Something is [eating]{"entity": "action", "role": "pest", "group": "1"} my [peaches]{"entity": "name", "role": "plant", "group": "1"}.
-    - [Swarming]{"entity": "descr", "role": "pest", "group": "1"} [ants]{"entity": "name", "role": "pest", "group": "1"}
+    - [Swarming]{"entity": "action", "role": "pest", "group": "1"} [ants]{"entity": "name", "role": "pest", "group": "1"}
     - The [cockroaches]{"entity": "name", "role": "pest", "group": "1"} [leave]{"entity": "action", "role": "pest", "group": "1"} [turds]{"entity": "name", "role": "damage", "group": "1"}
-    - The [peaches]{"entity": "name", "role": "plant", "group": "1"} that have the [gel]{"entity": "name", "role": "damage", "group": "1"} are starting to [rot]{"entity": "action", "role": "plant", "group": "1"} and don't look healthy
+    - The [peaches]{"entity": "name", "role": "plant", "group": "1"} that have the [gel]{"entity": "name", "role": "damage", "group": "1"} are starting to [rot]{"entity": "action", "role": "plant", "group": "1"} and don't [look]{"entity": "action", "role": "plant", "group": "1"} [healthy]{"entity": "descr", "role": "plant", "group": "1"}
     - There are [webs]{"entity": "name", "role": "damage", "group": "1"} with [worms]{"entity": "name", "role": "pest", "group": "1"} in them on my [evergreen tree]{"entity": "name", "role": "plant", "group": "1"}
     - There is [clear]{"entity": "descr", "role": "damage", "group": "1"} [gel]{"entity": "name", "role": "damage", "group": "1"} [coming]{"entity": "action", "role": "damage", "group": "1"} out of the [peaches]{"entity": "name", "role": "plant", "group": "1"}.
     - They are [weeds]{"entity": "name", "role": "pest", "group": "1"}
     - They [kill]{"entity": "action", "role": "pest", "group": "1"} my [rose]{"entity": "name", "role": "plant", "group": "1"} [bushes]{"entity": "type", "role": "plant", "group": "1"}
-    - What do I do about [swarming]{"entity": "descr", "role": "pest", "group": "1"} [ants]{"entity": "name", "role": "pest", "group": "1"}?
+    - What do I do about [swarming]{"entity": "action", "role": "pest", "group": "1"} [ants]{"entity": "name", "role": "pest", "group": "1"}?
     - Whats causing my [shrubs]{"entity": "name", "role": "plant", "group": "1"} [leaves]{"entity": "part", "role": "plant", "group": "1"} to [turn]{"entity": "action", "role": "plant", "group": "1"} [yellow]{"entity": "descr", "role": "plant", "group": "1"}?
-    - White [insects]{"entity": "type", "role": "pest", "group": "1"} with [black]{"entity": "descr", "role": "pest", "group": "1"} heads [killing]{"entity": "action", "role": "pest", "group": "1"} [oak tree]{"entity": "name", "role": "plant", "group": "1"}
-    - a [bug]{"entity": "type", "role": "pest", "group": "1"} is [eating]{"entity": "action", "role": "pest", "group": "1"} my [tomatoes]{"entity": "name", "role": "plant", "group": "1"}
+    - [White]{"entity": "descr", "role": "pest", "group": "1"} [insects]{"entity": "type", "role": "pest", "group": "1"} with [black]{"entity": "descr", "role": "pest", "group": "1"} [heads]{"entity": "part", "role": "pest", "group": "1"} [killing]{"entity": "action", "role": "pest", "group": "1"} [oak tree]{"entity": "name", "role": "plant", "group": "1"}
+    - a [bug]{"entity": "type", "role": "pest", "group": "1"} is [sucking]{"entity": "action", "role": "pest", "group": "1"} my [tomatoes]{"entity": "name", "role": "plant", "group": "1"}
     - [biting]{"entity": "action", "role": "pest", "group": "1"} [flies]{"entity": "name", "role": "pest", "group": "1"}
-    - [black]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} on my [roses]{"entity": "name", "role": "plant", "group": "1"}
-    - [black]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} on [tomato]{"entity": "name", "role": "plant", "group": "1"}
+    - [orange]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} on my [roses]{"entity": "name", "role": "plant", "group": "1"}
+    - [huge]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} on [tomato]{"entity": "name", "role": "plant", "group": "1"}
     - [brown]{"entity": "descr", "role": "plant", "group": "1"} [leaves]{"entity": "part", "role": "plant", "group": "1"}
-    - [brown]{"entity": "descr", "role": "plant", "group": "1"} [leaves]{"entity": "part", "role": "plant", "group": "1"} on [tomato]{"entity": "name", "role": "plant", "group": "1"} ["role": "plant"]{"entity": "type", "role": "plant", "group": "1"}
-    - [brown]{"entity": "descr", "role": "plant", "group": "1"} [leaves]{"entity": "part", "role": "plant", "group": "1"} on [tomato]{"entity": "name", "role": "plant", "group": "1"} [plants]{"entity": "type", "role": "plant", "GROUP": "1"}
+    - [small]{"entity": "descr", "role": "plant", "group": "1"} [kernels]{"entity": "part", "role": "plant", "group": "1"} on [ivy]{"entity": "name", "role": "plant", "group": "1"} [plant]{"entity": "type", "role": "plant", "group": "1"}
     - [brown]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} and [dying]{"entity": "action", "role": "plant", "group": "1"} [flowers]{"entity": "part", "role": "plant", "group": "1"}
-    - [dead]{"entity": "descr", "role": "damage", "group": "1"} or [brown]{"entity": "descr", "role": "damage", "group": "1"} [patches]{"entity": "name", "role": "damage", "group": "1"} of [grass]{"entity": "name", "role": "pest", "group": "1"}
-    - [eating]{"entity": "action", "role": "pest", "group": "1"} the [leaves]{"entity": "type", "role": "plant", "group": "1"}
+    - [dead]{"entity": "descr", "role": "damage", "group": "1"} or [decayed]{"entity": "descr", "role": "damage", "group": "1"} [patches]{"entity": "name", "role": "damage", "group": "1"} of [grass]{"entity": "name", "role": "pest", "group": "1"}
+    - [twisting]{"entity": "action", "role": "pest", "group": "1"} the [leaves]{"entity": "type", "role": "plant", "group": "1"}
     - [holes]{"entity": "name", "role": "damage", "group": "1"} in [leaves]{"entity": "type", "role": "plant", "group": "1"}
     - [holes]{"entity": "name", "role": "damage", "group": "1"} in the [flowers]{"entity": "part", "role": "plant", "group": "1"}
     - how to [prevent]{"entity": "action", "role": "pest", "group": "1"} [tomato]{"entity": "name", "role": "plant", "group": "1"} [hornworm]{"entity": "name", "role": "pest", "group": "1"}
-    - i have [bugs]{"entity": "type", "role": "pest", "group": "1"} on my [tomato]{"entity": "name", "role": "plant", "group": "1"} [plants]{"entity": "type", "role": "plant", "group": "1"}
+    - i have [bugs]{"entity": "type", "role": "pest", "group": "1"} on my [oleander]{"entity": "name", "role": "plant", "group": "1"} [plants]{"entity": "type", "role": "plant", "group": "1"}
     - i have [dead]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} in my [lawn]{"entity": "location", "role": "damage", "group": "1"}
     - i have [fire ants]{"entity": "name", "role": "pest", "group": "1"}
     - i have [spots]{"entity": "name", "role": "damage", "group": "1"} on my [roses]{"entity": "name", "role": "plant", "group": "1"}
-    - it's [eating]{"entity": "action", "role": "pest", "group": "1"} the [leaves]{"entity": "part", "role": "plant", "group": "1"} of my [mustard greens]{"entity": "name", "role": "plant", "group": "1"}
+    - it's [eating]{"entity": "action", "role": "pest", "group": "1"} the [twigs]{"entity": "part", "role": "plant", "group": "1"} of my [mustard greens]{"entity": "name", "role": "plant", "group": "1"}
     - [rat]{"entity": "name", "role": "pest", "group": "1"} problem
     - some of [large]{"entity": "descr", "role": "pest", "group": "1"} [beetle]{"entity": "name", "role": "pest", "group": "1"} [eating]{"entity": "action", "role": "pest", "group": "1"} my [willow tree]{"entity": "name", "role": "plant", "group": "1"}
-    - the [beetles]{"entity": "name", "role": "pest", "group": "1"} are [eating]{"entity": "action", "role": "pest", "group": "1"} [holes]{"entity": "name", "role": "damage", "group": "1"} in the [trunk]{"entity": "part", "role": "plant", "group": "1"} of the [tree]{"entity": "type", "role": "plant", "group": "1"}
+    - the [beetles]{"entity": "name", "role": "pest", "group": "1"} are [tunneling]{"entity": "action", "role": "pest", "group": "1"} [holes]{"entity": "name", "role": "damage", "group": "1"} in the [trunk]{"entity": "part", "role": "plant", "group": "1"} of the [tree]{"entity": "type", "role": "plant", "group": "1"}
     - [tiny]{"entity": "descr", "role": "pest", "group": "1"} [ants]{"entity": "name", "role": "pest", "group": "1"} in the [kitchen]{"entity": "location", "role": "pest", "group": "1"}
-    - [white]{"entity": "descr", "role": "damage"} [fuzz]{"entity": "name", "role": "damage", "group": "1"} on [apple tree]{"entity": "name", "role": "plant", "group": "1"} [leaves]{"entity": "part", "role": "plant", "group": "1"}
+    - [white]{"entity": "descr", "role": "damage", "group": "1"} [fuzz]{"entity": "name", "role": "damage", "group": "1"} on [apple tree]{"entity": "name", "role": "plant", "group": "1"} [leaves]{"entity": "part", "role": "plant", "group": "1"}
     - I think i have spotted [lantern fly]{"entity": "name", "role": "pest", "group": "1"}
     - They look like [lantern flies]{"entity": "name", "role": "pest", "group": "1"}
-    - I have [small]{"entity": "descr", "role": "pest", "group": "1"} [green]{"entity": "descr", "role": "pest"} [grubs]{"entity": "name", "role": "pest", "group": "1"} in my [lawn]{"entity": "location", "role": "pest", "group": "1"}.
+    - I have [small]{"entity": "descr", "role": "pest", "group": "1"} [green]{"entity": "descr", "role": "pest", "group": "1"} [grubs]{"entity": "name", "role": "pest", "group": "1"} in my [lawn]{"entity": "location", "role": "pest", "group": "1"}.
     - [Downy mildew]{"entity": "name", "role": "pest", "group": "1"} of [roses]{"entity": "name", "role": "plant", "group": "1"}
+    - [Plant]{"entity": "type", "role": "plant", "group": "1"} [seems]{"entity": "action", "role": "plant", "group": "1"} [unhealthy]{"entity": "descr", "role": "plant", "group": "1"}
+    - My [plant]{"entity": "type", "role": "plant", "group": "1"} is slowly [dying]{"entity": "action", "role": "plant", "group": "1"}
+    - My [plant]{"entity": "type", "role": "plant", "group": "1"} is of [herbs]{"entity": "type", "role": "plant", "group": "1"}
+    - [Grapes]{"entity": "name", "role": "plant", "group": "1"} are [developing]{"entity": "action", "role": "plant", "group": "1"} well
+    - [Seedlings]{"entity": "part", "role": "plant", "group": "1"} are [underdeveloped]{"entity": "descr", "role": "plant", "group": "1"}
+    - I have [citrus]{"entity": "name", "role": "plant", "group": "1"} at [home]{"entity": "location", "role": "plant", "group": "1"} and the [crown]{"entity": "part", "role": "plant", "group": "2"} is [scarred]{"entity": "descr", "role": "plant", "group": "2"}
+    - I have [boxelder]{"entity": "name", "role": "plant", "group": "1"} [bugs]{"entity": "type", "role": "pest", "group": "1"}
+    - I have [ants]{"entity": "name", "role": "pest", "group": "1"}
+    - I have [fire ants]{"entity": "name", "role": "pest", "group": "1"}
+    - It is a [small]{"entity": "descr", "role": "pest", "group": "1"} [insect]{"entity": "type", "role": "pest", "group": "1"}
+    - I have [cockroaches]{"entity": "name", "role": "pest", "group": "1"} near my [sink]{"entity": "location", "role": "pest", "group": "1"}
+    - i have [aphids]{"entity": "type", "role": "pest", "group": "1"} on my [tomato]{"entity": "name", "role": "plant", "group": "1"} [plants]{"entity": "type", "role": "plant", "group": "1"}
+    - There is a [hole]{"entity": "name", "role": "damage", "group": "1"} in the [trim]{"entity": "location", "role": "damage", "group": "1"} on the [wall]{"entity": "location", "role": "damage", "group": "1"}
+    - [Affected]{"entity": "descr", "role": "plant", "group": "1"} [branches]{"entity": "part", "role": "plant", "group": "1"} are [dying]{"entity": "action", "role": "plant", "group": "1"}
+    - [Black]{"entity": "descr", "role": "damage", "group": "1"} [spots]{"entity": "name", "role": "damage", "group": "1"} on the [ripe]{"entity": "descr", "role": "plant", "group": "1"} [tomatoes]{"entity": "name", "role": "plant", "group": "1"}.
+    - [Cockroaches]{"entity": "name", "role": "pest", "group": "1"} are [invading]{"entity": "action", "role": "pest", "group": "1"} my [house]{"entity": "location", "role": "pest", "group": "1"}
+    - [Eating]{"entity": "action", "role": "pest", "group": "1"} [leaves]{"entity": "part", "role": "plant", "group": "1"}
+    - [Eating]{"entity": "action", "role": "pest", "group": "1"} [plant]{"entity": "part", "role": "plant", "group": "1"}
+    - How do I [kill]{"entity": "action", "role": "pest", "group": "1"} [cockroaches]{"entity": "name", "role": "pest", "group": "1"}?
+    - How to [manage]{"entity": "action", "role": "pest", "group": "1"} [pest]{"entity": "type", "role": "pest", "group": "1"} in my [farm]{"entity": "location", "role": "pest", "group": "1"}?
+    - I found [dirt]{"entity": "descr", "role": "damage", "group": "1"} [tunnels]{"entity": "name", "role": "damage", "group": "1"} in my [basement]{"entity": "location", "role": "damage", "group": "1"}. When I broke up the dirt, I found [little]{"entity": "descr", "role": "pest", "group": "2"} [snails]{"entity": "name", "role": "pest", "group": "2"} and [larvae]{"entity": "name", "role": "pest", "group": "2"} inside.
+    - I have a [pest]{"entity": "type", "role": "pest", "group": "1"} in [cotton plant]{"entity": "name", "role": "plant", "group": "1"}
+    - I have a [borer]{"entity": "type", "role": "pest", "group": "1"} in [mango]{"entity": "name", "role": "plant", "group": "1"} [tree]{"entity": "type", "role": "plant", "group": "1"}
+    - I have [ants]{"entity": "name", "role": "pest", "group": "1"} in my [kitchen]{"entity": "location", "role": "pest", "group": "1"}
+    - I have [slugs]{"entity": "name", "role": "pest", "group": "1"} in my [lawn]{"entity": "location", "role": "pest", "group": "1"}
+    - I have [black]{"entity": "descr", "role": "pest", "group": "1"} [termites]{"entity": "name", "role": "pest", "group": "1"} in [begonias]{"entity": "name", "role": "plant", "group": "1"}
+    - I have [cockroaches]{"entity": "name", "role": "pest", "group": "1"} near my [sink]{"entity": "location", "role": "pest", "group": "1"}
+    - I have [dandelions]{"entity": "name", "role": "pest", "group": "1"} in my [lawn]{"entity": "location", "role": "pest", "group": "1"}
+    - I have [flies]{"entity": "name", "role": "pest", "group": "1"} in the [house]{"entity": "location", "role": "pest", "group": "1"}
+    - I have [large]{"entity": "descr", "role": "pest", "group": "1"} [black]{"entity": "descr", "role": "pest", "group": "1"} [mice]{"entity": "name", "role": "pest", "group": "1"} running around on my [patio]{"entity": "location", "role": "pest", "group": "1"} at night
+    - I have [spots]{"entity": "name", "role": "damage", "group": "1"} on my [roses]{"entity": "name", "role": "plant", "group": "1"}

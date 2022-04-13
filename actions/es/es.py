@@ -29,7 +29,7 @@ async def _cos_sim_query(
     vector_name     = 'vectors.vector'
     source_nested   = ['vectors.name']
     if query_links:
-        vector_name = 'vectors_links.vector'
+        vector_name     = 'vectors_links.vector'
         source_nested   = ['vectors_links.order']
         
     cos     = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
@@ -81,13 +81,14 @@ async def _cos_sim_query(
 
 async def _handle_es_query(
     query       : str               ,
-    slots       : str       = None  ,
+    slots       : List[str] = None  ,
     filter_ids  : List[str] = None  ,
     ) -> list:
     '''Perform search in ES base.
 
     Args:
         query       (str)       : Query statement.
+        slots       (List[str]) : Additional entity queries. Defaults to None.
         filter_ids  (List[str]) : IDs of docs that should be considered. Defaults to None.
 
     Returns:
@@ -96,8 +97,8 @@ async def _handle_es_query(
     
     query_vector = config.embed([query]).numpy()[0]
     if slots:
-        slots_vector = config.embed([slots]).numpy()[0]
-        query_vector = np.average([query_vector, slots_vector], axis = 0)
+        slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
+        query_vector = np.average([query_vector, slots_vector]                  , axis = 0)
     
     hits = await _cos_sim_query(
         index           = config.es_combined_index  ,
@@ -230,7 +231,7 @@ def _get_text(hits: dict) -> dict:
 
 async def submit(
     question    : str               ,
-    slots       : str       = None  ,
+    slots       : List[str] = None  ,
     filter_ids  : List[str] = None
 
     ) -> Tuple[dict, dict]:
@@ -239,7 +240,7 @@ async def submit(
 
     Args:
         question    (str)       : Question that is asked.
-        slots       (str)       : Pest damage description. Defaults to None.
+        slots       (List[str]) : Pest damage description. Defaults to None.
         filter_ids  (List[str]) : IDs of docs that should be considered. Defaults to None.
     
     Returns:

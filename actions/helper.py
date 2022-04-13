@@ -29,14 +29,14 @@ utterances = {
     'add_help'          : 'Anything else I can help with?',
     'more_details'      : 'Please, give more more information',
     'ask_more_details'  : 'Did that answer your question? If not, can you give me some more information',
-    'debug_slots'       : 'Extracted slots:</br>',
+    'debug_slots'       : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
     'debug_no_results'  : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
     'debug_results'     : 'Top {0} results.',
     'debug_slot_results': 'Results with slots improvement... Top {0} results.',
     'debug_no_es'       : 'Not doing an actual elastic search query.',
 }
 
-# buttons
+# Buttons
 buttons = {
     'ask_question'  : {
         'title'     : 'I would like to ask a pest related question.', 
@@ -70,6 +70,17 @@ buttons = {
         'title'     : "No, I'd like to speak to an expert.",
         'payload'   : '/intent_request_expert'
     }
+}
+
+# Entity names and order
+entity_names = ['action', 'descr', 'location', 'name', 'part', 'type']
+entity_order = {
+    'descr'     : 1,
+    'type'      : 2,
+    'name'      : 3,
+    'part'      : 4,
+    'action'    : 5,
+    'location'  : 6
 }
 
 
@@ -129,6 +140,68 @@ def _get_config_message(config):
     )
 
     return message
+
+
+def _get_entity_groups(entities):
+    '''Get the entity groups from the user's message.'''
+    ent_list = []
+
+    for entity in entities:
+        if entity["entity"] in entity_names and 'role' in entity:
+            en_dict = {}
+            en_dict['entity'] = entity['entity' ]
+            en_dict['value' ] = entity['value'  ]
+            en_dict['role'  ] = entity['role'   ]
+            en_dict['group' ] = entity['group'  ]
+            
+            ent_list.append(en_dict)
+
+    ent_list = [i for n, i in enumerate(ent_list) if i not in ent_list[n + 1:]]
+
+    slots = {}
+    for e in ent_list:
+        g = e.pop('group')
+        e_tuple = (entity_order[e['entity']], e['entity'], e['value'])
+        if g in slots:
+            r = e['role']
+            if r in slots[g]: slots[g][r].append(e_tuple) 
+            else            : slots[g][r] = [e_tuple]
+        else: slots[g] = {e['role']: [e_tuple]}
+    
+    for g in slots.values():
+        for r in g:
+            g[r] = sorted(g[r], key = lambda x: x[0])
+
+    return slots
+    
+
+def _process_slots(slots, prev_slots = None):
+    '''Get slots utterance and compose slots query.'''
+    slots_utterance = ''
+    for g, roles in slots.items():
+        slots_utterance += f'Group {g}:</br>'
+        for r, entities in roles.items():
+            for e in entities:
+                slots_utterance += f'(<i>{r}</i>) <strong>{e[1]}</strong> - <strong>{e[2]}</strong></br>'
+        slots_utterance += '</br>'
+    
+    slots_query = []
+    if prev_slots is not None:
+        slots_query = prev_slots
+    for g, roles in slots.items():
+        query = []
+        for r in ['pest', 'damage', 'plant']:
+            if r in roles:
+                query.extend(roles[r])
+        slots_query.append(' '.join([e[2] for e in query]))
+    
+    if len(slots_query) > 0:
+        slots_utterance += f'Composed {len(slots_query)} additional queries:</br>'
+        for i, q in enumerate(slots_query):
+            slots_utterance += f'{i+1}) <i>{q}</i></br>'
+    else: slots_query = None
+    
+    return slots_utterance, slots_query
 
 
 # def _get_plant_names(

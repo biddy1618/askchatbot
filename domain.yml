@@ -26,12 +26,76 @@ intents:
 - intent_test_collapsible
 - intent_test_carousel
 entities:
-- action
-- descr
-- location
-- name
-- part
-- type
+- action:
+    roles:
+      - pest
+      - plant
+      - damage
+    groups:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+- descr:
+    roles:
+      - pest
+      - plant
+      - damage
+    groups:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+- location:
+    roles:
+      - pest
+      - plant
+      - damage
+    groups:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+- name:
+    roles:
+      - pest
+      - plant
+      - damage
+    groups:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+- part:
+    roles:
+      - pest
+      - plant
+    groups:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+- type:
+    roles:
+      - pest
+      - plant
+    groups:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
 slots:
   # Basic slots
   shown_greeting:
@@ -57,36 +121,10 @@ slots:
       - type: custom
         action: action_validate_problem_description
   # Additional slots
-  action:
-    type: list
+  problem_details:
+    type: any
     mappings:
-      - type: from_entity
-        entity: action
-  descr:
-    type: list
-    mappings:
-      - type: from_entity
-        entity: descr
-  location:
-    type: list
-    mappings:
-      - type: from_entity
-        entity: location
-  name:
-    type: list
-    mappings:
-      - type: from_entity
-        entity: name
-  part:
-    type: list
-    mappings:
-      - type: from_entity
-        entity: part
-  type:
-    type: list
-    mappings:
-      - type: from_entity
-        entity: type
+      - type: custom
   # ES query result slots
   problem_description_add:
     type: text
@@ -257,18 +295,8 @@ forms:
   es_query_form:
     required_slots:
     - problem_description
-    - name
-    - descr
-    - action
-    - location
-    - part
-    - type
+    - problem_details
   es_result_form:
     required_slots:
     - problem_description_add
-    - name
-    - descr
-    - action
-    - location
-    - part
-    - type
+    - problem_details
