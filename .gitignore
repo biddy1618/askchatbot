@@ -20,4 +20,4 @@ actions/es/data/**/*.json
 actions/es/scripts/test/*
 
 # Development environment variables
-env-dev.sh
+# env-dev.sh

@@ -1,4 +1,4 @@
-# tiny dependency resolver
+# tiny dependency resolver for development purposes
 pipdeptree==2.2.1
 
 # for local fast embedding vectorization
