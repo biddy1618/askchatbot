@@ -190,7 +190,7 @@ def _process_slots(slots, prev_slots = None):
         slots_query = prev_slots
     for g, roles in slots.items():
         query = []
-        for r in ['pest', 'damage', 'plant']:
+        for r in ['pest', 'damage', 'remedy', 'plant']:
             if r in roles:
                 query.extend(roles[r])
         slots_query.append(' '.join([e[2] for e in query]))

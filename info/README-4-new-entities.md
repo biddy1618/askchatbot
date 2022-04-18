@@ -14,6 +14,7 @@ Roles:
 * pest
 * plant
 * damage
+* remedy
 
 
 Groups:
@@ -26,7 +27,8 @@ Order:
 2. Roles
     1. Pest
     2. Damage
-    3. Plant
+    3. Remedy
+    4. Plant
 3. Entities:
     1. descr
     2. (type |) name (| part)

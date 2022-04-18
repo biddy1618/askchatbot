@@ -31,6 +31,7 @@ entities:
       - pest
       - plant
       - damage
+      - remedy
     groups:
       - 1
       - 2
@@ -43,6 +44,7 @@ entities:
       - pest
       - plant
       - damage
+      - remedy
     groups:
       - 1
       - 2
@@ -55,6 +57,7 @@ entities:
       - pest
       - plant
       - damage
+      - remedy
     groups:
       - 1
       - 2
@@ -67,6 +70,7 @@ entities:
       - pest
       - plant
       - damage
+      - remedy
     groups:
       - 1
       - 2
