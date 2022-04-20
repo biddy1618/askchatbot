@@ -51,3 +51,10 @@ Order:
     GroupN: ...
 }
 ```
+
+
+# To Do
+
+* Baseline scores with precision, recall, and misses
+* Synonym list (layman) - initial approach using simple mapping method (lady bug. ladybug - lady beetle) before the search
+

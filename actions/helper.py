@@ -147,7 +147,7 @@ def _get_entity_groups(entities):
     ent_list = []
 
     for entity in entities:
-        if entity["entity"] in entity_names and 'role' in entity:
+        if entity["entity"] in entity_names and 'role' in entity and 'group' in entity:
             en_dict = {}
             en_dict['entity'] = entity['entity' ]
             en_dict['value' ] = entity['value'  ]

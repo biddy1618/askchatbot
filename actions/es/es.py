@@ -146,12 +146,12 @@ def _format_result(
     res = {}
     if config.debug:
         res['title'] = (
-            f'<p>{index+1})<em>{name}</a></em>'
+            f'<p>{index+1})<em>{name}</em>'
             f'</br>(score: {score:.2f})</br>'
             f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     else:
         res['title'] = (
-            f'<p>{index+1})<em>{name}</a></em>'
+            f'<p>{index+1})<em>{name}</em>'
             f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     
     res['description'] = ''
