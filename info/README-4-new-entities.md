@@ -20,6 +20,28 @@ Roles:
 Groups:
 * from 1 to n
 
+## Basic ground rules and guidelines
+
+* Label compound composite names of pests and plants as a single entity
+    * peach leaf curl
+    * oriental cockroaches
+    * roof rats
+    * rat poison
+    * carpet beetle
+    * blossom end rot
+    * fungus gnats
+    * gopher trap
+    * ground squirrels
+    * head lice
+    * weed killer
+* Distinguish between verb and adjectives, specifically label verbs as verb explicitly (since POS of modifier as adjective of the verb is still VERB)
+    * Dying man - VERB NOUN (mark __dying__ as ACTION)
+    * Answering machine - VERB NOUN (mark __answering__ as ACTION)
+    * Heating element - NOUN NOUN (mark __heating__ as ACTION)
+    * Landing field - NOUN NOUN (mark __landing__ as ACTION)
+    * leaves are covered - NOUN AUX VERB (mark __covered__ as ACTION)
+
+
 ## Mapping logic
 
 Order:
@@ -45,6 +67,7 @@ Order:
         // Role keys with ordered tuples of entities
         pest    : [(order, entity_name, entity_value), ...],
         damage  : [(order, entity_name, entity_value), ...],
+        remedy  : [(order, entity_name, entity_value), ...],
         plant   : [(order, entity_name, entity_value), ...]
     },
     ...,
@@ -55,6 +78,8 @@ Order:
 
 # To Do
 
+* Ground rules for labelling (long-term goal)
 * Baseline scores with precision, recall, and misses
+* Label the new data from AE
 * Synonym list (layman) - initial approach using simple mapping method (lady bug. ladybug - lady beetle) before the search
 
