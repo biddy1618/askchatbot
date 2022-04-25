@@ -33,7 +33,7 @@ rules:
 
 - rule: Out of scope messages
   steps:
-  - intent: intent_out_of_score
+  - intent: intent_out_of_scope
   - action: action_out_of_scope
 
 # Main rules

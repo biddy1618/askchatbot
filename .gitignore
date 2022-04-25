@@ -19,5 +19,8 @@ actions/es/data/**/*.json
 # Some test data
 actions/es/scripts/test/*
 
+# Temporary
+data/nlu_es_examples_ae.yml
+
 # Development environment variables
 # env-dev.sh

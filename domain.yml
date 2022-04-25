@@ -11,7 +11,7 @@ intents:
 - intent_deny
 - intent_goodbye
 - intent_bot_challenge
-- intent_out_of_score
+- intent_out_of_scope
 # Main intents
 - intent_explain_ipm
 - intent_request_expert

@@ -82,4 +82,10 @@ Order:
 * Baseline scores with precision, recall, and misses
 * Label the new data from AE
 * Synonym list (layman) - initial approach using simple mapping method (lady bug. ladybug - lady beetle) before the search
-
+* Request access to workflow from Ewald or Jasper
+* For the Workflow (for running the ) and MLFlow:
+    * AutoFlow
+* Create the Docker file 
+* Contact Jasper and Ewald on the container's access to dev's chatbot API
+* True negatives in the test data - compose some samples
+* Iterative improvements - to be able to show the improvements in document

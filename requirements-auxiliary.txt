@@ -3,3 +3,8 @@ pipdeptree==2.2.1
 
 # for local fast embedding vectorization
 tensorflow-gpu==2.6.1
+
+# for styling guide
+autopep8==1.6.0
+pycodestyle==2.8.0
+toml==0.10.2

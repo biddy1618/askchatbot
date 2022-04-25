@@ -6,7 +6,7 @@ services:
     container_name: rasa
     environment:
       ACTION_ENDPOINT: http://rasa-actions:5055/webhook
-      TOKENIZERS_PARALLELISM: false
+      TOKENIZERS_PARALLELISM: 'false'
       STAGE: ${STAGE}
     ports:
       - "5005:5005"
@@ -22,7 +22,7 @@ services:
       TFHUB_EMBEDDING_URL: https://tfhub.dev/google/universal-sentence-encoder/4
       TFHUB_CACHE_DIR: /var/tmp/tfhub_modules
       TF_CPP_MIN_LOG_LEVEL: 3
-      TOKENIZERS_PARALLELISM: false
+      TOKENIZERS_PARALLELISM: 'false'
       STAGE: ${STAGE}
       DEBUG: ${DEBUG}
       DEPLOYMENT_VERSION: ${DEPLOYMENT_VERSION}
