@@ -61,19 +61,6 @@ if stage == 'dev':
     
     _PATH = Path(__file__).parent.as_posix()
 
-    # -------------------------------------------------------------
-    # Define paths where data stored  
-    PATH_DATA_ASKEXTENSION      = f'{_PATH}/data/askextension/2020-08-20/'
-    PATH_DATA_UCIPM             = f'{_PATH}/data/uc-ipm/updated/'
-    
-    # Askexntension data
-    ASKEXTENSION_QUESTION_URL   = 'https://ask2.extension.org/kb/faq.php?id='
-    ASKEXTENSION_FILE_NAMES     = [f'{PATH_DATA_ASKEXTENSION}{f}'   for f in os.listdir(PATH_DATA_ASKEXTENSION  )]
-
-    # UC IPM data
-    UCIPM_FILE_NAMES            = [f'{PATH_DATA_UCIPM}{f}'          for f in os.listdir(PATH_DATA_UCIPM         )]
-    # -------------------------------------------------------------
-
     # index mappings
     ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
 
