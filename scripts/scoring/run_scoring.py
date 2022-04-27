@@ -56,6 +56,10 @@ def _get_results(questions: List) -> List:
         DATA['message'] = q
         r = requests.post(RASA_URL, json = DATA)
 
+        if r.status_code != 200:
+            logger.info(f'Service at {RASA_URL} is unavailable, exit.')
+            exit()
+
         r = json.loads(r.text)
 
         assert isinstance(r, list)
@@ -82,6 +86,11 @@ def _get_results(questions: List) -> List:
 
         DATA['message'] = '/intent_affirm'
         r = requests.post(RASA_URL, json = DATA)
+
+        if r.status_code != 200:
+            logger.info(f'Something went wrong, exit')
+            exit()
+
         r = json.loads(r.text)
 
         assert len(r) == 1
