@@ -1,14 +1,13 @@
 
 
 # Variable to indicate the stage
-export STAGE=dev
+export STAGE=prod
 export DEPLOYMENT_VERSION=04.04.22
 
 # Variables for Rasa configuration
-export DEBUG=true
 export ES_SEARCH_SIZE=100
 export ES_CUT_OFF=0.4
-export ES_TOP_N=5
+export ES_TOP_N=10
 export ES_ASK_WEIGHT=0.6
 
 # Action server URL for Rasa chatbot within container
@@ -28,7 +27,3 @@ export ES_IMITATE=false
 export ELASTIC_USERNAME=elastic
 export ELASTIC_PASSWORD=changeme
 export ES_HOST=http://localhost:9200/
-
-# Elasticseach indexes
-export ES_ASKEXTENSION_INDEX=askextension
-export ES_COMBINED_INDEX=combined

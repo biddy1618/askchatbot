@@ -13,11 +13,8 @@ __pycache__/
 .vscode/
 
 # ES data and scraped data
-actions/es/data/**/*.json
+actions/es/data/*
 !actions/es/data/mappings/*
-
-# Some test data
-actions/es/scripts/test/*
 
 # Temporary
 data/nlu_es_examples_ae.yml

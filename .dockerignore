@@ -3,6 +3,7 @@
 .keras/
 .rasa/
 models/
+results/*
 
 # Python cache 
 __pycache__
@@ -26,11 +27,8 @@ requirements.txt
 web-client/
 
 # ES data and scraped data
-actions/es/data/**/*.json
+actions/es/data/*
 !actions/es/data/mappings/*
-
-# ES scripts for playground
-actions/es/scripts/test/*
 
 # temporary
 data/nlu_es_examples_ae.yml
