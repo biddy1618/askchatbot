@@ -31,6 +31,7 @@ def _read_data() -> Tuple[List, List]:
 
     return (questions, answers)
 
+
 def _get_results(questions: List) -> List:
     '''Query the list of questions against the chatbot in development environment.
 
@@ -50,61 +51,77 @@ def _get_results(questions: List) -> List:
     results = []
 
     logger.info(f'Querying {len(questions)} questions against chatbot...')
-
     for i, q in enumerate(questions):
 
         DATA['message'] = q
-        r = requests.post(RASA_URL, json = DATA)
+        try:
+            response = requests.post(RASA_URL, json = DATA)
+            if response.status_code != 200:
+                logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
+                exit()
 
-        if r.status_code != 200:
-            logger.info(f'Service at {RASA_URL} is unavailable, exit.')
+        except Exception as e:
+            logger.error(f'Error: Exception at posting question - "{q}", exit. {type(e).__name__}: "{e}".')
             exit()
 
-        r = json.loads(r.text)
-
-        assert isinstance(r, list)
-        assert len(r) >= 3
         
-        if STAGE == 'dev':
-            r = r[2]
-        else:
-            r = r[1]
+        try:
+            r = json.loads(response.text)
+            success = False
+            for link in r:
+                if 'custom' in link:
+                    success = True
+                    r = link['custom']
+                    break
+        except Exception as e:
+            logger.error(f'Error: Failed on parsing response on question - "{q}", exit. {type(e).__name__}: "{e}".')
+            exit()
 
-        assert 'custom' in r
-        r = r['custom']
-
-        assert 'data' in r
-        r = r['data']
-
+        
         result = []
-        for e in r:
-            title   = re.findall("<em>(.*?)</em>"           , e['title'])[0]
-            link    = re.findall("href=[\"\'](.*?)[\"\']"   , e['title'])[0]
-            result.append((title, link))
-        
+        if success:
+           
+            try:
+                r = r['data']
+                if len(r) == 0:
+                    raise Exception
+            except Exception as e:
+                logger.error(f'Error: Failed on parsing response on question - "{m}", exit. . {type(e).__name__}: "{e}".')
+
+            for e in r:
+                title   = re.findall("<em>(.*?)</em>"           , e['title'])[0]
+                link    = re.findall("href=[\"\'](.*?)[\"\']"   , e['title'])[0]
+                result.append((title, link))
+            
+
+            DATA['message'] = '/intent_affirm'
+            try:
+                response = requests.post(RASA_URL, json = DATA)
+                if response.status_code != 200:
+                    logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
+                    exit()
+            except Exception as e:
+                logger.error(f'Error: Exception at posting affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
+                exit()
+            
+            try:
+                r = json.loads(response.text)
+                r = r[0]
+                r = r['text']
+                if 'Anything else I can help with?' != r:
+                    raise Exception
+            except Exception as e:
+                logger.error(f'Error: Failed on parsing response of affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
+                exit()
+        else:
+            logger.info(f'No results for question - "{q}"')
+            result.append(('', ''))
+            
         results.append(result)
-
-        DATA['message'] = '/intent_affirm'
-        r = requests.post(RASA_URL, json = DATA)
-
-        if r.status_code != 200:
-            logger.info(f'Something went wrong, exit')
-            exit()
-
-        r = json.loads(r.text)
-
-        assert len(r) == 1
-        r = r[0]
-
-        assert 'text' in r
-        r = r['text']
-
-        assert 'Anything else I can help with?' == r
         if (i+1)%5 == 0:
             logger.info(f'Finished {i+1} questions...')
-
+    
     logger.info(f'Finished querying all questions for scoring')
-
     return results
 
 def _get_scores(

@@ -29,6 +29,3 @@ web-client/
 # ES data and scraped data
 actions/es/data/*
 !actions/es/data/mappings/*
-
-# temporary
-data/nlu_es_examples_ae.yml

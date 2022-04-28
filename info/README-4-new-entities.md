@@ -89,3 +89,10 @@ Order:
 * Contact Jasper and Ewald on the container's access to dev's chatbot API
 * True negatives in the test data - compose some samples
 * Iterative improvements - to be able to show the improvements in document
+
+* Compose the skeleton for the front-end
+* Cut-off
+
+* Focus on improvement of the metrics
+* Formulate the particular problems with misses on ranking
+* Include links vector comparison

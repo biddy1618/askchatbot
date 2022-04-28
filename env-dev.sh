@@ -1,7 +1,7 @@
 
 
 # Variable to indicate the stage
-export STAGE=prod
+export STAGE=dev
 export DEPLOYMENT_VERSION=04.04.22
 
 # Variables for Rasa configuration
