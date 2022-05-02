@@ -96,3 +96,15 @@ Order:
 * Focus on improvement of the metrics
 * Formulate the particular problems with misses on ranking
 * Include links vector comparison
+
+
+# Some test questions that are failing
+* My peonies are not growing well
+* My peony is not growing well
+* The questions that are related to pests
+* Another top level filter - is this pest-related
+* Entity extraction - rust roses - What does rust on roses look like?
+* Try changing the role composition order - basically fine-tuning
+    * find the best order, and see case-by-case where it's failing (look for patterns)
+* Add debugging message related to entity order
+* Add
