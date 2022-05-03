@@ -81,7 +81,6 @@ def _get_results(questions: List) -> List:
         
         result = []
         if success:
-           
             try:
                 r = r['data']
                 if len(r) == 0:
