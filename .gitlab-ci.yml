@@ -1,5 +1,6 @@
 stages:
     - dockerize
+    - deploy
 
 buildDockerRasa:
     stage: dockerize
@@ -49,5 +50,26 @@ buildDockerScoring:
     script:
         - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
           > /kaniko/.docker/config.json
-        - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/scripts/scoring/Dockerfile
+        - /kaniko/executor --context $CI_PROJECT_DIR/scripts/scoring/ --dockerfile $CI_PROJECT_DIR/scripts/scoring/Dockerfile
           --cache --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/scoring:$CI_COMMIT_SHA"
+
+deployDev:
+  stage: deploy
+  image: git.eduworks.us:5050/infrastructure/build-images/git:2.30.1-2
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev-dauren"'
+  script:
+    - mkdir -p ~/.ssh
+    - chmod 600 "$DEPLOY_KEY_PRIVATE"
+    - eval "$(ssh-agent -s)"
+    - ssh-add "$DEPLOY_KEY_PRIVATE" > /dev/null
+    - mv "$GIT_KNOWN_HOSTS" ~/.ssh/known_hosts
+    - touch ~/.gitconfig
+    - git config --global user.name $GITLAB_USER_NAME
+    - git config --global user.email $GITLAB_USER_EMAIL
+    - git clone git@160.1.7.191:$APPLICATION_REPO_PATH
+    - cd "$REPO_NAME"
+    - envsubst < "workflows/ask-chatbot/scoring/dev.yml.template" > "workflows/ask-chatbot/scoring/dev.yml"
+    - git add .
+    - git commit -m "Update ask jobs docker image to $CI_COMMIT_SHA"
+    - git push origin prod
