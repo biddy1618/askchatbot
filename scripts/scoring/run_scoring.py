@@ -9,11 +9,12 @@ import re
 import os
 
 import pandas as pd
+import mlflow
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-PATH_DATA   = os.getenv('PATH_DATA' , './data/transformed/result.pkl'               )
+PATH_DATA   = os.getenv('PATH_DATA' , '/app/result.pkl'               )
 RASA_URL    = os.getenv('RASA_URL'  , 'http://localhost:5005/webhooks/rest/webhook' )
 STAGE       = os.getenv('STAGE'     , 'dev'                                         )
 
@@ -175,6 +176,18 @@ def print_metrics(scores: List) -> None:
     logger.info(f'Top 3 : {top3 :<3d} ({top3 /len(scores) * 100:<.2f}%)')
     logger.info(f'Top 5 : {top5 :<3d} ({top5 /len(scores) * 100:<.2f}%)')
     logger.info(f'Top 10: {top10:<3d} ({top10/len(scores) * 100:<.2f}%)')
+
+    # Set MLflow experiment name (MLFLOW_EXPERIMENT_NAME is set in the workflow or docker-compose)
+    mlflow.set_experiment(os.getenv('MLFLOW_EXPERIMENT_NAME'))
+    # Start an MLflow run
+    with mlflow.start_run() as run:
+        # Log evaluation results to MLflow
+        mlflow.log_metric("top1", top1/len(scores) * 100)
+        mlflow.log_metric("top3", top3/len(scores) * 100)
+        mlflow.log_metric("top5", top5/len(scores) * 100)
+        mlflow.log_metric("top10", top10/len(scores) * 100)
+        mlflow.log_param("test_set", os.getenv('TEST_SET')) # Whether it is the UCIPM or AskExtension test dataset
+        mlflow.log_param("description", os.getenv('DESCRIPTION')) # Short description of is being evaluated
 
 def main():
 

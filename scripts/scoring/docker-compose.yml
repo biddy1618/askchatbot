@@ -1,18 +1,17 @@
 version: '3.9'
 services:
-  chatbot-scoring:
-    image: python:3.9-slim-bullseye
-    container_name: chatbot-scoring
-    volumes:
-      - ./:/scoring/
-    working_dir: /scoring/
+  scoring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: git.eduworks.us:5050/ask-extension/askchatbot/dev:0.0.1
     environment:
-      PATH_DATA: ${PATH_DATA}
-      RASA_URL: ${RASA_URL}
-      STAGE: ${STAGE}
-    tty: true
-    command: >
-      bash -c "apt-get update 
-      && pip install --upgrade -r requirements.txt
-      && python run_scoring.py"
-#      && tail -f /dev/null"
+      PATH_DATA: /app/result.pkl
+      RASA_URL: https://dev.api.chat.ask.eduworks.com/webhooks/rest/webhook
+      STAGE: prod
+      TEST_SET: result.pkl
+      DESCRIPTION: "initial commit"
+      MLFLOW_EXPERIMENT_NAME: chatbot_scoring
+      MLFLOW_TRACKING_URI: https://ask.ml.eduworks.com
+      MLFLOW_TRACKING_USERNAME: 
+      MLFLOW_TRACKING_PASSWORD: 
