@@ -49,3 +49,11 @@ nlu:
     - Let's test carousel
     - Show me carousel
     - carousel test
+- intent: intent_test_results_collapsible
+  examples: |
+    - test results collapsible
+    - results collapsible
+    - I would like to test results collapsible
+    - Let's test results collapsible
+    - Show me results collapsible
+    - results collapsible test
