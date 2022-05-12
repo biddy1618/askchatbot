@@ -1,7 +1,7 @@
 version: "3.0"
 
 nlu:
-- intent: intent_out_of_score
+- intent: intent_out_of_scope
   examples: |
     - I want to order food
     - What is 2 + 2?

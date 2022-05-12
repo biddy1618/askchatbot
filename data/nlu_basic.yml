@@ -45,15 +45,6 @@ nlu:
     - don't like that
     - no way
     - not really
-    - 1
-- intent: intent_not_clear
-  examples: |
-    - don't know
-    - no idea
-    - I don't know
-    - I don't remember
-    - don't remember
-    - forgot
 - intent: intent_bot_challenge
   examples: |
     - are you a bot?
@@ -64,4 +55,3 @@ nlu:
     - How can you be helpful?
     - How can you help me?
     - What services do you provide?
-    - 

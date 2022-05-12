@@ -73,31 +73,31 @@ class ValidateESQueryForm(FormValidationAction):
     def name(self) -> Text:
         return 'validate_es_query_form'
 
-    async def required_slots(
-        self,
-        domain_slots: List[Text]            ,
-        dispatcher  : CollectingDispatcher  ,
-        tracker     : Tracker               ,
-        domain      : Dict[Text, Any]       ,
-        ) -> List[Text]:
-        '''A list of required slots that the form has to fill.'''
-
-        logger.info('validate_es_query_form - required slots - START')
-
-        updated_slots = domain_slots.copy()
-        logger.info(f'validate_es_query_form - required_slots   - {updated_slots                }')
-        logger.info(f'validate_es_query_form - slots recognized - {tracker.slots_to_validate()  }')
-
-        if tracker.get_slot("problem_description") is not None:
-            for slot in domain_slots:
-                if slot not in tracker.slots_to_validate(): 
-                    logger.info(f'validate_es_query_form - removing slot - {slot}')        
-                    updated_slots.remove(slot)
+    async def extract_problem_details(
+        self, 
+        dispatcher  : CollectingDispatcher  , 
+        tracker     : Tracker               , 
+        domain      : Dict
+    ) -> Dict[Text, Any]:
+        '''Custom extraction function for problem_details entity-slot mapping.'''
         
-        logger.info(f'validate_es_query_form - updated slots    - {updated_slots}')
-        logger.info(f'validate_es_query_form - required slots   - END')
+        logger.info(f'validate_es_query_form - extract_problem_details - START')
+        logger.info(f'validate_es_query_form - extract_problem_details - prev. intent - {tracker.get_intent_of_latest_message()}')
 
-        return updated_slots
+        slots = helper._get_entity_groups(tracker.latest_message['entities'])
+        
+        for g, roles in slots.items():
+            logger.info(f'validate_es_query_form - extract_problem_details - entity group   - {g}')
+            if 'pest'   in roles:
+                for e in roles['pest'   ]: logger.info(f'validate_es_query_form - extract_problem_details - pest related   - (entity: {e[1]}, value: {e[2]})')
+            if 'damage' in roles:
+                for e in roles['damage' ]: logger.info(f'validate_es_query_form - extract_problem_details - damage related - (entity: {e[1]}, value: {e[2]})')
+            if 'plant'  in roles:
+                for e in roles['plant'  ]: logger.info(f'validate_es_query_form - extract_problem_details - plant related  - (entity: {e[1]}, value: {e[2]})')
+
+        logger.info(f'validate_es_query_form - extract_problem_details - END')
+        
+        return {'problem_details': slots}
 
 
 class ActionSubmitESQueryForm(Action):
@@ -116,39 +116,36 @@ class ActionSubmitESQueryForm(Action):
 
         logger.info(f'action_submit_es_query_form - run - START')
 
-        query = tracker.get_slot('problem_description')
-        slots = {
-            'plant_name'    : tracker.get_slot('plant_name'   ),
-            'plant_type'    : tracker.get_slot('plant_type'   ),
-            'plant_part'    : tracker.get_slot('plant_part'   ),
-            'plant_damage'  : tracker.get_slot('plant_damage' ),
-            'plant_pest'    : tracker.get_slot('plant_pest'   ),
-            'pest_location' : tracker.get_slot('pest_location')
-        }
-
-        slots_extracted = {s: list(set(slots[s])) for s in slots if slots[s] is not None}
-        slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(v) for k, v in slots_extracted.items()])
-        slots_query     = ' '.join(sum(slots_extracted.values(), []))
-        slots_query     = None if slots_query == '' else slots_query
-        buttons         = [
-            helper.buttons['start_over'     ],
-            helper.buttons['request_expert' ]
-        ]
+        query = tracker.get_slot('problem_description'  )
+        slots = tracker.get_slot('problem_details'      )
+        
+        logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
+        for g, roles in slots.items():
+            logger.info(f'action_submit_es_query_form - optional slots - slot group - {g}')
+            for r, ents in roles.items():
+                for e in ents:
+                    logger.info(f'action_submit_es_query_form - optional slots - role: {r} - {e[1]}: {e[2]}')
 
         results     = False
         filter_ids  = []
         events      = []
-        es_data     = {'slots': slots_extracted, 'filter_ids': filter_ids}
+        es_data     = {'slots': slots, 'filter_ids': filter_ids}
+        buttons     = [
+            helper.buttons['start_over'     ],
+            helper.buttons['request_expert' ]
+        ]
 
-        logger.info(f'action_submit_es_query_form - required problem_description    slot value - {query}')
-        for k, v in slots_extracted.items():
-            logger.info(f'action_submit_es_query_form - optional {k:<16} slot value - {v}')
         
+        slots_utterance, slots_query = helper._process_slots(slots)
+        
+        if slots_query is not None:
+            for q in slots_query:
+                logger.info(f'action_submit_es_query_form - slot query - {q}')
 
+        
         if not config.es_imitate:            
             if config.debug:            
-                # dispatcher.utter_message(text = 'Extracted slots:</br>' + slots_utterance   )
-                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance   )
+                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
                 
                 res, filter_ids = await submit(query, slots = slots_query)
                 top_n = config.es_top_n
@@ -156,13 +153,10 @@ class ActionSubmitESQueryForm(Action):
                     top_n = len(res['data'])
                 
                 if top_n == 0:
-                    # dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.')
                     dispatcher.utter_message(text = helper.utterances['debug_no_results'])
                 else:
-                    # message = f'Top {top_n} results.'
                     message = helper.utterances['debug_results'].format(str(top_n))
                     if slots_query:
-                        # message = f'Results with slots improvement... Top {top_n} results.'
                         message = helper.utterances['debug_slot_results'].format(str(top_n))
                         dispatcher.utter_message(text = message , json_message = res)
                     results = True
@@ -175,7 +169,6 @@ class ActionSubmitESQueryForm(Action):
                     top_n = len(res['data'])
                 
                 if top_n == 0:
-                    # dispatcher.utter_message(text = 'Unfortunately, could not find any results that might help you... Try to reformulate your problem description, please.')
                     dispatcher.utter_message(text = helper.utterances['no_results'])
                 else:
                     dispatcher.utter_message(text = res['text'], json_message = res)
@@ -260,37 +253,31 @@ class ValidateESResultForm(FormValidationAction):
     def name(self) -> Text:
         return 'validate_es_result_form'
 
-    async def required_slots(
-        self,
-        domain_slots: List[Text]            ,
-        dispatcher  : CollectingDispatcher  ,
-        tracker     : Tracker               ,
-        domain      : Dict[Text, Any]       ,
-        ) -> List[Text]:
-        '''A list of required slots that the form has to fill.'''
-
-        logger.info('validate_es_result_form - required slots - START')
-
-        updated_slots = domain_slots.copy()
-        logger.info(f'validate_es_result_form - required_slots   - {updated_slots                }')
-        logger.info(f'validate_es_result_form - slots recognized - {tracker.slots_to_validate()  }')
-
-        problem_desc_add = tracker.get_slot('problem_description_add')
-        if problem_desc_add is not None and problem_desc_add in ['yes', 'expert']:
-            for slot in domain_slots:
-                if slot != 'problem_description_add': 
-                    logger.info(f'validate_es_result_form - removing slot - {slot}')        
-                    updated_slots.remove(slot)
-        elif problem_desc_add is not None:
-            for slot in domain_slots:
-                if slot not in tracker.slots_to_validate(): 
-                    logger.info(f'validate_es_result_form - removing slot - {slot}')        
-                    updated_slots.remove(slot)
+    async def extract_problem_details(
+        self, 
+        dispatcher  : CollectingDispatcher  , 
+        tracker     : Tracker               , 
+        domain      : Dict
+    ) -> Dict[Text, Any]:
+        '''Custom extraction function for problem_details entity-slot mapping.'''
         
-        logger.info(f'validate_es_result_form - updated slots    - {updated_slots}')
-        logger.info(f'validate_es_result_form - required slots   - END')
+        logger.info(f'validate_es_result_form - extract_problem_details - START')
+        logger.info(f'validate_es_result_form - extract_problem_details - prev. intent - {tracker.get_intent_of_latest_message()}')
 
-        return updated_slots
+        slots = helper._get_entity_groups(tracker.latest_message['entities'])
+        
+        for g, roles in slots.items():
+            logger.info(f'validate_es_result_form - extract_problem_details - entity group   - {g}')
+            if 'pest'   in roles:
+                for e in roles['pest'   ]: logger.info(f'validate_es_result_form - extract_problem_details - pest related   - (entity: {e[1]}, value: {e[2]})')
+            if 'damage' in roles:
+                for e in roles['damage' ]: logger.info(f'validate_es_result_form - extract_problem_details - damage related - (entity: {e[1]}, value: {e[2]})')
+            if 'plant'  in roles:
+                for e in roles['plant'  ]: logger.info(f'validate_es_result_form - extract_problem_details - plant related  - (entity: {e[1]}, value: {e[2]})')
+
+        logger.info(f'validate_es_result_form - extract_problem_details - END')
+        
+        return {'problem_details': slots}
     
     def validate_problem_description_add(
         self,
@@ -329,7 +316,14 @@ class ActionSubmitESResultForm(Action):
         logger.info(f'action_submit_es_result_form - run - START')
 
         query = tracker.get_slot('problem_description_add')
+        slots = tracker.get_slot('problem_details')
+        
         logger.info(f'action_submit_es_result_form - required problem_description_add slot value - {query}')
+        for g, roles in slots.items():
+            logger.info(f'action_submit_es_query_form - optional slots - slot group - {g}')
+            for r, ents in roles.items():
+                for e in ents:
+                    logger.info(f'action_submit_es_query_form - optional slots - role: {r} - {e[1]}: {e[2]}')
 
         if query == 'expert':
             dispatcher.utter_message(text = helper.utterances['connect_expert'], buttons = [helper.buttons['start_over']])
@@ -339,36 +333,17 @@ class ActionSubmitESResultForm(Action):
             return events
         
         elif query != 'yes':
-            es_data = tracker.get_slot('es_data')
             
-            slots = {
-                'plant_name'    : tracker.get_slot('plant_name'   ),
-                'plant_type'    : tracker.get_slot('plant_type'   ),
-                'plant_part'    : tracker.get_slot('plant_part'   ),
-                'plant_damage'  : tracker.get_slot('plant_damage' ),
-                'plant_pest'    : tracker.get_slot('plant_pest'   ),
-                'pest_location' : tracker.get_slot('pest_location' )
-            }
-            slots_extracted = {s: list(set(slots[s])) for s in slots if slots[s] is not None}
-            slots_utterance = '</br>'.join(['<strong>' + k + '</strong>' + ': ' + str(v) for k, v in slots_extracted.items()])
-            for k, v in slots_extracted.items():
-                if k in es_data['slots']:
-                    es_data['slots'][k].extend(v)
-                    es_data['slots'][k] = list(set(es_data['slots'][k]))
-                else:
-                    es_data['slots'][k] = v
-            slots_extracted = es_data['slots']
-            slots_query     = ' '.join(sum(slots_extracted.values(), []))
-            slots_query     = None if slots_query == '' else slots_query
-            
-            filter_ids  = es_data['filter_ids']            
-            events      = []
-            
-            for k, v in slots_extracted.items():
-                logger.info(f'action_submit_es_result_form - optional {k:<16} slot value - {v}')
+            es_data             = tracker.get_slot('es_data')
+            prev_slots          = es_data['slots']
+            filter_ids          = es_data['filter_ids']            
+            events              = []
+
+            _, prev_slots                   = helper._process_slots(es_data['slots'])
+            slots_utterance, slots_query    = helper._process_slots(slots, prev_slots = prev_slots)
             
             if config.debug:            
-                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance   )
+                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
                 
                 res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
                 top_n = config.es_top_n

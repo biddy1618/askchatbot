@@ -33,7 +33,7 @@ rules:
 
 - rule: Out of scope messages
   steps:
-  - intent: intent_out_of_score
+  - intent: intent_out_of_scope
   - action: action_out_of_scope
 
 # Main rules
@@ -125,4 +125,10 @@ rules:
   steps:
   - intent: intent_test_carousel
   - action: utter_test_carousel
+
+- rule: Test results
+  steps:
+    - intent: intent_test_results_collapsible
+    - action: utter_test_results_collapsible
+
 

@@ -2,7 +2,7 @@ version: "3.0"
 
 nlu:
 
-- lookup: plant_type
+- lookup: type
   examples: |
     - non-woody
     - vegetables
@@ -20,3 +20,4 @@ nlu:
     - melons
     - woody
     - bush
+    - plants

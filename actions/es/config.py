@@ -18,12 +18,11 @@ tfhub_cache_dir         = os.getenv('TFHUB_CACHE_DIR'       , '/var/tmp/tfhub_mo
 es_username             = os.getenv('ES_USERNAME'           , 'elastic'                                                 )
 es_password             = os.getenv('ES_PASSWORD'           , 'changeme'                                                )
 es_host                 = os.getenv('ES_HOST'               , 'http://localhost:9200/'                                  )
-es_combined_index       = os.getenv('ES_COMBINED_INDEX'     , 'combined'                                                )
 es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                   )
 es_imitate              = es_imitate == 'true'
 
-debug                   = os.getenv('DEBUG'         , 'false'   )
-debug                   = debug == 'true'
+es_combined_index       = 'combined'
+debug                   = stage == 'dev'
 
 es_search_size          = os.getenv('ES_SEARCH_SIZE', '100'     )
 try: es_search_size     = int(es_search_size)
@@ -47,11 +46,11 @@ except ValueError:
     es_ask_weight = 0.6
 
 
-if stage == 'dev':
+if debug:
 
     logger.info('----------------------------------------------')
-    logger.info('Environment variables for DEV environment'     )
-    logger.info(f'- debug           = {debug}'                  )
+    logger.info('Configuration variables for DEV environment'   )
+    logger.info(f'- stage           = {stage}'                  )
     logger.info(f'- es_search_size  = {es_search_size}'         )
     logger.info(f'- es_cut_off      = {es_cut_off}'             )
     logger.info(f'- es_top_n        = {es_top_n}'               )
@@ -62,7 +61,7 @@ if stage == 'dev':
     _PATH = Path(__file__).parent.as_posix()
 
     # index mappings
-    ES_COMBINED_MAPPING         = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
+    ES_COMBINED_MAPPING = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
 
 
 if not es_imitate:
@@ -75,8 +74,9 @@ if not es_imitate:
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch configuration:')
     logger.info(f'- host                    = {es_host          }')
-    logger.info(f'- username                = {es_username      }')
-    logger.info(f'- password                = {es_password      }')
+    if debug:
+        logger.info(f'- username                = {es_username  }')
+        logger.info(f'- password                = {es_password  }')
     logger.info(f'- tfhub_embedding_url     = {tf_embed_url     }')
     logger.info(f'- tfhub_cache_dir         = {tfhub_cache_dir  }')
     logger.info('----------------------------------------------')
@@ -84,7 +84,7 @@ if not es_imitate:
 
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch indexes:')
-    logger.info(f'- combined index          = {es_combined_index    }')
+    logger.info(f'- combined index          = {es_combined_index}')
     logger.info('----------------------------------------------')
 
 

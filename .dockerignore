@@ -3,14 +3,15 @@
 .keras/
 .rasa/
 models/
+results/*
 
-# python cache 
+# Python cache 
 __pycache__
 
 # VScode files
 .vscode/
 
-# miscallenous
+# Miscallenous
 info/
 .env
 .gitignore
@@ -22,14 +23,9 @@ rasa-actions.dockerfile
 requirements-auxiliary.txt
 requirements.txt
 
-# web-clients
+# Web-clients
 web-client/
 
 # ES data and scraped data
-es/data/**/*.json
-
-# ES scripts for playground
-es/scripts/
-
-# simple front-end
-web-client/
+actions/es/data/*
+!actions/es/data/mappings/*

@@ -2,7 +2,7 @@ version: "3.0"
 
 nlu:
 
-- lookup: plant_name
+- lookup: name
   examples: |
     - abelia
     - abutilon
@@ -109,7 +109,6 @@ nlu:
     - gooseberry
     - grapes
     - grevillea
-    - gum
     - hackberry
     - hawthorn
     - hazelnut

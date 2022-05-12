@@ -44,7 +44,7 @@ pipeline:
   - name: SpacyFeaturizer
     pooling: mean
   # Creates lexixal and syntactic features for a user message to support entity extraction.
-  # Moves with a sliding window over every token int hte user message and creaets features
+  # Moves with a sliding window over every token int the user message and creaets features
   # according to the configuration.
   ## requires: tokens
   ## outputs: sparse_features for user messages 
@@ -65,7 +65,7 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   # Dual Intent Entity Transformer used for intent classification adn entity recognition.
-  ## requires: desnse_features and/or sparse_features for user messages and optionally intent.
+  ## requires: dense_features and/or sparse_features for user messages and optionally intent.
   ## outputs: entities, intent, and intent_ranking
   - name: DIETClassifier
     epochs: 100
