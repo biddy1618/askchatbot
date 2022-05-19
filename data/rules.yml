@@ -126,3 +126,9 @@ rules:
   - intent: intent_test_carousel
   - action: utter_test_carousel
 
+- rule: Test results
+  steps:
+    - intent: intent_test_results_collapsible
+    - action: utter_test_results_collapsible
+
+
