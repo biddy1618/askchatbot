@@ -6,10 +6,11 @@ Instructions for linux-based machines.
 
 Launch the services up using `docker compose`:
 ```bash
-source env-dev.sh       # to 
 docker compose build    # if you already built images, omit
 docker compose up
 ```
+
+FYI, the environment variables are set up in `.env` file.
 
 If you have already built the images, run the following to resume:
 ```bash
@@ -20,6 +21,10 @@ And to remove stopped containers and they are no longer needed, run following:
 ```bash
 docker compose down
 ```
+
+__NOTE__: The endpoint for Elasticsearch service is set up by default at `https://dev.es.chat.ask.eduworks.com/` (as indicated at `.env` file). 
+If you would like to run your own instance if ES, please, refer to file at "_./actions/es/deployment/README-1-es-deployment.md_" in this project.
+
 
 ## Testing
 
