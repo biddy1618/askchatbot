@@ -9,7 +9,6 @@ services:
       DATA_VALID: valid_questions.pkl
       DATA_NA: na_questions.pkl
       RASA_URL: https://dev.api.chat.ask.eduworks.com/webhooks/rest/webhook
-      DESCRIPTION: "added recall as a metric"
       MLFLOW_EXPERIMENT_NAME: chatbot_scoring
       MLFLOW_TRACKING_URI: https://ask.ml.eduworks.com
       MLFLOW_TRACKING_USERNAME: 

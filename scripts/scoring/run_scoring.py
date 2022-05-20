@@ -13,7 +13,7 @@ import mlflow
 
 import argparse
 
-parser = argparse.ArgumentParser(description = 'Scrit for getting stats for chatbot accuracy of valid queries and recall of NA queries.')
+parser = argparse.ArgumentParser(description = 'Script for getting stats for chatbot accuracy of valid queries and recall of NA queries.')
 parser.add_argument('--save', action = 'store_true', help = 'If using in MLFlow environment to save stats.')
 
 args = parser.parse_args()
@@ -21,9 +21,10 @@ args = parser.parse_args()
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-DATA_VALID  = os.getenv('DATA_VALID', 'scripts/scoring/data/transformed/valid_questions.pkl')
-DATA_NA     = os.getenv('DATA_NA'   , 'scripts/scoring/data/transformed/na_questions.pkl'   )
-RASA_URL    = os.getenv('RASA_URL'  , 'http://localhost:5005/webhooks/rest/webhook'         )
+DATA_VALID  = os.getenv('DATA_VALID'    , 'scripts/scoring/data/transformed/valid_questions.pkl')
+DATA_NA     = os.getenv('DATA_NA'       , 'scripts/scoring/data/transformed/na_questions.pkl'   )
+RASA_URL    = os.getenv('RASA_URL'      , 'http://localhost:5005/webhooks/rest/webhook'         )
+DESCRIPTION = os.getenv('DESCRIPTION'   , 'Experiment running locally'                          )
 
 def _read_data(
     path: str, 
@@ -252,6 +253,9 @@ def main(save = False) -> None:
 
     logger.info(f'Reading data for NA queries and getting stats.')
     total_na    , no_results    = _calc_stats_na_queries    ()
+
+    logger.info(f'---------------------------------------------------------------')
+    logger.info(f'DESCRIPTION: {DESCRIPTION}')
     
     logger.info(f'---------------------------------------------------------------')
     logger.info(f'Statistics for valid questions:')
@@ -275,15 +279,15 @@ def main(save = False) -> None:
         with mlflow.start_run() as run:
             # Log evaluation results to MLflow
             mlflow.log_metric("valid_total", total_valid)
-            mlflow.log_metric("valid_top01" , topn["1" ]/total_valid * 100)
-            mlflow.log_metric("valid_top03" , topn["3" ]/total_valid * 100)
-            mlflow.log_metric("valid_top05" , topn["5" ]/total_valid * 100)
+            mlflow.log_metric("valid_top01", topn["1" ]/total_valid * 100)
+            mlflow.log_metric("valid_top03", topn["3" ]/total_valid * 100)
+            mlflow.log_metric("valid_top05", topn["5" ]/total_valid * 100)
             mlflow.log_metric("valid_top10", topn["10"]/total_valid * 100)
             
-            mlflow.log_metric("na_total", total_na)
+            mlflow.log_metric("na_total" , total_na)
             mlflow.log_metric("na_recall", no_results/total_na * 100)
             
-            mlflow.log_param("description", os.getenv('DESCRIPTION')) # Short description of is being evaluated
+            mlflow.log_param("description", DESCRIPTION) # Short description of is being evaluated
 
 
 if __name__ == "__main__":

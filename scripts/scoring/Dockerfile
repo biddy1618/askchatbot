@@ -6,4 +6,7 @@ WORKDIR /app
 COPY "data/transformed/na_questions.pkl" /app/
 COPY "data/transformed/valid_questions.pkl" /app/
 COPY "run_scoring.py" /app/
+# for testing locally
+# CMD ["python", "run_scoring.py"]
+# for mlflow
 CMD ["python", "run_scoring.py", "--save"]
