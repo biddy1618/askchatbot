@@ -6,4 +6,4 @@ WORKDIR /app
 COPY "data/transformed/na_questions.pkl" /app/
 COPY "data/transformed/valid_questions.pkl" /app/
 COPY "run_scoring.py" /app/
-CMD ["python", "run_scoring.py"]
+CMD ["python", "run_scoring.py", "--save"]
