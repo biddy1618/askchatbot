@@ -274,10 +274,10 @@ def main(save = False) -> None:
         # Start an MLflow run
         with mlflow.start_run() as run:
             # Log evaluation results to MLflow
-            mlflow.log_metric("valid_total" , total_valid)
-            mlflow.log_metric("valid_top1" , topn["1" ]/total_valid * 100)
-            mlflow.log_metric("valid_top3" , topn["3" ]/total_valid * 100)
-            mlflow.log_metric("valid_top5" , topn["5" ]/total_valid * 100)
+            mlflow.log_metric("valid_total", total_valid)
+            mlflow.log_metric("valid_top01" , topn["1" ]/total_valid * 100)
+            mlflow.log_metric("valid_top03" , topn["3" ]/total_valid * 100)
+            mlflow.log_metric("valid_top05" , topn["5" ]/total_valid * 100)
             mlflow.log_metric("valid_top10", topn["10"]/total_valid * 100)
             
             mlflow.log_metric("na_total", total_na)
