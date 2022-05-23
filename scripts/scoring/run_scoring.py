@@ -248,15 +248,16 @@ def _calc_stats_na_queries() -> Tuple[int, int]:
 def main(save = False) -> None:
     '''Prints out the metrics.'''
 
+    logger.info(f'---------------------------------------------------------------')
+    logger.info(f'DESCRIPTION       : {DESCRIPTION}')
+    logger.info(f'RASA CHATBOT URL  : {RASA_URL}'   )
+    
     logger.info(f'Reading data for valid queries and getting stats.')
     total_valid , topn          = _calc_stats_valid_queries ()
 
     logger.info(f'Reading data for NA queries and getting stats.')
     total_na    , no_results    = _calc_stats_na_queries    ()
 
-    logger.info(f'---------------------------------------------------------------')
-    logger.info(f'DESCRIPTION: {DESCRIPTION}')
-    
     logger.info(f'---------------------------------------------------------------')
     logger.info(f'Statistics for valid questions:')
     logger.info(f'Out of {total_valid} valid queries, following correct:'  )
