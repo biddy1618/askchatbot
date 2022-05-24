@@ -29,11 +29,11 @@ try: es_search_size     = int(es_search_size)
 except ValueError:
     logger.warning('ES_SEARCH_SIZE variable should be integer, using default value - 100'   )
     es_search_size = 100
-es_cut_off              = os.getenv('ES_CUT_OFF'    , '0.4'     )
+es_cut_off              = os.getenv('ES_CUT_OFF'    , '0.525'     )
 try: es_cut_off         = float(es_cut_off)
 except ValueError:
-    logger.warning('ES_CUT_OFF variable should be float, using default value - 0.4'         )
-    es_cut_off = 0.4
+    logger.warning('ES_CUT_OFF variable should be float, using default value - 0.525'         )
+    es_cut_off = 0.525
 es_top_n                = os.getenv('ES_TOP_N'      , '3'       )
 try: es_top_n           = int(es_top_n)
 except ValueError:
@@ -44,6 +44,11 @@ try: es_ask_weight      = float(es_ask_weight)
 except ValueError:
     logger.warning('ES_ASK_WEIGHT variable should be float, using default value - 0.6'      )
     es_ask_weight = 0.6
+es_slots_weight         = os.getenv('ES_SLOTS_WEIGHT' , '0.3'   )
+try: es_slots_weight      = float(es_slots_weight)
+except ValueError:
+    logger.warning('ES_SLOTS_WEIGHT variable should be float, using default value - 0.3'    )
+    es_slots_weight = 0.3
 
 
 if debug:
@@ -55,6 +60,7 @@ if debug:
     logger.info(f'- es_cut_off      = {es_cut_off}'             )
     logger.info(f'- es_top_n        = {es_top_n}'               )
     logger.info(f'- es_ask_weight   = {es_ask_weight}'          )
+    logger.info(f'- es_slots_weight = {es_slots_weight}'        )
     logger.info('----------------------------------------------')
     
     

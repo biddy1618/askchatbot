@@ -97,8 +97,15 @@ async def _handle_es_query(
     
     query_vector = config.embed([query]).numpy()[0]
     if slots:
+        # slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
+        # query_vector = np.average([query_vector, slots_vector]                  , axis = 0)
         slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
-        query_vector = np.average([query_vector, slots_vector]                  , axis = 0)
+        query_vector = np.average(
+            a       = [query_vector, slots_vector], 
+            weights = [1 - config.es_slots_weight, config.es_slots_weight],
+            axis    = 0
+        )
+    
     
     hits = await _cos_sim_query(
         index           = config.es_combined_index  ,
