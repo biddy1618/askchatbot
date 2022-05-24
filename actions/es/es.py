@@ -108,11 +108,15 @@ async def _handle_es_query(
 
     return hits
 
-def _handle_es_result(hits: list, filter: bool = True) -> Tuple[list, list]:
+def _handle_es_result(
+    hits    : list,
+    filter  : bool = True
+    ) -> Tuple[list, list]:
     '''Process the ES query results (like filtering, reweighting, etc).
 
     Args:
-        hits (list): Results from ES query.
+        hits    (list): Results from ES query.
+        filter  (bool): If cut off filter should be applied. Defaults to True.
 
     Returns:
         Tuple[list, list]: filtered and processed ES query results
@@ -121,6 +125,8 @@ def _handle_es_result(hits: list, filter: bool = True) -> Tuple[list, list]:
     for h in hits: 
         if h['source'] == 'askExtension': 
             h['_score'] *= config.es_ask_weight
+    
+    hits = [h for h in hits if len(h['url']) > 0]
     
     if filter:
         hits = [h for h in hits if h['_score'] > config.es_cut_off]
