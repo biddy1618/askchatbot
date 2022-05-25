@@ -137,7 +137,7 @@ def _get_config_message(config):
         f'<strong>es_search_size <i>{config.es_search_size}</i></strong></br>'
         f'<strong>es_cut_off <i>{config.es_cut_off}</i></strong></br>'
         f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br>'
-        f'<strong>es_ask_weight <i>{config.es_ask_weight}</i></strong></br></br>'
+        f'<strong>es_ask_weight <i>{config.es_ask_weight}</i></strong></br>'
         f'<strong>es_slots_weight <i>{config.es_slots_weight}</i></strong></br></br>'
         'To change the configuration parameters, use following schema:</br>'
         'parameter <i>param_name value</i></br>'

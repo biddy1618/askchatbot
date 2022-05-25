@@ -53,6 +53,7 @@
             * do the averages weighted - done (introduced new parameter ES_SLOTS_WEIGHT with value 0.3)
             * aggregate by entity roles and average the embeddings
         * Send the error queries after query change tests
+        * query - `Why is my lawn getting large brown spots?`
     * Build the script to output the missing queries with all information on missing questions, automate the script (done, automate the script)
     * Take the script, refactor, remove the NA, include the NAs, compose second statitics for NAs (done)
     * Compose graph for cutoff parameter - for NA queries and valid queries
