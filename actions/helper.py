@@ -9,10 +9,11 @@ from rasa_sdk.events import (
 
 # Dictionary for parameters debug
 params = {
-    'es_search_size': int,
-    'es_top_n'      : int,
-    'es_cut_off'    : float,
-    'es_ask_weight' : float
+    'es_search_size'    : int,
+    'es_top_n'          : int,
+    'es_cut_off'        : float,
+    'es_ask_weight'     : float,
+    'es_slots_weight'   : float
 }
 
 # Utterances
@@ -59,11 +60,11 @@ buttons = {
         'payload'   : '/intent_affirm'
     },
     'deny_details'  : {
-        'title'     : "No. I’d like to provide additional details.",
+        'title'     : "No. I'd like to provide additional details.",
         'payload'   : '/intent_deny'
     },
     'deny_question' : {
-        'title'     : "No. I’d like to ask different question.", 
+        'title'     : "No. I'd like to ask different question.", 
         'payload'   : '/intent_affirm'
     },
     'deny_expert'   : {
@@ -72,8 +73,8 @@ buttons = {
     }
 }
 
-# Entity names and order
-entity_names = ['action', 'descr', 'location', 'name', 'part', 'type']
+# Parameters for fine-tuning
+## Entity names and order
 entity_order = {
     'descr'     : 1,
     'type'      : 2,
@@ -82,6 +83,9 @@ entity_order = {
     'action'    : 5,
     'location'  : 6
 }
+
+## Role order
+role_order = ['pest', 'plant', 'damage', 'remedy']
 
 
 def _reset_slots(tracker: Tracker) -> List[Any]:
@@ -133,7 +137,8 @@ def _get_config_message(config):
         f'<strong>es_search_size <i>{config.es_search_size}</i></strong></br>'
         f'<strong>es_cut_off <i>{config.es_cut_off}</i></strong></br>'
         f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br>'
-        f'<strong>es_ask_weight <i>{config.es_ask_weight}</i></strong></br></br>'
+        f'<strong>es_ask_weight <i>{config.es_ask_weight}</i></strong></br>'
+        f'<strong>es_slots_weight <i>{config.es_slots_weight}</i></strong></br></br>'
         'To change the configuration parameters, use following schema:</br>'
         'parameter <i>param_name value</i></br>'
         '(i.e. <strong>parameter es_cut_off <i>0.5</i></strong>)'
@@ -147,7 +152,7 @@ def _get_entity_groups(entities):
     ent_list = []
 
     for entity in entities:
-        if entity["entity"] in entity_names and 'role' in entity and 'group' in entity:
+        if entity["entity"] in entity_order.keys() and 'role' in entity and 'group' in entity:
             en_dict = {}
             en_dict['entity'] = entity['entity' ]
             en_dict['value' ] = entity['value'  ]
@@ -167,7 +172,7 @@ def _get_entity_groups(entities):
             if r in slots[g]: slots[g][r].append(e_tuple) 
             else            : slots[g][r] = [e_tuple]
         else: slots[g] = {e['role']: [e_tuple]}
-    
+
     for g in slots.values():
         for r in g:
             g[r] = sorted(g[r], key = lambda x: x[0])
@@ -190,7 +195,7 @@ def _process_slots(slots, prev_slots = None):
         slots_query = prev_slots
     for g, roles in slots.items():
         query = []
-        for r in ['pest', 'damage', 'remedy', 'plant']:
+        for r in role_order:
             if r in roles:
                 query.extend(roles[r])
         slots_query.append(' '.join([e[2] for e in query]))

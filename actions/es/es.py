@@ -97,8 +97,15 @@ async def _handle_es_query(
     
     query_vector = config.embed([query]).numpy()[0]
     if slots:
+        # slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
+        # query_vector = np.average([query_vector, slots_vector]                  , axis = 0)
         slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
-        query_vector = np.average([query_vector, slots_vector]                  , axis = 0)
+        query_vector = np.average(
+            a       = [query_vector, slots_vector], 
+            weights = [1 - config.es_slots_weight, config.es_slots_weight],
+            axis    = 0
+        )
+    
     
     hits = await _cos_sim_query(
         index           = config.es_combined_index  ,
@@ -108,11 +115,15 @@ async def _handle_es_query(
 
     return hits
 
-def _handle_es_result(hits: list, filter: bool = True) -> Tuple[list, list]:
+def _handle_es_result(
+    hits    : list,
+    filter  : bool = True
+    ) -> Tuple[list, list]:
     '''Process the ES query results (like filtering, reweighting, etc).
 
     Args:
-        hits (list): Results from ES query.
+        hits    (list): Results from ES query.
+        filter  (bool): If cut off filter should be applied. Defaults to True.
 
     Returns:
         Tuple[list, list]: filtered and processed ES query results
@@ -121,6 +132,8 @@ def _handle_es_result(hits: list, filter: bool = True) -> Tuple[list, list]:
     for h in hits: 
         if h['source'] == 'askExtension': 
             h['_score'] *= config.es_ask_weight
+    
+    hits = [h for h in hits if len(h['url']) > 0]
     
     if filter:
         hits = [h for h in hits if h['_score'] > config.es_cut_off]

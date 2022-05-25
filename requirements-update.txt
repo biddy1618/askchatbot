@@ -1,15 +1,12 @@
-pip==22.0.3
-
-# socket-io require these updates
-sanic==21.6.2
-Sanic-Cors==1.0.0
-sanic-routing==0.7.2
-
-# for SpaCy models
-spacy_transformers==1.1.5
-spacy_alignments==0.8.4
+# for SpaCy models - en_core_web_trf
+filelock==3.7.0
+huggingface-hub==0.6.0
+sacremoses==0.0.53 
+spacy-alignments==0.8.5
+spacy-transformers==1.1.5
+tokenizers==0.12.1
 torch==1.11.0
-tokenizers==0.11.6
-filelock==3.6.0
-sacremoses==0.0.49
-huggingface_hub==0.4.0
+transformers==4.17.0
+
+# pandas
+pandas==1.4.2

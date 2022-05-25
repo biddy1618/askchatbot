@@ -4,7 +4,7 @@
 # Dockerfile for building Rasa chatbot
 # More about the image - https://hub.docker.com/r/rasa/rasa/dockerfile
 
-ARG VERSION=3.0.4-spacy-en
+ARG VERSION=3.1.0-spacy-en
 FROM rasa/rasa:$VERSION AS rasa
 
 COPY . .
@@ -24,3 +24,6 @@ CMD ["run", "--cors", "*"]
 # EXPOSE 5005
 # ENTRYPOINT ["rasa"]
 # CMD ["--help"]
+
+# for development purposes, to attach to container, run the following:
+# docker run -it --rm --entrypoint /bin/bash rasa/rasa:3.1.0-spacy-en

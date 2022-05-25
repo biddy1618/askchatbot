@@ -6,9 +6,10 @@ export DEPLOYMENT_VERSION=04.04.22
 
 # Variables for Rasa configuration
 export ES_SEARCH_SIZE=100
-export ES_CUT_OFF=0.4
+export ES_CUT_OFF=0.525
 export ES_TOP_N=10
 export ES_ASK_WEIGHT=0.6
+export ES_SLOTS_WEIGHT=0.3
 
 # Action server URL for Rasa chatbot within container
 export ACTION_ENDPOINT=http://localhost:5055/webhook

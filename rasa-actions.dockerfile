@@ -6,14 +6,13 @@
 
 # FROM <image> (ARG <tag>)
 # base image
-ARG VERSION=3.0.2
+ARG VERSION=3.1.1
 FROM rasa/rasa-sdk:$VERSION AS rasa-sdk
 
 USER root
 COPY ./actions /app/actions
 
-RUN pip install --upgrade -r actions/requirements-actions.txt
-RUN pip install --upgrade -r actions/es/requirements-es.txt
+RUN pip install --upgrade -r actions/requirements-update.txt
 
 USER 1001
 
@@ -25,3 +24,6 @@ USER 1001
 # EXPOSE 5055
 # ENTRYPOINT ["./entrypoint.sh"]
 # CMD ["start", "--actions", "actions"]
+
+# for development purposes, to attach to container, run the following:
+# docker run -it --rm --entrypoint /bin/bash rasa/rasa-sdk:3.1.1

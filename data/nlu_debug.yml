@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.1"
 
 nlu:
 - intent: intent_set_parameter
@@ -11,5 +11,7 @@ nlu:
     - parameter es_top_n 2
     - parameter es_ask_weight 0.2
     - parameter es_ask_weight 0.9
+    - parameter es_slots_weight 0.2
+    - parameter es_slots_weight 0.9
     - parameter
     - set parameter
