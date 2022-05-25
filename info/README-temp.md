@@ -50,7 +50,7 @@
         * ['plant', 'damage', 'pest'] - done
         * The summary is that it doesn't make much difference in scores, I should concentrate more on the cut off and vector composition of the slots.
         * scores without the main query, only using the extracted additional queries out of the slots - done and failed
-            * do the averages weighted - done (introduced new parameter ES_SLOTS_WEIGHT)
+            * do the averages weighted - done (introduced new parameter ES_SLOTS_WEIGHT with value 0.3)
             * aggregate by entity roles and average the embeddings
         * Send the error queries after query change tests
     * Build the script to output the missing queries with all information on missing questions, automate the script (done, automate the script)
