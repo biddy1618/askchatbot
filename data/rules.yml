@@ -68,7 +68,7 @@ rules:
 # ES query form rule
 - rule: Activate form for querying ES
   steps:
-  - or: 
+  - or:
     - intent: intent_help_question
     - intent: intent_problem_description
   - action: es_query_form
@@ -130,5 +130,10 @@ rules:
   steps:
     - intent: intent_test_results_collapsible
     - action: utter_test_results_collapsible
+
+- rule: Test imgupload
+  steps:
+    - intent: intent_test_imgupload
+    - action: utter_test_imgupload
 
 

@@ -26,6 +26,7 @@ intents:
 - intent_test_collapsible
 - intent_test_carousel
 - intent_test_results_collapsible
+- intent_test_imgupload
 entities:
 - action:
     roles:
@@ -237,9 +238,9 @@ responses:
         payload: reply3
   utter_test_collapsible:
   - text: "You can check the following options"
-    custom: 
+    custom:
       payload: "collapsible"
-      data: 
+      data:
       - title: Title1
         description: Sick leave is time off from work that workers can use to stay home
           to address their health and safety needs without losing pay.
@@ -274,31 +275,31 @@ responses:
           ratings: '4.0'
           title: pqr
   utter_test_results_collapsible:
-    - custom: 
+    - custom:
         payload: "resultscollapsible"
-        data: 
+        data:
         - title: Thrips
           score: 0.99
-          source: http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt
+          source: //ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt
           details: Thrips, order Thysanoptera, are tiny, slender insects with fringed wings....
           development: Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
           management: Thrips are difficult to control. If management is necessary, use an integ...
           cutoff: false
-          image: [ 
+          image: [
             {
               "caption": "Stippling as result of greenhouse thrips feeding.",
-              "link": "http://ipm.ucanr.edu/PMG/H/I-TS-HHAE-CD.013.html?src=exchbt",
-              "src": "http://ipm.ucanr.edu/PMG/IMAGES/H/I-TS-HHAE-CD.013h.jpg?src=exchbt"
+              "link": "//ipm.ucanr.edu/PMG/H/I-TS-HHAE-CD.013.html?src=exchbt",
+              "src": "//ipm.ucanr.edu/PMG/IMAGES/H/I-TS-HHAE-CD.013h.jpg?src=exchbt"
             },
             {
               "caption": "Black feces and white feeding scars from thrips.",
-              "link": "http://ipm.ucanr.edu/PMG/F/I-TS-FOCC-CD.008.html?src=exchbt",
-              "src": "http://ipm.ucanr.edu/PMG/IMAGES/F/I-TS-FOCC-CD.008h.jpg?src=exchbt"
+              "link": "//ipm.ucanr.edu/PMG/F/I-TS-FOCC-CD.008.html?src=exchbt",
+              "src": "//ipm.ucanr.edu/PMG/IMAGES/F/I-TS-FOCC-CD.008h.jpg?src=exchbt"
             }
           ]
         - title: Stink bugs
           score: 0.99
-          source: http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt
+          source: //ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt
           details: These sucking insects (family Pentatomidae) are shield shaped. Their common ...
           development: Adult stink bugs are distinguished from other insects by the large ...
           management: Handpick the bugs and their eggs from small plants. Eliminate groundcovers...
@@ -306,13 +307,13 @@ responses:
           image: [
             {
               "caption": "Adults of southern green stink bug (left), redshouldered stink bug, (upper right) and consperse stink bug.",
-              "link": "http://ipm.ucanr.edu/PMG/E/I-HM-ECON-AD.015.html?src=exchbt",
-              "src": "http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-AD.015a.jpg?src=exchbt",
+              "link": "//ipm.ucanr.edu/PMG/E/I-HM-ECON-AD.015.html?src=exchbt",
+              "src": "//ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-AD.015a.jpg?src=exchbt",
             },
             {
               "caption": "First instars of consperse stink bug and their empty egg cases.",
-              "link": "http://ipm.ucanr.edu/PMG/E/I-HM-ECON-EG.001.html?src=exchbt",
-              "src": "http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-EG.001b.jpg?src=exchbt",
+              "link": "//ipm.ucanr.edu/PMG/E/I-HM-ECON-EG.001.html?src=exchbt",
+              "src": "//ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-EG.001b.jpg?src=exchbt",
             },
           ]
         - title: European Grapevine Moth
@@ -325,15 +326,19 @@ responses:
           image: [
             {
               "caption": "Adult female European grapevine moth.",
-              "link": "http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-AD.002.html?src=exchbt",
-              "src": "http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-AD.002h.jpg?src=exchbt"
+              "link": "//ipm.ucanr.edu/PMG/L/I-LP-LBOT-AD.002.html?src=exchbt",
+              "src": "//ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-AD.002h.jpg?src=exchbt"
             },
             {
               "caption": "Grape bunches with webbing, frass, and fungal infections.",
-              "link": "http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-CD.004.html?src=exchbt",
-              "src": "http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-CD.004h.jpg?src=exchbt"
+              "link": "//ipm.ucanr.edu/PMG/L/I-LP-LBOT-CD.004.html?src=exchbt",
+              "src": "//ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-CD.004h.jpg?src=exchbt"
             }
           ]
+  utter_test_imgupload:
+  - text: "Select a pest related image to upload."
+    custom:
+      payload: cvImgUpload
 actions:
 # Debug actions
 - action_set_parameter

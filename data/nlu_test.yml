@@ -57,3 +57,11 @@ nlu:
     - Let's test results collapsible
     - Show me results collapsible
     - results collapsible test
+- intent: intent_test_imgupload
+  examples: |
+    - test imgupload
+    - image upload
+    - I would like to test image upload
+    - Let's test image upload
+    - Show me image upload
+    - image upload test
