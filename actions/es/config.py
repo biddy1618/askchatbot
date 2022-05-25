@@ -34,11 +34,11 @@ try: es_cut_off         = float(es_cut_off)
 except ValueError:
     logger.warning('ES_CUT_OFF variable should be float, using default value - 0.525'         )
     es_cut_off = 0.525
-es_top_n                = os.getenv('ES_TOP_N'      , '3'       )
+es_top_n                = os.getenv('ES_TOP_N'      , '10'       )
 try: es_top_n           = int(es_top_n)
 except ValueError:
-    logger.warning('ES_TOP_N variable should be integer, using default value - 3'           )
-    es_cut_off = 3
+    logger.warning('ES_TOP_N variable should be integer, using default value - 10'           )
+    es_cut_off = 10
 es_ask_weight           = os.getenv('ES_ASK_WEIGHT' , '0.6'     )
 try: es_ask_weight      = float(es_ask_weight)
 except ValueError:
