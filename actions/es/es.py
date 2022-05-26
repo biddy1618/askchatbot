@@ -157,27 +157,40 @@ def _format_result(
     ) -> dict:
 
     res = {}
-    if config.debug:
-        res['title'] = (
-            f'<p>{index+1})<em>{name}</em>'
-            f'</br>(score: {score:.2f})</br>'
-            f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
-    else:
-        res['title'] = (
-            f'<p>{index+1})<em>{name}</em>'
-            f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
+    # if config.debug:
+    #     res['title'] = (
+    #         f'<p>{index+1})<em>{name}</em>'
+    #         f'</br>(score: {score:.2f})</br>'
+    #         f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
+    # else:
+    #     res['title'] = (
+    #         f'<p>{index+1})<em>{name}</em>'
+    #         f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     
-    res['description'] = ''
+    # res['description'] = ''
+    # if description:
+    #     res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
+    # if damage:
+    #     res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'                   )
+    # if identification:
+    #     res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'   )
+    # if development:
+    #     res['description'] += (f'<p><strong>Development</strong>: {development[:100]}</p></br>'         )
+    # if management:
+    #     res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
+    res['title'] = name
+    res['score'] = score
+    res['source'] = url
     if description:
-        res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
+        res['description'] = description
     if damage:
-        res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'                   )
+        res['damage'] = damage
     if identification:
-        res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'   )
+        res['identification'] = identification
     if development:
-        res['description'] += (f'<p><strong>Development</strong>: {development[:100]}</p></br>'         )
+        res['development'] = development
     if management:
-        res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
+        res['management'] = management
     
     return res
 
@@ -197,7 +210,7 @@ def _get_text(hits: dict) -> dict:
 
     res = {
         'text'      : 'Here are my top results:',
-        'payload'   : 'collapsible',
+        'payload'   : 'resultscollapsible',
         'data'      : []
     }
 
