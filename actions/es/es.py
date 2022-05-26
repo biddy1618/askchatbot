@@ -143,6 +143,8 @@ def _handle_es_result(
 
     return hits, filter_ids
 
+
+
 def _format_result(
     index           = None,
     source          = None,
@@ -154,43 +156,41 @@ def _format_result(
     identification  = None,
     development     = None,
     management      = None,
+    links           = None
     ) -> dict:
 
+    def _format_images(links = None):
+        images = []
+        
+        for l in links:
+            if l['type'] == 'image':
+                image = {
+                    'src'   : l['src'  ],
+                    'link'  : l['link' ],
+                    'title' : l['title']
+                }
+
+                images.append(image)
+        
+        return images
+
     res = {}
-    # if config.debug:
-    #     res['title'] = (
-    #         f'<p>{index+1})<em>{name}</em>'
-    #         f'</br>(score: {score:.2f})</br>'
-    #         f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
-    # else:
-    #     res['title'] = (
-    #         f'<p>{index+1})<em>{name}</em>'
-    #         f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     
-    # res['description'] = ''
-    # if description:
-    #     res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
-    # if damage:
-    #     res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'                   )
-    # if identification:
-    #     res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'   )
-    # if development:
-    #     res['description'] += (f'<p><strong>Development</strong>: {development[:100]}</p></br>'         )
-    # if management:
-    #     res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
-    res['title'] = name
-    res['score'] = score
+    res['source'] = source
+    res['title' ] = name
+    res['score' ] = score
     res['source'] = url
-    if description:
-        res['description'] = description
-    if damage:
-        res['damage'] = damage
-    if identification:
-        res['identification'] = identification
-    if development:
-        res['development'] = development
-    if management:
-        res['management'] = management
+    res['cutoff'] = False
+    res['url'   ] = url
+    
+    res['body'] = {}
+    res['body']['description'   ] = description
+    res['body']['damage'        ] = damage
+    res['body']['identification'] = identification
+    res['body']['development'   ] = development
+    res['body']['management'    ] = management
+
+    res['images'] = _format_images(links)
     
     return res
 
@@ -237,6 +237,7 @@ def _get_text(hits: dict) -> dict:
             development     = h.get('development'   , None  )
             damage          = h.get('damage'        , None  )
             management      = h.get('management'    , None  )
+            links           = h.get('links'         , None)
         
             res['data'].append(
                 _format_result(
@@ -249,7 +250,8 @@ def _get_text(hits: dict) -> dict:
                     identification  = identification,
                     development     = development   ,
                     damage          = damage        ,
-                    management      = management
+                    management      = management    ,
+                    links           = links
                 )
             )   
     
