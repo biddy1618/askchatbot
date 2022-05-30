@@ -146,7 +146,6 @@ def _handle_es_result(
 
 
 def _format_result(
-    index           = None,
     source          = None,
     score           = None,
     url             = None,
@@ -179,7 +178,6 @@ def _format_result(
     res['source'] = source
     res['title' ] = name
     res['score' ] = score
-    res['source'] = url
     res['cutoff'] = False
     res['url'   ] = url
     
@@ -227,7 +225,7 @@ def _get_text(hits: dict) -> dict:
         "management"
         '''
             
-        for i, h in enumerate(hits[:top_n]):
+        for h in hits[:top_n]:
             score           = h.get('_score'        , 0.0   )
             source          = h.get('source'        , None  )
             url             = h.get('url'           , None  )
@@ -241,7 +239,6 @@ def _get_text(hits: dict) -> dict:
         
             res['data'].append(
                 _format_result(
-                    index           = i             ,
                     source          = source        ,
                     score           = score         ,
                     url             = url           ,

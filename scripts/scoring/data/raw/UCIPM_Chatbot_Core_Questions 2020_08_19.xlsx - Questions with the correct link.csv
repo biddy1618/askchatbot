@@ -1,69 +1,79 @@
-Pest,Question,URL,Crawled,Training
-Peach leaf curl,How do you treat peach leaf curl?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
-Peach leaf curl,How can I get rid of peach leaf curl?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
-Peach leaf curl,"If my nectarine tree looks like it has peach leaf curl, how can I cure it?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
-Peach leaf curl,What is the best way to get rid of peach leaf curl on peach and nectarine trees?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
-Oriental cockroach,What are the big black bugs on my patio at night?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7467.html?src=exchbt,Y,Y
-Oriental cockroach,Are Oriental cockroaches harmful?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7467.html?src=exchbt,Y,Y
-Oriental cockroach,Can I get disease from Oriental cockroaches if they get into my home?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7467.html?src=exchbt,Y,Y
-roof rats,What attracts roof rats to your house?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74106.html?src=exchbt,Y,Y
-roof rats,There are roof rats getting into my home. What's the best way to keep them out without using rat poison?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74106.html?src=exchbt,Y,Y
-rats,I think I have rats in my home. What kind of rat poison works best? What else can I do to get rid of them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74106.html?src=exchbt,Y,Y
-ants in kitchen,How do I get rid of ants in my kitchen?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html?src=exchbt,Y,Y
-ants in kitchen,"In the summer, I get ant trails all over my kitchen. Why are they coming inside? What will keep them out?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html?src=exchbt,Y,Y
-rust on roses,What does rust on roses look like?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7463.html?src=exchbt,Y,Y
-rust on roses,My rose leaves are covered with dusty orange spots. Is it rust? What can I do about it?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7463.html?src=exchbt,Y,Y
-aphids on roses,There are tons of little green bugs on my rose bushes that I think are aphids. Are they bad for my roses? What controls them?,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt
+Question,CorrectTitle,URL,Crawled,Training
+How do you treat peach leaf curl?,Peach Leaf Curl,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
+How can I get rid of peach leaf curl?,Peach Leaf Curl,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
+"If my nectarine tree looks like it has peach leaf curl, how can I cure it?",Peach Leaf Curl,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
+What is the best way to get rid of peach leaf curl on peach and nectarine trees?,Peach Leaf Curl,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7426.html?src=exchbt,Y,Y
+What are the big black bugs on my patio at night?,Cockroaches,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7467.html?src=exchbt,Y,Y
+Are Oriental cockroaches harmful?,Cockroaches,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7467.html?src=exchbt,Y,Y
+Can I get disease from Oriental cockroaches if they get into my home?,Cockroaches,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7467.html?src=exchbt,Y,Y
+What attracts roof rats to your house?,Rats,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74106.html?src=exchbt,Y,Y
+There are roof rats getting into my home. What's the best way to keep them out without using rat poison?,Rats,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74106.html?src=exchbt,Y,Y
+I think I have rats in my home. What kind of rat poison works best? What else can I do to get rid of them?,Rats,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74106.html?src=exchbt,Y,Y
+How do I get rid of ants in my kitchen?,Ants,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html?src=exchbt,Y,Y
+"In the summer, I get ant trails all over my kitchen. Why are they coming inside? What will keep them out?",Ants,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html?src=exchbt,Y,Y
+What does rust on roses look like?,Roses: Diseases and Abiotic Disorders,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7463.html?src=exchbt,Y,Y
+My rose leaves are covered with dusty orange spots. Is it rust? What can I do about it?,Roses: Diseases and Abiotic Disorders,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7463.html?src=exchbt,Y,Y
+There are tons of little green bugs on my rose bushes that I think are aphids. Are they bad for my roses? What controls them?,"Aphids
+Roses: Insects and Mites","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7466.html?src=exchbt",Y,Y
-aphids on roses,How do you get rid of aphids on roses?,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt
+How do you get rid of aphids on roses?,"Aphids
+Roses: Insects and Mites","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html?src=exchbt
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7466.html?src=exchbt",Y,Y
-carpet beetles,Where are the little beetles on my window sill coming from?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html?src=exchbt,Y,Y
-carpet beetles,How did I get carpet beetles in my home?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html?src=exchbt,Y,Y
-mysterious bites,What is biting me in bed?,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7454.html?src=exchbt
+Where are the little beetles on my window sill coming from?,Carpet Beetles,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html?src=exchbt,Y,Y
+How did I get carpet beetles in my home?,Carpet Beetles,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html?src=exchbt,Y,Y
+What is biting me in bed?,"Bed Bugs
+Conenose Bugs
+Fleas","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7454.html?src=exchbt
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7455.html?src=exchbt
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7419.html?src=exchbt",Y,Y
-tomato wilt,What causes tomatoes to wilt?,http://ipm.ucanr.edu/home-and-landscape/tomato/index.html,Y,Y
-powdery mildew ,Will powdery mildew kill my zucchini?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7406.html?src=exchbt,Y,Y
-tree decline/death,"Why is my tree dying?
-[needed information: type of tree, cultural care e.g. irrigation]","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74109.html?src=exchbt
+What causes tomatoes to wilt?,Tomato,http://ipm.ucanr.edu/home-and-landscape/tomato/index.html,Y,Y
+Will powdery mildew kill my zucchini?,Powdery Mildew on Vegetables,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7406.html?src=exchbt,Y,Y
+"Why is my tree dying?
+[needed information: type of tree, cultural care e.g. irrigation]","Wood Decay Fungi in Landscape Trees
+Armillaria Root Rot","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74109.html?src=exchbt
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74171.html?src=exchbt",Y,Y
-damping off of seeds,"I planted seeds but they never came up. What happened?
-[needed information: type of plant, cultural information]",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74132.html?src=exchbt,Y,Y
-weeds in lawn,How do I kill weeds without killing my lawn?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html?src=exchbt,Y,Y
-common bermudagrass in flower beds,How do you keep bermudagrass from spreading in flower beds?,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7453.html?src=exchbt
+"I planted seeds but they never came up. What happened?
+[needed information: type of plant, cultural information]",Damping-off Diseases in the Garden,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74132.html?src=exchbt,Y,Y
+How do I kill weeds without killing my lawn?,Weed Management in Lawns,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html?src=exchbt,Y,Y
+How do you keep bermudagrass from spreading in flower beds?,"Bermudagrass
+Weed Management in Landscapes","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7453.html?src=exchbt
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt",Y,Y
-common bermudagrass ,How can I tell the difference between bermudagrass and crabgrass?,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7453.html?src=exchbt
+How can I tell the difference between bermudagrass and crabgrass?,"Bermudagrass
+Weed Management in Landscapes","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7453.html?src=exchbt
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt",Y,Y
-Vegetable growing,When should I plant asparagus?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/asptimeplant.html,Y,Y
-Vegetable growing,What is the best time of year for planting asparagus?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/asptimeplant.html,Y,Y
-Vegetable growing,Is it better to plant asparagus in spring or should I plant it in winter?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/asptimeplant.html,Y,Y
-Vegetable growing,Should vegetable gardens be planted in a sunny location or should they be planted in the shade?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/sitesel.html,Y,Y
-Vegetable growing,Can I plant vegetables in the shade?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/sitesel.html,Y,Y
-Vegetable growing,What is the best location for a vegetable garden?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/sitesel.html,Y,Y
-Vegetable growing,How do you stop blossom end rot on tomatoes?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomendrot.html,Y,Y
-Palm diseases,"What's wrong with my palm tree?
-[needed information: description of symptoms, type of palm tree]",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74148.html?src=exchbt,Y,Y
-Palm diseases,"If my palm tree has little black spots on it does that mean it has a disease and will it die?
-[needed information: type of palm tree]",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74148.html?src=exchbt,Y,Y
-fungus gnats,How do you get rid of fungus gnats?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html?src=exchbt,Y,Y
-pocket gophers,How do you set a gopher trap?,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7433.html?src=exchbt
+When should I plant asparagus?,Time to plant Asparagus,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/asptimeplant.html,Y,Y
+What is the best time of year for planting asparagus?,Time to plant Asparagus,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/asptimeplant.html,Y,Y
+Is it better to plant asparagus in spring or should I plant it in winter?,Time to plant Asparagus,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/asptimeplant.html,Y,Y
+Should vegetable gardens be planted in a sunny location or should they be planted in the shade?,Site selection,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/sitesel.html,Y,Y
+Can I plant vegetables in the shade?,Site selection,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/sitesel.html,Y,Y
+What is the best location for a vegetable garden?,Site selection,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/sitesel.html,Y,Y
+How do you stop blossom end rot on tomatoes?,Blossom end rot,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomendrot.html,Y,Y
+"What's wrong with my palm tree?
+[needed information: description of symptoms, type of palm tree]",Palm Diseases in the Landscape,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74148.html?src=exchbt,Y,Y
+"If my palm tree has little black spots on it does that mean it has a disease and will it die?
+[needed information: type of palm tree]",Palm Diseases in the Landscape,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74148.html?src=exchbt,Y,Y
+How do you get rid of fungus gnats?,Fungus Gnats,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html?src=exchbt,Y,Y
+How do you set a gopher trap?,"Pocket Gophers
+","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7433.html?src=exchbt
 http://ipm.ucanr.edu/IPMPROJECT/videolibrary-ur.html",Y,Y
-whiteflies,What insecticide gets rid of whiteflies?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7401.html?src=exchbt,Y,Y
-scales,"What do scale insects look like?
-[needed information: type of plant]",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt,Y,Y
-mealybugs,How do you stop mealybugs?,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74174.html?src=exchbt
+What insecticide gets rid of whiteflies?,Whiteflies,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7401.html?src=exchbt,Y,Y
+"What do scale insects look like?
+[needed information: type of plant]",Scales,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html?src=exchbt,Y,Y
+How do you stop mealybugs?,"Mealybugs
+Mealybugs
+Mealybugs","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74174.html?src=exchbt
 http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs-1.html?src=exchbt
 http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/mealybugs.html?src=exchbt",Y,Y
-ground squirrel,Where do ground squirrels live?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html?src=exchbt,Y,Y
-houseplants,Why are the leaves on my houseplant turning brown?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html?src=exchbt,Y,Y
-head lice,"How do you kill head lice?
-[needed information: type of plant, cultural care]",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html?src=exchbt,Y,Y
-mosquitoes,How do you keep mosquitoes away?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7451.html?src=exchbt,Y,Y
-deer,How do I deter deer from my garden?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74117.html?src=exchbt,Y,Y
-deer,Is there a way to keep deer out of my garden?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74117.html?src=exchbt,Y,Y
-deer,"An animal is eating all the plants in my garden and I don't know what it is. How do I find out what's eating my garden?
-[needed information: signs of animal, type of damage, type of plant]",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74117.html?src=exchbt,Y,Y
-weeds in garden,I have a garden full of weeds. How do I clear it out without using a lot of weed killer?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt,Y,Y
-weeds in garden,What's the best way to get rid of weeds in a large area?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt,Y,Y
-weeds in garden,"There's some kind of weed taking over my yard. What is it?
-[needed information: description of plant, time of year, geographical location]",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt,Y,Y
+Where do ground squirrels live?,Ground Squirrel,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html?src=exchbt,Y,Y
+Why are the leaves on my houseplant turning brown?,Houseplant Problems,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html?src=exchbt,Y,Y
+"How do you kill head lice?
+[needed information: type of plant, cultural care]",Head Lice,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html?src=exchbt,Y,Y
+How do you keep mosquitoes away?,Mosquitoes,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7451.html?src=exchbt,Y,Y
+How do I deter deer from my garden?,Deer,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74117.html?src=exchbt,Y,Y
+Is there a way to keep deer out of my garden?,Deer,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74117.html?src=exchbt,Y,Y
+"An animal is eating all the plants in my garden and I don't know what it is. How do I find out what's eating my garden?
+[needed information: signs of animal, type of damage, type of plant]",Deer,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74117.html?src=exchbt,Y,Y
+I have a garden full of weeds. How do I clear it out without using a lot of weed killer?,Weed Management in Landscapes,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt,Y,Y
+What's the best way to get rid of weeds in a large area?,Weed Management in Landscapes,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt,Y,Y
+"There's some kind of weed taking over my yard. What is it?
+[needed information: description of plant, time of year, geographical location]",Weed Management in Landscapes,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html?src=exchbt,Y,Y

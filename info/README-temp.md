@@ -37,42 +37,52 @@
 
 # Meeting 17.05.21
 
-* Automate the scoring system using MLFlow - give the IP to the Jasper (done)
-    * Scoring component - test different combinations of entity combinations
-        * Default configuration: ['pest', 'damage', 'remedy', 'plant'] - done
-        * Try these: ['pest', 'plant', 'damage', 'remedy'] - done
-        * ['plant', 'pest', 'damage', 'remedy'] - done
-        * ['damage', 'remedy', 'pest', 'plant'] - done
-        * ['damage', 'remedy', 'plant', 'pest'] - done
-        * ['pest', 'plant', 'damage'] - done
-        * ['pest', 'damage', 'plant'] - done
-        * ['plant', 'pest', 'damage'] - done
-        * ['plant', 'damage', 'pest'] - done
-        * The summary is that it doesn't make much difference in scores, I should concentrate more on the cut off and vector composition of the slots.
-        * scores without the main query, only using the extracted additional queries out of the slots - done and failed
-            * do the averages weighted - done (introduced new parameter ES_SLOTS_WEIGHT with value 0.3)
-            * aggregate by entity roles and average the embeddings
-        * Send the error queries after query change tests
-            * Remove the titles column
-            * Chunks extracted vector similarity
-        * query - `Why is my lawn getting large brown spots?`
-    * Build the script to output the missing queries with all information on missing questions, automate the script (done, automate the script)
-    * Take the script, refactor, remove the NA, include the NAs, compose second statitics for NAs (done)
-    * Compose graph for cutoff parameter - for NA queries and valid queries
-        * ES_CUT_OFF - 0.4 - done
-        * ES_CUT_OFF - 0.8 - done
-        * ES_CUT_OFF - 0.7 - done
-        * ES_CUT_OFF - 0.6 - done
-        * ES_CUT_OFF - 0.5 - done
-        * ES_CUT_OFF - 0.3 - done
-        * ES_CUT_OFF - 0.2 - done
-        * ES_CUT_OFF - 0.1 - done
-        * Send the error queries with 
-    * Equivocating sentences NLP
-    * Make sure that run_scoring is working (done)
+* Scoring component - test different combinations of entity combinations
+    * Default configuration: ['pest', 'damage', 'remedy', 'plant'] - done
+    * Try these: ['pest', 'plant', 'damage', 'remedy'] - done
+    * ['plant', 'pest', 'damage', 'remedy'] - done
+    * ['damage', 'remedy', 'pest', 'plant'] - done
+    * ['damage', 'remedy', 'plant', 'pest'] - done
+    * ['pest', 'plant', 'damage'] - done
+    * ['pest', 'damage', 'plant'] - done
+    * ['plant', 'pest', 'damage'] - done
+    * ['plant', 'damage', 'pest'] - done
+    * The summary is that it doesn't make much difference in scores, I should concentrate more on the cut off and vector composition of the slots.
+    * scores without the main query, only using the extracted additional queries out of the slots - done and failed
+        * do the averages weighted - done (introduced new parameter ES_SLOTS_WEIGHT with value 0.3)
+        * aggregate by entity roles and average the embeddings
+    * Send the error queries after query change tests
+        * Remove the titles column
+        * Chunks extracted vector similarity
+    * query - `Why is my lawn getting large brown spots?`
+* Build the script to output the missing queries with all information on missing questions, automate the script (done, automate the script)
+* Take the script, refactor, remove the NA, include the NAs, compose second statitics for NAs (done)
+* Compose graph for cutoff parameter - for NA queries and valid queries
+    * ES_CUT_OFF - 0.4 - done
+    * ES_CUT_OFF - 0.8 - done
+    * ES_CUT_OFF - 0.7 - done
+    * ES_CUT_OFF - 0.6 - done
+    * ES_CUT_OFF - 0.5 - done
+    * ES_CUT_OFF - 0.3 - done
+    * ES_CUT_OFF - 0.2 - done
+    * ES_CUT_OFF - 0.1 - done
+    * Send the error queries with 
+* Equivocating sentences NLP
+* Make sure that run_scoring is working (done)
 * Web-component - work with Vivi on the front-end for the queries
 * Computer vision - API - clear instructions on what are the objectives and integration into the Chatbot
     * Vivi will do it on her end, uploading the image and sending the request to the server
     * On my end, I should work on scoring the combinations
 
 * Budget composition - until July included
+
+
+* TO DO
+    * not crawled:
+        * http://ipm.ucanr.edu/IPMPROJECT/videolibrary-ur.html
+        * http://ipm.ucanr.edu/PMG/P/I-CO-PRCA-AD.001.html
+        * http://ipm.ucanr.edu/PMG/P/I-CO-PRCA-AD.001.html
+        * http://ipm.ucanr.edu/TOOLS/PNAI/pnaicompare.php?pn=7427
+        * http://ipm.ucanr.edu/PMG/invertebrates/links.ants.html
+    * process not empty `table_tips`
+    * deal with double URLs (`urlPestNote`, `urlQuickTip`)

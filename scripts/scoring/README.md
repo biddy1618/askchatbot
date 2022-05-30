@@ -15,9 +15,17 @@ Script for evaluating the relevancy of queries for Ask Extension Chatbot.
 6. When workflow is rebuild again (green checkmark), go to __MLFlow__ at __https://ask.ml.eduworks.com__ (sign in with provided login and password, contact Dalila for details), and select the corresponding experiment (in this case __chatbot_scoring__)
 7. You should be able to see latest metrics and stats corresponding to your experiment
 
-## Running
+## Running locally
 
-Run the container with following command:
+Make sure that in `Dockerfile` the `RUN` command is executed without `--save` parameter:
+```bash
+# for testing locally
+CMD ["python", "run_scoring.py"]
+# for mlflow
+# CMD ["python", "run_scoring.py", "--save"]
+```
+
+Then run the container with following command:
 ```bash
 docker compose up
 ```
@@ -27,21 +35,14 @@ The script strips the parameters of source links from ES database and uses simpl
 
 ## Adapting for MLFlow
 
-Change the necessary lines correspoing to `logger.print(...)`.
+Change the `RUN` command in the `Dockerfile` as follows:
+```bash
+# for testing locally
+# CMD ["python", "run_scoring.py"]
+# for mlflow
+CMD ["python", "run_scoring.py", "--save"]
+```
 
-## Data format
+## Data validation
 
-Data should be available in pickle format. Data transformation script is available under `scoring_data_etl.ipynb` notebook.
-
-It consists of the following columns:
-
-| Question         | ExpectedAnswer                  | URL                                   | Source                         |
-|------------------|---------------------------------|---------------------------------------|--------------------------------|
-| Questions itself | Reference answer(s) from UC IPM | Link(s) to the problem in UC IPM site | Question source (UC IPM or AE) |
-
-__Notes__:
-* If there are several expected answer references they are separated by `\n` (new line) character
-* Same applies to URLS - if there are several URLs they are separated by `\n` (new line) character
-* All URLs are striped from optional parameters (`?`)
-* Line crawled can have two varibles - `Y` and `N`
-* Alternative link can be null
+Details can be found at `scoring_data_elt.ipynb` notebook.
