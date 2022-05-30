@@ -5,11 +5,9 @@ import logging
 import random
 import json
 import sys
-import re
 import os
 
 import pandas as pd
-import mlflow
 
 import argparse
 
@@ -105,10 +103,10 @@ def _get_results(questions: List) -> List:
                 logger.error(f'Error: Failed on parsing response on question - "{q}", exit. . {type(e).__name__}: "{e}".')
 
             for e in r:
-                title   = re.findall("<em>(.*?)</em>"           , e['title'])[0]
-                link    = re.findall("href=[\"\'](.*?)[\"\']"   , e['title'])[0]
+                title   = e['title']
+                link    = e['url'].split('?')[0]
                 result.append((title, link))
-            
+
 
             DATA['message'] = '/intent_affirm'
             try:
@@ -274,6 +272,8 @@ def main(save = False) -> None:
     logger.info(f'---------------------------------------------------------------')
     
     if save:
+        import mlflow
+
         # Set MLflow experiment name (MLFLOW_EXPERIMENT_NAME is set in the workflow or docker-compose)
         mlflow.set_experiment(os.getenv('MLFLOW_EXPERIMENT_NAME'))
         # Start an MLflow run
