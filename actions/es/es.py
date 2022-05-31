@@ -1,7 +1,6 @@
 import logging
-from operator import index
 
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 import numpy as np
 
@@ -12,7 +11,6 @@ logger = logging.getLogger(__name__)
 async def _cos_sim_query(
     index           : str               ,
     query_vector    : np.ndarray        ,
-    query_links     : bool      = False ,           
     filter_ids      : List[str] = None  ,
     ) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
@@ -28,13 +26,10 @@ async def _cos_sim_query(
     '''
     vector_name     = 'vectors.vector'
     source_nested   = ['vectors.name']
-    if query_links:
-        vector_name     = 'vectors_links.vector'
-        source_nested   = ['vectors_links.order']
         
     cos     = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
     script  = {"source": cos, "params": {"query_vector": query_vector}}
-    
+
     source_query = {'includes': [
         'source', 'url', 'name', 'description', 'identification', 
         'development', 'damage', 'management', 'links'
@@ -97,8 +92,6 @@ async def _handle_es_query(
     
     query_vector = config.embed([query]).numpy()[0]
     if slots:
-        # slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
-        # query_vector = np.average([query_vector, slots_vector]                  , axis = 0)
         slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
         query_vector = np.average(
             a       = [query_vector, slots_vector], 

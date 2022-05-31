@@ -32,16 +32,6 @@
                     "link"  : {"type": "keyword", "index": "false"},
                     "title" : {"type": "keyword", "index": "false"}
                 }
-            },
-            "vectors_links" : {
-                "type"      : "nested",
-                "properties": {
-                    "vector": {
-                        "type": "dense_vector", 
-                        "dims": 512
-                    },
-                    "order"  : {"type": "keyword", "index": "false"}
-                }
             }
         }
     }
