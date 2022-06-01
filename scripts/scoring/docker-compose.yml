@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     image: git.eduworks.us:5050/ask-extension/askchatbot/dev:0.0.1
     container_name: scoring
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
     environment:
       DATA_VALID: valid_questions.pkl
       DATA_NA: na_questions.pkl

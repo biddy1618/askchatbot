@@ -31,7 +31,7 @@ async def _cos_sim_query(
     script  = {"source": cos, "params": {"query_vector": query_vector}}
 
     source_query = {'includes': [
-        'source', 'url', 'name', 'description', 'identification', 
+        'source', 'url', 'title', 'description', 'identification', 
         'development', 'damage', 'management', 'links'
     ]}
 
@@ -138,19 +138,30 @@ def _handle_es_result(
 
 
 
-def _format_result(
-    source          = None,
-    score           = None,
-    url             = None,
-    name            = None,
-    description     = None,
-    damage          = None,
-    identification  = None,
-    development     = None,
-    management      = None,
-    links           = None
-    ) -> dict:
-
+def _format_result(hit) -> dict:
+    '''
+    Fields:
+    "source"
+    "url"
+    "title"
+    "description"
+    "identification"
+    "development"
+    "damage"
+    "management"
+    '''
+ 
+    score           = hit.get('_score'          , 0.0   )
+    source          = hit.get('source'          , None  )
+    url             = hit.get('url'             , None  )
+    title           = hit.get('title'           , None  )
+    description     = hit.get('description'     , None  )
+    identification  = hit.get('identification'  , None  )
+    development     = hit.get('development'     , None  )
+    damage          = hit.get('damage'          , None  )
+    management      = hit.get('management'      , None  )
+    links           = hit.get('links'           , None  )
+    
     def _format_images(links = None):
         images = []
         
@@ -166,22 +177,41 @@ def _format_result(
         
         return images
 
+    def _format_scores(hit = None):
+        scores = hit['top_scores']
+
+        scores_dict = {}
+        for i, s in enumerate(scores):
+            s1 = {'score': s['score']}
+
+            name, index = s['source']['name'].split('_')
+            s1['field'] = name
+            
+            if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
+            else:               s1['text'] = hit[name   ] + '...'
+            
+            scores_dict['top_score_' + str(i+1)] = s1
+        
+        return scores_dict
+
     res = {}
     
     res['source'] = source
-    res['title' ] = name
+    res['title' ] = title
     res['score' ] = score
     res['cutoff'] = False
     res['url'   ] = url
     
     res['body'] = {}
     res['body']['description'   ] = description
-    res['body']['damage'        ] = damage
     res['body']['identification'] = identification
     res['body']['development'   ] = development
+    res['body']['damage'        ] = damage
     res['body']['management'    ] = management
 
     res['images'] = _format_images(links)
+
+    res['scores'] = _format_scores(hit)
     
     return res
 
@@ -206,44 +236,7 @@ def _get_text(hits: dict) -> dict:
     }
 
     if len(hits):
-        '''
-        Fields:
-        "source"
-        "url"
-        "name"
-        "description"
-        "identification"
-        "development"
-        "damage"
-        "management"
-        '''
-            
-        for h in hits[:top_n]:
-            score           = h.get('_score'        , 0.0   )
-            source          = h.get('source'        , None  )
-            url             = h.get('url'           , None  )
-            name            = h.get('name'          , None  )
-            description     = h.get('description'   , None  )
-            identification  = h.get('identification', None  )
-            development     = h.get('development'   , None  )
-            damage          = h.get('damage'        , None  )
-            management      = h.get('management'    , None  )
-            links           = h.get('links'         , None)
-        
-            res['data'].append(
-                _format_result(
-                    source          = source        ,
-                    score           = score         ,
-                    url             = url           ,
-                    name            = name          ,
-                    description     = description   ,
-                    identification  = identification,
-                    development     = development   ,
-                    damage          = damage        ,
-                    management      = management    ,
-                    links           = links
-                )
-            )   
+        for h in hits[:top_n]: res['data'].append(_format_result(h))   
     
     return res
 
