@@ -7,6 +7,7 @@ buildDockerRasa:
     rules:
         - if: $CI_COMMIT_BRANCH == "dev"
         - if: $CI_COMMIT_BRANCH == "dev-dauren"
+        - if: $CI_COMMIT_BRANCH == "qa-dauren"
         - if: $CI_COMMIT_BRANCH == "qa"
         - if: $CI_COMMIT_BRANCH == "prod"
     image:
@@ -24,6 +25,7 @@ buildDockerRasaSdk:
     rules:
         - if: $CI_COMMIT_BRANCH == "dev"
         - if: $CI_COMMIT_BRANCH == "dev-dauren"
+        - if: $CI_COMMIT_BRANCH == "qa-dauren"
         - if: $CI_COMMIT_BRANCH == "qa"
         - if: $CI_COMMIT_BRANCH == "prod"
     image:
@@ -41,6 +43,7 @@ buildDockerScoring:
     rules:
         - if: $CI_COMMIT_BRANCH == "dev"
         - if: $CI_COMMIT_BRANCH == "dev-dauren"
+        - if: $CI_COMMIT_BRANCH == "qa-dauren"
         - if: $CI_COMMIT_BRANCH == "qa"
         - if: $CI_COMMIT_BRANCH == "prod"
     image:
