@@ -18,7 +18,7 @@ buildDockerRasa:
         - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
           > /kaniko/.docker/config.json
         - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile
-          --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/rasa:$CI_COMMIT_SHA"
+          --cache --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/rasa:$CI_COMMIT_SHA"
 
 buildDockerRasaSdk:
     stage: dockerize
@@ -36,7 +36,7 @@ buildDockerRasaSdk:
         - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
           > /kaniko/.docker/config.json
         - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/rasa-actions.dockerfile
-          --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/rasa-sdk:$CI_COMMIT_SHA"
+          --cache --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/rasa-sdk:$CI_COMMIT_SHA"
 
 buildDockerScoring:
     stage: dockerize
@@ -54,7 +54,7 @@ buildDockerScoring:
         - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
           > /kaniko/.docker/config.json
         - /kaniko/executor --context $CI_PROJECT_DIR/scripts/scoring/ --dockerfile $CI_PROJECT_DIR/scripts/scoring/Dockerfile
-          --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/scoring:$CI_COMMIT_SHA"
+          --cache --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/scoring:$CI_COMMIT_SHA"
 
 deployDev:
   stage: deploy
