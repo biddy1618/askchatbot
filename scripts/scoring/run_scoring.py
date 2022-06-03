@@ -3,13 +3,10 @@ from typing import List, Tuple
 import requests
 import logging
 import random
-import json
 import sys
-import re
 import os
 
 import pandas as pd
-import mlflow
 
 import argparse
 
@@ -83,12 +80,12 @@ def _get_results(questions: List) -> List:
 
         
         try:
-            r = json.loads(response.text)
+            r = response.json()
             success = False
-            for link in r:
-                if 'custom' in link:
+            for r1 in r:
+                if 'custom' in r1:
                     success = True
-                    r = link['custom']
+                    r = r1['custom']['data']
                     break
         except Exception as e:
             logger.error(f'Error: Failed on parsing response on question - "{q}", exit. {type(e).__name__}: "{e}".')
@@ -98,17 +95,14 @@ def _get_results(questions: List) -> List:
         result = []
         if success:
             try:
-                r = r['data']
                 if len(r) == 0:
                     raise Exception
             except Exception as e:
                 logger.error(f'Error: Failed on parsing response on question - "{q}", exit. . {type(e).__name__}: "{e}".')
 
-            for e in r:
-                title   = re.findall("<em>(.*?)</em>"           , e['title'])[0]
-                link    = re.findall("href=[\"\'](.*?)[\"\']"   , e['title'])[0]
-                result.append((title, link))
-            
+            for r1 in r:
+                result.append(r1)
+
 
             DATA['message'] = '/intent_affirm'
             try:
@@ -121,9 +115,8 @@ def _get_results(questions: List) -> List:
                 exit()
             
             try:
-                r = json.loads(response.text)
-                r = r[0]
-                r = r['text']
+                r = response.json()
+                r = r[0]['text']
                 if 'Anything else I can help with?' != r:
                     raise Exception
             except Exception as e:
@@ -166,7 +159,7 @@ def _calc_stats_valid_queries() -> Tuple[int, dict]:
             answer = answers[i]
             topn = [False, False, False, False]
             for i1, r1 in enumerate(r):
-                if r1[1].split('?')[0] in answer:
+                if r1['url'].split('?')[0] in answer:
                     if i1 == 0:
                         topn[0] = True
                     if i1 < 3:
@@ -274,6 +267,8 @@ def main(save = False) -> None:
     logger.info(f'---------------------------------------------------------------')
     
     if save:
+        import mlflow
+
         # Set MLflow experiment name (MLFLOW_EXPERIMENT_NAME is set in the workflow or docker-compose)
         mlflow.set_experiment(os.getenv('MLFLOW_EXPERIMENT_NAME'))
         # Start an MLflow run

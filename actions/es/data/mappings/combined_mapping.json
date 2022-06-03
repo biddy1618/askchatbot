@@ -7,7 +7,7 @@
             "source"        : {"type": "keyword", "index": "true"},
             "url"           : {"type": "keyword", "index": "false"},
 
-            "name"          : {"type": "keyword", "index": "false"},
+            "title"         : {"type": "keyword", "index": "false"},
             "description"   : {"type": "keyword", "index": "false"},
             "identification": {"type": "keyword", "index": "false"},
             "development"   : {"type": "keyword", "index": "false"},
@@ -31,16 +31,6 @@
                     "src"   : {"type": "keyword", "index": "false"},
                     "link"  : {"type": "keyword", "index": "false"},
                     "title" : {"type": "keyword", "index": "false"}
-                }
-            },
-            "vectors_links" : {
-                "type"      : "nested",
-                "properties": {
-                    "vector": {
-                        "type": "dense_vector", 
-                        "dims": 512
-                    },
-                    "order"  : {"type": "keyword", "index": "false"}
                 }
             }
         }

@@ -1,7 +1,6 @@
 import logging
-from operator import index
 
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 import numpy as np
 
@@ -12,7 +11,6 @@ logger = logging.getLogger(__name__)
 async def _cos_sim_query(
     index           : str               ,
     query_vector    : np.ndarray        ,
-    query_links     : bool      = False ,           
     filter_ids      : List[str] = None  ,
     ) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
@@ -28,15 +26,12 @@ async def _cos_sim_query(
     '''
     vector_name     = 'vectors.vector'
     source_nested   = ['vectors.name']
-    if query_links:
-        vector_name     = 'vectors_links.vector'
-        source_nested   = ['vectors_links.order']
         
     cos     = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
     script  = {"source": cos, "params": {"query_vector": query_vector}}
-    
+
     source_query = {'includes': [
-        'source', 'url', 'name', 'description', 'identification', 
+        'source', 'url', 'title', 'description', 'identification', 
         'development', 'damage', 'management', 'links'
     ]}
 
@@ -97,8 +92,6 @@ async def _handle_es_query(
     
     query_vector = config.embed([query]).numpy()[0]
     if slots:
-        # slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
-        # query_vector = np.average([query_vector, slots_vector]                  , axis = 0)
         slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
         query_vector = np.average(
             a       = [query_vector, slots_vector], 
@@ -142,6 +135,7 @@ def _handle_es_result(
     hits = sorted(hits, key = lambda h: h['_score'], reverse = True)
 
     return hits, filter_ids
+
 
 def _format_result(
     index           = None,
@@ -241,6 +235,110 @@ def _get_text(hits: dict) -> dict:
             )   
     
     return res
+
+
+# Tempoparily disable the new view for demo
+# def _format_result(hit) -> dict:
+#     '''
+#     Fields:
+#     "source"
+#     "url"
+#     "title"
+#     "description"
+#     "identification"
+#     "development"
+#     "damage"
+#     "management"
+#     '''
+ 
+#     score           = hit.get('_score'          , 0.0   )
+#     source          = hit.get('source'          , None  )
+#     url             = hit.get('url'             , None  )
+#     title           = hit.get('title'           , None  )
+#     description     = hit.get('description'     , None  )
+#     identification  = hit.get('identification'  , None  )
+#     development     = hit.get('development'     , None  )
+#     damage          = hit.get('damage'          , None  )
+#     management      = hit.get('management'      , None  )
+#     links           = hit.get('links'           , None  )
+    
+#     def _format_images(links = None):
+#         images = []
+        
+#         for l in links:
+#             if l['type'] == 'image':
+#                 image = {
+#                     'src'   : l['src'  ],
+#                     'link'  : l['link' ],
+#                     'title' : l['title']
+#                 }
+
+#                 images.append(image)
+        
+#         return images
+
+#     def _format_scores(hit = None):
+#         scores = hit['top_scores']
+
+#         scores_dict = {}
+#         for i, s in enumerate(scores):
+#             s1 = {'score': s['score']}
+
+#             name, index = s['source']['name'].split('_')
+#             s1['field'] = name
+            
+#             if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
+#             else:               s1['text'] = hit[name   ] + '...'
+            
+#             scores_dict['top_score_' + str(i+1)] = s1
+        
+#         return scores_dict
+
+#     res = {}
+    
+#     res['source'] = source
+#     res['title' ] = title
+#     res['score' ] = score
+#     res['cutoff'] = False
+#     res['url'   ] = url
+    
+#     res['body'] = {}
+#     res['body']['description'   ] = description
+#     res['body']['identification'] = identification
+#     res['body']['development'   ] = development
+#     res['body']['damage'        ] = damage
+#     res['body']['management'    ] = management
+
+#     res['images'] = _format_images(links)
+
+#     res['scores'] = _format_scores(hit)
+    
+#     return res
+
+# def _get_text(hits: dict) -> dict:
+#     '''Process results for output.
+
+#     Args:
+#         hits (dict): Sorted results from ES query.
+        
+#     Returns:
+#         dict: Data for chatbot to return.
+#     '''
+
+#     top_n = config.es_top_n
+#     if len(hits) < config.es_top_n:
+#         top_n = len(hits)
+
+#     res = {
+#         'text'      : 'Here are my top results:',
+#         'payload'   : 'resultscollapsible',
+#         'data'      : []
+#     }
+
+#     if len(hits):
+#         for h in hits[:top_n]: res['data'].append(_format_result(h))   
+    
+#     return res
 
 async def submit(
     question    : str               ,
