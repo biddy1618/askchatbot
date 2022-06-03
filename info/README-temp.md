@@ -92,3 +92,8 @@
     * for examples, the avocado page can contain information in its link titles generic problems like Mealybugs, site selection, or watering.
         * as a solution we can concatenate the title with the links titles. that way may be it is going to be more precise taking into account the context.
         * temp fix
+    
+* Experimenting with the results
+    * try vectorize the chunks in 1 to 3 sizes of the sentences and also try largest language model from USE Google (number 5)
+    * create a set of important entities related the sources (by retrieving the entities in the data sources), and do matching based on those entities
+    * 
