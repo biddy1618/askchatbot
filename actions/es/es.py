@@ -148,7 +148,7 @@ def _format_result(
     source          = None,
     score           = None,
     url             = None,
-    name            = None,
+    title           = None,
     description     = None,
     damage          = None,
     identification  = None,
@@ -159,12 +159,12 @@ def _format_result(
     res = {}
     if config.debug:
         res['title'] = (
-            f'<p>{index+1})<em>{name}</em>'
+            f'<p>{index+1})<em>{title}</em>'
             f'</br>(score: {score:.2f})</br>'
             f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     else:
         res['title'] = (
-            f'<p>{index+1})<em>{name}</em>'
+            f'<p>{index+1})<em>{title}</em>'
             f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     
     res['description'] = ''
@@ -206,7 +206,7 @@ def _get_text(hits: dict) -> dict:
         Fields:
         "source"
         "url"
-        "name"
+        "title"
         "description"
         "identification"
         "development"
@@ -218,7 +218,7 @@ def _get_text(hits: dict) -> dict:
             score           = h.get('_score'        , 0.0   )
             source          = h.get('source'        , None  )
             url             = h.get('url'           , None  )
-            name            = h.get('name'          , None  )
+            title           = h.get('title'         , None  )
             description     = h.get('description'   , None  )
             identification  = h.get('identification', None  )
             development     = h.get('development'   , None  )
@@ -231,7 +231,7 @@ def _get_text(hits: dict) -> dict:
                     source          = source        ,
                     score           = score         ,
                     url             = url           ,
-                    name            = name          ,
+                    title           = title         ,
                     description     = description   ,
                     identification  = identification,
                     development     = development   ,
