@@ -25,30 +25,29 @@ async def _cos_sim_query(
         dict: Return hits.
     '''
     vector_name     = 'vectors.vector'
-    source_nested   = ['vectors.name']
-        
+    source_nested   = {'includes': ['vectors.name', 'vectors.start', 'vectors.end']}
+
     cos     = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
     script  = {"source": cos, "params": {"query_vector": query_vector}}
 
-    source_query = {'includes': [
-        'source', 'url', 'title', 'description', 'identification', 
-        'development', 'damage', 'management', 'links'
-    ]}
+    source_query = {'includes': ['source', 'url', 'title', 'description', 'identification', 'development', 'damage', 'management', 'links']}
 
     path = vector_name.split('.')[0]
-    query = {"bool": {
-        "must": {"nested": {
-                    "score_mode": "max" ,
-                    "path"      : path  ,
-                    "inner_hits": {"size": 3, "name": "nested", "_source": source_nested},
-                    "query"     : {"function_score": {"script_score": {"script": script}}}}
-        },
-        "filter"    : [],
-        "must_not"  : []
-    }}
+    query = {
+        "bool": {
+            "must": {"nested": {
+                        "score_mode": "max" ,
+                        "path"      : path  ,
+                        "inner_hits": {"size": 3, "name": "nested", "_source": source_nested},
+                        "query"     : {"function_score": {"script_score": {"script": script}}}}
+            },
+            "filter"    : [],
+            "must_not"  : []
+        }
+    }
 
     if filter_ids is not None:
-        query['bool']['filter'  ].append({'ids'     : {'values': filter_ids     }})
+        query['bool']['filter'].append({'ids': {'values': filter_ids     }})
 
     response = await config.es_client.search(
         index   = index                 ,
@@ -136,29 +135,52 @@ def _handle_es_result(
 
     return hits, filter_ids
 
+# Disable for the new view
+def _format_result(hit) -> dict:
 
-def _format_result(
-    index           = None,
-    source          = None,
-    score           = None,
-    url             = None,
-    title           = None,
-    description     = None,
-    damage          = None,
-    identification  = None,
-    development     = None,
-    management      = None,
-    ) -> dict:
+    score           = hit.get('_score'        , 0.0   )
+    source          = hit.get('source'        , None  )
+    url             = hit.get('url'           , None  )
+    title           = hit.get('title'         , None  )
+    description     = hit.get('description'   , None  )
+    identification  = hit.get('identification', None  )
+    development     = hit.get('development'   , None  )
+    damage          = hit.get('damage'        , None  )
+    management      = hit.get('management'    , None  )
+
+    def _format_scores(hit = None):
+        scores = hit['top_scores']
+        scores_dict = {}
+        
+        for i, s in enumerate(scores):
+            s1 = {'score': s['score']}
+
+            name, index = s['source']['name'    ].split('_')
+            
+            start       = s['source']['start'   ]
+            end         = s['source']['end'     ]
+            if end > config.es_field_limit:
+                start   = config.es_field_limit - 50
+                end     = config.es_field_limit
+            
+            s1['field'] = name
+            
+            if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
+            else:               s1['text'] = hit[name   ][start:end]
+            
+            scores_dict['top_score_' + str(i+1)] = s1
+        
+        return scores_dict
 
     res = {}
     if config.debug:
         res['title'] = (
-            f'<p>{index+1})<em>{title}</em>'
+            f'<p><em>{title}</em>'
             f'</br>(score: {score:.2f})</br>'
             f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     else:
         res['title'] = (
-            f'<p>{index+1})<em>{title}</em>'
+            f'<p><em>{title}</em>'
             f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     
     res['description'] = ''
@@ -173,84 +195,16 @@ def _format_result(
     if management:
         res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
     
-    return res
-
-def _get_text(hits: dict) -> dict:
-    '''Process results for output.
-
-    Args:
-        hits (dict): Sorted results from ES query.
-        
-    Returns:
-        dict: Data for chatbot to return.
-    '''
-
-    top_n = config.es_top_n
-    if len(hits) < config.es_top_n:
-        top_n = len(hits)
-
-    res = {
-        'text'      : 'Here are my top results:',
-        'payload'   : 'collapsible',
-        'data'      : []
-    }
-
-    if len(hits):
-        '''
-        Fields:
-        "source"
-        "url"
-        "name"
-        "description"
-        "identification"
-        "development"
-        "damage"
-        "management"
-        '''
-            
-        for i, h in enumerate(hits[:top_n]):
-            score           = h.get('_score'        , 0.0   )
-            source          = h.get('source'        , None  )
-            url             = h.get('url'           , None  )
-            title           = h.get('title'         , None  )
-            description     = h.get('description'   , None  )
-            identification  = h.get('identification', None  )
-            development     = h.get('development'   , None  )
-            damage          = h.get('damage'        , None  )
-            management      = h.get('management'    , None  )
-        
-            res['data'].append(
-                _format_result(
-                    index           = i             ,
-                    source          = source        ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = title         ,
-                    description     = description   ,
-                    identification  = identification,
-                    development     = development   ,
-                    damage          = damage        ,
-                    management      = management
-                )
-            )   
+    res['url'   ] = url
+    res['scores'] = _format_scores(hit)
+    
     
     return res
 
 
-# Tempoparily disable the new view for demo
+# Enable for the new view
 # def _format_result(hit) -> dict:
-#     '''
-#     Fields:
-#     "source"
-#     "url"
-#     "title"
-#     "description"
-#     "identification"
-#     "development"
-#     "damage"
-#     "management"
-#     '''
- 
+    
 #     score           = hit.get('_score'          , 0.0   )
 #     source          = hit.get('source'          , None  )
 #     url             = hit.get('url'             , None  )
@@ -285,10 +239,17 @@ def _get_text(hits: dict) -> dict:
 #             s1 = {'score': s['score']}
 
 #             name, index = s['source']['name'].split('_')
+            
+#             start       = s['source']['start'   ]
+#             end         = s['source']['end'     ]
+#             if end > config.es_field_limit:
+#                 start   = config.es_field_limit - 50
+#                 end     = config.es_field_limit
+
 #             s1['field'] = name
             
 #             if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
-#             else:               s1['text'] = hit[name   ] + '...'
+#             else:               s1['text'] = hit[name   ][start:end]
             
 #             scores_dict['top_score_' + str(i+1)] = s1
         
@@ -315,30 +276,31 @@ def _get_text(hits: dict) -> dict:
     
 #     return res
 
-# def _get_text(hits: dict) -> dict:
-#     '''Process results for output.
+def _get_text(hits: dict) -> dict:
+    '''Process results for output.
 
-#     Args:
-#         hits (dict): Sorted results from ES query.
+    Args:
+        hits (dict): Sorted results from ES query.
         
-#     Returns:
-#         dict: Data for chatbot to return.
-#     '''
+    Returns:
+        dict: Data for chatbot to return.
+    '''
 
-#     top_n = config.es_top_n
-#     if len(hits) < config.es_top_n:
-#         top_n = len(hits)
+    top_n = config.es_top_n
+    if len(hits) < config.es_top_n:
+        top_n = len(hits)
 
-#     res = {
-#         'text'      : 'Here are my top results:',
-#         'payload'   : 'resultscollapsible',
-#         'data'      : []
-#     }
+    res = {
+        'text'      : 'Here are my top results:',
+        'payload'   : 'collapsible',
+        # 'payload'   : 'resultscollapsible',
+        'data'      : []
+    }
 
-#     if len(hits):
-#         for h in hits[:top_n]: res['data'].append(_format_result(h))   
+    if len(hits):
+        for h in hits[:top_n]: res['data'].append(_format_result(h))   
     
-#     return res
+    return res
 
 async def submit(
     question    : str               ,

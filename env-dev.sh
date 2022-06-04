@@ -2,7 +2,7 @@
 
 # Variable to indicate the stage
 export STAGE=dev
-export DEPLOYMENT_VERSION=26.05.22
+export DEPLOYMENT_VERSION=04.05.22
 
 # Variables for Rasa configuration
 export ES_SEARCH_SIZE=100
