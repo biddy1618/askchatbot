@@ -23,7 +23,7 @@ utterances = {
     'help'              : 'How can I help you?',
     'ipm'               : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
     'fallback'          : "I'm sorry, I didn't catch that. Can you rephrase?",
-    'out_of_scope'      : "Sorry, that request is outside my scope. For now, I can I only deal with pest-related requests.",
+    'out_of_scope'      : "Sorry, that request is outside my scope. For now, I can only deal with pest-related requests.",
     'connect_expert'    : 'You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.',
     'ask_problem_desc'  : 'Please, describe your problem.',
     'no_results'        : 'Unfortunately, could not find any results that might help you... Try to reword your pest problem, please.',
