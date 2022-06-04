@@ -22,6 +22,7 @@ es_imitate              = os.getenv('ES_IMITATE'            , 'false'           
 es_imitate              = es_imitate == 'true'
 
 es_combined_index       = 'combined'
+es_field_limit          = 32766
 debug                   = stage == 'dev'
 
 es_search_size          = os.getenv('ES_SEARCH_SIZE', '100'     )
@@ -29,15 +30,15 @@ try: es_search_size     = int(es_search_size)
 except ValueError:
     logger.warning('ES_SEARCH_SIZE variable should be integer, using default value - 100'   )
     es_search_size = 100
-es_cut_off              = os.getenv('ES_CUT_OFF'    , '0.525'     )
+es_cut_off              = os.getenv('ES_CUT_OFF'    , '0.4'     )
 try: es_cut_off         = float(es_cut_off)
 except ValueError:
-    logger.warning('ES_CUT_OFF variable should be float, using default value - 0.525'         )
-    es_cut_off = 0.525
-es_top_n                = os.getenv('ES_TOP_N'      , '10'       )
+    logger.warning('ES_CUT_OFF variable should be float, using default value - 0.4'         )
+    es_cut_off = 0.4
+es_top_n                = os.getenv('ES_TOP_N'      , '10'      )
 try: es_top_n           = int(es_top_n)
 except ValueError:
-    logger.warning('ES_TOP_N variable should be integer, using default value - 10'           )
+    logger.warning('ES_TOP_N variable should be integer, using default value - 10'          )
     es_cut_off = 10
 es_ask_weight           = os.getenv('ES_ASK_WEIGHT' , '0.6'     )
 try: es_ask_weight      = float(es_ask_weight)

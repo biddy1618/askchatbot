@@ -25,6 +25,13 @@ CMD ["python", "run_scoring.py"]
 # CMD ["python", "run_scoring.py", "--save"]
 ```
 
+Also change the __RASA_URL__ in _docker-compose.yml_ file to:
+```yml
+...
+RASA_URL: http://host.docker.internal:5005/webhooks/rest/webhook
+...
+```
+
 Then run the container with following command:
 ```bash
 docker compose up
