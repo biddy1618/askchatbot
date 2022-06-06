@@ -171,6 +171,7 @@ class ActionSubmitESQueryForm(Action):
                 if top_n == 0:
                     dispatcher.utter_message(text = helper.utterances['no_results'])
                 else:
+                    dispatcher.utter_message(text = helper.utterances['results'])
                     dispatcher.utter_message(text = res['text'], json_message = res)
                     results = True
                 
