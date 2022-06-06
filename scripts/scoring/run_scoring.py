@@ -101,7 +101,7 @@ def _get_results(questions: List) -> List:
                 logger.error(f'Error: Failed on parsing response on question - "{q}", exit. . {type(e).__name__}: "{e}".')
 
             for r1 in r:
-                result.append(r1)
+                result.append(r1['meta'])
 
 
             DATA['message'] = '/intent_affirm'

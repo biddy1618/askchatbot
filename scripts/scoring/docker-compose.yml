@@ -11,6 +11,7 @@ services:
     environment:
       DATA_VALID: valid_questions.pkl
       DATA_NA: na_questions.pkl
+      # RASA_URL: http://host.docker.internal:5005/webhooks/rest/webhook
       RASA_URL: https://dev.api.chat.ask.eduworks.com/webhooks/rest/webhook
       DESCRIPTION: Running experiment on prod
       MLFLOW_EXPERIMENT_NAME: chatbot_scoring

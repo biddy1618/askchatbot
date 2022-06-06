@@ -195,8 +195,10 @@ def _format_result(hit) -> dict:
     if management:
         res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
     
-    res['url'   ] = url
-    res['scores'] = _format_scores(hit)
+    res['meta'  ] = {}
+    res['meta'  ]['url'   ] = url
+    res['meta'  ]['title' ] = title
+    res['meta'  ]['scores'] = _format_scores(hit)
     
     
     return res
