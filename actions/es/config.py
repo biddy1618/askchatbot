@@ -9,49 +9,27 @@ from elasticsearch import AsyncElasticsearch
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
+es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
+es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
+tfhub_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/tfhub_modules'  )
 
-stage                   = os.getenv('STAGE'                 , 'dev'                                                         )
-version                 = os.getenv('DEPLOYMENT_VERSION'    , 'UNDEFINED'                                                   ) 
-tf_cpp_min_log_level    = os.getenv('TF_CPP_MIN_LOG_LEVEL'  , '3'                                                           )
-# tf_embed_url            = os.getenv('TFHUB_EMBEDDING_URL'   , 'https://tfhub.dev/google/universal-sentence-encoder/4'       )
-tf_embed_url            = os.getenv('TFHUB_EMBEDDING_URL'   , 'https://tfhub.dev/google/universal-sentence-encoder-large/5' )
-tfhub_cache_dir         = os.getenv('TFHUB_CACHE_DIR'       , '/var/tmp/tfhub_modules'                                      )
-es_username             = os.getenv('ES_USERNAME'           , 'elastic'                                                     )
-es_password             = os.getenv('ES_PASSWORD'           , 'changeme'                                                    )
-es_host                 = os.getenv('ES_HOST'               , 'http://localhost:9200/'                                      )
-es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                       )
-es_imitate              = es_imitate == 'true'
+# stage           = 'dev'
+stage           = 'prod'
+version         = '04.06.22'
+# tf_embed_url    = 'https://tfhub.dev/google/universal-sentence-encoder/4'
+tf_embed_url    = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
+es_imitate      = False
 
 es_combined_index       = 'combined'
 es_field_limit          = 32766
 debug                   = stage == 'dev'
 
-es_search_size          = os.getenv('ES_SEARCH_SIZE', '100'     )
-try: es_search_size     = int(es_search_size)
-except ValueError:
-    logger.warning('ES_SEARCH_SIZE variable should be integer, using default value - 100'   )
-    es_search_size = 100
-es_cut_off              = os.getenv('ES_CUT_OFF'    , '0.4'     )
-try: es_cut_off         = float(es_cut_off)
-except ValueError:
-    logger.warning('ES_CUT_OFF variable should be float, using default value - 0.4'         )
-    es_cut_off = 0.4
-es_top_n                = os.getenv('ES_TOP_N'      , '10'      )
-try: es_top_n           = int(es_top_n)
-except ValueError:
-    logger.warning('ES_TOP_N variable should be integer, using default value - 10'          )
-    es_cut_off = 10
-es_ask_weight           = os.getenv('ES_ASK_WEIGHT' , '0.6'     )
-try: es_ask_weight      = float(es_ask_weight)
-except ValueError:
-    logger.warning('ES_ASK_WEIGHT variable should be float, using default value - 0.6'      )
-    es_ask_weight = 0.6
-es_slots_weight         = os.getenv('ES_SLOTS_WEIGHT' , '0.3'   )
-try: es_slots_weight      = float(es_slots_weight)
-except ValueError:
-    logger.warning('ES_SLOTS_WEIGHT variable should be float, using default value - 0.3'    )
-    es_slots_weight = 0.3
-
+es_search_size          = 100
+es_cut_off              = 0.4
+es_top_n                = 10
+es_ask_weight           = 0.6
+es_slots_weight         = 0.3
 
 if debug:
 
@@ -64,8 +42,8 @@ if debug:
     logger.info(f'- es_ask_weight   = {es_ask_weight}'          )
     logger.info(f'- es_slots_weight = {es_slots_weight}'        )
     logger.info('----------------------------------------------')
-    
-    
+
+
     _PATH = Path(__file__).parent.as_posix()
 
     # index mappings
@@ -73,26 +51,23 @@ if debug:
 
 
 if not es_imitate:
-    
-    os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
-    os.environ['TFHUB_CACHE_DIR']       = tfhub_cache_dir
 
     import tensorflow_hub as tf_hub
-    
+
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch configuration:')
-    logger.info(f'- host                    = {es_host          }')
+    logger.info(f'- host                = {es_host          }')
     if debug:
-        logger.info(f'- username                = {es_username  }')
-        logger.info(f'- password                = {es_password  }')
-    logger.info(f'- tfhub_embedding_url     = {tf_embed_url     }')
-    logger.info(f'- tfhub_cache_dir         = {tfhub_cache_dir  }')
+        logger.info(f'- username            = {es_username  }')
+        logger.info(f'- password            = {es_password  }')
+    logger.info(f'- tfhub_embedding_url = {tf_embed_url     }')
+    logger.info(f'- tfhub_cache_dir     = {tfhub_cache_dir  }')
     logger.info('----------------------------------------------')
 
 
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch indexes:')
-    logger.info(f'- combined index          = {es_combined_index}')
+    logger.info(f'- combined index      = {es_combined_index}')
     logger.info('----------------------------------------------')
 
 

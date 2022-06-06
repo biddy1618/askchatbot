@@ -195,67 +195,12 @@ def _format_result(hit) -> dict:
     if management:
         res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
     
-    return res
-
-def _get_text(hits: dict) -> dict:
-    '''Process results for output.
-
-    Args:
-        hits (dict): Sorted results from ES query.
-        
-    Returns:
-        dict: Data for chatbot to return.
-    '''
-
-    top_n = config.es_top_n
-    if len(hits) < config.es_top_n:
-        top_n = len(hits)
-
-    res = {
-        'text'      : 'Here are my top results:',
-        'payload'   : 'collapsible',
-        'data'      : []
-    }
-
-    if len(hits):
-        '''
-        Fields:
-        "source"
-        "url"
-        "title"
-        "description"
-        "identification"
-        "development"
-        "damage"
-        "management"
-        '''
-            
-        for i, h in enumerate(hits[:top_n]):
-            score           = h.get('_score'        , 0.0   )
-            source          = h.get('source'        , None  )
-            url             = h.get('url'           , None  )
-            title           = h.get('title'         , None  )
-            description     = h.get('description'   , None  )
-            identification  = h.get('identification', None  )
-            development     = h.get('development'   , None  )
-            damage          = h.get('damage'        , None  )
-            management      = h.get('management'    , None  )
-        
-            res['data'].append(
-                _format_result(
-                    index           = i             ,
-                    source          = source        ,
-                    score           = score         ,
-                    url             = url           ,
-                    title           = title         ,
-                    description     = description   ,
-                    identification  = identification,
-                    development     = development   ,
-                    damage          = damage        ,
-                    management      = management
-                )
-            )
-
+    res['meta'  ] = {}
+    res['meta'  ]['url'   ] = url
+    res['meta'  ]['title' ] = title
+    res['meta'  ]['scores'] = _format_scores(hit)
+    
+    
     return res
 
 

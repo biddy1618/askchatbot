@@ -7,7 +7,6 @@ services:
     environment:
       ACTION_ENDPOINT: http://rasa-actions:5055/webhook
       TOKENIZERS_PARALLELISM: 'false'
-      STAGE: ${STAGE}
     ports:
       - "5005:5005"
     command: ["run", "--cors", "*"]
@@ -19,19 +18,9 @@ services:
     extra_hosts:
     - "host.docker.internal:host-gateway"
     environment:
-      # TFHUB_EMBEDDING_URL: https://tfhub.dev/google/universal-sentence-encoder/4
-      TFHUB_EMBEDDING_URL: https://tfhub.dev/google/universal-sentence-encoder-large/5
       TFHUB_CACHE_DIR: /var/tmp/tfhub_modules
       TF_CPP_MIN_LOG_LEVEL: 3
       TOKENIZERS_PARALLELISM: 'false'
-      STAGE: ${STAGE}
-      DEPLOYMENT_VERSION: ${DEPLOYMENT_VERSION}
-      ES_SEARCH_SIZE: ${ES_SEARCH_SIZE}
-      ES_CUT_OFF: ${ES_CUT_OFF}
-      ES_TOP_N: ${ES_TOP_N}
-      ES_ASK_WEIGHT: ${ES_ASK_WEIGHT}
-      ES_SLOTS_WEIGHT: ${ES_SLOTS_WEIGHT}
-      ES_IMITATE: ${ES_IMITATE}
       ELASTIC_USERNAME: ${ES_USERNAME}
       ELASTIC_PASSWORD: ${ES_PASSWORD}
       ES_HOST: ${ES_HOST}
