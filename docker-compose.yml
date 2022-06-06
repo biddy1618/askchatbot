@@ -19,7 +19,8 @@ services:
     extra_hosts:
     - "host.docker.internal:host-gateway"
     environment:
-      TFHUB_EMBEDDING_URL: https://tfhub.dev/google/universal-sentence-encoder/4
+      # TFHUB_EMBEDDING_URL: https://tfhub.dev/google/universal-sentence-encoder/4
+      TFHUB_EMBEDDING_URL: https://tfhub.dev/google/universal-sentence-encoder-large/5
       TFHUB_CACHE_DIR: /var/tmp/tfhub_modules
       TF_CPP_MIN_LOG_LEVEL: 3
       TOKENIZERS_PARALLELISM: 'false'

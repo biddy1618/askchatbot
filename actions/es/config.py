@@ -10,15 +10,16 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-stage                   = os.getenv('STAGE'                 , 'dev'                                                     )
-version                 = os.getenv('DEPLOYMENT_VERSION'    , 'UNDEFINED'                                               ) 
-tf_cpp_min_log_level    = os.getenv('TF_CPP_MIN_LOG_LEVEL'  , '3'                                                       )
-tf_embed_url            = os.getenv('TFHUB_EMBEDDING_URL'   , 'https://tfhub.dev/google/universal-sentence-encoder/4'   )
-tfhub_cache_dir         = os.getenv('TFHUB_CACHE_DIR'       , '/var/tmp/tfhub_modules'                                  )
-es_username             = os.getenv('ES_USERNAME'           , 'elastic'                                                 )
-es_password             = os.getenv('ES_PASSWORD'           , 'changeme'                                                )
-es_host                 = os.getenv('ES_HOST'               , 'http://localhost:9200/'                                  )
-es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                   )
+stage                   = os.getenv('STAGE'                 , 'dev'                                                         )
+version                 = os.getenv('DEPLOYMENT_VERSION'    , 'UNDEFINED'                                                   ) 
+tf_cpp_min_log_level    = os.getenv('TF_CPP_MIN_LOG_LEVEL'  , '3'                                                           )
+# tf_embed_url            = os.getenv('TFHUB_EMBEDDING_URL'   , 'https://tfhub.dev/google/universal-sentence-encoder/4'       )
+tf_embed_url            = os.getenv('TFHUB_EMBEDDING_URL'   , 'https://tfhub.dev/google/universal-sentence-encoder-large/5' )
+tfhub_cache_dir         = os.getenv('TFHUB_CACHE_DIR'       , '/var/tmp/tfhub_modules'                                      )
+es_username             = os.getenv('ES_USERNAME'           , 'elastic'                                                     )
+es_password             = os.getenv('ES_PASSWORD'           , 'changeme'                                                    )
+es_host                 = os.getenv('ES_HOST'               , 'http://localhost:9200/'                                      )
+es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                       )
 es_imitate              = es_imitate == 'true'
 
 es_combined_index       = 'combined'
