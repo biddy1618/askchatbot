@@ -18,7 +18,8 @@ export ACTION_ENDPOINT=http://localhost:5055/webhook
 export TOKENIZERS_PARALLELISM=false
 
 # Universal Sentence Encoder config in TF Hub
-export TFHUB_EMBEDDING_URL=https://tfhub.dev/google/universal-sentence-encoder/4
+# export TFHUB_EMBEDDING_URL=https://tfhub.dev/google/universal-sentence-encoder/4
+export TFHUB_EMBEDDING_URL=https://tfhub.dev/google/universal-sentence-encoder-large/5
 export TFHUB_CACHE_DIR=/var/tmp/tfhub_modules
 export TF_CPP_MIN_LOG_LEVEL=3
 
