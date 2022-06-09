@@ -159,7 +159,8 @@ def _calc_stats_valid_queries() -> Tuple[int, dict]:
             answer = answers[i]
             topn = [False, False, False, False]
             for i1, r1 in enumerate(r):
-                if r1['url'].split('?')[0] in answer:
+                res_url = r1['url'] if r1['source'] == 'youtube' else r1['url'].split('?')[0]
+                if res_url in answer:
                     if i1 == 0:
                         topn[0] = True
                     if i1 < 3:

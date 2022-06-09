@@ -212,6 +212,7 @@ def _format_result(hit) -> dict:
     res['meta'  ] = {}
     res['meta'  ]['url'   ] = url
     res['meta'  ]['title' ] = title
+    res['meta'  ]['source'] = source
     res['meta'  ]['scores'] = _format_scores(hit)
     
     
