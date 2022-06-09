@@ -20,8 +20,8 @@ stage       = 'dev'
 # stage       = 'prod'
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4'
-embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
-# embed_url = 'paraphrase-MiniLM-L6-v2'
+# embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
+embed_url = 'paraphrase-MiniLM-L6-v2'
 
 es_combined_index   = 'combined'
 es_field_limit      = 32766
@@ -47,8 +47,8 @@ if debug:
 
 if not es_imitate:
 
-    import tensorflow_hub as tf_hub
-    # from sentence_transformers import SentenceTransformer
+    # import tensorflow_hub as tf_hub
+    from sentence_transformers import SentenceTransformer
 
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch configuration:')
@@ -71,11 +71,11 @@ if not es_imitate:
     logger.info('Done initiliazing ElasticSearch client')
 
     logger.info(f'Start loading embedding module - {embed_url}')
-    embed = tf_hub.load(embed_url)
-    # embed = SentenceTransformer(
-    #     model_name_or_path  = 'paraphrase-MiniLM-L6-v2',
-    #     cache_folder        = embed_cache_dir,
-    #     device              = 'cpu')
+    # embed = tf_hub.load(embed_url)
+    embed = SentenceTransformer(
+        model_name_or_path  = 'paraphrase-MiniLM-L6-v2' ,
+        cache_folder        = embed_cache_dir           ,
+        device              = 'cpu'                     )
     logger.info(f'Done loading embedding module - {embed_url}')
     # -------------------------------------------------------------
 else:
