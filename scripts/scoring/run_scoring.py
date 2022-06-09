@@ -72,11 +72,11 @@ def _get_results(questions: List) -> List:
             response = requests.post(RASA_URL, json = DATA)
             if response.status_code != 200:
                 logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
-                exit()
+                sys.exit(1)
 
         except Exception as e:
             logger.error(f'Error: Exception at posting question - "{q}", exit. {type(e).__name__}: "{e}".')
-            exit()
+            sys.exit(1)
 
         
         try:
@@ -89,7 +89,7 @@ def _get_results(questions: List) -> List:
                     break
         except Exception as e:
             logger.error(f'Error: Failed on parsing response on question - "{q}", exit. {type(e).__name__}: "{e}".')
-            exit()
+            sys.exit(1)
 
         
         result = []
@@ -109,10 +109,10 @@ def _get_results(questions: List) -> List:
                 response = requests.post(RASA_URL, json = DATA)
                 if response.status_code != 200:
                     logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
-                    exit()
+                    sys.exit(1)
             except Exception as e:
                 logger.error(f'Error: Exception at posting affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
-                exit()
+                sys.exit(1)
             
             try:
                 r = response.json()
@@ -121,7 +121,7 @@ def _get_results(questions: List) -> List:
                     raise Exception
             except Exception as e:
                 logger.error(f'Error: Failed on parsing response of affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
-                exit()
+                sys.exit(1)
         else:
             logger.info(f'No results for question - "{q}".')
             
