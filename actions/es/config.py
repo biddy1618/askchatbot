@@ -1,8 +1,6 @@
 import os
 import sys
 import logging
-from pathlib import Path
-import json
 
 from elasticsearch import AsyncElasticsearch
 
@@ -15,13 +13,15 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '13.06.22'
+version     = '14.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4'
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
-embed_url = 'paraphrase-MiniLM-L6-v2'
+# embed_url = 'paraphrase-MiniLM-L6-v2'
+embed_url = 'paraphrase-MiniLM-L12-v2'
+# embed_url = 'bert-base-nli-mean-tokens'
 
 es_combined_index   = 'combined'
 es_field_limit      = 32766
@@ -73,9 +73,9 @@ if not es_imitate:
     logger.info(f'Start loading embedding module - {embed_url}')
     # embed = tf_hub.load(embed_url)
     embed = SentenceTransformer(
-        model_name_or_path  = 'paraphrase-MiniLM-L6-v2' ,
-        cache_folder        = embed_cache_dir           ,
-        device              = 'cpu'                     )
+        model_name_or_path  = embed_url         ,
+        cache_folder        = embed_cache_dir   ,
+        device              = 'cpu'             )
     logger.info(f'Done loading embedding module - {embed_url}')
     # -------------------------------------------------------------
 else:

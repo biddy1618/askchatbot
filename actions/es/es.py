@@ -99,7 +99,8 @@ async def _handle_es_query(
     #         axis    = 0
     #     )
     
-    # Sentence Encoder model - paraphrase-MiniLM-L6-v2
+    # Sentence Encoder model
+    ## paraphrase-MiniLM-L6-v2, paraphrase-MiniLM-L12-v2, bert-base-nli-mean-tokens
     query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     if slots:
         slots_vector = np.average(

@@ -200,10 +200,10 @@ def _calc_stats_valid_queries() -> Tuple[int, dict]:
         return topn
     
     questions, answers  = _read_data    (DATA_VALID, urls = True)
-    results             = _get_results  (questions)
-    scores              = _get_scores   (answers, results)
-    topn                = _get_stats    (scores)
-    total               = len           (questions)
+    results             = _get_results  (questions              )
+    scores              = _get_scores   (answers, results       )
+    topn                = _get_stats    (scores                 )
+    total               = len           (questions              )
 
     return (total, topn)
     
@@ -231,10 +231,10 @@ def _calc_stats_na_queries() -> Tuple[int, int]:
         
         return no_results
 
-    questions, _    = _read_data    (DATA_NA, urls = False)
-    results         = _get_results  (questions)
-    no_results      = _get_stats    (results)
-    total           = len           (results)
+    questions, _    = _read_data    (DATA_NA, urls = False  )
+    results         = _get_results  (questions              )
+    no_results      = _get_stats    (results                )
+    total           = len           (results                )
 
     return (total, no_results)
 
