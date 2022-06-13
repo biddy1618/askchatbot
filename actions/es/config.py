@@ -15,7 +15,7 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '09.06.22'
+version     = '13.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 
