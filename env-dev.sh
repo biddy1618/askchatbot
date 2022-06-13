@@ -6,7 +6,7 @@ export TOKENIZERS_PARALLELISM=false
 
 # Universal Sentence Encoder config in TF Hub
 export TF_CPP_MIN_LOG_LEVEL=3
-export TFHUB_CACHE_DIR=/var/tmp/tfhub_modules
+export TFHUB_CACHE_DIR=/var/tmp/models
 
 # Elasticsearch settings
 export ELASTIC_USERNAME=elastic

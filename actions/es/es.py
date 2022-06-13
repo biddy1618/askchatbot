@@ -89,9 +89,24 @@ async def _handle_es_query(
         list: return list of hits. 
     '''    
     
-    query_vector = config.embed([query]).numpy()[0]
+    # TF HUB model - USE
+    # query_vector = config.embed([query]).numpy()[0]
+    # if slots:
+    #     slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
+    #     query_vector = np.average(
+    #         a       = [query_vector, slots_vector], 
+    #         weights = [1 - config.es_slots_weight, config.es_slots_weight],
+    #         axis    = 0
+    #     )
+    
+    # Sentence Encoder model
+    ## paraphrase-MiniLM-L6-v2, paraphrase-MiniLM-L12-v2, bert-base-nli-mean-tokens
+    query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     if slots:
-        slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
+        slots_vector = np.average(
+            [config.embed.encode([s], show_progress_bar = False)[0] for s in slots],
+            axis = 0
+        )
         query_vector = np.average(
             a       = [query_vector, slots_vector], 
             weights = [1 - config.es_slots_weight, config.es_slots_weight],
@@ -198,6 +213,7 @@ def _format_result(hit) -> dict:
     res['meta'  ] = {}
     res['meta'  ]['url'   ] = url
     res['meta'  ]['title' ] = title
+    res['meta'  ]['source'] = source
     res['meta'  ]['scores'] = _format_scores(hit)
     
     

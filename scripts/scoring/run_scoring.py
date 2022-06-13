@@ -72,11 +72,11 @@ def _get_results(questions: List) -> List:
             response = requests.post(RASA_URL, json = DATA)
             if response.status_code != 200:
                 logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
-                exit()
+                sys.exit(1)
 
         except Exception as e:
             logger.error(f'Error: Exception at posting question - "{q}", exit. {type(e).__name__}: "{e}".')
-            exit()
+            sys.exit(1)
 
         
         try:
@@ -89,7 +89,7 @@ def _get_results(questions: List) -> List:
                     break
         except Exception as e:
             logger.error(f'Error: Failed on parsing response on question - "{q}", exit. {type(e).__name__}: "{e}".')
-            exit()
+            sys.exit(1)
 
         
         result = []
@@ -109,10 +109,10 @@ def _get_results(questions: List) -> List:
                 response = requests.post(RASA_URL, json = DATA)
                 if response.status_code != 200:
                     logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
-                    exit()
+                    sys.exit(1)
             except Exception as e:
                 logger.error(f'Error: Exception at posting affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
-                exit()
+                sys.exit(1)
             
             try:
                 r = response.json()
@@ -121,7 +121,7 @@ def _get_results(questions: List) -> List:
                     raise Exception
             except Exception as e:
                 logger.error(f'Error: Failed on parsing response of affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
-                exit()
+                sys.exit(1)
         else:
             logger.info(f'No results for question - "{q}".')
             
@@ -159,7 +159,8 @@ def _calc_stats_valid_queries() -> Tuple[int, dict]:
             answer = answers[i]
             topn = [False, False, False, False]
             for i1, r1 in enumerate(r):
-                if r1['url'].split('?')[0] in answer:
+                res_url = r1['url'] if r1['source'] == 'youtube' else r1['url'].split('?')[0]
+                if res_url in answer:
                     if i1 == 0:
                         topn[0] = True
                     if i1 < 3:
@@ -199,10 +200,10 @@ def _calc_stats_valid_queries() -> Tuple[int, dict]:
         return topn
     
     questions, answers  = _read_data    (DATA_VALID, urls = True)
-    results             = _get_results  (questions)
-    scores              = _get_scores   (answers, results)
-    topn                = _get_stats    (scores)
-    total               = len           (questions)
+    results             = _get_results  (questions              )
+    scores              = _get_scores   (answers, results       )
+    topn                = _get_stats    (scores                 )
+    total               = len           (questions              )
 
     return (total, topn)
     
@@ -230,10 +231,10 @@ def _calc_stats_na_queries() -> Tuple[int, int]:
         
         return no_results
 
-    questions, _    = _read_data    (DATA_NA, urls = False)
-    results         = _get_results  (questions)
-    no_results      = _get_stats    (results)
-    total           = len           (results)
+    questions, _    = _read_data    (DATA_NA, urls = False  )
+    results         = _get_results  (questions              )
+    no_results      = _get_stats    (results                )
+    total           = len           (results                )
 
     return (total, no_results)
 

@@ -9,11 +9,13 @@ Script for evaluating the relevancy of queries for Ask Extension Chatbot.
 3. Execute the push commands in right order:
     1. Add, commit, and push the job repo
     2. Add, commit, and push the project repo
-    3. Wait until the docker image is built for the project repo (in this case the project dockerize pipeline can be found at https://git.eduworks.us/ask-extension/askchatbot/-/pipelines)
+    3. Wait until the docker image is built for the project repo and deployment is successfull (in this case the project dockerize pipeline can be found at https://git.eduworks.us/ask-extension/askchatbot/-/pipelines and deployment can be checked by DEV server url - https://dev.chat.ask.eduworks.com/)
 4. Then go to Argo at __ask.jobs.eduworks.com__ (log in with Eduworks SSI), select the corresponding workflow (in this case it is __chatbot-scoring__)
 5. Delete that workflow (sounds not right, but it will trigger the workflow to run with latest `yml` files once again)
 6. When workflow is rebuild again (green checkmark), go to __MLFlow__ at __https://ask.ml.eduworks.com__ (sign in with provided login and password, contact Dalila for details), and select the corresponding experiment (in this case __chatbot_scoring__)
 7. You should be able to see latest metrics and stats corresponding to your experiment
+
+__NOTE__: if one wants to run experiment on already deployed version of the project (i.e. miss the points _1_, _3.2_, _3.3_), then simply make sure that project is deployed and available on DEV server, and follow the pipeline omitting points _1_, _3.2_ and _3.3_.
 
 ## Running locally
 
