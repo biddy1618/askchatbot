@@ -13,7 +13,7 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '14.06.22'
+version     = '16.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 
@@ -31,7 +31,7 @@ es_search_size  = 100
 es_cut_off      = 0.4
 es_top_n        = 10
 es_ask_weight   = 0.6
-es_slots_weight = 0.3
+es_slots_weight = 0.1
 
 if debug:
 
