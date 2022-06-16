@@ -151,119 +151,33 @@ def _handle_es_result(
     return hits, filter_ids
 
 # Disable for the new view
-def _format_result(hit) -> dict:
-
-    score           = hit.get('_score'        , 0.0   )
-    source          = hit.get('source'        , None  )
-    url             = hit.get('url'           , None  )
-    title           = hit.get('title'         , None  )
-    description     = hit.get('description'   , None  )
-    identification  = hit.get('identification', None  )
-    development     = hit.get('development'   , None  )
-    damage          = hit.get('damage'        , None  )
-    management      = hit.get('management'    , None  )
-
-    def _format_scores(hit = None):
-        scores = hit['top_scores']
-        scores_dict = {}
-        
-        for i, s in enumerate(scores):
-            s1 = {'score': s['score']}
-
-            name, index = s['source']['name'    ].split('_')
-            
-            start       = s['source']['start'   ]
-            end         = s['source']['end'     ]
-            if end > config.es_field_limit:
-                start   = config.es_field_limit - 50
-                end     = config.es_field_limit
-            
-            s1['field'] = name
-            
-            if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
-            else:               s1['text'] = hit[name   ][start:end]
-            
-            scores_dict['top_score_' + str(i+1)] = s1
-        
-        return scores_dict
-
-    res = {}
-    if config.debug:
-        res['title'] = (
-            f'<p><em>{title}</em>'
-            f'</br>(score: {score:.2f})</br>'
-            f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
-    else:
-        res['title'] = (
-            f'<p><em>{title}</em>'
-            f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
-    
-    res['description'] = ''
-    if description:
-        res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
-    if damage:
-        res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'                   )
-    if identification:
-        res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'   )
-    if development:
-        res['description'] += (f'<p><strong>Development</strong>: {development[:100]}</p></br>'         )
-    if management:
-        res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
-    
-    res['meta'  ] = {}
-    res['meta'  ]['url'   ] = url
-    res['meta'  ]['title' ] = title
-    res['meta'  ]['source'] = source
-    res['meta'  ]['scores'] = _format_scores(hit)
-    
-    
-    return res
-
-
-# Enable for the new view
 # def _format_result(hit) -> dict:
-    
-#     score           = hit.get('_score'          , 0.0   )
-#     source          = hit.get('source'          , None  )
-#     url             = hit.get('url'             , None  )
-#     title           = hit.get('title'           , None  )
-#     description     = hit.get('description'     , None  )
-#     identification  = hit.get('identification'  , None  )
-#     development     = hit.get('development'     , None  )
-#     damage          = hit.get('damage'          , None  )
-#     management      = hit.get('management'      , None  )
-#     links           = hit.get('links'           , None  )
-    
-#     def _format_images(links = None):
-#         images = []
-        
-#         for l in links:
-#             if l['type'] == 'image':
-#                 image = {
-#                     'src'   : l['src'  ],
-#                     'link'  : l['link' ],
-#                     'title' : l['title']
-#                 }
 
-#                 images.append(image)
-        
-#         return images
+#     score           = hit.get('_score'        , 0.0   )
+#     source          = hit.get('source'        , None  )
+#     url             = hit.get('url'           , None  )
+#     title           = hit.get('title'         , None  )
+#     description     = hit.get('description'   , None  )
+#     identification  = hit.get('identification', None  )
+#     development     = hit.get('development'   , None  )
+#     damage          = hit.get('damage'        , None  )
+#     management      = hit.get('management'    , None  )
 
 #     def _format_scores(hit = None):
 #         scores = hit['top_scores']
-
 #         scores_dict = {}
+        
 #         for i, s in enumerate(scores):
 #             s1 = {'score': s['score']}
 
-#             name, index = s['source']['name'].split('_')
+#             name, index = s['source']['name'    ].split('_')
             
 #             start       = s['source']['start'   ]
 #             end         = s['source']['end'     ]
 #             if end > config.es_field_limit:
 #                 start   = config.es_field_limit - 50
 #                 end     = config.es_field_limit
-
+            
 #             s1['field'] = name
             
 #             if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
@@ -274,25 +188,111 @@ def _format_result(hit) -> dict:
 #         return scores_dict
 
 #     res = {}
+#     if config.debug:
+#         res['title'] = (
+#             f'<p><em>{title}</em>'
+#             f'</br>(score: {score:.2f})</br>'
+#             f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
+#     else:
+#         res['title'] = (
+#             f'<p><em>{title}</em>'
+#             f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
     
-#     res['source'] = source
-#     res['title' ] = title
-#     res['score' ] = score
-#     res['cutoff'] = False
-#     res['url'   ] = url
+#     res['description'] = ''
+#     if description:
+#         res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
+#     if damage:
+#         res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'                   )
+#     if identification:
+#         res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'   )
+#     if development:
+#         res['description'] += (f'<p><strong>Development</strong>: {development[:100]}</p></br>'         )
+#     if management:
+#         res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
     
-#     res['body'] = {}
-#     res['body']['description'   ] = description
-#     res['body']['identification'] = identification
-#     res['body']['development'   ] = development
-#     res['body']['damage'        ] = damage
-#     res['body']['management'    ] = management
-
-#     res['images'] = _format_images(links)
-
-#     res['scores'] = _format_scores(hit)
+#     res['meta'  ] = {}
+#     res['meta'  ]['url'   ] = url
+#     res['meta'  ]['title' ] = title
+#     res['meta'  ]['source'] = source
+#     res['meta'  ]['scores'] = _format_scores(hit)
+    
     
 #     return res
+
+
+# Enable for the new view
+def _format_result(hit) -> dict:
+    
+    score           = hit.get('_score'          , 0.0   )
+    source          = hit.get('source'          , None  )
+    url             = hit.get('url'             , None  )
+    title           = hit.get('title'           , None  )
+    description     = hit.get('description'     , None  )
+    identification  = hit.get('identification'  , None  )
+    development     = hit.get('development'     , None  )
+    damage          = hit.get('damage'          , None  )
+    management      = hit.get('management'      , None  )
+    links           = hit.get('links'           , None  )
+    
+    def _format_images(links = None):
+        images = []
+        
+        for l in links:
+            if l['type'] == 'image':
+                image = {
+                    'src'   : l['src'  ],
+                    'link'  : l['link' ],
+                    'title' : l['title']
+                }
+
+                images.append(image)
+        
+        return images
+
+    def _format_scores(hit = None):
+        scores = hit['top_scores']
+
+        scores_dict = {}
+        for i, s in enumerate(scores):
+            s1 = {'score': f'{s["score"]:.2f}'}
+
+            name, index = s['source']['name'].split('_')
+            
+            start       = s['source']['start'   ]
+            end         = s['source']['end'     ]
+            if end > config.es_field_limit:
+                start   = config.es_field_limit - 50
+                end     = config.es_field_limit
+
+            s1['field'] = name
+            
+            if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
+            else:               s1['text'] = hit[name   ][start:end]
+            
+            scores_dict['top_score_' + str(i+1)] = s1
+        
+        return scores_dict
+
+    res = {}
+    
+    res['source'] = source
+    res['title' ] = title
+    res['score' ] = f'{score:.2f}'
+    res['cutoff'] = False
+    res['url'   ] = url
+    
+    res['body'] = {}
+    res['body']['description'   ] = description
+    res['body']['identification'] = identification
+    res['body']['development'   ] = development
+    res['body']['damage'        ] = damage
+    res['body']['management'    ] = management
+
+    res['images'] = _format_images(links)
+
+    res['scores'] = _format_scores(hit)
+    
+    return res
 
 def _get_text(hits: dict) -> dict:
     '''Process results for output.
@@ -310,8 +310,8 @@ def _get_text(hits: dict) -> dict:
 
     res = {
         'text'      : 'Here are my top results:',
-        'payload'   : 'collapsible',
-        # 'payload'   : 'resultscollapsible',
+        # 'payload'   : 'collapsible',
+        'payload'   : 'resultscollapsible',
         'data'      : []
     }
 
