@@ -89,7 +89,7 @@ async def _handle_es_query(
         list: return list of hits. 
     '''    
     
-    # TF HUB model - USE
+    # TF HUB model
     # query_vector = config.embed([query]).numpy()[0]
     # if slots:
     #     slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
@@ -100,7 +100,6 @@ async def _handle_es_query(
     #     )
     
     # Sentence Encoder model
-    ## paraphrase-MiniLM-L6-v2, paraphrase-MiniLM-L12-v2, bert-base-nli-mean-tokens
     query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     if slots:
         slots_vector = np.average(

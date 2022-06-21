@@ -13,15 +13,18 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '16.06.22'
+version     = '21.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4'
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
 # embed_url = 'paraphrase-MiniLM-L6-v2'
-embed_url = 'paraphrase-MiniLM-L12-v2'
+# embed_url = 'paraphrase-MiniLM-L12-v2'
 # embed_url = 'bert-base-nli-mean-tokens'
+# embed_url = 'stsb-distilbert-base'
+embed_url = 'all-mpnet-base-v2'
+# embed_url = 'all-distilroberta-v1'
 
 es_combined_index   = 'combined'
 es_field_limit      = 32766
