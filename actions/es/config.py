@@ -23,8 +23,8 @@ stage       = 'dev'
 # embed_url = 'paraphrase-MiniLM-L12-v2'
 # embed_url = 'bert-base-nli-mean-tokens'
 # embed_url = 'stsb-distilbert-base'
-embed_url = 'all-mpnet-base-v2'
-# embed_url = 'all-distilroberta-v1'
+# embed_url = 'all-mpnet-base-v2'
+embed_url = 'all-distilroberta-v1'
 
 es_combined_index   = 'combined'
 es_field_limit      = 32766
