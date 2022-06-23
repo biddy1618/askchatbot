@@ -27,7 +27,7 @@ CMD ["python", "run_scoring.py"]
 # CMD ["python", "run_scoring.py", "--save"]
 ```
 
-Also change the __RASA_URL__ in _docker-compose.yml_ file to:
+Change the __RASA_URL__ in _docker-compose.yml_ file to:
 ```yml
 ...
 RASA_URL: http://host.docker.internal:5005/webhooks/rest/webhook
@@ -52,6 +52,6 @@ Change the `RUN` command in the `Dockerfile` as follows:
 CMD ["python", "run_scoring.py", "--save"]
 ```
 
-## Data validation
+## Data ETL and validation
 
 Details can be found at `scoring_data_elt.ipynb` notebook.

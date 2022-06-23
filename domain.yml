@@ -280,61 +280,64 @@ responses:
         data:
         - title: Thrips
           score: 0.99
-          source: //ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt
-          details: Thrips, order Thysanoptera, are tiny, slender insects with fringed wings....
-          development: Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
-          management: Thrips are difficult to control. If management is necessary, use an integ...
+          url: http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt
+          source: pestsIPM
           cutoff: false
-          image: [
-            {
-              "caption": "Stippling as result of greenhouse thrips feeding.",
-              "link": "//ipm.ucanr.edu/PMG/H/I-TS-HHAE-CD.013.html?src=exchbt",
-              "src": "//ipm.ucanr.edu/PMG/IMAGES/H/I-TS-HHAE-CD.013h.jpg?src=exchbt"
-            },
-            {
-              "caption": "Black feces and white feeding scars from thrips.",
-              "link": "//ipm.ucanr.edu/PMG/F/I-TS-FOCC-CD.008.html?src=exchbt",
-              "src": "//ipm.ucanr.edu/PMG/IMAGES/F/I-TS-FOCC-CD.008h.jpg?src=exchbt"
-            }
-          ]
+          body:
+            description: This is a description. Thrips, order Thysanoptera, are tiny, slender insects with fringed wings....
+            damage: This is a damage. Thrips are difficult to control. If management is necessary, use an integ...
+            identification: This is an identification. Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
+            development: This is a development. Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
+            management: This is a management. Thrips are difficult to control. If management is necessary, use an integ...
+          images:
+          - caption: Stippling as result of greenhouse thrips feeding.
+            link: http://ipm.ucanr.edu/PMG/H/I-TS-HHAE-CD.013.html?src=exchbt
+            src: http://ipm.ucanr.edu/PMG/IMAGES/H/I-TS-HHAE-CD.013h.jpg
+          - caption: Black feces and white feeding scars from thrips.
+            link: http://ipm.ucanr.edu/PMG/F/I-TS-FOCC-CD.008.html?src=exchbt
+            src: http://ipm.ucanr.edu/PMG/IMAGES/F/I-TS-FOCC-CD.008h.jpg
         - title: Stink bugs
           score: 0.99
-          source: //ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt
-          details: These sucking insects (family Pentatomidae) are shield shaped. Their common ...
-          development: Adult stink bugs are distinguished from other insects by the large ...
-          management: Handpick the bugs and their eggs from small plants. Eliminate groundcovers...
+          url: http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt
+          source: pestsIPM
           cutoff: false
-          image: [
-            {
-              "caption": "Adults of southern green stink bug (left), redshouldered stink bug, (upper right) and consperse stink bug.",
-              "link": "//ipm.ucanr.edu/PMG/E/I-HM-ECON-AD.015.html?src=exchbt",
-              "src": "//ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-AD.015a.jpg?src=exchbt",
-            },
-            {
-              "caption": "First instars of consperse stink bug and their empty egg cases.",
-              "link": "//ipm.ucanr.edu/PMG/E/I-HM-ECON-EG.001.html?src=exchbt",
-              "src": "//ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-EG.001b.jpg?src=exchbt",
-            },
-          ]
+          body:
+            description: This is a description. These sucking insects (family Pentatomidae) are shield shaped. Their common ...
+            development: This is a development. Adult stink bugs are distinguished from other insects by the large ...
+            management: This is a management. Handpick the bugs and their eggs from small plants. Eliminate groundcovers...
+          images:
+          - caption: Adults of southern green stink bug (left), redshouldered stink bug, (upper right) and consperse stink bug.
+            link: http://ipm.ucanr.edu/PMG/E/I-HM-ECON-AD.015.html?src=exchbt
+            src: http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-AD.015a.jpg
+          - caption: First instars of consperse stink bug and their empty egg cases.
+            link: http://ipm.ucanr.edu/PMG/E/I-HM-ECON-EG.001.html?src=exchbt
+            src: http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-EG.001b.jpg
         - title: European Grapevine Moth
           score: 0.99
-          source: https://www2.ipm.ucanr.edu/Invasive-and-Exotic-Pests/European-grapevine-moth/?src=exchbt
-          details: Lobesia botrana, the European grapevine moth, was first reported in the United ...
-          development: In May and June, first-generation larvae web and feed on the flower clusters. Secon...
-          management: In countries where L. botrana is established, control measures are targeted at ...
+          url: https://www2.ipm.ucanr.edu/Invasive-and-Exotic-Pests/European-grapevine-moth/?src=exchbt
+          source: pestsIPM
           cutoff: false
-          image: [
-            {
-              "caption": "Adult female European grapevine moth.",
-              "link": "//ipm.ucanr.edu/PMG/L/I-LP-LBOT-AD.002.html?src=exchbt",
-              "src": "//ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-AD.002h.jpg?src=exchbt"
-            },
-            {
-              "caption": "Grape bunches with webbing, frass, and fungal infections.",
-              "link": "//ipm.ucanr.edu/PMG/L/I-LP-LBOT-CD.004.html?src=exchbt",
-              "src": "//ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-CD.004h.jpg?src=exchbt"
-            }
-          ]
+          body:
+            description: This is a description. Lobesia botrana, the European grapevine moth, was first reported in the United ...
+            development: This is a development. In May and June, first-generation larvae web and feed on the flower clusters. Secon...
+            management: This is a management. In countries where L. botrana is established, control measures are targeted at ...
+          images: 
+          - caption: Adult female European grapevine moth.
+            link: http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-AD.002.html?src=exchbt
+            src: http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-AD.002h.jpg
+          - caption: Grape bunches with webbing, frass, and fungal infections.
+            link: http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-CD.004.html?src=exchbt
+            src: http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-CD.004h.jpg
+        - title: Missing images
+          score: 0.99
+          url: https://www2.ipm.ucanr.edu/Invasive-and-Exotic-Pests/European-grapevine-moth/?src=exchbt
+          source: pestsIPM
+          cutoff: false
+          body:
+            description: This is a description. Lobesia botrana, the European grapevine moth, was first reported in the United ...
+            development: This is a development. In May and June, first-generation larvae web and feed on the flower clusters. Secon...
+            management: This is a management. In countries where L. botrana is established, control measures are targeted at ...
+          images: []
   utter_test_imgupload:
   - text: "Select a pest related image to upload."
     custom:

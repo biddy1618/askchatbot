@@ -101,7 +101,7 @@ def _get_results(questions: List) -> List:
                 logger.error(f'Error: Failed on parsing response on question - "{q}", exit. . {type(e).__name__}: "{e}".')
 
             for r1 in r:
-                result.append(r1['meta'])
+                result.append(r1)
 
 
             DATA['message'] = '/intent_affirm'
@@ -159,7 +159,7 @@ def _calc_stats_valid_queries() -> Tuple[int, dict]:
             answer = answers[i]
             topn = [False, False, False, False]
             for i1, r1 in enumerate(r):
-                res_url = r1['url'] if r1['source'] == 'youtube' else r1['url'].split('?')[0]
+                res_url = r1['url'] if r1['source'] == 'pestsVideos' else r1['url'].split('?')[0]
                 if res_url in answer:
                     if i1 == 0:
                         topn[0] = True

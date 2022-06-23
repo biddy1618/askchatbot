@@ -13,15 +13,41 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '14.06.22'
+version     = '21.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4'
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
+## embed_url = 'all-MiniLM-L6-v2'
 # embed_url = 'paraphrase-MiniLM-L6-v2'
-embed_url = 'paraphrase-MiniLM-L12-v2'
 # embed_url = 'bert-base-nli-mean-tokens'
+# embed_url = 'stsb-distilbert-base'
+# embed_url = 'paraphrase-multilingual-MiniLM-L12-v2'
+# embed_url = 'all-mpnet-base-v2'
+## Best one so far
+embed_url = 'all-distilroberta-v1'
+# embed_url = 'distiluse-base-multilingual-cased-v2'
+# embed_url = 'paraphrase-mpnet-base-v2'
+# embed_url = 'paraphrase-MiniLM-L12-v2'
+## embed_url = 'paraphrase-xlm-r-multilingual-v1'
+## embed_url = 'distiluse-base-multilingual-cased'
+## embed_url = 'paraphrase-distilroberta-base-v1'
+## embed_url = 'allenai-specter '
+## embed_url = 'distiluse-base-multilingual-cased-v2'
+## embed_url = 'paraphrase-multilingual-mpnet-base-v2'
+## embed_url = 'paraphrase-distilroberta-base-v2'
+## embed_url = 'multi-qa-MiniLM-L6-cos-v1'
+## embed_url = 'LaBSE'
+## embed_url = 'distilbert-base-nli-stsb-mean-tokens'
+## embed_url = 'multi-qa-mpnet-base-dot-v1'
+## embed_url = 'paraphrase-MiniLM-L3-v2'
+## embed_url = 'sentence-t5-large'
+## embed_url = 'stsb-roberta-base-v2'
+## embed_url = 'distiluse-base-multilingual-cased-v1'
+## embed_url = 'msmarco-distilbert-dot-v5'
+## embed_url = 'multi-qa-mpnet-base-cos-v1'
+## embed_url = 'all-mpnet-base-v1'
 
 es_combined_index   = 'combined'
 es_field_limit      = 32766
@@ -31,7 +57,7 @@ es_search_size  = 100
 es_cut_off      = 0.4
 es_top_n        = 10
 es_ask_weight   = 0.6
-es_slots_weight = 0.3
+es_slots_weight = 0.1
 
 if debug:
 
