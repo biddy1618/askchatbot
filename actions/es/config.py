@@ -14,8 +14,8 @@ embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
 version     = '21.06.22'
-stage       = 'dev'
-# stage       = 'prod'
+# stage       = 'dev'
+stage       = 'prod'
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4'
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
