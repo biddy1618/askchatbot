@@ -19,12 +19,17 @@ stage       = 'dev'
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4'
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5'
+## embed_url = 'all-MiniLM-L6-v2'
 # embed_url = 'paraphrase-MiniLM-L6-v2'
-# embed_url = 'paraphrase-MiniLM-L12-v2'
 # embed_url = 'bert-base-nli-mean-tokens'
 # embed_url = 'stsb-distilbert-base'
+# embed_url = 'paraphrase-multilingual-MiniLM-L12-v2'
 # embed_url = 'all-mpnet-base-v2'
 embed_url = 'all-distilroberta-v1'
+# embed_url = 'distiluse-base-multilingual-cased-v2'
+# embed_url = 'paraphrase-mpnet-base-v2'
+
+# embed_url = 'paraphrase-MiniLM-L12-v2'
 
 es_combined_index   = 'combined'
 es_field_limit      = 32766
