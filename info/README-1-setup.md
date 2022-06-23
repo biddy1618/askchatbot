@@ -25,6 +25,13 @@ docker compose down
 __NOTE__: The endpoint for Elasticsearch service is set up by default at `https://dev.es.chat.ask.eduworks.com/` (as indicated at `.env` file). 
 If you would like to run your own instance if ES, please, refer to file at "_./actions/es/deployment/README-1-es-deployment.md_" in this project.
 
+To test the connection to ES, run the following in the python shell of __rasa-actions__ container:
+```python
+import requests
+from requests.auth import HTTPBasicAuth 
+
+requests.get('http://host.docker.internal:9200/', auth=HTTPBasicAuth('elastic', 'changeme')).json()
+```
 
 ## Testing
 
