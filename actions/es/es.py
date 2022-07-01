@@ -255,6 +255,9 @@ def _format_result(hit) -> dict:
         for i, s in enumerate(scores):
             s1 = {'score': f'{s["score"]:.2f}'}
 
+            if s['score'] < config.es_cut_off:
+                break
+
             name, index = s['source']['name'].split('_')
             
             start       = s['source']['start'   ]
@@ -265,8 +268,12 @@ def _format_result(hit) -> dict:
 
             s1['field'] = name
             
-            if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
-            else:               s1['text'] = hit[name   ][start:end]
+            if name == 'links':
+                link = hit[name][int(index)]
+                s1['text'   ] = hit['title'] + ' - ' + link['title']
+                s1['src'    ] = link['link'] if len(link['link']) > 0  else link['src']
+            else:
+                s1['text'   ] = hit[name   ][start:end]
             
             scores_dict['top_score_' + str(i+1)] = s1
         
@@ -288,8 +295,7 @@ def _format_result(hit) -> dict:
     res['body']['management'    ] = management
 
     res['images'] = _format_images(links)
-
-    res['scores'] = _format_scores(hit)
+    res['scores'] = _format_scores(hit  )
     
     return res
 
