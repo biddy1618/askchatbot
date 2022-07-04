@@ -1,6 +1,9 @@
 import os
 import sys
 import logging
+import pickle
+
+from spacy.lang.en import English
 
 from elasticsearch import AsyncElasticsearch
 
@@ -13,7 +16,7 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '30.06.22'
+version     = '04.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
@@ -60,6 +63,19 @@ es_cut_off      = 0.4
 es_top_n        = 10
 es_ask_weight   = 0.6
 es_slots_weight = 0.1
+
+
+logger.info('----------------------------------------------')
+logger.info('Loading synonym procedure')
+tokenizer = English().tokenizer
+synonym_dict = {}
+try:
+    with open(os.path.join(os.path.dirname(__file__), 'scripts/synonym_list/transformed/synonym_pest.pickle'), 'rb') as handle:
+        synonym_dict = pickle.load(handle)
+    logger.info('Successfully loaded synonym list')
+except IOError:
+    logger.info('Failed loading synonym list')
+logger.info('----------------------------------------------')
 
 if debug:
 
