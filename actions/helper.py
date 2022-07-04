@@ -7,6 +7,8 @@ from rasa_sdk.events import (
     UserUttered
 )
 
+from actions.es import config
+
 # Dictionary for parameters debug
 params = {
     'es_search_size'    : int,
@@ -24,7 +26,7 @@ utterances = {
     'ipm'               : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
     'fallback'          : "I'm sorry, I didn't catch that. Can you rephrase?",
     'out_of_scope'      : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
-    'connect_expert'    : 'You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.',
+    'connect_expert'    : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">Ask Extension</a>.',
     'ask_problem_desc'  : 'Please describe your problem.',
     'no_results'        : 'Unfortunately, I could not find any results that might help you... Please try to reword your pest problem.',
     'results'           : 'Here is what I found based on your description:',
@@ -135,6 +137,7 @@ def _get_config_message(config):
         'Bot Configuration:</br>'
         f'Debug: {config.debug}</br>'
         f'Version: {config.version}</br>'
+        f'<strong>expert_url <i>{config.expert_url}</i></strong></br>'
         f'<strong>es_search_size <i>{config.es_search_size}</i></strong></br>'
         f'<strong>es_cut_off <i>{config.es_cut_off}</i></strong></br>'
         f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br>'

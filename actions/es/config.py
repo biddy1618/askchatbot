@@ -13,9 +13,12 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '30.06.22'
+version     = '04.06.22'
 # stage       = 'dev'
 stage       = 'prod'
+expert_url  = 'https://ucanr.edu/About/Locations/'
+# expert_url  = 'https://ask2.extension.org/open.php'
+
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4' # 512
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5' # 512
@@ -63,6 +66,7 @@ if debug:
     logger.info('----------------------------------------------')
     logger.info('Configuration variables for DEV environment')
     logger.info(f'- stage           = {stage}')
+    logger.info(f'- expert_url      = {expert_url}')
     logger.info(f'- es_search_size  = {es_search_size}')
     logger.info(f'- es_cut_off      = {es_cut_off}')
     logger.info(f'- es_top_n        = {es_top_n}')
