@@ -86,24 +86,24 @@ async def _handle_es_query(
         list: return list of hits. 
     '''    
     
-    tokens = config.tokenizer(query)
-    query_modified = ""
-    replace = False
-    for token in tokens:
-        t = token.text.lower()
-            
-        if t in config.synonym_dict:
-            query_modified += config.synonym_dict[t]
-            query_modified += token.whitespace_
-            replace = True
-        else:
-            query_modified += token.text_with_ws
-        
-    if not replace:
-        query_modified = query
+    def _synonym_replace(text):
+        tokens = config.tokenizer(text)
+        text_modified = ""
+        for token in tokens:
+            t = token.text.lower()
+                
+            if t in config.synonym_dict:
+                text_modified += config.synonym_dict[t]
+                text_modified += token.whitespace_
+            else:
+                text_modified += token.text_with_ws
+
+        return text_modified    
+    
+    query = _synonym_replace(query)
 
     # TF HUB model
-    # query_vector = config.embed([query_modified]).numpy()[0]
+    # query_vector = config.embed([query]).numpy()[0]
     # if slots:
     #     slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
     #     query_vector = np.average(
@@ -113,8 +113,9 @@ async def _handle_es_query(
     #     )
     
     # Sentence Encoder model
-    query_vector = config.embed.encode([query_modified], show_progress_bar = False)[0]
+    query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     if slots:
+        slots = [_synonym_replace(s) for s in slots]
         slots_vector = np.average(
             [config.embed.encode([s], show_progress_bar = False)[0] for s in slots],
             axis = 0
