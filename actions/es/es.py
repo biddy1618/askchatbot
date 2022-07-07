@@ -9,16 +9,13 @@ from actions.es import config
 logger = logging.getLogger(__name__)
 
 async def _cos_sim_query(
-    index           : str               ,
     query_vector    : np.ndarray        ,
     filter_ids      : List[str] = None  ,
     ) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
 
     Args:
-        index           (str)       : Name of the index.
         query_vector    (np.ndarray): Query vector.
-        query_link      (bool)      : True if querying against links. Defaults to False.
         filter_ids      (List[str]) : Filter results based on the IDs given. Defaults to None.
 
     Returns:
@@ -50,9 +47,9 @@ async def _cos_sim_query(
         query['bool']['filter'].append({'ids': {'values': filter_ids     }})
 
     response = await config.es_client.search(
-        index   = index                 ,
-        query   = query                 ,
-        size    = config.es_search_size ,
+        index   = config.es_combined_index  ,
+        query   = query                     ,
+        size    = config.es_search_size     ,
         _source = source_query
     )
 
@@ -89,6 +86,22 @@ async def _handle_es_query(
         list: return list of hits. 
     '''    
     
+    def _synonym_replace(text):
+        tokens = config.tokenizer(text)
+        text_modified = ""
+        for token in tokens:
+            t = token.text.lower()
+                
+            if t in config.synonym_dict:
+                text_modified += config.synonym_dict[t]
+                text_modified += token.whitespace_
+            else:
+                text_modified += token.text_with_ws
+
+        return text_modified    
+    
+    query = _synonym_replace(query)
+
     # TF HUB model
     # query_vector = config.embed([query]).numpy()[0]
     # if slots:
@@ -102,6 +115,7 @@ async def _handle_es_query(
     # Sentence Encoder model
     query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     if slots:
+        slots = [_synonym_replace(s) for s in slots]
         slots_vector = np.average(
             [config.embed.encode([s], show_progress_bar = False)[0] for s in slots],
             axis = 0
@@ -114,8 +128,7 @@ async def _handle_es_query(
     
     
     hits = await _cos_sim_query(
-        index           = config.es_combined_index  ,
-        query_vector    = query_vector              ,
+        query_vector    = query_vector,
         filter_ids      = filter_ids
     )
 
