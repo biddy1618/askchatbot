@@ -44,7 +44,7 @@ lice,louse,lice
 lizards,,lizard
 mallows,"common mallow, cheeseweed, little mallow, dwarf malva, dwarf cheeseweed, running mallow, running mallows, umbrella mallow, fairy-cheese, fairy cheese, fairy cheeses, fairy-cheeses, doll-cheese, doll cheese, doll cheeses, Dutch cheese, Dutch-cheese, cheesetts, common cheeses",mallow
 mealybugs,,mealybug
-mice,"mouse, rodent, house mouse",mice
+mice,"mouse, rodent, house mouse",mouse
 mildew,"mold, fungi, fungus",fungus
 millipedes,,millipede
 mistletoes,"leafy mistletoe, broadleafed mistletoe, dwarf mistletoe",mistletoe
@@ -68,7 +68,7 @@ psyllids,,psyllidae
 purslane,"common purslane, common purslain, common purselane, common pursland, common pursley, common pusley, common pussley, weed purslane, weed purslain, kitchen-garden purslane, garden purslain, notched purslane, rough-seeded purslane, rough-seed purslane, roughseed purslane, summer purslane, green purslane, green leaf purslane, duckweed purslane, duckweed pursley, western pusley, little hogweed purslane, little hogweed, little-hogweed, inland pigweed, fatweed",purslane
 rabbits,"coney, hare, black-tailed hare, jackrabbit, brush rabbit, bunny, bunnies, bunny rabbit, cottontail",rabbit
 raccoons,"common raccoon, racoon, northern raccoon, trash panda",raccoon
-rats,"rodent, mouse, black rat, house rat, ship rat, Norway rat, brown rat, common rat, sewer rat, Hanover rat, Norwegian rat, city rat, water rat, wharf rat",mice
+rats,"black rat, house rat, ship rat, Norway rat, brown rat, common rat, sewer rat, Hanover rat, Norwegian rat, city rat, water rat, wharf rat",rat
 scales,,scale
 scorpions,"bark scorpion, Arizona hairy scorpion, stripedtail scorpion",scorpion
 sharpshooters,,sharpshooter
@@ -86,7 +86,7 @@ termites,,termite
 thistles,"tumbleweed, salsola, Russian-thistle, Russian-thistle, Russianthistle, Russian thistle tumbleweed, Russian tumbleweed, tumbling Russian thistle, Russian-cactus, Russian cactus, Ukraine-salzkraut, Ukraine salzkraut, wind witch, wind-witch, windwitch",thistle
 thrips,thrip,thrip
 vines,,vines
-voles,"meadow mice, common vole, field vole, field mouse",vole
+voles,"meadow mice, common vole, field vole, field mouse",mouse
 wasps,"yellowjackets, yellow jackets, meat bees, hornets",wasp
 weeds,,weed
 woad,"dyer's woad, dyer's-woad, dyers' woad, dyers woad, dye woad, blue dye woad, blue woad, Marlahan mustard, asp-of-Jerusalem, asp of Jerusalem",woad
