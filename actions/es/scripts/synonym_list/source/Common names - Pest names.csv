@@ -9,7 +9,7 @@ brooms,"Scotch broom, English broom, Portugese broom, French broom, sweet broom"
 bugs,insects,bug
 buttercup,"buttercup oxalis, Bermuda buttercup, Cape oxalis, weedy Cape oxalis, Cape sorrel, African wood-sorrel, African wood sorrel, African woodsorrel, buttercup wood-sorrel, buttercup sorrel, Bermuda oxalis, Bermuda sorrel, 
 Bermuda-buttercup wood-sorrel, Bermuda buttercup wood sorrel, Bermuda-buttercup, Bermudabuttercup, weedy Bermuda buttercup, soursob, sour-sob, sour sob, soursobs, sour-sobs, sour sobs, nanny-goat's foot",buttercup
-canker,"lesion, sunken area",canker
+canker,sunken area,canker
 caterpillars,"worm, larva, oakworm, earworm, hornworm, fruitworm, pinworm, looper, cutworm",worm
 centipedes,,centipede
 chickweeds,"common stellaria, common garden chickweed, garden chickweed, introduced chickweed, chick wittles, chickwittles, chickwhirtles, chicken's meat, chickenmeat, clucken wort, cluckenweed, cluckweed, cheekweed, cheek weed, scarwort, mischievous Jack, skirt buttons, white bird's-eye, white bird's eye, little star lady",chickweed
@@ -25,7 +25,7 @@ earwigs,"pincher bug, forkytail",earwig
 firebrats,bristletail,bristletail
 fleas,,flea
 flies,,fly
-fungi,"mold, mildew, mushroom, conk, toadstool, decay, rot, rust",fungus
+fungi,"mold, mildew, mushroom, conk, toadstool, decay, rust",fungus
 gnats,,gnat
 gophers,pocket gopher,gopher
 grass,"lawn, turf, turfgrass",grass
@@ -85,7 +85,6 @@ swallows,bird,bird
 termites,,termite
 thistles,"tumbleweed, salsola, Russian-thistle, Russian-thistle, Russianthistle, Russian thistle tumbleweed, Russian tumbleweed, tumbling Russian thistle, Russian-cactus, Russian cactus, Ukraine-salzkraut, Ukraine salzkraut, wind witch, wind-witch, windwitch",thistle
 thrips,thrip,thrip
-vines,,vines
 voles,"meadow mice, common vole, field vole, field mouse",mouse
 wasps,"yellowjackets, yellow jackets, meat bees, hornets",wasp
 weeds,,weed

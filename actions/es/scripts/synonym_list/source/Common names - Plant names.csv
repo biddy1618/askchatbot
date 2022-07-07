@@ -44,11 +44,11 @@ broccoli,"Brassica oleracea var. italica, Calabrese broccoli, sprouting broccoli
 buckthorn,"Rhamnus, common buckthorn, European buckthorn, Hart's thorn, European waythorn, alder-leaved buck-thorn, alder-leaved buck thorn, alder-leaved buckthorn, alder leaved buckthorn, alder-leaved coffeeberry, alder leaved coffeeberry, alder-leafed buckthorn, alder-leaf buckthorn, alder leaf  buckthorn, alderleaf buckthorn, alder-leaf coffeeberry, alderleaf coffeeberry, low buckthorn, false dwarf alder",buckthorn
 buckwheat,"Fagopyrum esculentum, soba, silverhull buckwheat",buckwheat
 buddleja,"butterfly bush, butterfly-bush, summer lilac, orange eye",buddleja
-cabbage,"Brassica oleracea var. capitata, kale, kales, leaf cabbage",cabbage
+cabbage,"Brassica oleracea var. capitata, kale, leaf cabbage, cabbages",cabbage
 cactus,"succulent, prickly pear, Opuntia, Saguaro",cactus
 caesalpinia,"peacock flower, red bird of paradise, Mexican bird of paradise, dwarf poinciana, pride of Barbados, Barbados flower fence, flos pavonis, flamboyant-de-jardin, ohai aliʻi",caesalpinia
 camellia,"Camellia japonica, Japanese camellia, common camellia",camellia
-caneberries,"blueberries, raspberries, berries, brambles, brambleberries, blackberries, boysenberries, Marionberries, tayberries, loganberries",blackberry
+caneberries,"blueberries, raspberries, brambles, brambleberries, blackberries, boysenberries, Marionberries, tayberries, loganberries",blackberry
 cantaloupe,"muskmelon, musk melon, mush melon, Cucumis melo, rock melon, sweet melon, spanspek",cantaloupe
 carnation,"Dianthus caryophyllus, clove pink, gillies, gilliflower, Jove’s flower, nelka, scaffold flower, sops-in-wine",carnation
 carob,"Ceratonia siliqua, carob tree, St John's-bread, locust bean",carob
@@ -88,7 +88,7 @@ eggplants,"Solanum melongena, aubergine, brinjal",eggplant
 elderberry,"Sambucus, elder, black elder, European elder,  European elderberry, European black elderberry, tramman, American elderberry, common elderberry, American elder",elderberry
 elm,"Ulmus, American elm, slippery elm, cedar elm, winged elm, September elm",elm
 escallonia,"pink escallonia, cordoba escallonia, red claws",escallonia
-eucalyptus,"gum, sweetgum, Tasmanian blue gum, blue gum, red gum, sugar gum, red ironbark, silver dollar gum, lemon scented gum",eucalyptus
+eucalyptus,"sweetgum, Tasmanian blue gum, blue gum, red gum, sugar gum, red ironbark, silver dollar gum, lemon scented gum",eucalyptus
 eugenia,"Australian brush cherry, Syzygium paniculatum, magenta lilly pilly, magenta cherry",eugenia
 euonymus,"spindle, spindle tree, burning-bush, strawberry-bush, wahoo, wintercreeper ",euonymus
 ficus,"fig, Indian laurel, Laurel fig",ficus
@@ -102,20 +102,20 @@ gardenia,"Cape jasmine, Gardenia augusta, Gardenia jasminoides",gardenia
 garlic,"Allium sativum, cultivated garlic, camphor of the poor, clove of garlic, nectar of the Gods, Rocambole, Rocamboles, rustic treacle, serpent garlic, stinking rose",garlic
 geranium,Pelargoniun,geranium
 ginkgo,"maidenhair tree, gingko, kew tree",ginkgo
-gladiolus,,gladiolus
+gladiolus,"sword lily, marsh gladiolus",gladiolus
 gooseberry,"Ribes, currant",currant
 grapes,Vitus,grapes
-grevillea,,grevillea
-hackberry,,hackberry
-hawthorn,,hawthorn
+grevillea,"silk oak, silky oak, spider flower, Kahlil flower",grevillea
+hackberry,"Celtis, nettletree, sugarberry, beaverwood",hackberry
+hawthorn,"Crataegus, thornapple, hawberry",hawthorn
 hazelnut,"California hazel, filbert, Corylus",hazelnut
-heath,,heath
-heather,,heather
-hebe,,hebe
-hibiscus,,hibiscus
-holly,,holly
-honeysuckle,,honeysuckle
-hopbush,,dodonaea
+heath,Erica,heath
+heather,Calluna,heather
+hebe,"showy-speedwell, New Zealand hebe, shrubby Veronica",hebe
+hibiscus,"rosemallow, rose-mallow, China rose, shoeblack plant, China-rose",hibiscus
+holly,"Ilex, Christmas holly, common holly, English holly, European holly, Dwarf burford holly",holly
+honeysuckle,"California honeysuckle, Lonicera, Japanese honeysuckle, woodbine, common honeysuckle, common woodbine, white honeysuckle",honeysuckle
+hopbush,"Dodonaea, hopseed, native hop, broadleaf hopbush, Florida hopbush, hopseed bush, switch sorrel, varnish, chapoliztle, casol",dodonaea
 hornbeam,,hornbeam
 hydrangea,,hydrangea
 hypericum,,hypericum
@@ -187,7 +187,7 @@ prunes,"dried plums, stone fruit",almond
 pumpkins,,pumpkin
 pyracantha,,pyracantha
 quince,pome fruit,apple
-raspberries,"caneberries, berries",blackberry
+raspberries,"caneberries",blackberry
 redberry,,buckthorn
 redbud,,redbud
 redwood,,redwood

@@ -33,7 +33,7 @@ beech,"beech, common beech, european beech, fagus"
 beefwood,"australian pine, beefwood, casuarina, ironwood, she-oak, sheoak, swamp oak, whistling pine"
 begonia,begonia
 birch,"american dwarf birch, betula, birch, birch tree, birchtree, canoe birch, interior western birch, paper birch, red birch, rocky mountain birch, spring birch, water birch, western black birch, western red birch, western river birch, western water birch, yellow birch"
-blackberry,"berries, black berry, black-berry, blackberries, blackberry, blueberries, boysenberries, bramble, brambleberries, brambles, california blackberry, caneberries, cloud berry, cloud-berry, cloudberry, cutleaf blackberry, dewberry, elmleaf blackberry, flowering raspberry, himalayan blackberry, loganberries, marionberries, raspberries, raspberry, raspberry bush, rubus, salmon berry, salmon-berry, salmonberry, tayberries, thimble berry, thimble-berry, thimbleberry"
+blackberry,"black berry, black-berry, blackberries, blackberry, blueberries, boysenberries, bramble, brambleberries, brambles, california blackberry, caneberries, cloud berry, cloud-berry, cloudberry, cutleaf blackberry, dewberry, elmleaf blackberry, flowering raspberry, himalayan blackberry, loganberries, marionberries, raspberries, raspberry, raspberry bush, rubus, salmon berry, salmon-berry, salmonberry, tayberries, thimble berry, thimble-berry, thimbleberry"
 bottlebrush,"bottlebrush, crimson bottle brush, crimson bottle-brush, crimson bottlebrush, crimson-bottlebrush, melaleuca, rock wattle myrtle, weeping bottle brush, weeping bottle-brush, weeping bottlebrush"
 bougainvillea,"bougainvillea, paperflower"
 boxwood,"box, boxwood, buxus, english boxwood"
@@ -41,7 +41,7 @@ broccoli,"brassica oleracea var. italica, broccoli, calabrese broccoli, sproutin
 buckthorn,"alder leaf  buckthorn, alder leaved buckthorn, alder leaved coffeeberry, alder-leaf buckthorn, alder-leaf coffeeberry, alder-leafed buckthorn, alder-leaved buck thorn, alder-leaved buck-thorn, alder-leaved buckthorn, alder-leaved coffeeberry, alderleaf buckthorn, alderleaf coffeeberry, buckthorn, coffeeberry, common buckthorn, european buckthorn, european waythorn, false dwarf alder, hart's thorn, low buckthorn, redberry, rhamnus"
 buckwheat,"buckwheat, fagopyrum esculentum, silverhull buckwheat, soba"
 buddleja,"buddleja, butterfly bush, butterfly-bush, orange eye, summer lilac"
-cabbage,"brassica oleracea var. capitata, cabbage, kale, kales, leaf cabbage"
+cabbage,"brassica oleracea var. capitata, cabbage, cabbages, kale, leaf cabbage"
 cactus,"cactus, opuntia, prickly pear, saguaro, succulent"
 caesalpinia,"barbados flower fence, caesalpinia, dwarf poinciana, flamboyant-de-jardin, flos pavonis, mexican bird of paradise, ohai aliʻi, peacock flower, pride of barbados, red bird of paradise"
 camellia,"camellia, camellia japonica, common camellia, japanese camellia"
@@ -75,14 +75,14 @@ cypress,"chamaecyparis, cupressus, cypress, false cypress"
 daffodil,"daffadown dilly, daffodil, daffydowndilly, jonquil, lent lily, narcissus, paperwhite"
 dahlia,"anemone dahlia, ball dahlia, cactus dahlia, collarette dahlia, dahlia, decorative dahlia, dinner plate dahlia, garden dahlia, mignon dahlia, orchid dahlia, peony dahlia, pompon dahlia, semi cactus dahlia, single dahlia, waterlily dahlias"
 daphne,"daphne, fragrant daphne, lilac daphne, rock daphne, winter daphne"
-dodonaea,"dodonaea, dodonaea viscosa, hopbush, hopseed tree"
+dodonaea,"broadleaf hopbush, casol, chapoliztle, dodonaea, dodonaea viscosa, florida hopbush, hopbush, hopseed, hopseed bush, hopseed tree, native hop, switch sorrel, varnish"
 dogwood,"common dogwood, cornus, dogwood, flowering dogwood, kousa dogwood, pacific dogwood"
 dracaena,"cordyline, corn plant, dracaena, dragon tree, ti tree"
 eggplant,"aubergine, brinjal, eggplant, eggplants, solanum melongena"
 elderberry,"american elder, american elderberry, black elder, common elderberry, elder, elderberry, european black elderberry, european elder, european elderberry, sambucus, tramman"
 elm,"american elm, cedar elm, elm, september elm, slippery elm, ulmus, winged elm"
 escallonia,"cordoba escallonia, escallonia, pink escallonia, red claws"
-eucalyptus,"blue gum, eucalyptus, gum, lemon scented gum, red gum, red ironbark, silver dollar gum, sugar gum, sweetgum, tasmanian blue gum"
+eucalyptus,"blue gum, eucalyptus, lemon scented gum, red gum, red ironbark, silver dollar gum, sugar gum, sweetgum, tasmanian blue gum"
 eugenia,"australian brush cherry, eugenia, magenta cherry, magenta lilly pilly, syzygium paniculatum"
 euonymus,"burning-bush, euonymus, spindle, spindle tree, strawberry-bush, wahoo, wintercreeper"
 ficus,"ficus, fig, indian laurel, laurel fig"
@@ -94,18 +94,18 @@ gardenia,"cape jasmine, gardenia, gardenia augusta, gardenia jasminoides"
 garlic,"allium sativum, camphor of the poor, clove of garlic, cultivated garlic, garlic, nectar of the gods, rocambole, rocamboles, rustic treacle, serpent garlic, stinking rose"
 geranium,"geranium, pelargoniun"
 ginkgo,"gingko, ginkgo, kew tree, maidenhair tree"
-gladiolus,gladiolus
+gladiolus,"gladiolus, marsh gladiolus, sword lily"
 grapes,"grapes, vitus"
-grevillea,grevillea
-hackberry,hackberry
-hawthorn,hawthorn
+grevillea,"grevillea, kahlil flower, silk oak, silky oak, spider flower"
+hackberry,"beaverwood, celtis, hackberry, nettletree, sugarberry"
+hawthorn,"crataegus, hawberry, hawthorn, thornapple"
 hazelnut,"california hazel, corylus, filbert, hazelnut"
-heath,heath
-heather,heather
-hebe,hebe
-hibiscus,hibiscus
-holly,holly
-honeysuckle,honeysuckle
+heath,"erica, heath"
+heather,"calluna, heather"
+hebe,"hebe, new zealand hebe, showy-speedwell, shrubby veronica"
+hibiscus,"china rose, china-rose, hibiscus, rose-mallow, rosemallow, shoeblack plant"
+holly,"christmas holly, common holly, dwarf burford holly, english holly, european holly, holly, ilex"
+honeysuckle,"california honeysuckle, common honeysuckle, common woodbine, honeysuckle, japanese honeysuckle, lonicera, white honeysuckle, woodbine"
 hornbeam,hornbeam
 hydrangea,hydrangea
 hypericum,hypericum
