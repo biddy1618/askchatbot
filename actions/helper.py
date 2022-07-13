@@ -1,3 +1,4 @@
+from pickle import GET
 from typing import Dict, Text, Any, List, Tuple
 
 from rasa_sdk import Tracker
@@ -31,7 +32,7 @@ utterances = {
     'no_results'        : 'Unfortunately, I could not find any results that might help you... Please try to reword your pest problem.',
     'results'           : 'Here is what I found based on your description:',
     'add_help'          : 'Anything else I can help with?',
-    'more_details'      : 'Please provide more information such as what the pest or damage looks like or where it was found.',
+    'more_details'      : 'Please provide additional information.',
     'ask_more_details'  : 'Did that answer your question? If not, can you give me more information?',
     'debug_slots'       : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
     'debug_no_results'  : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
@@ -182,7 +183,76 @@ def _get_entity_groups(entities):
             g[r] = sorted(g[r], key = lambda x: x[0])
 
     return slots
+
+def _get_add_message(es_data):
+    '''Get message for additional message regarding pests and location of the entities.'''
     
+    # check if pest entity exists
+    def _get_pest(slots):
+
+        pest_entity = None
+        for group in slots.values():
+            if 'pest' in group:
+                for entity in group.get('pest'):
+                    if entity[1] in ['name', 'type', 'part']:
+                        pest_entity = entity[2]
+                        break
+                else:
+                    continue
+                break
+        
+        return pest_entity
+    
+    # check if location entity exists
+    def _get_location(slots):
+
+        location_entity = None
+        for group in slots.values():
+            for role in group.values():
+                for entity in role:
+                    if entity[1] in ['location']:
+                        location_entity = entity[2]
+                        break
+                else:
+                    continue
+                break
+            else:
+                continue
+            break
+        
+        return location_entity
+    
+    def _get_plant_or_damage(slots):
+
+        plant_or_damage_entity = None
+        for group in slots.values():
+            for entity in group.get('plant', []):
+                if entity[1] in ['name', 'type', 'part', 'location']:
+                    plant_or_damage_entity = entity[2]
+                    break
+            for entity in group.get('damage', []):
+                if entity[1] in ['name', 'type', 'part', 'location']:
+                    plant_or_damage_entity = entity[2]
+                    break
+            else:
+                continue
+            break
+        
+        return plant_or_damage_entity
+
+    
+    slots = es_data['slots'] if es_data is not None and 'slots' in es_data else {}
+    pest_entity     = _get_pest(slots)
+    location_entity = _get_location(slots)
+    other_entity    = _get_plant_or_damage(slots)
+    message         = ''
+    if pest_entity and not location_entity:
+        message = f' For example, can you tell me where you see {pest_entity}, (e.g. is it indoors or outdoors)?'
+    elif not pest_entity and other_entity:
+        message = f' For example, have you seen any bugs around the {other_entity}? If so, what do they look like?'
+    
+    return message
+
 
 def _process_slots(slots, prev_slots = None):
     '''Get slots utterance and compose slots query.'''

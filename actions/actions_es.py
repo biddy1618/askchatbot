@@ -96,7 +96,7 @@ class ValidateESQueryForm(FormValidationAction):
                 for e in roles['plant'  ]: logger.info(f'validate_es_query_form - extract_problem_details - plant related  - (entity: {e[1]}, value: {e[2]})')
 
         logger.info(f'validate_es_query_form - extract_problem_details - END')
-        
+
         return {'problem_details': slots}
 
 
@@ -167,7 +167,7 @@ class ActionSubmitESQueryForm(Action):
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
-                
+
                 if top_n == 0:
                     dispatcher.utter_message(text = helper.utterances['no_results'])
                 else:
@@ -177,8 +177,14 @@ class ActionSubmitESQueryForm(Action):
                 
             if results:
                 es_data['filter_ids'] = filter_ids
-                events.append(SlotSet('es_data', es_data))
-                events.append(FollowupAction('es_result_form'))
+                top_score = float(res['data'][0]['score'])
+                if top_score >= 0.6:
+                    events = helper._reset_slots(tracker)
+                    events.append(SlotSet('done_query', True))
+                    dispatcher.utter_message(text = helper.utterances['add_help'], buttons = buttons)
+                else:
+                    events.append(SlotSet('es_data', es_data))
+                    events.append(FollowupAction('es_result_form'))
             else:
                 events = helper._reset_slots(tracker)
                 events.append(SlotSet('done_query', True))
@@ -208,19 +214,10 @@ class ActionAskForProblemDescriptionAdd(Action):
 
         logger.info('action_ask_problem_description_add - START')
         es_data = tracker.get_slot('es_data')
-        
-        required_utterances = {
-            'plant_name'    : 'plant name'              ,
-            'plant_type'    : 'plant type'              ,
-            'plant_part'    : 'plant part'              ,
-            'plant_damage'  : 'damage caused to plant'  ,
-            'plant_pest'    : 'pest name or description',
-            'pest_location' : 'location of pest'
-        }
 
         intent_prev = tracker.latest_message['intent']['name']
         buttons     = []
-        message     = ''  
+        message     = ''
         if intent_prev == 'intent_deny':
             message = helper.utterances['more_details']
         else:
@@ -231,17 +228,10 @@ class ActionAskForProblemDescriptionAdd(Action):
                 helper.buttons['deny_question'  ],
                 helper.buttons['deny_expert'    ],
             ]
-        add_detail = False
-        if es_data is not None and 'slots' in es_data:
-            for s in required_utterances.keys():
-                if s not in es_data['slots'].keys():
-                    if not add_detail:  message += ' (like ' + required_utterances[s]
-                    else:               message += ', ' + required_utterances[s]
-                    add_detail = True
+            add_details = helper._get_add_message(es_data)
+            logger.info(f'action_ask_problem_description_add - addition message - f{add_details}')
+            message += add_details
         
-        if add_detail:  message += ').'
-        else:           message += '.'
-
         dispatcher.utter_message(text = message, buttons = buttons)
 
         logger.info('action_ask_problem_description_add - END')
