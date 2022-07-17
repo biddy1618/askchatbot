@@ -8,15 +8,11 @@ from actions.es import config
 
 logger = logging.getLogger(__name__)
 
-async def _cos_sim_query(
-    query_vector    : np.ndarray        ,
-    filter_ids      : List[str] = None  ,
-    ) -> dict:
+async def _cos_sim_query(query_vector: np.ndarray) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
 
     Args:
         query_vector    (np.ndarray): Query vector.
-        filter_ids      (List[str]) : Filter results based on the IDs given. Defaults to None.
 
     Returns:
         dict: Return hits.
@@ -38,13 +34,8 @@ async def _cos_sim_query(
                         "inner_hits": {"size": 3, "name": "nested", "_source": source_nested},
                         "query"     : {"function_score": {"script_score": {"script": script}}}}
             },
-            "filter"    : [],
-            "must_not"  : []
         }
     }
-
-    if filter_ids is not None:
-        query['bool']['filter'].append({'ids': {'values': filter_ids     }})
 
     response = await config.es_client.search(
         index   = config.es_combined_index  ,
@@ -72,15 +63,13 @@ async def _cos_sim_query(
 
 async def _handle_es_query(
     query       : str               ,
-    slots       : List[str] = None  ,
-    filter_ids  : List[str] = None  ,
+    slots       : List[str] = None
     ) -> list:
     '''Perform search in ES base.
 
     Args:
         query       (str)       : Query statement.
         slots       (List[str]) : Additional entity queries. Defaults to None.
-        filter_ids  (List[str]) : IDs of docs that should be considered. Defaults to None.
 
     Returns:
         list: return list of hits. 
@@ -111,17 +100,14 @@ async def _handle_es_query(
     # Sentence Encoder model
     query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     
-    hits = await _cos_sim_query(
-        query_vector    = query_vector,
-        filter_ids      = filter_ids
-    )
+    hits = await _cos_sim_query(query_vector = query_vector)
 
-    return hits
+    return hits, query
 
 def _handle_es_result(
     hits    : list,
     filter  : bool = True
-    ) -> Tuple[list, list]:
+    ) -> list:
     '''Process the ES query results (like filtering, reweighting, etc).
 
     Args:
@@ -129,7 +115,7 @@ def _handle_es_result(
         filter  (bool): If cut off filter should be applied. Defaults to True.
 
     Returns:
-        Tuple[list, list]: filtered and processed ES query results
+        list: filtered and processed ES query results
     '''
 
     for h in hits: 
@@ -141,10 +127,9 @@ def _handle_es_result(
     if filter:
         hits = [h for h in hits if h['_score'] > config.es_cut_off]
     
-    filter_ids = [h['_id'] for h in hits]
     hits = sorted(hits, key = lambda h: h['_score'], reverse = True)
 
-    return hits, filter_ids
+    return hits
 
 # Disable for the new view
 # def _format_result(hit) -> dict:
@@ -296,11 +281,11 @@ def _format_result(hit) -> dict:
     
     return res
 
-def _get_text(hits: dict) -> dict:
+def _get_text(hits: list) -> dict:
     '''Process results for output.
 
     Args:
-        hits (dict): Sorted results from ES query.
+        hits (list): Sorted results from ES query.
         
     Returns:
         dict: Data for chatbot to return.
@@ -324,27 +309,25 @@ def _get_text(hits: dict) -> dict:
 
 async def submit(
     question    : str               ,
-    slots       : List[str] = None  ,
-    filter_ids  : List[str] = None
-
-    ) -> Tuple[dict, dict]:
+    slots       : List[str] = None
+    ) -> Tuple[dict, str]:
     
     '''Perform ES query, transform results, print them, and return results.
 
     Args:
         question    (str)       : Question that is asked.
         slots       (List[str]) : Pest damage description. Defaults to None.
-        filter_ids  (List[str]) : IDs of docs that should be considered. Defaults to None.
     
     Returns:
-        Tuple[dict, dict]: Results from ES query. If slots were provided, then results with slots refinement.
+        Tuple[dict, str]: Results from ES query and final transformed query that was embedded.
+                            If slots were provided, then results with slots refinement.
     '''
 
-    hits = await _handle_es_query(question, slots = slots, filter_ids = filter_ids)
+    hits, debug_query = await _handle_es_query(question, slots = slots)
     
-    hits, filter_ids = _handle_es_result(hits)    
+    hits = _handle_es_result(hits)    
     
     res = _get_text(hits)
     
-    return res, filter_ids
+    return res, debug_query
     

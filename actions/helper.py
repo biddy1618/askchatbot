@@ -36,6 +36,7 @@ utterances = {
     'ask_more_details'      : 'Did that answer your question? If not, can you give me more information?',
     'ask_more_details_pest' : ' For example, can you tell me where you see {0}, (e.g. is it indoors or outdoors)?',
     'ask_more_details_other': ' For example, have you seen any bugs around the {0}? If so, what do they look like?',
+    'debug_query'           : 'Final transformed query with synonym replacement that was used for retrieval:</br> <i>{0}<i>',
     'debug_slots'           : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
     'debug_no_results'      : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
     'debug_results'         : 'Top {0} results.',
@@ -173,7 +174,7 @@ def _get_entity_groups(entities):
     slots = {}
     for e in ent_list:
         g = e.pop('group')
-        e_tuple = (entity_order[e['entity']], e['entity'], e['value'])
+        e_tuple = (entity_order[e['entity']], e['entity'], e['value'].lower())
         if g in slots:
             r = e['role']
             if r in slots[g]: slots[g][r].append(e_tuple) 

@@ -127,9 +127,8 @@ class ActionSubmitESQueryForm(Action):
                     logger.info(f'action_submit_es_query_form - optional slots - role: {r} - {e[1]}: {e[2]}')
 
         results     = False
-        filter_ids  = []
         events      = []
-        es_data     = {'slots': slots, 'filter_ids': filter_ids}
+        es_data     = {'query': query, 'slots': slots}
         buttons     = [
             helper.buttons['start_over'     ],
             helper.buttons['request_expert' ]
@@ -145,9 +144,11 @@ class ActionSubmitESQueryForm(Action):
         
         if not config.es_imitate:            
             if config.debug:            
-                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
                 
-                res, filter_ids = await submit(query, slots = slots_query)
+                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
+                res, debug_query = await submit(query, slots = slots_query)
+                dispatcher.utter_message(text = helper.utterances['debug_query'].format(debug_query))
+                
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
@@ -162,7 +163,7 @@ class ActionSubmitESQueryForm(Action):
                     results = True
 
             else:
-                res, filter_ids = await submit(query, slots = slots_query)
+                res, _ = await submit(query, slots = slots_query)
                 
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
@@ -176,7 +177,6 @@ class ActionSubmitESQueryForm(Action):
                     results = True
                 
             if results:
-                es_data['filter_ids'] = filter_ids
                 top_score = float(res['data'][0]['score'])
                 if top_score >= 0.6:
                     events = helper._reset_slots(tracker)
@@ -229,7 +229,7 @@ class ActionAskForProblemDescriptionAdd(Action):
                 helper.buttons['deny_expert'    ],
             ]
             add_details = helper._get_add_message(es_data)
-            logger.info(f'action_ask_problem_description_add - addition message - f{add_details}')
+            if add_details: logger.info(f'action_ask_problem_description_add - additional message - {add_details}')
             message += add_details
         
         dispatcher.utter_message(text = message, buttons = buttons)
@@ -326,17 +326,19 @@ class ActionSubmitESResultForm(Action):
         elif query != 'yes':
             
             es_data             = tracker.get_slot('es_data')
+            prev_query          = es_data['query']
             prev_slots          = es_data['slots']
-            filter_ids          = es_data['filter_ids']            
             events              = []
 
             _, prev_slots                   = helper._process_slots(es_data['slots'])
             slots_utterance, slots_query    = helper._process_slots(slots, prev_slots = prev_slots)
+            query                           = '. '.join([prev_query, query])
             
             if config.debug:            
                 dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
+                res, debug_query = await submit(query, slots = slots_query)
+                dispatcher.utter_message(text = helper.utterances['debug_query'].format(debug_query))
                 
-                res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
@@ -350,7 +352,7 @@ class ActionSubmitESResultForm(Action):
                         dispatcher.utter_message(text = message , json_message = res)
 
             else:
-                res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
+                res, _ = await submit(query, slots = slots_query)
                 
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
