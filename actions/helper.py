@@ -36,6 +36,7 @@ utterances = {
     'ask_more_details'      : 'Did that answer your question? If not, can you give me more information?',
     'ask_more_details_pest' : ' For example, can you tell me where you see {0}, (e.g. is it indoors or outdoors)?',
     'ask_more_details_other': ' For example, have you seen any bugs around the {0}? If so, what do they look like?',
+    'ask_more_details_less' : ' For example, what do you need to know about the {0}?',
     'debug_query'           : 'Final transformed query with synonym replacement that was used for retrieval:</br> <i>{0}<i>',
     'debug_slots'           : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
     'debug_no_results'      : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
@@ -127,7 +128,7 @@ def _parse_config_message(text: str) -> Tuple[str, str]:
     '''Parse the configuration parameters from user (only debug mode).'''
     parameter, value = None, None
     try:
-        _, parameter, value = [t.strip() for t in text.split(' ')]
+        _, parameter, value = [t for t in text.split()]
         if parameter in params  : value = params[parameter](value)
         else                    : raise Exception  
     except Exception:
@@ -245,11 +246,17 @@ def _get_add_message(es_data):
 
     
     slots = es_data['slots'] if es_data is not None and 'slots' in es_data else {}
+    query = es_data['query']
     pest_entity     = _get_pest(slots)
     location_entity = _get_location(slots)
     other_entity    = _get_plant_or_damage(slots)
     message         = ''
-    if pest_entity and not location_entity:
+    if len(query.split()) <= 6:
+        if pest_entity:
+            message = utterances['ask_more_details_less'].format(pest_entity)
+        if other_entity:
+            message = utterances['ask_more_details_less'].format(other_entity)
+    elif pest_entity and not location_entity:
         message = utterances['ask_more_details_pest'].format(pest_entity)
     elif not pest_entity and other_entity:
         message = utterances['ask_more_details_other'].format(other_entity)

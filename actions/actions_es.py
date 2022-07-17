@@ -178,7 +178,7 @@ class ActionSubmitESQueryForm(Action):
                 
             if results:
                 top_score = float(res['data'][0]['score'])
-                if top_score >= 0.6:
+                if top_score >= 0.6 and len(query.split()) > 6:
                     events = helper._reset_slots(tracker)
                     events.append(SlotSet('done_query', True))
                     dispatcher.utter_message(text = helper.utterances['add_help'], buttons = buttons)
@@ -219,7 +219,7 @@ class ActionAskForProblemDescriptionAdd(Action):
         buttons     = []
         message     = ''
         if intent_prev == 'intent_deny':
-            message = helper.utterances['more_details']
+            message = helper.utterances['more_details']            
         else:
             message = helper.utterances['ask_more_details']
             buttons = [
