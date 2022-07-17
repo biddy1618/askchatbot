@@ -102,30 +102,14 @@ async def _handle_es_query(
     
     query = _synonym_replace(query)
 
+    if slots:
+        query = '. '.join([query] + [_synonym_replace(s) for s in slots])
+
     # TF HUB model
     # query_vector = config.embed([query]).numpy()[0]
-    # if slots:
-    #     slots_vector = np.average([config.embed([s]).numpy()[0] for s in slots] , axis = 0)
-    #     query_vector = np.average(
-    #         a       = [query_vector, slots_vector], 
-    #         weights = [1 - config.es_slots_weight, config.es_slots_weight],
-    #         axis    = 0
-    #     )
-    
+
     # Sentence Encoder model
     query_vector = config.embed.encode([query], show_progress_bar = False)[0]
-    if slots:
-        slots = [_synonym_replace(s) for s in slots]
-        slots_vector = np.average(
-            [config.embed.encode([s], show_progress_bar = False)[0] for s in slots],
-            axis = 0
-        )
-        query_vector = np.average(
-            a       = [query_vector, slots_vector], 
-            weights = [1 - config.es_slots_weight, config.es_slots_weight],
-            axis    = 0
-        )
-    
     
     hits = await _cos_sim_query(
         query_vector    = query_vector,

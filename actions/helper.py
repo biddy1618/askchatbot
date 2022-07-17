@@ -21,24 +21,26 @@ params = {
 
 # Utterances
 utterances = {
-    'greet'             : "Hi, I'm Scout, the UC IPM Assistant!",
-    'goodbye'           : 'Bye!',
-    'help'              : 'How can I help you?',
-    'ipm'               : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
-    'fallback'          : "I'm sorry, I didn't catch that. Can you rephrase?",
-    'out_of_scope'      : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
-    'connect_expert'    : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">Ask Extension</a>.',
-    'ask_problem_desc'  : 'Please describe your problem.',
-    'no_results'        : 'Unfortunately, I could not find any results that might help you... Please try to reword your pest problem.',
-    'results'           : 'Here is what I found based on your description:',
-    'add_help'          : 'Anything else I can help with?',
-    'more_details'      : 'Please provide additional information.',
-    'ask_more_details'  : 'Did that answer your question? If not, can you give me more information?',
-    'debug_slots'       : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
-    'debug_no_results'  : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
-    'debug_results'     : 'Top {0} results.',
-    'debug_slot_results': 'Results with slots improvement... Top {0} results.',
-    'debug_no_es'       : 'Not doing an actual elastic search query.',
+    'greet'                 : "Hi, I'm Scout, the UC IPM Assistant!",
+    'goodbye'               : 'Bye!',
+    'help'                  : 'How can I help you?',
+    'ipm'                   : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
+    'fallback'              : "I'm sorry, I didn't catch that. Can you rephrase?",
+    'out_of_scope'          : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
+    'connect_expert'        : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">Ask Extension</a>.',
+    'ask_problem_desc'      : 'Please describe your problem.',
+    'no_results'            : 'Unfortunately, I could not find any results that might help you... Please try to reword your pest problem.',
+    'results'               : 'Here is what I found based on your description:',
+    'add_help'              : 'Anything else I can help with?',
+    'more_details'          : 'Please provide additional information.',
+    'ask_more_details'      : 'Did that answer your question? If not, can you give me more information?',
+    'ask_more_details_pest' : ' For example, can you tell me where you see {0}, (e.g. is it indoors or outdoors)?',
+    'ask_more_details_other': ' For example, have you seen any bugs around the {0}? If so, what do they look like?',
+    'debug_slots'           : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
+    'debug_no_results'      : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
+    'debug_results'         : 'Top {0} results.',
+    'debug_slot_results'    : 'Results with slots improvement... Top {0} results.',
+    'debug_no_es'           : 'Not doing an actual elastic search query.',
 }
 
 # Buttons
@@ -247,9 +249,9 @@ def _get_add_message(es_data):
     other_entity    = _get_plant_or_damage(slots)
     message         = ''
     if pest_entity and not location_entity:
-        message = f' For example, can you tell me where you see {pest_entity}, (e.g. is it indoors or outdoors)?'
+        message = utterances['ask_more_details_pest'].format(pest_entity)
     elif not pest_entity and other_entity:
-        message = f' For example, have you seen any bugs around the {other_entity}? If so, what do they look like?'
+        message = utterances['ask_more_details_other'].format(other_entity)
     
     return message
 
