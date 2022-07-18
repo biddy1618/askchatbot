@@ -1,3 +1,4 @@
+from pickle import GET
 from typing import Dict, Text, Any, List, Tuple
 
 from rasa_sdk import Tracker
@@ -20,24 +21,28 @@ params = {
 
 # Utterances
 utterances = {
-    'greet'             : "Hi, I'm Scout, the UC IPM Assistant!",
-    'goodbye'           : 'Bye!',
-    'help'              : 'How can I help you?',
-    'ipm'               : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
-    'fallback'          : "I'm sorry, I didn't catch that. Can you rephrase?",
-    'out_of_scope'      : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
-    'connect_expert'    : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">Ask Extension</a>.',
-    'ask_problem_desc'  : 'Please describe your problem.',
-    'no_results'        : 'Unfortunately, I could not find any results that might help you... Please try to reword your pest problem.',
-    'results'           : 'Here is what I found based on your description:',
-    'add_help'          : 'Anything else I can help with?',
-    'more_details'      : 'Please provide more information such as what the pest or damage looks like or where it was found.',
-    'ask_more_details'  : 'Did that answer your question? If not, can you give me more information?',
-    'debug_slots'       : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
-    'debug_no_results'  : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
-    'debug_results'     : 'Top {0} results.',
-    'debug_slot_results': 'Results with slots improvement... Top {0} results.',
-    'debug_no_es'       : 'Not doing an actual elastic search query.',
+    'greet'                 : "Hi, I'm Scout, the UC IPM Assistant!",
+    'goodbye'               : 'Bye!',
+    'help'                  : 'How can I help you?',
+    'ipm'                   : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
+    'fallback'              : "I'm sorry, I didn't catch that. Can you rephrase?",
+    'out_of_scope'          : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
+    'connect_expert'        : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">Ask Extension</a>.',
+    'ask_problem_desc'      : 'Please describe your problem.',
+    'no_results'            : 'Unfortunately, I could not find any results that might help you... Please try to reword your pest problem.',
+    'results'               : 'Here is what I found based on your description:',
+    'add_help'              : 'Anything else I can help with?',
+    'more_details'          : 'Please provide additional information.',
+    'ask_more_details'      : 'Did that answer your question? If not, can you give me more information?',
+    'ask_more_details_pest' : ' For example, can you tell me where you see {0}, (e.g. is it indoors or outdoors)?',
+    'ask_more_details_other': ' For example, have you seen any bugs around the {0}? If so, what do they look like?',
+    'ask_more_details_less' : ' For example, what do you need to know about the {0}?',
+    'debug_query'           : 'Final transformed query with synonym replacement that was used for retrieval:</br> <i>{0}<i>',
+    'debug_slots'           : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
+    'debug_no_results'      : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
+    'debug_results'         : 'Top {0} results.',
+    'debug_slot_results'    : 'Results with slots improvement... Top {0} results.',
+    'debug_no_es'           : 'Not doing an actual elastic search query.',
 }
 
 # Buttons
@@ -123,7 +128,7 @@ def _parse_config_message(text: str) -> Tuple[str, str]:
     '''Parse the configuration parameters from user (only debug mode).'''
     parameter, value = None, None
     try:
-        _, parameter, value = [t.strip() for t in text.split(' ')]
+        _, parameter, value = [t for t in text.split()]
         if parameter in params  : value = params[parameter](value)
         else                    : raise Exception  
     except Exception:
@@ -170,7 +175,7 @@ def _get_entity_groups(entities):
     slots = {}
     for e in ent_list:
         g = e.pop('group')
-        e_tuple = (entity_order[e['entity']], e['entity'], e['value'])
+        e_tuple = (entity_order[e['entity']], e['entity'], e['value'].lower())
         if g in slots:
             r = e['role']
             if r in slots[g]: slots[g][r].append(e_tuple) 
@@ -182,7 +187,82 @@ def _get_entity_groups(entities):
             g[r] = sorted(g[r], key = lambda x: x[0])
 
     return slots
+
+def _get_add_message(es_data):
+    '''Get message for additional message regarding pests and location of the entities.'''
     
+    # check if pest entity exists
+    def _get_pest(slots):
+
+        pest_entity = None
+        for group in slots.values():
+            if 'pest' in group:
+                for entity in group.get('pest'):
+                    if entity[1] in ['name', 'type', 'part']:
+                        pest_entity = entity[2]
+                        break
+                else:
+                    continue
+                break
+        
+        return pest_entity
+    
+    # check if location entity exists
+    def _get_location(slots):
+
+        location_entity = None
+        for group in slots.values():
+            for role in group.values():
+                for entity in role:
+                    if entity[1] in ['location']:
+                        location_entity = entity[2]
+                        break
+                else:
+                    continue
+                break
+            else:
+                continue
+            break
+        
+        return location_entity
+    
+    def _get_plant_or_damage(slots):
+
+        plant_or_damage_entity = None
+        for group in slots.values():
+            for entity in group.get('plant', []):
+                if entity[1] in ['name', 'type', 'part', 'location']:
+                    plant_or_damage_entity = entity[2]
+                    break
+            for entity in group.get('damage', []):
+                if entity[1] in ['name', 'type', 'part', 'location']:
+                    plant_or_damage_entity = entity[2]
+                    break
+            else:
+                continue
+            break
+        
+        return plant_or_damage_entity
+
+    
+    slots = es_data['slots'] if es_data is not None and 'slots' in es_data else {}
+    query = es_data['query']
+    pest_entity     = _get_pest(slots)
+    location_entity = _get_location(slots)
+    other_entity    = _get_plant_or_damage(slots)
+    message         = ''
+    if len(query.split()) <= 6:
+        if pest_entity:
+            message = utterances['ask_more_details_less'].format(pest_entity)
+        if other_entity:
+            message = utterances['ask_more_details_less'].format(other_entity)
+    elif pest_entity and not location_entity:
+        message = utterances['ask_more_details_pest'].format(pest_entity)
+    elif not pest_entity and other_entity:
+        message = utterances['ask_more_details_other'].format(other_entity)
+    
+    return message
+
 
 def _process_slots(slots, prev_slots = None):
     '''Get slots utterance and compose slots query.'''

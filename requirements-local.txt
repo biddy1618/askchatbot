@@ -61,3 +61,14 @@ pipdeptree==2.2.1
 autopep8==1.6.0
 pycodestyle==2.8.0
 toml==0.10.2
+
+# pylint
+astroid==2.11.7
+dill==0.3.5.1
+isort==5.10.1
+lazy-object-proxy==1.7.1
+mccabe==0.7.0
+platformdirs==2.5.2
+pylint==2.14.4
+tomli==2.0.1
+tomlkit==0.11.1

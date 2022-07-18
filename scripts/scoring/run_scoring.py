@@ -80,9 +80,9 @@ def _get_results(questions: List) -> List:
 
         
         try:
-            r = response.json()
+            response = response.json()
             success = False
-            for r1 in r:
+            for r1 in response:
                 if 'custom' in r1:
                     success = True
                     r = r1['custom']['data']
@@ -103,20 +103,20 @@ def _get_results(questions: List) -> List:
             for r1 in r:
                 result.append(r1)
 
-
-            DATA['message'] = '/intent_affirm'
-            try:
-                response = requests.post(RASA_URL, json = DATA)
-                if response.status_code != 200:
-                    logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
+            if response[-1]['text'].startswith('Did that answer your question? If not, can you give me more information?'):
+                DATA['message'] = '/intent_affirm'
+                try:
+                    response = requests.post(RASA_URL, json = DATA)
+                    if response.status_code != 200:
+                        logger.error(f'Error: Service at {RASA_URL} is unavailable, exit.')
+                        sys.exit(1)
+                    response = response.json()
+                except Exception as e:
+                    logger.error(f'Error: Exception at posting affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
                     sys.exit(1)
-            except Exception as e:
-                logger.error(f'Error: Exception at posting affirmative message on question - "{q}", exit. {type(e).__name__}: "{e}".')
-                sys.exit(1)
             
             try:
-                r = response.json()
-                r = r[0]['text']
+                r = response[-1]['text']
                 if 'Anything else I can help with?' != r:
                     raise Exception
             except Exception as e:

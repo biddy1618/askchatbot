@@ -5,19 +5,19 @@ acacia,"mimosa, thorntree, wattle",acacia
 agave,"century plant, century-plant, centuryplant, maguey, desert agave, desert century plant, desert century-plant, desert centuryplant, desert maguey, maguey del desierto, maguey de desierto, agave del desierto",agave
 albizia,"silk plant, silk tree, sirises, albizzia, mimosa, East Indian walnut",acacia
 alder,"aldertree, Italian alder, cordate alder, alder tree, gray alder, grey alder, hoary alder, Alnus",alder
-almond,"sweet almond, common sweet almond, common almond, domestic almond, cultivated almond, cultivated sweet almond, Prunus",almond
+almond,"sweet almond, common sweet almond, common almond, domestic almond, cultivated almond, cultivated sweet almond, Prunus, tree nut",almond
 alstroemeria,"Peruvian lily, lily of the Incas, Alstromeria lily",alstroemeria
 alyssum,"sweet alyssum, carpet flower, sweet alison, Lobularia",alyssum
 andromeda,"Japanese andromeda, Japanese pieris",andromeda
 angelica,"wild celery, California angelica, dong quai, marsh angelica, poison angelica, garden angelica, seacoast angelica, ashitaba, bai zhi",angelica
 apples,"common apple, paradise apple, Malus, pome fruit",apple
-apricots,"Armenian plums, Briancon apricot, purple apricot",apricot
+apricots,"Armenian plums, Briancon apricot, purple apricot, drupe, stone fruit",apricot
 aralia,"spikenard, herbal aralia, udo, Japanese spikenard, mountain asparagus",aralia
 araucaria,"monkey puzzle tree, Chilean pine, monkey tail tree, pewen, pinonero",araucaria
 arborvitae,"northern white-cedar, eastern white-cedar, Thuja",arborvitae
 artemisia,"mugwort, wormwood, sagebrush, sagewort, sage-wort, sage wort, mug-wort, mug wort, wormwort, wormwood sage, Artemis herb, Artemis's herb, Artemis' herb, sailor's-tobacco, sailor's tobacco, sailors' tobacco, sweet sagewort, sweet mugwort, sweet wormwort, sweet wormwood, sweet worm-wood, sweet worm wood, sweet Annie, sweet annie",artemisia
 artichokes,"globe artichoke, French artichoke, Cynara",artichoke
-ash,Fraxinus,ash
+ash,"Fraxinus, fan west ash, white ash, raywood ash, California ash, European ash, Oregon ash, flowering ash, Modesto ash, evergreen ash",ash
 asparagus,"garden asparagus, sparrow grass, shatavari",asparagus
 aspen,"quaking aspen, trembling aspen, American aspen, mountain aspen, golden aspen, trembling poplar, white poplar, popple, popple tree, popple-tree, cottonwood, cotton-wood, cotton wood, cottonwood tree, cotton tree, alamo",aspen
 aster,"bushy aster, late purple aster, small white aster, willow aster, Michaelmas flower, European Michaelmas daisy, Michaelmas daisy, New York daisy",aster
@@ -30,7 +30,7 @@ gold-stem bamboo, gold stem bamboo, goldstem bamboo, yellow bamboo, fish-pole ba
 bamboo, fishing pole bamboo, fish-cane bamboo, fish cane bamboo, fishcane bamboo, running bamboo",bamboo
 barberry,"Berberis, barberry-bush, barberry bush, barberry-tree, barberry tree, berberry, berbery, berberos, Oregon-grape, Oregon grape, Oregongrape, holly-grape, holly grape, hollygrape, grape-holly, grape holly, grapeholly",barberry
 bayberry,"Myrica, bay-rum tree, candleberry, sweet gale, wax-myrtle, wax myrtle, waxmyrtle",bayberry
-beans,"Phaseolus vulgaris, common bean, French bean, runner bean, bush bean, pole bean",bean
+beans,"Phaseolus vulgaris, common bean, French bean, runner bean, bush bean, pole bean, legume",bean
 beech,"Fagus, European beech, common beech",beech
 beefwood,"Casuarina, she-oak, sheoak, ironwood, Australian pine, whistling pine, swamp oak",beefwood
 begonia,Begonia,begonia
@@ -52,8 +52,8 @@ caneberries,"blueberries, raspberries, brambles, brambleberries, blackberries, b
 cantaloupe,"muskmelon, musk melon, mush melon, Cucumis melo, rock melon, sweet melon, spanspek",cantaloupe
 carnation,"Dianthus caryophyllus, clove pink, gillies, gilliflower, Jove’s flower, nelka, scaffold flower, sops-in-wine",carnation
 carob,"Ceratonia siliqua, carob tree, St John's-bread, locust bean",carob
-carrots,Daucus carota,carrot
-cassia,"Gold medallion tree, senna",cassia
+carrots,"Daucus carota, root vegetable, garden carrot",carrot
+cassia,"gold medallion tree, senna, wild senna, coffee senna, styptic weed, candlestick senna, candlebush, Easter cassia, Christmas senna, bladder senna, scorpion senna, golden shower, purging cassia, Indian laburnum, pudding-pipe tree",cassia
 catalpa,"catawba, Catalpa tree",catalpa
 cauliflower,"Brassica oleracea var. botrytis, gobi, Cyprus colewort",cauliflower
 ceanothus,"buckbrush, California lilac, soap bush, wild lilac",ceanothus
@@ -88,23 +88,23 @@ eggplants,"Solanum melongena, aubergine, brinjal",eggplant
 elderberry,"Sambucus, elder, black elder, European elder,  European elderberry, European black elderberry, tramman, American elderberry, common elderberry, American elder",elderberry
 elm,"Ulmus, American elm, slippery elm, cedar elm, winged elm, September elm",elm
 escallonia,"pink escallonia, cordoba escallonia, red claws",escallonia
-eucalyptus,"sweetgum, Tasmanian blue gum, blue gum, red gum, sugar gum, red ironbark, silver dollar gum, lemon scented gum",eucalyptus
+eucalyptus,"Tasmanian blue gum, blue gum, red gum, sugar gum, red ironbark, silver dollar gum, lemon scented gum",eucalyptus
 eugenia,"Australian brush cherry, Syzygium paniculatum, magenta lilly pilly, magenta cherry",eugenia
 euonymus,"spindle, spindle tree, burning-bush, strawberry-bush, wahoo, wintercreeper ",euonymus
 ficus,"fig, Indian laurel, Laurel fig",ficus
 fig,"Ficus, Indian laurel, laurel fig",ficus
 filbert,"California hazel, hazelnut, Corylus",hazelnut
-fir,"Abies, true fir, conifer",fir
+fir,"Abies, true fir, conifer, silver fir, Santa Lucia fir, Japanese fir, grand fir, noble fir, red fir, Nordmann fir, Korean fir",fir
 forsythia,"golden bell, common forsythia, green-stem forsythia, weeping forsythia",forsythia
 freesia,"Freesia x hybrida, common freesia            ",freesia
 fuchsia,"common fuchsia, hummingbird fuchsia, hardy fuchsia",fuchsia
 gardenia,"Cape jasmine, Gardenia augusta, Gardenia jasminoides",gardenia
 garlic,"Allium sativum, cultivated garlic, camphor of the poor, clove of garlic, nectar of the Gods, Rocambole, Rocamboles, rustic treacle, serpent garlic, stinking rose",garlic
-geranium,Pelargoniun,geranium
+geranium,Pelargonium,geranium
 ginkgo,"maidenhair tree, gingko, kew tree",ginkgo
 gladiolus,"sword lily, marsh gladiolus",gladiolus
-gooseberry,"Ribes, currant",currant
-grapes,Vitus,grapes
+gooseberry,"Ribes, currant, black currant, golden currant, ground gooseberry, California gooseberry",currant
+grapes,"Vitus, true berry",grapes
 grevillea,"silk oak, silky oak, spider flower, Kahlil flower",grevillea
 hackberry,"Celtis, nettletree, sugarberry, beaverwood",hackberry
 hawthorn,"Crataegus, thornapple, hawberry",hawthorn
@@ -116,130 +116,130 @@ hibiscus,"rosemallow, rose-mallow, China rose, shoeblack plant, China-rose",hibi
 holly,"Ilex, Christmas holly, common holly, English holly, European holly, Dwarf burford holly",holly
 honeysuckle,"California honeysuckle, Lonicera, Japanese honeysuckle, woodbine, common honeysuckle, common woodbine, white honeysuckle",honeysuckle
 hopbush,"Dodonaea, hopseed, native hop, broadleaf hopbush, Florida hopbush, hopseed bush, switch sorrel, varnish, chapoliztle, casol",dodonaea
-hornbeam,,hornbeam
-hydrangea,,hydrangea
-hypericum,,hypericum
-impatiens,,impatiens
-iris,,iris
-ironwood,,beefwood
-ivy,,ivy
-jacaranda,,jacaranda
-jasmine,,jasmine
-juniper,,juniper
-kinnikinnick,,kinnikinnick
-lantana,,lantana
-larch,,larch
-laurel,,laurel
-lettuce,,lettuce
-lilac,,lilac
-lily,,lily
-linden,,linden
-liquidambar,,liquidambar
-locust,,locust
-loquat,,loquat
-madrone,,madrone
-magnolia,,magnolia
-mahonia,,mahonia
-manzanita,,manzanita
-maple,,maple
-marigold,,marigold
-mayten,,mayten
-melaleuca,,bottlebrush
-mesquite,,mesquite
-metrosideros,,metrosideros
-mimosa,,acacia
-mugwort,,artemisia
-mulberry,,mulberry
-myoporum,,myoporum
-myrtle,,myrtle
-nandina,,nandina
-nasturtium,,nasturtium
-nectarines,stone fruit,almond
-oak,,oak
-oleander,,oleander
-olive,,olive
-onions,,onions
-palm,,palm
-pansy,,pansy
-paperbark,,paperbark
-peaches,stone fruit,almond
-pears,,pear
-peas,,pea
-peony,,peony
-peppers,,pepper
-pepperwood,,pepperwood
-periwinkle,,periwinkle
-persimmon,,persimmon
-petunia,,petunia
-photinia,,photinia
-pine,,pine
-pittosporum,,pittosporum
-plums,stone fruit,almond
-podocarpus,,podocarpus
-pomegranate,,pomegranate
-poplar,,poplar
-poppy,,poppy
-potatoes,,potatoes
-prickly-pear,,prickly-pear
-primrose,,primrose
-privet,,privet
-prunes,"dried plums, stone fruit",almond
-pumpkins,,pumpkin
-pyracantha,,pyracantha
-quince,pome fruit,apple
-raspberries,"caneberries",blackberry
-redberry,,buckthorn
-redbud,,redbud
-redwood,,redwood
-rhamnus,,buckthorn
-rhaphiolepis,,rhaphiolepis
-rhododendron,,azalea
-rhus,,rhus
-ribes,gooseberry,currant
-rose,,rose
-rosemary,,rosemary
-sage,,sage
-sagebrush,,artemisia
-saguaro,,cactus
-saltbush,,saltbush
-salvia,,salvia
-senna,,cassia
-sequoia,,sequoia
-serviceberry,,serviceberry
-shadbush,,shadbush
-she-oak,,beefwood
-snapdragon,,snapdragon
-spinach,,spinach
-spirea,,spirea
-spruce,,spruce
-squash,,squash
-strawberries,,strawberry
-sugarbush,,sugarbush
-sumac,,sumac
-sunflower,,sunflower
-sweetbay,,sweetbay
-sycamore,,sycamore
-syringa,,syringa
-tamarisk,,tamarisk
-tanoak,,tanoak
-tarragon,,tarragon
-tobira,,tobira
-tomatoes,,tomato
-toyon,,toyon
-tulip,,tulip
-tupelo,,tupelo
-verbena,,verbena
-viburnum,,viburnum
-vinca,,vinca
-violet,,violet
-walnut,,walnut
-watermelon,melon,watermelon
-weigela,,weigela
-willow,,willow
-wisteria,,wisteria
-wormwood,,artemisia
-xylosma,,xylosma
-yew,,yew
-yucca,,yucca
-zelkova,,zelkova
-zinnia,,zinnia
+hornbeam,"Carpinus, American hornbeam, blue-beech, musclewood, muscle beech",hornbeam
+hydrangea,"bigleaf hydrangea, French hydrangea, lacecap hydrangea, mophead hydrangea, penny mac, hortensia",hydrangea
+hypericum,"gold flower, St. Johnswort, Saint-John's-wort, Rose of Sharon, Aaron's beard, goatweed, St John's Wort",hypericum
+impatiens,"New Guinea impatiens, busy Lizzie, balsam, sultana, patient Lucy, jewelweed, touch-me-not",impatiens
+iris,"Dutch iris, bulbous iris, rhizomatous iris, bearded iris, German iris, common flag, blue flag",iris
+ironwood,"Lyonothamnus floribundus, Catalina ironwood, island ironwood, fernleaf ironwood, palo fierro, Lyontree",beefwood
+ivy,"Hedera, Algerian ivy, English ivy, common ivy",ivy
+jacaranda,"fern tree, black poui, Brazilian rose wood, blue jacaranda",jacaranda
+jasmine,"Jasminum, dwarf jasmine, winter jasmine, jessamine, common jasmine, poet's jasmine, Japanese jasmine, primrose jasmine, Italian jasmine, Arabian jasmine",jasmine
+juniper,"Juniperus, common juniper, California juniper, California white cedar, desert white cedar, Western juniper, Utah juniper, Sierra juniper",juniper
+kinnikinnick,"manzanita, Arctostaphylos, common bearberry, red bearberry, kinnikinnik",kinnikinnick
+lantana,"wild sage, red sage, big sage, tick berry, Lantana verbena, and shrub sage",lantana
+larch,"Larix, western larch, tamarack, eastern larch",larch
+laurel,"English laurel, common laurel, cherry laurel",laurel
+lettuce,"Lactuca sativa, garden lettuce, leafy green, salad green",lettuce
+lilac,"Syringa, Japanese tree lilac, common lilac, purple lilac, English lilac, French lilac",lilac
+lily,"Asiatic lily, Easter lily, Oriental lily, Lilium",lily
+linden,"Tilia, basswood, lime tree, little-leaf linden, littleleaf linden",linden
+liquidambar,"sweet gum, sweetgum, redgum, satin walnut, American storax, star gum, copalm balsam, Alligator-tree, blisted, opossum-tree, sapgum. satin-walnut, liquid amber",liquidambar
+locust,"Robinia, black locust, false acacia, green locust, pea flower locust, white locust, yellow locust, bristly locust, standing sweet pea",locust
+loquat,"Eriobotrya japonica, Japanese medlar, Japanese plum",loquat
+madrone,"Arbutus menziesii, strawberry tree, Arbutus unedo, Pacific madrone, madroo, madroa, bearberry, Killarney strawberry tree, madroño, madrona, strawberry madrone ",madrone
+magnolia,"bull bay, cucumber tree, cucumber magnolia, umbrella tree, umbrella magnolia, elkwood, swamp bay",magnolia
+mahonia,"holly-leaved barberry, holly-leaf Oregon-grape",mahonia
+manzanita,"Kinnikinnick, Arctostaphylos, common bearberry, red bearberry, kinnikinnik",kinnikinnick
+maple,"Acer, Japanese maple, box elder, boxelder maple, big leaf maple, bigleaf maple, Oregon maple, vine maple, Rocky Mountain maple, mountain maple, Douglas maple",maple
+marigold,"Tagetes, African marigold, Aztec marigold, American marigold, big marigold",marigold
+mayten,"Maytenus boaria, maiten tree, mayten tree, Chile mayten tree, Chile mayten, Chilean mayten, Chilean maiten, Chilean maiten tree",mayten
+melaleuca,"bottlebrush, crimson bottlebrush, weeping bottlebrush, black tea tree, granite bottlebrush, myrtle, paperbark, rock wattle myrtle, lemon bottlebrush, tea-tree, teatree, tea tree",bottlebrush
+mesquite,"Prosopsis, honey mesquite, glandular mesquite, algarroba, screwbean mesquite, tomillo",mesquite
+metrosideros,"iron tree, New Zealand Christmas tree, pōhutukawa, New Zealand Christmas bush, 'Ohi'a lehua, lehua, 'Ohi'a ",metrosideros
+mimosa,"Albizia, silk plant, silk tree, sirises, albizzia, mimosa, East Indian walnut",acacia
+mugwort,"Artemisia, wormwood, white mugwort, common mugwort, riverside wormwood, felon herb, chrysanthemum weed, wild wormwood, old Uncle Henry, sailor's tobacco, naughty man, old man, St. John's plant",artemisia
+mulberry,"Morus, white mulberry, common mulberry, silkworm mulberry, red mulberry, moral, mora",mulberry
+myoporum,"lollipop tree, creeping boobialla, creeping myoporum, dwarf native myrtle, small leaved myoporum, ngaio tree, New Zealand ngaio; New Zealand ngaio tree; New Zealand ngaio-tree; common ngaio; lollypop tree; mousehole tree",myoporum
+myrtle,"bottlebrush, crimson bottlebrush, weeping bottlebrush, black tea tree, granite bottlebrush, myrtle, paperbark, rock wattle myrtle, lemon bottlebrush, tea-tree, teatree, tea tree, melaleuca",bottlebrush
+nandina,"heavenly bamboo, sacred bamboo",nandina
+nasturtium,"Tropaeolum, garden nasturtium, monks cress, Indian cress, common nasturtium",nasturtium
+nectarines,"Prunus persica var. nucipersica",peach
+oak,"Quercus, Valley oak, pin oak, coast live oak, blue oak, canyon live oak, Engelmann oak",oak
+oleander,"Nerium oleander, nerium, rosebay, rose bay",oleander
+olive,"Olea europaea, common olive",olive
+onions,"Allium cepa, garden onion, bulb onion, shallot",onions
+palm,"Archontophoenix, Arecastrum, Brahea, Butia, Caryota, Chamaedorea, Dypsis, Hedyscepe, Howea, Jubaea, Livistona, Phoenix, Rhapis, Sabal, Syagrus, Trachycarpus, Washingtonia, fan palm, queen palm, California fan palm, Mexican fan palm, Canary Island date palm, date palm, Australian fountain palm, bamboo palm, Chinese fountain palm, Chinese fan palm, Chinese windmill palm, Fishtail palm, Guadalupe palm, Kentia palm, king palm, lady palm, majesty palm, Mediterranean fan palm, Mexican blue palm, pindo palm, pygmy date palm, San Jose hesper palm, Senegal date palm, triangle palm",palm
+pansy,"violet, Viola, wild pansy, field pansy, johnny-jump-up, California golden violet, yellow pansy, grass pansy, heartsease, field violet",violet
+paperbark,"bottlebrush, crimson bottlebrush, weeping bottlebrush, black tea tree, granite bottlebrush, myrtle, Melaleuca, rock wattle myrtle, lemon bottlebrush, tea-tree, teatree, tea tree",bottlebrush
+peaches,"Prunus persica",peach
+pears,"Pyrus communis, common pear, European pear, pome",pear
+peas,"Pisum sativum, garden pea, snap pea",pea
+peony,"Paeonia, common garden peony, Chinese peony, common peony, European peony, California peony, wild peony",peony
+peppers,"Capsicum annuum, hot pepper, sweet pepper, chili pepper, chile pepper, Anaheim pepper, cayenne pepper, jalapeño pepper, serrano pepper, bell pepper",pepper
+pepperwood,"California bay, California bay laurel, Oregon myrtle, Umbellularia californica",pepperwood
+periwinkle,"Vinca, Vinca roseus, Catharanthus roseus, Madagascar periwinkle, bright eyes, Cape periwinkle, graveyard plant, old maid, pink periwinkle, rose periwinkle, annual vinca, running myrtle",periwinkle
+persimmon,"Diospyros, American persimmon, Japanese persimmon, Oriental persimmon, common persimmon, kaki, eastern persimmon, possumwood, date plum, winter plum, Jove's fruit, Fuyu, Hachiya",persimmon
+petunia,"Petunia x hybrida, garden petunia",petunia
+photinia,"Chinese photinia, Chinese hawthorn, red top photinia, red tip photinia, Fraser photinia, Christmas berry",photinia
+pine,"Pinus, Italian stone pine, Monterey pine, foothill pine, Torrey pine, Jeffrey pine, Ponderosa pine, Bishop pine, sugar pine, lodgepole pine",pine
+pittosporum,"tobira, Victorian box, cheesewood, Japanese pittosporum, Australian laurel, Japanese cheesewood, sweet pittosporum, native daphne",pittosporum
+plums,"Prunus domestica, common plum, damson, greengage, prune plum, European plum, Chinese plum, Victoria plum, Mirabelle, Myrobalan, cherry plum",almond
+podocarpus,"African fern pine, yew pine, fern pine, long leafed yellowwood, real yellowwood, broadleaf podocarpus, totara",podocarpus
+pomegranate,"Punica granatum, pomegranate tree, Chinese apple, winter jewels, red ruby",pomegranate
+poplar,"cottonwood, aspen, Populus, narrow-leafed cottonwood, white poplar, balsam poplar, Fremond cottonwood, quaking aspen, Lombardy poplar, black cottonwood ",aspen
+poppy,"Papaver, breadseed poppy, opium poppy, common poppy, long-headed poppy, Alpine poppy, common field poppy",poppy
+potatoes,"Solanum tuberosum, Irish potato",potatoes
+prickly-pear,"cane cholla, pigmy tuna, coast prickly pear, tulip pricklypear",prickly-pear
+primrose,"Primula, common primrose, English primrose, cowslip, wild primrose",primrose
+privet,"Ligustrum, Japanese privet, glossy privet",privet
+prunes,"dried plums, Prunus domestica, common plum, prune plum, European plum, French plum, greengage",almond
+pumpkins,"squash, winter squash, Cucurbita pepo, Cucurbita maximo, field pumpkin, common pumpkin, jack-o'-lantern",pumpkin
+pyracantha,"firethorn, narrowleaf firethorn, slender firethorn, wooly firethorn, fire thorn, fire-thorn, pyracanth",pyracantha
+quince,"pome fruit, Chaenomeles, Japanese quince, flowering quince",apple
+raspberries,"caneberries, Rubus, red raspberry",blackberry
+redberry,"Rhamnus, buckthorn, coffeeberry, spiny redberry, hollyleaf redberry, hairyleaf redberry, island redberry",buckthorn
+redbud,"Cercis, western redbud, eastern redbud, royal white, Texas redbud, Chinese redbud, Judas tree",redbud
+redwood,"coast redwood, sequoia, Sequoia sempervirens",redwood
+rhamnus,"buckthorn, coffeeberry, redberry, spiny redberry, hollyleaf redberry, hairyleaf redberry, island redberry",buckthorn
+rhaphiolepis,"India hawthorn, rhaphiolepsis, Yeddo hawthorn, Indian hawthorn",rhaphiolepis
+rhododendron,azalea,azalea
+rhus,"lemonade berry, sugarbush, sumac, wax tree, lemonade sumac",rhus
+ribes,"gooseberry, currant, black currant, golden currant, ground gooseberry, California gooseberry",currant
+rose,"Rosa, hybrid tea rose, sweetheart, grandiflora, polyantha rose, landscape shrub rose, ground cover rose, floribunda, shrub rose",rose
+rosemary,"Rosmarinus officinalis, Blue Spires, Tuscan Blue, Arp, Prostratus",rosemary
+sage,"Salvia, white sage, blue sage, mejorana, California sage, chia, purple sage, Berggarten culinary sage, bee's bliss hybrid sage",sage
+sagebrush,"Artemisia, mugwort, wormwood, sagewort, sage-wort, sage wort, mug-wort, mug wort, wormwort, wormwood sage, Artemis herb, Artemis's herb, Artemis' herb, sailor's-tobacco, sailor's tobacco, sailors' tobacco, sweet sagewort, sweet mugwort, sweet wormwort, sweet wormwood, sweet worm-wood, sweet worm wood, sweet Annie, sweet annie",artemisia
+saguaro,"cactus, Carnegiea gigantea, giant cactus, saguaro cactus",cactus
+saltbush,"Atriplex, orache, orach, mountain spinach, garden orache",saltbush
+salvia,"sage, white sage, blue sage, mejorana, California sage, chia, purple sage, Berggarten culinary sage, bee's bliss hybrid sage",sage
+senna,"Cassia, gold medallion tree, wild senna, coffee senna, styptic weed, candlestick senna, candlebush, Easter cassia, Christmas senna, bladder senna, scorpion senna, golden shower, purging cassia, Indian laburnum, pudding-pipe tree",cassia
+sequoia,"coast redwood, redwood, Sequoia sempervirens",redwood
+serviceberry,"shadbush, Amelanchier, shadwood, shadblow, sarvisberry, juneberry, saskatoon, sugarplum, wild-plum, chuckley pear",serviceberry
+shadbush,"serviceberry, Amelanchier, shadwood, shadblow, sarvisberry, juneberry, saskatoon, sugarplum, wild-plum, chuckley pear",serviceberry
+she-oak,"beefwood, coast beefwood, she-oak, Casuarina, forest-oak, mountain she-oak, river she-oak, ironwood",beefwood
+snapdragon,"Antirrhinum majus, common snapdragon, garden snapdragon, snap dragon, dog flower, dragon flower            ",snapdragon
+spinach,"Spinacia oleracea",spinach
+spirea,"meadowsweet, steeplebush",spirea
+spruce,"Picea, Norway spruce, white spruce, Black Hills spruce, black spruce, Engelmann spruce, Serbian spruce, Colorado spruce, Sitka spruce",spruce
+squash,"summer squash, zucchini, yellow squash, scallop squash, Cucurbita pepo, winter squash, acorn squash, butternut squash, kabocha squash, Cucurbita maxima, Cucurbita moschata, pumpkin",pumpkin
+strawberries,"Fragaria, Fragaria x ananassa, garden strawberry, wild strawberry, woodland strawberry, alpine strawberry",strawberry
+sugarbush,"lemonade berry, sumac, Rhus, wax tree, lemonade sumac",rhus
+sumac,"lemonade berry, sugarbush, Rhus, wax tree, lemonade sumac",rhus
+sunflower,"Helianthus, common sunflower, annual sunflower, narrowleaf sunflower, western sunflower, giant sunflower, beach sunflower, dwarf sunflower, Nuttall's sunflower, prairie sunflower",sunflower
+sweetbay,"Grecian laurel, Laurus nobilis, bay laurel, bay leaf tree, bay tree, laurel tree, sweet bag, sweet bay, tree laurel, true laurel ",sweetbay
+sycamore,"London plane tree, Platanus, California sycamore, American sycamore ",sycamore
+syringa,"lilac, Japanese tree lilac, common lilac, purple lilac, English lilac, French lilac",lilac
+tamarisk,"Tamarix, salt cedar, saltcedar, taray",tamarisk
+tanoak,"tanbark oak, tan oak, Lithocarpus densiflorus, Notholithocarpus densiflorus",tanoak
+tarragon,"Artemisia dracunculus, estragon",tarragon
+tobira,"Pittosporum tobira, Japanese cheesewood, Australian laurel, Japanese pittosporum",pittosporum
+tomatoes,"Solanum lycopersicum, tomato plant, golden apple, love apple, tomatl",tomato
+toyon,"Heteromeles arbutifolia, California holly",toyon
+tulip,"Tulipa, common tulip, garden tulip, Didier's tulip",tulip
+tupelo,"sour gum, tupelo gum, Nyssa",tupelo
+verbena,"vervain, verveine, blue vervain, garden verbena",verbena
+viburnum,"snowball bush, Burkwood viburnum, cinnamon viburnum, David viburnum, Henry's viburnum, nannyberry, sheepberry, European cranberrybush, wayfaring tree",viburnum
+vinca,"periwinkle, Vinca roseus, Catharanthus roseus, Madagascar periwinkle, bright eyes, Cape periwinkle, graveyard plant, old maid, pink periwinkle, rose periwinkle, annual vinca, running myrtle",periwinkle
+violet,"pansy, Viola, wood violet, sweet violet, English violet, common violet, florist's violet, garden violet",violet
+walnut,"Juglans regia, Persian walnut, English walnut, Carpathian walnut, Madeira walnut, common walnut",walnut
+watermelon,"Citrullus lanatus, melon, dessert watermelon, tsamma",watermelon
+weigela,"Red Prince weigela, Weigela florida",weigela
+willow,"Salix, white willow, golden weeping willow, weeping willow, globe Navajo willow, twisted Hankow willow, French pussy willow, pussy willow, Pacific willow, arroyo willow",willow
+wisteria,"Chinese wisteria, American wisteria, Japanese wisteria, Wisteria floribunda, Wisteria sinensis, Wisteria frutescens, Wisteria macrostachya",wisteria
+wormwood,"Artemisia absinthium, common wormwood, mugwort, green-ginger, felonherb, grand wormwood, absinthe, absinthium, absinthe wormwood, wermout, wermud, wormit, wormod, American wormwood, western wormwood, madder wort, wormwood sage",artemisia
+xylosma,"Xylosma congestum, shiny xylosma, dense longwood",xylosma
+yew,"Taxus, English yew, common yew, European yew",yew
+yucca,"Spanish dagger, spineless yucca, stick yucca, Adam's needle. dagger plant, Spanish bayonet, aloe yucca, needle palm, narrowleaf yucca, Joshua tree, common yucca",yucca
+zelkova,"Japanese zelkova, Zelkova serrata, Japanese elm, keyaki, tsuki",zelkova
+zinnia,"Zinnia elegans, Zinnia bicolor, common zinnia, elegant zinnia, youth-and-age, Zinnia grandiflora, Rocky Mountains zinnia, plains zinnia, Zinnia acerosa, desert zinnia, wild zinnia, white zinnia, spinyleaf zinnia",zinnia
