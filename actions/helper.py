@@ -293,6 +293,13 @@ def _process_slots(slots, prev_slots = None):
     return slots_utterance, slots_query
 
 
+def _parse_tracker_events(events):
+    '''Parse chat history - filtering in only `bot` and `user` events.'''
+    chat_history = {}
+
+    return chat_history
+
+
 # def _get_plant_names(
 #     plant_type      : Text          = 'other',
 #     n               : int           = 10) -> List[Text]:

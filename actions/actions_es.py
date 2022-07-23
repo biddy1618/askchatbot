@@ -1,3 +1,4 @@
+from pprint import pprint
 from typing import Dict, Text, Any, List
 
 from rasa_sdk import Action, Tracker
@@ -13,6 +14,8 @@ from actions import helper
 
 from actions.es import config
 from actions.es.es import submit
+
+import json
 
 import logging
 logger = logging.getLogger(__name__)

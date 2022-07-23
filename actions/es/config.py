@@ -64,6 +64,7 @@ es_top_n        = 10
 es_ask_weight   = 0.6
 es_slots_weight = 0.1
 
+events_log_file = os.path.join(os.path.dirname(__file__), 'events_log.json')
 
 logger.info('----------------------------------------------')
 logger.info('Loading synonym procedure')

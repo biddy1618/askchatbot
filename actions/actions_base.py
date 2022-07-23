@@ -17,8 +17,12 @@ from rasa_sdk.events import (
 import logging
 logger = logging.getLogger(__name__)
 
+import json
+
 from actions import helper
 from actions.es import config
+
+
 
 
 class ActionGreet(Action):
@@ -141,4 +145,32 @@ class ActionOutOfScope(Action):
 
         dispatcher.utter_message(text = helper.utterances['out_of_scope'], buttons = buttons)
         logger.info('action_out_of_scope - END')
+        return []
+
+class ActionSaveConversation(Action):
+    '''Action for saving conversation.'''
+
+    def name(self) -> Text:
+        return 'action_save_conversation'
+    
+    def run(
+        self,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any]
+        ) -> List[EventType]:
+        
+        logger.info('action_save_conversation - START')
+        
+        dispatcher.utter_message(text = 'testing saving history')
+
+        
+        chat_history = helper._parse_tracker_events(tracker.events_after_latest_restart())
+                
+        with open(config.events_log_file, 'w') as f:
+            json.dump(tracker.events, f, indent=4)
+        
+        logging.info(f'action_save_conversation - sender_id - {tracker.sender_id}')
+
+        logger.info('action_save_conversation - END')
         return []
