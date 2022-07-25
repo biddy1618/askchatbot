@@ -1,4 +1,3 @@
-from pprint import pprint
 from typing import Dict, Text, Any, List
 
 from rasa_sdk import Action, Tracker
@@ -10,12 +9,12 @@ from rasa_sdk.events import (
     EventType
 )
 
+from elasticsearch import RequestError
+
 from actions import helper
 
 from actions.es import config
-from actions.es.es import submit
-
-import json
+from actions.es.es import submit, save_chat_logs
 
 import logging
 logger = logging.getLogger(__name__)
@@ -375,3 +374,40 @@ class ActionSubmitESResultForm(Action):
 
         logger.info(f'action_submit_es_result_form - run - END')
         return events
+
+
+class ActionSaveConversation(Action):
+    '''Action for saving conversation.'''
+
+    def name(self) -> Text:
+        return 'action_save_conversation'
+    
+    async def run(
+        self,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any]
+    ) -> List[EventType]:
+        
+        logger.info('action_save_conversation - START')
+        
+
+        
+        chat_history = helper._parse_tracker_events(tracker.events)
+        
+        export = {
+            'chat_id'       : tracker.sender_id             ,
+            'timestamp'     : chat_history[0]['timestamp']  ,
+            'chat_history'  : chat_history
+        }
+
+        try:
+            await save_chat_logs(export)
+        except RequestError as e:
+            logger.error(f'action_save_conversation - error while indexing - failed to save conversation with chat_id - {export["chat_id"]}')
+        except AssertionError as e:
+            logger.error(f'action_save_conversation - error on ES side - failed to save conversation with chat_id - {export["chat_id"]}')        
+        
+        logger.info(f'action_save_conversation - success saving conversation with chat_id - {export["chat_id"]}')
+        logger.info('action_save_conversation - END')
+        return []

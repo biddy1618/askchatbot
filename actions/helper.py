@@ -1,5 +1,5 @@
-from pickle import GET
 from typing import Dict, Text, Any, List, Tuple
+from datetime import datetime
 
 from rasa_sdk import Tracker
 from rasa_sdk.events import (
@@ -234,12 +234,14 @@ def _get_add_message(es_data):
                 if entity[1] in ['name', 'type', 'part', 'location']:
                     plant_or_damage_entity = entity[2]
                     break
-            for entity in group.get('damage', []):
-                if entity[1] in ['name', 'type', 'part', 'location']:
-                    plant_or_damage_entity = entity[2]
-                    break
             else:
-                continue
+                for entity in group.get('damage', []):
+                    if entity[1] in ['name', 'type', 'part', 'location']:
+                        plant_or_damage_entity = entity[2]
+                        break
+                else:
+                    continue
+                break
             break
         
         return plant_or_damage_entity
@@ -254,7 +256,7 @@ def _get_add_message(es_data):
     if len(query.split()) <= 6:
         if pest_entity:
             message = utterances['ask_more_details_less'].format(pest_entity)
-        if other_entity:
+        elif other_entity:
             message = utterances['ask_more_details_less'].format(other_entity)
     elif pest_entity and not location_entity:
         message = utterances['ask_more_details_pest'].format(pest_entity)
@@ -295,9 +297,43 @@ def _process_slots(slots, prev_slots = None):
 
 def _parse_tracker_events(events):
     '''Parse chat history - filtering in only `bot` and `user` events.'''
-    chat_history = {}
+    chat_history = []
 
+    for event in events:
+        if event['event'] in ['user', 'bot']:
+            text        = event['text']
+            timestamp   = datetime.fromtimestamp(event['timestamp']).isoformat()
+            chat_history.append({
+                'agent'     : event['event'],
+                'timestamp' : timestamp     ,
+                'text'      : text          ,
+            })
+    
     return chat_history
+
+
+def _parse_date(aft_date = None, bfr_date = None):
+    '''Parse date for the logging report.'''
+    try:
+        if aft_date is None:
+            aft_date = datetime.min
+        else:
+
+            aft_date = datetime.strptime(aft_date, '%d.%m.%Y')
+        
+        if bfr_date is None:
+            bfr_date = datetime.max
+        else:
+            bfr_date = datetime.strptime(bfr_date, '%d.%m.%Y')
+
+        aft_date = aft_date.isoformat()
+        bfr_date = bfr_date.isoformat()
+
+    except (TypeError, ValueError) as e:
+        raise(e)
+        
+
+    return aft_date, bfr_date
 
 
 # def _get_plant_names(

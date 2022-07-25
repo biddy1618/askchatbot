@@ -1,12 +1,9 @@
-import logging
-
-from typing import List, Tuple
-
 import numpy as np
 
-from actions.es import config
+from typing import List, Tuple
+from elasticsearch import RequestError
 
-logger = logging.getLogger(__name__)
+from actions.es import config
 
 async def _cos_sim_query(query_vector: np.ndarray) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
@@ -330,4 +327,25 @@ async def submit(
     res = _get_text(hits)
     
     return res, debug_query
+
+async def save_chat_logs(
+    chat_export: dict
+    ) -> None:
+    '''_summary_
+
+    Args:
+        chat_export (dict): _description_
+    '''
+    try:
+        response = await config.es_client.index(
+            index       = config.es_logging_index   ,
+            document    = chat_export               ,
+            id          = chat_export['chat_id']    ,
+        )
+    except RequestError as e:
+        raise(e)
     
+    try:
+        assert response['result'] in ['created', 'updated']
+    except AssertionError as e:
+        raise e

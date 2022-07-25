@@ -81,7 +81,7 @@ rules:
     - intent: intent_problem_description
   - action: es_query_form
   - active_loop: es_query_form
-
+  
 - rule: Submit form for querying ES
   condition:
   - active_loop: es_query_form
