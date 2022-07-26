@@ -301,14 +301,53 @@ def _parse_tracker_events(events):
     chat_history = []
 
     for event in events:
-        if event['event'] in ['user', 'bot']:
+        if event['event'] == 'user':
+            '''
+            structure:
+                agent       keyword
+                timestamp   date
+                text        match_only_text
+                intent      keyword
+            '''
             text        = event['text']
+            intent      = event['parse_data']['intent']['name']
             timestamp   = datetime.fromtimestamp(event['timestamp']).isoformat()
             chat_history.append({
-                'agent'     : event['event'],
-                'timestamp' : timestamp     ,
-                'text'      : text          ,
+                'agent'     : 'user'    ,
+                'timestamp' : timestamp ,
+                'text'      : text      ,
+                'intent'    : intent
             })
+        elif event['event'] == 'bot':
+            '''
+            structure:
+                agent       keyword
+                timestamp   date
+                text        match_only_text
+                results     nested
+                    url         keyword
+                    score       keyword
+            '''
+            text        = event['text']
+            timestamp   = datetime.fromtimestamp(event['timestamp']).isoformat()
+            
+            chat_history.append({
+                'agent'     : 'bot'     ,
+                'timestamp' : timestamp ,
+                'text'      : text      ,
+            })
+
+            if event['data']['custom'] is not None:
+                results = []
+                custom = event['data']['custom']
+                for result in custom['data']:
+                    url     = result['url'  ]
+                    score   = result['score']
+                    results.append({
+                        'url'   : url,
+                        'score' : score
+                    })
+                chat_history[-1]['results'] = results
     
     return chat_history
 
