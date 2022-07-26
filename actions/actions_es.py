@@ -161,7 +161,7 @@ class ActionSubmitESQueryForm(Action):
                     message = helper.utterances['debug_results'].format(str(top_n))
                     if slots_query:
                         message = helper.utterances['debug_slot_results'].format(str(top_n))
-                        dispatcher.utter_message(text = message , json_message = res)
+                    dispatcher.utter_message(text = message , json_message = res)
                     results = True
 
             else:
@@ -351,7 +351,7 @@ class ActionSubmitESResultForm(Action):
                     message = helper.utterances['debug_results'].format(str(top_n))
                     if slots_query:
                         message = helper.utterances['debug_slot_results'].format(str(top_n))
-                        dispatcher.utter_message(text = message , json_message = res)
+                    dispatcher.utter_message(text = message , json_message = res)
 
             else:
                 res, _ = await submit(query, slots = slots_query)
@@ -391,10 +391,7 @@ class ActionSaveConversation(Action):
         
         logger.info('action_save_conversation - START')
         
-
-        
         chat_history = helper._parse_tracker_events(tracker.events)
-        
         export = {
             'chat_id'       : tracker.sender_id             ,
             'timestamp'     : chat_history[0]['timestamp']  ,

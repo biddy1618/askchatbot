@@ -16,6 +16,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - how are you?
 - intent: intent_goodbye
   examples: |
     - cu

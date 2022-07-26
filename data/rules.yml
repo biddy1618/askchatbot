@@ -30,12 +30,6 @@ rules:
   - action: action_iambot
   - action: action_save_conversation
 
-- rule: Fallback rule
-  steps:
-  - intent: nlu_fallback
-  - action: action_default_fallback
-  - action: action_save_conversation
-
 - rule: Out of scope messages
   steps:
   - intent: intent_out_of_scope
