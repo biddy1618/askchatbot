@@ -12,7 +12,9 @@ COPY . .
 USER root
 RUN ["pip", "install", "--upgrade", "-r", "requirements-update.txt"]
 RUN ["python", "-m", "spacy", "download", "en_core_web_trf"]
-RUN ["rasa", "train"]
+
+# uncomment if model is not pushed
+# RUN ["rasa", "train"]
 
 USER 1001
 CMD ["run", "--cors", "*"]

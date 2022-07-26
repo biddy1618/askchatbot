@@ -2,7 +2,6 @@
 .config/
 .keras/
 .rasa/
-models/
 story_graph.dot
 results/*
 

@@ -2,7 +2,6 @@
 .config/
 .keras/
 .rasa/
-models/
 results/*
 
 # Python cache 

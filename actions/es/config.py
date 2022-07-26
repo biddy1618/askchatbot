@@ -1,109 +1,130 @@
 import os
 import sys
 import logging
-from pathlib import Path
-import json
+import pickle
+
+from spacy.lang.en import English
 
 from elasticsearch import AsyncElasticsearch
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
+es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
+es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
+embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
-stage                   = os.getenv('STAGE'                 , 'dev'                                                     )
-version                 = os.getenv('DEPLOYMENT_VERSION'    , 'UNDEFINED'                                               ) 
-tf_cpp_min_log_level    = os.getenv('TF_CPP_MIN_LOG_LEVEL'  , '3'                                                       )
-tf_embed_url            = os.getenv('TFHUB_EMBEDDING_URL'   , 'https://tfhub.dev/google/universal-sentence-encoder/4'   )
-tfhub_cache_dir         = os.getenv('TFHUB_CACHE_DIR'       , '/var/tmp/tfhub_modules'                                  )
-es_username             = os.getenv('ES_USERNAME'           , 'elastic'                                                 )
-es_password             = os.getenv('ES_PASSWORD'           , 'changeme'                                                )
-es_host                 = os.getenv('ES_HOST'               , 'http://localhost:9200/'                                  )
-es_imitate              = os.getenv('ES_IMITATE'            , 'false'                                                   )
-es_imitate              = es_imitate == 'true'
+es_imitate  = False
+version     = '26.06.22'
+stage       = 'dev'
+# stage       = 'prod'
+expert_url  = 'https://ucanr.edu/About/Locations/'
+# expert_url  = 'https://ask2.extension.org/open.php'
 
-es_combined_index       = 'combined'
-debug                   = stage == 'dev'
 
-es_search_size          = os.getenv('ES_SEARCH_SIZE', '100'     )
-try: es_search_size     = int(es_search_size)
-except ValueError:
-    logger.warning('ES_SEARCH_SIZE variable should be integer, using default value - 100'   )
-    es_search_size = 100
-es_cut_off              = os.getenv('ES_CUT_OFF'    , '0.525'     )
-try: es_cut_off         = float(es_cut_off)
-except ValueError:
-    logger.warning('ES_CUT_OFF variable should be float, using default value - 0.525'         )
-    es_cut_off = 0.525
-es_top_n                = os.getenv('ES_TOP_N'      , '10'       )
-try: es_top_n           = int(es_top_n)
-except ValueError:
-    logger.warning('ES_TOP_N variable should be integer, using default value - 10'           )
-    es_cut_off = 10
-es_ask_weight           = os.getenv('ES_ASK_WEIGHT' , '0.6'     )
-try: es_ask_weight      = float(es_ask_weight)
-except ValueError:
-    logger.warning('ES_ASK_WEIGHT variable should be float, using default value - 0.6'      )
-    es_ask_weight = 0.6
-es_slots_weight         = os.getenv('ES_SLOTS_WEIGHT' , '0.3'   )
-try: es_slots_weight      = float(es_slots_weight)
-except ValueError:
-    logger.warning('ES_SLOTS_WEIGHT variable should be float, using default value - 0.3'    )
-    es_slots_weight = 0.3
+# embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4' # 512
+# embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5' # 512
+# embed_url = 'all-MiniLM-L6-v2' # 384
+# embed_url = 'paraphrase-MiniLM-L6-v2'# 384
+# embed_url = 'bert-base-nli-mean-tokens' # 768
+# embed_url = 'stsb-distilbert-base' # 768
+# embed_url = 'paraphrase-multilingual-MiniLM-L12-v2' # 384
+# embed_url = 'all-mpnet-base-v2' # 768
+## Best one so far
+embed_url = 'all-distilroberta-v1' # 768
+# embed_url = 'distiluse-base-multilingual-cased-v2' # 512
+# embed_url = 'paraphrase-mpnet-base-v2' # 768
+# embed_url = 'paraphrase-MiniLM-L12-v2' # 384
+# embed_url = 'paraphrase-xlm-r-multilingual-v1' # 768
+# embed_url = 'distiluse-base-multilingual-cased' # 512
+# embed_url = 'paraphrase-distilroberta-base-v1' # 768
+# embed_url = 'allenai-specter' # 768
+# embed_url = 'paraphrase-multilingual-mpnet-base-v2' # 768
+# embed_url = 'paraphrase-distilroberta-base-v2' # 768
+# embed_url = 'multi-qa-MiniLM-L6-cos-v1' # 384
+# embed_url = 'LaBSE' # 768
+# embed_url = 'distilbert-base-nli-stsb-mean-tokens' # 768
+# embed_url = 'multi-qa-mpnet-base-dot-v1' # 768
+# embed_url = 'paraphrase-MiniLM-L3-v2' # 384
+# embed_url = 'sentence-t5-large' # 768
+# embed_url = 'stsb-roberta-base-v2' # 768
+# embed_url = 'distiluse-base-multilingual-cased-v1' # 512
+# embed_url = 'msmarco-distilbert-dot-v5' # 768
+# embed_url = 'multi-qa-mpnet-base-cos-v1' # 768
+# embed_url = 'all-mpnet-base-v1' # 768
 
+es_combined_index   = 'combined'
+es_logging_index    = 'logs'
+es_field_limit      = 32766
+debug               = stage == 'dev'
+
+es_search_size  = 100
+es_cut_off      = 0.4
+es_top_n        = 10
+es_ask_weight   = 0.6
+es_slots_weight = 0.1
+
+logger.info('----------------------------------------------')
+logger.info('Loading synonym procedure')
+tokenizer = English().tokenizer
+synonym_dict = {}
+try:
+    with open(os.path.join(os.path.dirname(__file__), 'scripts/synonym_list/transformed/synonym_pest.pickle'), 'rb') as handle:
+        synonym_dict = pickle.load(handle)
+    logger.info('Successfully loaded synonym list')
+except IOError:
+    logger.info('Failed loading synonym list')
+logger.info('----------------------------------------------')
 
 if debug:
 
     logger.info('----------------------------------------------')
-    logger.info('Configuration variables for DEV environment'   )
-    logger.info(f'- stage           = {stage}'                  )
-    logger.info(f'- es_search_size  = {es_search_size}'         )
-    logger.info(f'- es_cut_off      = {es_cut_off}'             )
-    logger.info(f'- es_top_n        = {es_top_n}'               )
-    logger.info(f'- es_ask_weight   = {es_ask_weight}'          )
-    logger.info(f'- es_slots_weight = {es_slots_weight}'        )
+    logger.info('Configuration variables for DEV environment')
+    logger.info(f'- stage           = {stage}')
+    logger.info(f'- expert_url      = {expert_url}')
+    logger.info(f'- es_search_size  = {es_search_size}')
+    logger.info(f'- es_cut_off      = {es_cut_off}')
+    logger.info(f'- es_top_n        = {es_top_n}')
+    logger.info(f'- es_ask_weight   = {es_ask_weight}')
+    logger.info(f'- es_slots_weight = {es_slots_weight}')
     logger.info('----------------------------------------------')
-    
-    
-    _PATH = Path(__file__).parent.as_posix()
-
-    # index mappings
-    ES_COMBINED_MAPPING = json.load(open(f'{_PATH}/data/mappings/combined_mapping.json'))
-
 
 if not es_imitate:
-    
-    os.environ['TF_CPP_MIN_LOG_LEVEL']  = tf_cpp_min_log_level
-    os.environ['TFHUB_CACHE_DIR']       = tfhub_cache_dir
 
-    import tensorflow_hub as tf_hub
-    
+    # import tensorflow_hub as tf_hub
+    from sentence_transformers import SentenceTransformer
+
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch configuration:')
-    logger.info(f'- host                    = {es_host          }')
+    logger.info(f'- host                = {es_host          }')
     if debug:
-        logger.info(f'- username                = {es_username  }')
-        logger.info(f'- password                = {es_password  }')
-    logger.info(f'- tfhub_embedding_url     = {tf_embed_url     }')
-    logger.info(f'- tfhub_cache_dir         = {tfhub_cache_dir  }')
+        logger.info(f'- username            = {es_username  }')
+        logger.info(f'- password            = {es_password  }')
+    logger.info(f'- embed_url           = {embed_url        }')
+    logger.info(f'- embed_cache_dir     = {embed_cache_dir  }')
     logger.info('----------------------------------------------')
-
 
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch indexes:')
-    logger.info(f'- combined index          = {es_combined_index}')
+    logger.info(f'- combined index      = {es_combined_index}'  )
+    logger.info(f'- logging index       = {es_logging_index}'   )
     logger.info('----------------------------------------------')
 
-
     logger.info('Initializing the Elasticsearch client')
-    es_client = AsyncElasticsearch([es_host], http_auth=(es_username, es_password))
+    es_client = AsyncElasticsearch(
+        [es_host], http_auth=(es_username, es_password))
     logger.info('Done initiliazing ElasticSearch client')
 
-    logger.info(f'Start loading embedding module {tf_embed_url}')
-    embed = tf_hub.load(tf_embed_url)
-    logger.info(f'Done loading embedding module {tf_embed_url}')
+    logger.info(f'Start loading embedding module - {embed_url}')
+    # embed = tf_hub.load(embed_url)
+    embed = SentenceTransformer(
+        model_name_or_path  = embed_url         ,
+        cache_folder        = embed_cache_dir   ,
+        device              = 'cpu'             )
+    logger.info(f'Done loading embedding module - {embed_url}')
     # -------------------------------------------------------------
 else:
     logger.info('----------------------------------------------')
     logger.info('Imitating Elasticseach queries for dev purposes')
     logger.info('----------------------------------------------')
-

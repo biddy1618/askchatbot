@@ -1,0 +1,14 @@
+Plant types,synonyms,target name
+non-woody,"herbaceous, annual",non-woody
+vegetables,,vegetable
+vegetable,,vegetable
+herbs,,herb
+berry,,berry
+berries,,berry
+grapevines,vines,grapevine
+plants,,plant
+tree,,tree
+trees,,tree
+shrubs,"bushes, bush",tree
+woody,"tree, shrub, shrubs",tree
+bush,"shrub, bushes",tree

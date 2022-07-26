@@ -1,0 +1,29 @@
+version: "3.1"
+
+nlu:
+- intent: intent_out_of_scope
+  examples: |
+    - Does Orthene Systemic insecticide work to control Japanese beetles?
+    - I'm interested in finding a local source for vegetable plants that are a little unusual, and native flower sources. Is there a list or catalog of native or friendly plant growers?
+    - I'm looking for a planting guide on current weather conditions, forecast temperature in air and soil for guidance on a up to date format. I'm attempting to plant a vegetable market garden.
+    - I'm a 4-H alumni. What is the nearest club near me? If there isn't one close, can I start my own club?
+    - We would like to prepare the soil for a vegetable garden. What is the best way to prepare the soil?
+    - I'm interested in hiring a master gardener from the master gardener program. Do you have recent candidates who might be looking for a project?
+    - What are the recommended sprays to use on apple and cherry trees?
+    - I bought a farm this year, and I'm learning about regenerative agriculture. Who can I contact about what are appropriate cover crops to grow for green manure, and what are sources for seed in the area?
+    - What cultivar would you recommend for a good table raspberry, red raspberry, that is firm and good for this area.
+    - I HAVE A 13 YEAR OLD ROSEBUSH I NEED TO MOVE DUE TO LACK OF FULL SUN. CAN IT BE MOVED SAFELY NOW?
+    - Do you know an affordable source to get evergreen trees we can plant for a windbreak? We would like a windbreak for our house yard.
+    - We have two raised beds and want to add some additional soil to them this spring. What do you recommend? Is garden mulch a good choice? Also, what nutrients should we add to the soil before planting?
+    - I have a few apple trees. The one has a bent over growth form (no apical dominant stem), and has multiple suckers. It is also stunted compared to neighboring trees.  Do you know what this could be related to?
+    - Have we had our last frost for spring of 2022? I'm trying to figure out when to plant.
+    - How to apply fertilizer to our Dwarf Norway Spruce? Liquid or granulated? Pour over top including needles or at trunk drip line?
+    - What can I do about a bad case of Japanese knotweed?..its taken over the garden space complete and much of the property
+    - The trees on my property have long branches that have grown out during spring and summer. Do I have to cut them back? I'm afraid that cutting them will just cause more to be created and thus I'll be in a mode of always having to prune them back.
+    - I have a small orchard, is it too soon to prune?
+    - How can I turn my garden into compost?
+    - What is a good soil mix for blueberries?
+    - How do you tell when pears are ready to pick?
+    - Where do I find the right plants for my pond?
+    - Is winter a good time to transplant my fruit tree?
+    - I am inquiring if I may submit a soil sample and get the results to know if there are any heavy metals and/or lack of essential minerals.

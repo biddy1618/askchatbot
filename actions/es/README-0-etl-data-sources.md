@@ -11,10 +11,10 @@ More information can be found in `./scripts/es_etl.ipynb` notebook.
 
 ### Final mappings
 
-`Problem` source:
+`Dec2021` scrape:
 ```json
 {
-    "source"        : "pestsIPM/pestsDiseases/pestsTurf/pestsExotic/damagesEnvironment/damagesWeed",
+    "source"        : "pestsIPM/pestsDiseases/pestsTurf/pestsExotic/damagesEnvironment/damagesWeed/infoFruits/infoVeggies/infoFlowers",
     "name"          : "text",
     "url"           : "url",
     "description"   : "text",
@@ -24,8 +24,8 @@ More information can be found in `./scripts/es_etl.ipynb` notebook.
     "management"    : "text",
     "links": [
         {
-            "type"      : "images/video/page",
-            "caption"   : "...",
+            "type"      : "image/video/page",
+            "title"     : "...",
             "src"       : "urlSource",
             "link"      : "urlAdditional"
         },
@@ -34,26 +34,24 @@ More information can be found in `./scripts/es_etl.ipynb` notebook.
 }
 ```
 
-`Information` source:
+`Apr2021` scrape:
 ```json
 {
-    "source"        : "infoFruits/infoVeggies/infoFlowers",
+    "source"        : "infoFruitVegCultural/infoPestControl/infoPesticideControl/pestsNotes/pestsQuickTips/pestsVideos/pestsWeed",
     "name"          : "text",
     "url"           : "url",
     "description"   : "text",
-    "identification": "text",
     "development"   : "text",
     "damage"        : "text",
-    "management"    : "text",
     "links": [
         {
-            "type"      : "tips/images/problem",
-            "caption"   : "...",
+            "type"      : "images",
+            "title"     : "...",
             "src"       : "urlSource",
             "link"      : "urlAdditional"
         },
         ...
-    ],
+    ]
 }
 ```
 ## Universal Sentence Encoder
@@ -112,6 +110,26 @@ It is a list of dictionary objects with following fields:
 - `county` - county ticket was created in
 - `question` - question that has been posted
 - `answer` - responselists presented in numbered dictionary data type
+
+### Final mappings
+
+```json
+{
+    "source"        : "askExtension",
+    "name"          : "text",           # title
+    "url"           : "url",            # url
+    "description"   : "text",           # title_question
+    "links": [
+        {
+            "type"      : "tag/answer",
+            "title"     : "...",
+            "src"       : "urlSource",
+            "link"      : "urlAdditional"
+        },
+        ...
+    ]
+}
+```
 
 ### ETL and EDA
 

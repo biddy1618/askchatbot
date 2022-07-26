@@ -14,11 +14,17 @@ from rasa_sdk.events import (
     UserUtteranceReverted
 )
 
+from elasticsearch import RequestError
+
 import logging
 logger = logging.getLogger(__name__)
 
 from actions import helper
 from actions.es import config
+from actions.es.es import save_chat_logs
+
+
+
 
 
 class ActionGreet(Action):
@@ -91,7 +97,7 @@ class ActionIamBot(Action):
         logger.info('action_iambot - START')
         buttons = [helper.buttons['start_over']]
 
-        dispatcher.utter_message(text = helper.utterances['goodbye'], buttons = buttons)
+        dispatcher.utter_message(text = helper.utterances['iambot'], buttons = buttons)
         logger.info('action_iambot - END')
         return []
 
@@ -102,7 +108,7 @@ class ActionDefaultFallback(Action):
     def name(self) -> Text:
         return 'action_default_fallback'
     
-    def run(
+    async def run(
         self,
         dispatcher  : CollectingDispatcher,
         tracker     : Tracker,
@@ -114,6 +120,26 @@ class ActionDefaultFallback(Action):
             helper.buttons['start_over'     ],
             helper.buttons['request_expert' ]
         ]
+
+        logger.info('action_default_fallback - saving chat history due to `UserUtteranceReverted` action - START')
+        
+        chat_history = helper._parse_tracker_events(tracker.events)
+        
+        export = {
+            'chat_id'       : tracker.sender_id             ,
+            'timestamp'     : chat_history[0]['timestamp']  ,
+            'chat_history'  : chat_history
+        }
+
+        try:
+            await save_chat_logs(export)
+        except RequestError as e:
+            logger.error(f'action_default_fallback - error while indexing - failed to save conversation with chat_id - {export["chat_id"]}')
+        except AssertionError as e:
+            logger.error(f'action_default_fallback - error on ES side - failed to save conversation with chat_id - {export["chat_id"]}')     
+        
+        logger.info('action_default_fallback - saved chat history - END')
+        
 
         dispatcher.utter_message(text = helper.utterances['fallback'], buttons = buttons)
         logger.info('action_default_fallback - END')

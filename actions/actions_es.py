@@ -9,10 +9,12 @@ from rasa_sdk.events import (
     EventType
 )
 
+from elasticsearch import RequestError
+
 from actions import helper
 
 from actions.es import config
-from actions.es.es import submit
+from actions.es.es import submit, save_chat_logs
 
 import logging
 logger = logging.getLogger(__name__)
@@ -96,7 +98,7 @@ class ValidateESQueryForm(FormValidationAction):
                 for e in roles['plant'  ]: logger.info(f'validate_es_query_form - extract_problem_details - plant related  - (entity: {e[1]}, value: {e[2]})')
 
         logger.info(f'validate_es_query_form - extract_problem_details - END')
-        
+
         return {'problem_details': slots}
 
 
@@ -127,9 +129,8 @@ class ActionSubmitESQueryForm(Action):
                     logger.info(f'action_submit_es_query_form - optional slots - role: {r} - {e[1]}: {e[2]}')
 
         results     = False
-        filter_ids  = []
         events      = []
-        es_data     = {'slots': slots, 'filter_ids': filter_ids}
+        es_data     = {'query': query, 'slots': slots}
         buttons     = [
             helper.buttons['start_over'     ],
             helper.buttons['request_expert' ]
@@ -145,9 +146,11 @@ class ActionSubmitESQueryForm(Action):
         
         if not config.es_imitate:            
             if config.debug:            
-                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
                 
-                res, filter_ids = await submit(query, slots = slots_query)
+                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
+                res, debug_query = await submit(query, slots = slots_query)
+                dispatcher.utter_message(text = helper.utterances['debug_query'].format(debug_query))
+                
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
@@ -158,26 +161,32 @@ class ActionSubmitESQueryForm(Action):
                     message = helper.utterances['debug_results'].format(str(top_n))
                     if slots_query:
                         message = helper.utterances['debug_slot_results'].format(str(top_n))
-                        dispatcher.utter_message(text = message , json_message = res)
+                    dispatcher.utter_message(text = message , json_message = res)
                     results = True
 
             else:
-                res, filter_ids = await submit(query, slots = slots_query)
+                res, _ = await submit(query, slots = slots_query)
                 
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
-                
+
                 if top_n == 0:
                     dispatcher.utter_message(text = helper.utterances['no_results'])
                 else:
+                    dispatcher.utter_message(text = helper.utterances['results'])
                     dispatcher.utter_message(text = res['text'], json_message = res)
                     results = True
                 
             if results:
-                es_data['filter_ids'] = filter_ids
-                events.append(SlotSet('es_data', es_data))
-                events.append(FollowupAction('es_result_form'))
+                top_score = float(res['data'][0]['score'])
+                if top_score >= 0.6 and len(query.split()) > 6:
+                    events = helper._reset_slots(tracker)
+                    events.append(SlotSet('done_query', True))
+                    dispatcher.utter_message(text = helper.utterances['add_help'], buttons = buttons)
+                else:
+                    events.append(SlotSet('es_data', es_data))
+                    events.append(FollowupAction('es_result_form'))
             else:
                 events = helper._reset_slots(tracker)
                 events.append(SlotSet('done_query', True))
@@ -207,21 +216,12 @@ class ActionAskForProblemDescriptionAdd(Action):
 
         logger.info('action_ask_problem_description_add - START')
         es_data = tracker.get_slot('es_data')
-        
-        required_utterances = {
-            'plant_name'    : 'plant name'              ,
-            'plant_type'    : 'plant type'              ,
-            'plant_part'    : 'plant part'              ,
-            'plant_damage'  : 'damage caused to plant'  ,
-            'plant_pest'    : 'pest name or description',
-            'pest_location' : 'location of pest'
-        }
 
         intent_prev = tracker.latest_message['intent']['name']
         buttons     = []
-        message     = ''  
+        message     = ''
         if intent_prev == 'intent_deny':
-            message = helper.utterances['more_details']
+            message = helper.utterances['more_details']            
         else:
             message = helper.utterances['ask_more_details']
             buttons = [
@@ -230,17 +230,10 @@ class ActionAskForProblemDescriptionAdd(Action):
                 helper.buttons['deny_question'  ],
                 helper.buttons['deny_expert'    ],
             ]
-        add_detail = False
-        if es_data is not None and 'slots' in es_data:
-            for s in required_utterances.keys():
-                if s not in es_data['slots'].keys():
-                    if not add_detail:  message += ' (like ' + required_utterances[s]
-                    else:               message += ', ' + required_utterances[s]
-                    add_detail = True
+            add_details = helper._get_add_message(es_data)
+            if add_details: logger.info(f'action_ask_problem_description_add - additional message - {add_details}')
+            message += add_details
         
-        if add_detail:  message += ').'
-        else:           message += '.'
-
         dispatcher.utter_message(text = message, buttons = buttons)
 
         logger.info('action_ask_problem_description_add - END')
@@ -335,17 +328,19 @@ class ActionSubmitESResultForm(Action):
         elif query != 'yes':
             
             es_data             = tracker.get_slot('es_data')
+            prev_query          = es_data['query']
             prev_slots          = es_data['slots']
-            filter_ids          = es_data['filter_ids']            
             events              = []
 
             _, prev_slots                   = helper._process_slots(es_data['slots'])
             slots_utterance, slots_query    = helper._process_slots(slots, prev_slots = prev_slots)
+            query                           = '. '.join([prev_query, query])
             
             if config.debug:            
                 dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
+                res, debug_query = await submit(query, slots = slots_query)
+                dispatcher.utter_message(text = helper.utterances['debug_query'].format(debug_query))
                 
-                res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
                     top_n = len(res['data'])
@@ -356,10 +351,10 @@ class ActionSubmitESResultForm(Action):
                     message = helper.utterances['debug_results'].format(str(top_n))
                     if slots_query:
                         message = helper.utterances['debug_slot_results'].format(str(top_n))
-                        dispatcher.utter_message(text = message , json_message = res)
+                    dispatcher.utter_message(text = message , json_message = res)
 
             else:
-                res, _ = await submit(query, slots = slots_query, filter_ids = filter_ids)
+                res, _ = await submit(query, slots = slots_query)
                 
                 top_n = config.es_top_n
                 if len(res['data']) < config.es_top_n:
@@ -379,3 +374,37 @@ class ActionSubmitESResultForm(Action):
 
         logger.info(f'action_submit_es_result_form - run - END')
         return events
+
+
+class ActionSaveConversation(Action):
+    '''Action for saving conversation.'''
+
+    def name(self) -> Text:
+        return 'action_save_conversation'
+    
+    async def run(
+        self,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any]
+    ) -> List[EventType]:
+        
+        logger.info('action_save_conversation - START')
+        
+        chat_history = helper._parse_tracker_events(tracker.events)
+        export = {
+            'chat_id'       : tracker.sender_id             ,
+            'timestamp'     : chat_history[0]['timestamp']  ,
+            'chat_history'  : chat_history
+        }
+
+        try:
+            await save_chat_logs(export)
+        except RequestError as e:
+            logger.error(f'action_save_conversation - error while indexing - failed to save conversation with chat_id - {export["chat_id"]}')
+        except AssertionError as e:
+            logger.error(f'action_save_conversation - error on ES side - failed to save conversation with chat_id - {export["chat_id"]}')        
+        
+        logger.info(f'action_save_conversation - success saving conversation with chat_id - {export["chat_id"]}')
+        logger.info('action_save_conversation - END')
+        return []
