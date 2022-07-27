@@ -192,8 +192,8 @@ responses:
   #     title: Connect me to an expert.
   #   text: I'm sorry, I am still learning. Can you rephrase?
   # ES query form slots questions
-  utter_ask_problem_description:
-  - text: Please describe your problem.
+  # utter_ask_problem_description:
+  # - text: Please describe your problem.
   # ES result form slots questions
   # utter_ask_query_more:
   # - buttons:

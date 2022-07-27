@@ -63,7 +63,6 @@ es_search_size  = 100
 es_cut_off      = 0.4
 es_top_n        = 10
 es_ask_weight   = 0.6
-es_slots_weight = 0.1
 
 logger.info('----------------------------------------------')
 logger.info('Loading synonym procedure')
@@ -87,7 +86,6 @@ if debug:
     logger.info(f'- es_cut_off      = {es_cut_off}')
     logger.info(f'- es_top_n        = {es_top_n}')
     logger.info(f'- es_ask_weight   = {es_ask_weight}')
-    logger.info(f'- es_slots_weight = {es_slots_weight}')
     logger.info('----------------------------------------------')
 
 if not es_imitate:

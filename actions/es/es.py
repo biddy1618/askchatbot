@@ -70,8 +70,8 @@ async def _handle_es_query(
 
     Returns:
         list: return list of hits. 
-    '''    
-    
+    '''
+
     def _synonym_replace(text):
         tokens = config.tokenizer(text)
         text_modified = ""
