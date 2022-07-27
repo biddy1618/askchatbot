@@ -363,6 +363,8 @@ actions:
 - validate_es_result_form
 - action_ask_problem_description_add
 - action_submit_es_result_form
+# Save chat history
+- action_save_conversation
 forms:
   # ES forms
   es_query_form:

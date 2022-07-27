@@ -1,5 +1,5 @@
-from pickle import GET
 from typing import Dict, Text, Any, List, Tuple
+from datetime import datetime
 
 from rasa_sdk import Tracker
 from rasa_sdk.events import (
@@ -25,15 +25,16 @@ utterances = {
     'goodbye'               : 'Bye!',
     'help'                  : 'How can I help you?',
     'ipm'                   : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
-    'fallback'              : "I'm sorry, I didn't catch that. Can you rephrase?",
-    'out_of_scope'          : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
     'connect_expert'        : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">Ask Extension</a>.',
+    'iambot'                : 'I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a> platform. I can help you with the pest-related issues and questions. If you have one, please, describe your problem.',
+    'out_of_scope'          : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
+    'fallback'              : "I'm sorry, I didn't catch that. Can you rephrase?",
     'ask_problem_desc'      : 'Please describe your problem.',
     'no_results'            : 'Unfortunately, I could not find any results that might help you... Please try to reword your pest problem.',
     'results'               : 'Here is what I found based on your description:',
-    'add_help'              : 'Anything else I can help with?',
     'more_details'          : 'Please provide additional information.',
     'ask_more_details'      : 'Did that answer your question? If not, can you give me more information?',
+    'add_help'              : 'Anything else I can help with?',
     'ask_more_details_pest' : ' For example, can you tell me where you see {0}, (e.g. is it indoors or outdoors)?',
     'ask_more_details_other': ' For example, have you seen any bugs around the {0}? If so, what do they look like?',
     'ask_more_details_less' : ' For example, what do you need to know about the {0}?',
@@ -234,12 +235,14 @@ def _get_add_message(es_data):
                 if entity[1] in ['name', 'type', 'part', 'location']:
                     plant_or_damage_entity = entity[2]
                     break
-            for entity in group.get('damage', []):
-                if entity[1] in ['name', 'type', 'part', 'location']:
-                    plant_or_damage_entity = entity[2]
-                    break
             else:
-                continue
+                for entity in group.get('damage', []):
+                    if entity[1] in ['name', 'type', 'part', 'location']:
+                        plant_or_damage_entity = entity[2]
+                        break
+                else:
+                    continue
+                break
             break
         
         return plant_or_damage_entity
@@ -254,7 +257,7 @@ def _get_add_message(es_data):
     if len(query.split()) <= 6:
         if pest_entity:
             message = utterances['ask_more_details_less'].format(pest_entity)
-        if other_entity:
+        elif other_entity:
             message = utterances['ask_more_details_less'].format(other_entity)
     elif pest_entity and not location_entity:
         message = utterances['ask_more_details_pest'].format(pest_entity)
@@ -291,6 +294,86 @@ def _process_slots(slots, prev_slots = None):
     else: slots_query = None
     
     return slots_utterance, slots_query
+
+
+def _parse_tracker_events(events):
+    '''Parse chat history - filtering in only `bot` and `user` events.'''
+    chat_history = []
+
+    for event in events:
+        if event['event'] == 'user':
+            '''
+            structure:
+                agent       keyword
+                timestamp   date
+                text        match_only_text
+                intent      keyword
+            '''
+            text        = event['text']
+            intent      = event['parse_data']['intent']['name']
+            timestamp   = datetime.fromtimestamp(event['timestamp']).isoformat()
+            chat_history.append({
+                'agent'     : 'user'    ,
+                'timestamp' : timestamp ,
+                'text'      : text      ,
+                'intent'    : intent
+            })
+        elif event['event'] == 'bot':
+            '''
+            structure:
+                agent       keyword
+                timestamp   date
+                text        match_only_text
+                results     nested
+                    url         keyword
+                    score       keyword
+            '''
+            text        = event['text']
+            timestamp   = datetime.fromtimestamp(event['timestamp']).isoformat()
+            
+            chat_history.append({
+                'agent'     : 'bot'     ,
+                'timestamp' : timestamp ,
+                'text'      : text      ,
+            })
+
+            if event['data']['custom'] is not None:
+                results = []
+                custom = event['data']['custom']
+                for result in custom['data']:
+                    url     = result['url'  ]
+                    score   = result['score']
+                    results.append({
+                        'url'   : url,
+                        'score' : score
+                    })
+                chat_history[-1]['results'] = results
+    
+    return chat_history
+
+
+def _parse_date(aft_date = None, bfr_date = None):
+    '''Parse date for the logging report.'''
+    try:
+        if aft_date is None:
+            aft_date = datetime.min
+        else:
+
+            aft_date = datetime.strptime(aft_date, '%d.%m.%Y')
+        
+        if bfr_date is None:
+            bfr_date = datetime.max
+        else:
+            bfr_date = datetime.strptime(bfr_date, '%d.%m.%Y')
+
+        aft_date = aft_date.isoformat()
+        bfr_date = bfr_date.isoformat()
+
+    except (TypeError, ValueError) as e:
+        raise(e)
+        
+
+    return aft_date, bfr_date
 
 
 # def _get_plant_names(

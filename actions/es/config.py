@@ -16,7 +16,7 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '17.06.22'
+version     = '26.06.22'
 # stage       = 'dev'
 stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
@@ -55,6 +55,7 @@ embed_url = 'all-distilroberta-v1' # 768
 # embed_url = 'all-mpnet-base-v1' # 768
 
 es_combined_index   = 'combined'
+es_logging_index    = 'logs'
 es_field_limit      = 32766
 debug               = stage == 'dev'
 
@@ -63,7 +64,6 @@ es_cut_off      = 0.4
 es_top_n        = 10
 es_ask_weight   = 0.6
 es_slots_weight = 0.1
-
 
 logger.info('----------------------------------------------')
 logger.info('Loading synonym procedure')
@@ -107,7 +107,8 @@ if not es_imitate:
 
     logger.info('----------------------------------------------')
     logger.info('Elasticsearch indexes:')
-    logger.info(f'- combined index      = {es_combined_index}')
+    logger.info(f'- combined index      = {es_combined_index}'  )
+    logger.info(f'- logging index       = {es_logging_index}'   )
     logger.info('----------------------------------------------')
 
     logger.info('Initializing the Elasticsearch client')
