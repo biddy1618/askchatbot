@@ -61,7 +61,7 @@ async def _cos_sim_query(query_vector: np.ndarray) -> dict:
 async def _handle_es_query(
     query       : str               ,
     slots       : List[str] = None
-    ) -> list:
+    ) -> Tuple[list, str]:
     '''Perform search in ES base.
 
     Args:
@@ -69,7 +69,8 @@ async def _handle_es_query(
         slots       (List[str]) : Additional entity queries. Defaults to None.
 
     Returns:
-        list: return list of hits. 
+        Tuple[list, str]: Results from ES query and final transformed query that was embedded.
+                            If slots were provided, then results with slots refinement.
     '''
 
     def _synonym_replace(text):
@@ -199,7 +200,15 @@ def _handle_es_result(
 
 
 # Enable for the new view
-def _format_result(hit) -> dict:
+def _format_result(hit: dict) -> dict:
+    '''Process formatted file single result for output.
+
+    Args:
+        hit (dict): Single result item.
+
+    Returns:
+        dict: Formatted result.
+    '''
     
     score           = hit.get('_score'          , 0.0   )
     source          = hit.get('source'          , None  )
@@ -331,10 +340,10 @@ async def submit(
 async def save_chat_logs(
     chat_export: dict
     ) -> None:
-    '''_summary_
+    '''Save the chat into the index logs in ES.
 
     Args:
-        chat_export (dict): _description_
+        chat_export (dict): The chat export object containing chat history for particular session.
     '''
     try:
         response = await config.es_client.index(

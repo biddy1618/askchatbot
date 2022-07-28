@@ -16,7 +16,7 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '26.06.22'
+version     = '28.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
@@ -62,7 +62,7 @@ debug               = stage == 'dev'
 es_search_size  = 100
 es_cut_off      = 0.4
 es_top_n        = 10
-es_ask_weight   = 0.6
+es_ask_weight   = 0.8
 
 logger.info('----------------------------------------------')
 logger.info('Loading synonym procedure')
