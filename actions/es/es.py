@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 from typing import List, Tuple
 from elasticsearch import RequestError
@@ -85,7 +86,33 @@ async def _handle_es_query(
             else:
                 text_modified += token.text_with_ws
 
-        return text_modified    
+        return text_modified
+    
+    def _check_for_hardcoded_queries(text):
+        
+        tokens = config.tokenizer(text)
+        text_modified = ""
+
+        for token in tokens:
+            if not token.is_stop:
+                text_modified += token.text_with_ws
+            
+        query_vector = config.embed.encode([text_modified], show_progress_bar = False)[0]
+        best_score  = 0
+        best_result = None
+        for h_query in config.hardcoded_queries:
+            h_query_vector = h_query['vector']
+            score = cosine_similarity([query_vector, h_query_vector])[0, 1]
+            if score > best_score:
+                best_score  = score
+                best_result = h_query
+
+        if best_score < config.es_hardcoded_threshold:
+            return None
+
+        return best_result        
+    
+    check_hardcoded = _check_for_hardcoded_queries(query)
     
     query = _synonym_replace(query)
 
@@ -99,6 +126,11 @@ async def _handle_es_query(
     query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     
     hits = await _cos_sim_query(query_vector = query_vector)
+
+    if check_hardcoded:
+        urls = set([h['url'] for h in check_hardcoded['hits']])
+        hits = [h for h in hits if h['url'] not in urls and h['_score'] > config.es_cut_off_hardcoded]
+        hits = check_hardcoded['hits'] + hits
 
     return hits, query
 
