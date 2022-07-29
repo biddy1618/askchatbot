@@ -1,6 +1,11 @@
 # The Extension Bot
 
 Repo for the Ask Extension chatbot component demonstration.
+
+## Local set up and deployment
+
+You can find the details for building the project locally in the following [`README-1-setup.md`](info/README-1-setup.md) file.
+
 ## Things you can ask the bot
 
 The bot can:
@@ -45,3 +50,44 @@ The chatbot is available through `https://dev.chat.ask.eduworks.com/`.
 ## Front-end
 
 [Repository](https://git.eduworks.us/ask-extension/askchatbot-widget) for the front-end.
+
+## Rasa project structure details
+
+```bash
+📂 /path/to/project
+┣━━ 📂 actions                      # actions
+┃   ┣━━ 📂 static                   # static files
+┃   ┃   ┣━━ 🔢 plant_matches.pkl    # data scraped from "plant diagnostic matrix"
+┃   ┃   ┗━━ 🔢 plant_tree.pkl       # data scraped from "plant diagnostic matrix"
+┃   ┣━━ 🐍 __init__.py              #
+┃   ┣━━ 🐍 actions.py               # actions main module
+┃   ┣━━ 🐍 helper.py                # helper functions for actions module
+┃   ┣━━ 📄 plant_matching.ipynb     # EDA for scraped data
+┃   ┗━━ 📄 requirements-action.txt  # modules used in actions module
+┣━━ 📂 data                         # data for training Rasa chatbot
+┃   ┣━━ 📂 lookup-tables            # lookup tables, i.e., synonyms
+┃   ┃   ┣━━ 📄 plant-damage.yml     # 
+┃   ┃   ┣━━ 📄 plant-disease.yml    #
+┃   ┃   ┣━━ 📄 plant-name.yml       #
+┃   ┃   ┣━━ 📄 plant-part.yml       #
+┃   ┃   ┣━━ 📄 plant-pest.yml       #
+┃   ┃   ┗━━ 📄 plant-type.yml       #
+┃   ┣━━ 📄 nlu-request-plant-problem.yml    # training data for this intent
+┃   ┣━━ 📄 nlu.yml                  # training data for minor intents
+┃   ┣━━ 📄 rules.yml                # rule stories
+┃   ┗━━ 📄 stories.yml              # general stories
+┣━━ 📂 models                       # trained models
+┣━━ 📂 tests                        # test folder
+┃   ┗━━ 📄 test_stories.yml         # sample test
+┣━━ 📄 config.yml                   # configuration file
+┣━━ 📄 credentials.yml              # credentials file
+┣━━ 📄 domain.yml                   # domain file
+┣━━ 📄 endpoints.yml                # endpoints file
+┣━━ 🐋 Dockerfile                   # dockerfile for rasa server
+┣━━ 🐋 rasa-sdk.dockerfile          # dockerfile for rasa actions server
+┣━━ 🐋 docker-compose.yml           # docker compose file
+┣━━ 📄 index.html                   # HTML file for python web-client
+┣━━ 📄 README.md                    # readme file
+┣━━ 📄 endpoints.yml                # endpoints file
+┗━━ 📄 requirements.txt             # requirements file
+```
