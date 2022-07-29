@@ -106,3 +106,9 @@ The chatbot is available through `https://qa.chat.ask.eduworks.com/`.
 ┣━━ 📄 requirements-update.txt      # requirements file update for compatibility
 ┗━━ 📄 requirements.txt             # requirements file
 ```
+
+## Auxilary
+
+To see the details on ETL and EDA, refer to [`README-0-etl-data-sources.md](actions/es/README-0-etl-data-sources.md).
+
+To read about the scoring pipeline, refer to [`README-scoring.md](scripts/scoring/README-scoring.md).
