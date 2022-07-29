@@ -35,6 +35,11 @@ pip install -r actions/requirements.txt
 pip install -r actions/requirements-update.txt
 ```
 
+Download spacy model:
+```bash
+python -m spacy download en_core_web_trf
+```
+
 Make sure that environment variables set correctly by running following command:
 ```bash
 source env-dev.sh

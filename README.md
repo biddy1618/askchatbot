@@ -107,7 +107,7 @@ The chatbot is available through `https://qa.chat.ask.eduworks.com/`.
 ┗━━ 📄 requirements.txt             # requirements file
 ```
 
-## Auxilary
+## Auxillary
 
 To see the details on ETL and EDA, refer to [`README-0-etl-data-sources.md](actions/es/README-0-etl-data-sources.md).
 

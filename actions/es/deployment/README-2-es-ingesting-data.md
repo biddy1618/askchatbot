@@ -12,7 +12,7 @@ Download data in the folder `8/3 JSON Export` and put downloaded files into loca
 
 Data can be obtained through DVC ([installation guide](https://wiki.eduworks.com/Information_Technology/MLOps/DATA-Installing-DVC)). Clone the [repository](https://git.eduworks.us/data/ask-extension/uc-ipm-web-scrape) for scraped data, install Google Cloud Client - `gcloud` (more in installation guide), authenticate, and pull the data through dvc. Please, contact admin for access rights.
 
-Copy the downloaded files into folder `actions/es/data/uc-ipm/updated-Dec2021`.
+Copy the downloaded files into folders `actions/es/data/uc-ipm/updated-Dec2021` and `actions/es/data/uc-ipm/updated-Apr2022` accordingly.
 
 ## Ingesting data
 
