@@ -1,70 +1,346 @@
-Status,Question,Expected Answer 1,Expected Answer 2,Expected Answer 3,CODE,Answers,Bad Answer 1,Bad Answer score,Bad Answer 2,Bad Answer 2 score,Bad Answer 3,Bad Answer 3 score
-,There are large brown spots in my lawn that seem to be spreading. What should I do?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+Group,Question,Expected Answer 1,Expected Answer 2,Expected Answer 3,CODE,Answers,Bad Answer 1,Bad Answer score,Bad Answer 2,Bad Answer 2 score,Bad Answer 3,Bad Answer 3 score
+1,There are large brown spots in my lawn that seem to be spreading. What should I do?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html",http://ipm.ucanr.edu/TOOLS/TURF/PESTS/disanthrac.html,0.49,http://ipm.ucanr.edu/PMG/WEEDS/field_madder.html,,0.5,
-,What could be causing the holes in my kale plant leaves?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+1,What could be causing the big dead spots in my lawn? I think they are getting larger.,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html",http://ipm.ucanr.edu/TOOLS/TURF/PESTS/disanthrac.html,0.49,http://ipm.ucanr.edu/PMG/WEEDS/field_madder.html,,0.5,
+1,I have noticed significant patches of dead grass in my lawn that appear to be growing. What do you think could be going on?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html",http://ipm.ucanr.edu/TOOLS/TURF/PESTS/disanthrac.html,0.49,http://ipm.ucanr.edu/PMG/WEEDS/field_madder.html,,0.5,
+1,My lawn has patchy areas of dead grass. What do you think could be the issue? I am afraid the brown spots are getting larger.,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html",http://ipm.ucanr.edu/TOOLS/TURF/PESTS/disanthrac.html,0.49,http://ipm.ucanr.edu/PMG/WEEDS/field_madder.html,,0.5,
+1,What sort of treatment is required for the areas of my lawn that are dying off in the middle of green grass? The brown spots are spreading.,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7497.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7476.html",http://ipm.ucanr.edu/TOOLS/TURF/PESTS/disanthrac.html,0.49,http://ipm.ucanr.edu/PMG/WEEDS/field_madder.html,,0.5,
+2,What could be causing the holes in my kale plant leaves?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
 http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
 http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/yuccaweevil.html,0.49,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/rtnem.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/shfollagemin.html,0.45
-,There are little green caterpillars all over my cabbage plants. what are they?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+2,Something is eating holes in my kale plant leaves. What could it be?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/yuccaweevil.html,0.49,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/rtnem.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/shfollagemin.html,0.45
+2,The leaves on my kale have holes in them. What sorts of things could be causing this?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/yuccaweevil.html,0.49,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/rtnem.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/shfollagemin.html,0.45
+2,I have noticed holes appearing in the kale leaves in my garden. What could be making them?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/yuccaweevil.html,0.49,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/rtnem.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/shfollagemin.html,0.45
+2,The kale from my garden has a lot of holes in the leaves. How do I prevent this?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/colecropwater.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74166.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/CULTURAL/broccoliharvest.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/yuccaweevil.html,0.49,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/rtnem.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/shfollagemin.html,0.45
+3,There are little green caterpillars all over my cabbage plants. what are they?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
 http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
 http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
 http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
 http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/roseslug.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7422.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/geranium.html,0.55
-,What can I do to get rid of slugs?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html,http://ipm.ucanr.edu/QT/snailsslugscard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+3,My cabbage plants have tiny greenish caterpillars. Will these cause damage?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/roseslug.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7422.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/geranium.html,0.55
+3,Can you tell me what little green worms would be found in the cabbage in my garden?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/roseslug.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7422.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/geranium.html,0.55
+3,The cabbage in my garden has small green caterpillars. What might they be?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/roseslug.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7422.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/geranium.html,0.55
+3,My cabbage is being taken over by little green worms. What are they and will they damage the plant?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html,"http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html","http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/loopers.html
+http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/importcabwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/INVERT/idcater.html",http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/roseslug.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7422.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/geranium.html,0.55
+4,What can I do to get rid of slugs?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html,http://ipm.ucanr.edu/QT/snailsslugscard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
 http://ipm.ucanr.edu/QT/snailsslugscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
 http://ipm.ucanr.edu/QT/snailsslugscard.html",http://ipm.ucanr.edu/PMG/WEEDS/petty_spurge.html,0.46,,,,
-,I have a weed that's growing close to the ground. It grows fast and has long skinny branches and tiny leaves. What is it? How can I get rid of it?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+4,I have found slug trails in my garden. How do I manage them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html,http://ipm.ucanr.edu/QT/snailsslugscard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html",http://ipm.ucanr.edu/PMG/WEEDS/petty_spurge.html,0.46,,,,
+4,What approach is best for getting rid of slugs?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html,http://ipm.ucanr.edu/QT/snailsslugscard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html",http://ipm.ucanr.edu/PMG/WEEDS/petty_spurge.html,0.46,,,,
+4,What is the best method to control slugs in my garden?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html,http://ipm.ucanr.edu/QT/snailsslugscard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html",http://ipm.ucanr.edu/PMG/WEEDS/petty_spurge.html,0.46,,,,
+4,My garden has a lot of slugs. How do I eradicate them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html,http://ipm.ucanr.edu/QT/snailsslugscard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7427.html
+http://ipm.ucanr.edu/QT/snailsslugscard.html",http://ipm.ucanr.edu/PMG/WEEDS/petty_spurge.html,0.46,,,,
+5,I have a weed that's growing close to the ground. It grows fast and has long skinny branches and tiny leaves. What is it? How can I get rid of it?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html",,,,,,
-,The woodpeckers in my neighborhood are driving me crazy with all the hammering. What can I do to chase them away?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,"Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
-,there are fuzzy little bugs eating my wool coat. How do I get rid of them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+5,"My yard has a ground-covering weed that is spreading quickly. The plant has little leaves on long slender stems. What do think it is, and what do you suggest I do to manage it?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html",,,,,,
+5,There is a fast-growing weed in my yard with long slender branches and tiny leaves. It is spreading rapidly close to the ground. Can you identify it and a method to kill it?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html",,,,,,
+5,"I need help with a really fast growing weed in my yard. It grows close to the ground and has long skinny stems with tiny leaves. What is this weed, and how should I treat for it in the grass?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html",,,,,,
+5,"I have an invasive plant in my yard that is close to the ground in height with long slender stems and teeny leaves. It is spreading rapidly, and I need to control it. Do you have an idea what it is? ",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7445.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html",,,,,,
+6,The woodpeckers in my neighborhood are driving me crazy with all the hammering. What can I do to chase them away?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,"Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+6,How can I discourage woodpeckers in my area from making all of that loud pecking noise?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,"Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+6,Is there a method to shoo woodpeckers away from our neighborhood? They are making so much racket that I am losing my mind.,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,"Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+6,"There are a lot of noisy woodpeckers in my neighborhood, and I would like to encourage them to go elsewhere. Is there a suggested method for doing this without causing them any harm?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,"Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+6,I need to do something about all of the noisy woodpeckers in my neighborhood. Can you recommend any approaches to chase them off?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,"Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+7,there are fuzzy little bugs eating my wool coat. How do I get rid of them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html",http://ipm.ucanr.edu/PMG/PESTNOTES//pn74153.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.55,http://ipm.ucanr.edu/QT/earwigscard.html,0.53
-,How can I tell what kind of ant is invading my kitchen?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7410.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html,0.53
-,I think a brown recluse spider bit me or maybe it was a black widow or a mosquito. How can I tell the difference? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+7,"I found several hairy little bugs on my wool coat in the closet, and I think they are eating holes it. How can I stop this from happening?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html",http://ipm.ucanr.edu/PMG/PESTNOTES//pn74153.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.55,http://ipm.ucanr.edu/QT/earwigscard.html,0.53
+7,"My wool coat has fuzzy little bugs eating it. It was stored in my closet, so what should I do to prevent any further damage?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html",http://ipm.ucanr.edu/PMG/PESTNOTES//pn74153.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.55,http://ipm.ucanr.edu/QT/earwigscard.html,0.53
+7,How can I get rid of these tiny fuzzy bugs that I found on my wool coat in the closet? I think they have been eating the wool and making holes.,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html",http://ipm.ucanr.edu/PMG/PESTNOTES//pn74153.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.55,http://ipm.ucanr.edu/QT/earwigscard.html,0.53
+7,"Apparently, my wool coat is being eaten by tiny fuzzy bugs. What should I do to stop and prevent this from happening?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7436.html",http://ipm.ucanr.edu/PMG/PESTNOTES//pn74153.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.55,http://ipm.ucanr.edu/QT/earwigscard.html,0.53
+8,How can I tell what kind of ant is invading my kitchen?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7410.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html,0.53
+8,There are ants all over my kitchen. How can I tell what kind they are?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7410.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html,0.53
+8,I found a ton of ants in my kitchen. How do I know which kind they are?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7410.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html,0.53
+8,"My kitchen has been taken over by ants, but I can't tell what kind they are. Can you help me?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7410.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html,0.53
+8,My kitchen counter is covered in ants. What can I do to decide what kind they are and how to manage them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7411.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7410.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7404.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7408.html,0.53
+9,I think a brown recluse spider bit me or maybe it was a black widow or a mosquito. How can I tell the difference? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/necitcutworm.html,0.53,http://ipm.ucanr.edu/QT/spidermitescard.html,0.53,,
-,I have a rash on my arm. How do I know if I have Lyme disease?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/leafspotvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/potatomosaicvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bluemoldrot.html,0.47
-,How can I get rid of the noisy woodpeckers on my land?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/QT/yellowjacketscard.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html,0.56,http://ipm.ucanr.edu/QT/termitescard.html,0.55
-,How do I know if I have termites?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+9,"I have been bitten by something, but how can I tell from the bite what it was? I am afraid it was a brown recluse spider, or black widow spider, or mosquito based on where I have been.",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/necitcutworm.html,0.53,http://ipm.ucanr.edu/QT/spidermitescard.html,0.53,,
+9,"Can you tell from looking at a bite what sort of bug bit you? I have a new bite, but am not sure if it was a dangerous spider or just a mosquito.",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/necitcutworm.html,0.53,http://ipm.ucanr.edu/QT/spidermitescard.html,0.53,,
+9,"Something bit me, but I didn't see what it was. Maybe it was a spider (brown recluse or black widow), or maybe it was a mosquito. How can I tell?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/necitcutworm.html,0.53,http://ipm.ucanr.edu/QT/spidermitescard.html,0.53,,
+9,I am worried that I may have been bitten by a brown recluse or black widow. How can I tell a spider bite from a simple mosquito bite?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7468.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/necitcutworm.html,0.53,http://ipm.ucanr.edu/QT/spidermitescard.html,0.53,,
+10,I have a rash on my arm. How do I know if I have Lyme disease?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/leafspotvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/potatomosaicvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bluemoldrot.html,0.47
+10,What does the Lyme disease rash look and/or feel like?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/leafspotvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/potatomosaicvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bluemoldrot.html,0.47
+10,Should I be suspicious of Lyme disease based on how a rash on my arm looks?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/leafspotvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/potatomosaicvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bluemoldrot.html,0.47
+10,My arm has developed a rash. How do I know if this may be related to Lyme disease?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/leafspotvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/potatomosaicvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bluemoldrot.html,0.47
+10,I found a tick on my arm and now the area has developed a rash. Do you think this could be Lyme disease?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7485.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/leafspotvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/potatomosaicvirus.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bluemoldrot.html,0.47
+11,How can I get rid of the noisy woodpeckers on my land?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/QT/yellowjacketscard.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html,0.56,http://ipm.ucanr.edu/QT/termitescard.html,0.55
+11,There are lots of loud woodpeckers in my yard. How do I get them to move on?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/QT/yellowjacketscard.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html,0.56,http://ipm.ucanr.edu/QT/termitescard.html,0.55
+11,Is there something I could do on my property to keep the noisy woodpeckers away?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/QT/yellowjacketscard.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html,0.56,http://ipm.ucanr.edu/QT/termitescard.html,0.55
+11,What methods do you recommend to prevent woodpeckers from coming on my property?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/QT/yellowjacketscard.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html,0.56,http://ipm.ucanr.edu/QT/termitescard.html,0.55
+11,Do you have recommendations for frightening woodpeckers from my land?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74124.html,http://ipm.ucanr.edu/QT/yellowjacketscard.html,0.57,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74114.html,0.56,http://ipm.ucanr.edu/QT/termitescard.html,0.55
+12,How do I know if I have termites?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html,0.59,http://ipm.ucanr.edu/TOOLS/TURF/PESTS/inbermite.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7428.html,0.55
-,What kind of holes do powderpost beetles leave?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cucumberbeet.html,0.52,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7403.html,0.51,,
-,"How can I tell the difference between Powderpost, Deathwatch, and False Powderpost Beetles? ",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/poplrcotnwdaspen.html,0.44,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,0.44,,
-,My almonds have worms inside them. How do I kill the bugs? ,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+12,What are the signs of termite infestation that I should look for?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html,0.59,http://ipm.ucanr.edu/TOOLS/TURF/PESTS/inbermite.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7428.html,0.55
+12,I think my house may have termites. What should I look for to confirm?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html,0.59,http://ipm.ucanr.edu/TOOLS/TURF/PESTS/inbermite.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7428.html,0.55
+12,How do I distinguish water damage from termite damage?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html,0.59,http://ipm.ucanr.edu/TOOLS/TURF/PESTS/inbermite.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7428.html,0.55
+12,Is there a good way to detect if termites are present?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7415.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7440.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7405.html,0.59,http://ipm.ucanr.edu/TOOLS/TURF/PESTS/inbermite.html,0.56,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7428.html,0.55
+13,What kind of holes do powderpost beetles leave?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cucumberbeet.html,0.52,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7403.html,0.51,,
+13,What sorts of wood damage do powerderpost beetles cause?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cucumberbeet.html,0.52,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7403.html,0.51,,
+13,What are the signs of powderpost beetles being the cause of holes in my wood?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cucumberbeet.html,0.52,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7403.html,0.51,,
+13,I have found some holes in wood on my home. How do I know if it was damaged by powderpost beetles?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cucumberbeet.html,0.52,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7403.html,0.51,,
+13,How do I distinguish powderpost beetle holes from other beetle holes?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/cucumberbeet.html,0.52,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7403.html,0.51,,
+14,"How can I tell the difference between Powderpost, Deathwatch, and False Powderpost Beetles? ",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/poplrcotnwdaspen.html,0.44,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,0.44,,
+14,There are a bunch of beetles boring holes in wood in my house. How do I decide which kind they are?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/poplrcotnwdaspen.html,0.44,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,0.44,,
+14,I have found some powdery debris near holes in wood in my home. How do I know if the damage was caused by beetles and which kind it may be?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/poplrcotnwdaspen.html,0.44,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,0.44,,
+14,"I found a beetle on some wood in my house. How do I determine which kind of beetle it is? I am thinking perhaps Powerpost, Deathwatch, or False Powerderpost based on the damage I see.",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/poplrcotnwdaspen.html,0.44,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,0.44,,
+14,How do I identify wood-boring beetles in my home?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7418.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/poplrcotnwdaspen.html,0.44,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,0.44,,
+15,My almonds have worms inside them. How do I kill the bugs? ,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
 http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
 http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/scab.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticilliumwil.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html,0.53
-,My strawberries get some kind of fuzzy white stuff on them then they get mushy and rotten. What can I do about it? ,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+15,I found worms inside the almonds from my yard. How do I treat my almond tree?,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/scab.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticilliumwil.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html,0.53
+15,There are worms in the almonds from my tree. What should I do to eradicate them?,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/scab.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticilliumwil.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html,0.53
+15,I found worms in the almonds from a tree in my yard. What is the best method to stop and prevent them from causing further damage?,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/scab.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticilliumwil.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html,0.53
+15,How do I treat an almond tree that has worms in its nuts? I need to get rid of the bugs.,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/navelorwrm.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/almonds.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/scab.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/verticilliumwil.html,0.55,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74105.html,0.53
+16,My strawberries get some kind of fuzzy white stuff on them then they get mushy and rotten. What can I do about it? ,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
 http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
 http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strvirusdis.html,0.59,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html,0.58,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strawcrmoth.html,0.56
-,What can I do to control weeds without using chemicals?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html,http://ipm.ucanr.edu/QT/landscapeweedscard.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+16,The strawberries in my garden are starting to get a greyish white substance on them as they over ripen. What should I do to stop this?,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strvirusdis.html,0.59,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html,0.58,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strawcrmoth.html,0.56
+16,I have noticed white fuzzy stuff on strawberries that have started to get soft or mushy. What should I do to keep this from spreading to the other strawberries?,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strvirusdis.html,0.59,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html,0.58,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strawcrmoth.html,0.56
+16,What should I do about a white fuzzy substance that has appeared on my strawberries?,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strvirusdis.html,0.59,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html,0.58,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strawcrmoth.html,0.56
+16,How do I prevent the white fuzzy substance on my strawberries from spreading to other fruits?,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html,,"http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html","http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strgraymold.html
+http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/strawberries.html",http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/DISEASE/strvirusdis.html,0.59,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/lygusbugs.html,0.58,http://ipm.ucanr.edu/PMG/GARDEN/FRUIT/PESTS/strawcrmoth.html,0.56
+17,What can I do to control weeds without using chemicals?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html,http://ipm.ucanr.edu/QT/landscapeweedscard.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
 http://ipm.ucanr.edu/QT/landscapeweedscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
 http://ipm.ucanr.edu/QT/landscapeweedscard.html",http://ipm.ucanr.edu/QT/weedcontrolcard.html,0.78,,,,
-,What is a beneficial predator?,http://ipm.ucanr.edu/QT/beneficialpredatorscard.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,,"http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+17,I would like to avoid using chemicals in my yard. How do you recommend I manage the weeds?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html,http://ipm.ucanr.edu/QT/landscapeweedscard.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html",http://ipm.ucanr.edu/QT/weedcontrolcard.html,0.78,,,,
+17,How can I stay on top of weeds in my yard without the use of chemicals or herbicides?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html,http://ipm.ucanr.edu/QT/landscapeweedscard.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html",http://ipm.ucanr.edu/QT/weedcontrolcard.html,0.78,,,,
+17,What steps should I take to prevent and manage weeds without using chemical treatments?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html,http://ipm.ucanr.edu/QT/landscapeweedscard.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html",http://ipm.ucanr.edu/QT/weedcontrolcard.html,0.78,,,,
+17,"If I wish to avoid using chemicals, how could I manage weeds in my garden?",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html,http://ipm.ucanr.edu/QT/landscapeweedscard.html,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7441.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74113.html
+http://ipm.ucanr.edu/QT/landscapeweedscard.html",http://ipm.ucanr.edu/QT/weedcontrolcard.html,0.78,,,,
+18,What is a beneficial predator?,http://ipm.ucanr.edu/QT/beneficialpredatorscard.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,,"http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
-,When should I try to control ground squirrels?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html,http://ipm.ucanr.edu/QT/groundsquirrelcard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+18,How could a predator actually be beneficial to my yard?,http://ipm.ucanr.edu/QT/beneficialpredatorscard.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,,"http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+18,What should I do about natural predators in my yard?,http://ipm.ucanr.edu/QT/beneficialpredatorscard.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,,"http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+18,When does a predator become beneficial to my yard?,http://ipm.ucanr.edu/QT/beneficialpredatorscard.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,,"http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+18,What sorts of bugs are good to have in my garden?,http://ipm.ucanr.edu/QT/beneficialpredatorscard.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html,,"http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","http://ipm.ucanr.edu/QT/beneficialpredatorscard.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74140.html","Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",,,,,
+19,When should I try to control ground squirrels?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html,http://ipm.ucanr.edu/QT/groundsquirrelcard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
 http://ipm.ucanr.edu/QT/groundsquirrelcard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
 http://ipm.ucanr.edu/QT/groundsquirrelcard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74122.html,0.61,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7447.html,0.51,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74130.html,0.51
-,I have a mouse problem in my garage. How do I get rid of them? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+19,Are there recommendations for managing ground squirrels on my property?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html,http://ipm.ucanr.edu/QT/groundsquirrelcard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74122.html,0.61,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7447.html,0.51,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74130.html,0.51
+19,Does the ground squirrel management recommendation change based on the time of year?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html,http://ipm.ucanr.edu/QT/groundsquirrelcard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74122.html,0.61,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7447.html,0.51,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74130.html,0.51
+19,When is the best time to apply a ground squirrel management technique?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html,http://ipm.ucanr.edu/QT/groundsquirrelcard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74122.html,0.61,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7447.html,0.51,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74130.html,0.51
+19,What do you suggest I do to manage ground squirrels on my place?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html,http://ipm.ucanr.edu/QT/groundsquirrelcard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7438.html
+http://ipm.ucanr.edu/QT/groundsquirrelcard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn74122.html,0.61,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7447.html,0.51,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74130.html,0.51
+20,I have a mouse problem in my garage. How do I get rid of them? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
 http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7455.html,0.53,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7452.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,0.48
-,There are centipedes in my bathroom. Will they bite me? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74136.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7495.html,0.46,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7475.html,0.43
-,My alstromeria plant isn't developing flowers. Why not?,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,,,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomdrop.html,0.45,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,0.44,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crypblight.html,0.41
-,The begonias in my garden have wiggly white trails all over the leaves. What is it?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,,,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/willow.html,0.49,http://ipm.ucanr.edu/home-and-landscape/beans/index.html,0.49
-,My kid came home from school with head lice. How do I get rid of them? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html,http://ipm.ucanr.edu/QT/headlicecard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+20,I found signs of mice living in my garage. What should I do to exterminate them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7455.html,0.53,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7452.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,0.48
+20,"There are mice in my garage, and I need help getting rid of them and keeping them out.",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7455.html,0.53,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7452.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,0.48
+20,What steps should I take to manage mice that have infested my garage?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7455.html,0.53,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7452.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,0.48
+20,How do you suggest that I control mice in my garage?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7483.html
+http://ipm.ucanr.edu/PMG/PESTNOTES/pn74161.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7455.html,0.53,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7452.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74149.html,0.48
+21,There are centipedes in my bathroom. Will they bite me? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74136.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7495.html,0.46,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7475.html,0.43
+21,I found some centipedes in my bathroom. Should I be worried about getting bitten by them?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74136.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7495.html,0.46,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7475.html,0.43
+21,Could a centipede that I found in my house bite a person?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74136.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7495.html,0.46,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7475.html,0.43
+21,How do I know if a centipede will bite me? I found some in my bathroom.,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74136.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7495.html,0.46,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7475.html,0.43
+21,Would a centipede found in the bathroom be a type that bites people?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,,,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7472.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74136.html,0.48,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7495.html,0.46,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7475.html,0.43
+22,My alstromeria plant isn't developing flowers. Why not?,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,,,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomdrop.html,0.45,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,0.44,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crypblight.html,0.41
+22,I have an alstromeria that isn't blooming. What should I do?,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,,,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomdrop.html,0.45,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,0.44,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crypblight.html,0.41
+22,What should I do for an alstromeria that isn't developing flowers and blooming?,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,,,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomdrop.html,0.45,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,0.44,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crypblight.html,0.41
+22,What is wrong with my alstromeria when it just doesn't develop blooms?,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,,,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomdrop.html,0.45,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,0.44,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crypblight.html,0.41
+22,What could be causing my alstromeria to stop blooming?,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,,,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/FLOWERS/alstroemeria.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/ENVIRON/blossomdrop.html,0.45,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74128.html,0.44,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISEASES/crypblight.html,0.41
+23,The begonias in my garden have wiggly white trails all over the leaves. What is it?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,,,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/willow.html,0.49,http://ipm.ucanr.edu/home-and-landscape/beans/index.html,0.49
+23,What are the white wiggly trails on my begonia leaves?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,,,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/willow.html,0.49,http://ipm.ucanr.edu/home-and-landscape/beans/index.html,0.49
+23,What is causing the wiggly white trails on my begonia's leaves?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,,,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/willow.html,0.49,http://ipm.ucanr.edu/home-and-landscape/beans/index.html,0.49
+23,What is happening to my begonia when there are white wiggly trails on its leaves?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,,,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/willow.html,0.49,http://ipm.ucanr.edu/home-and-landscape/beans/index.html,0.49
+23,What steps should I take when I see wiggly white trails on my begonia's leaves?,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,,,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/vegleafminers.html,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7448.html,0.56,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/willow.html,0.49,http://ipm.ucanr.edu/home-and-landscape/beans/index.html,0.49
+24,My kid came home from school with head lice. How do I get rid of them? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html,http://ipm.ucanr.edu/QT/headlicecard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
 http://ipm.ucanr.edu/QT/headlicecard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
 http://ipm.ucanr.edu/QT/headlicecard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7451.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.49
-,Why are the leaves on my Pothos houseplant turning yellow? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+24,The school sent my child home with a note saying he has head lice. What should I do to treat it?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html,http://ipm.ucanr.edu/QT/headlicecard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7451.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.49
+24,What steps should I take to treat head lice on a school-aged child?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html,http://ipm.ucanr.edu/QT/headlicecard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7451.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.49
+24,What is the treatment for head lice on a school-aged child?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html,http://ipm.ucanr.edu/QT/headlicecard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7451.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.49
+24,I just found out that the school found head lice on my child. What do I need to do to get rid of them quickly?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html,http://ipm.ucanr.edu/QT/headlicecard.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn7446.html
+http://ipm.ucanr.edu/QT/headlicecard.html",http://ipm.ucanr.edu/PMG/PESTNOTES/pn7451.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn7435.html,0.5,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74168.html,0.49
+25,Why are the leaves on my Pothos houseplant turning yellow? ,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html",http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/fusarwilt.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bacringrot.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/cyptipminer.html,0.47
+25,The leaves on my Pothos house plant are turning yellow. What could be causing it?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html",http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/fusarwilt.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bacringrot.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/cyptipminer.html,0.47
+25,How do I help a Pothos house plant that has leaves that are turning yellow?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html",http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/fusarwilt.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bacringrot.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/cyptipminer.html,0.47
+25,My Pothos houseplant has yellowing leaves. Why is this happening?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
+http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html",http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/fusarwilt.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bacringrot.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/cyptipminer.html,0.47
+25,What do the yellow leaves on my Pothos houseplant mean?,http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html,,"http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
 http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html","http://ipm.ucanr.edu/PMG/PESTNOTES/pn74172.html
 http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/DISORDERS/nitrogendeficiency.html",http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/fusarwilt.html,0.5,http://ipm.ucanr.edu/PMG/GARDEN/VEGES/DISEASES/bacringrot.html,0.48,http://ipm.ucanr.edu/PMG/GARDEN/PLANTS/INVERT/cyptipminer.html,0.47

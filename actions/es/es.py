@@ -107,7 +107,7 @@ async def _handle_es_query(
                 best_score  = score
                 best_result = h_query
 
-        if best_score < 0.85:
+        if best_score < config.es_hardcoded_threshold:
             return None
 
         return best_result        
