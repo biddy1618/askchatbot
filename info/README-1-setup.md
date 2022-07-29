@@ -13,7 +13,44 @@ Details of the local machine:
 - Windowing System: X11
 
 
-## Docker Compose (version 2.2.2)
+## 1st method - `conda` environment (version 4.13.0)
+
+Create environment with python version 3.9.12
+```bash
+conda create --name askchatbot-dev python=3.9.12
+conda activate askchatbot-dev
+pip install pip==21.3.1
+```
+
+Install requirements for Rasa service:
+```bash
+pip install -r requirements.txt
+pip install -r requirements-update.txt
+pip install -r requirements-local.txt
+```
+
+Install requirements for Rasa Actions service:
+```bash
+pip install -r actions/requirements.txt
+pip install -r actions/requirements-update.txt
+```
+
+Make sure that environment variables set correctly by running following command:
+```bash
+source env-dev.sh
+```
+
+Start Rasa service:
+```bash
+rasa run --cors=*
+```
+
+Start Rasa Actions service:
+```bash
+rasa run actions
+```
+
+## 2nd method (preferred) - `docker dompose` (version 2.2.2)
 
 Launch the services up using `docker compose`:
 ```bash

@@ -26,26 +26,13 @@ The bot can:
 2. Explain `Intergrated Pest Management`.
 3. Connect to expert by showing the link to reach the expert.
 
-## Details of implementation
-
-The bot is able to retrieve entities related to pest management like following:
-1. Pest name
-2. Plant name
-3. Plant type
-4. Plant part
-5. Plant damage
-6. Pest location
-
-It uses the recognized entities to adjust the results of the search result.
-
-Querying the data sources happens through vector-similiraties of embedded vectors of the query against the knowledge database.
-
-* Embedding is achieving through [Universal Sentence Encoder model by Google](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/46808.pdf)
-* The distance metric is [cosine similary distance](https://en.wikipedia.org/wiki/Cosine_similarity)
-
-## Development server
+## DEV server
 
 The chatbot is available through `https://dev.chat.ask.eduworks.com/`.
+
+## QA server
+
+The chatbot is available through `https://qa.chat.ask.eduworks.com/`.
 
 ## Front-end
 
@@ -56,38 +43,66 @@ The chatbot is available through `https://dev.chat.ask.eduworks.com/`.
 ```bash
 📂 /path/to/project
 ┣━━ 📂 actions                      # actions
-┃   ┣━━ 📂 static                   # static files
-┃   ┃   ┣━━ 🔢 plant_matches.pkl    # data scraped from "plant diagnostic matrix"
-┃   ┃   ┗━━ 🔢 plant_tree.pkl       # data scraped from "plant diagnostic matrix"
-┃   ┣━━ 🐍 __init__.py              #
-┃   ┣━━ 🐍 actions.py               # actions main module
+┃   ┣━━ 📂 es                       # details on setting up of ES service
+┃   ┃   ┣━━ 📂 deployment           # details on setting up of ES service
+┃   ┃   ┣━━ 📄 .env                 # environment variables for docker compose
+┃   ┃   ┣━━ 📄 docker-compose.yml               # docker compose file
+┃   ┃   ┣━━ 🐍 es_chat_logging_index.ipynb      # scripts for creating chat logs index into ES
+┃   ┃   ┣━━ 🐍 es_ingest_data.ipynb             # scripts for ingesting data into ES
+┃   ┃   ┣━━ 📄 README-1-es-deployment.md        # guide on local set up of ES service
+┃   ┃   ┗━━ 📄 README-2-es-ingesting-data.md    # guide on getting and ingesting data to ES service
+┃   ┃   ┣━━ 📂 scripts              # additional scripts  
+┃   ┃   ┃   ┣━━ 📂 events_sample    # sample of events logs for logging ETL
+┃   ┃   ┃   ┃   ┗━━ ...             # ...
+┃   ┃   ┃   ┣━━ 📂 hardcoded        # hardcoded question source and transformed files
+┃   ┃   ┃   ┃   ┗━━ ...             # ...
+┃   ┃   ┃   ┣━━ 📂 synonym_list     # synonym list source and transformed files
+┃   ┃   ┃   ┃   ┗━━ ...             # ...
+┃   ┃   ┃   ┣━━ 🐍 es_chat_logging.ipynb        # scripts (playground) for chat logging feature
+┃   ┃   ┃   ┣━━ 🐍 es_etl.ipynb                 # EDA and ETL of data sources
+┃   ┃   ┃   ┣━━ 🐍 es_hardcoded.ipynb           # scripts (playground) for hardcoded questions
+┃   ┃   ┃   ┣━━ 🐍 es_playground.ipynb          # scripts (playground) for ES service calls
+┃   ┃   ┃   ┗━━ 🐍 synonym_playground.md        # scripts (playground) for synonym replacement feature
+┃   ┃   ┣━━ 🐍 __init__.py          #
+┃   ┃   ┣━━ 🐍 config.py            # configuration file for the Rasa Actions service and ES
+┃   ┃   ┣━━ 🐍 es.py                # implementation of ES retrieving functions for chatbot
+┃   ┃   ┗━━ 📄 README-0-etl-data-sources.md     # information in EDA and ETL of the data sources
+┃   ┣━━ 🐍 __init__.py              # 
+┃   ┣━━ 🐍 actions_base.py          # base actions (like out-of-scope or greet)
+┃   ┣━━ 🐍 actions_debug.py         # actions for debug purposes
+┃   ┣━━ 🐍 actions_es.py            # actions for ES service retrieval of data
+┃   ┣━━ 🐍 actions_main.py          # actions for add. feature like explain IPM or connect to expert
 ┃   ┣━━ 🐍 helper.py                # helper functions for actions module
-┃   ┣━━ 📄 plant_matching.ipynb     # EDA for scraped data
-┃   ┗━━ 📄 requirements-action.txt  # modules used in actions module
+┃   ┣━━ 📄 requirements-update.txt  # actions requirements file update for compatibility
+┃   ┗━━ 📄 requirements.txt         # actions requirements file
 ┣━━ 📂 data                         # data for training Rasa chatbot
-┃   ┣━━ 📂 lookup-tables            # lookup tables, i.e., synonyms
-┃   ┃   ┣━━ 📄 plant-damage.yml     # 
-┃   ┃   ┣━━ 📄 plant-disease.yml    #
-┃   ┃   ┣━━ 📄 plant-name.yml       #
-┃   ┃   ┣━━ 📄 plant-part.yml       #
-┃   ┃   ┣━━ 📄 plant-pest.yml       #
-┃   ┃   ┗━━ 📄 plant-type.yml       #
-┃   ┣━━ 📄 nlu-request-plant-problem.yml    # training data for this intent
-┃   ┣━━ 📄 nlu.yml                  # training data for minor intents
-┃   ┣━━ 📄 rules.yml                # rule stories
-┃   ┗━━ 📄 stories.yml              # general stories
+┃   ┗━━ ...
 ┣━━ 📂 models                       # trained models
-┣━━ 📂 tests                        # test folder
-┃   ┗━━ 📄 test_stories.yml         # sample test
+┃   ┗━━ ...
+┣━━ 📂 scripts/scoring              # scripts for scoring the chatbot
+┃   ┣━━ 📂 data                     # data for scoring
+┃   ┃   ┗━━ ...                     # ...
+┃   ┣━━ 🐋 docker-compose.yml                   # docker compose file for automated scoring
+┃   ┣━━ 🐋 Dockerfile                           # dockerfile for scoring
+┃   ┣━━ 📄 README-scoring.md                    # guide on running the scoring script
+┃   ┣━━ 📄 requirements-local.txt               # requirements file for local development
+┃   ┣━━ 📄 requirements.txt                     # requirements file for scoring script
+┃   ┣━━ 🐍 run_scoring.py                       # main script for running scoring
+┃   ┣━━ 🐍 scoring_data_etl.ipynb               # ETL and EDA of test data for scoring
+┃   ┣━━ 🐍 scoring_playground.ipynb             # scripts (playground) for scoring service
+┣━━ 📂 web-client                   # alternative web-clients for debugging
+┃   ┗━━ ...                         # ...
 ┣━━ 📄 config.yml                   # configuration file
 ┣━━ 📄 credentials.yml              # credentials file
 ┣━━ 📄 domain.yml                   # domain file
 ┣━━ 📄 endpoints.yml                # endpoints file
+┣━━ 📄 .env                         # environment variables for docker compose
 ┣━━ 🐋 Dockerfile                   # dockerfile for rasa server
 ┣━━ 🐋 rasa-sdk.dockerfile          # dockerfile for rasa actions server
 ┣━━ 🐋 docker-compose.yml           # docker compose file
-┣━━ 📄 index.html                   # HTML file for python web-client
 ┣━━ 📄 README.md                    # readme file
-┣━━ 📄 endpoints.yml                # endpoints file
+┣━━ 📄 env-dev.sh                   # environment variables for local development
+┣━━ 📄 requirements-local.txt       # requirements file local development (like jupyter)
+┣━━ 📄 requirements-update.txt      # requirements file update for compatibility
 ┗━━ 📄 requirements.txt             # requirements file
 ```
