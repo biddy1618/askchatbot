@@ -17,3 +17,6 @@ actions/es/data/*
 
 # Development environment variables
 # env-dev.sh
+
+# Local READMEs
+info/miscellaneous/*

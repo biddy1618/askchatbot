@@ -16,7 +16,7 @@ es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
-version     = '26.06.22'
+version     = '29.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
@@ -62,8 +62,7 @@ debug               = stage == 'dev'
 es_search_size  = 100
 es_cut_off      = 0.4
 es_top_n        = 10
-es_ask_weight   = 0.6
-es_slots_weight = 0.1
+es_ask_weight   = 0.8
 
 logger.info('----------------------------------------------')
 logger.info('Loading synonym procedure')
@@ -77,6 +76,21 @@ except IOError:
     logger.info('Failed loading synonym list')
 logger.info('----------------------------------------------')
 
+logger.info('----------------------------------------------')
+logger.info('Loading hardcoded queries')
+hardcoded_queries       = []
+es_cut_off_hardcoded    = es_cut_off + 0.2
+es_hardcoded_threshold  = 0.85
+try:
+    with open(os.path.join(os.path.dirname(__file__), 'scripts/hardcoded/transformed/hardcoded.pickle'), 'rb') as handle:
+        hardcoded_queries = pickle.load(handle)
+    logger.info('Successfully loaded hardcoded queries')
+except IOError:
+    logger.info('Failed loading hardcoded queries')
+logger.info(f'- cut off parameter for hardcoded queries     = {es_cut_off_hardcoded:.2f}'   )
+logger.info(f'- cut off parameter for similarity threshold  = {es_hardcoded_threshold:.2f}' )
+logger.info('----------------------------------------------')
+
 if debug:
 
     logger.info('----------------------------------------------')
@@ -87,7 +101,6 @@ if debug:
     logger.info(f'- es_cut_off      = {es_cut_off}')
     logger.info(f'- es_top_n        = {es_top_n}')
     logger.info(f'- es_ask_weight   = {es_ask_weight}')
-    logger.info(f'- es_slots_weight = {es_slots_weight}')
     logger.info('----------------------------------------------')
 
 if not es_imitate:
