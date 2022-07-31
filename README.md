@@ -92,6 +92,10 @@ The chatbot is available through `https://qa.chat.ask.eduworks.com/`.
 ┃   ┣━━ 🐍 scoring_playground.ipynb             # scripts (playground) for scoring service
 ┣━━ 📂 web-client                   # alternative web-clients for debugging
 ┃   ┗━━ ...                         # ...
+┣━━ 📄 .dockerignore                # docker ignore file
+┣━━ 📄 .env                         # environment variables for docker compose file
+┣━━ 📄 .gitignore                   # git ignore file
+┣━━ 📄 .gitlab-ci.yml               # gitlab CI/CD configuration file
 ┣━━ 📄 config.yml                   # configuration file
 ┣━━ 📄 credentials.yml              # credentials file
 ┣━━ 📄 domain.yml                   # domain file
