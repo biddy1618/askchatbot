@@ -1,10 +1,5 @@
 # UC IPM Data
 
-## Data retrieval
-
-Data can be obtained through DVC ([installation guide](https://wiki.eduworks.com/Information_Technology/MLOps/DATA-Installing-DVC)). Clone the [repository](https://git.eduworks.us/data/ask-extension/uc-ipm-web-scrape) for scraped data, install Google Cloud Client - `gcloud` (more in installation guide), authenticate, and pull the data through dvc. Please, contact admin for access rights.
-
-
 ### ETL and EDA
 
 More information can be found in `./scripts/es_etl.ipynb` notebook.
@@ -74,8 +69,6 @@ curl https://ask2.extension.org/api/knowledge/2012-12-05/2012-12-06
 ```
 where first date indicates start date and second date indicates end date (both inclusive).
 
-Crawled data can be found [here](https://drive.google.com/drive/folders/12CyhdvCwNLgtdUHTcmWkAKR4oIWhGKHq).
-
 ## Data description
 
 Ask Extension data obtained through API looks the following way:
@@ -134,7 +127,6 @@ It is a list of dictionary objects with following fields:
 ### ETL and EDA
 
 More information can be found in `./scripts/es_etl.ipynb` notebook.
-
 
 ## Person of contact
 

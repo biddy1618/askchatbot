@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 from typing import List, Tuple
 from elasticsearch import RequestError
@@ -61,7 +62,7 @@ async def _cos_sim_query(query_vector: np.ndarray) -> dict:
 async def _handle_es_query(
     query       : str               ,
     slots       : List[str] = None
-    ) -> list:
+    ) -> Tuple[list, str]:
     '''Perform search in ES base.
 
     Args:
@@ -69,9 +70,10 @@ async def _handle_es_query(
         slots       (List[str]) : Additional entity queries. Defaults to None.
 
     Returns:
-        list: return list of hits. 
-    '''    
-    
+        Tuple[list, str]: Results from ES query and final transformed query that was embedded.
+                            If slots were provided, then results with slots refinement.
+    '''
+
     def _synonym_replace(text):
         tokens = config.tokenizer(text)
         text_modified = ""
@@ -84,7 +86,33 @@ async def _handle_es_query(
             else:
                 text_modified += token.text_with_ws
 
-        return text_modified    
+        return text_modified
+    
+    def _check_for_hardcoded_queries(text):
+        
+        tokens = config.tokenizer(text)
+        text_modified = ""
+
+        for token in tokens:
+            if not token.is_stop:
+                text_modified += token.text_with_ws
+            
+        query_vector = config.embed.encode([text_modified], show_progress_bar = False)[0]
+        best_score  = 0
+        best_result = None
+        for h_query in config.hardcoded_queries:
+            h_query_vector = h_query['vector']
+            score = cosine_similarity([query_vector, h_query_vector])[0, 1]
+            if score > best_score:
+                best_score  = score
+                best_result = h_query
+
+        if best_score < config.es_hardcoded_threshold:
+            return None
+
+        return best_result        
+    
+    check_hardcoded = _check_for_hardcoded_queries(query)
     
     query = _synonym_replace(query)
 
@@ -98,6 +126,11 @@ async def _handle_es_query(
     query_vector = config.embed.encode([query], show_progress_bar = False)[0]
     
     hits = await _cos_sim_query(query_vector = query_vector)
+
+    if check_hardcoded:
+        urls = set([h['url'] for h in check_hardcoded['hits']])
+        hits = [h for h in hits if h['url'] not in urls and h['_score'] > config.es_cut_off_hardcoded]
+        hits = check_hardcoded['hits'] + hits
 
     return hits, query
 
@@ -199,7 +232,15 @@ def _handle_es_result(
 
 
 # Enable for the new view
-def _format_result(hit) -> dict:
+def _format_result(hit: dict) -> dict:
+    '''Process formatted file single result for output.
+
+    Args:
+        hit (dict): Single result item.
+
+    Returns:
+        dict: Formatted result.
+    '''
     
     score           = hit.get('_score'          , 0.0   )
     source          = hit.get('source'          , None  )
@@ -331,10 +372,10 @@ async def submit(
 async def save_chat_logs(
     chat_export: dict
     ) -> None:
-    '''_summary_
+    '''Save the chat into the index logs in ES.
 
     Args:
-        chat_export (dict): _description_
+        chat_export (dict): The chat export object containing chat history for particular session.
     '''
     try:
         response = await config.es_client.index(
