@@ -113,6 +113,6 @@ The chatbot is available through `https://qa.chat.ask.eduworks.com/`.
 
 ## Auxillary
 
-To see the details on ETL and EDA, refer to [`README-0-etl-data-sources.md](actions/es/README-0-etl-data-sources.md).
+To see the details on ETL and EDA, refer to [README-0-etl-data-sources.md](actions/es/README-0-etl-data-sources.md).
 
-To read about the scoring pipeline, refer to [`README-scoring.md](scripts/scoring/README-scoring.md).
+To read about the scoring pipeline, refer to [README-scoring.md](scripts/scoring/README-scoring.md).
