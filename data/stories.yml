@@ -1,0 +1,8 @@
+stories:
+- story: Timeout error fallback  
+  steps: 
+  - intent: intent_update_kb
+  - action: action_please_wait
+  - action: action_update_kb
+  - intent: nlu_fallback
+  - action: utter_timeout_error

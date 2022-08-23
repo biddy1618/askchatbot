@@ -2,7 +2,7 @@ import os
 import sys
 import logging
 import pickle
-
+from torch import cuda
 from spacy.lang.en import English
 
 from elasticsearch import AsyncElasticsearch
@@ -21,6 +21,8 @@ stage       = 'dev'
 # stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
 # expert_url  = 'https://ask2.extension.org/open.php'
+
+DEVICE = 'cuda' if cuda.is_available() else 'cpu' # Encoding into vectors is pretty slow if not using GPU
 
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4' # 512
@@ -56,6 +58,7 @@ embed_url = 'all-distilroberta-v1' # 768
 
 es_combined_index   = 'combined'
 es_logging_index    = 'logs'
+es_ask_extension_kb_index = 'ask_extension_kb'
 es_field_limit      = 32766
 debug               = stage == 'dev'
 
@@ -126,7 +129,7 @@ if not es_imitate:
 
     logger.info('Initializing the Elasticsearch client')
     es_client = AsyncElasticsearch(
-        [es_host], http_auth=(es_username, es_password))
+        [es_host], http_auth=(es_username, es_password), timeout=30, max_retries=10, retry_on_time=True)
     logger.info('Done initiliazing ElasticSearch client')
 
     logger.info(f'Start loading embedding module - {embed_url}')
@@ -134,7 +137,7 @@ if not es_imitate:
     embed = SentenceTransformer(
         model_name_or_path  = embed_url         ,
         cache_folder        = embed_cache_dir   ,
-        device              = 'cpu'             )
+        device              =  DEVICE           )
     logger.info(f'Done loading embedding module - {embed_url}')
     # -------------------------------------------------------------
 else:

@@ -14,9 +14,11 @@ from elasticsearch import RequestError
 from actions import helper
 
 from actions.es import config
-from actions.es.es import submit, save_chat_logs
-
+from actions.es.es import submit, save_chat_logs, retrieve_last_update, update_kb
+import json
+import requests 
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -407,4 +409,54 @@ class ActionSaveConversation(Action):
         
         logger.info(f'action_save_conversation - success saving conversation with chat_id - {export["chat_id"]}')
         logger.info('action_save_conversation - END')
+        return []
+
+
+class ActionLastKBUpdate(Action):
+    '''Retrieves the last update for Ask Extension Knowledge Base index'''
+
+    def name(self) -> Text:
+        return 'action_retrieve_last_kb_update'
+
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        logger.info('Retrieving last KB update - Start')
+        try:
+            date = await retrieve_last_update()
+            dispatcher.utter_message(text=f'The Ask Extension Knowledge Base was last updated on {date}')
+        except RequestError as e:
+            logger.error(f'A request error occurred. {e}')
+        except Exception as e:
+            logger.error(f"An unknown error occurred. {e}")
+        logger.info('Knowledge Base updated - End')
+        return []
+
+class ActionPleaseWait(Action):
+
+    def name(self) -> Text:
+
+        return "action_please_wait"
+
+    def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text=f"Okay, let me work on that...")
+        return []
+class ActionUpdateKB(Action):
+    '''Updates the knowledge base us'''
+
+    def name(self) -> Text:
+        return 'action_update_kb'
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+
+        date = await retrieve_last_update()
+        items = requests.get(f'https://qa.osticket.eduworks.com/api/knowledge/{date}').json()
+        try:
+            num_items_added = await update_kb(items)
+            dispatcher.utter_message(text=f"The update was successful! I've added {num_items_added} to my brain.")
+        except RequestError as e:
+            logger.error(f'Error while indexing - failed to fully update the knowledge base')
+        except Exception as e:
+            logger.error(f"An unknown error occurred. {e}")
+        
+        logger.info('Knowledge Base updated - End')
         return []

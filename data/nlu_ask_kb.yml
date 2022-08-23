@@ -1,0 +1,15 @@
+version: "3.1"
+
+nlu:
+- intent: intent_update_kb
+  examples: |
+    - Update the knowledge base
+    - Update the kb
+    - Update the ask extension knowledgebase
+
+- intent: intent_retrieve_last_update
+  examples: |
+    - When was the Knowledge base last updated?
+    - When was the ask extension knowledge base last updated?
+    - Retrieve the date of the last kb update
+    - Retrieve the last knowledge base update date
