@@ -3,8 +3,24 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from typing import List, Tuple
 from elasticsearch import RequestError
-
+import requests
 from actions.es import config
+import logging
+logger = logging.getLogger(__name__)
+from datetime import datetime
+
+from tqdm import tqdm
+class TqdmLoggingHandler(logging.Handler):
+    def __init__(self, level=logging.NOTSET):
+        super().__init__(level)
+
+    def emit(self, record):
+        try:
+            msg = self.format(record)
+            tqdm.write(msg)
+            self.flush()
+        except Exception:
+            self.handleError(record)  
 
 async def _cos_sim_query(query_vector: np.ndarray) -> dict:
     '''Exectute vector search in ES based on cosine similarity.
@@ -390,3 +406,40 @@ async def save_chat_logs(
         assert response['result'] in ['created', 'updated']
     except AssertionError as e:
         raise e
+
+async def update_kb(items) -> None:
+    '''Retrieves the last update and calls osticket api to get latest items to add to database.'''
+    logger.setLevel(logging.INFO)
+    logger.addHandler(TqdmLoggingHandler())
+    count = 0
+    for item in tqdm(items):
+        count+=1
+        try:
+            item['created_timestamp'] = datetime.strptime(item['created'].split()[0], '%Y-%m-%d').timestamp()
+            item['updated_timestamp'] = datetime.strptime(item['created'].split()[0], '%Y-%m-%d').timestamp()
+            response = await config.es_client.index(index='ask_extension_kb', body=item, request_timeout=10000)
+        except RequestError as e:
+            raise e
+        except Exception as e:
+            raise e
+    return count
+
+async def retrieve_last_update() -> str:
+    """ Searches Elastic Search for last update to ask_extension_kb index. 
+
+    Retruns:
+        Last update date (string)
+    """
+    body = {
+        'aggs': {
+            'last_updated':{
+                'max': {
+                    'field': 'created_timestamp'
+                }
+            }
+        }
+    }
+    res = await config.es_client.search(index='ask_extension_kb', body=body, size=0)
+    timestamp = res['aggregations']['last_updated']['value']
+    date = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+    return date

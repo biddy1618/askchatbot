@@ -1,377 +1,399 @@
-version: '3.1'
+version: "3.1"
 session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+    session_expiration_time: 60
+    carry_over_slots_to_new_session: true
 intents:
-# Debug intents
-- intent_set_parameter
-# Base intents
-- intent_greet
-- intent_affirm
-- intent_deny
-- intent_goodbye
-- intent_bot_challenge
-- intent_out_of_scope
-# Main intents
-- intent_explain_ipm
-- intent_request_expert
-# ES intents
-- intent_help_question
-- intent_problem_description
-# Tests
-- intent_test_images
-- intent_test_videos
-- intent_test_dropdows
-- intent_test_quick_replies
-- intent_test_collapsible
-- intent_test_carousel
-- intent_test_results_collapsible
-- intent_test_imgupload
+    # Debug intents
+    - intent_set_parameter
+    # Base intents
+    - intent_greet
+    - intent_affirm
+    - intent_deny
+    - intent_goodbye
+    - intent_bot_challenge
+    - intent_out_of_scope
+    # Main intents
+    - intent_explain_ipm
+    - intent_request_expert
+    # ES intents
+    - intent_help_question
+    - intent_problem_description
+    # Tests
+    - intent_test_images
+    - intent_test_videos
+    - intent_test_dropdows
+    - intent_test_quick_replies
+    - intent_test_collapsible
+    - intent_test_carousel
+    - intent_test_results_collapsible
+    - intent_test_imgupload
+    - intent_update_kb
+    - intent_retrieve_last_update
+
 entities:
-- action:
-    roles:
-      - pest
-      - plant
-      - damage
-      - remedy
-    groups:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-- descr:
-    roles:
-      - pest
-      - plant
-      - damage
-      - remedy
-    groups:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-- location:
-    roles:
-      - pest
-      - plant
-      - damage
-      - remedy
-    groups:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-- name:
-    roles:
-      - pest
-      - plant
-      - damage
-      - remedy
-    groups:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-- part:
-    roles:
-      - pest
-      - plant
-    groups:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-- type:
-    roles:
-      - pest
-      - plant
-    groups:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
+    - action:
+          roles:
+              - pest
+              - plant
+              - damage
+              - remedy
+          groups:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+    - descr:
+          roles:
+              - pest
+              - plant
+              - damage
+              - remedy
+          groups:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+    - location:
+          roles:
+              - pest
+              - plant
+              - damage
+              - remedy
+          groups:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+    - name:
+          roles:
+              - pest
+              - plant
+              - damage
+              - remedy
+          groups:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+    - part:
+          roles:
+              - pest
+              - plant
+          groups:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+    - type:
+          roles:
+              - pest
+              - plant
+          groups:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
 slots:
-  # Basic slots
-  shown_greeting:
-    type: bool
-    mappings:
-    - type: custom
-  shown_explain_ipm:
-    type: bool
-    mappings:
-    - type: custom
-  done_query:
-    type: bool
-    mappings:
-    - type: custom
-  # ES query form slots
-  es_data:
-    type: any
-    mappings:
-    - type: custom
-  problem_description:
-    type: text
-    mappings:
-      - type: custom
-        action: action_validate_problem_description
-  # Additional slots
-  problem_details:
-    type: any
-    mappings:
-      - type: custom
-  # ES query result slots
-  problem_description_add:
-    type: text
-    mappings:
-      - type: from_text
-        intent: intent_problem_description
-        conditions:
-        - active_loop: es_result_form
-          requested_slot: problem_description_add
-      - type: from_intent
-        value: yes
-        intent: intent_affirm
-        conditions:
-        - active_loop: es_result_form
-          requested_slot: problem_description_add
-      - type: from_intent
-        value: no
-        intent: intent_deny
-        conditions:
-        - active_loop: es_result_form
-          requested_slot: problem_description_add
-      - type: from_intent
-        value: expert
-        intent: intent_request_expert
-        conditions:
-        - active_loop: es_result_form
-          requested_slot: problem_description_add
+    # Basic slots
+    shown_greeting:
+        type: bool
+        mappings:
+            - type: custom
+    shown_explain_ipm:
+        type: bool
+        mappings:
+            - type: custom
+    done_query:
+        type: bool
+        mappings:
+            - type: custom
+    # ES query form slots
+    es_data:
+        type: any
+        mappings:
+            - type: custom
+    problem_description:
+        type: text
+        mappings:
+            - type: custom
+              action: action_validate_problem_description
+    # Additional slots
+    problem_details:
+        type: any
+        mappings:
+            - type: custom
+    # ES query result slots
+    problem_description_add:
+        type: text
+        mappings:
+            - type: from_text
+              intent: intent_problem_description
+              conditions:
+                  - active_loop: es_result_form
+                    requested_slot: problem_description_add
+            - type: from_intent
+              value: yes
+              intent: intent_affirm
+              conditions:
+                  - active_loop: es_result_form
+                    requested_slot: problem_description_add
+            - type: from_intent
+              value: no
+              intent: intent_deny
+              conditions:
+                  - active_loop: es_result_form
+                    requested_slot: problem_description_add
+            - type: from_intent
+              value: expert
+              intent: intent_request_expert
+              conditions:
+                  - active_loop: es_result_form
+                    requested_slot: problem_description_add
 responses:
-  # Basic responses
-  # utter_goodbye:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   text: Bye!
-  # utter_iamabot:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   text: I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a> platform. I can help you with the pest-related issues and questions. If you have one, please, describe your problem.
-  # utter_greet:
-  # - text: Hi, I'm the AskExtension Assistant!
-  # utter_connect_expert:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   text: You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.
-  # utter_out_of_scope:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   - payload: /intent_request_expert
-  #     title: Connect me to an expert.
-  #   text: Sorry, I can't handle that request. For now, I can handle pest related requests. Try me :D
-  # utter_default:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   - payload: /intent_request_expert
-  #     title: Connect me to an expert.
-  #   text: I'm sorry, I am still learning. Can you rephrase?
-  # ES query form slots questions
-  # utter_ask_problem_description:
-  # - text: Please describe your problem.
-  # ES result form slots questions
-  # utter_ask_query_more:
-  # - buttons:
-  #   - payload: /intent_affirm
-  #     title: Yes.
-  #   - payload: /intent_deny
-  #     title: No.
-  #   text: Do you have any additional details to give you a better help?
-  # utter_ask_problem_description_add:
-  # - buttons:
-  #   - payload: /intent_affirm
-  #     title: Yes, it helped.
-  #   text: Did that answer your question? If not, can you give me some more information about where you saw this?
-  # Testing utterances
-  utter_test_images:
-  - text: "Here is something to cheer you up 😉 "
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-  utter_test_videos:
-  - text: "Check this video"
-    attachment: { "type":"video", "payload":{ "src": "https://youtube.com/embed/9C1Km6xfdMA" } }
-  utter_test_droprows:
-  - text: "Please select a option"
-    custom:
-      payload: dropDown
-      data:
-      - label: option1
-        value: option1
-      - label: option2
-        value: option2
-      - label: option3
-        value: option3
-  utter_test_quick_replies:
-  - text: "Please choose a reply"
-    custom:
-      payload: quickReplies
-      data:
-      - title: reply1
-        payload: reply1
-      - title: reply2
-        payload: reply2
-      - title: reply3
-        payload: reply3
-  utter_test_collapsible:
-  - text: "You can check the following options"
-    custom:
-      payload: "collapsible"
-      data:
-      - title: Title1
-        description: Sick leave is time off from work that workers can use to stay home
-          to address their health and safety needs without losing pay.
-      - title: Title2
-        description: 'Earned Leaves are the leaves which are earned in the previous year
-          and enjoyed in the preceding years. '
-      - title: Title3
-        description: Casual Leave are granted for certain unforeseen situation or were you
-          are require to go for one or two days leaves to attend to personal matters and
-          not for vacation.
-      - title: Title4
-        description: Flexi leave is an optional leave which one can apply directly in system
-          at lease a week before.
-  utter_test_carousel:
-    - custom:
-        payload: cardsCarousel
-        data:
-        - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
-          name: abc
-          ratings: '4.0'
-          title: pqr
-        - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
-          name: abc
-          ratings: '4.0'
-          title: pqr
-        - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
-          name: abc
-          ratings: '4.0'
-          title: pqr
-        - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
-          name: abc
-          ratings: '4.0'
-          title: pqr
-  utter_test_results_collapsible:
-    - custom:
-        payload: "resultscollapsible"
-        data:
-        - title: Thrips
-          score: 0.99
-          url: http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt
-          source: pestsIPM
-          cutoff: false
-          body:
-            description: This is a description. Thrips, order Thysanoptera, are tiny, slender insects with fringed wings....
-            damage: This is a damage. Thrips are difficult to control. If management is necessary, use an integ...
-            identification: This is an identification. Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
-            development: This is a development. Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
-            management: This is a management. Thrips are difficult to control. If management is necessary, use an integ...
-          images:
-          - caption: Stippling as result of greenhouse thrips feeding.
-            link: http://ipm.ucanr.edu/PMG/H/I-TS-HHAE-CD.013.html?src=exchbt
-            src: http://ipm.ucanr.edu/PMG/IMAGES/H/I-TS-HHAE-CD.013h.jpg
-          - caption: Black feces and white feeding scars from thrips.
-            link: http://ipm.ucanr.edu/PMG/F/I-TS-FOCC-CD.008.html?src=exchbt
-            src: http://ipm.ucanr.edu/PMG/IMAGES/F/I-TS-FOCC-CD.008h.jpg
-        - title: Stink bugs
-          score: 0.99
-          url: http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt
-          source: pestsIPM
-          cutoff: false
-          body:
-            description: This is a description. These sucking insects (family Pentatomidae) are shield shaped. Their common ...
-            development: This is a development. Adult stink bugs are distinguished from other insects by the large ...
-            management: This is a management. Handpick the bugs and their eggs from small plants. Eliminate groundcovers...
-          images:
-          - caption: Adults of southern green stink bug (left), redshouldered stink bug, (upper right) and consperse stink bug.
-            link: http://ipm.ucanr.edu/PMG/E/I-HM-ECON-AD.015.html?src=exchbt
-            src: http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-AD.015a.jpg
-          - caption: First instars of consperse stink bug and their empty egg cases.
-            link: http://ipm.ucanr.edu/PMG/E/I-HM-ECON-EG.001.html?src=exchbt
-            src: http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-EG.001b.jpg
-        - title: European Grapevine Moth
-          score: 0.99
-          url: https://www2.ipm.ucanr.edu/Invasive-and-Exotic-Pests/European-grapevine-moth/?src=exchbt
-          source: pestsIPM
-          cutoff: false
-          body:
-            description: This is a description. Lobesia botrana, the European grapevine moth, was first reported in the United ...
-            development: This is a development. In May and June, first-generation larvae web and feed on the flower clusters. Secon...
-            management: This is a management. In countries where L. botrana is established, control measures are targeted at ...
-          images: 
-          - caption: Adult female European grapevine moth.
-            link: http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-AD.002.html?src=exchbt
-            src: http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-AD.002h.jpg
-          - caption: Grape bunches with webbing, frass, and fungal infections.
-            link: http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-CD.004.html?src=exchbt
-            src: http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-CD.004h.jpg
-        - title: Missing images
-          score: 0.99
-          url: https://www2.ipm.ucanr.edu/Invasive-and-Exotic-Pests/European-grapevine-moth/?src=exchbt
-          source: pestsIPM
-          cutoff: false
-          body:
-            description: This is a description. Lobesia botrana, the European grapevine moth, was first reported in the United ...
-            development: This is a development. In May and June, first-generation larvae web and feed on the flower clusters. Secon...
-            management: This is a management. In countries where L. botrana is established, control measures are targeted at ...
-          images: []
-  utter_test_imgupload:
-  - text: "Select a pest related image to upload."
-    custom:
-      payload: cvImgUpload
+    # Basic responses
+    # utter_goodbye:
+    # - buttons:
+    #   - payload: /intent_greet
+    #     title: Start over.
+    #   text: Bye!
+    # utter_iamabot:
+    # - buttons:
+    #   - payload: /intent_greet
+    #     title: Start over.
+    #   text: I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a> platform. I can help you with the pest-related issues and questions. If you have one, please, describe your problem.
+    # utter_greet:
+    # - text: Hi, I'm the AskExtension Assistant!
+    # utter_connect_expert:
+    # - buttons:
+    #   - payload: /intent_greet
+    #     title: Start over.
+    #   text: You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.
+    # utter_out_of_scope:
+    # - buttons:
+    #   - payload: /intent_greet
+    #     title: Start over.
+    #   - payload: /intent_request_expert
+    #     title: Connect me to an expert.
+    #   text: Sorry, I can't handle that request. For now, I can handle pest related requests. Try me :D
+    # utter_default:
+    # - buttons:
+    #   - payload: /intent_greet
+    #     title: Start over.
+    #   - payload: /intent_request_expert
+    #     title: Connect me to an expert.
+    #   text: I'm sorry, I am still learning. Can you rephrase?
+    # ES query form slots questions
+    # utter_ask_problem_description:
+    # - text: Please describe your problem.
+    # ES result form slots questions
+    # utter_ask_query_more:
+    # - buttons:
+    #   - payload: /intent_affirm
+    #     title: Yes.
+    #   - payload: /intent_deny
+    #     title: No.
+    #   text: Do you have any additional details to give you a better help?
+    # utter_ask_problem_description_add:
+    # - buttons:
+    #   - payload: /intent_affirm
+    #     title: Yes, it helped.
+    #   text: Did that answer your question? If not, can you give me some more information about where you saw this?
+    # Testing utterances
+    utter_update_in_progress:
+      - text: "Okay, let me work on that..."
+
+    utter_timeout_error:
+      - text: "The ElasticSearch server timed out 😔. I've partially updated the knowledge base. Type \"Update the knowledge base\" again to continue."
+
+    utter_test_images:
+        - text: "Here is something to cheer you up 😉 "
+          image: "https://i.imgur.com/nGF1K8f.jpg"
+    utter_test_videos:
+        - text: "Check this video"
+          attachment:
+              {
+                  "type": "video",
+                  "payload": { "src": "https://youtube.com/embed/9C1Km6xfdMA" },
+              }
+    utter_test_droprows:
+        - text: "Please select a option"
+          custom:
+              payload: dropDown
+              data:
+                  - label: option1
+                    value: option1
+                  - label: option2
+                    value: option2
+                  - label: option3
+                    value: option3
+    utter_test_quick_replies:
+        - text: "Please choose a reply"
+          custom:
+              payload: quickReplies
+              data:
+                  - title: reply1
+                    payload: reply1
+                  - title: reply2
+                    payload: reply2
+                  - title: reply3
+                    payload: reply3
+    utter_test_collapsible:
+        - text: "You can check the following options"
+          custom:
+              payload: "collapsible"
+              data:
+                  - title: Title1
+                    description:
+                        Sick leave is time off from work that workers can use to stay home
+                        to address their health and safety needs without losing pay.
+                  - title: Title2
+                    description:
+                        "Earned Leaves are the leaves which are earned in the previous year
+                        and enjoyed in the preceding years. "
+                  - title: Title3
+                    description:
+                        Casual Leave are granted for certain unforeseen situation or were you
+                        are require to go for one or two days leaves to attend to personal matters and
+                        not for vacation.
+                  - title: Title4
+                    description:
+                        Flexi leave is an optional leave which one can apply directly in system
+                        at lease a week before.
+    utter_test_carousel:
+        - custom:
+              payload: cardsCarousel
+              data:
+                  - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
+                    name: abc
+                    ratings: "4.0"
+                    title: pqr
+                  - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
+                    name: abc
+                    ratings: "4.0"
+                    title: pqr
+                  - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
+                    name: abc
+                    ratings: "4.0"
+                    title: pqr
+                  - image: https://b.zmtcdn.com/data/pictures/1/17428541/da50010b1a953dfbb109306fba5a6c06.jpg
+                    name: abc
+                    ratings: "4.0"
+                    title: pqr
+    utter_test_results_collapsible:
+        - custom:
+              payload: "resultscollapsible"
+              data:
+                  - title: Thrips
+                    score: 0.99
+                    url: http://ipm.ucanr.edu/PMG/PESTNOTES/pn7429.html?src=exchbt
+                    source: pestsIPM
+                    cutoff: false
+                    body:
+                        description: This is a description. Thrips, order Thysanoptera, are tiny, slender insects with fringed wings....
+                        damage: This is a damage. Thrips are difficult to control. If management is necessary, use an integ...
+                        identification: This is an identification. Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
+                        development: This is a development. Thrips feeding on plants can damage fruit, leaves, and shoots and very notice...
+                        management: This is a management. Thrips are difficult to control. If management is necessary, use an integ...
+                    images:
+                        - caption: Stippling as result of greenhouse thrips feeding.
+                          link: http://ipm.ucanr.edu/PMG/H/I-TS-HHAE-CD.013.html?src=exchbt
+                          src: http://ipm.ucanr.edu/PMG/IMAGES/H/I-TS-HHAE-CD.013h.jpg
+                        - caption: Black feces and white feeding scars from thrips.
+                          link: http://ipm.ucanr.edu/PMG/F/I-TS-FOCC-CD.008.html?src=exchbt
+                          src: http://ipm.ucanr.edu/PMG/IMAGES/F/I-TS-FOCC-CD.008h.jpg
+                  - title: Stink bugs
+                    score: 0.99
+                    url: http://ipm.ucanr.edu/PMG/GARDEN/VEGES/PESTS/stinkbug.html?src=exchbt
+                    source: pestsIPM
+                    cutoff: false
+                    body:
+                        description: This is a description. These sucking insects (family Pentatomidae) are shield shaped. Their common ...
+                        development: This is a development. Adult stink bugs are distinguished from other insects by the large ...
+                        management: This is a management. Handpick the bugs and their eggs from small plants. Eliminate groundcovers...
+                    images:
+                        - caption: Adults of southern green stink bug (left), redshouldered stink bug, (upper right) and consperse stink bug.
+                          link: http://ipm.ucanr.edu/PMG/E/I-HM-ECON-AD.015.html?src=exchbt
+                          src: http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-AD.015a.jpg
+                        - caption: First instars of consperse stink bug and their empty egg cases.
+                          link: http://ipm.ucanr.edu/PMG/E/I-HM-ECON-EG.001.html?src=exchbt
+                          src: http://ipm.ucanr.edu/PMG/IMAGES/E/I-HM-ECON-EG.001b.jpg
+                  - title: European Grapevine Moth
+                    score: 0.99
+                    url: https://www2.ipm.ucanr.edu/Invasive-and-Exotic-Pests/European-grapevine-moth/?src=exchbt
+                    source: pestsIPM
+                    cutoff: false
+                    body:
+                        description: This is a description. Lobesia botrana, the European grapevine moth, was first reported in the United ...
+                        development: This is a development. In May and June, first-generation larvae web and feed on the flower clusters. Secon...
+                        management: This is a management. In countries where L. botrana is established, control measures are targeted at ...
+                    images:
+                        - caption: Adult female European grapevine moth.
+                          link: http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-AD.002.html?src=exchbt
+                          src: http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-AD.002h.jpg
+                        - caption: Grape bunches with webbing, frass, and fungal infections.
+                          link: http://ipm.ucanr.edu/PMG/L/I-LP-LBOT-CD.004.html?src=exchbt
+                          src: http://ipm.ucanr.edu/PMG/IMAGES/L/I-LP-LBOT-CD.004h.jpg
+                  - title: Missing images
+                    score: 0.99
+                    url: https://www2.ipm.ucanr.edu/Invasive-and-Exotic-Pests/European-grapevine-moth/?src=exchbt
+                    source: pestsIPM
+                    cutoff: false
+                    body:
+                        description: This is a description. Lobesia botrana, the European grapevine moth, was first reported in the United ...
+                        development: This is a development. In May and June, first-generation larvae web and feed on the flower clusters. Secon...
+                        management: This is a management. In countries where L. botrana is established, control measures are targeted at ...
+                    images: []
+    utter_test_imgupload:
+        - text: "Select a pest related image to upload."
+          custom:
+              payload: cvImgUpload
 actions:
-# Debug actions
-- action_set_parameter
-# Base actions
-- action_greet
-- action_goodbye
-- action_iambot
-- action_default_fallback
-- action_out_of_scope
-# Main actions
-- action_explain_ipm
-- action_connect_expert
-# ES query form actions
-- action_ask_problem_description
-- action_validate_problem_description
-- validate_es_query_form
-- action_submit_es_query_form
-# ES result form actions
-- validate_es_result_form
-- action_ask_problem_description_add
-- action_submit_es_result_form
-# Save chat history
-- action_save_conversation
+    # Debug actions
+    - action_set_parameter
+    # Base actions
+    - action_greet
+    - action_goodbye
+    - action_iambot
+    - action_default_fallback
+    - action_out_of_scope
+    # Main actions
+    - action_explain_ipm
+    - action_connect_expert
+    # ES query form actions
+    - action_ask_problem_description
+    - action_validate_problem_description
+    - validate_es_query_form
+    - action_submit_es_query_form
+    # ES result form actions
+    - validate_es_result_form
+    - action_ask_problem_description_add
+    - action_submit_es_result_form
+    # Save chat history
+    - action_save_conversation
+    # Ask Extention Knowledgebase
+    - action_update_kb
+    - action_retrieve_last_kb_update
+    - action_please_wait
+
 forms:
-  # ES forms
-  es_query_form:
-    required_slots:
-    - problem_description
-    - problem_details
-  es_result_form:
-    required_slots:
-    - problem_description_add
-    - problem_details
+    # ES forms
+    es_query_form:
+        required_slots:
+            - problem_description
+            - problem_details
+    es_result_form:
+        required_slots:
+            - problem_description_add
+            - problem_details
