@@ -13,11 +13,12 @@ USER root
 RUN ["pip", "install", "--upgrade", "-r", "requirements-update.txt"]
 RUN ["python", "-m", "spacy", "download", "en_core_web_trf"]
 
+
 # uncomment if model is not pushed
 # RUN ["rasa", "train"]
 
 USER 1001
-CMD ["run", "--cors", "*"]
+CMD ["run", "--cors", "*", "--request-timeout", "3600"]
 
 # change shell
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]

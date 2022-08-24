@@ -7,9 +7,12 @@ services:
     environment:
       ACTION_ENDPOINT: http://rasa-actions:5055/webhook
       TOKENIZERS_PARALLELISM: 'false'
+      STREAM_READING_TIMEOUT_ENV: 5000
+      SANIC_RESPONSE_TIMEOUT: 5000
+      SANIC_REQUEST_TIMEOUT: 5000
     ports:
       - "5005:5005"
-    command: ["run", "--cors", "*"]
+    command: ["run", "--cors", "*", "--request-timeout", "3600"]
   rasa-actions:
     build:
       context: .
@@ -24,4 +27,6 @@ services:
       ELASTIC_USERNAME: ${ES_USERNAME}
       ELASTIC_PASSWORD: ${ES_PASSWORD}
       ES_HOST: ${ES_HOST}
+      SANIC_REQUEST_TIMEOUT: 5000
+      SANIC_RESPONSE_TIMEOUT: 5000
     

@@ -29,6 +29,8 @@ intents:
     - intent_test_imgupload
     - intent_update_kb
     - intent_retrieve_last_update
+    - intent_confirmed_update
+    - intent_dont_update
 
 entities:
     - action:
@@ -106,7 +108,12 @@ entities:
               - 5
               - 6
 slots:
-    # Basic slots
+    num_items:
+        type: text
+        influence_conversation: true
+        mappings:
+            - type: custom
+
     shown_greeting:
         type: bool
         mappings:
@@ -211,11 +218,28 @@ responses:
     #     title: Yes, it helped.
     #   text: Did that answer your question? If not, can you give me some more information about where you saw this?
     # Testing utterances
+
+    utter_confirm_update:
+      - text: "Updating the knowledge base could take awhile. Would you like to continue?"
+        buttons:
+        - title: "Yes"
+          payload: "/intent_confirmed_update"
+        - title: "No"
+          payload: "/intent_dont_update"
+    utter_wont_update:
+      - text: "Okay, I won't update then."
     utter_update_in_progress:
       - text: "Okay, let me work on that..."
 
     utter_timeout_error:
-      - text: "The ElasticSearch server timed out 😔. I've partially updated the knowledge base. Type \"Update the knowledge base\" again to continue."
+      - text: "The Knowledge Base has been partially updated, but I ran into a timeout error. Would you like to continue updating?"
+        buttons:
+        - title: "Yes"
+          payload: "/intent_confirmed_update"
+        - title: "No"
+          payload: "/intent_dont_update"
+    utter_update_success:
+        - text: "The update was successful! I've added {num_items} items to my brain"
 
     utter_test_images:
         - text: "Here is something to cheer you up 😉 "
@@ -385,7 +409,7 @@ actions:
     # Ask Extention Knowledgebase
     - action_update_kb
     - action_retrieve_last_kb_update
-    - action_please_wait
+    - action_success
 
 forms:
     # ES forms
