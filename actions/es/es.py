@@ -407,11 +407,19 @@ async def save_chat_logs(
     except AssertionError as e:
         raise e
 
-async def update_kb(items) -> None:
+async def update_kb() -> int:
     '''Retrieves the last update and calls osticket api to get latest items to add to database.'''
     logger.setLevel(logging.INFO)
     logger.addHandler(TqdmLoggingHandler())
     count = 0
+    date = await retrieve_last_update()
+
+    # API Url for local vs deployed on GCP
+
+    url = f'http://10.16.36.190/api/knowledge/{date}' # gcp
+    #url = f'https://qa.osticket.eduworks.com/api/knowledge/{date}' # local
+
+    items = requests.get(url).json()
     for item in tqdm(items):
         count+=1
         try:
@@ -423,6 +431,8 @@ async def update_kb(items) -> None:
         except Exception as e:
             raise e
     return count
+
+
 
 async def retrieve_last_update() -> str:
     """ Searches Elastic Search for last update to ask_extension_kb index. 

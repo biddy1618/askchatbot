@@ -99,11 +99,32 @@ rules:
           - action: action_save_conversation
 
       # Ask Extension KB rules
-    - rule: Update Knowledge base
+    - rule: Confirm update
       steps:
           - intent: intent_update_kb
-          - action: action_please_wait
-          - action: action_update_kb
+          - action: utter_confirm_update
+
+    - rule: Don't update
+      steps:
+          - intent: intent_dont_update
+          - action: utter_wont_update
+          
+    - rule: Update knowledge base
+      steps:
+      - intent: intent_confirmed_update
+      - action: action_update_kb
+      - slot_was_set:
+          - num_items
+      - action: utter_update_success
+
+    - rule: Timeout error when KB was being updated
+      steps:
+      - intent: intent_confirmed_update
+      - action: action_update_kb
+      - slot_was_set:
+          - num_items: null
+      - action: utter_timeout_error
+
 
     - rule: Retrieve Last Update
       steps:
