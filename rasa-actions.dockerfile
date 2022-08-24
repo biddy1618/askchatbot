@@ -9,6 +9,9 @@
 ARG VERSION=3.1.1
 FROM rasa/rasa-sdk:$VERSION AS rasa-sdk
 
+ENV STREAM_READING_TIMEOUT_ENV 5000
+ENV SANIC_REQUEST_TIMEOUT  5000
+
 USER root
 COPY ./actions /app/actions
 
