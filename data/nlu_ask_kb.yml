@@ -5,7 +5,7 @@ nlu:
   examples: |
     - Update the knowledge base
     - Update the kb
-    - Update the ask extension knowledgebase
+    - Update the ask extension knowledge base
 
 - intent: intent_retrieve_last_update
   examples: |
@@ -13,3 +13,24 @@ nlu:
     - When was the ask extension knowledge base last updated?
     - Retrieve the date of the last kb update
     - Retrieve the last knowledge base update date
+    
+- regex: date
+  examples: |
+    - \d{4}\-\d{2}\-\d{2}
+
+- intent: intent_date_range_update
+  examples: |
+    - Get knowledge base questions from [2020-08-02]{"entity": "date", "role": "start"} to [2021-08-08]{"entity": "date", "role": "end"}
+    - Update the knowledge base with questions from [2009-04-24]{"entity": "date", "role": "start"} to [2018-12-17]{"entity": "date", "role": "end"}
+    - Retrive questions from the knowledge base starting on [2014-04-03]{"entity": "date", "role": "start"} and ending on [2016-04-30]({"entity": "date", "role": "end"}
+    - Update the knowledge base to [2022-09-01]{"entity": "date", "role": "end"} starting from [2014-07-13]{"entity": "date", "role": "start"}
+    - Update from [2015-02-27]{"entity": "date", "role": "start"} to [2016-08-30]({"entity": "date", "role": "end"}
+    - Update the kb from [2018-07-13]{"entity": "date", "role": "start"} to [2022-03-24]({"entity": "date", "role": "end"}
+    - Update knowledge base from [2015-12-13]{"entity": "date", "role": "start"} to [2019-10-13]({"entity": "date", "role": "end"}
+    - Update kb from [2015-01-01]{"entity": "date", "role": "start"} to [2015-01-01]{"entity": "date", "role": "end"}
+
+- intent: intent_get_total_documents
+  examples: |
+    - How many documents are in the ask extension knowledge base?
+    - Tell me the number of items in the knowledge base
+    - Give me the total number of items in the knowledge base 

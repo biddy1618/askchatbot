@@ -31,143 +31,165 @@ intents:
     - intent_retrieve_last_update
     - intent_confirmed_update
     - intent_dont_update
-
+    - intent_external_finished 
+    - intent_get_id
+    - intent_date_range_update
+    - intent_get_total_documents
+    
 entities:
-    - action:
-          roles:
-              - pest
-              - plant
-              - damage
-              - remedy
-          groups:
-              - 1
-              - 2
-              - 3
-              - 4
-              - 5
-              - 6
-    - descr:
-          roles:
-              - pest
-              - plant
-              - damage
-              - remedy
-          groups:
-              - 1
-              - 2
-              - 3
-              - 4
-              - 5
-              - 6
-    - location:
-          roles:
-              - pest
-              - plant
-              - damage
-              - remedy
-          groups:
-              - 1
-              - 2
-              - 3
-              - 4
-              - 5
-              - 6
-    - name:
-          roles:
-              - pest
-              - plant
-              - damage
-              - remedy
-          groups:
-              - 1
-              - 2
-              - 3
-              - 4
-              - 5
-              - 6
-    - part:
-          roles:
-              - pest
-              - plant
-          groups:
-              - 1
-              - 2
-              - 3
-              - 4
-              - 5
-              - 6
-    - type:
-          roles:
-              - pest
-              - plant
-          groups:
-              - 1
-              - 2
-              - 3
-              - 4
-              - 5
-              - 6
-slots:
-    num_items:
-        type: text
-        influence_conversation: true
-        mappings:
-            - type: custom
+  - action:
+        roles:
+            - pest
+            - plant
+            - damage
+            - remedy
+        groups:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+  - descr:
+        roles:
+            - pest
+            - plant
+            - damage
+            - remedy
+        groups:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+  - location:
+        roles:
+            - pest
+            - plant
+            - damage
+            - remedy
+        groups:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+  - name:
+        roles:
+            - pest
+            - plant
+            - damage
+            - remedy
+        groups:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+  - part:
+        roles:
+            - pest
+            - plant
+        groups:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+  - type:
+        roles:
+            - pest
+            - plant
+        groups:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+  - date: 
+        roles:
+          - start
+          - end
 
-    shown_greeting:
-        type: bool
-        mappings:
-            - type: custom
-    shown_explain_ipm:
-        type: bool
-        mappings:
-            - type: custom
-    done_query:
-        type: bool
-        mappings:
-            - type: custom
-    # ES query form slots
-    es_data:
-        type: any
-        mappings:
-            - type: custom
-    problem_description:
-        type: text
-        mappings:
-            - type: custom
-              action: action_validate_problem_description
-    # Additional slots
-    problem_details:
-        type: any
-        mappings:
-            - type: custom
-    # ES query result slots
-    problem_description_add:
-        type: text
-        mappings:
-            - type: from_text
-              intent: intent_problem_description
-              conditions:
-                  - active_loop: es_result_form
-                    requested_slot: problem_description_add
-            - type: from_intent
-              value: yes
-              intent: intent_affirm
-              conditions:
-                  - active_loop: es_result_form
-                    requested_slot: problem_description_add
-            - type: from_intent
-              value: no
-              intent: intent_deny
-              conditions:
-                  - active_loop: es_result_form
-                    requested_slot: problem_description_add
-            - type: from_intent
-              value: expert
-              intent: intent_request_expert
-              conditions:
-                  - active_loop: es_result_form
-                    requested_slot: problem_description_add
+
+slots:
+  num_items:
+      type: text
+      influence_conversation: true
+      mappings:
+          - type: custom
+  start:
+      type: text
+      mappings:
+        - type: from_entity
+          entity: date
+          role: start
+  end:
+      type: text
+      mappings:
+        - type: from_entity
+          entity: date
+          role: end
+
+  shown_greeting:
+      type: bool
+      mappings:
+          - type: custom
+  shown_explain_ipm:
+      type: bool
+      mappings:
+          - type: custom
+  done_query:
+      type: bool
+      mappings:
+          - type: custom
+  # ES query form slots
+  es_data:
+      type: any
+      mappings:
+          - type: custom
+  problem_description:
+      type: text
+      mappings:
+          - type: custom
+            action: action_validate_problem_description
+  # Additional slots
+  problem_details:
+      type: any
+      mappings:
+          - type: custom
+  # ES query result slots
+  problem_description_add:
+      type: text
+      mappings:
+          - type: from_text
+            intent: intent_problem_description
+            conditions:
+                - active_loop: es_result_form
+                  requested_slot: problem_description_add
+          - type: from_intent
+            value: yes
+            intent: intent_affirm
+            conditions:
+                - active_loop: es_result_form
+                  requested_slot: problem_description_add
+          - type: from_intent
+            value: no
+            intent: intent_deny
+            conditions:
+                - active_loop: es_result_form
+                  requested_slot: problem_description_add
+          - type: from_intent
+            value: expert
+            intent: intent_request_expert
+            conditions:
+                - active_loop: es_result_form
+                  requested_slot: problem_description_add
 responses:
     # Basic responses
     # utter_goodbye:
@@ -226,6 +248,7 @@ responses:
           payload: "/intent_confirmed_update"
         - title: "No"
           payload: "/intent_dont_update"
+
     utter_wont_update:
       - text: "Okay, I won't update then."
     utter_update_in_progress:
@@ -409,7 +432,7 @@ actions:
     # Ask Extention Knowledgebase
     - action_update_kb
     - action_retrieve_last_kb_update
-    - action_success
+    - action_get_total_documents
 
 forms:
     # ES forms
