@@ -10,3 +10,7 @@ transformers==4.17.0
 
 # pandas
 pandas==1.4.2
+
+#tkinter
+tk==0.1.0
+nest-asyncio==1.5.5

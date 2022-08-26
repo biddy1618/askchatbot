@@ -26,5 +26,5 @@ requirements.txt
 web-client/
 
 # ES data and scraped data
-actions/es/data/*
-!actions/es/data/mappings/*
+# actions/es/data/*
+#!actions/es/data/mappings/*

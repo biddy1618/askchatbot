@@ -6,16 +6,26 @@
 
 # FROM <image> (ARG <tag>)
 # base image
-ARG VERSION=3.1.1
+ARG VERSION=3.2.0
 FROM rasa/rasa-sdk:$VERSION AS rasa-sdk
 
-ENV STREAM_READING_TIMEOUT_ENV 5000
-ENV SANIC_REQUEST_TIMEOUT  5000
 
 USER root
+
+RUN apt-get update -qq && \
+    apt-get install -y python3-tk && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    
 COPY ./actions /app/actions
 
 RUN pip install --upgrade -r actions/requirements-update.txt
+
+ARG REQUEST_TIMEOUT=300
+ENV REQUEST_TIMEOUT=300
+
+ARG RESPONSE_TIMEOUT=300
+ENV RESPONSE_TIMEOUT=300
 
 USER 1001
 

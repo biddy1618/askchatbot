@@ -15,6 +15,9 @@ es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
 es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
+os_ticket_url = 'http://10.16.36.190/api/knowledge/'
+#os_ticket_url = 'https://qa.osticket.eduworks.com/api/knowledge/'
+
 es_imitate  = False
 version     = '29.06.22'
 stage       = 'dev'
@@ -23,7 +26,7 @@ expert_url  = 'https://ucanr.edu/About/Locations/'
 # expert_url  = 'https://ask2.extension.org/open.php'
 
 DEVICE = 'cuda' if cuda.is_available() else 'cpu' # Encoding into vectors is pretty slow if not using GPU
-
+count=0
 
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4' # 512
 # embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5' # 512
@@ -129,7 +132,7 @@ if not es_imitate:
 
     logger.info('Initializing the Elasticsearch client')
     es_client = AsyncElasticsearch(
-        [es_host], http_auth=(es_username, es_password), timeout=30, max_retries=10, retry_on_time=True)
+        [es_host], http_auth=(es_username, es_password), timeout=300, max_retries=10, retry_on_time=True)
     logger.info('Done initiliazing ElasticSearch client')
 
     logger.info(f'Start loading embedding module - {embed_url}')

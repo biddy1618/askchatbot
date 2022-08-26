@@ -14,9 +14,16 @@ from elasticsearch import RequestError
 from actions import helper
 from async_timeout import timeout
 from actions.es import config
-from actions.es.es import submit, save_chat_logs, retrieve_last_update, update_kb
-
+from actions.es.es import submit, save_chat_logs
+from actions.es.es_ask_kb import get_total_documents, retrieve_last_update, update_kb
 import logging
+from datetime import datetime
+from threading import Thread
+import asyncio 
+import uvloop
+
+# from threading import Thread
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 logger = logging.getLogger(__name__)
 
@@ -429,14 +436,63 @@ class ActionLastKBUpdate(Action):
         logger.info('Knowledge Base updated - End')
         return []
 
+class ActionGetTotalDocuments(Action):
+    '''Retrieves the last update for Ask Extension Knowledge Base index'''
+
+    def name(self) -> Text:
+        return 'action_get_total_documents'
+
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        logger.info('Getting total documents in Knowledge base')
+        total = await get_total_documents()
+        dispatcher.utter_message(text=f'There are currently {total:,} total items in my knowledge base.')
+        return []
+
+    
 class ActionUpdateKB(Action):
-    '''Updates the knowledge base us'''
+    '''Updates the knowledge base using the last found date'''
 
     def name(self) -> Text:
         return 'action_update_kb'
-    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
 
-        logger.info('Knowledge Base update - Start')
-        num_items_added = await update_kb()
-        logger.info('Knowledge Base update - End')
-        return [SlotSet('num_items', str(num_items_added))]
+    def check_dates(self, start_date, end_date):
+        """Simple function to see whether dates are valid and return a message if not. """
+        if start_date and end_date:
+            logger.info(f"Inputted start date: {start_date}")
+            logger.info(f'Inputted end date: {end_date}')
+            try: 
+                start= [int(i) for i in start_date.split('-')]
+                end = [int(i) for i in end_date.split('-')]
+                if datetime(year=start[0], month=start[1], day=start[2]) and datetime(year=end[0], month=end[1], day=end[2]):
+                    if datetime(year=start[0], month=start[1], day=start[2]) < datetime(year=end[0], month=end[1], day=end[2]):
+                        return start_date, end_date, ""
+                else:
+                    return None, None, "I'm detecting that the start date came after the end date. Do you mind rephrasing?"
+            except Exception as e:
+                logger.error(f"Error: {e}")
+                return None, None, "The dates inputted are invalid. Do you mind rephrasing?"
+        return None, None, "No dates were found"
+
+    async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
+        start_date, end_date, msg = self.check_dates(tracker.get_slot('start'), tracker.get_slot('end'))
+        if (start_date and end_date) or msg == 'No dates were found':
+            logger.info('Knowledge Base update - Start')
+            before = await get_total_documents()
+            try:
+                # Asyncio event loop problems, so just opening new thread...
+                task = asyncio.create_task(update_kb(start_date, end_date))
+                await task 
+                after = await get_total_documents()
+                total_added = after - before 
+                if total_added == 0:
+                    msg = "Looks like there is nothing for me to add."
+                else: 
+                    msg = f"The update was successful! I've added {total_added:,} items to my brain."
+            except:
+                msg= "Uh oh. Looks like there was an error when trying to update the knowledge base."
+
+            dispatcher.utter_message(text=msg)
+            return [SlotSet('start', None), SlotSet('end', None)]
+        else:
+            dispatcher.utter_message(text= msg)
+            return [SlotSet('start', None), SlotSet('end', None)]

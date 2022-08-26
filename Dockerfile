@@ -4,11 +4,8 @@
 # Dockerfile for building Rasa chatbot
 # More about the image - https://hub.docker.com/r/rasa/rasa/dockerfile
 
-ARG VERSION=3.1.0-spacy-en
+ARG VERSION=3.2.6-spacy-en
 FROM rasa/rasa:$VERSION AS rasa
-
-ENV STREAM_READING_TIMEOUT_ENV 5000
-ENV SANIC_REQUEST_TIMEOUT  5000
 
 COPY . .
 
@@ -17,11 +14,26 @@ RUN ["pip", "install", "--upgrade", "-r", "requirements-update.txt"]
 RUN ["python", "-m", "spacy", "download", "en_core_web_trf"]
 
 
+ARG STREAM_READING_TIME_ENV=300
+ENV STREAM_READING_TIME_ENV=300
+
+ARG SANIC_REQUEST_TIMEOUT=300
+ENV SANIC_REQUEST_TIMEOUT=300
+
+ARG REQUEST_TIMEOUT=300
+ENV REQUEST_TIMEOUT=300
+
+ARG RESPONSE_TIMEOUT=300
+ENV RESPONSE_TIMEOUT=300
+
+
 # uncomment if model is not pushed
 # RUN ["rasa", "train"]
 
 USER 1001
-CMD ["run", "--cors", "*", "--request-timeout", "3600"]
+EXPOSE 5005
+ENTRYPOINT ["rasa", "run", "--request-timeout", "5000", "--enable-api", "--auth-token", "test", "--cors", "*"]
+#ENTRYPOINT ["rasa", "run", "--request-timeout", "5000", "--cors", "*"]
 
 # change shell
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]
