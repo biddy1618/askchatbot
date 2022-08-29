@@ -13,17 +13,9 @@ USER root
 RUN ["pip", "install", "--upgrade", "-r", "requirements-update.txt"]
 RUN ["python", "-m", "spacy", "download", "en_core_web_trf"]
 
-
-ARG STREAM_READING_TIME_ENV=300
 ENV STREAM_READING_TIME_ENV=300
-
-ARG SANIC_REQUEST_TIMEOUT=300
 ENV SANIC_REQUEST_TIMEOUT=300
-
-ARG REQUEST_TIMEOUT=300
 ENV REQUEST_TIMEOUT=300
-
-ARG RESPONSE_TIMEOUT=300
 ENV RESPONSE_TIMEOUT=300
 
 

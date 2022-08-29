@@ -456,7 +456,10 @@ class ActionUpdateKB(Action):
         return 'action_update_kb'
 
     def check_dates(self, start_date, end_date):
-        """Simple function to see whether dates are valid and return a message if not. """
+        """Checkes whether the dates found (if any) are valid.
+            
+            Returns:
+                Dates (if valid) and message (indicating where the error occurred) """
         if start_date and end_date:
             logger.info(f"Inputted start date: {start_date}")
             logger.info(f'Inputted end date: {end_date}')
@@ -473,26 +476,34 @@ class ActionUpdateKB(Action):
                 return None, None, "The dates inputted are invalid. Do you mind rephrasing?"
         return None, None, "No dates were found"
 
+    async def get_message(self, was_successful, total_documents_before):
+        """Counts the number of documents added and returns a message to display to the user about update status."""
+        total_documents_after = await get_total_documents()
+        total_documents_added = total_documents_after - total_documents_before
+        if was_successful: 
+            if total_documents_added == 0:
+                return "Looks like there was nothing for me to add"
+            else: 
+                return f"The update was successful! I've added {total_documents_added:,} items to my brain."
+        else: 
+            if total_documents_added == 0:
+                return "Uh oh. Looks like an error occurred while searching for new items. Would you like to try again?"
+            else: 
+                return f"The update was partially successful. I've added {total_documents_added:,} to my brain. Would you like to continue adding more items?"
+
     async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[EventType]:
         start_date, end_date, msg = self.check_dates(tracker.get_slot('start'), tracker.get_slot('end'))
         if (start_date and end_date) or msg == 'No dates were found':
             logger.info('Knowledge Base update - Start')
-            before = await get_total_documents()
-            try:
-                # Asyncio event loop problems, so just opening new thread...
+            total_documents_before = await get_total_documents()
+            try: 
                 task = asyncio.create_task(update_kb(start_date, end_date))
                 await task 
-                after = await get_total_documents()
-                total_added = after - before 
-                if total_added == 0:
-                    msg = "Looks like there is nothing for me to add."
-                else: 
-                    msg = f"The update was successful! I've added {total_added:,} items to my brain."
+                msg = self.get_message(True, total_documents_before)
+                dispatcher.utter_message(text=msg)
+                return [SlotSet('start', None), SlotSet('end', None)]
             except:
-                msg= "Uh oh. Looks like there was an error when trying to update the knowledge base."
-
-            dispatcher.utter_message(text=msg)
-            return [SlotSet('start', None), SlotSet('end', None)]
-        else:
-            dispatcher.utter_message(text= msg)
-            return [SlotSet('start', None), SlotSet('end', None)]
+                msg = await self.get_message(False, total_documents_before)
+                dispatcher.utter_message(text=msg)
+                dispatcher.utter_message(buttons=[{'payload': "/intent_confirmed_update", 'title': 'Yes'},{'payload': "/intent_dont_update", 'title': 'No'} ])
+                return []
