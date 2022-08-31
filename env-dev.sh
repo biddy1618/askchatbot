@@ -13,7 +13,7 @@ export ELASTIC_USERNAME=elastic
 export ELASTIC_PASSWORD=changeme
 export ES_HOST=http://localhost:9200/
 
-# Should be simplified later. Lots of timeout settings in RASA and multiple seem to trigger timeout errors for longer actions
+# Should be simplified later. Lots of timeout settings in RASA and need to investigate which ones are the culprit later
 export STREAM_READING_TIME_ENV=300
 export SANIC_REQUEST_TIMEOUT=300
 export REQUEST_TIMEOUT=300
