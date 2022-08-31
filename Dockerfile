@@ -25,14 +25,12 @@ ENV REQUEST_TIMEOUT=300
 ENV RESPONSE_TIMEOUT=300
 ENV DEFAULT_STREAM_READING_TIMEOUT_IN_SECONDS=120
 
-
 # uncomment if model is not pushed
 # RUN ["rasa", "train"]
 
 USER 1001
 EXPOSE 5005
-ENTRYPOINT ["rasa", "run", "--request-timeout", "5000", "--enable-api", "--auth-token", "test", "--cors", "*"]
-#ENTRYPOINT ["rasa", "run", "--request-timeout", "5000", "--cors", "*"]
+ENTRYPOINT ["rasa", "run", "--request-timeout", "5000", "--cors", "*"]
 
 # change shell
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]
