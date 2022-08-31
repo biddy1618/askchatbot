@@ -499,7 +499,7 @@ class ActionUpdateKB(Action):
             try: 
                 task = asyncio.create_task(update_kb(start_date, end_date))
                 await task 
-                msg = self.get_message(True, total_documents_before)
+                msg = await self.get_message(True, total_documents_before)
                 dispatcher.utter_message(text=msg)
                 return [SlotSet('start', None), SlotSet('end', None)]
             except:
