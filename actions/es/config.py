@@ -20,8 +20,8 @@ os_ticket_url = 'http://10.16.36.190/api/knowledge/'
 
 es_imitate  = False
 version     = '29.06.22'
-stage       = 'dev'
-# stage       = 'prod'
+# stage       = 'dev'
+stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
 # expert_url  = 'https://ask2.extension.org/open.php'
 
