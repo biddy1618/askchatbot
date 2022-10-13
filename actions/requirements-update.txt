@@ -1,22 +1,30 @@
 # local update for rasa-sdk to avoid conflicts
-pip==22.0.4
-ujson==4.3.0
+pip==22.2.2
+
+# updates to match the rasa version 3.2.6
+certifi==2022.6.15
+charset-normalizer==2.1.0
+prompt-toolkit==3.0.28
+requests==2.28.1
+ujson==5.4.0
+websockets==10.3
 
 # elasticsearch
 aiohttp==3.7.4
-aiosignal==1.2.0 
+aiosignal==1.2.0
 async-timeout==3.0.1
 attrs==21.2.0
 elasticsearch[async]==7.17.0
-frozenlist==1.3.0
-yarl==1.7.2
+frozenlist==1.3.1
+yarl==1.8.1
 
 # tensorflow-hub
-# numpy==1.19.5
+numpy==1.19.5
 protobuf==3.19.4
 tensorflow-hub==0.12.0
 
 # tensorflow
+MarkupSafe==2.1.1
 absl-py==0.13.0
 astunparse==1.6.3
 cachetools==4.2.4
@@ -25,55 +33,56 @@ gast==0.4.0
 google-auth==1.35.0
 google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
-grpcio==1.45.0
-h5py==3.6.0
-importlib-metadata==4.11.3
-keras==2.7.0
+grpcio==1.47.0
+h5py==3.7.0
+importlib-metadata==4.12.0
+keras==2.7.0 
 keras-preprocessing==1.1.2
-libclang==13.0.0
-markdown==3.3.6
-numpy==1.19.5
+libclang==14.0.1
+markdown==3.3.7
 oauthlib==3.2.0
 opt-einsum==3.3.0
+protobuf==3.19.4
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 requests-oauthlib==1.3.1
 rsa==4.8
-tensorboard==2.8.0
+six==1.16.0
+tensorboard==2.9.1
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
-tensorflow==2.7.1
+tensorflow==2.7.3
 tensorflow-estimator==2.7.0
-tensorflow-io-gcs-filesystem==0.24.0
+tensorflow-io-gcs-filesystem==0.26.0
 termcolor==1.1.0
-werkzeug==2.0.3
-wrapt==1.14.0
-zipp==3.7.0
+werkzeug==2.1.2
+wheel==0.37.1
+wrapt==1.14.1
+zipp==3.8.0
 
 # sentence-transformers
 click==7.1.2
-filelock==3.7.0
-huggingface-hub==0.6.0
+filelock==3.8.0
+huggingface-hub==0.10.1
 joblib==1.0.1
 nltk==3.7
 packaging==20.9
-pillow==9.0.1
-pyparsing==3.0.7
+pillow==9.2.0
+pyparsing==3.0.9
 pyyaml==5.4.1
-regex==2021.8.28
+regex==2022.4.24
 scikit-learn==0.24.2
 scipy==1.7.3
 sentence-transformers==2.2.0
-sentencepiece==0.1.96
+sentencepiece==0.1.97
 threadpoolctl==3.1.0
 tokenizers==0.12.1
-torch==1.11.0
-torchvision==0.12.0
-tqdm==4.63.1
-transformers==4.17.0
+torch==1.12.1
+torchvision==0.13.1
+tqdm==4.64.0
+transformers==4.20.1
 
 # spacy
-MarkupSafe==2.1.1
 blis==0.7.8
 catalogue==2.0.7
 cymem==2.0.6
@@ -84,7 +93,7 @@ pathy==0.6.2
 preshed==3.0.6
 pydantic==1.8.2
 smart-open==5.2.1
-spacy==3.2.3
+spacy==3.2.4
 spacy-legacy==3.0.9
 spacy-loggers==1.0.2
 srsly==2.4.3
@@ -92,6 +101,6 @@ thinc==8.0.17
 typer==0.4.2
 wasabi==0.9.1
 
-#tkinter
+# tkinter
 tk==0.1.0
 nest-asyncio==1.5.5

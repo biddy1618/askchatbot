@@ -1,16 +1,18 @@
+# pip update
+pip==22.2.2
+
 # for SpaCy models - en_core_web_trf
-filelock==3.7.0
-huggingface-hub==0.6.0
-sacremoses==0.0.53 
+filelock==3.8.0
+huggingface-hub==0.10.1
 spacy-alignments==0.8.5
-spacy-transformers==1.1.5
+spacy-transformers==1.1.7
 tokenizers==0.12.1
-torch==1.11.0
-transformers==4.17.0
+torch==1.12.1
+transformers==4.20.1
 
 # pandas
-pandas==1.4.2
+# pandas==1.4.2
 
 #tkinter
-tk==0.1.0
-nest-asyncio==1.5.5
+# tk==0.1.0
+# nest-asyncio==1.5.5
