@@ -17,7 +17,7 @@ Details of the local machine:
 
 Create environment with python version 3.9.12
 ```bash
-conda create --name askchatbot-dev python=3.9.12
+conda create --yes --name askchatbot-dev python=3.9.12
 conda activate askchatbot-dev
 pip install pip==21.3.1
 ```
