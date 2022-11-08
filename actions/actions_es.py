@@ -9,6 +9,7 @@ from rasa_sdk.events import (
     EventType
 )
 
+
 from elasticsearch import RequestError
 
 from actions import helper
