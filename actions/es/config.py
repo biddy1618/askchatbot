@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
 es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
-es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
+es_host         = os.getenv('ES_HOST'           , 'https://dev.ucipm.es.chat.ask.eduworks.com/'  )
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 
 es_imitate  = False
@@ -20,7 +20,7 @@ version     = '29.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
-
+client = "uc_ipm"
 embed_url = "JeffEduworks/generalized_chatbot_model"
 auth_token = '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'
 es_combined_index   = 'combined'
@@ -32,6 +32,7 @@ es_search_size  = 100
 es_cut_off      = 0.4
 es_top_n        = 10
 es_ask_weight   = 0.8
+es_downweight   = 1
 
 logger.info('----------------------------------------------')
 logger.info('Loading synonym procedure')
