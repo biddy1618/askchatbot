@@ -1,31 +1,18 @@
-# syntax=docker/dockerfile:1
-# escape=\
-# About
-# Dockerfile for building Rasa chatbot
-# More about the image - https://hub.docker.com/r/rasa/rasa/dockerfile
+FROM condaforge/mambaforge:latest
 
-ARG VERSION=3.1.0-spacy-en
-FROM rasa/rasa:$VERSION AS rasa
+USER root 
 
 COPY . .
+RUN mamba env create -f environment_rasa.yml 
 
-USER root
-RUN ["pip", "install", "--upgrade", "-r", "requirements-update.txt"]
-RUN ["python", "-m", "spacy", "download", "en_core_web_trf"]
+SHELL ["conda", "run", "-n", "rasa_env", "/bin/bash", "-c"]
 
+
+
+RUN  ["conda", "run", "--no-capture-output", "-n", "rasa_env", "python",  "-m", "spacy", "download", "en_core_web_trf"]
 # uncomment if model is not pushed
-# RUN ["rasa", "train"]
+#  RUN  ["conda", "run", "--no-capture-output", "-n", "rasa_actions_env", "python", "-m", "rasa", "train"]
 
 USER 1001
-CMD ["run", "--cors", "*"]
-
-# change shell
-# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# the entry point
-# EXPOSE 5005
-# ENTRYPOINT ["rasa"]
-# CMD ["--help"]
-
-# for development purposes, to attach to container, run the following:
-# docker run -it --rm --entrypoint /bin/bash rasa/rasa:3.1.0-spacy-en
+EXPOSE 5005
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "rasa_env", "python",  "-m", "rasa", "run", "--request-timeout", "3500", "--cors", "*"]
