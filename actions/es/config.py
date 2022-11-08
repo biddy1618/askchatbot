@@ -20,40 +20,9 @@ version     = '29.06.22'
 stage       = 'dev'
 # stage       = 'prod'
 expert_url  = 'https://ucanr.edu/About/Locations/'
-# expert_url  = 'https://ask2.extension.org/open.php'
 
-
-# embed_url = 'https://tfhub.dev/google/universal-sentence-encoder/4' # 512
-# embed_url = 'https://tfhub.dev/google/universal-sentence-encoder-large/5' # 512
-# embed_url = 'all-MiniLM-L6-v2' # 384
-# embed_url = 'paraphrase-MiniLM-L6-v2'# 384
-# embed_url = 'bert-base-nli-mean-tokens' # 768
-# embed_url = 'stsb-distilbert-base' # 768
-# embed_url = 'paraphrase-multilingual-MiniLM-L12-v2' # 384
-# embed_url = 'all-mpnet-base-v2' # 768
-## Best one so far
-embed_url = 'all-distilroberta-v1' # 768
-# embed_url = 'distiluse-base-multilingual-cased-v2' # 512
-# embed_url = 'paraphrase-mpnet-base-v2' # 768
-# embed_url = 'paraphrase-MiniLM-L12-v2' # 384
-# embed_url = 'paraphrase-xlm-r-multilingual-v1' # 768
-# embed_url = 'distiluse-base-multilingual-cased' # 512
-# embed_url = 'paraphrase-distilroberta-base-v1' # 768
-# embed_url = 'allenai-specter' # 768
-# embed_url = 'paraphrase-multilingual-mpnet-base-v2' # 768
-# embed_url = 'paraphrase-distilroberta-base-v2' # 768
-# embed_url = 'multi-qa-MiniLM-L6-cos-v1' # 384
-# embed_url = 'LaBSE' # 768
-# embed_url = 'distilbert-base-nli-stsb-mean-tokens' # 768
-# embed_url = 'multi-qa-mpnet-base-dot-v1' # 768
-# embed_url = 'paraphrase-MiniLM-L3-v2' # 384
-# embed_url = 'sentence-t5-large' # 768
-# embed_url = 'stsb-roberta-base-v2' # 768
-# embed_url = 'distiluse-base-multilingual-cased-v1' # 512
-# embed_url = 'msmarco-distilbert-dot-v5' # 768
-# embed_url = 'multi-qa-mpnet-base-cos-v1' # 768
-# embed_url = 'all-mpnet-base-v1' # 768
-
+embed_url = "JeffEduworks/generalized_chatbot_model"
+auth_token = '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'
 es_combined_index   = 'combined'
 es_logging_index    = 'logs'
 es_field_limit      = 32766
@@ -130,9 +99,11 @@ if not es_imitate:
     logger.info('Done initiliazing ElasticSearch client')
 
     logger.info(f'Start loading embedding module - {embed_url}')
-    # embed = tf_hub.load(embed_url)
+    
+    
     embed = SentenceTransformer(
         model_name_or_path  = embed_url         ,
+        use_auth_token      = auth_token        ,
         cache_folder        = embed_cache_dir   ,
         device              = 'cpu'             )
     logger.info(f'Done loading embedding module - {embed_url}')

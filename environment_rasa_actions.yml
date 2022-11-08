@@ -1,0 +1,16 @@
+name: rasa_actions_env
+channels:
+    - defaults
+    
+dependencies:
+    - python=3.9
+    - pytorch::pytorch
+    - pip 
+    - pip: 
+        - rasa==3.3
+        - rasa-sdk==3.3
+        - numpy
+        - transformers 
+        - sentence-transformers 
+        - elasticsearch[async]==7.17
+    

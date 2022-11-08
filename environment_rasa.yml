@@ -1,0 +1,11 @@
+name: rasa_env
+channels:
+    - defaults
+    - pytorch
+    
+dependencies:
+    - python=3.9
+    - pytorch::pytorch
+    - pip
+    - pip: 
+      - rasa[spacy]==3.3

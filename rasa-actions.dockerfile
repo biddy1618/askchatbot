@@ -1,29 +1,12 @@
-# syntax=docker/dockerfile:1
-# escape=\
-# About
-# Dockerfile for building Rasa Actions server
-# More about the image - https://hub.docker.com/r/rasa/rasa-sdk/dockerfile
+FROM condaforge/mambaforge:latest
 
-# FROM <image> (ARG <tag>)
-# base image
-ARG VERSION=3.1.1
-FROM rasa/rasa-sdk:$VERSION AS rasa-sdk
+WORKDIR /app
 
-USER root
 COPY ./actions /app/actions
+COPY environment_rasa_actions.yml /app/environment_rasa_actions.yml
+RUN mamba env create -f environment_rasa_actions.yml 
 
-RUN pip install --upgrade -r actions/requirements-update.txt
+SHELL ["conda", "run", "-n", "rasa_actions_env", "/bin/bash", "-c"]
 
-USER 1001
 
-# change shell
-# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# create a mount point for custom actions and the entry point
-# WORKDIR /app
-# EXPOSE 5055
-# ENTRYPOINT ["./entrypoint.sh"]
-# CMD ["start", "--actions", "actions"]
-
-# for development purposes, to attach to container, run the following:
-# docker run -it --rm --entrypoint /bin/bash rasa/rasa-sdk:3.1.1
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "rasa_actions_env", "python",  "-m", "rasa", "run", "actions"]
