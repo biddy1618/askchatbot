@@ -41,8 +41,8 @@ utterances = {
     'debug_query'           : 'Final transformed query with synonym replacement that was used for retrieval:</br> <i>{0}<i>',
     'debug_slots'           : 'Extracted slots</br>[Format: (<i>relation</i>) <strong>entity</strong> - <strong>value</strong>]:</br>',
     'debug_no_results'      : 'Unfortunately, could not find any results that might help you... Try reducing <strong>es_cut_off</strong> parameter.',
-    'debug_results'         : 'Top {0} results.',
-    'debug_slot_results'    : 'Results with slots improvement... Top {0} results.',
+    'debug_results'         : 'Here are my top {0} resources and FAQs. You can scroll through them using the arrow heads on the sides.',
+    'debug_slot_results'    : 'Results with slots improvement... Here are my top {0} resources and FAQs. You can scroll through them using the arrow heads on the sides.',
     'debug_no_es'           : 'Not doing an actual elastic search query.',
 }
 
