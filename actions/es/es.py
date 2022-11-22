@@ -253,6 +253,7 @@ def _format_result(hit: dict) -> dict:
     management      = hit.get('management'      , None  )
     question        = hit.get('question'        , None  )    
     links           = hit.get('links'           , None  )
+    label           = hit.get('label'           , None  )
     
     def _format_images(links = None):
         images = []
@@ -315,7 +316,7 @@ def _format_result(hit: dict) -> dict:
     res['body']['damage'        ] = damage
     res['body']['management'    ] = management
     res['body']['question'      ] = question
-
+    res['label'] = label
     res['images'] = _format_images(links)
     res['scores'] = _format_scores(hit  )
     
