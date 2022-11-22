@@ -21,7 +21,7 @@ async def _cos_sim_query(query_vector: np.ndarray) -> dict:
     cos     = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
     script  = {"source": cos, "params": {"query_vector": query_vector}}
 
-    source_query = {'includes': ['source', 'url', 'title', 'description', 'identification', 'development', 'damage', 'management', 'links']}
+    source_query = {'includes': ['source', 'url', 'title', 'description', 'identification', 'development', 'damage', 'management', 'links', 'label', 'question']}
 
     path = vector_name.split('.')[0]
     query = {
