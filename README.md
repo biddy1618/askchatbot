@@ -6,6 +6,58 @@ Repo for the Ask Extension chatbot component demonstration.
 
 You can find the details for building the project locally in the following [`README-1-setup.md`](info/README-1-setup.md) file.
 
+
+## Configuration Parameters
+Configuration parameters are set in the [chat.js file](https://git.eduworks.us/ask-extension/askchatbot-widget/-/blob/prod/public/static/js/components/chat.js) of the frontend Widget and change the slot values in Rasa on page reload. 
+
+The default parameters are shown below:
+```json
+{
+    "search_size": 100,
+    "cut_off": 0.4,
+    "max_return_amount": 10,
+    "ae_downweight": 0.8
+}
+```
+
+### search_size
+This is the number of returns prior to any kind of filtering based on client/state. Just raw results from Elastic Search prior to the filtering algorithms.
+
+By default, this is set to 100. Meaning each query will return the top 100 results from Elastic Search. Then these will eventually get filtered down to up to the max_return_amount to show to the user.
+
+In general, I don't see much of a reason for clients to play with this term. It's mostly used to give a good number of results prior to filtering while not being overly computationally expensive.
+
+### cut_off: 
+Cut off is a paramter that removes all sources with a score below your cut off threshold. 
+
+By default, it's set to 0.4. This means that any score below 0.4 will not be shown to the user. 
+
+If there are no scores above your threshold, the chatbot should indicate that it is incapable of finding a good result and direct you to your extension office for more help. 
+
+### ae_downweight 
+The source downweight parameter is designed to reduce the scores from AE Knowledge Base, i.e. giving higher priority to UC IPM resources.
+
+The value should be set between 0 and 1
+*  If  *ae_downweight* is set to *1*, no filtering is done based on source. The scores will be purely the cosine similarity value between the query/document embeddings.
+* If *ae_downweight* is set to *0*, results from AE KB will be completely filtered out of the results.
+* If *ae_downweight* is *between* 0 and 1, the scores from AE KB will be mulitiplied by the source_downweight. Effectively reducing their score since the downweight value is a fraction.
+
+In general, `ae_downweight` should either be set to 0, 1, or a value close to 1 (say 0.9 or higher). If a `ae_downweight` term is small, the end result would just be completely filtering out the results with an additional computation. 
+
+By default, this value is set to 0.8.
+
+## Configuration Commands to play with 
+This won't be enabled in production. However, if you want to play with configuration settings, you can change each field with the following commnds:
+```
+set parameter value
+```
+#### Examples
+```
+set max_return_amount 4
+set ae_downweight 0.95
+set search_size 90
+set cut_off 0.4
+```
 ## Things you can ask the bot
 
 The bot can:

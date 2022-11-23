@@ -1,3 +1,9 @@
+'''
+Module for ES functions.
+
+Author: Dauren Baitursyn
+'''
+
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -38,7 +44,7 @@ async def _cos_sim_query(query_vector: np.ndarray) -> dict:
     response = await config.es_client.search(
         index   = config.es_combined_index  ,
         query   = query                     ,
-        size    = config.es_search_size     ,
+        size    = config.search_size     ,
         _source = source_query
     )
 
@@ -150,85 +156,16 @@ def _handle_es_result(
 
     for h in hits: 
         if h['source'] == 'askExtension': 
-            h['_score'] *= config.es_ask_weight
+            h['_score'] *= config.ae_downweight
     
     hits = [h for h in hits if len(h['url']) > 0]
     
     if filter:
-        hits = [h for h in hits if h['_score'] > config.es_cut_off]
+        hits = [h for h in hits if h['_score'] > config.cut_off]
     
     hits = sorted(hits, key = lambda h: h['_score'], reverse = True)
 
     return hits
-
-# Disable for the new view
-# def _format_result(hit) -> dict:
-
-#     score           = hit.get('_score'        , 0.0   )
-#     source          = hit.get('source'        , None  )
-#     url             = hit.get('url'           , None  )
-#     title           = hit.get('title'         , None  )
-#     description     = hit.get('description'   , None  )
-#     identification  = hit.get('identification', None  )
-#     development     = hit.get('development'   , None  )
-#     damage          = hit.get('damage'        , None  )
-#     management      = hit.get('management'    , None  )
-
-#     def _format_scores(hit = None):
-#         scores = hit['top_scores']
-#         scores_dict = {}
-        
-#         for i, s in enumerate(scores):
-#             s1 = {'score': s['score']}
-
-#             name, index = s['source']['name'    ].split('_')
-            
-#             start       = s['source']['start'   ]
-#             end         = s['source']['end'     ]
-#             if end > config.es_field_limit:
-#                 start   = config.es_field_limit - 50
-#                 end     = config.es_field_limit
-            
-#             s1['field'] = name
-            
-#             if name == 'links': s1['text'] = hit['title'] + ' - ' + hit[name][int(index)]['title']
-#             else:               s1['text'] = hit[name   ][start:end]
-            
-#             scores_dict['top_score_' + str(i+1)] = s1
-        
-#         return scores_dict
-
-#     res = {}
-#     if config.debug:
-#         res['title'] = (
-#             f'<p><em>{title}</em>'
-#             f'</br>(score: {score:.2f})</br>'
-#             f'(source: <a href="{url}" target="_blank">{source}</a>)</p>')
-#     else:
-#         res['title'] = (
-#             f'<p><em>{title}</em>'
-#             f'</br>(source: <a href="{url}" target="_blank">{source}</a>)</p>')
-    
-#     res['description'] = ''
-#     if description:
-#         res['description'] += (f'<p><strong>Details</strong>: {description[:100]}</p></br>'             )
-#     if damage:
-#         res['description'] += (f'<p><strong>Damage</strong>: {damage[:100]}</p></br>'                   )
-#     if identification:
-#         res['description'] += (f'<p><strong>Identification</strong>: {identification[:100]}</p></br>'   )
-#     if development:
-#         res['description'] += (f'<p><strong>Development</strong>: {development[:100]}</p></br>'         )
-#     if management:
-#         res['description'] += (f'<p><strong>Management</strong>: {management[:100]}</p></br>'           )
-    
-#     res['meta'  ] = {}
-#     res['meta'  ]['url'   ] = url
-#     res['meta'  ]['title' ] = title
-#     res['meta'  ]['source'] = source
-#     res['meta'  ]['scores'] = _format_scores(hit)
-    
-    
-#     return res
 
 
 # Enable for the new view
@@ -275,7 +212,7 @@ def _format_result(hit: dict) -> dict:
         for i, s in enumerate(scores):
             s1 = {'score': f'{s["score"]:.2f}'}
 
-            if s['score'] < config.es_cut_off:
+            if s['score'] < config.cut_off:
                 break
 
             name, index = s['source']['name'].split('_')
@@ -329,8 +266,8 @@ def _get_text(hits: list) -> dict:
         dict: Data for chatbot to return.
     '''
 
-    top_n = config.es_top_n
-    if len(hits) < config.es_top_n:
+    top_n = config.max_return_amount
+    if len(hits) < config.max_return_amount:
         top_n = len(hits)
 
     res = {

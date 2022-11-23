@@ -1,3 +1,9 @@
+'''
+Module for ES actions.
+
+Author: Dauren Baitursyn
+'''
+
 from typing import Dict, Text, Any, List
 
 from rasa_sdk import Action, Tracker
@@ -145,58 +151,52 @@ class ActionSubmitESQueryForm(Action):
                 logger.info(f'action_submit_es_query_form - slot query - {q}')
 
         
-        if not config.es_imitate:            
-            if config.debug:            
-                
-                dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
-                res, debug_query = await submit(query, slots = slots_query)
-                dispatcher.utter_message(text = helper.utterances['debug_query'].format(debug_query))
-                
-                top_n = config.es_top_n
-                if len(res['data']) < config.es_top_n:
-                    top_n = len(res['data'])
-                
-                if top_n == 0:
-                    dispatcher.utter_message(text = helper.utterances['debug_no_results'])
-                else:
-                    message = helper.utterances['debug_results'].format(str(top_n))
-                    if slots_query:
-                        message = helper.utterances['debug_slot_results'].format(str(top_n))
-                    dispatcher.utter_message(text = message , json_message = res)
-                    results = True
-
+        if config.stage == 'dev':            
+            
+            dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
+            res, debug_query = await submit(query, slots = slots_query)
+            dispatcher.utter_message(text = helper.utterances['debug_query'].format(debug_query))
+            
+            top_n = config.max_return_amount
+            if len(res['data']) < config.max_return_amount:
+                top_n = len(res['data'])
+            
+            if top_n == 0:
+                dispatcher.utter_message(text = helper.utterances['debug_no_results'])
             else:
-                res, _ = await submit(query, slots = slots_query)
-                
-                top_n = config.es_top_n
-                if len(res['data']) < config.es_top_n:
-                    top_n = len(res['data'])
+                message = helper.utterances['debug_results'].format(str(top_n))
+                if slots_query:
+                    message = helper.utterances['debug_slot_results'].format(str(top_n))
+                dispatcher.utter_message(text = message , json_message = res)
+                results = True
 
-                if top_n == 0:
-                    dispatcher.utter_message(text = helper.utterances['no_results'])
-                else:
-                    dispatcher.utter_message(text = helper.utterances['results'])
-                    dispatcher.utter_message(text = res['text'], json_message = res)
-                    results = True
-                
-            if results:
-                top_score = float(res['data'][0]['score'])
-                if top_score >= 0.6 and len(query.split()) > 6:
-                    events = helper._reset_slots(tracker)
-                    events.append(SlotSet('done_query', True))
-                    dispatcher.utter_message(text = helper.utterances['add_help'], buttons = buttons)
-                else:
-                    events.append(SlotSet('es_data', es_data))
-                    events.append(FollowupAction('es_result_form'))
+        else:
+            res, _ = await submit(query, slots = slots_query)
+            
+            top_n = config.max_return_amount
+            if len(res['data']) < config.max_return_amount:
+                top_n = len(res['data'])
+
+            if top_n == 0:
+                dispatcher.utter_message(text = helper.utterances['no_results'])
             else:
+                dispatcher.utter_message(text = helper.utterances['results'])
+                dispatcher.utter_message(text = res['text'], json_message = res)
+                results = True
+            
+        if results:
+            top_score = float(res['data'][0]['score'])
+            if top_score >= 0.6 and len(query.split()) > 6:
                 events = helper._reset_slots(tracker)
                 events.append(SlotSet('done_query', True))
                 dispatcher.utter_message(text = helper.utterances['add_help'], buttons = buttons)
-        
+            else:
+                events.append(SlotSet('es_data', es_data))
+                events.append(FollowupAction('es_result_form'))
         else:
-            logger.info(f'action_submit_es_query_form - run - not doing actual ES query')
             events = helper._reset_slots(tracker)
-            dispatcher.utter_message(text = helper.utterances['debug_no_es'], buttons = buttons)
+            events.append(SlotSet('done_query', True))
+            dispatcher.utter_message(text = helper.utterances['add_help'], buttons = buttons)
 
 
         logger.info(f'action_submit_es_query_form - run - END')
@@ -337,13 +337,13 @@ class ActionSubmitESResultForm(Action):
             slots_utterance, slots_query    = helper._process_slots(slots, prev_slots = prev_slots)
             query                           = '. '.join([prev_query, query])
             
-            if config.debug:            
+            if config.stage == 'dev':            
                 dispatcher.utter_message(text = helper.utterances['debug_slots'] + slots_utterance)
                 res, debug_query = await submit(query, slots = slots_query)
                 dispatcher.utter_message(text = helper.utterances['debug_query'].format(debug_query))
                 
-                top_n = config.es_top_n
-                if len(res['data']) < config.es_top_n:
+                top_n = config.max_return_amount
+                if len(res['data']) < config.max_return_amount:
                     top_n = len(res['data'])
                 
                 if top_n == 0:
@@ -357,8 +357,8 @@ class ActionSubmitESResultForm(Action):
             else:
                 res, _ = await submit(query, slots = slots_query)
                 
-                top_n = config.es_top_n
-                if len(res['data']) < config.es_top_n:
+                top_n = config.max_return_amount
+                if len(res['data']) < config.max_return_amount:
                     top_n = len(res['data'])
                 
                 if top_n == 0:  dispatcher.utter_message(text = helper.utterances['no_results'])

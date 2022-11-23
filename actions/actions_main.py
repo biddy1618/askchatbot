@@ -1,3 +1,8 @@
+'''
+Module for main actions.
+
+Author: Dauren Baitursyn
+'''
 from typing import Dict, Text, Any, List
 
 from rasa_sdk import Action, Tracker

@@ -1,22 +1,23 @@
+'''
+Module for helper functions and static variables.
+
+Author: Dauren Baitursyn
+'''
+import json
 from typing import Dict, Text, Any, List, Tuple
 from datetime import datetime
 
 from rasa_sdk import Tracker
-from rasa_sdk.events import (
-    SlotSet,
-    ActionExecuted,
-    UserUttered
-)
+from rasa_sdk.events import SlotSet, ActionExecuted, UserUttered
 
 from actions.es import config
 
 # Dictionary for parameters debug
 params = {
-    'es_search_size'    : int,
-    'es_top_n'          : int,
-    'es_cut_off'        : float,
-    'es_ask_weight'     : float,
-    'es_slots_weight'   : float
+    'search_size'       : int,
+    'max_return_amount' : int,
+    'cut_off'           : float,
+    'ae_downweight'     : float
 }
 
 # Utterances
@@ -102,11 +103,11 @@ def _reset_slots(tracker: Tracker) -> List[Any]:
     
     events = []
 
-    for k, v in tracker.slots.items():
+    for k, _ in tracker.slots.items():
         if k in ['shown_greeting', 'shown_privacy_policy']: 
             events.append(SlotSet(k, True))
         elif k in ['shown_explain_ipm', 'done_query']:
-            events.append(SlotSet(k, v))
+            continue
         else: 
             events.append(SlotSet(k, None))
 
@@ -141,16 +142,15 @@ def _get_config_message(config):
     '''Get the configuration message (only in debug mode).'''
     message = (
         'Bot Configuration:</br>'
-        f'Debug: {config.debug}</br>'
-        f'Version: {config.version}</br>'
+        f'Stage: {config.stage}</br>'
         f'<strong>expert_url <i>{config.expert_url}</i></strong></br>'
-        f'<strong>es_search_size <i>{config.es_search_size}</i></strong></br>'
-        f'<strong>es_cut_off <i>{config.es_cut_off}</i></strong></br>'
-        f'<strong>es_top_n <i>{config.es_top_n}</i></strong></br>'
-        f'<strong>es_ask_weight <i>{config.es_ask_weight}</i></strong></br></br>'
+        f'<strong>search_size <i>{config.search_size}</i></strong></br>'
+        f'<strong>cut_off <i>{config.cut_off}</i></strong></br>'
+        f'<strong>max_return_amount <i>{config.max_return_amount}</i></strong></br>'
+        f'<strong>ae_downweight <i>{config.ae_downweight}</i></strong></br></br>'
         'To change the configuration parameters, use following schema:</br>'
         'parameter <i>param_name value</i></br>'
-        '(i.e. <strong>parameter es_cut_off <i>0.5</i></strong>)'
+        '(i.e. <strong>parameter cut_off <i>0.5</i></strong>)'
     )
 
     return message
@@ -375,83 +375,25 @@ def _parse_date(aft_date = None, bfr_date = None):
     return aft_date, bfr_date
 
 
-# def _get_plant_names(
-#     plant_type      : Text          = 'other',
-#     n               : int           = 10) -> List[Text]:
-#     '''Get plant names corresponding to plant type.'''
-
-#     df = db['plant_matches']
-#     df = df[df['plant_type'] == plant_type] if plant_type != 'other' else df
+def _set_config(session_config):
+    '''Parse config slot for single session.'''
+    try:
+        if isinstance(session_config, str):
+            session_config = json.loads(session_config)
+        for param, func in params.items():
+            value = func(session_config[param])
+            setattr(config, param, value)
+    # If no config was passed down then set it to default
+    except (TypeError, KeyError) as r:
+        return (
+            'Error parsing config message: </br>'
+            'Please pass the config file in a JSON format as like following</br>'
+            '{search_size: 100,</br>'
+            ' cut_off: 0.4,</br>'
+            ' max_return_amount: 10,</br>'
+            ' ae_downweight: 0.8}</br>'
+            'Using default configurations...')
     
-#     pn = df['plant_name'].drop_duplicates()
-#     if pn.shape[0] > n:
-#         pn = pn.sample(n)
+    return None
     
-#     return pn.tolist()
 
-
-# def _get_plant_parts(
-#     plant_type      : Text          = 'other',
-#     plant_name      : Text          = 'other',
-#     n               : int           = 10) -> List[Text]:
-#     '''Get plant details corresponding to plant descriptions.'''
-
-#     pp = None
-#     df = db['plant_matches']
-#     df = df[df['plant_type'] == plant_type] if plant_type != 'other' else df
-#     df = df[df['plant_name'] == plant_name] if plant_name != 'other' else df
-    
-#     pp = df['plant_part'].drop_duplicates()
-#     if pp.shape[0] > n:
-#         pp = pp.sample(n)
-
-#     return pp.tolist()
-
-
-# def _get_plant_damages(
-#     plant_type      : Text          = 'other',
-#     plant_name      : Text          = 'other',
-#     plant_part      : Text          = 'other',
-#     n               : int           = 10) -> List[Text]:
-#     '''Get plant details corresponding to plant descriptions.'''
-
-#     pd = []
-#     df = db['plant_matches']
-#     df = df[df['plant_type'] == plant_type] if plant_type != 'other' else df
-#     df = df[df['plant_name'] == plant_name] if plant_name != 'other' else df
-#     df = df[df['plant_part'] == plant_part] if plant_part != 'other' else df
-    
-#     pd = df['plant_damage'].drop_duplicates()
-#     if pd.shape[0] > n:
-#         pd = pd.sample(10)
-    
-#     return pd.tolist()
-
-
-# def _jaccard_coef(s1: set, s2: set) -> float:  
-#     return len(s1.intersection(s2)) / len(s1.union(s2))
-
-
-# def _get_problem_links(
-#     plant_type      : Text = 'other',
-#     plant_name      : Text = 'other',
-#     plant_part      : Text = 'other',
-#     plant_damages   : List[Text] = []) -> List[Text]:
-#     '''Get information associated with plant problem descriptions.'''
-
-#     df = db['plant_tree']
-
-#     df = df[df['plant_type'] == plant_type] if plant_type != 'other' else df
-#     df = df[df['plant_name'] == plant_name] if plant_name != 'other' else df
-#     df = df[df['plant_part'] == plant_part] if plant_part != 'other' else df
-
-#     query = set(plant_damages)
-
-#     df['coef'] = df['plant_damage'].apply(lambda s: _jaccard_coef(s, query))
-#     df = df.sort_values('coef', ascending = False).head(3)
-    
-#     res = [f'[Link]({r[1]["link"]}) for following plant problem: '\
-#         f'type - {r[1]["plant_type"]}, name - {r[1]["plant_type"]}'\
-#         f'part - {r[1]["plant_part"]}, damages - {", ".join(r[1]["plant_damage"])}' for r in df.iterrows()]
-
-#     return res

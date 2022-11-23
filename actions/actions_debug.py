@@ -1,3 +1,8 @@
+'''
+Module for debug actions.
+
+Author: Dauren Baitursyn
+'''
 from typing import Dict, Text, Any, List
 
 from rasa_sdk import Action, Tracker
@@ -41,7 +46,7 @@ class ActionSetParameter(Action):
                 text    = (
                     f'Error parsing config message: </br>'              +
                     'Please, use explicit parameter names</br>'         +
-                    '(i.e. <strong>parameter es_cut_off 0.5</strong>).' +
+                    '(i.e. <strong>parameter cut_off 0.5</strong>).' +
                     '</br>Available parameters: <i>'                    +
                     ', '.join(helper.params.keys())                     +
                     '</i>.')

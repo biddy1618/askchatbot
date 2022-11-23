@@ -28,6 +28,7 @@ intents:
 - intent_test_results_collapsible
 - intent_test_imgupload
 entities:
+- config
 - action:
     roles:
       - pest
@@ -159,54 +160,6 @@ slots:
         - active_loop: es_result_form
           requested_slot: problem_description_add
 responses:
-  # Basic responses
-  # utter_goodbye:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   text: Bye!
-  # utter_iamabot:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   text: I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a> platform. I can help you with the pest-related issues and questions. If you have one, please, describe your problem.
-  # utter_greet:
-  # - text: Hi, I'm the AskExtension Assistant!
-  # utter_connect_expert:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   text: You can ask one of our experts at <a href="https://ask2.extension.org/open.php" target="_blank">Ask Extension</a>.
-  # utter_out_of_scope:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   - payload: /intent_request_expert
-  #     title: Connect me to an expert.
-  #   text: Sorry, I can't handle that request. For now, I can handle pest related requests. Try me :D
-  # utter_default:
-  # - buttons:
-  #   - payload: /intent_greet
-  #     title: Start over.
-  #   - payload: /intent_request_expert
-  #     title: Connect me to an expert.
-  #   text: I'm sorry, I am still learning. Can you rephrase?
-  # ES query form slots questions
-  # utter_ask_problem_description:
-  # - text: Please describe your problem.
-  # ES result form slots questions
-  # utter_ask_query_more:
-  # - buttons:
-  #   - payload: /intent_affirm
-  #     title: Yes.
-  #   - payload: /intent_deny
-  #     title: No.
-  #   text: Do you have any additional details to give you a better help?
-  # utter_ask_problem_description_add:
-  # - buttons:
-  #   - payload: /intent_affirm
-  #     title: Yes, it helped.
-  #   text: Did that answer your question? If not, can you give me some more information about where you saw this?
   # Testing utterances
   utter_test_images:
   - text: "Here is something to cheer you up 😉 "

@@ -1,30 +1,20 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
+'''
+Module for Rasa Actions that serve for basic responses.
 
-
+Author: Dauren Baitursyn
+'''
 from typing import Dict, Text, Any, List
-
 from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import (
-    EventType,
-    UserUtteranceReverted
-)
-
 from elasticsearch import RequestError
-
-import logging
-logger = logging.getLogger(__name__)
+from rasa_sdk.events import SlotSet, EventType, UserUtteranceReverted
+from rasa_sdk.executor import CollectingDispatcher
 
 from actions import helper
 from actions.es import config
 from actions.es.es import save_chat_logs
 
-
-
+import logging
+logger = logging.getLogger(__name__)
 
 
 class ActionGreet(Action):
@@ -41,12 +31,20 @@ class ActionGreet(Action):
         ) -> List[EventType]:
         
         logger.info('action_greet - START')
+        session_config = next(tracker.get_latest_entity_values('config'), None)
+        if session_config:
+            error_session_config = helper._set_config(session_config)
+            if error_session_config:
+                dispatcher.utter_message(text = error_session_config)    
+        
+        
         shown_greeting          = tracker.get_slot('shown_greeting')
         shown_explain_ipm       = tracker.get_slot('shown_explain_ipm')
         done_query              = tracker.get_slot('done_query')
 
         if not shown_greeting:
-            if config.debug: dispatcher.utter_message(text = helper._get_config_message(config))    
+            if config.stage == 'dev':
+                dispatcher.utter_message(text = helper._get_config_message(config))    
             dispatcher.utter_message(text = helper.utterances['greet'])
         
         buttons = [helper.buttons['ask_question']]

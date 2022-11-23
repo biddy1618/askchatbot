@@ -14,6 +14,8 @@ Data can be obtained through DVC ([installation guide](https://wiki.eduworks.com
 
 Copy the downloaded files into folders `actions/es/data/uc-ipm/updated-Dec2021` and `actions/es/data/uc-ipm/updated-Apr2022` accordingly.
 
+The current version of data corresponds to the following commit - 763c9d32394f4a66e3c6ba7af5ccf6d880b6495d.
+
 ## Ingesting data
 
 Run the scripts in the [notebook](es_ingest_data.ipynb) to create indexes and ingest data sources from AE and UC IPM.

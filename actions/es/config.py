@@ -1,39 +1,48 @@
+'''
+Module for configuration.
+
+Author: Dauren Baitursyn
+'''
 import os
 import sys
 import logging
 import pickle
 
 from spacy.lang.en import English
-
 from elasticsearch import AsyncElasticsearch
+from sentence_transformers import SentenceTransformer
+
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# ES configuration variables
 es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
 es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
-es_host         = os.getenv('ES_HOST'           , 'https://dev.ucipm.es.chat.ask.eduworks.com/'  )
-embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
+es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 
-es_imitate  = False
-version     = '29.06.22'
+# Cache directory for sentence embedder
+embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
+embed_url = "JeffEduworks/generalized_chatbot_model"
+expert_url  = 'https://ucanr.edu/About/Locations/'
+auth_token = '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'
+
+# Deployment vars
 stage       = 'dev'
 # stage       = 'prod'
-expert_url  = 'https://ucanr.edu/About/Locations/'
-client = "uc_ipm"
-embed_url = "JeffEduworks/generalized_chatbot_model"
-auth_token = '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'
+
+# Front-end configs
+## Static
 es_combined_index   = 'combined'
 es_logging_index    = 'logs'
 es_field_limit      = 32766
-debug               = stage == 'dev'
+## Dynamic
+search_size         = 100
+max_return_amount   = 10
+cut_off             = 0.4
+ae_downweight       = 0.8
 
-es_search_size  = 100
-es_cut_off      = 0.4
-es_top_n        = 10
-es_ask_weight   = 0.8
-es_downweight   = 1
-
+# Loading synonym procedure
 logger.info('----------------------------------------------')
 logger.info('Loading synonym procedure')
 tokenizer = English().tokenizer
@@ -46,10 +55,11 @@ except IOError:
     logger.info('Failed loading synonym list')
 logger.info('----------------------------------------------')
 
+# Loading hardcoded queries
 logger.info('----------------------------------------------')
 logger.info('Loading hardcoded queries')
 hardcoded_queries       = []
-es_cut_off_hardcoded    = es_cut_off + 0.2
+es_cut_off_hardcoded    = cut_off + 0.2
 es_hardcoded_threshold  = 0.85
 try:
     with open(os.path.join(os.path.dirname(__file__), 'scripts/hardcoded/transformed/hardcoded.pickle'), 'rb') as handle:
@@ -61,55 +71,43 @@ logger.info(f'- cut off parameter for hardcoded queries     = {es_cut_off_hardco
 logger.info(f'- cut off parameter for similarity threshold  = {es_hardcoded_threshold:.2f}' )
 logger.info('----------------------------------------------')
 
-if debug:
-
+# Debug messages
+if stage == 'dev':
     logger.info('----------------------------------------------')
     logger.info('Configuration variables for DEV environment')
-    logger.info(f'- stage           = {stage}')
-    logger.info(f'- expert_url      = {expert_url}')
-    logger.info(f'- es_search_size  = {es_search_size}')
-    logger.info(f'- es_cut_off      = {es_cut_off}')
-    logger.info(f'- es_top_n        = {es_top_n}')
-    logger.info(f'- es_ask_weight   = {es_ask_weight}')
+    logger.info(f'- stage               = {stage}')
+    logger.info(f'- expert_url          = {expert_url}')
+    logger.info(f'- search_size         = {search_size}')
+    logger.info(f'- cut_off             = {cut_off}')
+    logger.info(f'- max_return_amount   = {max_return_amount}')
+    logger.info(f'- ae_downweight       = {ae_downweight}')
     logger.info('----------------------------------------------')
 
-if not es_imitate:
+logger.info('----------------------------------------------')
+logger.info('Elasticsearch configuration:')
+logger.info(f'- host                = {es_host          }')
+if stage == 'dev':
+    logger.info(f'- username            = {es_username  }')
+    logger.info(f'- password            = {es_password  }')
+logger.info(f'- embed_url           = {embed_url        }')
+logger.info(f'- embed_cache_dir     = {embed_cache_dir  }')
+logger.info('----------------------------------------------')
+logger.info('----------------------------------------------')
 
-    # import tensorflow_hub as tf_hub
-    from sentence_transformers import SentenceTransformer
+logger.info('Elasticsearch indexes:')
+logger.info(f'- combined index      = {es_combined_index}'  )
+logger.info(f'- logging index       = {es_logging_index}'   )
+logger.info('----------------------------------------------')
 
-    logger.info('----------------------------------------------')
-    logger.info('Elasticsearch configuration:')
-    logger.info(f'- host                = {es_host          }')
-    if debug:
-        logger.info(f'- username            = {es_username  }')
-        logger.info(f'- password            = {es_password  }')
-    logger.info(f'- embed_url           = {embed_url        }')
-    logger.info(f'- embed_cache_dir     = {embed_cache_dir  }')
-    logger.info('----------------------------------------------')
+logger.info('Initializing the Elasticsearch client')
+es_client = AsyncElasticsearch(
+    [es_host], http_auth=(es_username, es_password))
+logger.info('Done initiliazing ElasticSearch client')
 
-    logger.info('----------------------------------------------')
-    logger.info('Elasticsearch indexes:')
-    logger.info(f'- combined index      = {es_combined_index}'  )
-    logger.info(f'- logging index       = {es_logging_index}'   )
-    logger.info('----------------------------------------------')
-
-    logger.info('Initializing the Elasticsearch client')
-    es_client = AsyncElasticsearch(
-        [es_host], http_auth=(es_username, es_password))
-    logger.info('Done initiliazing ElasticSearch client')
-
-    logger.info(f'Start loading embedding module - {embed_url}')
-    
-    
-    embed = SentenceTransformer(
-        model_name_or_path  = embed_url         ,
-        use_auth_token      = auth_token        ,
-        cache_folder        = embed_cache_dir   ,
-        device              = 'cpu'             )
-    logger.info(f'Done loading embedding module - {embed_url}')
-    # -------------------------------------------------------------
-else:
-    logger.info('----------------------------------------------')
-    logger.info('Imitating Elasticseach queries for dev purposes')
-    logger.info('----------------------------------------------')
+logger.info(f'Start loading embedding module - {embed_url}')
+embed = SentenceTransformer(
+    model_name_or_path  = embed_url         ,
+    use_auth_token      = auth_token        ,
+    cache_folder        = embed_cache_dir   ,
+    device              = 'cpu'             )
+logger.info(f'Done loading embedding module - {embed_url}')
