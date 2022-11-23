@@ -27,7 +27,7 @@ async def _cos_sim_query(query_vector: np.ndarray) -> dict:
     cos     = f'cosineSimilarity(params.query_vector, "{vector_name}") + 1.0'
     script  = {"source": cos, "params": {"query_vector": query_vector}}
 
-    source_query = {'includes': ['source', 'url', 'title', 'description', 'identification', 'development', 'damage', 'management', 'links']}
+    source_query = {'includes': ['source', 'url', 'title', 'description', 'identification', 'development', 'damage', 'management', 'links', 'label', 'question']}
 
     path = vector_name.split('.')[0]
     query = {
@@ -188,7 +188,9 @@ def _format_result(hit: dict) -> dict:
     development     = hit.get('development'     , None  )
     damage          = hit.get('damage'          , None  )
     management      = hit.get('management'      , None  )
+    question        = hit.get('question'        , None  )    
     links           = hit.get('links'           , None  )
+    #label           = hit.get('label'           , None  )
     
     def _format_images(links = None):
         images = []
@@ -227,7 +229,7 @@ def _format_result(hit: dict) -> dict:
             
             if name == 'links':
                 link = hit[name][int(index)]
-                s1['text'   ] = hit['title'] + ' - ' + link['title']
+                s1['text'   ] =  link['title']
                 s1['src'    ] = link['link'] if len(link['link']) > 0  else link['src']
             else:
                 s1['text'   ] = hit[name   ][start:end]
@@ -250,7 +252,8 @@ def _format_result(hit: dict) -> dict:
     res['body']['development'   ] = development
     res['body']['damage'        ] = damage
     res['body']['management'    ] = management
-
+    res['body']['question'      ] = question
+    # res['label'] = label
     res['images'] = _format_images(links)
     res['scores'] = _format_scores(hit  )
     
