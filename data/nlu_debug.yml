@@ -11,5 +11,15 @@ nlu:
     - parameter max_return_amount 2
     - parameter ae_downweight 0.2
     - parameter ae_downweight 0.9
+    - set parameter ae_downweight 0.4
     - parameter
     - set parameter
+
+
+- intent: intent_show_parameters
+  examples: |
+    - show configuration parameters 
+    - show parameters 
+    - show all parameters 
+    - show all configuration parameters
+    - Show Parameters 

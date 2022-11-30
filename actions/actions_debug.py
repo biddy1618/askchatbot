@@ -58,3 +58,24 @@ class ActionSetParameter(Action):
         logger.info('action_set_parameter - END')
 
         return []
+    
+class ActionShowParameters(Action):
+    '''Action for setting client for testing purposes.'''
+
+    def name(self) -> Text:
+        return 'action_show_parameters'
+    
+    def run(
+        self,
+        dispatcher  : CollectingDispatcher,
+        tracker     : Tracker,
+        domain      : Dict[Text, Any]
+        ) -> List[EventType]:
+
+        logger.info('action_show_parameters - START')
+        msg = 'Current parameters:<br><br>'
+        for param in helper.params:
+            msg += f'<strong>{param}</strong> = <i>{getattr(config, param)}</i><br>'
+        dispatcher.utter_message(text=msg)
+        logger.info('action_show_parameters - END')
+        return []

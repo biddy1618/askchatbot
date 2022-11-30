@@ -29,6 +29,10 @@ intents:
 - intent_test_imgupload
 entities:
 - config
+- search_size
+- max_return_amount
+- cut_off
+- ae_downweight
 - action:
     roles:
       - pest
@@ -104,6 +108,39 @@ entities:
       - 5
       - 6
 slots:
+  # config slots
+  search_size:
+    type: any
+    influence_conversation: false
+    initial_value: 100 
+    mappings:
+    - type: from_entity
+      entity: search_size
+  max_return_amount:
+    type: any
+    influence_conversation: false
+    initial_value: 10
+    mappings:
+    - type: from_entity
+      entity: max_return_amount
+  cut_off:
+    type: float 
+    min_value: 0.0
+    max_value: 1.0 
+    influence_conversation: false
+    initial_value: 0.4
+    mappings:
+    - type: from_entity
+      entity: cut_off
+  ae_downweight:
+    type: float 
+    min_value: 0.0
+    max_value: 1.0 
+    influence_conversation: false
+    initial_value: 0.0
+    mappings:
+    - type: from_entity
+      entity: ae_downweight
   # Basic slots
   shown_greeting:
     type: bool
@@ -298,6 +335,7 @@ responses:
 actions:
 # Debug actions
 - action_set_parameter
+- action_show_parameters
 # Base actions
 - action_greet
 - action_goodbye

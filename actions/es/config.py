@@ -36,11 +36,13 @@ stage       = 'dev'
 es_combined_index   = 'combined'
 es_logging_index    = 'logs'
 es_field_limit      = 32766
+
 ## Dynamic
 search_size         = 100
 max_return_amount   = 10
 cut_off             = 0.4
 ae_downweight       = 0.8
+config_keys = {"search_size", "cut_off", "max_return_amount", "ae_downweight"}
 
 # Loading synonym procedure
 logger.info('----------------------------------------------')
