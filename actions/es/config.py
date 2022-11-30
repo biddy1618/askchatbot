@@ -27,14 +27,12 @@ embed_url = "JeffEduworks/generalized_chatbot_model"
 expert_url  = 'https://ucanr.edu/About/Locations/'
 auth_token = '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'
 
-es_imitate  = False
-version     = '29.06.22'
-# stage       = 'dev'
-stage       = 'prod'
-expert_url  = 'https://ucanr.edu/About/Locations/'
-client = "uc_ipm"
-embed_url = "JeffEduworks/generalized_chatbot_model"
-auth_token = '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'
+# Deployment vars
+stage       = 'dev'
+# stage       = 'prod'
+
+# Front-end configs
+## Static
 es_combined_index   = 'combined'
 es_logging_index    = 'logs'
 es_field_limit      = 32766
