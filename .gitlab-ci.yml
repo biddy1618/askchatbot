@@ -19,6 +19,7 @@ buildDockerRasa:
           > /kaniko/.docker/config.json
         - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile
           --cache --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/rasa:$CI_COMMIT_SHA"
+          --build-arg BRANCH=$CI_COMMIT_BRANCH
 
 buildDockerRasaSdk:
     stage: dockerize
@@ -37,6 +38,7 @@ buildDockerRasaSdk:
           > /kaniko/.docker/config.json
         - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/rasa-actions.dockerfile
           --cache --destination "$CI_REGISTRY_IMAGE/$CI_COMMIT_BRANCH/rasa-sdk:$CI_COMMIT_SHA"
+          --build-arg BRANCH=$CI_COMMIT_BRANCH
 
 buildDockerScoring:
     stage: dockerize

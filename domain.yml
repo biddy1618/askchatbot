@@ -5,6 +5,7 @@ session_config:
 intents:
 # Debug intents
 - intent_set_parameter
+- intent_show_parameters
 # Base intents
 - intent_greet
 - intent_affirm
@@ -33,6 +34,7 @@ entities:
 - max_return_amount
 - cut_off
 - ae_downweight
+
 - action:
     roles:
       - pest
@@ -128,7 +130,7 @@ slots:
     min_value: 0.0
     max_value: 1.0 
     influence_conversation: false
-    initial_value: 0.4
+    initial_value: 0.6
     mappings:
     - type: from_entity
       entity: cut_off

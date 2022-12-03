@@ -106,7 +106,7 @@ def _reset_slots(tracker: Tracker) -> List[Any]:
     for k, _ in tracker.slots.items():
         if k in ['shown_greeting', 'shown_privacy_policy']: 
             events.append(SlotSet(k, True))
-        elif k in ['shown_explain_ipm', 'done_query']:
+        elif k in ['shown_explain_ipm', 'done_query'] or k in config.config_keys:
             continue
         else: 
             events.append(SlotSet(k, None))
@@ -125,17 +125,15 @@ def _next_intent(next_intent: Text) -> List[Dict]:
     ]
 
 
-
-def _parse_config_message(text: str) -> Tuple[str, str]:
+def _parse_config_message(text: str):
     '''Parse the configuration parameters from user (only debug mode).'''
-    parameter, value = None, None
     try:
-        _, parameter, value = [t for t in text.split()]
-        if parameter in params  : value = params[parameter](value)
-        else                    : raise Exception  
+        text = text.strip()
+        parameter, value = text.split()[-2:] # last 2 tokens 
+        value = float(value) if 'downweight' in parameter or 'cut_off' in parameter else int(value)
+        return parameter, value, ""
     except Exception:
-        parameter, value = None, None
-    return parameter, value
+        return None, None, "Parsing Error. Please check the formatting of your input."
 
 
 def _get_config_message(config):

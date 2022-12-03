@@ -10,6 +10,13 @@ rules:
   - action: action_greet
   - action: action_listen
   - action: action_save_conversation
+  
+- rule: Show parameters
+  steps:
+  - intent: intent_show_parameters
+  - action: action_show_parameters
+  - action: action_save_conversation
+
 
 # Base rules
 - rule: Introduction message with available options to choose from

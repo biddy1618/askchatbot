@@ -7,6 +7,7 @@ services:
     environment:
       ACTION_ENDPOINT: http://rasa-actions:5055/webhook
       TOKENIZERS_PARALLELISM: 'false'
+      BRANCH: dev
     ports:
       - "5005:5005"
     command: ["run", "--cors", "*"]
@@ -24,4 +25,5 @@ services:
       ELASTIC_USERNAME: ${ES_USERNAME}
       ELASTIC_PASSWORD: ${ES_PASSWORD}
       ES_HOST: ${ES_HOST}
+      BRANCH: dev
     

@@ -11,25 +11,38 @@ import pickle
 from spacy.lang.en import English
 from elasticsearch import AsyncElasticsearch
 from sentence_transformers import SentenceTransformer
-
+from os import getenv 
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def get_stage(branch_name: str):
+    if 'dev' in branch_name:
+        return "dev", 'https://dev.ucipm.es.chat.ask.eduworks.com/'
+    elif "qa" in branch_name:
+        return 'qa', 'https://qa.ucipm.es.chat.ask.eduworks.com/'
+    elif 'prod' in branch_name:
+        return 'prod', 'https://ucipm.es.chat.ask.eduworks.com/'
+    else:
+        return 'dev', 'http://localhost:9200/'
+
+# Deployment vars
+stage_env = os.getenv('BRANCH', 'dev')
+stage, es_host = get_stage(stage_env)
+
+# Deployment vars
+stage_env = os.getenv('BRANCH', 'dev')
+stage, host_url = get_stage(stage_env)
+
 # ES configuration variables
 es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
 es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
-es_host         = os.getenv('ES_HOST'           , 'http://localhost:9200/'  )
 
 # Cache directory for sentence embedder
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
 embed_url = "JeffEduworks/generalized_chatbot_model"
 expert_url  = 'https://ucanr.edu/About/Locations/'
 auth_token = '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'
-
-# Deployment vars
-stage       = 'dev'
-# stage       = 'prod'
 
 # Front-end configs
 ## Static
@@ -40,8 +53,9 @@ es_field_limit      = 32766
 ## Dynamic
 search_size         = 100
 max_return_amount   = 10
-cut_off             = 0.4
-ae_downweight       = 0.8
+cut_off             = 0.6
+ae_downweight       = 0.85
+
 config_keys = {"search_size", "cut_off", "max_return_amount", "ae_downweight"}
 
 # Loading synonym procedure
@@ -61,7 +75,6 @@ logger.info('----------------------------------------------')
 logger.info('----------------------------------------------')
 logger.info('Loading hardcoded queries')
 hardcoded_queries       = []
-es_cut_off_hardcoded    = cut_off + 0.2
 es_hardcoded_threshold  = 0.85
 try:
     with open(os.path.join(os.path.dirname(__file__), 'scripts/hardcoded/transformed/hardcoded.pickle'), 'rb') as handle:
@@ -69,7 +82,7 @@ try:
     logger.info('Successfully loaded hardcoded queries')
 except IOError:
     logger.info('Failed loading hardcoded queries')
-logger.info(f'- cut off parameter for hardcoded queries     = {es_cut_off_hardcoded:.2f}'   )
+logger.info(f'- cut off parameter for hardcoded queries     = {cut_off:.2f}'   )
 logger.info(f'- cut off parameter for similarity threshold  = {es_hardcoded_threshold:.2f}' )
 logger.info('----------------------------------------------')
 

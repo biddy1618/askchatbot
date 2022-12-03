@@ -31,20 +31,14 @@ class ActionGreet(Action):
         ) -> List[EventType]:
         
         logger.info('action_greet - START')
-        # session_config = next(tracker.get_latest_entity_values('config'), None)
-        # if session_config:
-        #     error_session_config = helper._set_config(session_config)
-        #     if error_session_config:
-        #         dispatcher.utter_message(text = error_session_config)    
-        
-        
-        shown_greeting          = tracker.get_slot('shown_greeting')
-        shown_explain_ipm       = tracker.get_slot('shown_explain_ipm')
-        done_query              = tracker.get_slot('done_query')
+        return_vals = []
         for key in config.config_keys:
             slot_value = tracker.get_slot(key)
             setattr(config, key, slot_value)
                 
+        shown_greeting          = tracker.get_slot('shown_greeting')
+        shown_explain_ipm       = tracker.get_slot('shown_explain_ipm')
+        done_query              = tracker.get_slot('done_query')
                 
         if not shown_greeting:
             if config.stage == 'dev':

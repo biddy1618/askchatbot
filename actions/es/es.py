@@ -135,7 +135,7 @@ async def _handle_es_query(
 
     if check_hardcoded:
         urls = set([h['url'] for h in check_hardcoded['hits']])
-        hits = [h for h in hits if h['url'] not in urls and h['_score'] > config.es_cut_off_hardcoded]
+        hits = [h for h in hits if h['url'] not in urls and h['_score'] > config.cut_off]
         hits = check_hardcoded['hits'] + hits
 
     return hits, query
@@ -269,19 +269,14 @@ def _get_text(hits: list) -> dict:
         dict: Data for chatbot to return.
     '''
 
-    top_n = config.max_return_amount
-    if len(hits) < config.max_return_amount:
-        top_n = len(hits)
+    top_n = len(hits) if len(hits) < config.max_return_amount else config.max_return_amount
 
     res = {
-        'text'      : 'Here are my top results:',
+        'text'      : f'Here are my top {top_n} results:',
         # 'payload'   : 'collapsible',
         'payload'   : 'resultscollapsible',
-        'data'      : []
+        'data'      : [_format_result(h) for h in hits[:top_n]]
     }
-
-    if len(hits):
-        for h in hits[:top_n]: res['data'].append(_format_result(h))   
     
     return res
 

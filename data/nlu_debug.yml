@@ -4,13 +4,17 @@ nlu:
 - intent: intent_set_parameter
   examples: |
     - parameter cut_off 0.85
+    - set cut_off 0.4
+    - set search_size 50
     - parameter cut_off 0.34
     - parameter search_size 100
     - parameter search_size 8
     - parameter max_return_amount 10
     - parameter max_return_amount 2
+    - set max_return_amount 3
     - parameter ae_downweight 0.2
     - parameter ae_downweight 0.9
+    - set ae_downweight 0.7
     - set parameter ae_downweight 0.4
     - parameter
     - set parameter
