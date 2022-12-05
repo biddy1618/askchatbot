@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 # ES configuration variables
 es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
 es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
-es_host = os.getenv("ES_HOST", '127.0.0.1:9200')
+es_host = os.getenv("ES_HOST", '127.0.0.1:9200/')
 es_client = AsyncElasticsearch([es_host], http_auth=(es_username, es_password))
 
 
