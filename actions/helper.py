@@ -99,7 +99,7 @@ role_order = ['pest', 'plant', 'damage', 'remedy']
 
 def show_params():
     msg = 'Current parameters:<br><br>'
-    param_keys = [item for item in config.config_keys] + ["stage", "es_host"]
+    param_keys = [item for item in config.config_keys] + ["stage", "es_host", 'branch_name']
     for param in param_keys:
         msg += f'<strong>{param}</strong> = <i>{getattr(config, param)}</i><br>'
     return msg

@@ -2,6 +2,10 @@ FROM condaforge/mambaforge:latest
 
 WORKDIR /app
 
+ARG BRANCH_NAME
+ENV BRANCH_NAME=$BRANCH_NAME
+
+
 COPY ./actions /app/actions
 COPY environment_rasa_actions.yml /app/environment_rasa_actions.yml
 RUN mamba env create -f environment_rasa_actions.yml 
