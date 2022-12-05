@@ -18,11 +18,12 @@ logger = logging.getLogger(__name__)
 # ES configuration variables
 es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
 es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
-es_host = os.getenv("ES_HOST", 'https://dev.ucipm.es.chat.ask.eduworks.com/')
-stage = 'dev' if 'dev' in es_host else 'prod'
-
+es_host = os.getenv("ES_HOST", '127.0.0.1:9200')
 es_client = AsyncElasticsearch([es_host], http_auth=(es_username, es_password))
 
+
+#stage = 'dev' if 'dev' in es_host else 'prod'
+stage = 'dev'
 
 # Cache directory for sentence embedder
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
@@ -69,7 +70,6 @@ try:
 except IOError:
     logger.info('Failed loading hardcoded queries')
 logger.info(f'- cut off parameter for hardcoded queries     = {cut_off:.2f}'   )
-logger.info(f'- cut off parameter for similarity threshold  = {es_hardcoded_threshold:.2f}' )
 logger.info('----------------------------------------------')
 
 # Debug messages
@@ -86,7 +86,7 @@ if stage == 'dev':
 
 logger.info('----------------------------------------------')
 logger.info('Elasticsearch configuration:')
-logger.info(f'- host                = {es_host          }')
+logger.info(f"ES Host: {es_host}")
 if stage == 'dev':
     logger.info(f'- username            = {es_username  }')
     logger.info(f'- password            = {es_password  }')
