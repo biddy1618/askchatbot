@@ -20,7 +20,7 @@ es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
 es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
 es_host = os.getenv("ES_HOST", '127.0.0.1:9200/')
 es_client = AsyncElasticsearch([es_host], http_auth=(es_username, es_password))
-branch_name = os.getenv("CI_COMMIT_BRANCH", "qa")
+branch_name = os.getenv("BRANCH_NAME", "qa")
 
 
 #stage = 'dev' if 'dev' in es_host else 'prod'
