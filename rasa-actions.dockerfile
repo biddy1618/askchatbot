@@ -2,8 +2,8 @@ FROM condaforge/mambaforge:latest
 
 WORKDIR /app
 
-ARG BRANCH_NAME
-ENV BRANCH_NAME=$BRANCH_NAME
+ARG CI_COMMIT_BRANCH
+ENV CI_COMMIT_BRANCH=$CI_COMMIT_BRANCH
 
 
 COPY ./actions /app/actions
