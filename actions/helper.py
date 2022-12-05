@@ -97,7 +97,13 @@ entity_order = {
 ## Role order
 role_order = ['pest', 'plant', 'damage', 'remedy']
 
-
+def show_params():
+    msg = 'Current parameters:<br><br>'
+    param_keys = [item for item in config.config_keys] + ["stage", "es_host"]
+    for param in param_keys:
+        msg += f'<strong>{param}</strong> = <i>{getattr(config, param)}</i><br>'
+    return msg
+    
 def _reset_slots(tracker: Tracker) -> List[Any]:
     '''Clean up slots from all previous forms.'''
     
@@ -134,24 +140,6 @@ def _parse_config_message(text: str):
         return parameter, value, ""
     except Exception:
         return None, None, "Parsing Error. Please check the formatting of your input."
-
-
-def _get_config_message(config):
-    '''Get the configuration message (only in debug mode).'''
-    message = (
-        'Bot Configuration:</br>'
-        f'Stage: {config.stage}</br>'
-        f'<strong>expert_url <i>{config.expert_url}</i></strong></br>'
-        f'<strong>search_size <i>{config.search_size}</i></strong></br>'
-        f'<strong>cut_off <i>{config.cut_off}</i></strong></br>'
-        f'<strong>max_return_amount <i>{config.max_return_amount}</i></strong></br>'
-        f'<strong>ae_downweight <i>{config.ae_downweight}</i></strong></br></br>'
-        'To change the configuration parameters, use following schema:</br>'
-        'parameter <i>param_name value</i></br>'
-        '(i.e. <strong>parameter cut_off <i>0.5</i></strong>)'
-    )
-
-    return message
 
 
 def _get_entity_groups(entities):

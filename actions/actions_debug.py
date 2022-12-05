@@ -42,9 +42,7 @@ class ActionSetParameter(Action):
             
         else: 
             dispatcher.utter_message(text    = "Error. Could not find parameter. Please refer to the current parameters and use the exact names")
-            msg = 'Current parameters:<br><br>'
-            for param in config.config_keys:
-                msg += f'<strong>{param}</strong> = <i>{getattr(config, param)}</i><br>'
+            msg = helper.show_params()
                 
         dispatcher.utter_message(text=msg)
         logger.info(f'action_set_parameter - parameter parsing error - {None}')
@@ -67,10 +65,7 @@ class ActionShowParameters(Action):
         ) -> List[EventType]:
 
         logger.info('action_show_parameters - START')
-        msg = 'Current parameters:<br><br>'
-        for param in config.config_keys:
-            msg += f'<strong>{param}</strong> = <i>{getattr(config, param)}</i><br>'
-        msg += f'<strong>stage</strong> = <i>{getattr(config, "stage")}</i><br>'
+        msg = helper.show_params()
         dispatcher.utter_message(text=msg)
         logger.info('action_show_parameters - END')
         return []

@@ -42,9 +42,7 @@ class ActionGreet(Action):
                 
         if not shown_greeting:
             if config.stage == 'dev':
-                msg = 'Current parameters:<br><br>'
-                for param in helper.params:
-                    msg += f'<strong>{param}</strong> = <i>{getattr(config, param)}</i><br>'
+                msg = helper.show_params()
                 dispatcher.utter_message(text=msg)
                 
             dispatcher.utter_message(text = helper.utterances['greet'])
