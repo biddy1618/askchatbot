@@ -11,32 +11,18 @@ import pickle
 from spacy.lang.en import English
 from elasticsearch import AsyncElasticsearch
 from sentence_transformers import SentenceTransformer
-from os import getenv 
-
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def get_stage(branch_name: str):
-    if 'dev' in branch_name:
-        return "dev", 'https://dev.ucipm.es.chat.ask.eduworks.com/'
-    elif "qa" in branch_name:
-        return 'qa', 'https://qa.ucipm.es.chat.ask.eduworks.com/'
-    elif 'prod' in branch_name:
-        return 'prod', 'https://ucipm.es.chat.ask.eduworks.com/'
-    else:
-        return 'dev', 'http://localhost:9200/'
-
-# Deployment vars
-stage_env = os.getenv('BRANCH', 'dev')
-stage, es_host = get_stage(stage_env)
-
-# Deployment vars
-stage_env = os.getenv('BRANCH', 'dev')
-stage, host_url = get_stage(stage_env)
 
 # ES configuration variables
 es_username     = os.getenv('ES_USERNAME'       , 'elastic'                 )
 es_password     = os.getenv('ES_PASSWORD'       , 'changeme'                )
+es_host = os.getenv("ES_HOST", 'https://dev.ucipm.es.chat.ask.eduworks.com/')
+stage = 'dev' if 'dev' in es_host else 'prod'
+
+es_client = AsyncElasticsearch([es_host], http_auth=(es_username, es_password))
+
 
 # Cache directory for sentence embedder
 embed_cache_dir = os.getenv('TFHUB_CACHE_DIR'   , '/var/tmp/models'         )
@@ -113,11 +99,6 @@ logger.info('Elasticsearch indexes:')
 logger.info(f'- combined index      = {es_combined_index}'  )
 logger.info(f'- logging index       = {es_logging_index}'   )
 logger.info('----------------------------------------------')
-
-logger.info('Initializing the Elasticsearch client')
-es_client = AsyncElasticsearch(
-    [es_host], http_auth=(es_username, es_password))
-logger.info('Done initiliazing ElasticSearch client')
 
 logger.info(f'Start loading embedding module - {embed_url}')
 embed = SentenceTransformer(

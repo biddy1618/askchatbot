@@ -1,8 +1,6 @@
 FROM condaforge/mambaforge:latest
 
 WORKDIR /app
-ARG BRANCH
-ENV BRANCH=$BRANCH
 
 COPY ./actions /app/actions
 COPY environment_rasa_actions.yml /app/environment_rasa_actions.yml
