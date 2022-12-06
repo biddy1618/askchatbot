@@ -26,7 +26,7 @@ utterances = {
     'goodbye'               : 'Bye!',
     'help'                  : 'How can I help you?',
     'ipm'                   : 'IPM (Integrated Pest Management) is an ecosystem-based strategy that focuses on long-term prevention of pests or their damage through a combination of techniques such as biological control, habitat manipulation, modification of cultural practices, and use of resistant varieties. You can find more details <a href="https://www2.ipm.ucanr.edu/What-is-IPM/" target="_blank">here</a>.',
-    'connect_expert'        : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">Ask Extension</a>.',
+    'connect_expert'        : f'You can ask one of our experts at <a href="{config.expert_url}" target="_blank">UC Cooperative Extension</a>.',
     'iambot'                : 'I am a bot, powered by <a href="https://rasa.com/" target="_blank">Rasa</a> platform. I can help you with the pest-related issues and questions. If you have one, please, describe your problem.',
     'out_of_scope'          : "Sorry, that request is outside my scope. For now, I only deal with pest-related requests.",
     'fallback'              : "I'm sorry, I didn't catch that. Can you rephrase?",

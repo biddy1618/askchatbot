@@ -41,8 +41,8 @@ es_field_limit      = 32766
 ## Dynamic
 search_size         = 100
 max_return_amount   = 10
-cut_off             = 0.6
-ae_downweight       = 0.85
+cut_off             = 0.59
+ae_downweight       = 0.9
 
 config_keys = {"search_size", "cut_off", "max_return_amount", "ae_downweight"}
 
